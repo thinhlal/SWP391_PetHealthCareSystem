@@ -1,0 +1,225 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Inter:var(--small-text-font-weight),700,600,400,200");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+
+.create-account-page {
+}
+
+.create-account-page .overlap-img {
+  background-image: url(../img/img_SignUp/image-1.png);
+  background-size: cover;
+  background-position: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.create-account-page .frame {
+  max-width: 1300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px #00000040;
+}
+
+.create-account-page .create-account_img {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  object-fit: cover;
+  width: 700px;
+}
+
+.create-account_content {
+  margin: 0 50px;
+  height: 530px;
+}
+
+.create-account-page .create-account_logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-account-page .create-account_logo img{
+  width: 245px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.create-account-page .create-account_tittle {
+  margin: 40px 0;
+  font-family: "Inter", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 24px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.create-account-page .form_SignUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.create-account-page .form_SignUp_Input {
+  display: flex;
+  width: 400px;
+  height: 40px;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #ccc;
+}
+
+.create-account-page .form_SignUp_Input-Text {
+  flex: 1;
+  font-family: "Inter", Helvetica;
+  color: #000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding-left: 10px;
+}
+
+.form_SignUp_Btn_Wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.create-account-page .form_SignUp_Btn {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  width: 400px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  background-color: #000000;
+  border-radius: 8px;
+}
+
+.form_SignUp_Btn:hover {
+  background-color: #002169;
+  cursor: pointer;
+}
+
+.create-account-page .form_SignUp_Btn-Text {
+  width: fit-content;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 150%;
+  white-space: nowrap;
+  font-style: normal;
+}
+
+.create-account-page .div {
+  position: relative;
+  flex: 1;
+  margin-top: -4px;
+  margin-bottom: -2px;
+  font-family: "Inter", Helvetica;
+  font-weight: 200;
+  color: #828282;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.create-account-page .form_SignUp_Regulation::after{
+  content: "";
+  display: block;
+  border: 1px solid #e8e7e7;
+  margin: 30px 40px;
+}
+
+.create-account-page .form_SignUp_Regulation {
+  margin: 30px 40px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: transparent;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.create-account-page .form_SignUp_Regulation_Span {
+  color: #828282;
+}
+
+.create-account-page .form_SignUp_Regulation_Link {
+  color: #000000;
+}
+
+.form_SignUp_Regulation_Link:hover {
+  opacity: 0.6;
+}
+
+.create-account-page .form_SignUp_HadAcc {
+  font-family: "Inter", Helvetica;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.create-account-page .form_SignUp_HadAcc_SignIn {
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: #4950f5;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+  text-decoration: underline;
+  white-space: nowrap;
+}
+
+.form_SignUp_HadAcc_SignIn:hover {
+  opacity: 0.6;
+}

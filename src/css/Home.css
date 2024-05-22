@@ -1,0 +1,1479 @@
+:root {
+  --body-text-font-family: "Inter", Helvetica;
+  --body-text-font-weight: 500;
+  --body-text-font-size: 20px;
+  --body-text-letter-spacing: 0px;
+  --body-text-line-height: 150%;
+  --body-text-font-style: normal;
+  --button-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Paytone+One:400|Montserrat:800,600,500,400,700|Open+Sans:600|Inter:var(--body-text-font-weight)");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+
+.main {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.main .overlap {
+  padding: 0;
+  margin: 0;
+}
+
+.main .slider {
+  height: 850px;
+  margin: 0;
+  padding: 0;
+}
+
+.main .overlap-group {
+  height: 100%;
+  background-image: url(../img/img_Home/slider-bg-03-1.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.main .best-care-of-our {
+  position: absolute;
+  width: 539px;
+  height: 235px;
+  top: 533px;
+  left: 170px;
+  font-family: "Paytone One", Helvetica;
+  font-weight: 600;
+  color: #f2f2f2;
+  font-size: 60px;
+  letter-spacing: 0;
+  line-height: 100px;
+}
+
+.main .overlap-2 {
+  width: 100%;
+}
+
+.main .white-navigate {
+  position: absolute;
+  width: 1400px;
+  height: 78px;
+  top: 144px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(../img/img_Home/rectangle-40314.svg);
+  background-size: 100% 100%;
+}
+
+.main .list-header {
+  display: flex;
+  width: 814px;
+  height: 60px;
+  align-items: flex-start;
+  gap: 46px;
+  padding: 8px 0px;
+  position: absolute;
+  top: 9px;
+  left: 256px;
+  border-radius: 12px;
+}
+
+.main .frame {
+  background-color: #ffffff;
+  display: flex;
+  width: 126px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  position: relative;
+  border-radius: 8px;
+}
+
+.main .text-wrapper {
+  position: relative;
+  width: fit-content;
+  margin-top: 0px;
+  margin-bottom: -1px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  color: #425bb3;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+  white-space: nowrap;
+  transition: color 0.3s, transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .text-wrapper:hover {
+  color: #ff5733; /* Đổi màu chữ khi hover */
+  transform: translateY(-5px); /* Chữ nổi lên khi hover */
+}
+
+.main .div-wrapper {
+  display: flex;
+  width: 126px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  position: relative;
+  border-radius: 8px;
+}
+
+.main .logo {
+  position: absolute;
+  width: 195px;
+  height: 39px;
+  top: 19px;
+  left: 17px;
+  object-fit: cover;
+}
+
+.main .booking-button {
+  display: flex;
+  width: 170px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px 14px;
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  background-color: #e18213;
+  border-radius: 10px;
+  box-shadow: var(--button-shadow);
+  transition: background-color 0.3s, color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .text-wrapper-2 {
+  height: 50px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  padding: 0px 23px;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 50px;
+  white-space: nowrap;
+  border-radius: 10px;
+}
+
+.main .text-wrapper-2:hover {
+  cursor: pointer;
+  background-color: #002169;
+  color: #ffffff;
+}
+
+.sub_header_wrapper {
+  position: relative;
+  height: 91px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main .pethealthcare-gmail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 50px;
+  font-family: "Open Sans", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.main .header_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+}
+
+.main .sign-in {
+  margin-right: 15px;
+  display: flex;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 0px;
+  background-color: #002169;
+  border-radius: 10px;
+  box-shadow: var(--button-shadow);
+  transition: background-color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .sign-in:hover {
+  background-color: #e18213; /* Đổi màu nền khi hover */
+  cursor: pointer;
+}
+
+.main .sign-in_icon {
+  filter: invert(8%) sepia(100%) saturate(6481%) hue-rotate(246deg)
+    brightness(102%) contrast(143%);
+}
+
+.main .text-wrapper-3 {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.main .sign-up {
+  display: flex;
+  width: 100px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  background-color: #002169;
+  border-radius: 10px;
+  box-shadow: var(--button-shadow);
+  transition: background-color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .sign-up:hover {
+  background-color: #e18213; /* Đổi màu nền khi hover */
+  cursor: pointer;
+}
+
+.main .text-wrapper-4 {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.main .emergency {
+  padding: 0;
+  margin: 0;
+}
+
+.main .emergency-we-re-wrapper {
+  height: 81px;
+  background-color: #002169;
+}
+
+.main .emergency-we-re {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 81px;
+}
+
+.content_description {
+  padding: 0;
+  margin: 0;
+}
+
+.main .img-logo-wrapper {
+  margin: 50px 0;
+  display: flex;
+  align-items: center;
+  object-fit: cover;
+  justify-content: center;
+}
+
+.main .img-logo {
+  width: 400px;
+  height: auto;
+}
+
+.main .text-petwellbeing {
+  text-shadow: 0px 4px 4px #00000040;
+  font-weight: 600;
+  color: #4f3c3c;
+  font-size: 32px;
+  text-align: center;
+  line-height: 48px;
+  font-family: "Montserrat", Helvetica;
+  letter-spacing: 0;
+}
+
+.text-pethealthcare_description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 80px 0;
+}
+
+.main .text-pethealthcare {
+  font-weight: 500;
+  color: #4f3c3c;
+  font-size: 16px;
+  text-align: center;
+  line-height: 24px;
+  font-family: "Montserrat", Helvetica;
+  letter-spacing: 0;
+  width: 50%;
+}
+
+.main .MAIN-SERVICES_title {
+  position: relative;
+  margin: 100px 0;
+  display: flex;
+  align-items: end;
+  height: 200px;
+  justify-content: center;
+  font-size: 50px;
+  color: #fff;
+  z-index: 1;
+}
+
+.main .overlap-3 {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  height: 1143px;
+  background-color: #002169;
+  padding-bottom: 100px;
+}
+
+.main .floofins-and-co {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  mix-blend-mode: multiply;
+  object-fit: cover;
+}
+
+.main .SERVICES-INFOR {
+  position: absolute;
+  width: 1594px;
+  height: 670px;
+  top: 331px;
+  left: 165px;
+}
+
+.service-detail-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main .service_Info_Detail {
+  position: relative;
+  width: 473px;
+  height: 678px;
+  z-index: 1;
+  background-color: #fff;
+  padding: 0;
+  border-radius: 50px;
+}
+
+.main .service_Info_Detail-img {
+  width: 100%;
+  height: 400px;
+  background-image: url("../img/img_Home/dog1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-start-start-radius: 50px;
+  border-start-end-radius: 50px;
+}
+
+.main .service_Info_Detail-text {
+  font-size: 25px;
+  padding: 20px;
+  text-wrap: balance;
+}
+
+.main .service_Info_Detail-button-wrapper-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.main .service_Info_Detail-button-wrapper {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 210px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.main .service_Info_Detail-button {
+  width: 210px;
+  height: 50px;
+  background-color: #e18213;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 20px;
+  padding-right: 24px;
+}
+
+.main .service_Info_Detail-button-wrapper:hover .service_Info_Detail-button {
+  background-color: #002169;
+  cursor: pointer;
+}
+
+.service_Info_Detail-button-icon {
+  position: absolute;
+  width: 20px;
+  color: #fff;
+  right: 27px;
+  top: 17px;
+}
+
+.main .PRIMARY-PET-CARE {
+  position: absolute;
+  width: 510px;
+  height: 31px;
+  top: 154px;
+  left: 705px;
+}
+
+.main .overlap-4 {
+  position: relative;
+}
+
+.main .main-why-choose {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 100px 0;
+}
+
+.main .why-we-are-img {
+  object-fit: cover;
+}
+
+.main .content-whywearebest {
+  position: relative;
+}
+
+.main .maintain {
+  width: 461px;
+  height: 146px;
+}
+
+.main .overlap-group-2 {
+  position: relative;
+}
+
+.main .maintain-text {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 400;
+  color: #4f3c3c;
+  font-size: 30px;
+  letter-spacing: 0;
+  line-height: 45px;
+}
+
+.main .span {
+  font-weight: 700;
+}
+
+.main .text-wrapper-5 {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.main .text-wrapper-6 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.maintain-text-flex {
+  display: flex;
+  align-items: center;
+}
+
+.main .element {
+  left: 8px;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 15px;
+  object-fit: cover;
+}
+
+.main .affordable {
+  width: 461px;
+  height: 146px;
+}
+
+.main .group {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 14px;
+  left: 5px;
+  background-image: url(../img/img_Home/4315445-1.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.main .more-pet-training {
+  width: 461px;
+  height: 146px;
+}
+
+.main .more-experience-text {
+  width: 461px;
+  height: 146px;
+}
+
+.main .element-2 {
+  left: 5px;
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 14px;
+  object-fit: cover;
+}
+
+.main .overlap-5 {
+  width: 600px;
+  height: 252px;
+}
+
+.main .text-wrapper-7 {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 400;
+  color: #4f3c3c;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.main .content-whywearebest-2 {
+  text-shadow: 0px 4px 4px #00000040;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 400;
+  color: #4f3c3c;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 36px;
+}
+
+.main .text-wrapper-8 {
+  font-weight: 500;
+}
+
+.main .text-wrapper-9 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+}
+
+.content-layout_flex {
+  display: flex;
+}
+
+.main .MAIN-DOCTOR {
+  position: relative;
+}
+
+.main .button-doctor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 110px 0;
+}
+
+.MAIN-DOCTOR-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main .text-wrapper-11 {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #002169;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-right: 50px;
+}
+
+.main .element-primary-button-wrapper {
+  width: 210px;
+  height: 52px;
+}
+
+.main .element-primary-button {
+  display: flex;
+  width: 210px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  position: relative;
+  background-color: #e18213;
+  border-radius: 20px;
+  transition: background-color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .element-primary-button:hover {
+  background-color: #002169; /* Đổi màu nền khi hover */
+  cursor: pointer;
+}
+
+.main .text-wrapper-12 {
+  position: relative;
+  width: fit-content;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.main .element-3 {
+  width: 21.82px;
+  position: relative;
+  height: 20px;
+}
+
+.main .doctor {
+  width: 232px;
+  display: flex;
+  flex-direction: column;
+  height: 362px;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* doctor 1 */
+.main .graphic {
+  background-image: url(../img/img_Home/graphic.svg);
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 232px;
+  border-radius: 180px;
+  background-size: cover;
+  background-position: 50% 50%;
+  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .graphic:hover {
+  transform: scale(1.05); /* Phóng to hình khi hover */
+  cursor: pointer;
+}
+
+.main .copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.main .text-wrapper-13 {
+  position: relative;
+  align-self: stretch;
+  margin-top: -1px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  color: #002169;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 36px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.main .text-wrapper-14 {
+  position: relative;
+  align-self: stretch;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #002169;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* doctor 1 */
+.main .graphic-2 {
+  background-image: url(../img/img_Home/graphic-1.svg);
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 232px;
+  border-radius: 180px;
+  background-size: cover;
+  background-position: 50% 50%;
+  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .graphic-2:hover {
+  transform: scale(1.05); /* Phóng to hình khi hover */
+  cursor: pointer;
+}
+
+/* doctor 3 */
+.main .graphic-3 {
+  background-image: url(../img/img_Home/graphic-2.svg);
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 232px;
+  border-radius: 180px;
+  background-size: cover;
+  background-position: 50% 50%;
+  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .graphic-3:hover {
+  transform: scale(1.05); /* Phóng to hình khi hover */
+  cursor: pointer;
+}
+
+/* doctor 4 */
+.main .graphic-4 {
+  background-image: url(../img/img_Home/graphic-3.svg);
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 232px;
+  border-radius: 180px;
+  background-size: cover;
+  background-position: 50% 50%;
+  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .graphic-4:hover {
+  transform: scale(1.05); /* Phóng to hình khi hover */
+  cursor: pointer;
+}
+
+.main .title-doctor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 148px;
+  color: #4f3c3c;
+  font-size: 32px;
+  line-height: 48px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0;
+  margin-bottom: 50px;
+}
+
+.main .overlap-6 {
+  position: relative;
+  width: 1300px;
+  left: 50%;
+  transform: translate(-50%);
+  height: 512px;
+  background-image: url(../img/img_Home/rectangle-8.svg);
+  background-size: 100% 100%;
+}
+
+.main .button-bookingform {
+  margin: auto;
+  display: flex;
+  width: 268px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  background-color: #e18213;
+  border-radius: 25px;
+  transition: background-color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+}
+
+.main .button-bookingform:hover {
+  background-color: #681179; /* Đổi màu nền khi hover */
+  cursor: pointer;
+}
+
+.main .text-wrapper-15 {
+  position: relative;
+  width: 172px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.main .element-4 {
+  width: 22.58px;
+  object-fit: cover;
+  position: relative;
+  height: 20px;
+}
+
+.main .form-booking {
+  position: relative;
+}
+.main .bigform-booking {
+  height: 163px;
+}
+
+.main .pettype {
+  display: flex;
+  width: 304px;
+  height: 50px;
+  align-items: center;
+  gap: 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+}
+
+.select-pet-type {
+  padding: 0 10px;
+  background-color: #123179;
+  width: 304px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  color: #fff;
+  font-size: 20px;
+}
+
+.main .label {
+  flex: 1;
+  height: 41px;
+  margin-top: 10.5px;
+  margin-bottom: -2.5px;
+  position: relative;
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  color: #828282;
+  font-size: var(--body-text-font-size);
+  letter-spacing: var(--body-text-letter-spacing);
+  line-height: var(--body-text-line-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-style: var(--body-text-font-style);
+}
+
+.main .element-5 {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+}
+
+.main .time {
+  display: flex;
+  width: 302px;
+  height: 50px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+}
+
+.main .element-6 {
+  position: relative;
+  width: 32.04px;
+  height: 34px;
+  object-fit: cover;
+}
+
+.main .date {
+  display: flex;
+  width: 309px;
+  height: 50px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+}
+
+.main .label-2 {
+  width: 215px;
+  position: relative;
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  color: #828282;
+  font-size: var(--body-text-font-size);
+  letter-spacing: var(--body-text-letter-spacing);
+  line-height: var(--body-text-line-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-style: var(--body-text-font-style);
+}
+
+.main .element-7 {
+  position: relative;
+  width: 35px;
+  height: 34px;
+  object-fit: cover;
+}
+
+.main .phone {
+  display: flex;
+  width: 303px;
+  height: 50px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+}
+
+.main .gmail {
+  display: flex;
+  width: 300px;
+  height: 50px;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+}
+
+.phone,
+.gmail {
+  display: flex;
+  width: 303px; /* Điều chỉnh lại chiều rộng theo ý muốn của bạn */
+  height: 50px; /* Điều chỉnh lại chiều cao theo ý muốn của bạn */
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.phone .input,
+.gmail .input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  color: #ffffff;
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  font-size: var(--body-text-font-size);
+  line-height: var(--body-text-line-height);
+  outline: none;
+}
+
+.phone .input::placeholder,
+.gmail .input::placeholder,
+.name::placeholder {
+  color: #828282; /* Màu placeholder */
+}
+
+.time {
+  display: flex;
+  width: 302px; /* Điều chỉnh lại chiều rộng theo ý muốn của bạn */
+  height: 50px; /* Điều chỉnh lại chiều cao theo ý muốn của bạn */
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.time .input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  color: #fff;
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  font-size: var(--body-text-font-size);
+  line-height: var(--body-text-line-height);
+  outline: none;
+}
+
+.time .input::placeholder {
+  color: #828282; /* Màu placeholder */
+}
+
+.element-6 {
+  width: 32.04px;
+  height: 34px;
+  object-fit: cover;
+}
+
+.date {
+  display: flex;
+  width: 309px; /* Điều chỉnh lại chiều rộng theo ý muốn của bạn */
+  height: 50px; /* Điều chỉnh lại chiều cao theo ý muốn của bạn */
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.date .input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  color: #fff;
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  font-size: var(--body-text-font-size);
+  line-height: var(--body-text-line-height);
+  outline: none;
+}
+
+.element-7 {
+  width: 35px;
+  height: 34px;
+  object-fit: cover;
+}
+
+.main .name {
+  width: 309px;
+  height: 50px;
+  padding: 8px 16px;
+  background-color: #113179;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  flex: 1;
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  color: #fff;
+  font-size: var(--body-text-font-size);
+  letter-spacing: var(--body-text-letter-spacing);
+  line-height: var(--body-text-line-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-style: var(--body-text-font-style);
+}
+
+.subtitle-formbooking_infor_name,
+.subtitle-formbooking_time_Time {
+  margin: 0 20px;
+}
+
+.main .subtitle-formbooking_infor,
+.main .subtitle-formbooking_time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main .subtitle-formbooking_infor,
+.main .subtitle-formbooking_time {
+  margin: 50px 0;
+}
+
+.main .text-wrapper-16 {
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  color: #ffffff;
+  font-size: var(--body-text-font-size);
+  letter-spacing: var(--body-text-letter-spacing);
+  line-height: var(--body-text-line-height);
+  white-space: nowrap;
+  font-style: var(--body-text-font-style);
+}
+
+.main .title-booking {
+  text-shadow: 0px 4px 4px #00000040;
+  color: #ffffff;
+  padding: 40px 0 0 0;
+  font-size: 40px;
+  line-height: 60px;
+  white-space: nowrap;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.main .MAIN-FEEDBACK {
+  margin: 110px 0 0 0;
+  background-color: #d9d9d9;
+  background-image: url(../img/img_Home/background-item-1.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.main .overlap-7 {
+  position: relative;
+  width: 1920px;
+  height: 793px;
+  background-color: #d9d9d9;
+  background-image: url(../img/img_Home/background-item-1.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.main .MAIN-FEEDBACK-title {
+  text-align: center;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 800;
+  color: #4f3c3c;
+  font-size: 40px;
+  letter-spacing: 0;
+  line-height: 60px;
+  padding: 50px 0;
+}
+
+.main .FEEDBACK {
+  position: relative;
+}
+
+.Feedback_Flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0 0 100px 0;
+}
+
+.main .overlap-group-6 {
+  width: 638px;
+  height: 431px;
+  left: -4px;
+  background-image: url(../img/img_Home/client-2.png);
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.main .a-great-strength-of {
+  position: absolute;
+  width: 506px;
+  height: 209px;
+  top: 120px;
+  left: 88px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.main .element-tab-list {
+  display: flex;
+  width: 239px;
+  align-items: flex-start;
+  position: absolute;
+  top: 62px;
+  left: 210px;
+}
+
+.main .segmented-control {
+  display: flex;
+  width: 239px;
+  align-items: flex-start;
+  padding: 4px;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.main .item {
+  display: inline-flex;
+  height: 32px;
+  align-items: center;
+  gap: 8px;
+  padding: 0px 12px;
+  position: relative;
+  flex: 0 0 auto;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: var(--button-shadow);
+}
+
+.main .element-8 {
+  position: relative;
+  width: 22px;
+  height: 24px;
+  object-fit: cover;
+}
+
+.main .a-great-strength-of-2 {
+  position: absolute;
+  width: 506px;
+  height: 209px;
+  top: 120px;
+  left: 70px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.main .segmented-control-wrapper {
+  display: flex;
+  width: 239px;
+  align-items: flex-start;
+  position: absolute;
+  top: 62px;
+  left: 204px;
+}
+
+.main .MAIN-FOOTER {
+  position: relative;
+  height: 605px;
+  background-color: #002169;
+}
+
+.main .MAIN-FOOTER_LEFT {
+  position: relative;
+  display: flex;
+}
+
+.main .overlap-9 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 527px;
+  height: 246px;
+}
+
+.main .text-wrapper-23 {
+  width: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.main .footer-img {
+  position: absolute;
+  width: 150px;
+  object-fit: cover;
+  bottom: -30px;
+  left: 0;
+}
+
+.main .overlap-10 {
+  margin: 50px 0;
+}
+
+.main .text-wrapper-24 {
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 30px;
+  font-family: "Montserrat", Helvetica;
+  letter-spacing: 0;
+}
+
+.main .text-wrapper-25 {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.main .text-wrapper-26 {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 60px;
+}
+
+.main .MAIN-FOOTER_LEFT_TIME_Text {
+  margin: 10px 20px 10px 0;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+  white-space: nowrap;
+}
+
+.main .overlap-group-7 {
+  position: absolute;
+  right: 35px;
+  top: 90px;
+  width: 494px;
+  height: 424px;
+  background-color: #315194;
+  border-radius: 50px;
+}
+.main .text-wrapper-27 {
+  align-items: center;
+  margin: 20px;
+  justify-content: center;
+  display: flex;
+  height: 123px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 35px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 52.5px;
+}
+
+.main .element-input-field {
+  margin: auto;
+  display: flex;
+  width: 399px;
+  align-items: center;
+  gap: 16px;
+  background-color: #113179;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.main .label-3 {
+  padding-left: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #002169;
+  flex: 1;
+  height: 55px;
+  position: relative;
+  font-family: var(--body-text-font-family);
+  font-weight: var(--body-text-font-weight);
+  color: #828282;
+  font-size: var(--body-text-font-size);
+  letter-spacing: var(--body-text-letter-spacing);
+  line-height: var(--body-text-line-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-style: var(--body-text-font-style);
+}
+
+.main .element-primary-button-2 {
+  margin: auto;
+  display: flex;
+  margin-top: 60px;
+  width: 399px;
+  height: 58px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  background-color: #e18213;
+  border-radius: 8px;
+}
+
+.main .element-primary-button-2:hover {
+  background-color: #002169;
+  cursor: pointer;
+}
+
+.main .text-wrapper-28 {
+  width: fit-content;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.main .img-3 {
+  width: 240px;
+  height: 95px;
+  object-fit: cover;
+}
+
+.main .MAIN-FOOTER_LEFT_DESC {
+  margin-top: 50px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main .MAIN-FOOTER_LEFT_TIME {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
