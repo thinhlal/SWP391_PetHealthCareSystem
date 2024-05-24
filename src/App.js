@@ -1,16 +1,15 @@
 // import { Routes, Route, Link } from 'react-router-dom'
-// import SignUp from './SignUp.js';
-import Booking from './Booking.js';
 import { Routes, Route } from "react-router-dom";
-import Home from './Home.js';
-import SignUp from './SignUp.js';
-import ManageListBooking from './ManageListBooking.js';
+import Booking from './pages/Booking/Booking.js';
+import Home from './pages/Home/Home.js';
+import SignUp from './pages/SignUp/SignUp.js';
+import ManageListBooking from './pages/ManageBooking/ManageListBooking.js';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
       <Route path="/booking" element={<Booking />} />
+      <Route path="/" element={<Home />} /> 
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/manage-booking" element={<ManageListBooking />} />
     </Routes>

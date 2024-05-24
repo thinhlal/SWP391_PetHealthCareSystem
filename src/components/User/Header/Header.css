@@ -1,0 +1,142 @@
+a{
+  text-decoration: none !important;
+}
+.main-header {
+  position: relative;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.main-header-navigation {
+  background-color: #002169;
+  display: flex;
+}
+
+/* responsive */
+.main-header-logo {
+  height: 39px;
+  object-fit: cover;
+  margin: 14px 10px;
+  padding-left: 20px;
+}
+
+/* responsive */
+.main-header-menu {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header_link {
+  text-align: center;
+  padding: 10px 16px;
+  margin: 0 20px;
+}
+
+.header_link-text {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 20px;
+  letter-spacing: 0;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.header_link:hover .header_link-text {
+  color: #e18213;
+}
+
+.main-header-user_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+}
+
+.main-header-user {
+    position: relative;
+}
+
+.main-header-user-account:hover {
+  cursor: pointer;
+}
+
+.main-header-user-account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #002169;
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.account_icon {
+  width: 30px;
+  object-fit: cover;
+}
+
+.main-header-user-account-name {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.main-header-user-account_menu {
+  display: none;
+  width: 150px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  position: absolute;
+  top: 35px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 5px;
+  white-space: nowrap;
+  border: 1px solid #ccc;
+}
+
+.main-header-user-account::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  width: 148px;
+  height: 27px;
+}
+
+.main-header-user-account_menu::before {
+  content: "";
+  position: absolute;
+  display: none;
+  top: -10px;
+  right: 15px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+}
+
+.main-header-user-account:hover .main-header-user-account_menu {
+  display: block; /* Hiển thị nội dung 'Log out' khi di chuột vào */
+  cursor: pointer;
+}
+.main-header-user-account:hover .main-header-user-account_menu::before {
+  display: block;
+}
+
+.main-header-user-account_menu-item {
+  padding-left: 15px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.main-header-user-account_menu-item:hover {
+  border-radius: 5px;
+  background-color: #ccc;
+  cursor: pointer;
+}
