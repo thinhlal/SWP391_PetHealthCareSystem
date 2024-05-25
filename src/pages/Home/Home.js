@@ -5,7 +5,7 @@ import Footer from '../../components/User/Footer/Footer.js';
 // Images
 import logo from '../../assets/images/img_Home/logo.png';
 import logo_header_img from '../../assets/images/img_Home/header_img_logo.png';
-import petSlider1 from '../../assets/images/img_Home/petSlider.jpg';
+import petSlider1 from '../../assets/images/img_Home/petSlider.png';
 import petSlider2 from '../../assets/images/img_Home/slider-dog.png';
 import dogBackground from '../../assets/images/img_Home/dogBackground.png';
 import why_we_are from '../../assets/images/img_Home/dog_About.png';
