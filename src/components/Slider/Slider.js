@@ -7,7 +7,7 @@ function Slider({ images }) {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 3000);
+        }, 5000);
 
         return () => clearInterval(intervalId); // Xóa interval khi component bị hủy
     }, [images]); // Thiết lập dependency là images

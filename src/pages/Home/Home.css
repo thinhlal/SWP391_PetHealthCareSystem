@@ -46,7 +46,7 @@ a {
   margin: 0;
 }
 
-.main .slider {
+.main .slider-wrapper {
   height: 850px;
   margin: 0;
   padding: 0;
@@ -59,6 +59,7 @@ a {
 }
 
 .main .best-care-of-our {
+  z-index: 1000;
   position: absolute;
   width: 539px;
   height: 235px;
@@ -77,14 +78,15 @@ a {
 }
 
 .main .white-navigate {
+  z-index: 1000;
   position: absolute;
   width: 1400px;
   height: 78px;
   top: 144px;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url(../../assets/images/img_Home/rectangle-40314.svg);
-  background-size: 100% 100%;
+  background-color: #fff;
+  border-radius: 20px;
 }
 
 .main .list-header {
@@ -145,13 +147,17 @@ a {
   border-radius: 8px;
 }
 
-.main .logo {
+.white-navigate-logo-wrapper{
+
+}
+
+.main .white-navigate-logo {
   position: absolute;
   width: 195px;
   height: 39px;
-  top: 19px;
-  left: 17px;
   object-fit: cover;
+  left: 20px;
+  top: 18px;
 }
 
 .main .booking-button {
@@ -191,6 +197,12 @@ a {
   cursor: pointer;
   background-color: #002169;
   color: #ffffff;
+}
+
+.SUB-HEADER {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
 }
 
 .sub_header_wrapper {

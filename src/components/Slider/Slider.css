@@ -13,7 +13,7 @@
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 5s ease-out;
   }
   
   .slider img.active {

@@ -3,17 +3,21 @@ import Slider from '../../components/Slider/Slider.js';
 // Components
 import Footer from '../../components/User/Footer/Footer.js';
 // Images
-import logo from '../../assets/images/img_Home/logo.png';
+import logo_navigate from '../../assets/images/img_Home/logo.png';
 import logo_header_img from '../../assets/images/img_Home/header_img_logo.png';
 import petSlider1 from '../../assets/images/img_Home/petSlider.png';
 import petSlider2 from '../../assets/images/img_Home/slider-dog.png';
+import petSlider3 from '../../assets/images/img_Home/Pet-Cares.jpg';
+import petSlider4 from '../../assets/images/img_Home/slider_bg.png';
+import petSlider5 from '../../assets/images/img_Home/slider_bg_02.png';
+import petSlider6 from '../../assets/images/img_Home/slider_bg_03.png';
 import dogBackground from '../../assets/images/img_Home/dogBackground.png';
 import why_we_are from '../../assets/images/img_Home/dog_About.png';
 import checked_Icon from '../../assets/images/img_Home/checked.png';
 import vote_star from '../../assets/images/img_Home/star.png';
 import { useEffect } from 'react';
 
-const images = [petSlider2, petSlider1];
+const images = [petSlider2, petSlider1, petSlider3, petSlider4, petSlider5, petSlider6];
 
 function Home() {
 
@@ -39,8 +43,8 @@ function Home() {
     return (
         <div className="main container-fluid">
             <div className="overlap row">
-                <div className="slider col-md-12  lazy-load">
-                    <Slider images={images}></Slider>
+                <div className="slider-wrapper col-md-12 lazy-load">
+
                     <div className="SUB-HEADER">
                         <div className="sub_header_wrapper">
                             <div className="pethealthcare-gmail">
@@ -59,8 +63,13 @@ function Home() {
                             </div>
                         </div>
                     </div>
+                    <Slider images={images}></Slider>
 
                     <div className="white-navigate">
+
+                        <div className='white-navigate-logo-wrapper'>
+                            <img className="white-navigate-logo" src={logo_navigate} alt='Logo' loading="lazy" />
+                        </div>
                         <div className="list-header">
                             <a href="#123" className="frame">
                                 <div className="text-wrapper">
@@ -88,7 +97,6 @@ function Home() {
                                 </div>
                             </a>
                         </div>
-                        <img className="logo" src={logo} alt='Logo' loading="lazy" />
                         <div className="booking-button">
                             <a className="text-wrapper-2" href='booking'>
                                 BOOKING NOW!
