@@ -16,7 +16,7 @@ function ManageListBooking() {
                 <HeaderManager></HeaderManager>
                 <div className="manage-booking-cage-header">
                     <img className="logo" src={logo} alt='' />
-                    <p className="p">Pet Health Care - Manage Booking Cage cancellations</p>
+                    <p className="p">Pet Health Care - Manage Booking Lists</p>
                 </div>
                 <div className="overlap">
                     <div className="sidebar">
@@ -58,7 +58,7 @@ function ManageListBooking() {
                                     </div>
                                 </div>
                                 <div className="actions">
-                                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" className="booking-btn-add" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         Add Booking
                                     </button>
                                     <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">

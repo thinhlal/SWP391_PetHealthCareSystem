@@ -19,6 +19,12 @@
   margin-left: 15px;
 }
 
+.navigation-user-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .navigation-user {
   position: relative;
   display: flex;
@@ -27,7 +33,20 @@
   margin-right: 15px;
 }
 
+.navigation-user:hover {
+  cursor: pointer;
+}
+
+.navigation-user::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  width: 140px;
+  height: 27px;
+}
+
 .navigation-user:hover .navigation-user_notify {
+  box-shadow: 1px 1px 1px #ccc;
   display: block;
   cursor: pointer;
 }
@@ -35,18 +54,40 @@
 .navigation-user_notify {
   position: absolute;
   display: none;
-  top: 60px;
+  top: 33px;
   right: 0;
-  width: 135px;
-  height: 50px;
-  background-color: #0035a9;
+  width: 150px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.navigation-user_notify::before {
+  content: "";
+  position: absolute;
+  display: none;
+  top: -10px;
+  right: 40px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+}
+
+.navigation-user:hover .navigation-user_notify::before {
+  display: block;
+  cursor: pointer;
 }
 
 .navigation-user_notify_content {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 0;
+}
+
+.navigation-user_notify_content:hover {
+  background-color: #e9e9e9;
+  border-radius: 5px;
 }
 
 .navigation-user_logout_icon {
@@ -54,9 +95,9 @@
 }
 
 .navigation-user_notify_content-text {
-  padding-left: 10px;
+  padding-left: 16px;
   font-size: 18px;
-  color: #fff;
+  color: #000;
 }
 
 .male-user {

@@ -1,0 +1,18 @@
+.veterinarian-overlay{
+    margin: 0;
+    padding: 0;
+}
+.veterinarian-wrapper {
+}
+
+.veterinarian-name {
+}
+
+.veterinarian-email {
+}
+
+.veterinarian-img {
+    width: 570px;
+    height: 435px;
+    object-fit: cover;
+}

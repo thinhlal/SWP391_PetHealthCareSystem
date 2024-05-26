@@ -29,6 +29,7 @@
 
 .manage-booking-cage .sidebar {
   width: 20%;
+  height: 100%;
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -265,10 +266,22 @@
 }
 
 .manage-booking-cage .actions {
-  display: flex;
-  height: 44.72px;
-  gap: 18.51px;
   margin-right: 25px;
+}
+
+.booking-btn-add {
+  background-color: #e18213;
+  height: 45px;
+  outline: none;
+  border: none;
+  color: #fff;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.booking-btn-add:hover{
+  background-color: #002169;
+  cursor: pointer;
 }
 
 .manage-booking-cage .content-2 {
@@ -316,6 +329,6 @@
   align-items: center;
   justify-content: center;
 }
-.pagination_wrapper nav{
+.pagination_wrapper nav {
   margin-top: 70px;
 }
