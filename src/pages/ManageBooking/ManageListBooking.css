@@ -43,12 +43,12 @@
   align-items: center;
   justify-content: center;
   height: 100px;
+  gap: 10px;
 }
 
 .manage-booking-cage .home {
-  position: relative;
-  width: 36.23px;
-  height: 36.23px;
+  width: 30.23px;
+  height: 37.23px;
 }
 
 .manage-booking-cage .text-wrapper-3 {
@@ -78,8 +78,8 @@
 }
 
 .manage-booking-cage .icon-list {
-  width: 25px;
-  height: 20px;
+  width: 18px;
+  height: 15px;
 }
 
 .manage-booking-cage .text-wrapper-4 {
@@ -279,7 +279,7 @@
   border-radius: 10px;
 }
 
-.booking-btn-add:hover{
+.booking-btn-add:hover {
   background-color: #002169;
   cursor: pointer;
 }
