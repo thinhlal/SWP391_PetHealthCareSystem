@@ -55,8 +55,11 @@ function Booking() {
                                 <div className="select_Name">Doctors</div>
                                 <div className="select_Booking">
                                     <select name="doctors" className="select_Info" required>
-                                        <option value="">A</option>
-                                        <option value="">B</option>
+                                        <option value="">Daria Andaloro</option>
+                                        <option value="">Michael Brian</option>
+                                        <option value="">Kenroly Gajon</option>
+                                        <option value="">Lizay Arianya</option>
+                                        
                                     </select>
                                 </div>
                             </div>

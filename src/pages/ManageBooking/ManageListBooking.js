@@ -4,7 +4,7 @@ import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import logo from '../../assets/images/img_Manager/logo.png'
+// import logo from '../../assets/images/img_Manager/logo.png'
 import home_img from '../../assets/images/img_Manager/home.svg'
 import list_icon from '../../assets/images/img_Manager/icon-list.png'
 import search_icon from '../../assets/images/img_Manager/search.svg'
@@ -15,7 +15,7 @@ function ManageListBooking() {
             <div className="row">
                 <HeaderManager></HeaderManager>
                 <div className="manage-booking-cage-header">
-                    <img className="logo" src={logo} alt='' />
+                    {/* <img className="logo" src={logo} alt='' /> */}
                     <p className="p">Pet Health Care - Manage Booking Lists</p>
                 </div>
                 <div className="overlap">

@@ -10,19 +10,16 @@ function Header() {
                 <img className="main-header-logo" src={logo} alt='' />
                 <div className="main-header-menu">
                     <div className="header_link">
-                        <a href="#123" className="header_link-text">Home</a>
+                        <a href="/" className="header_link-text">Home</a>
                     </div>
                     <div className="header_link">
-                        <a href="#123" className="header_link-text">Services</a>
+                        <a href="services" className="header_link-text">Services</a>
                     </div>
                     <div className="header_link">
                         <a href="#123" className="header_link-text">About us</a>
                     </div>
                     <div className="header_link">
                         <a href="#123" className="header_link-text">Contact</a>
-                    </div>
-                    <div className="header_link">
-                        <a href="#123" className="header_link-text">Blog</a>
                     </div>
                 </div>
                 <div className="main-header-user_wrapper">

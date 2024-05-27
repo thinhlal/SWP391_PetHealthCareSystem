@@ -76,7 +76,7 @@ function Home() {
                                     Home
                                 </div>
                             </a>
-                            <a href="#123" className="div-wrapper">
+                            <a href="services" className="div-wrapper">
                                 <div className="text-wrapper">
                                     Services
                                 </div>
@@ -91,11 +91,7 @@ function Home() {
                                     Contact
                                 </div>
                             </a>
-                            <a href="#123" className="div-wrapper">
-                                <div className="text-wrapper">
-                                    Blog
-                                </div>
-                            </a>
+                            
                         </div>
                         <div className="booking-button">
                             <a className="text-wrapper-2" href='booking'>
@@ -126,10 +122,10 @@ function Home() {
                     />
                 </div>
 
-                <p className="text-petwellbeing">
+                <div className="text-petwellbeing">
                     Your pet’s well-being, happiness and<br />your peace of mind are our
                     top priorities.
-                </p>
+                </div>
 
                 <div className="text-pethealthcare_description">
                     <p className="text-pethealthcare">
@@ -161,7 +157,7 @@ function Home() {
                             </div>
                             <div className="service_Info_Detail-button-wrapper-flex">
                                 <div className="service_Info_Detail-button-wrapper">
-                                    <a href="#123" className="service_Info_Detail-button">
+                                    <a href="services" className="service_Info_Detail-button">
                                         <span>View Services</span>
                                     </a>
                                 </div>
@@ -175,7 +171,7 @@ function Home() {
                             </div>
                             <div className="service_Info_Detail-button-wrapper-flex">
                                 <div className="service_Info_Detail-button-wrapper">
-                                    <a href="#123" className="service_Info_Detail-button">
+                                    <a href="services" className="service_Info_Detail-button">
                                         <span>View Services</span>
                                     </a>
                                 </div>
@@ -188,7 +184,7 @@ function Home() {
                             </div>
                             <div className="service_Info_Detail-button-wrapper-flex">
                                 <div className="service_Info_Detail-button-wrapper">
-                                    <a href="#123" className="service_Info_Detail-button">
+                                    <a href="services" className="service_Info_Detail-button">
                                         <span>View Services</span>
                                     </a>
                                 </div>

@@ -267,6 +267,8 @@
 
 .manage-booking-cage .actions {
   margin-right: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
 }
 
 .booking-btn-add {
@@ -293,8 +295,9 @@
   line-height: 40px;
   border-left: 1px solid #eaecf0;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
   width: 100%;
+  font-family: "Montserrat", sans-serif;
 }
 
 .content_body_wrapper {
@@ -313,6 +316,8 @@
   justify-content: center;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
 }
 
 .content_body .content_checkbox {
@@ -328,6 +333,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
 }
 .pagination_wrapper nav {
   margin-top: 70px;

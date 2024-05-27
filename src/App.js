@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp/SignUp.js';
 import ManageListBooking from './pages/ManageBooking/ManageListBooking.js';
 import YourPet from './pages/YourPet/YourPet.js';
 import DoctorInfo from './pages/DoctorInfo/DoctorInfo.js';
+import Services from "./pages/Services/Services.js";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/manage-booking" element={<ManageListBooking />} />
       <Route path="/your-pet" element={<YourPet />} />
       <Route path="/doctor" element={<DoctorInfo />} />
+      <Route path="/services" element={<Services />} />
     </Routes>
   );
 }
