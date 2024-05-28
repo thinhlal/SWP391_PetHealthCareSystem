@@ -28,99 +28,8 @@
   margin-left: 3%;
 }
 
-/* list header */
-.all-services .list-header {
-  display: flex;
-  width: 868px;
-  height: 60px;
-  align-items: flex-start;
-  gap: 46px;
-  padding: 8px 0px;
-  border-radius: 12px;
-}
-
-/* text in list header */
-.all-services .frame {
-  display: flex;
-  width: 126px;
-  height: 42px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 8px;
-}
-
-/* text in list header */
-.all-services .text-wrapper {
-  width: fit-content;
-  margin-top: -3px;
-  margin-bottom: -1px;
-  font-family: "Montserrat", Helvetica;
-  font-weight: 600;
-  color: #ffffff;
-  font-size: 20px;
-  letter-spacing: 0;
-  line-height: 30px;
-  white-space: nowrap;
-  transition: transform 0.3s, color 0.3s;
-}
-
-/* hover text in list header */
-.all-services .text-wrapper:hover {
-  transform: scale(1.1); /* Làm nổi lên */
-  color: #ff5733; /* Màu sắc khi di chuột vào */
-}
-
-/* user login */
-.all-services .user-login {
-  display: flex;
-  width: 175px;
-  height: 60px;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 0px;
-  background-color: #002169;
-  border-radius: 10px;
-  box-shadow: var(--button-shadow);
-  margin-right: 3%;
-}
-
-/* icon user login */
-.all-services .img {
-  margin-right: 8px;
-  width: 32px;
-  height: 28px;
-  object-fit: cover;
-}
-
-/* text user login */
-.all-services .text-wrapper-2 {
-  font-family: "Montserrat", Helvetica;
-  font-weight: 600;
-  color: #ffffff;
-  font-size: 20px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 30px;
-  white-space: nowrap;
-  text-decoration: none;
-  transition: transform 0.3s, color 0.3s;
-}
-
-.all-services .text-wrapper-2:hover {
-  transform: scale(1.1);
-  color: #ff5733;
-}
-
-/* Slider */
-.all-services .services-slider {
-  width: 100%;
-  height: 850px;
-}
-
 /* image in slider */
-.all-services .overlap-group {
+.all-services .overlap-services-slider {
   width: 100%;
   height: 850px;
   background-image: url(../../assets/images/img_Services/slider-bg-03-1.png);
@@ -129,13 +38,13 @@
 }
 
 /* text in image slider */
-.all-services .p {
+.all-services .title-services-slider {
   position: relative;
   top: 502px;
   left: 441px;
   width: 697px;
   height: 235px;
-  font-family: "Montserrat", Helvetica;
+  font-family: "Paytone One", Helvetica;
   font-weight: 400;
   color: #ffffff;
   font-size: 64px;
@@ -153,18 +62,13 @@
 }
 
 /* text 'choose the best care' */
-.all-services .text-wrapper-3 {
+.all-services .main-title-text {
   width: 100%;
-  height: 58px;
   text-shadow: 0px 4px 4px #00000040;
-  font-family: "Paytone One", Helvetica;
-  font-weight: 400;
   color: #002169;
   font-size: 40px;
   text-align: center;
-  letter-spacing: 0;
-  line-height: 54px;
-  white-space: nowrap;
+  font-family: "Montserrat", Helvetica;
 }
 
 /* Cat part */
@@ -195,10 +99,9 @@
   overflow: hidden;
 }
 
-.all-services .rectangle {
-  width: 100%;
-  height: 700px;
+.all-services .photo-frame-img-service {
   object-fit: cover;
+  width: 100%;
 }
 
 /* content cat */
@@ -221,7 +124,7 @@
   background-color: #ffffff;
 }
 
-.all-services .item {
+.all-services .content-list-services-cat {
   align-self: stretch;
   width: 100%;
   display: flex;
@@ -233,7 +136,7 @@
   border-radius: 8px;
 }
 
-.all-services .avatar {
+.all-services .green-tick-image {
   width: 48px;
   height: 48px;
   border-radius: 1000px;
@@ -242,7 +145,7 @@
   overflow: hidden;
 }
 
-.all-services .rectangle-2 {
+.all-services .green-tick-src-image {
   position: absolute;
   width: 48px;
   height: 48px;
@@ -251,14 +154,6 @@
   object-fit: cover;
 }
 
-.all-services .text {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  flex: 1;
-  flex-grow: 1;
-}
 
 .all-services .text-wrapper-cat {
   position: relative;
@@ -272,24 +167,14 @@
   line-height: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   text-align: left;
-}
-
-.all-services .item-2 {
-  width: 602px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 12px 0px;
-  position: relative;
-  flex: 0 0 auto;
-  border-radius: 8px;
 }
 
-.all-services .element-primary-button {
+
+
+.all-services .booking-services-button {
   display: flex;
   width: 137px;
   height: 47px;
@@ -303,11 +188,11 @@
   transition: background-color 0.3s;
 }
 
-.all-services .element-primary-button:hover {
+.all-services .booking-services-button:hover {
   background-color: #002169;
 }
 
-.all-services .text-wrapper-6 {
+.all-services .text-booking-services-button {
   position: relative;
   width: fit-content;
   font-family: "Montserrat", Helvetica;
@@ -319,9 +204,8 @@
   white-space: nowrap;
 }
 
-.all-services .text-wrapper-7 {
+.all-services .title-services-cat {
   font-family: "Montserrat", Helvetica;
-  font-weight: 400;
   color: #002169;
   font-size: 36px;
   letter-spacing: -0.72px;
@@ -338,8 +222,10 @@
 
 .all-services .picture-services-dog,
 .all-services .content-services-dog {
-  width: 100%; /* This can be omitted since grid layout will handle the width */
-  height: 800px; /* This can be set to 100% if you want it to fill the parent's height */
+  width: 100%; 
+  height: 800px; 
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* image dog */
@@ -350,6 +236,7 @@
 
 .all-services .avatar-dog {
   width: 100%;
+  height: 700px;
   border-radius: 1000px 0px 0px 1000px;
   position: relative;
   background-color: #f7f7f7;
@@ -417,8 +304,7 @@
   line-height: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   text-align: right;
+  display: flex;
+  align-items: center;
 }
