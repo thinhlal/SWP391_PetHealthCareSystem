@@ -71,64 +71,62 @@ function Home() {
                             <img className="white-navigate-logo" src={logo_navigate} alt='Logo' loading="lazy" />
                         </div>
                         <div className="list-header">
-                            <a href="#123" className="frame">
-                                <div className="text-wrapper">
+                            <a href="#123" className="list-header-navigate">
+                                <div className="list-header-navigate-text">
                                     Home
                                 </div>
                             </a>
                             <a href="services" className="div-wrapper">
-                                <div className="text-wrapper">
+                                <div className="list-header-navigate-text">
                                     Services
                                 </div>
                             </a>
                             <a href="#123" className="div-wrapper">
-                                <div className="text-wrapper">
+                                <div className="list-header-navigate-text">
                                     About us
                                 </div>
                             </a>
                             <a href="#123" className="div-wrapper">
-                                <div className="text-wrapper">
+                                <div className="list-header-navigate-text">
                                     Contact
                                 </div>
                             </a>
-                            
+
                         </div>
-                        <div className="booking-button">
-                            <a className="text-wrapper-2" href='booking'>
+                        <div className="list-header-navigate-booking-btn">
+                            <a className="list-header-navigate-booking-btn-link" href='booking'>
                                 BOOKING NOW!
                             </a>
                         </div>
                     </div>
-                    <p className="best-care-of-our">
+                    <p className="home-slider-text">
                         Best care of our <br />little friends
                     </p>
                 </div>
 
-                <div className="emergency col-md-12 lazy-load">
-                    <div className="emergency-we-re-wrapper">
-                        <p className="emergency-we-re">
-                            Emergency? We are available at 0999999999.
-                        </p>
-                    </div>
+                <div className="home-slider-emergency col-md-12 lazy-load">
+                    <p className="home-slider-emergency-text">
+                        Emergency? We are available at 0999999999.
+                    </p>
                 </div>
             </div>
 
             <div className="content_description row lazy-load">
-                <div className="col-md-12 img-logo-wrapper">
+                <div className="col-md-12 content_description-logo-wrapper">
                     <img alt=""
-                        className="img-logo"
+                        className="content_description-logo"
                         src={logo_header_img}
                         loading="lazy"
                     />
                 </div>
 
-                <div className="text-petwellbeing">
+                <div className="content_description-title">
                     Your pet’s well-being, happiness and<br />your peace of mind are our
                     top priorities.
                 </div>
 
-                <div className="text-pethealthcare_description">
-                    <p className="text-pethealthcare">
+                <div className="content_description-text">
+                    <div className="content_description-text-pethealthcare">
                         Pet Health Care is the first and only full-service international
                         veterinary clinic in Central Vietnam. Striving for excellence and
                         driven by animal welfare, we provide compassionate clinical care,
@@ -138,7 +136,7 @@ function Home() {
                         international standards and treating all animals with compassionate
                         care in every visit, be it for a routine check up or an emergency
                         procedure.
-                    </p>
+                    </div>
                 </div>
             </div>
             <div className="MAIN-SERVICES lazy-load">
