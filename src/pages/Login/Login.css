@@ -1,0 +1,211 @@
+.login-page .background-blur {
+    background-image: url('../../assets/images/img_Login/backg.png');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* main login */
+  .login-page .main-login-page {
+    display: grid;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+  }
+  
+  
+  /* form login */
+  .login-page .main-login-account {
+    width: 1300px;
+  }
+  
+  .login-page .overlap-group {
+    border-radius: 20px;
+  }
+  
+  /* login  */
+  .login-page .form-login-account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px #00000040;
+  }
+  
+  
+  .login-page .main-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  /* send login input */
+  .login-page .form-send-login {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  
+  .login-page .main-title-text {
+    font-family: "Montserrat", Helvetica;
+    font-weight: 500;
+    color: #828282;
+    font-size: 24px;
+    text-align: center;
+    letter-spacing: -0.24px;
+    line-height: 36px;
+  }
+  
+  .login-page .input-user, .login-page .input-password {
+    margin: 10px 0;
+  }
+  
+  .login-page .field-input-login {
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-family: "Montserrat", Helvetica;
+    line-height: 24px;
+  }
+  
+  .login-page .input-password {
+    background-color: #ffffff;
+    border-radius: 8px;
+  }
+  
+  
+  /* button sign in */
+  .login-page .sign-in-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    background-color: #696969;
+    border-radius: 15px; 
+    transition: background-color 0.3s ease; 
+    margin: 10px 36%; 
+    height: 40px;
+    font-family: "Montserrat", Helvetica;
+  }
+  
+  
+  .login-page .sign-in-button:hover {
+    background-color: #002169; 
+  }
+  
+  .login-page .text-sign-in-button {
+    color: #ffffff;
+  }
+  
+  .login-page .title-continue-with {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 100px;
+  }
+  
+  .login-page .rectangle {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #e6e6e6;
+  }
+  
+  .login-page .text-continue-with {
+    font-family: "Montserrat", Helvetica;
+    color: #828282;
+    line-height: 24px;
+  }
+  
+  .login-page .button-login-google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #eeeeee;
+    border-radius: 8px;
+    margin: 10px 100px;
+    width: 400px;
+    height: 40px;
+    border: none;
+    font-family: "Montserrat", Helvetica;
+  }
+  
+  .login-page .text-google {
+    color: #000000;
+  }
+  
+  .login-page .google-img {
+    margin-right: 10px;
+  }
+  
+  .login-page .logo-img {
+    display: flex;
+    height: 50px;
+    margin: 20px auto;
+  }
+  
+  
+  .login-page .form-login-right-side {
+    display: block;
+    width: 50%;
+  }
+  
+  /* text forgot pass */
+  .login-page .text-button-forgot-password {
+    font-family: "Montserrat", Helvetica;
+    color: #799c67;
+    font-size: 12px;
+    text-align: right;
+    line-height: 18px;
+  }
+  
+  .login-page .text-button-forgot-password:hover {
+    color: #000000; 
+  }
+  
+  /* cha img */
+  .img-left-side {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 50%; 
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    overflow: hidden; 
+    box-sizing: border-box; 
+  }
+  
+  /* image */
+  .login-page .cat-img {
+    object-fit: cover;
+    border-top-left-radius: 20px; 
+    border-bottom-left-radius: 20px;
+    display: block;
+    width: 100%
+  }
+  
+  
+  
+  .login-page .new-user-create {
+    font-family: "Montserrat", Helvetica;
+    font-weight: 400;
+    color: transparent;
+    font-size: 16px;
+    text-align: center;
+    line-height: 24px;
+  }
+  
+  .login-page .text-new-user {
+    color: #828282;
+  }
+  
+  /* button create new account */
+  .login-page .text-create-account {
+    color: #70955d;
+    text-decoration: underline;
+  }
+  
+  .login-page .text-create-account:hover {
+    color: #000000; 
+  }
+  
