@@ -1,0 +1,499 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700,600|Inter:500,var(--presets-body2-font-weight),var(--body-text-font-weight)");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+a {
+  text-decoration: none;
+}
+
+.slide {
+  width: 100%;
+}
+
+.main-tittle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4% 0px;
+}
+
+.overlap-group {
+  background-color: #ffffff;
+}
+
+.text-tittle {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  color: #425bb3;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 60%;
+}
+
+.overlap {
+  display: flex;
+}
+
+.your-Pet-Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f3f3;
+  border-left: 1px solid #e2e2e2;
+  height: 84px;
+}
+
+.search-pet {
+  padding-left: 20px;
+}
+
+.search-pet-txt {
+  font-size: 18px;
+  margin: 10px 0;
+  letter-spacing: 0;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.search-pet-input {
+  position: relative;
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.search-pet-input-icons {
+  background-color: #ffffff;
+  line-height: 33px;
+  text-align: center;
+  width: 40px;
+  border: 1px solid #e4e3e3;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.search-pet-input-icons:hover {
+  cursor: pointer;
+}
+
+.search-pet-input input[type="text"] {
+  height: 35px;
+  width: 300px;
+  outline: none;
+  font-family: "Montserrat", Helvetica;
+  font-size: 16px;
+  color: #000;
+  padding-left: 10px;
+  border: 1px solid #e4e3e3;
+  background: #ffffff;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.menu-icons {
+  width: 20px;
+  height: 20px;
+}
+
+.your-pet-sidebar {
+  background-color: #fafafa;
+  width: 20%;
+}
+
+.category-Header_wrapper {
+  height: 84px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.category-Header {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 600;
+  font-size: 30px;
+  background-color: #f5f3f3;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-Header-Txt {
+  margin-left: 10px;
+}
+
+.list-items-category {
+  margin-top: 20px;
+}
+
+.add-pet-button {
+  display: flex;
+  width: 100px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 16px;
+  margin-right: 20px;
+  color: #fff;
+  background-color: #e18213;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Montserrat", Helvetica;
+}
+
+.add-pet-button:hover {
+  background-color: #002169;
+}
+
+.button-edit {
+  width: fit-content;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.main-content {
+  width: 100%;
+}
+
+
+
+.menu-item_txt {
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 18px;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.menu-item {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 10px 40px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.detail-information {
+    font-family: "Montserrat", sans-serif;
+    margin: 10px 10px;
+    /* color: rgb(245, 243, 243); */
+}
+
+/* pop up css */
+.modal-lg .modal-content {
+  padding: 20px;
+}
+
+.box {
+  width: 100%;
+  height: auto;
+}
+
+.box .pop-up-form {
+  width: 100%;
+  height: auto;
+}
+
+.box .overlap-group {
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.box .form {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.box .pet-update-text {
+  margin: 8px 0;
+  width: 100%;
+}
+
+.box .pet-update-text-label {
+  align-self: stretch;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #666666;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+
+.box .pet-update-text-input {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.box .pet-update-text-input .type-here {
+  width: 100%;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 400;
+  color: #000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 30px;
+  background: transparent;
+  border: 1px solid #cccccc;
+  padding: 0 10px;
+  outline: none;
+}
+
+.box .pet-update-type {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.box .pet-update-type-radio {
+  margin: 3px 0;
+  display: flex;
+}
+
+.box .radio {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box .radio-2 {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 50%;
+  border: 1px solid #cccccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box .radio-2 input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.box .radio-selection {
+  flex: 1;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 400;
+  color: #000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.box .pet-image-upload {
+  width: 200px;
+  height: 200px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px auto;
+}
+
+.box .pet-image-upload-choose-file {
+  margin: 10px 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.pet-image-upload-choose-file-input {
+  width: 200px;
+}
+
+.box .cloud-upload {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.box .button-edit-txt {
+  width: 100%;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.modal-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  text-align: center;
+  flex: 1;
+}
+
+.add-pet_pagination {
+  border-top: 1px solid #e2e2e2;
+  padding: 50px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  font-family: "Montserrat", Helvetica;
+}
+
+/* feedback booking */
+
+.info-detail-booking {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.detail-booking-confirm {
+  width: 100%;
+  border: 1px solid #d5d2d2;
+  border-radius: 10px;
+}
+
+.card-detail-booking-confirm {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: #fff;
+    background-clip: border-box;
+    margin-top: 15px; 
+    margin-bottom: 15px; 
+  }
+
+  .card-ID-booking {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; 
+    margin: 15px 15px;
+  }
+
+  .ID-text {
+     font-size: 16px;
+     font-weight: 600;
+  }
+
+  .card-body-content .col {
+    margin-bottom: 10px; 
+  }
+
+
+
+
+.text-card-body-content {
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.5;
+}
+
+.card-title-detail-booking:first-child {
+  border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0;
+}
+
+.card-title-detail-booking {
+  background-color: #fff;
+}
+
+.price-cancel-rate-booking {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa các cột nếu cần */
+}
+
+
+.cancel-booking-button {
+  grid-column: 2 / 3;
+}
+
+.feedback-rate-booking {
+  grid-column: 3 / 4;
+}
+
+
+.total-price-booking {
+  display: flex;
+  grid-column: 1 / 2;
+  font-weight: 600;
+}
+
+.cancel-booking-button {
+  color: #ffffff;
+  background-color: #e18213;
+  border-radius: 8px;
+  padding: 15px 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.cancel-booking-button:hover {
+  color: #ffffff;
+  background-color: #182155;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.feedback-rate-booking {
+  color: #ffffff;
+  background-color: #e18213;
+  border-radius: 8px;
+  padding: 15px 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.feedback-rate-booking:hover {
+  color: #ffffff;
+  background-color: #182155;
+  border-radius: 8px;
+  text-decoration: none;
+}

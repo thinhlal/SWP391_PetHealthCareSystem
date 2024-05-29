@@ -8,6 +8,7 @@ import YourPet from './pages/YourPet/YourPet.js';
 import DoctorInfo from './pages/DoctorInfo/DoctorInfo.js';
 import Services from "./pages/Services/Services.js";
 import Login from "./pages/Login/Login.js";
+import FeedbackBooking from './pages/FeedbackBooking/FeedbackBooking.js'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/doctor" element={<DoctorInfo />} />
       <Route path="/services" element={<Services />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/feedback" element={<FeedbackBooking />} />
     </Routes>
   );
 }
