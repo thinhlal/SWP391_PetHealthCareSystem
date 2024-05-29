@@ -71,10 +71,7 @@ function ManageCages() {
                                     <div className="content-list-body-value">A1</div>
                                     <div className="content-list-body-value">Large Cage</div>
                                     <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                        />
+                                        Empty
                                     </div>
                                     <div className="content-list-body-value">
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more_info">
@@ -85,11 +82,11 @@ function ManageCages() {
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                                 <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Update information and treatment process</h1>
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div className="modal-body">
-                                                    .....
+
                                                 </div>
                                                 <div className="modal-footer">
                                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -99,25 +96,37 @@ function ManageCages() {
                                         </div>
                                     </div>
                                     <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update">
+                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-status">
                                             Update
                                         </button>
                                     </div>
-                                    <div className="modal fade" id="update" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal fade" id="update-status" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <form>
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <div className='modal-body-update-status'>
+                                                            <div className='modal-body-update-status-title'>Status:</div>
+                                                            <div className='modal-body-update-status-empty'>
+                                                                <input type="radio" id="empty" name="status" value="Empty" defaultChecked/>
+                                                                <div className='modal-body-update-status-empty-text'>Empty</div>
+                                                            </div>
+                                                            <div className='modal-body-update-status-using'>
+                                                                <input type="radio" id="using" name="status" value="Using" />
+                                                                <div className='modal-body-update-status-using-text'>Using</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" className="btn btn-primary">Save changes</button>
+                                                    </div>
                                                 </div>
-                                                <div className="modal-body">
-                                                    .....
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

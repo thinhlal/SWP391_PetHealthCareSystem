@@ -187,4 +187,29 @@
   .pagination_wrapper nav {
     margin-top: 70px;
   }
+
+
+/* css modal update status */
+
+.modal-body-update-status{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.modal-body-update-status-empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.modal-body-update-status-using{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+  
   
