@@ -340,11 +340,11 @@ a {
 }
 
 .main .MAIN-SERVICES_title {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
+  margin-top: 70px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-size: 40px;
   color: #fff;
   z-index: 1;
 }
@@ -353,7 +353,7 @@ a {
   padding: 0;
   margin: 0;
   position: relative;
-  height: 1143px;
+  height: 1000px;
   background-color: #002169;
   padding-bottom: 100px;
 }
@@ -384,7 +384,7 @@ a {
 
 .main .service_Info_Detail {
   position: relative;
-  width: 473px;
+  width: 400px;
   height: 678px;
   z-index: 1;
   background-color: #fff;
