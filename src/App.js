@@ -9,6 +9,7 @@ import DoctorInfo from './pages/DoctorInfo/DoctorInfo.js';
 import Services from './pages/Services/Services.js';
 import Login from './pages/Login/Login.js';
 import ManageCages from './pages/ManageCages/ManageCages.js';
+import ManageDoctorCalender from "./pages/ManageDoctorCalender/ManageDoctorCalender.js"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path='/services' element={<Services />} />
       <Route path='/login' element={<Login />} />
       <Route path='/manage-cages' element={<ManageCages />} />
+      <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
     </Routes>
   );
 }

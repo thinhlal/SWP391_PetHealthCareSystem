@@ -1,0 +1,763 @@
+html, 
+body {
+  margin: 0; height: 100%;
+   overflow-x: hidden;
+}
+
+.manage-doctor-calender {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.manage-doctor-calender .div {
+  background-color: #ffffff;
+  width: 100%;
+  height: 1080px;  position: relative;
+}
+
+.manage-doctor-calender .doctor-calender-name{
+  margin: 70px 0 70px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.manage-doctor-calender .doctor-calender-title{
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  color: #4f3c3c;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 60px;
+  white-space: nowrap;
+}
+
+.manage-doctor-calender .overlap {
+
+  width: 202px;
+  height: 28px;
+  top: 12px;
+  left: 63px;
+}
+
+.manage-doctor-calender .app-title {
+
+  width: 201px;
+  height: 28px;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+}
+
+.manage-doctor-calender .manage-doctor-calender-pagination-frame {
+  display: flex;
+  width: 201px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  top: 3px;
+  left: 1px;
+}
+
+
+.manage-doctor-calender .logo-logo {
+
+  width: 332px;
+  height: 231px;
+  top: 102px;
+  left: 0;
+  mix-blend-mode: multiply;
+  object-fit: cover;
+}
+
+
+.manage-doctor-calender .doctor-calender {
+  position: relative;
+  font-family: "Montserrat", Helvetica;
+  color: #4f3c3c;
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 60px;
+  white-space: nowrap;
+ 
+}
+
+.manage-doctor-calender .doctor-calender-menu {
+
+  width: 100%;
+  height: 761px;
+  top: 374px;
+  left: 1px;
+}
+
+.manage-doctor-calender .doctor-calender-sidebar {
+
+  width: 14.5%;
+  height: 761px;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  overflow: hidden;
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-color: #e0e0e0;
+}
+
+.manage-doctor-calender .doctor-calender-home {
+  display: flex;
+  width: 100%;
+  height: 106px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+
+  top: 0;
+  left: 0;
+  background-color: #e4d9e7;
+}
+
+.manage-doctor-calender .doctor-calender-home-icon-text{
+  display: flex;
+  width: 195px;
+  align-items: center;
+  justify-content: center;
+  gap: 14.58px;
+  position: relative;
+}
+
+.manage-doctor-calender .doctor-calender-home-icon {
+  position: relative;
+  width: 35px;
+  height: 35px;
+}
+
+.manage-doctor-calender .doctor-calender-text-home {
+  position: relative;
+  width: 100%;
+  font-family: "Inter", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 35px;
+  letter-spacing: 0;
+  line-height: 52.5px;
+}
+
+.manage-doctor-calender .doctor-calender-list {
+  display: flex;
+  flex-direction: column;
+  width: 224px;
+  height: 128px;
+  align-items: flex-start;
+  gap: 4px;
+
+  top: 173px;
+  left: 0;
+  background-color: #ffffff;
+}
+
+.manage-doctor-calender .doctor-calender-menu-item {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  gap: 16px;
+  padding: 0px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.manage-doctor-calender .text-wrapper-4 {
+  position: relative;
+  width: 115px;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.manage-doctor-calender .doctor-calender-menu-item-name {
+  position: relative;
+  flex: 1;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+.manage-doctor-calender .menu-item-2 {
+  display: flex;
+  height: 40px;
+  align-items: center;
+  gap: 16px;
+  padding: 0px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  margin-bottom: -44px;
+  background-color: #e4d9e7;
+  border-radius: 8px;
+}
+
+.manage-doctor-calender .doctor-calender-categories-icon {
+  width: 100%;
+  height: 44px;
+  top: 115px;
+  left: 0;
+  background-color: #f1eff1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.manage-doctor-calender .doctor-calender-icon-list {
+
+  width: 10%;
+  height: 19px;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.manage-doctor-calender .doctor-calender-categories {
+
+  height: 30px;
+  top: 9px;
+  left: 54px;
+  font-family: "Inter", Helvetica;
+  font-weight: 700;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.manage-doctor-calender .doctor-calender-table {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 87%;
+    align-items: flex-start;
+    top: -100%;
+    left: 14.5%;
+    background-color: #ffffff;
+    border-radius: 0px 7.69px 7.69px 7.69px;
+    border: 0.96px solid;
+    border-color: #eaecf0;
+}
+
+.manage-doctor-calender .card-header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  flex: 0 0 auto;
+  background-color: #7a3f8733;
+}
+
+.manage-doctor-calender .content {
+  display: flex;
+  width: 1280px;
+  align-items: center;
+  padding: 19.23px 23.08px 18.27px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.manage-doctor-calender .doctor-calender-search {
+  display: flex;
+  flex-direction: column;
+  width: 1179px;
+  align-items: flex-start;
+  gap: 3.85px;
+  position: relative;
+  background-color: #e4d9e7;
+}
+
+.manage-doctor-calender .doctor-calender-search-text-badge {
+  display: flex;
+  width: 139px;
+  align-items: center;
+  gap: 7.69px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.manage-doctor-calender .doctor-calender-search-text {
+  width: 195px;
+  height: 25px;
+  margin-right: -56px;
+  font-weight: 600;
+  color: #000000;
+  font-size: 22px;
+  line-height: 26.9px;
+  position: relative;
+  margin-top: -0.96px;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.manage-doctor-calender .doctor-calender-search-badge {
+  position: relative;
+  width: 671px;
+  margin-right: -734.69px;
+  mix-blend-mode: multiply;
+}
+
+.manage-doctor-calender .doctor-calender-input {
+  display: flex;
+  width: 336px;
+  height: 40px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px 8px 12px;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+}
+
+.manage-doctor-calender .doctor-calender-search-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.manage-doctor-calender .doctor-calender-search-input {
+  position: relative;
+  flex: 1;
+  margin-top: -1px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #828282;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  border: none;
+}
+
+.manage-doctor-calender .doctor-calender-content {
+  width: 105%;
+  height: 646px;
+  align-items: flex-start;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.manage-doctor-calender .column {
+  width: 191px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+.manage-doctor-calender .doctor-calender-table-header-cell {
+  display: flex;
+  height: 43px;
+  align-items: center;
+  gap: 11.54px;
+  padding: 11.54px 23.08px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  background-color: #fbfcfc;
+  border-bottom-width: 0.96px;
+  border-bottom-style: solid;
+  border-color: #eaecf0;
+}
+
+.manage-doctor-calender .doctor-calender-table-header {
+  display: inline-flex;
+  gap: 3.85px;
+  flex: 0 0 auto;
+  align-items: center;
+  position: relative;
+}
+
+.manage-doctor-calender .doctor-calender-content-text {
+  position: relative;
+  width: auto;
+  margin-top: -0.96px;
+  font-family: "Inter", Helvetica;
+  font-weight: 500;
+  color: #667084;
+  font-size: 11.5px;
+  letter-spacing: 0;
+  line-height: 17.3px;
+  white-space: nowrap;
+}
+
+.manage-doctor-calender .doctor-calender-content-arrow-down {
+  position: relative;
+  width: 15.39px;
+  height: 15.39px;
+}
+
+.manage-doctor-calender .doctor-calender-row2-table-cell {
+  display: flex;
+  height: 43px;
+  gap: 11.54px;
+  padding: 11.54px 23.08px;
+  align-self: stretch;
+  width: 100%;
+  border-bottom-width: 0.96px;
+  border-bottom-style: solid;
+  border-color: #eaecf0;
+  align-items: center;
+  position: relative;
+}
+
+.manage-doctor-calender .text-and-supporting-2 {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+  margin-top: -0.04px;
+  margin-bottom: -0.04px;
+}
+
+.manage-doctor-calender .doctor-calender-row2-text {
+  width: auto;
+  font-weight: 500;
+  color: #0f1728;
+  font-size: 13.5px;
+  line-height: 19.2px;
+  position: relative;
+  margin-top: -0.96px;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.manage-doctor-calender .column-2 {
+  width: 160px;
+  height: 645.02px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+
+.manage-doctor-calender .badge-wrapper {
+  height: 43px;
+  padding: 11.54px 23.08px;
+  border-color: #eaecf0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  border-bottom-width: 0.96px;
+  border-bottom-style: solid;
+}
+
+.manage-doctor-calender .badge-base-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+  margin-top: -0.96px;
+  margin-bottom: -0.96px;
+  mix-blend-mode: multiply;
+}
+
+.manage-doctor-calender .calender-content-badge-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5.77px;
+  padding: 1.92px 7.69px 1.92px 5.77px;
+  position: relative;
+  flex: 0 0 auto;
+  background-color: #ebfdf2;
+  border-radius: 15.39px;
+}
+
+.manage-doctor-calender .dot {
+  position: relative;
+  width: 7.69px;
+  height: 7.69px;
+}
+
+.manage-doctor-calender .calender-content-dot-2 {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  top: -1px;
+  left: 1px;
+  background-color: #14b96c;
+  border-radius: 2.88px;
+}
+
+.manage-doctor-calender .calender-content-active {
+  width: auto;
+  font-weight: 500;
+  color: #037847;
+  font-size: 11.5px;
+  text-align: center;
+  line-height: 17.3px;
+  position: relative;
+  margin-top: -0.96px;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+
+.manage-doctor-calender .calender-content-badge {
+  display: inline-flex;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+  mix-blend-mode: multiply;
+}
+
+.manage-doctor-calender .calender-content-badge-base-2 {
+  background-color: #f2f3f6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5.77px;
+  padding: 1.92px 7.69px 1.92px 5.77px;
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: 15.39px;
+}
+
+.manage-doctor-calender .calender-content-dot-3 {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  top: -1px;
+  left: 1px;
+  background-color: #6c768b;
+  border-radius: 2.88px;
+}
+
+.manage-doctor-calender .calender-content-inactive {
+  width: auto;
+  font-weight: 500;
+  color: #364153;
+  font-size: 11.5px;
+  text-align: center;
+  line-height: 17.3px;
+  position: relative;
+  margin-top: -0.96px;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.manage-doctor-calender .calender-content-table-cell {
+  height: 43px;
+  padding: 10.58px 23.08px;
+  border-color: #eaecf0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  border-bottom-width: 0.96px;
+  border-bottom-style: solid;
+}
+
+.manage-doctor-calender .table-cell-4 {
+  padding: 10.58px 23.08px;
+  flex: 0 0 auto;
+  border-color: #eaecf0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  border-bottom-width: 0.96px;
+  border-bottom-style: solid;
+}
+
+.manage-doctor-calender .column-3 {
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.manage-doctor-calender .table-header-cell-2 {
+  align-self: stretch;
+  width: 100%;
+  height: 43px;
+  position: relative;
+  background-color: #fbfcfc;
+  border-bottom-width: 0.96px;
+  border-bottom-style: solid;
+  border-color: #eaecf0;
+}
+
+.manage-doctor-calender .badge-3 {
+  display: inline-flex;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+  margin-top: -0.96px;
+  margin-bottom: -0.96px;
+  border-radius: 44px;
+  overflow: hidden;
+  mix-blend-mode: multiply;
+}
+
+.calender-content-badge-base-3 {
+  background-color: #adaeb0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5.77px;
+  padding: 1.92px 7.69px 1.92px 5.77px;
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: 15.39px;
+  border: none;
+}
+
+.manage-doctor-calender .badge-4 {
+  display: inline-flex;
+  align-items: flex-start;
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: 44px;
+  overflow: hidden;
+  mix-blend-mode: multiply;
+}
+
+.manage-doctor-calender .frame-3 {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 9.92px;
+  margin-bottom: -0.96px;
+  margin-left: -0.96px;
+  margin-right: -0.96px;
+  border-bottom-width: 0.96px;
+  border-bottom-style: solid;
+  border-color: #eaecf0;
+}
+
+.manage-doctor-calender .line {
+
+  width: 5px;
+  height: 761px;
+  top: 0;
+  left: 238px;
+}
+
+.manage-doctor-calender .manage-doctor-calender-pagination {
+
+  display: ruby-text;
+  width: 300px;
+  height: 2%;
+  background-color: #ffffff;
+  border-radius: 15px;
+  border: 1px solid;
+  border-color: var(--primary);
+  box-shadow: 0px 8px 16px #00000014, 0px 0px 4px #0000000a;
+  margin-left: 50%;
+  margin-top: 1%;
+}
+
+.manage-doctor-calender .manage-doctor-calender-vector {
+
+  width: 7px;
+  height: 9px;
+
+}
+
+.manage-doctor-calender .manage-doctor-calender-element {
+
+  width: 207px;
+  height: 19px;
+  
+}
+
+
+.manage-doctor-calender .manage-doctor-calender-pagination-text {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  margin-top: -1px;
+  font-family: "Product Sans Medium-Regular", Helvetica;
+  font-weight: 400;
+  color: #646464;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+
+.calender-content-badge-base-3:hover {
+  background-color: orange;
+}
+.doctor-calender-menu-item-name:hover{
+  background-color:#e4d9e7
+}
+.manage-doctor-calender .manage-doctor-calender-pagination-text:hover {
+  background-color: #002169;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 9.5px;
+}
+.doctor-calender-row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 8.5%;
+}
+.doctor-calender-row2{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 8.1%;
+}
