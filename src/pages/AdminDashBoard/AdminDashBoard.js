@@ -5,12 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 //images
-import logo_pet_health_care from '../../assets/images/img_AdminDashBoard/logo.png'
-import icon_admin from '../../assets/images/img_AdminDashBoard/img-7.png'
-import icon_home from '../../assets/images/img_AdminDashBoard/home.svg'
-import icon_search from '../../assets/images/img_AdminDashBoard/search.svg'
-import vector_left from '../../assets/images/img_AdminDashBoard/search.svg'
-import vector_right from '../../assets/images/img_AdminDashBoard/vector-1.svg'
+import logo_pet_health_care from '../../assets/images/img_AdminDashBoard/logo_pethealthcare.png'
+import icon_admin from '../../assets/images/img_AdminDashBoard/logo_admin.png'
+import icon_home from '../../assets/images/img_AdminDashBoard/icon_home.svg'
+import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg'
+import vector_left from '../../assets/images/img_AdminDashBoard/left_vector-1.svg'
+import vector_right from '../../assets/images/img_AdminDashBoard/right_vector.svg'
 function AdminDashBoard() {
     return (
 
