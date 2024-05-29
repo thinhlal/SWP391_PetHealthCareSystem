@@ -91,11 +91,11 @@ function ManageDoctorCalender() {
                                         />
                                     </div>
                                     <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#moreinfo">
+                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more_info">
                                             More info
                                         </button>
                                     </div>
-                                    <div className="modal fade" id="moreinfo" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                                 <div className="modal-header">
@@ -135,12 +135,12 @@ function ManageDoctorCalender() {
                                         />
                                     </div>
                                     <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#moreinfo">
+                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more_info">
                                             More info
                                         </button>
 
                                     </div>
-                                    <div className="modal fade" id="moreinfo" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                                 <div className="modal-header">
