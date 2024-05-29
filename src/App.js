@@ -10,7 +10,7 @@ import Services from './pages/Services/Services.js';
 import Login from './pages/Login/Login.js';
 import ManageCages from './pages/ManageCages/ManageCages.js';
 import ManageDoctorCalender from "./pages/ManageDoctorCalender/ManageDoctorCalender.js"
-
+import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js';
 function App() {
   return (
     <Routes>
@@ -24,6 +24,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/manage-cages' element={<ManageCages />} />
       <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
+      <Route path="/admin-dashboard" element={<AdminDashBoard />} />
     </Routes>
   );
 }
