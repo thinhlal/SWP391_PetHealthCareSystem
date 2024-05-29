@@ -45,22 +45,6 @@ a {
   object-fit: cover;
 }
 
-.main .best-care-of-our {
-  z-index: 1000;
-  position: absolute;
-  width: 539px;
-  height: 235px;
-  top: 533px;
-  left: 170px;
-  font-family: "Paytone One", Helvetica;
-  font-weight: 800;
-  opacity: 0.7;
-  color: #f2f2f2;
-  font-size: 60px;
-  letter-spacing: 0;
-  line-height: 100px;
-}
-
 .main .overlap-2 {
   width: 100%;
 }
@@ -90,7 +74,7 @@ a {
   border-radius: 12px;
 }
 
-.main .frame {
+.main .list-header-navigate {
   display: flex;
   width: 126px;
   height: 42px;
@@ -102,7 +86,7 @@ a {
   border-radius: 8px;
 }
 
-.main .text-wrapper {
+.main .list-header-navigate-text {
   position: relative;
   width: fit-content;
   margin-top: 0px;
@@ -117,9 +101,25 @@ a {
   transition: color 0.3s, transform 0.3s;
 }
 
-.main .text-wrapper:hover {
+.main .list-header-navigate-text:hover {
   color: #ff5733;
   transform: translateY(-5px);
+}
+
+.main .home-slider-text {
+  z-index: 1000;
+  position: absolute;
+  width: 539px;
+  height: 235px;
+  top: 533px;
+  left: 170px;
+  font-family: "Paytone One", Helvetica;
+  font-weight: 800;
+  opacity: 0.7;
+  color: #f2f2f2;
+  font-size: 60px;
+  letter-spacing: 0;
+  line-height: 100px;
 }
 
 .main .div-wrapper {
@@ -146,7 +146,7 @@ a {
   top: 18px;
 }
 
-.main .booking-button {
+.main .list-header-navigate-booking-btn {
   display: flex;
   width: 170px;
   height: 50px;
@@ -163,7 +163,7 @@ a {
   transition: background-color 0.3s, color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
 }
 
-.main .text-wrapper-2 {
+.main .list-header-navigate-booking-btn-link {
   height: 50px;
   font-family: "Montserrat", Helvetica;
   font-weight: 600;
@@ -179,7 +179,7 @@ a {
   border-radius: 10px;
 }
 
-.main .text-wrapper-2:hover {
+.main .list-header-navigate-booking-btn-link:hover {
   cursor: pointer;
   background-color: #002169;
   color: #ffffff;
@@ -274,17 +274,14 @@ a {
   white-space: nowrap;
 }
 
-.main .emergency {
+.main .home-slider-emergency {
   padding: 0;
   margin: 0;
-}
-
-.main .emergency-we-re-wrapper {
   height: 81px;
   background-color: #002169;
 }
 
-.main .emergency-we-re {
+.main .home-slider-emergency-text {
   font-family: "Montserrat", Helvetica;
   font-weight: 500;
   color: #ffffff;
@@ -299,7 +296,7 @@ a {
   margin: 0 !important;
 }
 
-.main .img-logo-wrapper {
+.main .content_description-logo-wrapper {
   margin: 50px 0;
   display: flex;
   align-items: center;
@@ -307,12 +304,12 @@ a {
   justify-content: center;
 }
 
-.main .img-logo {
+.main .content_description-logo {
   width: 400px;
   height: auto;
 }
 
-.main .text-petwellbeing {
+.main .content_description-title {
   text-shadow: 0px 4px 4px #00000040;
   font-weight: 600;
   color: #4f3c3c;
@@ -324,14 +321,14 @@ a {
   margin: 0 0 50px 0;
 }
 
-.text-pethealthcare_description {
+.content_description-text {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 50px 0 80px 0;
 }
 
-.main .text-pethealthcare {
+.main .content_description-text-pethealthcare {
   font-weight: 500;
   color: #4f3c3c;
   font-size: 16px;
@@ -343,11 +340,11 @@ a {
 }
 
 .main .MAIN-SERVICES_title {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 50px;
+  margin-top: 70px;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-size: 40px;
   color: #fff;
   z-index: 1;
 }
@@ -356,7 +353,7 @@ a {
   padding: 0;
   margin: 0;
   position: relative;
-  height: 1143px;
+  height: 1000px;
   background-color: #002169;
   padding-bottom: 100px;
 }
@@ -379,7 +376,7 @@ a {
   left: 165px;
 }
 
-.service-detail-wrapper {
+.main .service-detail-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -387,7 +384,7 @@ a {
 
 .main .service_Info_Detail {
   position: relative;
-  width: 473px;
+  width: 400px;
   height: 678px;
   z-index: 1;
   background-color: #fff;
@@ -443,7 +440,7 @@ a {
   z-index: 2;
 }
 
-.service_Info_Detail-button::after {
+.main .service_Info_Detail-button::after {
   position: absolute;
   content: "";
   top: 0;
@@ -455,11 +452,11 @@ a {
   border-radius: 5px;
 }
 
-.service_Info_Detail-button:hover {
+.main .service_Info_Detail-button:hover {
   color: #fff;
 }
 
-.service_Info_Detail-button:hover::after {
+.main .service_Info_Detail-button:hover::after {
   width: 100%;
 }
 
@@ -522,7 +519,7 @@ a {
   line-height: 24px;
 }
 
-.maintain-text-flex {
+.main .maintain-text-flex {
   display: flex;
   align-items: center;
 }
@@ -620,7 +617,7 @@ a {
   margin: 20px 0 110px 0;
 }
 
-.MAIN-DOCTOR-flex {
+.main .MAIN-DOCTOR-flex {
   display: flex;
   align-items: center;
   justify-content: space-around;
