@@ -8,7 +8,7 @@ import YourPet from './pages/YourPet/YourPet.js';
 import DoctorInfo from './pages/DoctorInfo/DoctorInfo.js';
 import Services from "./pages/Services/Services.js";
 import Login from "./pages/Login/Login.js";
-
+import ManageDoctorCalender from "./pages/ManageDoctorCalender/ManageDoctorCalender.js"
 function App() {
   return (
     <Routes>
@@ -20,6 +20,7 @@ function App() {
       <Route path="/doctor" element={<DoctorInfo />} />
       <Route path="/services" element={<Services />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
     </Routes>
   );
 }
