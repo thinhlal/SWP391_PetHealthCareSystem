@@ -45,7 +45,24 @@ function ManageListBooking() {
                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">
-                                                sadsadas
+                                                <input type="date" placeholder="Search" className="main-content-header-search-input" />
+                                                <input type="text" placeholder="Name" className="main-content-header-search-input" />
+                                                <input type="text" placeholder="Pet Name" className="main-content-header-search-input" />
+                                                <input type="text" placeholder="Search" className="main-content-header-search-input" />
+                                                <label for="Service">Choose Service:</label>
+                                                    <select name="Service" id="Service">
+                                                        <option value="Service">NameService</option>
+                                                        <option value="Service">NameService</option>
+                                                        <option value="Service">NameService</option>
+                                                        <option value="Service">NameService</option>
+                                                    </select>
+                                                <label for="Doctor">Choose Doctor:</label>
+                                                    <select name="Doctor" id="Doctor">
+                                                        <option value="Doctor">NameDoctor</option>
+                                                        <option value="Doctor">NameDoctor</option>
+                                                        <option value="Doctor">NameDoctor</option>
+                                                        <option value="Doctor">NameDoctor</option>
+                                                    </select>
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -75,7 +92,36 @@ function ManageListBooking() {
                                     <div className="content-list-body-value">ssss</div>
                                     <div className="content-list-body-value">Dog</div>
                                     <div className="content-list-body-value">Blooming</div>
-                                    <div className="content-list-body-value">Chen</div>
+                                   
+                                    <div className="content-list-body-value">
+                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#choosedoctor">
+                                            Choose Doctor
+                                        </button>
+
+                                    </div>
+                                    <div className="modal fade" id="choosedoctor" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div className="modal-dialog">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Doctor List</h1>
+                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div className="modal-body">
+                                                <label for="Doctor">Choose Doctor:</label>
+                                                    <select name="Doctor" id="Doctor">
+                                                        <option value="Doctor">NameDoctor</option>
+                                                        <option value="Doctor">NameDoctor</option>
+                                                        <option value="Doctor">NameDoctor</option>
+                                                        <option value="Doctor">NameDoctor</option>
+                                                    </select>
+                                                </div>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" className="btn btn-primary">Save </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="content-list-body-value">
                                         <input
                                             type="checkbox"
