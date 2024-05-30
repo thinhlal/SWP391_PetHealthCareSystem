@@ -1,0 +1,170 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .menu .logopethealthcare{
+    text-align: right;
+  }
+  
+  #navbar {
+    width: 100%;
+      display: flex;
+      justify-content: center;
+      background-color: #113179;
+  }
+  .tittle {
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      text-align: center;
+      font-family: 'Montserrat', Helvetica;
+      font-weight: 700;
+      color: #113179;
+      font-size: 50px;
+      letter-spacing: 0;
+      line-height: 80px;
+      white-space: nowrap;
+      margin-top: 100px;
+      margin-left: 40px;
+  }
+  
+  .tittle-1{
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: 'Montserrat', Helvetica;
+    text-align: center;
+    font-weight: 500;
+    color: #113179;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: 50px;
+    white-space: nowrap;
+    margin-top: -10px;
+    margin-left: 40px; 
+  }
+  
+  form {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 1100px;
+    height: 650px;
+    margin: 50px auto;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr) auto;
+    grid-gap: 20px;
+    color: #113179;
+  }
+  
+  
+  .form-group{
+    margin-right: 50px;
+    margin-left: 20px;
+  }
+  
+  .form-group-1{
+    margin-right: 50px;
+  }
+  
+  .form-group-2{
+    margin-right: 50px;
+  }
+  
+  .form-group-3 textarea {
+    height: 80px; 
+    font-size: 16px; 
+    padding: 10px; 
+    margin-left: 20px;
+    resize: vertical; 
+    overflow: auto; 
+    word-wrap: break-word;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: 20px;
+  
+  }
+  
+  .PetExam-form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .btn-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-save {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-save:hover {
+    background-color: orange;
+  }
+  
+  .btn-cancel {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-cancel:hover {
+    background-color: orange;
+  }
+  
+  .button-savecancel{
+    margin-top: 200px;
+    margin-right: -100px;
+  }
+  
+  .PetExam-final{
+    font-family: 'Montserrat', Helvetica;
+    text-align: center;
+    font-weight: 700;
+    font-size: 25px;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    color: #113179;
+  }
+  
+  
+  @media screen and (max-width: 768px){
+      .header{
+          display: block;
+          text-align: center;
+      }
+      .header img{
+          width: 20%;
+      }
+  
+      
+  }
+  
+  
+  
+  
+  
