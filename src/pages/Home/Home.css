@@ -346,6 +346,7 @@ a {
   line-height: 50px;
   font-size: 40px;
   color: #fff;
+  margin-bottom: 50px;
   z-index: 1;
 }
 
@@ -353,9 +354,9 @@ a {
   padding: 0;
   margin: 0;
   position: relative;
-  height: 1000px;
+  height: 800px;
   background-color: #002169;
-  padding-bottom: 100px;
+  padding-bottom: 70px;
 }
 
 .main .floofins-and-co {
@@ -385,7 +386,7 @@ a {
 .main .service_Info_Detail {
   position: relative;
   width: 400px;
-  height: 678px;
+  height: 550px;
   z-index: 1;
   background-color: #fff;
   padding: 0;
@@ -394,7 +395,7 @@ a {
 
 .main .service_Info_Detail-img {
   width: 100%;
-  height: 400px;
+  height: 300px;
   background-image: url(../../assets/images/img_Home/service_dog.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -411,8 +412,8 @@ a {
 
 .main .service_Info_Detail-button-wrapper-flex {
   position: absolute;
-  bottom: 70px;
-  left: 137px;
+  bottom: 50px;
+  left: 105px;
   border-radius: 5px;
 }
 
