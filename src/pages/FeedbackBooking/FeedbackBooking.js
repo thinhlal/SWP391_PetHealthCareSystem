@@ -8,35 +8,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 // Images
 import dog_icon from "../../assets/images/img_YourPet/dog_icon.png";
-function YourPet() {
-  const [avatar, setAvatar] = useState();
+
+
+function YourBooking() {
+  const [avatar] = useState();
+  
   useEffect(() => {
     return () => {
-      avatar && URL.revokeObjectURL(avatar.preview);
+      if (avatar) {
+        URL.revokeObjectURL(avatar.preview);
+      }
     };
   }, [avatar]);
 
-  const handlePreviewAvatar = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      file.preview = URL.createObjectURL(file);
-      setAvatar(file);
-    }
-  };
+ 
+
   return (
-    <div className="container-fluid">
-      <div className="row">
+    <div className="container-your-booking">
+      <div className="row-your-booking">
         <Header></Header>
-        <div className="main-tittle">
-          <div className="overlap-group">
-            <div className="text-tittle">Pet Information</div>
+        <div className="main-tittle-your-booking">
+          <div className="overlap-group-booking">
+            <div className="text-tittle-your-booking">Booking</div>
           </div>
         </div>
-        <div className="overlap">
-          <div className="your-pet-sidebar">
+        <div className="overlap-booking">
+          <div className="your-booking-sidebar">
             <div>
-              <div className="category-Header_wrapper">
-                <div className="category-Header">
+              <div className="category-main-header-booking">
+                <div className="category-header-booking">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"
@@ -50,16 +50,20 @@ function YourPet() {
                       d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
                     />
                   </svg>
-                  <div className="category-Header-Txt">Categories</div>
+                  <div className="category-header-text-booking">Categories</div>
                 </div>
               </div>
-              <div className="list-items-category">
-                <div className="menu-item">
-                  <img className="menu-icons" src={dog_icon} alt="" />
-                  <div className="menu-item_txt">Your pet</div>
+              <div className="list-booking-items-category-booking">
+                <div className="menu-item-your-booking">
+                  <img
+                    className="menu-icons-your-booking"
+                    src={dog_icon}
+                    alt=""
+                  />
+                  <div className="menu-item_text-booking">Your pet</div>
                 </div>
 
-                <div className="menu-item">
+                <div className="menu-item-your-booking">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -71,10 +75,10 @@ function YourPet() {
                     <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0" />
                     <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                   </svg>
-                  <div className="menu-item_txt">Your booking</div>
+                  <div className="menu-item_text-booking">Your booking</div>
                 </div>
 
-                <div className="menu-item">
+                <div className="menu-item-your-booking">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -85,22 +89,27 @@ function YourPet() {
                   >
                     <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z" />
                   </svg>
-                  <div className="menu-item_txt">Pet are staying in cages</div>
+                  <div className="menu-item_text-booking">
+                    Pet are staying in cages
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="main-content">
-            <div className="your-Pet-Header">
-              <div className="search-pet">
-                <div className="search-pet-txt">Search Your Booking</div>
-                <div className="search-pet-input">
+
+          <div className="main-content-booking">
+            <div className="your-Pet-Header-booking">
+              <div className="search-pet-booking">
+                <div className="search-pet-txt-booking">
+                  Search Your Booking
+                </div>
+                <div className="search-pet-input-booking">
                   <input
                     type="text"
                     placeholder="Search"
-                    className="label-input"
+                    className="label-input-booking"
                   />
-                  <div className="search-pet-input-icons">
+                  <div className="search-pet-input-icons-booking">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -114,231 +123,45 @@ function YourPet() {
                   </div>
                 </div>
               </div>
-
-              <div
-                className="add-pet-button"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                <div className="text-wrapper-3">Add Pet</div>
-              </div>
-              <div
-                className="modal fade"
-                id="exampleModal"
-                tabIndex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog modal-lg">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h1 className="modal-title fs-5" id="exampleModalLabel">
-                        Pet Information Form
-                      </h1>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div className="modal-body">
-                      <div className="box">
-                        <div className="pop-up-form">
-                          <div className="overlap-group">
-                            <div className="form">
-                              <div className="pet-image-upload">
-                                {avatar && (
-                                  <img
-                                    className="cloud-upload"
-                                    src={avatar.preview}
-                                    alt=""
-                                  />
-                                )}
-                              </div>
-                              <div className="pet-image-upload-choose-file">
-                                <input
-                                  type="file"
-                                  onChange={handlePreviewAvatar}
-                                  className="pet-image-upload-choose-file-input"
-                                ></input>
-                              </div>
-
-                              <div className="pet-update-text">
-                                <label
-                                  className="pet-update-text-label"
-                                  htmlFor="input-1"
-                                >
-                                  Pet name
-                                </label>
-                                <div className="pet-update-text-input">
-                                  <input
-                                    className="type-here"
-                                    placeholder="Enter pet name"
-                                    type="text"
-                                    id="input-1"
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="pet-update-text">
-                                <label
-                                  className="pet-update-text-label"
-                                  htmlFor="input-1"
-                                >
-                                  Pet name
-                                </label>
-                                <div className="pet-update-text-input">
-                                  <input
-                                    className="type-here"
-                                    placeholder="Enter pet name"
-                                    type="text"
-                                    id="input-1"
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="pet-update-text">
-                                <label
-                                  className="pet-update-text-label"
-                                  htmlFor="input-1"
-                                >
-                                  Pet name
-                                </label>
-                                <div className="pet-update-text-input">
-                                  <input
-                                    className="type-here"
-                                    placeholder="Enter pet name"
-                                    type="text"
-                                    id="input-1"
-                                  />
-                                </div>
-                              </div>
-                              <div className="pet-update-text">
-                                <label
-                                  className="pet-update-text-label"
-                                  htmlFor="input-1"
-                                >
-                                  Pet name
-                                </label>
-                                <div className="pet-update-text-input">
-                                  <input
-                                    className="type-here"
-                                    placeholder="Enter pet name"
-                                    type="text"
-                                    id="input-1"
-                                  />
-                                </div>
-                              </div>
-
-                              <div className="pet-update-type">
-                                <div className="pet-update-type-header">
-                                  <div className="radio-selection">Type</div>
-                                </div>
-
-                                <div className="pet-update-type-radio">
-                                  <div className="radio">
-                                    <input
-                                      type="radio"
-                                      id="dog"
-                                      name="type"
-                                      value="dog"
-                                    />
-                                  </div>
-                                  <div className="radio-selection">Dog</div>
-                                </div>
-                                <div className="pet-update-type-radio">
-                                  <div className="radio">
-                                    <input
-                                      type="radio"
-                                      id="cat"
-                                      name="type"
-                                      value="cat"
-                                    />
-                                  </div>
-                                  <div className="radio-selection">Cat</div>
-                                </div>
-                              </div>
-
-                              <div className="pet-update-type">
-                                <div className="pet-update-type-header">
-                                  <div className="radio-selection">Gender</div>
-                                </div>
-
-                                <div className="pet-update-type-radio">
-                                  <div className="radio">
-                                    <input
-                                      type="radio"
-                                      id="male"
-                                      name="gender"
-                                      value="male"
-                                    />
-                                  </div>
-                                  <div className="radio-selection">Male</div>
-                                </div>
-
-                                <div className="pet-update-type-radio">
-                                  <div className="radio">
-                                    <input
-                                      type="radio"
-                                      id="female"
-                                      name="gender"
-                                      value="female"
-                                    />
-                                  </div>
-                                  <div className="radio-selection">Female</div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        data-bs-dismiss="modal"
-                        style={{ fontFamily: "Montserrat, sans-serif" }}
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-success"
-                        style={{ fontFamily: "Montserrat, sans-serif" }}
-                      >
-                        Add Pet
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div className="detail-information">
+
+            <div className="detail-information-booking">
               {/* column 1 */}
               <div className="info-detail-booking">
-                <div className="detail-booking-confirm">
-                  <div className="card-detail-booking-confirm">
-                    
+                <div className="detail-booking-confirm-booking">
+                  <div className="card-detail-booking-confirm-booking">
                     <div className="card-ID-booking">
-                      <div>ID: OD45345345435</div>
-                      <div className="card-body-content">
-                        <div className="text-card-body-content">
-                          <div className="col">
-                            <div>Date Booking:</div> <br />
-                            29 nov 2019
+                      <div className="detail-number-ID">ID: OD45345345435
+                         <div className="status-booking-1">Status: Pending</div>
+                      </div>
+                      <div className="card-body-content-booking">
+                        <div className="text-card-body-content-booking">
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Date Booking:
+                            </div>{" "}
+                            <br />
+                            29 nov 2024
                           </div>
-                          <div className="col">
-                            <div>Time:</div> <br />
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Time:
+                            </div>{" "}
+                            <br />
                             10:00
                           </div>
-                          <div className="col">
-                            <div>Selected Doctor:</div> <br />
-                            Picked by the courier
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Selected Doctor:
+                            </div>{" "}
+                            <br />
+                            Alex
                           </div>
-                          <div className="col">
-                            <div>Services:</div> <br />
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Services:
+                            </div>{" "}
+                            <br />
                             Periodic health check-ups for dogs
                           </div>
                         </div>
@@ -346,18 +169,18 @@ function YourPet() {
 
                       <div className="price-cancel-rate-booking">
                         <div className="total-price-booking">
-                          Total Price: <div className="detail-price">50$</div>
+                          Total Price:&nbsp;{" "}
+                          <div className="detail-price-booking">70$</div>
                         </div>
-                        <a href="/" className="cancel-booking-button">
-                          <div className="text-sign-in-button">
+                        <a href="/" className="cancel-booking-button-1">
+                          <div className="text-sign-in-button-booking">
                             Cancel Booking
                           </div>
                         </a>
-                        <a href="/" className="feedback-rate-booking">
-                          <div className="text-feedback-rate-booking">
-                            Feedback
-                          </div>
-                        </a>
+                        {/* button feedback */}
+                        <button type="button" className="btn btn-primary feedback-rate-booking" data-bs-toggle="modal" data-bs-target="#newModal">
+                          <div className="text-feedback-rate-booking">Feedback</div>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -366,27 +189,40 @@ function YourPet() {
 
               {/* column 2 */}
               <div className="info-detail-booking">
-                <div className="detail-booking-confirm">
-                  <div className="card-detail-booking-confirm">
-                  
+                <div className="detail-booking-confirm-booking">
+                  <div className="card-detail-booking-confirm-booking">
                     <div className="card-ID-booking">
-                      <div>ID: OD45345345435</div>
-                      <div className="card-body-content">
-                        <div className="text-card-body-content">
-                          <div className="col">
-                            <div>Date Booking:</div> <br />
-                            29 nov 2019
+                      <div className="detail-number-ID">ID: OD45345345435
+                      <div className="status-booking-2">Status: Completed booking</div>
+                      </div>
+                      <div className="card-body-content-booking">
+                        <div className="text-card-body-content-booking">
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Date Booking:
+                            </div>{" "}
+                            <br />
+                            10 nov 2024
                           </div>
-                          <div className="col">
-                            <div>Time:</div> <br />
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Time:
+                            </div>{" "}
+                            <br />
                             12:00
                           </div>
-                          <div className="col">
-                            <div>Selected Doctor:</div> <br />
-                            Picked by the courier
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Selected Doctor:
+                            </div>{" "}
+                            <br />
+                            Alex
                           </div>
-                          <div className="col">
-                            <div>Services:</div> <br />
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Services:
+                            </div>{" "}
+                            <br />
                             Periodic health check-ups for dogs
                           </div>
                         </div>
@@ -394,18 +230,18 @@ function YourPet() {
 
                       <div className="price-cancel-rate-booking">
                         <div className="total-price-booking">
-                          Total Price: <div className="detail-price">50$</div>
+                          Total Price:&nbsp;{" "}
+                          <div className="detail-price-booking">50$</div>
                         </div>
-                        <a href="/" className="cancel-booking-button">
-                          <div className="text-sign-in-button">
+                        <a href="/" className="cancel-booking-button-2">
+                          <div className="text-sign-in-button-booking">
                             Cancel Booking
                           </div>
                         </a>
-                        <a href="/" className="feedback-rate-booking">
-                          <div className="text-feedback-rate-booking">
-                            Feedback
-                          </div>
-                        </a>
+                        {/* button feedback */}
+                        <button type="button" className="btn btn-primary feedback-rate-booking" data-bs-toggle="modal" data-bs-target="#newModal">
+                          <div className="text-feedback-rate-booking">Feedback</div>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -414,27 +250,40 @@ function YourPet() {
 
               {/* column 3 */}
               <div className="info-detail-booking">
-                <div className="detail-booking-confirm">
-                  <div className="card-detail-booking-confirm">
-                   
-                    <div className="card-ID-booking">
-                      <>ID: OD45345345435</>
-                      <div className="card-body-content">
-                        <div className="text-card-body-content">
-                          <div className="col">
-                            <div>Date Booking:</div> <br />
-                            29 nov 2019
+                <div className="detail-booking-confirm-booking">
+                  <div className="card-detail-booking-confirm-booking">
+                    <div className="card-ID-booking">                        
+                      <div className="detail-number-ID">ID: OD45345345435
+                      <div className="status-booking-3">Status: Completed booking</div>
+                      </div>
+                      <div className="card-body-content-booking">
+                        <div className="text-card-body-content-booking">
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Date Booking:
+                            </div>{" "}
+                            <br />
+                            20 nov 2024
                           </div>
-                          <div className="col">
-                            <div>Time:</div> <br />
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Time:
+                            </div>{" "}
+                            <br />
                             15:00
                           </div>
-                          <div className="col">
-                            <div>Selected Doctor:</div> <br />
-                            Picked by the courier
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Selected Doctor:
+                            </div>{" "}
+                            <br />
+                            Alex
                           </div>
-                          <div className="col">
-                            <div>Services:</div> <br />
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Services:
+                            </div>{" "}
+                            <br />
                             Periodic health check-ups for dogs
                           </div>
                         </div>
@@ -442,26 +291,70 @@ function YourPet() {
 
                       <div className="price-cancel-rate-booking">
                         <div className="total-price-booking">
-                          Total Price: <div className="detail-price">50$</div>
+                          Total Price:&nbsp;{" "}
+                          <div className="detail-price-booking">45$</div>
                         </div>
-                        <a href="/" className="cancel-booking-button">
-                          <div className="text-sign-in-button">
+                        <a href="/" className="cancel-booking-button-3">
+                          <div className="text-sign-in-button-booking">
                             Cancel Booking
                           </div>
                         </a>
-                        <a href="/" className="feedback-rate-booking">
-                          <div className="text-feedback-rate-booking">
-                            Feedback
-                          </div>
-                        </a>
+                        {/* button feedback */}
+                        <button type="button" className="btn btn-primary feedback-rate-booking" data-bs-toggle="modal" data-bs-target="#newModal">
+                          <div className="text-feedback-rate-booking">Feedback</div>
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            
+            {/* modal rating */}
+          
+            <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="newModalLabel">Your opinion matters to us!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                <div class="modal-body">
+                  <div className="rating-container">
+                    <div className="main-title-rate">How was quality of the call?</div>
+                    <div className="rate-success">
+                      
+                      <div className="rating">
+                        <input type="radio" name="rating" value="5" id="5" />
+                        <label htmlFor="5">☆</label>
+                        <input type="radio" name="rating" value="4" id="4" />
+                        <label htmlFor="4">☆</label>
+                        <input type="radio" name="rating" value="3" id="3" />
+                        <label htmlFor="3">☆</label>
+                        <input type="radio" name="rating" value="2" id="2" />
+                        <label htmlFor="2">☆</label>
+                        <input type="radio" name="rating" value="1" id="1" />
+                        <label htmlFor="1">☆</label>
+                      </div>
+                    </div>
+
+                    <textarea placeholder="Leave a message, if you want"></textarea>
+                    <button className="rating-button">Rate now</button>                    
+                  </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="button-secondary" data-bs-dismiss="modal">Maybe later</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* modal confirm  */}
+
           </div>
         </div>
+
+        {/* pagination */}
         <div className="add-pet_pagination">
           <nav aria-label="...">
             <ul className="pagination">
@@ -493,10 +386,11 @@ function YourPet() {
             </ul>
           </nav>
         </div>
+
         <Footer></Footer>
       </div>
     </div>
   );
 }
 
-export default YourPet;
+export default YourBooking;
