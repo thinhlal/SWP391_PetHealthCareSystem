@@ -45,19 +45,18 @@ function ManageListBooking() {
                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">
-                                                <input type="date" placeholder="Search" className="main-content-header-search-input" />
-                                                <input type="text" placeholder="Name" className="main-content-header-search-input" />
-                                                <input type="text" placeholder="Pet Name" className="main-content-header-search-input" />
-                                                <input type="text" placeholder="Search" className="main-content-header-search-input" />
-                                                <label for="Service">Choose Service:</label>
-                                                    <select name="Service" id="Service">
+                                                <input type="date" placeholder="Search" className="main-content-header-add-input" />
+                                                <input type="text" placeholder="Name" className="main-content-header-add-input" />
+                                                <input type="text" placeholder="Pet Name" className="main-content-header-add-input" />
+                                                <label className="choose-service"for="Service">Choose Service:</label>
+                                                    <select name="add-service-list" id="Service">
                                                         <option value="Service">NameService</option>
                                                         <option value="Service">NameService</option>
                                                         <option value="Service">NameService</option>
                                                         <option value="Service">NameService</option>
                                                     </select>
-                                                <label for="Doctor">Choose Doctor:</label>
-                                                    <select name="Doctor" id="Doctor">
+                                                    <label className="choose-doctor"for="Doctor">Choose Doctor:</label>
+                                                    <select className="add-doctor-list" id="Doctor">
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
@@ -107,8 +106,8 @@ function ManageListBooking() {
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div className="modal-body">
-                                                <label for="Doctor">Choose Doctor:</label>
-                                                    <select name="Doctor" id="Doctor">
+                                                <label className="choose-doctor"for="Doctor">Choose Doctor:</label>
+                                                    <select className="add-doctor-list" id="Doctor">
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
