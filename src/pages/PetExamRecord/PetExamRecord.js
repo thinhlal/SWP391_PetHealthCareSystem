@@ -21,7 +21,7 @@ function PetExamRecord() {
                                     <span className="icon-bar"></span>
                                 </button>
                             </div>
-                            <div className="logopethealthcare" id="pethealthcaresystem"> <img src={logo_user} />  </div>
+                            <div className="logopethealthcare" id="pethealthcaresystem"> <img src={logo_user} alt=""/>  </div>
                         </div>
                     </nav>
                 </div>
