@@ -12,6 +12,7 @@ import ManageCages from './pages/ManageCages/ManageCages.js';
 import ManageDoctorCalender from "./pages/ManageDoctorCalender/ManageDoctorCalender.js"
 import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js';
 import FeedbackBooking from './pages/FeedbackBooking/FeedbackBooking.js'
+import ManageSickPet from './pages/ManageSickPet/ManageSickPet.js';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
       <Route path="/admin-dashboard" element={<AdminDashBoard />} />
       <Route path="/feedback" element={<FeedbackBooking />} />
+      <Route path="/sick-pet" element={<ManageSickPet />} />
     </Routes>
   );
 }
