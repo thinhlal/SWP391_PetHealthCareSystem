@@ -95,7 +95,7 @@ function ManageListBooking() {
                                 <div className="main-content-list-title-text">BookingID</div>
                                 <div className="main-content-list-title-text">Booking date</div>
                                 <div className="main-content-list-title-text">Name</div>
-                                <div className="main-content-list-title-text">Pet Name</div>
+                                <div className="main-content-list-title-text">Pet Type</div>
                                 <div className="main-content-list-title-text">Service</div>
                                 <div className="main-content-list-title-text">Doctor</div>
                                 <div className="main-content-list-title-text">Check In</div>
