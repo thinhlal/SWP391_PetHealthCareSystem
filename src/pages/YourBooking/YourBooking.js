@@ -1,5 +1,5 @@
-import "./FeedbackBooking.css";
-import React, { useEffect, useState } from "react";
+import "./YourBooking.css";
+import React from "react";
 import Header from "../../components/User/Header/Header.js";
 import Footer from "../../components/User/Footer/Footer.js";
 // Bootstrap CSS
@@ -11,17 +11,6 @@ import dog_icon from "../../assets/images/img_YourPet/dog_icon.png";
 
 
 function YourBooking() {
-  const [avatar] = useState();
-  
-  useEffect(() => {
-    return () => {
-      if (avatar) {
-        URL.revokeObjectURL(avatar.preview);
-      }
-    };
-  }, [avatar]);
-
- 
 
   return (
     <div className="container-your-booking">
@@ -132,7 +121,7 @@ function YourBooking() {
                   <div className="card-detail-booking-confirm-booking">
                     <div className="card-ID-booking">
                       <div className="detail-number-ID">ID: OD45345345435
-                         <div className="status-booking-1">Status: Pending</div>
+                        <div className="status-booking-1">Status: Pending</div>
                       </div>
                       <div className="card-body-content-booking">
                         <div className="text-card-body-content-booking">
@@ -149,6 +138,20 @@ function YourBooking() {
                             </div>{" "}
                             <br />
                             10:00
+                          </div>
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Pet Name:
+                            </div>{" "}
+                            <br />
+                            ABC
+                          </div>
+                          <div className="col-booking">
+                            <div className="mini-title-detail-booking">
+                              Pet Type:
+                            </div>{" "}
+                            <br />
+                            Dog
                           </div>
                           <div className="col-booking">
                             <div className="mini-title-detail-booking">
@@ -193,7 +196,7 @@ function YourBooking() {
                   <div className="card-detail-booking-confirm-booking">
                     <div className="card-ID-booking">
                       <div className="detail-number-ID">ID: OD45345345435
-                      <div className="status-booking-2">Status: Completed booking</div>
+                        <div className="status-booking-2">Status: Completed booking</div>
                       </div>
                       <div className="card-body-content-booking">
                         <div className="text-card-body-content-booking">
@@ -252,9 +255,9 @@ function YourBooking() {
               <div className="info-detail-booking">
                 <div className="detail-booking-confirm-booking">
                   <div className="card-detail-booking-confirm-booking">
-                    <div className="card-ID-booking">                        
+                    <div className="card-ID-booking">
                       <div className="detail-number-ID">ID: OD45345345435
-                      <div className="status-booking-3">Status: Completed booking</div>
+                        <div className="status-booking-3">Status: Completed booking</div>
                       </div>
                       <div className="card-body-content-booking">
                         <div className="text-card-body-content-booking">
@@ -309,9 +312,9 @@ function YourBooking() {
                 </div>
               </div>
             </div>
-            
+
             {/* modal rating */}
-          
+
             <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -319,28 +322,28 @@ function YourBooking() {
                     <h1 class="modal-title fs-5" id="newModalLabel">Your opinion matters to us!</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                <div class="modal-body">
-                  <div className="rating-container">
-                    <div className="main-title-rate">How was quality of the call?</div>
-                    <div className="rate-success">
-                      
-                      <div className="rating">
-                        <input type="radio" name="rating" value="5" id="5" />
-                        <label htmlFor="5">☆</label>
-                        <input type="radio" name="rating" value="4" id="4" />
-                        <label htmlFor="4">☆</label>
-                        <input type="radio" name="rating" value="3" id="3" />
-                        <label htmlFor="3">☆</label>
-                        <input type="radio" name="rating" value="2" id="2" />
-                        <label htmlFor="2">☆</label>
-                        <input type="radio" name="rating" value="1" id="1" />
-                        <label htmlFor="1">☆</label>
-                      </div>
-                    </div>
+                  <div class="modal-body">
+                    <div className="rating-container">
+                      <div className="main-title-rate">How was quality of the call?</div>
+                      <div className="rate-success">
 
-                    <textarea placeholder="Leave a message, if you want"></textarea>
-                    <button className="rating-button">Rate now</button>                    
-                  </div>
+                        <div className="rating">
+                          <input type="radio" name="rating" value="5" id="5" />
+                          <label htmlFor="5">☆</label>
+                          <input type="radio" name="rating" value="4" id="4" />
+                          <label htmlFor="4">☆</label>
+                          <input type="radio" name="rating" value="3" id="3" />
+                          <label htmlFor="3">☆</label>
+                          <input type="radio" name="rating" value="2" id="2" />
+                          <label htmlFor="2">☆</label>
+                          <input type="radio" name="rating" value="1" id="1" />
+                          <label htmlFor="1">☆</label>
+                        </div>
+                      </div>
+
+                      <textarea placeholder="Leave a message, if you want"></textarea>
+                      <button className="rating-button">Rate now</button>
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="button-secondary" data-bs-dismiss="modal">Maybe later</button>
