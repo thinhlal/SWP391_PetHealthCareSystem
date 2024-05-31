@@ -129,6 +129,12 @@
     border-left: 1px solid #f9f9fa;
 }
 
+.Admin-Account-Main-Filter {
+    display: flex;
+    justify-content: space-between;
+    font-family: Roboto, sans-serif;
+}
+
 .Admin-Account-Main-Search {
     display: flex;
     align-items: center;
@@ -165,6 +171,8 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
+
 
 .Admin-Account-Main-Table-Wrapper {
     margin: 50px 3%;

@@ -13,9 +13,8 @@ import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import { blue } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
 import { green } from '@mui/material/colors';
-
-
-
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 function AdminAccount() {
     return (
@@ -74,10 +73,25 @@ function AdminAccount() {
                                 <div className='Admin-Account-Main-Table-Title-Text'>
                                     Account Information
                                 </div>
-                                <div className="Admin-Account-Main-Search">
-                                    <input type="text" placeholder="Search Name" className="Admin-Account-Main-Search-Input " />
-                                    <button className="Admin-Account-Main-Search-Button"> <img src={icon_search} alt="" /> </button>
+                                <div className="Admin-Account-Main-Filter">
+
+                                    <div className="Admin-Account-Main-Search">
+                                        <input type="text" placeholder="Search Name" className="Admin-Account-Main-Search-Input " />
+                                        <button className="Admin-Account-Main-Search-Button"> <img src={icon_search} alt="" /> </button>
+                                    </div>
+                                    <div className="Admin-Account-Select-Role">
+                                        <FilterAltIcon />
+                                        Select Role:
+                                        <select className="Admin-Account-Select-Filter" name="role">
+                                            <option>All</option>
+                                            <option>Customer</option>
+                                            <option>Veterinarians</option>
+                                            <option>Staff</option>
+                                            <option>Admin</option>
+                                        </select>
+                                    </div>
                                 </div>
+
                                 <div className="Admin-Account-Main-Table-Header">
                                     <div className="Admin-Account-Main-Table-Header-Title "> Account ID </div>
                                     <div className="Admin-Account-Main-Table-Header-Title "> Name </div>
