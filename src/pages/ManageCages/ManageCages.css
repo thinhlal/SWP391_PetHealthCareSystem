@@ -1,215 +1,258 @@
 .manage-cages .manage-cages-title {
-    margin: 70px 0 70px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  
-  .manage-cages .manage-cages-title-text {
-    width: fit-content;
-    margin-top: -1px;
-    font-family: "Montserrat", Helvetica;
-    font-weight: 700;
-    color: #4f3c3c;
-    font-size: 40px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: 60px;
-    white-space: nowrap;
-  }
-  
-  .manage-cages-content {
-    padding: 0 !important;
-    display: flex;
-  }
-  
-  .manage-cages .manage-booking-main-content {
-    width: 100%;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  .manage-cages .main-content-header {
-    display: flex;
-    height: 100px;
-    align-items: center;
-    position: relative;
-    justify-content: space-between;
-    border-left: 1px solid #dedddd;
-    background-color: #ebebeb;
-  }
-  
-  .manage-cages .main-content-header-search {
-    display: flex;
-    flex-direction: column;
-    margin-left: 25px;
-    gap: 4.63px;
-  }
-  
-  .manage-cages .main-content-header-search-title {
-    font-weight: 600;
-    color: #000000;
-    font-size: 18px;
-    margin-bottom: 0 !important;
-    white-space: nowrap;
-    font-family: "Inter", Helvetica;
-    letter-spacing: 0;
-  }
-  
-  .manage-cages .main-content-header-search-input-wrapper {
-    border: 1px solid #c3c3c3;
-    align-items: center;
-    gap: 14.43px;
-    position: relative;
-    background-color: #ffffff;
-    border-radius: 5px;
-  }
-  
-  .manage-cages .search-input-btn {
-    position: absolute;
-    width: 50px;
-    height: 32px;
-    right: 0px;
-    top: 0;
-    padding: 10px;
-    background-color: #fff;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .manage-cages .search-input-btn:hover {
-    cursor: pointer;
-  }
-  
-  .manage-cages .search-input-btn-icon {
-    position: absolute;
-    top: 7px;
-    right: 15px;
-    width: 20px;
-  }
-  
-  .manage-cages .main-content-header-search-input {
-    border-radius: 5px;
-    width: 350px;
-    padding-left: 10px;
-    font-family: "Inter", Helvetica;
-    font-weight: 400;
-    color: #000;
-    font-size: 16px;
-    letter-spacing: 0;
-    line-height: 30px;
-    overflow: hidden;
-    border: none;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-  }
-  
-  .manage-cages .main-content-header-search-input:focus {
-    outline: none;
-  }
-  
-  .manage-cages .main-content-header-add-booking {
-    margin-right: 25px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 15px;
-  }
-  
-  .manage-cages .booking-btn-add {
-    background-color: #e18213;
-    height: 45px;
-    outline: none;
-    border: none;
-    color: #fff;
-    width: 100px;
-    border-radius: 10px;
-  }
-  
-  .manage-cages .booking-btn-add:hover {
-    background-color: #002169;
-    cursor: pointer;
-  }
-  
-  .manage-cages .main-content-list {
-    margin: 0px;
-  }
-  
-  .manage-cages .main-content-list-title {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .manage-cages .main-content-list-title-text {
-    text-align: center;
-    line-height: 40px;
-    border-left: 1px solid #eaecf0;
-    font-weight: 600;
-    font-size: 16px;
-    width: 100%;
-    font-family: "Montserrat", sans-serif;
-  }
-  .manage-cages .main-content-list-body-wrapper {
-  }
-  
-  .manage-cages .content-list-body-info {
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  .manage-cages .content-list-body-value {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-left: 1px solid #eaecf0;
-    border-top: 1px solid #eaecf0;
-    font-family: "Montserrat", sans-serif;
-    font-size: 16px;
-  }
-  .manage-cages .content-list-body-value:hover {
-    opacity: 0.6;
-  }
-  
-  .manage-cages .content-list-body-value .content-list-body-checkbox {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .pagination_wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Montserrat", sans-serif;
-    font-size: 16px;
-  }
-  .pagination_wrapper nav {
-    margin-top: 70px;
-  }
+  margin: 70px 0 70px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 
+.manage-cages .manage-cages-title-text {
+  width: fit-content;
+  margin-top: -1px;
+  font-family: "Montserrat", Helvetica;
+  font-weight: 700;
+  color: #4f3c3c;
+  font-size: 40px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 60px;
+  white-space: nowrap;
+}
+
+.manage-cages-content {
+  padding: 0 !important;
+  display: flex;
+}
+
+.manage-cages .manage-booking-main-content {
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.manage-cages .main-content-header {
+  display: flex;
+  height: 100px;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  border-left: 1px solid #dedddd;
+  background-color: #ebebeb;
+}
+
+.manage-cages .main-content-header-search {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+  gap: 4.63px;
+}
+
+.manage-cages .main-content-header-search-title {
+  font-weight: 600;
+  color: #000000;
+  font-size: 18px;
+  margin-bottom: 0 !important;
+  white-space: nowrap;
+  font-family: "Inter", Helvetica;
+  letter-spacing: 0;
+}
+
+.manage-cages .main-content-header-search-input-wrapper {
+  border: 1px solid #c3c3c3;
+  align-items: center;
+  gap: 14.43px;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.manage-cages .search-input-btn {
+  position: absolute;
+  width: 50px;
+  height: 32px;
+  right: 0px;
+  top: 0;
+  padding: 10px;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.manage-cages .search-input-btn:hover {
+  cursor: pointer;
+}
+
+.manage-cages .search-input-btn-icon {
+  position: absolute;
+  top: 7px;
+  right: 15px;
+  width: 20px;
+}
+
+.manage-cages .main-content-header-search-input {
+  border-radius: 5px;
+  width: 350px;
+  padding-left: 10px;
+  font-family: "Inter", Helvetica;
+  font-weight: 400;
+  color: #000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 30px;
+  overflow: hidden;
+  border: none;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.manage-cages .main-content-header-search-input:focus {
+  outline: none;
+}
+
+.manage-cages .main-content-header-add-booking {
+  margin-right: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+}
+
+.manage-cages .booking-btn-add {
+  background-color: #e18213;
+  height: 45px;
+  outline: none;
+  border: none;
+  color: #fff;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.manage-cages .booking-btn-add:hover {
+  background-color: #002169;
+  cursor: pointer;
+}
+
+.manage-cages .main-content-list {
+  margin: 0px;
+}
+
+.manage-cages .main-content-list-title {
+  display: flex;
+  justify-content: space-around;
+}
+
+.manage-cages .main-content-list-title-text {
+  text-align: center;
+  line-height: 40px;
+  border-left: 1px solid #eaecf0;
+  font-weight: 600;
+  font-size: 16px;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+.manage-cages .main-content-list-body-wrapper {
+}
+
+.manage-cages .content-list-body-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.manage-cages .content-list-body-value {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #eaecf0;
+  border-top: 1px solid #eaecf0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+.manage-cages .content-list-body-value:hover {
+  opacity: 0.6;
+}
+
+.manage-cages .content-list-body-value .content-list-body-checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.pagination_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+.pagination_wrapper nav {
+  margin-top: 70px;
+}
 
 /* css modal update status */
 
-.modal-body-update-status{
+.modal-body-update-status {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
+  font-family: Roboto, sans-serif;
+  margin: 20px;
+}
+
+.modal-body-update-status-title {
   font-size: 18px;
+  font-weight: 600;
 }
 
-.modal-body-update-status-empty{
+.modal-body-update-status-empty {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
+  font-size: 16px;
 }
 
-.modal-body-update-status-using{
+.modal-body-update-status-using {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
+  font-size: 16px;
 }
-  
-  
+
+.modal-body-update-text {
+  font-family: Roboto, sans-serif;
+  margin: 20px;
+}
+
+.modal-body-update-text-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.modal-body-update-text-info {
+  width: 100%;
+}
+
+.modal-body-section {
+  margin: 20px;
+}
+
+.modal-body-section label {
+  display: block;
+  margin: 10px 0;
+}
+
+.modal-body-section span {
+  margin-right: 25px;
+  margin-left: 5px;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.service {
+  margin-bottom: 10px;
+}
