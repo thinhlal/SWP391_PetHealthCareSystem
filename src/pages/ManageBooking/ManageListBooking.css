@@ -8,7 +8,7 @@
 .manage-booking-list .manage-booking-list-title-text {
   width: fit-content;
   margin-top: -1px;
-  font-family: "Montserrat", Helvetica;
+  font-family: "Roboto", sans-serif;
   font-weight: 700;
   color: #4f3c3c;
   font-size: 40px;
@@ -52,7 +52,7 @@
   font-size: 18px;
   margin-bottom: 0 !important;
   white-space: nowrap;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   letter-spacing: 0;
 }
 
@@ -92,7 +92,7 @@
   border-radius: 5px;
   width: 350px;
   padding-left: 10px;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #000;
   font-size: 16px;
@@ -112,7 +112,7 @@
 
 .manage-booking-list .main-content-header-add-booking {
   margin-right: 25px;
-  font-family: "Montserrat", sans-serif;
+  font-family: Roboto, sans-serif;
   font-size: 15px;
 }
 
@@ -147,7 +147,7 @@
   font-weight: 600;
   font-size: 16px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: Roboto, sans-serif;
 }
 .manage-booking-list .main-content-list-body-wrapper {
 }
@@ -165,7 +165,7 @@
   justify-content: center;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
-  font-family: "Montserrat", sans-serif;
+  font-family: Roboto, sans-serif;
   font-size: 16px;
 }
 .manage-booking-list .content-list-body-value:hover {
@@ -181,9 +181,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: Roboto, sans-serif;
   font-size: 16px;
 }
 .pagination_wrapper nav {
   margin-top: 70px;
+}
+.choose-service{
+  margin-left: 10px;
+  font-family: Roboto, sans-serif;
+}
+.choose-doctor{
+  margin-left: 10px;
+  font-family: "Roboto", sans-serif;
+}
+.manage-booking-list .main-content-header-add-input {
+  border-radius: 5px;
+  width: 350px;
+  padding-left: 10px;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  color: #000;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.add-doctor-list{
+  margin-left: 10px;
+  font-family: "Roboto", sans-serif;
+}
+.add-service-list{
+  margin-left: 10px;
+  font-family: "Roboto", sans-serif; 
 }

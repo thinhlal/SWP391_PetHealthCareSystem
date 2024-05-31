@@ -5,14 +5,13 @@ import Home from './pages/Home/Home.js';
 import SignUp from './pages/SignUp/SignUp.js';
 import ManageListBooking from './pages/ManageBooking/ManageListBooking.js';
 import YourPet from './pages/YourPet/YourPet.js';
-import DoctorInfo from './pages/DoctorInfo/DoctorInfo.js';
 import Services from "./pages/Services/Services.js";
 import Login from "./pages/Login/Login.js";
 import ManageCages from './pages/ManageCages/ManageCages.js';
 import ManageDoctorCalender from "./pages/ManageDoctorCalender/ManageDoctorCalender.js"
-import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js';
-import FeedbackBooking from './pages/FeedbackBooking/FeedbackBooking.js'
+import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js'
 import ManageSickPet from './pages/ManageSickPet/ManageSickPet.js';
+import YourBooking from './pages/YourBooking/YourBooking.js'
 
 function App() {
   return (
@@ -22,14 +21,13 @@ function App() {
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/manage-booking" element={<ManageListBooking />} />
       <Route path="/your-pet" element={<YourPet />} />
-      <Route path="/doctor" element={<DoctorInfo />} />
       <Route path="/services" element={<Services />} />
       <Route path="/login" element={<Login />} />
       <Route path='/manage-cages' element={<ManageCages />} />
       <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
       <Route path="/admin-dashboard" element={<AdminDashBoard />} />
-      <Route path="/feedback" element={<FeedbackBooking />} />
       <Route path="/sick-pet" element={<ManageSickPet />} />
+      <Route path="/your-booking" element={<YourBooking />} />
     </Routes>
   );
 }
