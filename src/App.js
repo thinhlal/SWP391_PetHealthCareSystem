@@ -14,6 +14,7 @@ import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js'
 import ManageSickPet from './pages/ManageSickPet/ManageSickPet.js';
 import YourBooking from './pages/YourBooking/YourBooking.js'
 import AdminAccount from './pages/AdminAccount/AdminAccount.js';
+import PetExamRecord from './pages/PetExamRecord/PetExamRecord.js';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route path="/sick-pet" element={<ManageSickPet />} />
       <Route path="/your-booking" element={<YourBooking />} />
       <Route path="/admin-account" element={<AdminAccount />} />
+      <Route path="/pet_exam_record" element={<PetExamRecord />} />
     </Routes>
   );
 }
