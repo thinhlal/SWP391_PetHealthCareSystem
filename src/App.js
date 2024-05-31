@@ -13,6 +13,7 @@ import WorkSchedule from'./pages/WorkSchedule/WorkSchedule.js';
 import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js'
 import ManageSickPet from './pages/ManageSickPet/ManageSickPet.js';
 import YourBooking from './pages/YourBooking/YourBooking.js'
+import AdminAccount from './pages/AdminAccount/AdminAccount.js';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Route path="/work_schedule" element={<WorkSchedule />} />
       <Route path="/sick-pet" element={<ManageSickPet />} />
       <Route path="/your-booking" element={<YourBooking />} />
+      <Route path="/admin-account" element={<AdminAccount />} />
     </Routes>
   );
 }
