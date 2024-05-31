@@ -1,0 +1,279 @@
+.Admin-Account {
+    background-color: #fafafa;
+}
+
+.Admin-Account-Header {
+    border-bottom: 1px solid #eae8f1;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    height: 63px;
+}
+
+.Admin-Account-Header-Logo {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Admin-Account-Logo {
+    width: 190px;
+}
+
+.Admin-Account-Header-Account-Wrapper {
+    border-left: 1px solid #eae8f1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", Helvetica;
+    color: white;
+}
+
+.Admin-Account-Header-Account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.Admin-Account-Header-Admin:hover {
+    transform: scale(1.1);
+    color: #dd6637;
+    cursor: pointer;
+}
+
+.Admin-Account-Header-Account-Text {
+    line-height: 25px;
+    font-size: 16px;
+    color: #000;
+}
+
+.Admin-Account-Content {
+    padding: 0;
+    margin: 0;
+}
+
+.Admin-Account-Navigate {
+    padding: 0;
+    position: relative;
+}
+
+.Admin-Account-Navigate-Dashboard {
+    font-family: Roboto, sans-serif;
+    display: flex;
+    height: 36px;
+    align-items: center;
+    margin: 10px 10px 5px 20px;
+}
+
+.Admin-Account-Navigate-Text-Dashboard {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.Admin-Account-Navigate-Text {
+    font-family: "Montserrat", Helvetica;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.Admin-Account-Navigate-Logout {
+    line-height: 42px;
+    text-align: center;
+    width: 100%;
+    font-family: Roboto, sans-serif;
+    position: absolute;
+    bottom: 50px;
+}
+
+.Admin-Account-Navigate-Logout:hover {
+    color: rgb(70, 128, 255);
+    cursor: pointer;
+    background-color: #e3eafc;
+}
+
+.Admin-Account-Navigate-Logout span {
+    margin-left: 10px;
+}
+
+.Admin-Account-Navigate-Text-Rest {
+    font-family: Roboto, sans-serif;
+}
+
+.Admin-Account-Navigate-Text-Rest-Menu {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.Admin-Account-Navigate-Text-Rest-Menu:hover {
+    color: rgb(70, 128, 255);
+    cursor: pointer;
+    background-color: #e3eafc;
+}
+
+.Admin-Account-Main {
+    padding: 0;
+    background-color: #f1f5f9;
+    border-left: 1px solid #f9f9fa;
+}
+
+.Admin-Account-Main-Search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 35px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.Admin-Account-Main-Search-Input {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    height: 35px;
+    padding: 0 16px;
+    border: none;
+    background-color: #ecf0fa;
+    font-family: "Montserrat", Helvetica;
+    font-weight: 500;
+    color: #000000;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.Admin-Account-Main-Search-Input:focus {
+    outline: none;
+}
+
+.Admin-Account-Main-Search-Button {
+    background-color: #ecf0fa;
+    height: 100%;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.Admin-Account-Main-Table-Wrapper {
+    margin: 50px 3%;
+    padding: 0;
+    border: 1px solid #eae8f1;
+    border-radius: 10px;
+    box-shadow: -2px 8px 18px #dadee8;
+}
+
+.Admin-Account-Main-Table {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.Admin-Account-Main-Table-Title {
+    color: #242f48;
+    font-family: Roboto, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    margin-bottom: 4px;
+}
+
+.Admin-Account-Main-Table-Title-Text {
+    font-size: 12px;
+    font-family: Roboto, sans-serif;
+    margin-bottom: 15px;
+}
+
+.Admin-Account-Main-Table-Header {
+    display: flex;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: Roboto, sans-serif;
+    text-align: center;
+    border-bottom: 1px solid #eae8f1;
+}
+
+.Admin-Account-Main-Table-Header-Title {
+    width: 100%;
+    background-color: #F1F5F9;
+    line-height: 40px;
+    padding: 0 0 0 10px;
+    margin: 0;
+    text-align: left;
+    border-left: 1px solid #eae8f1;
+    border-top: 1px solid #eae8f1;
+}
+
+.Admin-Account-Main-Table-Header-Title-Btn {
+    line-height: 40px;
+    width: 100%;
+    background-color: #F1F5F9;
+    padding: 0 0 0 10px;
+    margin: 0;
+    text-align: center;
+    border-left: 1px solid #eae8f1;
+    border-top: 1px solid #eae8f1;
+}
+
+.Admin-Account-Main-Table-Header-Title-Btn:last-child {
+    border-top-right-radius: 8px;
+    border-right: 1px solid #eae8f1;
+}
+
+.Admin-Account-Main-Table-Header-Title:first-child {
+    border-top-left-radius: 8px;
+}
+
+.Admin-Account-Main-Table-Content-Row-Wrapper {
+    display: flex;
+    line-height: 40px;
+    border-bottom: 1px solid #eae8f1;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+}
+
+.Admin-Account-Main-Table-Content-Row {
+    width: 100%;
+    border-left: 1px solid #eae8f1;
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+
+.Admin-Account-Main-Table-Content-Row-Btn {
+    display: flex;
+}
+
+.Admin-Account-Main-Table-Content-Btn {
+    width: 33.333%;
+    border: none;
+    background-color: white;
+}
+
+
+
+.Admin-Account-Main-Table-Content-Btn :hover {
+    color: rgb(70, 128, 255);
+    cursor: pointer;
+    background-color: #e3eafc;
+}
+
+
+
+.Admin-Account-Pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 10px 0;
+}

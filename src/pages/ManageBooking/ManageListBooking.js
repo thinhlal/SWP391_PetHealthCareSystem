@@ -41,27 +41,45 @@ function ManageListBooking() {
                                     <div className="modal-dialog">
                                         <div className="modal-content">
                                             <div className="modal-header">
-                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Add Booking</h1>
                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">
-                                                <input type="date" placeholder="Search" className="main-content-header-add-input" />
-                                                <input type="text" placeholder="Name" className="main-content-header-add-input" />
-                                                <input type="text" placeholder="Pet Name" className="main-content-header-add-input" />
-                                                <label className="choose-service"for="Service">Choose Service:</label>
-                                                    <select name="add-service-list" id="Service">
+                                                        <div className="add-booking">
+                                                         <small className='title-add-booking'>Booking Date:&nbsp;</small>
+                                                         <input type="date" className="form-control" placeholder="Enter notes here" />
+                                                       </div>
+                                                        <div className="add-booking">
+                                                         <small className='title-add-booking'>Name:&nbsp;</small>
+                                                         <input type="text" className="form-control" placeholder="Enter notes here" />
+                                                       </div>
+                                                       <div className="add-booking">
+                                                         <small className='title-add-booking'>Pet Name:&nbsp;</small>
+                                                         <input type="text" className="form-control" placeholder="Enter notes here" />
+                                                       </div>
+                                                       <div className="add-booking">
+                                                         <small className='title-add-booking'>Pet Type:&nbsp;</small>
+                                                         <input type="text" className="form-control" placeholder="Enter notes here" />
+                                                       </div>
+                                                       <div className="add-booking">
+                                                       <small className='title-add-booking'>Service:&nbsp;</small>
+                                                    <select className="form-control" id="Service">
                                                         <option value="Service">NameService</option>
                                                         <option value="Service">NameService</option>
                                                         <option value="Service">NameService</option>
                                                         <option value="Service">NameService</option>
                                                     </select>
-                                                    <label className="choose-doctor"for="Doctor">Choose Doctor:</label>
-                                                    <select className="add-doctor-list" id="Doctor">
+                                                       </div>
+                                                    <div className="add-booking">
+                                                    <small className='title-add-booking'>Doctor:&nbsp;</small>
+                                                    <select className="form-control" id="Doctor">
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                     </select>
+                                                       </div>
+                                                    
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -106,13 +124,15 @@ function ManageListBooking() {
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div className="modal-body">
-                                                <label className="choose-doctor"for="Doctor">Choose Doctor:</label>
-                                                    <select className="add-doctor-list" id="Doctor">
+                                                <div className="add-booking">
+                                                    <small className='title-add-booking'>Doctor:&nbsp;</small>
+                                                    <select className="form-control" id="Doctor">
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                         <option value="Doctor">NameDoctor</option>
                                                     </select>
+                                                       </div>
                                                 </div>
                                                 <div className="modal-footer">
                                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>

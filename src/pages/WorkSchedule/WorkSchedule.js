@@ -8,24 +8,15 @@ function WorkSchedule() {
     return (
         <div>
             <div className="menu">			
-			 <nav className="navbar bg-primary"  role="navigation">
-			  <div className="container-fluid lemenu">
-				<div className="navbar-header">
-				  <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">   
-					<span className="icon-bar"></span>
-					<span className="icon-bar"></span>
-					<span className="icon-bar"></span>
-				  </button>
-				</div>
-			  </div>
+			 <nav className="nav-header">
 			  <div className="admin-logo">
-					<img src={logo_admin} alt="Admin"/>Hi Admin
+					<img src={logo_admin} alt="Admin"/>
 			</div>
 			</nav>			
 		</div>
 		<div> 		
 			<div>
-				<h1 classNameName="logopethealthcare"><img src={logoPet} alt=""/></h1>
+				<h1 className="brand_pet"><img src={logoPet} alt=""/></h1>
 				<p className="tittle"> Today's Work Schedule</p>
 			</div>
 			<div className="ver-container">
@@ -37,94 +28,95 @@ function WorkSchedule() {
 			</div>
 			  </div>		
 	<div>	
-		<div className=" table-schedule" id="tables">
-			<form>
-				<table>
-				  <thead>
+		<div className="table-schedule" id="tables">
+			<form className="form_table-schedule">
+				<table className="table_table-schedule">
+				  <thead claasName="head_table-schedule">
 					<tr>
-						<th>Stt</th>
-					  <th>Pet ID</th>
-					  <th>Pet Type</th>
-					  <th>Gender</th>
-					  <th>Register hour</th>
-					  <th>Pet Owner</th>
-					  <th>Status</th>
+						<th className="th_table-schedule">Stt</th>
+					  <th className="th_table-schedule">Pet ID</th>
+					  <th className="th_table-schedule">Pet Type</th>
+					  <th className="th_table-schedule">Gender</th>
+					  <th className="th_table-schedule">Register hour</th>
+					  <th className="th_table-schedule">Pet Owner</th>
+					  <th className="th_table-schedule">Status</th>
 					</tr>
 				  </thead>
 				  <tbody>
 					<tr>
-						<td>1</td>
-					  <td>Pet1</td>
-					  <td>Dog</td>
-					  <td>Male</td>
-					  <td>8:00 - 9:00</td>
-					  <td>Minh</td>
-					  <td><button type="button" className="button-receive">
+						<td className="td_table-schedule">1</td>
+					  <td className="td_table-schedule">Pet1</td>
+					  <td className="td_table-schedule">Dog</td>
+					  <td className="td_table-schedule">Male</td>
+					  <td className="td_table-schedule">8:00 - 9:00</td>
+					  <td className="td_table-schedule">Minh</td>
+					  <td className="td_table-schedule"><button type="button" className="button-receive">
 						Receive
 					  </button>
 					</td>
 					</tr>
 					<tr>
-						<td>2</td>
-						<td>Pet2</td>
-						<td>Dog</td>
-						<td>Female</td>
-						<td>10:00 - 11:00</td>
-						<td>Phat</td>
-						<td><button type="button" className="button-receive">
+						<td className="td_table-schedule">2</td>
+						<td className="td_table-schedule">Pet2</td>
+						<td className="td_table-schedule">Dog</td>
+						<td className="td_table-schedule">Female</td>
+						<td className="td_table-schedule">10:00 - 11:00</td>
+						<td className="td_table-schedule">Phat</td>
+						<td className="td_table-schedule"><button type="button" className="button-receive">
 						  Receive
 						</button></td>
 					</tr>
 					<tr>
-						<td>3</td>
-						<td>Pet3</td>
-						<td>Cat</td>
-						<td>Male</td>
-						<td>13:00 - 14:00</td>
-						<td>Dat</td>
-						<td><button type="button" className="button-receive">
+						<td className="td_table-schedule">3</td>
+						<td className="td_table-schedule">Pet3</td>
+						<td className="td_table-schedule">Cat</td>
+						<td className="td_table-schedule">Male</td>
+						<td className="td_table-schedule">13:00 - 14:00</td>
+						<td className="td_table-schedule">Dat</td>
+						<td className="td_table-schedule"><button type="button" className="button-receive">
 						  Receive
 						</button></td>
 					</tr>
 					<tr>
-						<td>4</td>
-						<td>Pet4</td>
-						<td>Dog</td>
-						<td>Male</td>
-						<td>15:00 - 16:00</td>
-						<td>Thinh</td>
-						<td><button type="button" className="button-receive">
+						<td className="td_table-schedule">4</td>
+						<td className="td_table-schedule">Pet4</td>
+						<td className="td_table-schedule">Dog</td>
+						<td className="td_table-schedule">Male</td>
+						<td className="td_table-schedule">15:00 - 16:00</td>
+						<td className="td_table-schedule">Thinh</td>
+						<td className="td_table-schedule"><button type="button" className="button-receive">
 						  Receive
 						</button></td>
 					</tr>
 					<tr>
-						<td>5</td>
-						<td>Pet5</td>
-						<td>Cat</td>
-						<td>Female</td>
-						<td>16:00 - 17:00</td>
-						<td>Tung</td>
-						<td><button type="button" className="button-receive">
+						<td className="td_table-schedule">5</td>
+						<td className="td_table-schedule">Pet5</td>
+						<td className="td_table-schedule">Cat</td>
+						<td className="td_table-schedule">Female</td>
+						<td className="td_table-schedule">16:00 - 17:00</td>
+						<td className="td_table-schedule">Tung</td>
+						<td className="td_table-schedule"><button type="button" className="button-receive">
 						  Receive
 						</button></td>
 					</tr>
 					<tr>
-						<td>6</td>
-						<td>Pet6</td>
-						<td>Dog</td>
-						<td>Male</td>
-						<td>19:00 - 20:00</td>
-						<td>Duong</td>
-						<td><button type="button" className="button-receive">
+						<td className="td_table-schedule">6</td>
+						<td className="td_table-schedule">Pet6</td>
+						<td className="td_table-schedule">Dog</td>
+						<td className="td_table-schedule">Male</td>
+						<td className="td_table-schedule">19:00 - 20:00</td>
+						<td className="td_table-schedule">Duong</td>
+						<td className="td_table-schedule"><button type="button" className="button-receive">
 						  Receive
 						</button></td>
 					</tr>
 				  </tbody>
 				</table>
+				<div>
+					<p className="final_page">----------Schedule----------</p>	
+				</div>
 			  </form>
 		</div>
-
-		<p className="final">----------Schedule----------</p>	
         </div>
         </div>
     )

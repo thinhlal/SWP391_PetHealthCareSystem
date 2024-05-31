@@ -5,17 +5,23 @@ body {
     margin: 0;
   }
   
-  .menu .logopethealthcare{
+  .logo_petE{
     text-align: right;
+    margin-right: 30px;
   }
   
-  #navbar {
-    width: 100%;
-      display: flex;
+  .nav-head {
+      width: 100%;
       justify-content: center;
-      background-color: #051230;
+      background-color: #08215a;
   }
-  .tittle {
+
+  .images_petE{
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .tittle_petE {
       text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       text-align: center;
       font-family: 'Montserrat', Helvetica;
@@ -29,7 +35,7 @@ body {
       margin-left: 40px;
   }
   
-  .tittle-1{
+  .tittle-1_petE{
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-family: 'Montserrat', Helvetica;
     text-align: center;
@@ -43,9 +49,9 @@ body {
     margin-left: 40px; 
   }
   
-  form {
+  .form_petE {
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     width: 1100px;
     height: 650px;
     margin: 50px auto;
@@ -58,20 +64,20 @@ body {
   }
   
   
-  .form-group{
+  .form-group_petE{
     margin-right: 50px;
     margin-left: 20px;
   }
   
-  .form-group-1{
+  .form-group-1_petE{
     margin-right: 50px;
   }
   
-  .form-group-2{
+  .form-group-2_petE{
     margin-right: 50px;
   }
   
-  .form-group-3 textarea {
+  .form-group-3_petE textarea {
     height: 80px; 
     font-size: 16px; 
     padding: 10px; 
@@ -136,7 +142,7 @@ body {
     background-color: orange;
   }
   
-  .button-savecancel{
+  .button-sc{
     margin-top: 200px;
     margin-right: -100px;
   }

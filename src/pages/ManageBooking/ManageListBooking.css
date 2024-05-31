@@ -187,37 +187,16 @@
 .pagination_wrapper nav {
   margin-top: 70px;
 }
-.choose-service{
+
+.title-add-booking{
+  color: #004cb9;
+  font-weight: 600;
   margin-left: 10px;
-  font-family: Roboto, sans-serif;
 }
-.choose-doctor{
-  margin-left: 10px;
-  font-family: "Roboto", sans-serif;
-}
-.manage-booking-list .main-content-header-add-input {
-  border-radius: 5px;
-  width: 350px;
-  padding-left: 10px;
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
-  color: #000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 30px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+.form-control {
+  margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 10px;
 }
-.add-doctor-list{
-  margin-left: 10px;
-  font-family: "Roboto", sans-serif;
-}
-.add-service-list{
-  margin-left: 10px;
-  font-family: "Roboto", sans-serif; 
+.add-booking{
+  margin-top: 10px;
 }
