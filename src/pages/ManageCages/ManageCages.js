@@ -1,7 +1,7 @@
 //css
 import './ManageCages.css';
 //Component
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
 // Bootstrap CSS
