@@ -30,7 +30,7 @@
     justify-content: flex-end;
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     color: white;
 }
 
@@ -48,6 +48,7 @@
 }
 
 .Admin-Account-Header-Account-Text {
+    font-family: Roboto, sans-serif;
     line-height: 25px;
     font-size: 16px;
     color: #000;
@@ -72,6 +73,7 @@
 }
 
 .Admin-Account-Navigate-Text-Dashboard {
+    font-family: Roboto, sans-serif;
     margin-left: 10px;
     margin-top: 5px;
     font-weight: 600;
@@ -79,7 +81,7 @@
 }
 
 .Admin-Account-Navigate-Text {
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     font-weight: 500;
     letter-spacing: 1px;
     font-size: 16px;
@@ -105,11 +107,8 @@
     margin-left: 10px;
 }
 
-.Admin-Account-Navigate-Text-Rest {
-    font-family: Roboto, sans-serif;
-}
-
 .Admin-Account-Navigate-Text-Rest-Menu {
+    font-family: Roboto, sans-serif;
     height: 42px;
     display: flex;
     align-items: center;
@@ -127,12 +126,6 @@
     padding: 0;
     background-color: #f1f5f9;
     border-left: 1px solid #f9f9fa;
-}
-
-.Admin-Account-Main-Filter {
-    display: flex;
-    justify-content: space-between;
-    font-family: Roboto, sans-serif;
 }
 
 .Admin-Account-Main-Search {
@@ -153,7 +146,7 @@
     padding: 0 16px;
     border: none;
     background-color: #ecf0fa;
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     font-weight: 500;
     color: #000000;
     font-size: 16px;
@@ -172,7 +165,11 @@
     border-bottom-right-radius: 10px;
 }
 
-
+.Admin-Account-Main-Filter {
+    display: flex;
+    justify-content: space-between;
+    font-family: Roboto, sans-serif;
+}
 
 .Admin-Account-Main-Table-Wrapper {
     margin: 50px 3%;
@@ -269,15 +266,47 @@
     background-color: white;
 }
 
+.Admin-Account-modal-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+}
 
+.Admin-Account-modal-update {
+    padding: 5px;
+}
+
+.Admin-Account-modal-more {
+    padding: 5px;
+}
+
+.Admin-Account-modal-delete {
+    padding: 5px;
+}
+
+.Admin-Account-input {
+    height: 35px;
+    line-height: 24px;
+    font-size: 16px;
+}
+
+.Admin-Account-input-phone {
+    width: 122px;
+    height: 35px;
+    line-height: 24px;
+    font-size: 16px;
+
+}
+
+.Admin-Account-input-role {
+    margin: 4px;
+}
 
 .Admin-Account-Main-Table-Content-Btn :hover {
     color: rgb(70, 128, 255);
     cursor: pointer;
     background-color: #e3eafc;
 }
-
-
 
 .Admin-Account-Pagination {
     display: flex;
