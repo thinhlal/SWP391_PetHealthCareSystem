@@ -1378,13 +1378,6 @@ function AdminAccount() {
                                     </div>
                                 </div>
 
-                                
-
-
-
-
-
-
                                 <div className='Admin-Account-Pagination'>
                                     <Stack spacing={2}>
                                         <Pagination count={10} />
@@ -1394,8 +1387,6 @@ function AdminAccount() {
                         </div>
                     </div>
                 </div>
-
-
 
             </div>
         </div>
