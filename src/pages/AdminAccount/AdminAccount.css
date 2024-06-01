@@ -272,11 +272,19 @@
     font-size: 20px;
 }
 
+.Admin-Account-modal-initials {
+    font-weight: 600;
+    padding-right: 5px;
+}
+
 .Admin-Account-modal-update {
+    display: flex;
     padding: 5px;
 }
 
 .Admin-Account-modal-more {
+    font-weight: 700px;
+    display: flex;
     padding: 5px;
 }
 
@@ -291,7 +299,7 @@
 }
 
 .Admin-Account-input-phone {
-    width: 122px;
+    width: 110px;
     height: 35px;
     line-height: 24px;
     font-size: 16px;
