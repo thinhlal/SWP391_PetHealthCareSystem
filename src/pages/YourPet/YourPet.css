@@ -40,6 +40,8 @@ a {
 
 .overlap {
   display: flex;
+  margin: 0;
+  padding: 0;
 }
 
 .your-Pet-Header {
@@ -226,7 +228,7 @@ a {
   font-family: "Montserrat", Helvetica;
 }
 
-.view-pet-btn{
+.view-pet-btn {
   margin: 10px;
   border: none;
   color: #fff;
@@ -236,7 +238,7 @@ a {
   background-color: #e18213;
 }
 
-.view-pet-btn:hover{
+.view-pet-btn:hover {
   background-color: #002169;
   cursor: pointer;
 }
