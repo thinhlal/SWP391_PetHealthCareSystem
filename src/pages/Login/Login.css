@@ -47,7 +47,7 @@
   }
   
   .login-page .main-title-text {
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     font-weight: 500;
     color: #828282;
     font-size: 24px;
@@ -65,7 +65,7 @@
     padding: 8px 16px;
     border-radius: 8px;
     border: 1px solid #e0e0e0;
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     line-height: 24px;
   }
   
@@ -85,7 +85,7 @@
     transition: background-color 0.3s ease; 
     margin: 10px 36%; 
     height: 40px;
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
   }
   
   
@@ -111,7 +111,7 @@
   }
   
   .login-page .text-continue-with {
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     color: #828282;
     line-height: 24px;
   }
@@ -127,7 +127,7 @@
     width: 400px;
     height: 40px;
     border: none;
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
   }
   
   .login-page .text-google {
@@ -152,7 +152,7 @@
   
   /* text forgot pass */
   .login-page .text-button-forgot-password {
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     color: #799c67;
     font-size: 12px;
     text-align: right;
@@ -187,7 +187,7 @@
   
   
   .login-page .new-user-create {
-    font-family: "Montserrat", Helvetica;
+    font-family: Roboto, sans-serif;
     font-weight: 400;
     color: transparent;
     font-size: 16px;

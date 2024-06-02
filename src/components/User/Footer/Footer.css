@@ -32,7 +32,7 @@
   color: #ffffff;
   font-size: 20px;
   line-height: 30px;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   letter-spacing: 0;
 }
 
@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
   font-size: 20px;
@@ -72,18 +72,19 @@
   justify-content: center;
 }
 .main-footer_Info_Time-Title {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #ffffff;
   font-size: 40px;
   text-align: center;
   letter-spacing: 0;
   line-height: 60px;
+  margin-bottom: 40px;
 }
 
 .main-footer_Info_Text {
   margin: 10px 20px 10px 0;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
   font-size: 20px;
@@ -107,7 +108,7 @@
   justify-content: center;
   display: flex;
   height: 123px;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #ffffff;
   font-size: 35px;
@@ -135,7 +136,7 @@
   flex: 1;
   height: 55px;
   position: relative;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #828282;
   font-size: 20px;
@@ -170,7 +171,7 @@
 
 .footer_form-subriber-button-text {
   width: fit-content;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #ffffff;
   font-size: 24px;

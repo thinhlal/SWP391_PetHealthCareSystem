@@ -44,7 +44,7 @@
   left: 441px;
   width: 697px;
   height: 235px;
-  font-family: "Paytone One", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #ffffff;
   font-size: 64px;
@@ -68,7 +68,7 @@
   color: #002169;
   font-size: 40px;
   text-align: center;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
 }
 
 /* Cat part */
@@ -111,7 +111,7 @@
 }
 
 .all-services .list-item-cat {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   align-items: flex-start;
   left: 120px;
   display: flex;
@@ -159,7 +159,7 @@
   position: relative;
   width: 350px;
   height: 78px;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #444444;
   font-size: 16px;
@@ -195,7 +195,7 @@
 .all-services .text-booking-services-button {
   position: relative;
   width: fit-content;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
   font-size: 16px;
@@ -205,7 +205,7 @@
 }
 
 .all-services .title-services-cat {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   color: #002169;
   font-size: 36px;
   letter-spacing: -0.72px;
@@ -249,7 +249,7 @@
 }
 
 .all-services .list-services-dog {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   align-items: flex-end;
   left: 199px;
   display: flex;
@@ -263,7 +263,7 @@
 }
 
 .all-services .list-services-dog-title {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #002169;
   font-size: 36px;
@@ -296,7 +296,7 @@
   position: relative;
   width: 350px;
   height: 78px;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #444444;
   font-size: 16px;

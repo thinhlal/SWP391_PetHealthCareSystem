@@ -9,12 +9,6 @@ body {
   margin: 0px;
   height: 100%;
 }
-/* a blue color as a generic focus style */
-button:focus-visible {
-  outline: 2px solid #4a90e2 !important;
-  outline: -webkit-focus-ring-color auto 5px !important;
-}
-
 .create-account-page {
 }
 
@@ -64,7 +58,7 @@ button:focus-visible {
 
 .create-account-page .create-account_tittle {
   margin: 40px 0;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 600;
   color: #000000;
   font-size: 24px;
@@ -95,7 +89,7 @@ button:focus-visible {
 
 .create-account-page .form_SignUp_Input-Text {
   flex: 1;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   color: #000;
   font-size: 16px;
   letter-spacing: 0;
@@ -139,7 +133,7 @@ button:focus-visible {
 
 .create-account-page .form_SignUp_Btn-Text {
   width: fit-content;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
   font-size: 16px;
@@ -154,7 +148,7 @@ button:focus-visible {
   flex: 1;
   margin-top: -4px;
   margin-bottom: -2px;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 200;
   color: #828282;
   font-size: 20px;
@@ -176,7 +170,7 @@ button:focus-visible {
 
 .create-account-page .form_SignUp_Regulation {
   margin: 30px 40px;
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 400;
   color: transparent;
   font-size: 16px;
@@ -198,7 +192,7 @@ button:focus-visible {
 }
 
 .create-account-page .form_SignUp_HadAcc {
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,7 +200,7 @@ button:focus-visible {
 }
 
 .create-account-page .form_SignUp_HadAcc_SignIn {
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #4950f5;
   font-size: 16px;

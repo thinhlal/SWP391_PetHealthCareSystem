@@ -19,7 +19,7 @@
 }
 
 .sidebar-header-text {
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 600;
   color: #000000;
   font-size: 30px;
@@ -45,7 +45,7 @@
 }
 
 .sidebar-list-tittle-text {
-  font-family: "Inter", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #000000;
   font-size: 20px;
@@ -70,7 +70,7 @@
 }
 
 .sidebar-list-item-text {
-  font-family: "Inter", Helvetica, sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #000000;
   font-size: 16.6px;
