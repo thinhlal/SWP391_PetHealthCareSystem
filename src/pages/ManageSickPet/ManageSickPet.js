@@ -37,45 +37,7 @@ function ManageSickPet() {
                                     <input type="text" placeholder="Search" className="main-content-header-search-input" />
                                 </div>
                             </div>
-                            <div className="main-content-header-add-booking">
-                                <button type="button" className="booking-btn-add" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Add Booking
-                                </button>
-                                <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div className="modal-dialog">
-                                        <div className="modal-content">
-                                            <div className="modal-header">
-                                                <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div className="modal-body">
-                                                <input type="date" placeholder="Search" className="main-content-header-search-input" />
-                                                <input type="text" placeholder="Name" className="main-content-header-search-input" />
-                                                <input type="text" placeholder="Pet Name" className="main-content-header-search-input" />
-                                                <input type="text" placeholder="Search" className="main-content-header-search-input" />
-                                                <label for="Service">Choose Service:</label>
-                                                    <select name="Service" id="Service">
-                                                        <option value="Service">NameService</option>
-                                                        <option value="Service">NameService</option>
-                                                        <option value="Service">NameService</option>
-                                                        <option value="Service">NameService</option>
-                                                    </select>
-                                                <label for="Doctor">Choose Doctor:</label>
-                                                    <select name="Doctor" id="Doctor">
-                                                        <option value="Doctor">NameDoctor</option>
-                                                        <option value="Doctor">NameDoctor</option>
-                                                        <option value="Doctor">NameDoctor</option>
-                                                        <option value="Doctor">NameDoctor</option>
-                                                    </select>
-                                            </div>
-                                            <div className="modal-footer">
-                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" className="btn btn-success">Add</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div className="main-content-list">
                             <div className="main-content-list-title">
@@ -85,9 +47,9 @@ function ManageSickPet() {
                                 <div className="main-content-list-title-text">Breeds</div>
                                 <div className="main-content-list-title-text">Name</div>
                                 <div className="main-content-list-title-text">Cage</div>
-                                <div className="main-content-list-title-text">Date hospitalization</div>
+                                <div className="main-content-list-title-text">Hospitalized day</div>
                                 
-                                <div className="main-content-list-title-text">View</div>
+                                <div className="main-content-list-title-text-info">View</div>
                             </div>
                             <div className="main-content-list-body-wrapper">
                                
@@ -101,7 +63,7 @@ function ManageSickPet() {
                                     <div className="content-list-body-value">2024-06-10 09:15</div>
 
                 
-                                    <div className="content-list-body-value">
+                                    <div className="content-list-body-value-button-info">
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more-info-sick-pet">
                                             More info
                                         </button>
@@ -193,6 +155,15 @@ function ManageSickPet() {
                                                          <small className='title-reason-sick-pet'>Notes:&nbsp;</small>
                                                          <input type="text" className="form-control" placeholder="Enter notes here" />
                                                        </div>
+                                                       <div className="reason-sick-pet">
+                                                        <small className='title-reason-sick-pet'>Status:&nbsp;</small>
+                                                        <select className="form-control">
+                                                            <option value="good">Good</option>
+                                                            <option value="not_good">Not Good</option>
+                                                        </select>
+                                                       </div>
+                                                    
+                                                       
                                                     </div>
                                                    </div>
                                                  </div>                                             
@@ -215,7 +186,7 @@ function ManageSickPet() {
                                     <div className="content-list-body-value">A02</div>
                                     <div className="content-list-body-value">2024-06-10 09:15</div>
                                     
-                                    <div className="content-list-body-value">
+                                    <div className="content-list-body-value-button-info">
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more-info-sick-pet">
                                             More info
                                         </button>
@@ -249,7 +220,7 @@ function ManageSickPet() {
                                     <div className="content-list-body-value">A03</div>
                                     <div className="content-list-body-value">2024-06-10 09:15</div>
                                     
-                                    <div className="content-list-body-value">
+                                    <div className="content-list-body-value-button-info">
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more-info-sick-pet">
                                             More info
                                         </button>
@@ -282,7 +253,7 @@ function ManageSickPet() {
                                     <div className="content-list-body-value">A04</div>
                                     <div className="content-list-body-value">2024-06-10 09:15</div>
                                     
-                                    <div className="content-list-body-value">
+                                    <div className="content-list-body-value-button-info">
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more-info-sick-pet">
                                             More info
                                         </button>

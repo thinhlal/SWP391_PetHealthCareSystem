@@ -8,7 +8,7 @@
 
 .text-wrapper {
   width: fit-content;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 300;
   color: #ffffff;
   font-size: 16px;
@@ -110,7 +110,7 @@
 
 .text-wrapper-2 {
   height: 24px;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
   font-size: 16px;
