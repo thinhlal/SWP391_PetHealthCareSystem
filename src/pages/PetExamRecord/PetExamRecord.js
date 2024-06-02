@@ -19,7 +19,7 @@ function PetExamRecord() {
 			</nav>			
 		</div>				
 		<div> 		
-			<div>
+			<div className="petE-head">
                 <img src={logo_petE} alt=""/>
 				<p className="petE-tittle"> Pet Exam Record </p>
 				<p className="petE-tittle-1"> Create a new examination pool for pet</p>
