@@ -136,17 +136,16 @@ function AdminDashBoard() {
                                     <div className="Admin-DashBoard-Main-Table-Header-Title "> Customer ID </div>
                                     <div className="Admin-DashBoard-Main-Table-Header-Title "> Pet ID </div>
                                     <div className="Admin-DashBoard-Main-Table-Header-Title "> Total Price </div>
-                                    <div className="Admin-DashBoard-Main-Table-Header-Title "> Total Price </div>
+                                    <div className="Admin-DashBoard-Main-Table-Header-Title "> Date </div>
                                     <div className="Admin-DashBoard-Main-Table-Header-Title-Btn "> Details </div>
-                                    <div className="Admin-DashBoard-Main-Table-Header-Title-Btn "> Remove </div>
                                 </div>
 
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -171,18 +170,13 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -207,18 +201,13 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -243,18 +232,13 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -279,18 +263,13 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -315,18 +294,13 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -351,18 +325,13 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -387,18 +356,13 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -423,18 +387,14 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
-                                        </button>
-                                    </div>
                                 </div>
+
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
                                         <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -459,13 +419,47 @@ function AdminDashBoard() {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
                                     <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn-Remove">
-                                            Remove
+                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            Details
                                         </button>
+
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        ...
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                
+
+
+
+
+
+
+
+
+
 
                                 <div className='Admin-DashBoard-Pagination'>
                                     <Stack spacing={2}>

@@ -1,5 +1,7 @@
 //css
 import './AdminAccount.css';
+// Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Pagination from '@mui/material/Pagination';
@@ -10,10 +12,10 @@ import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { blue } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
 import { green } from '@mui/material/colors';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 function AdminAccount() {
     return (
@@ -51,9 +53,9 @@ function AdminAccount() {
                             </div>
                         </div>
                         <div className="Admin-Account-Navigate-Logout">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="42" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
-                                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="42" fill="currentColor" className="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
+                                <path fillRule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
                             </svg>
                             <span>
                                 Logout
@@ -63,6 +65,77 @@ function AdminAccount() {
 
 
                     <div className="Admin-Account-Main col-md-10">
+
+
+
+
+                        <div className="Admin-Account-Main_Title">
+                            <div className="Admin-Account-Main_Title-Left">
+                                <h2 className='Admin-Account-Main_Title-Left-Intro'>Hi, welcome back!</h2>
+                                <p className='Admin-Account-Main_Title-Left-text'>Sales monitoring dashboard template.</p>
+                            </div>
+                            <div className="Admin-Account-Main_Title-Right">
+                                <label className='Admin-Account-title-Star'>Customer Ratings</label>
+                                <div className='Admin-Account-Star'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#fbbc0b" className="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#fbbc0b" className="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" className="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" className="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" className="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <span>(14.000)</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="Admin-Account-Main-ChooseDate">
+                            <div className="Admin-Account-Main-ChooseDate_Text">Choose Date:</div>
+                            <input type="date"
+                                id="start"
+                                name="trip-start"
+                                value="2022-07-22"
+                                min="2018-01-01" max="2026-12-31" />
+                        </div>
+
+
+                        <div className="Admin-Account-Main-Header row">
+                            <div className="Admin-Account-Main-Header-Income col-md-3">
+                                <div className="Admin-Account-Main-Header-Note"> Daily income </div>
+                                <div className="Admin-Account-Main-Header-Money"> $5,678.90 </div>
+                                <div className="Admin-Account-Main-Header-Percent"> +20% day over day </div>
+                            </div>
+
+                            <div className="Admin-Account-Main-Header-Income col-md-3">
+                                <div className="Admin-Account-Main-Header-Note">Weekly income </div>
+                                <div className="Admin-Account-Main-Header-Money"> $45,678.90 </div>
+                                <div className="Admin-Account-Main-Header-Percent"> +10% day over week </div>
+                            </div>
+
+                            <div className="Admin-Account-Main-Header-Income col-md-3">
+                                <div className="Admin-Account-Main-Header-Note"> Monthly income </div>
+                                <div className="Admin-Account-Main-Header-Money"> $230,678.90 </div>
+                                <div className="Admin-Account-Main-Header-Percent"> +23% day over month </div>
+                            </div>
+
+                            <div className="Admin-Account-Main-Header-Income col-md-3">
+                                <div className="Admin-Account-Main-Header-Note"> Total </div>
+                                <div className="Admin-Account-Main-Header-Money"> $5,678.90 </div>
+                                <div className="Admin-Account-Main-Header-Percent"> +20% day over day </div>
+                            </div>
+                        </div>
+
+
+
 
                         <div className="Admin-Account-Main-Table-Wrapper">
                             <div className='Admin-Account-Main-Table'>
@@ -106,7 +179,7 @@ function AdminAccount() {
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -114,16 +187,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -154,9 +227,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,7 +237,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -172,22 +245,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -195,7 +268,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -203,21 +276,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -227,14 +300,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00002 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Cole </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Customer </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -242,16 +315,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -282,9 +355,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -292,7 +365,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -300,22 +373,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -323,7 +396,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -331,21 +404,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -355,14 +428,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00003 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Davies </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Staff </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -370,16 +443,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -410,9 +483,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -420,7 +493,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -428,22 +501,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -451,7 +524,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -459,21 +532,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -483,14 +556,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00004 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Denis </div>
                                     <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -498,16 +571,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -538,9 +611,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -548,7 +621,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -556,22 +629,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -579,7 +652,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -587,21 +660,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -611,14 +684,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00005 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Thomas </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Customer </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -626,16 +699,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -666,9 +739,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -676,7 +749,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -684,22 +757,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -707,7 +780,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -715,21 +788,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -739,14 +812,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00006 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Helen </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Customer </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -754,16 +827,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -794,9 +867,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -804,7 +877,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -812,22 +885,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -835,7 +908,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -843,21 +916,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -867,14 +940,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00007 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Lila </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Customer </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -882,16 +955,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -922,9 +995,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -932,7 +1005,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -940,22 +1013,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -963,7 +1036,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -971,21 +1044,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -995,14 +1068,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00008 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Victoria </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Staff </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -1010,16 +1083,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -1050,9 +1123,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1060,7 +1133,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -1068,22 +1141,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1091,7 +1164,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -1099,21 +1172,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1123,14 +1196,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00009 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Daisy </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Staff </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -1138,16 +1211,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -1178,9 +1251,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1188,7 +1261,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -1196,22 +1269,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1219,7 +1292,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -1227,21 +1300,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1251,14 +1324,14 @@ function AdminAccount() {
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Leslie </div>
-                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00010 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Iris </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Customer </div>
                                     <div className="Admin-Account-Main-Table-Content-Row ">
 
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
                                                 <BorderColorOutlinedIcon
                                                     sx={{
                                                         color: blue[400],
@@ -1266,16 +1339,16 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-update-name">
-                                                                <div className="Admin-Account-modal-title"> Name </div>
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
                                                                 <div className="Admin-Account-modal-update" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
                                                                 <div className="Admin-Account-modal-update"  ><div className="Admin-Account-modal-initials">New name: </div><input className="Admin-Account-input" placeholder="Name" /> </div>
                                                             </div>
@@ -1306,9 +1379,9 @@ function AdminAccount() {
 
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-success">Save changes</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1316,7 +1389,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
                                                 <DeleteOutlineIcon
                                                     sx={{
                                                         color: red[400]
@@ -1324,22 +1397,22 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1347,7 +1420,7 @@ function AdminAccount() {
                                         </span>
 
                                         <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
-                                            <button type="button" class="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
                                                 <MoreVertOutlinedIcon
                                                     sx={{
                                                         color: green[400]
@@ -1355,21 +1428,21 @@ function AdminAccount() {
                                                 />
                                             </button>
 
-                                            <div class="modal fade" id="exampleModalMore" tabindex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div className="modal-body">
                                                             <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
                                                             <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1377,6 +1450,23 @@ function AdminAccount() {
                                         </span>
                                     </div>
                                 </div>
+
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 <div className='Admin-Account-Pagination'>
                                     <Stack spacing={2}>
