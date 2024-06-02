@@ -1,82 +1,170 @@
-.petExam-body {
+.petExam {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh;
   margin: 0;
-  background-color: #d3cece;
-  font-family: Arial, sans-serif;
 }
 
-.petExam-container {
-  background-color: white;
-  padding: 25px;
-  padding-left: 60px;
-  padding-right: 60px;
-  border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+.nav-head {
+  width: 100%;
+    display: flex;
+    justify-content: right;
+    background-color: #113179;
+}
+.petE-tittle {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    font-family: 'Montserrat', Helvetica;
+    font-weight: 700;
+    color: #1e5d94;
+    font-size: 50px;
+    letter-spacing: 0;
+    line-height: 80px;
+    white-space: nowrap;
+    margin-top: 100px;
+    margin-left: 40px;
+}
+
+.petE-tittle-1{
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Montserrat', Helvetica;
   text-align: center;
-}
-
-.petExam-details .petExam-info{
-  font-family: Roboto, sans-serif;
-  margin-top: 25px;
-  margin-bottom: 30px;
   font-weight: 500;
+  color: #1e5d94;
   font-size: 20px;
+  letter-spacing: 0;
+  line-height: 50px;
+  white-space: nowrap;
+  margin-top: -10px;
+  margin-left: 40px; 
 }
 
-.success-icon {
-  font-size: 60px;
-  color: #4CAF50;
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
-
-.petExam-message {
-  font-family: Roboto, sans-serif;
-  font-size: 30px;
-  font-weight: bold;
+.petE-tittle-2{
+  text-align: center;
+  font-size: 25px;
+  margin-top: 70px;
+  margin-bottom: 50px;
   color: #113179;
-  margin-bottom: 20px;
 }
 
-.petExam-details {
-  text-align: left;
-  margin-bottom: 20px;
+.form-petE {
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 1100px;
+  height: 650px;
+  margin: 50px auto;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr) auto;
+  grid-gap: 20px;
+  color: #113179;
 }
 
-.petExam-script {
-  font-size: 18px;
-  color: #4CAF50;
-  margin-bottom: 20px;
-  font-weight: 700;
+
+.form-petExam{
+  margin-right: 50px;
+  margin-left: 20px;
 }
 
-.petExam-button {
-  display: inline-block;
-  background-color: #113179;
-  color: white;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: 10px;
+.form-petExam-1{
+  margin-right: 50px;
+}
+
+.form-petExam-2{
+  margin-right: 50px;
+}
+
+.form-petExam-3 textarea {
+  height: 80px; 
+  font-size: 16px; 
+  padding: 10px; 
+  margin-left: 20px;
+  resize: vertical; 
+  overflow: auto; 
+  word-wrap: break-word;
+}
+
+label {
+  font-family: Roboto, sans-serif;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 20px;
+
+}
+
+.petE-control {
+  display: block;
+  width: 100%;
+  padding: 10px;
   font-size: 16px;
-  transition: background-color 0.3s ease;
-  border:none;
-  margin-top: 20px;
+  border: 1px solid #8f8c8c;
+  border-radius: 10px;
 }
 
-.petExam-button:hover {
+.petE-info{
+  font-family: Roboto, sans-serif;
+  display: block;
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+.btn-save, .btn-cancel{
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-save {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  margin-right: 20px;
+  margin-left: 50px;
+}
+
+.btn-save:hover {
   background-color: orange;
 }
 
-@media screen and (max-width: 768px){
-  .header{
-      display: block;
-      text-align: center;
-  }
-  .header img{
-      width: 20%;
-  
-  }
+.btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
 }
+
+.btn-cancel:hover {
+  background-color: orange;
+}
+
+.final-petE{
+  margin-top: 200px;
+  margin-right: -200px;
+}
+
+
+@media screen and (max-width: 768px){
+    .header{
+        display: block;
+        text-align: center;
+    }
+    .header img{
+        width: 20%;
+    
+    }
+
+    
+}
+
+
+
+
