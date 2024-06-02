@@ -40,7 +40,7 @@ a {
 }
 
 .text-tittle-your-booking {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #425bb3;
   font-size: 40px;
@@ -64,7 +64,7 @@ a {
 }
 
 .category-header-booking {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 600;
   font-size: 30px;
   background-color: #f5f3f3;
@@ -99,7 +99,7 @@ a {
 }
 
 .menu-item_text-booking {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #000000;
   font-size: 18px;
@@ -107,8 +107,8 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  white-space: nowrap; 
-  width: 100%; 
+  white-space: nowrap;
+  width: 100%;
 }
 
 .main-content-booking {
@@ -132,7 +132,7 @@ a {
   font-size: 18px;
   margin: 10px 0;
   letter-spacing: 0;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -162,7 +162,7 @@ a {
   height: 35px;
   width: 300px;
   outline: none;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   font-size: 16px;
   color: #000;
   padding-left: 10px;
@@ -172,9 +172,8 @@ a {
   border-bottom-left-radius: 10px;
 }
 
-
 .detail-information-booking {
-  font-family: "Montserrat", sans-serif;
+  font-family: Roboto, sans-serif;
   margin: 10px 10px;
 }
 
@@ -349,7 +348,7 @@ a {
   align-items: center;
   justify-content: center;
   background-color: #fafafa;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
 }
 
 /* modal rating css */
@@ -361,14 +360,13 @@ a {
 }
 
 .rating-container {
-  background-color: #E9E4F0;
+  background-color: #e9e4f0;
   padding: 20px;
   text-align: center;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
 }
-
 
 .rating-container h2 {
   margin-top: 0;
@@ -383,14 +381,13 @@ a {
   color: #898484;
   display: flex;
   justify-content: center;
-
 }
 
 .modal-title {
-  font-family: "Montserrat", sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 600;
   text-align: center;
-  flex: 1 1
+  flex: 1 1;
 }
 
 textarea {
@@ -410,14 +407,14 @@ textarea::placeholder {
 }
 
 .rating-button {
-  background-color: #4A00E0;
+  background-color: #4a00e0;
   color: white;
   border: none;
   padding: 12px 20px;
   border-radius: 5px;
   cursor: pointer;
   margin: 10px 0;
-  width: calc(100% - 20px)
+  width: calc(100% - 20px);
 }
 
 .rating-button:hover {
@@ -429,7 +426,7 @@ textarea::placeholder {
   font-weight: 100;
   border: none;
   background-color: #ffff;
-  color: #4A00E0;
+  color: #4a00e0;
 }
 
 .maybe-later {
@@ -458,9 +455,17 @@ textarea::placeholder {
   width: 1em;
   font-size: 40px;
   font-weight: 300;
-  color: #F2994A;  /* fallback for old browsers */
-color: -webkit-linear-gradient(to right, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
-color: linear-gradient(to right, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #f2994a; /* fallback for old browsers */
+  color: -webkit-linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  color: linear-gradient(
+    to right,
+    #f2c94c,
+    #f2994a
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   cursor: pointer;
 }
@@ -485,10 +490,8 @@ color: linear-gradient(to right, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefo
 }
 
 .modal-footer {
-  font-family: "Montserrat", Helvetica;
+  font-family: Roboto, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
-
