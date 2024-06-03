@@ -16,6 +16,7 @@ import YourBooking from './pages/YourBooking/YourBooking.js'
 import AdminAccount from './pages/AdminAccount/AdminAccount.js';
 import PetExamRecord from './pages/PetExamRecord/PetExamRecord.js';
 import VeterinarianInfo from './pages/VeterinarianInfo/VeterinarianInfo.js';
+import SelectPet from './pages/SelectPet/SelectPet.js';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
       <Route path="/admin-account" element={<AdminAccount />} />
       <Route path="/pet-exam-record" element={<PetExamRecord />} />
       <Route path="/veterinarian-info" element={<VeterinarianInfo />}/>
+      <Route path="/select-pet" element={<SelectPet />}/>
     </Routes>
   );
 }
