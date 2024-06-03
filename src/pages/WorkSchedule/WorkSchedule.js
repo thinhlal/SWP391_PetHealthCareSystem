@@ -50,9 +50,8 @@ function WorkSchedule() {
 					  <td className="td_table-schedule">Male</td>
 					  <td className="td_table-schedule">8:00 - 9:00</td>
 					  <td className="td_table-schedule">Minh</td>
-					  <td className="td_table-schedule"><button type="button" className="button-receive">
-						Receive
-					  </button>
+					  <td className="td_table-schedule">
+						<a href="pet-exam-record" className="click-button">Receive</a>
 					</td>
 					</tr>
 					<tr>
@@ -62,9 +61,8 @@ function WorkSchedule() {
 						<td className="td_table-schedule">Female</td>
 						<td className="td_table-schedule">10:00 - 11:00</td>
 						<td className="td_table-schedule">Phat</td>
-						<td className="td_table-schedule"><button type="button" className="button-receive">
-						  Receive
-						</button></td>
+						<td className="td_table-schedule"><a href="pet-exam-record" className="click-button">Receive</a>
+						</td>
 					</tr>
 					<tr>
 						<td className="td_table-schedule">3</td>
@@ -73,9 +71,8 @@ function WorkSchedule() {
 						<td className="td_table-schedule">Male</td>
 						<td className="td_table-schedule">13:00 - 14:00</td>
 						<td className="td_table-schedule">Dat</td>
-						<td className="td_table-schedule"><button type="button" className="button-receive">
-						  Receive
-						</button></td>
+						<td className="td_table-schedule"><a href="pet-exam-record" className="click-button">Receive</a>
+						</td>
 					</tr>
 					<tr>
 						<td className="td_table-schedule">4</td>
@@ -84,9 +81,7 @@ function WorkSchedule() {
 						<td className="td_table-schedule">Male</td>
 						<td className="td_table-schedule">15:00 - 16:00</td>
 						<td className="td_table-schedule">Thinh</td>
-						<td className="td_table-schedule"><button type="button" className="button-receive">
-						  Receive
-						</button></td>
+						<td className="td_table-schedule"><a href="pet-exam-record" className="click-button">Receive</a></td>
 					</tr>
 					<tr>
 						<td className="td_table-schedule">5</td>
@@ -95,9 +90,7 @@ function WorkSchedule() {
 						<td className="td_table-schedule">Female</td>
 						<td className="td_table-schedule">16:00 - 17:00</td>
 						<td className="td_table-schedule">Tung</td>
-						<td className="td_table-schedule"><button type="button" className="button-receive">
-						  Receive
-						</button></td>
+						<td className="td_table-schedule"><a href="pet-exam-record" className="click-button">Receive</a></td>
 					</tr>
 					<tr>
 						<td className="td_table-schedule">6</td>
@@ -106,9 +99,7 @@ function WorkSchedule() {
 						<td className="td_table-schedule">Male</td>
 						<td className="td_table-schedule">19:00 - 20:00</td>
 						<td className="td_table-schedule">Duong</td>
-						<td className="td_table-schedule"><button type="button" className="button-receive">
-						  Receive
-						</button></td>
+						<td className="td_table-schedule"><a href="pet-exam-record" className="click-button">Receive</a></td>
 					</tr>
 				  </tbody>
 				</table>

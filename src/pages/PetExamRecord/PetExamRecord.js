@@ -68,8 +68,8 @@ function PetExamRecord() {
   			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter note"></textarea>
 		</div>
 		<div className="final-petE">
-		<button type="submit" className="btn-save">Save</button>
-		<button type="button" className="btn-cancel">Cancel</button>
+		<a href="work-schedule" className="btn-save">Save</a>
+		<a href="work-schedule" className="btn-cancel">Cancel</a>
 		</div>
 	  </form>
 		<div>
