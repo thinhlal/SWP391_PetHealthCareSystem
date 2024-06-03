@@ -30,12 +30,12 @@ function App() {
       <Route path='/manage-cages' element={<ManageCages />} />
       <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
       <Route path="/admin-dashboard" element={<AdminDashBoard />} />
-      <Route path="/work_schedule" element={<WorkSchedule />} />
+      <Route path="/work-schedule" element={<WorkSchedule />} />
       <Route path="/sick-pet" element={<ManageSickPet />} />
       <Route path="/your-booking" element={<YourBooking />} />
       <Route path="/admin-account" element={<AdminAccount />} />
-      <Route path="/pet_exam_record" element={<PetExamRecord />} />
-      <Route path="/veterinarian_info" element={<VeterinarianInfo />}/>
+      <Route path="/pet-exam-record" element={<PetExamRecord />} />
+      <Route path="/veterinarian-info" element={<VeterinarianInfo />}/>
     </Routes>
   );
 }
