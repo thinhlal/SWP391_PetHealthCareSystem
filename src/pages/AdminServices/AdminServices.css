@@ -375,14 +375,11 @@
 }
 
 .Admin-Services-modal-initials {
+    font-family: Roboto, sans-serif;
     font-weight: 600;
     padding-right: 5px;
 }
 
-.Admin-Services-modal-initials {
-    font-weight: 600;
-    padding-right: 5px;
-}
 
 .Admin-Services-modal-update {
     display: flex;
