@@ -28,43 +28,43 @@ function PetExamRecord() {
 	</div>	
 	<form className="form-petE">
 		<div className="form-petExam">
-		  <label for="petId">Pet ID</label>
+		  <div class="pet-info-1">Pet ID</div>
 		  <p className="petE-info">PET01</p>
 		</div>
 		<div className="form-petExam-1">
-		  <label for="petType">Pet Type</label>
+		  <div class="pet-info-1">Pet Type</div>
 		  <p className="petE-info">Dog</p>
 		</div>
 		<div className="form-petExam-2">
-			<label for="petWeight">Pet Weight</label>
+			<div class="pet-info-1">Pet Weight</div>
 			<p className="petE-info">10 kg</p>
 		  </div>
 		<div className="form-petExam">
-		  <label for="petName">Pet Name</label>
+		  <div class="pet-info-1">Pet Name</div>
 		  <p className="petE-info">Jack</p>
 		</div>
 		<div className="form-petExam-1">
-		  <label for="petOwner">Pet Owner</label>
+		  <div class="pet-info-1">Pet Owner</div>
 		  <p className="petE-info">Messi</p>
 		</div>
 		<div className="form-petExam-2">
-		  <label for="petGender">Pet Gender</label>
+		  <div class="pet-info-1">Pet Gender</div>
 		  <p className="petE-info">Male</p>
 		</div>
 		<div className="form-petExam-3">
-			<label for="prescription">Pet Diagnostic</label>
+			<div class="pet-info-1">Pet Diagnostic</div>
 			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter Diagnostic"></textarea>
 		  </div>
 		  <div className="form-petExam-3">
-			<label for="prescription">Pet Symptoms</label>
+			<div class="pet-info-1">Pet Symptoms</div>
 			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter Symptoms"></textarea>
 		  </div>
 		<div className="form-petExam-3">
-  			<label for="prescription">Prescription</label>
+  			<div class="pet-info-1">Prescription</div>
   			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter prescription"></textarea>
 		</div>
 		<div className="form-petExam-3">
-  			<label for="note-petE">Note</label>
+  			<div for="note-petE">Note</div>
   			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter note"></textarea>
 		</div>
 		<div className="final-petE">
