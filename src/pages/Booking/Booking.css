@@ -147,10 +147,6 @@ body {
   -webkit-box-orient: vertical;
 }
 
-.booking-container .select_Info option {
-  color: #828288;
-}
-
 .booking-container .select_Date {
   width: 270px;
 }
