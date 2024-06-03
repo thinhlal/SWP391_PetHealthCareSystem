@@ -187,3 +187,60 @@
 .pagination_wrapper nav {
   margin-top: 70px;
 }
+.modal-body-booking-pet {
+  background-color: #fff;
+  border-color: #fff;
+  font-family: Roboto, sans-serif;
+  margin: 30px 20px;
+  display: flex;
+  align-items: center
+}
+
+.content-modal-booking-pet {
+  display: flex;
+  flex-direction: column; 
+  gap: 16px; 
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 15px; 
+}
+
+.font-weight-bold{
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.title-reason-booking-pet{
+  color: #004cb9;
+  font-weight: 600;
+}
+
+.mb-3 {
+  grid-row: span 2; /* Để dòng này nằm riêng giữa hai phần trên và dưới */
+}
+
+.close {
+  color: #000;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+
+.theme-color{
+
+  color: #004cb9;
+}
+hr.new1 {
+  border-top:  dashed #fff;
+  margin: 0.4rem 0;
+}
+
+.form-control {
+  margin-top: 10px;
+}

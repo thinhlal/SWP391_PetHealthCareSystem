@@ -19,7 +19,7 @@ function ManageListBooking() {
     const [ownerSearchResults, setOwnerSearchResults] = useState([]);
     const [petInfo, setPetInfo] = useState({});
     const [ownerInfo, setOwnerInfo] = useState({});
-    const [services, setServices] = useState([{ service: ""}]);
+    const [services, setServices] = useState([{ service: "" }]);
     const [availableVets, setAvailableVets] = useState([
         { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: ["2024-06-01T08:00", "2024-06-01T09:00", "2024-06-01T10:00"] },
         { id: 2, name: "Dr. Trần Thị B", availableSlots: ["2024-06-01T11:00", "2024-06-01T13:00", "2024-06-01T15:00"] },
@@ -83,7 +83,7 @@ function ManageListBooking() {
     };
 
     const addService = () => {
-        setServices([...services, { service: ""}]);
+        setServices([...services, { service: "" }]);
     };
 
     const handleSubmit = (event) => {
@@ -109,7 +109,7 @@ function ManageListBooking() {
         setOwnerSearchResults([]);
         setPetInfo({});
         setOwnerInfo({});
-        setServices([{ service: ""}]);
+        setServices([{ service: "" }]);
         setAvailableVets([
             { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: ["2024-06-01T08:00", "2024-06-01T09:00", "2024-06-01T10:00"] },
             { id: 2, name: "Dr. Trần Thị B", availableSlots: ["2024-06-01T11:00", "2024-06-01T13:00", "2024-06-01T15:00"] },
@@ -147,7 +147,7 @@ function ManageListBooking() {
                                 </button>
                                 <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog">
-                                        <form  id="addPetForm" onSubmit={handleSubmit}>
+                                        <form id="addPetForm" onSubmit={handleSubmit}>
                                             <div className="modal-content">
                                                 <div className="modal-header">
                                                     <h1 className="modal-title fs-5" id="exampleModalLabel">Add Booking</h1>
@@ -211,8 +211,8 @@ function ManageListBooking() {
                                                         <div id="newOwnerSection" className="modal-body-section">
                                                             <label>Owner Name:</label>
                                                             <input type="text" value={ownerInfo.name || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, name: e.target.value })} />
-                                                            <label>Address:</label>
-                                                            <input type="text" value={ownerInfo.address || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, address: e.target.value })} />
+                                                            <label>Email:</label>
+                                                            <input type="email" value={ownerInfo.email || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, email: e.target.value })} />
                                                             <label>Phone Number:</label>
                                                             <input type="text" value={ownerInfo.phone || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, phone: e.target.value })} />
                                                         </div>
@@ -242,6 +242,7 @@ function ManageListBooking() {
                                                     <div className="modal-body-section">
                                                         <label>Veterinarian:</label>
                                                         <select id="veterinarian">
+                                                            <option>Choose</option>
                                                             {availableVets
                                                                 .filter((vet) => vet.availableSlots.includes(`${selectedDate}T${selectedTime}`))
                                                                 .map((vet) => (
@@ -334,15 +335,81 @@ function ManageListBooking() {
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                                 <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Details</h1>
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div className="modal-body">
-                                                    .....
+                                                <div className="modal-body-booking-pet">
+                                                <div className="main-modal-content-booking-pet">
+                                                   <i className="fa fa-close close" data-dismiss="modal"></i>
+      
+                                                   <div className="grid-container">
+                                                     <div className="content-modal-booking-pet">
+                                                       <div className="reason-booking-pet">
+                                                         <span className="font-weight-bold">Pet Information</span>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Name Pet:&nbsp;</small>
+                                                         <small>LuLu</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Breed species:&nbsp;</small>
+                                                         <small>........</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>BirthDay:&nbsp;</small>
+                                                         <small>24/12/2020</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Type:&nbsp;</small>
+                                                         <small>Dog</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Gender:&nbsp;</small>
+                                                         <small>Male</small>
+                                                       </div>
+                                                       
+                                                     </div>
+
+                                                     <div className="mb-3">
+                                                       <hr className="new1" />
+                                                     </div>
+
+                                                     <div className="content-modal-booking-pet">
+                                                       <div className="reason-booking-pet">
+                                                         <span className="font-weight-bold">Customer Information</span>
+                                                       </div>
+                                                       <div className="reason-booking-pet">    
+                                                         <small className='title-reason-booking-pet'>Customer ID:&nbsp;</small>
+                                                         <small>2123</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">    
+                                                         <small className='title-reason-booking-pet'>Account ID:&nbsp;</small>
+                                                         <small>1213</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Name:&nbsp;</small>
+                                                         <small>Nguyen Van A</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Phone:&nbsp;</small>
+                                                         <small>12345675</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Email:&nbsp;</small>
+                                                         <small>abc@gmail.com</small>
+                                                       </div>
+                                                
+                                                     </div>
+
+                                                     <div className="mb-3">
+                                                       <hr className="new1" />
+                                                     </div>
+                                                   </div>
+                                                 </div>                                             
                                                 </div>
                                                 <div className="modal-footer">
                                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
