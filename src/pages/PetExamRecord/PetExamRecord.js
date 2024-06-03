@@ -64,7 +64,7 @@ function PetExamRecord() {
   			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter prescription"></textarea>
 		</div>
 		<div className="form-petExam-3">
-  			<div for="note-petE">Note</div>
+  			<div class="pet-info-1">Note</div>
   			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter note"></textarea>
 		</div>
 		<div className="final-petE">
