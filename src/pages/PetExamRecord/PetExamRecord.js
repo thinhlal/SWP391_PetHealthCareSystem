@@ -64,12 +64,12 @@ function PetExamRecord() {
   			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter prescription"></textarea>
 		</div>
 		<div className="form-petExam-3">
-  			<div for="note-petE">Note</div>
+  			<div class="pet-info-1">Note</div>
   			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter note"></textarea>
 		</div>
 		<div className="final-petE">
-		<button type="submit" className="btn-save">Save</button>
-		<button type="button" className="btn-cancel">Cancel</button>
+		<a href="work-schedule" className="btn-save">Save</a>
+		<a href="work-schedule" className="btn-cancel">Cancel</a>
 		</div>
 	  </form>
 		<div>
