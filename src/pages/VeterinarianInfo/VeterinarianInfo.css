@@ -1,88 +1,102 @@
-.logo_petE{
-  text-align: center;
-  margin-bottom: 50px;
-  margin-top: 50px;
+.doctor-info-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0f0fe;
+  margin-top: 30px;
+  height: 250px;
 }
 
-.vet-header{
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: 'Montserrat', Helvetica;
-  font-weight: 700;
-  color: #113179;
-  font-size: 50px;
-  text-align: center;
+.doctor-info .vet-header h1 {
+  font-family: Roboto, sans-serif;
+  color: #194893;
+  font-size: 40px;
+  line-height: 1.618;
   letter-spacing: 0;
-  line-height: 96px;
   white-space: nowrap;
-  margin-top: 100px;
-  margin-bottom: 100px;
 }
 
+.doctor-info .vet-header p {
+  font-family: Roboto, sans-serif;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.618;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
 
-.Vet {
+.doctor-info .logo_petE {
+}
+
+.doctor-info .logo_petE img {
+  border-radius: 100px;
+  object-fit: cover;
+  width: 500px;
+  height: 200px;
+}
+
+.doctor-info .Vet {
   text-align: center;
 }
 
-.vet-info{
+.doctor-info .vet-info {
   margin-bottom: 50px;
   max-width: 90%;
   margin-left: 90px;
   margin-right: auto;
 }
 
-.Vet img{
+.doctor-info .Vet img {
   width: 100%;
   border-radius: 40px;
   margin-top: 50px;
 }
 
-.vet-name{
-  font-family: 'Montserrat', Helvetica;
+.doctor-info .vet-name {
+  font-family: Roboto, sans-serif;
   font-weight: 900;
   color: #113179;
   font-size: 20px;
   margin-top: 30px;
 }
 
-.vet-name:hover{
+.doctor-info .vet-name:hover {
   font-size: 24px;
-  color:orange;
+  color: orange;
 }
 
-
-.vet-h1{
-  font-family: 'Montserrat', Helvetica;
+.doctor-info .vet-h1 {
+  font-family: Roboto, sans-serif;
   font-weight: 900;
   color: #113179;
   font-size: 20px;
   margin-top: 30px;
 }
 
-.vet-h1:hover{
+.doctor-info .vet-h1:hover {
   font-size: 24px;
-  color:orange;
+  color: orange;
 }
 
-.vet-info-1{
-  font-family: 'Montserrat', Helvetica;
+.doctor-info .vet-info-1 {
+  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: black;
   font-size: 16px;
   margin-top: 50px;
   margin-bottom: 80px;
   text-align: left;
-  background-color: #b0bfeb;
+  background-color: #EAFAFF;
   border-radius: 40px;
 }
 
-.vet-p{
+.doctor-info .vet-p {
   margin-top: 20px;
-  margin-bottom: 20px; ;
+  margin-bottom: 20px;
 }
 
-
-.vet-final{
-  font-family: 'Montserrat', Helvetica;
+.doctor-info .vet-final {
+  font-family: Roboto, sans-serif;
   font-weight: 900;
   color: #113179;
   font-size: 30px;
@@ -90,19 +104,12 @@
   margin-bottom: 40px;
 }
 
-
-
-@media screen and (max-width: 768px){
-  .header{
-      display: block;
-      text-align: center;
+@media screen and (max-width: 768px) {
+  .doctor-info .header {
+    display: block;
+    text-align: center;
   }
-  .header img{
-      width: 20%;
-  
+  .doctor-info .header img {
+    width: 20%;
   }
 }
-
-
-
-

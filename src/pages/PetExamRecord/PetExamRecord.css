@@ -1,176 +1,174 @@
-body {
+.petExam {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.nav-head {
+  width: 100%;
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-  }
-  
-  .logo_petE{
-    text-align: right;
-    margin-right: 30px;
-  }
-  
-  .nav-head {
-      width: 100%;
-      justify-content: center;
-      background-color: #08215a;
-  }
+    justify-content: right;
+    background-color: #113179;
+}
 
-  .images_petE{
-    margin-top: 40px;
-    text-align: center;
-  }
-
-  .tittle_petE {
-      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      text-align: center;
-      font-family: Roboto, sans-serif;
-      font-weight: 700;
-      color: #113179;
-      font-size: 50px;
-      letter-spacing: 0;
-      line-height: 80px;
-      white-space: nowrap;
-      margin-top: 100px;
-      margin-left: 40px;
-  }
-  
-  .tittle-1_petE{
+.petE-head{
+  text-align: center;
+}
+.petE-tittle {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-family: Roboto, sans-serif;
     text-align: center;
-    font-weight: 500;
-    color: #113179;
-    font-size: 20px;
-    letter-spacing: 0;
-    line-height: 50px;
-    white-space: nowrap;
-    margin-top: -10px;
-    margin-left: 40px; 
-  }
-  
-  .form_petE {
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-    width: 1100px;
-    height: 650px;
-    margin: 50px auto;
-    padding: 50px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr) auto;
-    grid-gap: 20px;
-    color: #113179;
-  }
-  
-  
-  .form-group_petE{
-    margin-right: 50px;
-    margin-left: 20px;
-  }
-  
-  .form-group-1_petE{
-    margin-right: 50px;
-  }
-  
-  .form-group-2_petE{
-    margin-right: 50px;
-  }
-  
-  .form-group-3_petE textarea {
-    height: 80px; 
-    font-size: 16px; 
-    padding: 10px; 
-    margin-left: 20px;
-    resize: vertical; 
-    overflow: auto; 
-    word-wrap: break-word;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-left: 20px;
-  
-  }
-  
-  .PetExam-form-control {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-  
-  .btn-container {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
-  .btn-save, .btn-cancel {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn-save {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-  }
-  
-  .btn-save:hover {
-    background-color: orange;
-  }
-  
-  .btn-cancel {
-    background-color: #6c757d;
-    color: #fff;
-    border: none;
-  }
-  
-  .btn-cancel:hover {
-    background-color: orange;
-  }
-  
-  .button-sc{
-    margin-top: 200px;
-    margin-right: -100px;
-  }
-  
-  .PetExam-final{
-    font-family: Roboto, sans-serif;
-    text-align: center;
+    font-family: 'Montserrat', Helvetica;
     font-weight: 700;
-    font-size: 25px;
-    margin-top: 70px;
-    margin-bottom: 50px;
-    color: #113179;
-  }
-  
-  
-  @media screen and (max-width: 768px){
-      .header{
-          display: block;
-          text-align: center;
-      }
-      .header img{
-          width: 20%;
-      }
-  
-      
-  }
-  
-  
-  
-  
-  
+    color: #1e5d94;
+    font-size: 50px;
+    letter-spacing: 0;
+    line-height: 80px;
+    white-space: nowrap;
+    margin-top: 100px;
+    margin-left: 40px;
+}
+
+.petE-tittle-1{
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Montserrat', Helvetica;
+  text-align: center;
+  font-weight: 500;
+  color: #1e5d94;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 50px;
+  white-space: nowrap;
+  margin-top: -10px;
+  margin-left: 40px; 
+}
+
+.petE-tittle-2{
+  text-align: center;
+  font-size: 25px;
+  margin-top: 70px;
+  margin-bottom: 50px;
+  color: #113179;
+}
+
+.form-petE {
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  width: 1100px;
+  height: 650px;
+  margin: 50px auto;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr) auto;
+  grid-gap: 20px;
+  color: #113179;
+}
+
+
+.form-petExam{
+  margin-right: 50px;
+  margin-left: 20px;
+}
+
+.form-petExam-1{
+  margin-right: 50px;
+}
+
+.form-petExam-2{
+  margin-right: 50px;
+}
+
+.form-petExam-3 textarea {
+  height: 80px; 
+  font-size: 16px; 
+  padding: 10px; 
+  margin-left: 20px;
+  resize: vertical; 
+  overflow: auto; 
+  word-wrap: break-word;
+}
+
+label {
+  font-family: Roboto, sans-serif;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 20px;
+
+}
+
+.petE-control {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #8f8c8c;
+  border-radius: 10px;
+}
+
+.petE-info{
+  font-family: Roboto, sans-serif;
+  display: block;
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
+.btn-save, .btn-cancel{
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-save {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  margin-right: 20px;
+  margin-left: 50px;
+}
+
+.btn-save:hover {
+  background-color: orange;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+}
+
+.btn-cancel:hover {
+  background-color: orange;
+}
+
+.final-petE{
+  margin-top: 200px;
+  margin-right: -200px;
+}
+
+
+@media screen and (max-width: 768px){
+    .header{
+        display: block;
+        text-align: center;
+    }
+    .header img{
+        width: 20%;
+    
+    }
+
+    
+}
+
+
+
+

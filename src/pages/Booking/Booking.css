@@ -36,14 +36,13 @@ body {
 }
 
 .booking-container .main-booking-menu {
-
   margin: 0 auto 60px;
   background-color: #ffffff;
   border-radius: 20px;
   border: 1px solid;
   border-color: #eae8e8;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 1400px;
+  max-width: 1300px;
   padding: 10px;
 }
 
@@ -71,22 +70,37 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 50px 0;
+  flex-direction: column;
+  margin: 30px 0;
+}
+
+.select-booking_info {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .booking-container .patient_Input {
+  width: 270px;
 }
 
-.patient_Input .select_Name {
-  height: 20px;
+.booking-container .patient_Input:first-child {
+  margin: 0 80px 0 0;
 }
-.select_Payment .select_Name {
-  margin-top: 30px;
+
+.booking-container .select_Payment {
+  margin-right: 80px;
 }
+
+.booking-container .select_Date {
+  margin-right: 80px;
+}
+
 .select_Name {
   margin-bottom: 5px;
   color: #828288;
-  font-size: 20px;
+  font-size: 16px;
   font-family: Roboto, sans-serif;
 }
 
@@ -97,9 +111,9 @@ body {
   width: 100%;
   font-family: Roboto, sans-serif;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 8px;
-  line-height: 33px;
+  line-height: 30px;
   color: #000;
   letter-spacing: 0;
   text-overflow: ellipsis;
@@ -110,18 +124,10 @@ body {
 
 .booking-container .select_Booking {
   display: flex;
-  width: 400px;
-  height: 35px;
+  width: 270px;
+  height: 32px;
   align-items: center;
   border-radius: 8px;
-}
-
-.select-booking_left {
-  margin-right: 40px;
-}
-
-.select-booking_right {
-  margin-left: 40px;
 }
 
 .booking-container .select_Info {
@@ -130,30 +136,30 @@ body {
   font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #000;
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 8px;
   letter-spacing: 0;
   padding: 0 10px;
-  height: 35px;
+  height: 32px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 
-.booking-container .select-services {
+.booking-container .select_Info option {
+  color: #828288;
 }
 
-.label-2 {
-  font-size: 16px;
+.booking-container .select_Date {
+  width: 270px;
 }
 
 .booking-container .select_Doctors {
-  margin-top: 30px;
 }
 
 .booking-container .available-tittle {
-  padding: 35px;
+  padding: 40px 0 20px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,15 +169,13 @@ body {
   font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #000000;
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: 0;
   line-height: 24px;
 }
 
 .booking-container .booked-slot {
   display: flex;
-  width: 137px;
-  height: 33px;
   align-items: center;
   gap: 4px;
   padding: 8px 16px;
@@ -180,15 +184,11 @@ body {
 
 .booking-container .square {
   height: 24px;
-  margin-top: -3.62px;
-  margin-bottom: -3.62px;
   object-fit: cover;
 }
 
 .booking-container .available-slot {
   display: flex;
-  width: 137px;
-  height: 33px;
   align-items: center;
   gap: 4px;
   padding: 8px 16px;
@@ -196,7 +196,7 @@ body {
 }
 
 .booked-status {
-  font-size: 18px;
+  font-size: 16px;
   font-family: Roboto, sans-serif;
 }
 
@@ -210,16 +210,16 @@ body {
   border: 1px solid;
   border-color: #eae8e8;
   justify-content: center;
-  align-items: center;
   place-items: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: -moz-fit-content;
   max-width: fit-content;
   margin: auto;
-  padding: 20px 10px;
+  padding: 20px 20px;
 }
 
 .booking-container .element-button-red {
-  width: 130px;
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,7 +231,7 @@ body {
 }
 
 .booking-container .element-button-green {
-  width: 130px;
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,6 +258,27 @@ body {
 }
 
 .element-button-red:hover {
+}
+
+.no-slots-message{
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  grid-column: span 4;
+  grid-row: span 4;
+}
+
+.booking-container .day-off-message {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #ff0000;
+  font-size: 18px;
+  line-height: 150%;
+  text-align: center;
+  grid-column: span 4;
+  grid-row: span 4;
 }
 
 .booking-container .booking-pay-money {
