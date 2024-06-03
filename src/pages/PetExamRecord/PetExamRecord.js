@@ -14,7 +14,7 @@ function PetExamRecord() {
 		<div className="menu">			
 			 <nav className="nav-head">
 				<div className="logo_ad">
-				<img src={icon_user}/>
+				<img src={icon_user} alt=''/>
 			  </div>
 			</nav>			
 		</div>				
