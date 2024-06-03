@@ -17,7 +17,7 @@ import AdminAccount from './pages/AdminAccount/AdminAccount.js';
 import PetExamRecord from './pages/PetExamRecord/PetExamRecord.js';
 import VeterinarianInfo from './pages/VeterinarianInfo/VeterinarianInfo.js';
 import SelectPet from './pages/SelectPet/SelectPet.js';
-
+import AdminServices from './pages/AdminServices/AdminServices.js';
 function App() {
   return (
     <Routes>
@@ -38,6 +38,7 @@ function App() {
       <Route path="/pet-exam-record" element={<PetExamRecord />} />
       <Route path="/veterinarian-info" element={<VeterinarianInfo />}/>
       <Route path="/select-pet" element={<SelectPet />}/>
+      <Route path="/admin-services" element={<AdminServices />} />
     </Routes>
   );
 }
