@@ -3,8 +3,7 @@
   align-items: center;
   justify-content: center;
   background-color: #e0f0fe;
-  margin-top: 30px;
-  height: 250px;
+  height: 300px;
 }
 
 .doctor-info .vet-header h1 {
@@ -35,21 +34,22 @@
   height: 200px;
 }
 
-.doctor-info .Vet {
-  text-align: center;
+.doctor-info .vet {
+  margin: 100px 0;
 }
 
 .doctor-info .vet-info {
-  margin-bottom: 50px;
-  max-width: 90%;
-  margin-left: 90px;
-  margin-right: auto;
+  padding: 0;
+  margin: 0;
 }
 
-.doctor-info .Vet img {
+.doctor-info .vet img {
   width: 100%;
-  border-radius: 40px;
-  margin-top: 50px;
+}
+
+.doctor-info .vet-info-img{
+  padding: 0;
+  margin: 0;
 }
 
 .doctor-info .vet-name {
@@ -83,11 +83,8 @@
   font-weight: 500;
   color: black;
   font-size: 16px;
-  margin-top: 50px;
-  margin-bottom: 80px;
   text-align: left;
   background-color: #EAFAFF;
-  border-radius: 40px;
 }
 
 .doctor-info .vet-p {

@@ -28,9 +28,9 @@ function VeterinarianInfo() {
 				</div>
 			</div>
 			<div>
-				<div className="Vet">
+				<div className="vet">
 					<div className="row vet-info">
-						<div className="col-md-5 vet">
+						<div className="col-md-5 vet-info-img">
 							<img src={vet1} alt="" />
 							<p className="vet-name">Veterinarian: Vet. Minh</p>
 						</div>
@@ -63,7 +63,7 @@ function VeterinarianInfo() {
 					</div>
 				</div>
 
-				<div className="Vet">
+				<div className="vet">
 
 					<div className="row vet-info">
 						<div className=" col-md-7 vet-info-1">
@@ -96,16 +96,16 @@ function VeterinarianInfo() {
 
 							</p>
 						</div>
-						<div className="col-md-5 vet">
+						<div className="col-md-5 vet-info-img">
 							<img src={vet2} alt="" />
 							<p className="vet-name">Veterinarian: Vet. Dat</p>
 						</div>
 					</div>
 				</div>
 
-				<div className="Vet">
+				<div className="vet">
 					<div className="row vet-info">
-						<div className="col-md-5 vet">
+						<div className="col-md-5 vet-info-img">
 							<img src={vet3} alt="" />
 							<p className="vet-name">Veterinarian: Vet. Duong</p>
 						</div>
@@ -135,7 +135,7 @@ function VeterinarianInfo() {
 					</div>
 				</div>
 
-				<div className="Vet">
+				<div className="vet">
 					<div className="row vet-info">
 						<div className=" col-md-7 vet-info-1">
 							<p className="vet-h1">Personal Information</p>
@@ -167,16 +167,16 @@ function VeterinarianInfo() {
 								✓ Certificate of training program recognized and issued by reputable veterinary organizations AVMA (American Veterinary Medical Association)
 							</p>
 						</div>
-						<div className="col-md-5 vet">
+						<div className="col-md-5 vet-info-img">
 							<img src={vet4} alt="" />
 							<p className="vet-name">Veterinarian: Vet. Thinh</p>
 						</div>
 					</div>
 				</div>
 
-				<div className="Vet">
+				<div className="vet">
 					<div className="row vet-info">
-						<div className="col-md-5 vet">
+						<div className="col-md-5 vet-info-img">
 							<img src={vet5} alt="" />
 							<p className="vet-name">Veterinarian: Vet. Phat</p>
 						</div>
@@ -206,7 +206,7 @@ function VeterinarianInfo() {
 						</div>
 					</div>
 				</div>
-				<div className="Vet">
+				<div className="vet">
 					<div className="row vet-info">
 						<div className=" col-md-7 vet-info-1">
 							<p className="vet-h1">Personal Information</p>
@@ -228,17 +228,11 @@ function VeterinarianInfo() {
 								- Known not only as one of the leading experts in the field of veterinary medicine in Vietnam, Vet. Minh is also loved by everyone for his closeness, dedication and dedication.
 							</p>
 						</div>
-						<div className="col-md-5 vet">
+						<div className="col-md-5 vet-info-img">
 							<img src={vet6} alt="" />
 							<p className="vet-name">Veterinarian: Vet. Tung</p>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<div className="Vet">
-				<div className="col-md-12 vet-final">
-					<p>----------Veterinarian Information----------</p>
 				</div>
 			</div>
 			<Footer></Footer>
