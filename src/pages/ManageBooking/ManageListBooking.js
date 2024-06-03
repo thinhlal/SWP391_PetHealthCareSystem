@@ -334,15 +334,81 @@ function ManageListBooking() {
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                                 <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Details</h1>
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div className="modal-body">
-                                                    .....
+                                                <div className="modal-body-booking-pet">
+                                                <div className="main-modal-content-booking-pet">
+                                                   <i className="fa fa-close close" data-dismiss="modal"></i>
+      
+                                                   <div className="grid-container">
+                                                     <div className="content-modal-booking-pet">
+                                                       <div className="reason-booking-pet">
+                                                         <span className="font-weight-bold">Pet Information</span>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Name Pet:&nbsp;</small>
+                                                         <small>LuLu</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Breed species:&nbsp;</small>
+                                                         <small>........</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>BirthDay:&nbsp;</small>
+                                                         <small>24/12/2020</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Type:&nbsp;</small>
+                                                         <small>Dog</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Gender:&nbsp;</small>
+                                                         <small>Male</small>
+                                                       </div>
+                                                       
+                                                     </div>
+
+                                                     <div className="mb-3">
+                                                       <hr className="new1" />
+                                                     </div>
+
+                                                     <div className="content-modal-booking-pet">
+                                                       <div className="reason-booking-pet">
+                                                         <span className="font-weight-bold">Customer Information</span>
+                                                       </div>
+                                                       <div className="reason-booking-pet">    
+                                                         <small className='title-reason-booking-pet'>Customer ID:&nbsp;</small>
+                                                         <small>2123</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">    
+                                                         <small className='title-reason-booking-pet'>Account ID:&nbsp;</small>
+                                                         <small>1213</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Name:&nbsp;</small>
+                                                         <small>Nguyen Van A</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Phone:&nbsp;</small>
+                                                         <small>12345675</small>
+                                                       </div>
+                                                       <div className="reason-booking-pet">
+                                                         <small className='title-reason-booking-pet'>Email:&nbsp;</small>
+                                                         <small>abc@gmail.com</small>
+                                                       </div>
+                                                
+                                                     </div>
+
+                                                     <div className="mb-3">
+                                                       <hr className="new1" />
+                                                     </div>
+                                                   </div>
+                                                 </div>                                             
                                                 </div>
                                                 <div className="modal-footer">
                                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
