@@ -7,7 +7,89 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
-import { SlowMotionVideo } from '@mui/icons-material';
+
+const doctorsData = [
+    {
+        id: "DOC001",
+        name: "Dr. Nguyễn Văn A",
+        workingHours: [
+            {
+                date: "2024-06-01",
+                startTime: "09:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "12:00", endTime: "13:00" }
+                ]
+            },
+            {
+                date: "2024-07-01",
+                startTime: "07:00",
+                endTime: "11:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "07:00", endTime: "08:00" },
+                    { startTime: "09:00", endTime: "10:00" }
+                ]
+            }
+        ]
+    },
+    {
+        id: "DOC002",
+        name: "Dr. Nguyễn Văn B",
+        workingHours: [
+            {
+                date: "2024-06-01",
+                startTime: "11:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "10:00", endTime: "11:00" }
+                ]
+            },
+            {
+                date: "2024-07-01",
+                startTime: "09:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "13:00", endTime: "14:00" },
+                    { startTime: "9:00", endTime: "10:00" }
+                ]
+            }
+        ]
+    },
+    {
+        id: "DOC003",
+        name: "Dr. Nguyễn Văn C",
+        workingHours: [
+            {
+                date: "2024-06-01",
+                startTime: "07:00",
+                endTime: "13:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "11:00", endTime: "12:00" }
+                ]
+            },
+            {
+                date: "2024-07-01",
+                startTime: "08:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "08:00", endTime: "09:00" },
+                    { startTime: "09:00", endTime: "10:00" }
+                ]
+            }
+        ]
+    }
+    // Thêm các bác sĩ khác nếu cần
+];
+
 
 function ManageListBooking() {
 
@@ -18,28 +100,16 @@ function ManageListBooking() {
     const [petInfo, setPetInfo] = useState({});
     const [ownerInfo, setOwnerInfo] = useState({});
     const [services, setServices] = useState([{ service: "" }]);
-    const [availableVets, setAvailableVets] = useState([
-        { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: [{ startTime: "2024-06-01T08:00", endTime: "2024-06-01T09:00" }, { startTime: "2024-07-01T10:00", endTime: "2024-07-01T11:00" }] },
-        { id: 2, name: "Dr. Nguyễn Văn A", availableSlots: [{ startTime: "2024-06-01T11:00", endTime: "2024-06-01T13:00" }, { startTime: "2024-07-01T10:00", endTime: "2024-07-01T11:00" }] },
-        { id: 3, name: "Dr. Nguyễn Văn A", availableSlots: [{ startTime: "2024-06-01T08:30", endTime: "2024-06-01T09:30" }, { startTime: "2024-07-01T10:00", endTime: "2024-07-01T12:00" }] }
-    ]);
-
     const [selectedDate, setSelectedDate] = useState("");
-    const [selectedTime, setSelectedTime] = useState("");
-
-    const [bookings, setBookings] = useState([]);
-
-    useEffect(() => {
-        // Fake data for bookings
-        const fakeBookings = [
-            { bookingID: "SE123456", bookingDate: "2024-06-01T08:00", name: "John Doe", petType: "Dog", service: "Blooming", doctor: "Chen", checkIn: false },
-            { bookingID: "SE123457", bookingDate: "2024-06-01T09:00", name: "Jane Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
-            { bookingID: "SE123458", bookingDate: "2024-06-01T09:00", name: "B Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
-            { bookingID: "SE123459", bookingDate: "2024-06-01T13:00", name: "B Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
-            { bookingID: "SE123460", bookingDate: "2024-06-01T09:00", name: "C Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false }
-        ];
-        setBookings(fakeBookings);
-    }, []);
+    const [selectedStartTime, setSelectedStartTime] = useState("");
+    const [selectedEndTime, setSelectedEndTime] = useState("");
+    const allBookings = [
+        { bookingID: "SE123456", day: "2024-06-01", startTime: "8:00", endTime: "9:00", name: "John Doe", petType: "Dog", service: "Blooming", doctor: "Chen", checkIn: false },
+        { bookingID: "SE123457", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "JaAAA", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
+        { bookingID: "SE123458", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "B AASSe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
+        { bookingID: "SE123459", day: "2024-06-01", startTime: "13:00", endTime: "14:00", name: "B Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
+        { bookingID: "SE123460", day: "2024-06-01", startTime: "15:00", endTime: "16:00", name: "C Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false }
+    ];
 
     const availableServices = [
         { id: 1, name: "X-quang" },
@@ -100,17 +170,17 @@ function ManageListBooking() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const formData = {
-            petInfo,
-            ownerInfo,
-            services,
-            reasonForAdmission: document.getElementById("reasonForAdmission").value,
-            currentCondition: document.getElementById("currentCondition").value,
-            cageNumber: document.getElementById("cageNumber").value,
-            admissionTime: document.getElementById("admissionTime").value,
-            veterinarian: document.getElementById("veterinarian").value,
-        };
-        console.log(formData);
+        // const formData = {
+        //     petInfo,
+        //     ownerInfo,
+        //     services,
+        //     reasonForAdmission: document.getElementById("reasonForAdmission").value,
+        //     currentCondition: document.getElementById("currentCondition").value,
+        //     cageNumber: document.getElementById("cageNumber").value,
+        //     admissionTime: document.getElementById("admissionTime").value,
+        //     veterinarian: document.getElementById("veterinarian").value,
+        // };
+        // console.log(formData)
         // Perform form submission logic here
     };
 
@@ -122,36 +192,54 @@ function ManageListBooking() {
         setPetInfo({});
         setOwnerInfo({});
         setServices([{ service: "" }]);
-        setAvailableVets([
-            { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: ["2024-06-01T08:00", "2024-06-01T09:00", "2024-06-01T10:00"] },
-            { id: 2, name: "Dr. Trần Thị B", availableSlots: ["2024-06-01T11:00", "2024-06-01T13:00", "2024-06-01T15:00"] },
-            { id: 3, name: "Dr. Lê Văn C", availableSlots: ["2024-06-01T08:30", "2024-06-01T09:30", "2024-06-01T10:30"] }
-        ]);
         setSelectedDate("");
-        setSelectedTime("");
+        setSelectedEndTime("");
+        setSelectedStartTime("");
         document.getElementById("addPetForm").reset();
     };
 
+    const findAvailableDoctor = (date, startTime, endTime) => {
+        const availableDoctors = [];
+        for (const doctor of doctorsData) {
+            const workingHour = doctor.workingHours.find(wh => wh.date === date && !wh.isOff);
+            if (workingHour) {
+                const withinWorkingHours = (
+                    startTime >= workingHour.startTime && endTime <= workingHour.endTime
+                );
+                if (withinWorkingHours) {
+                    const hasNoOverlap = workingHour.bookings.every(booking => {
+                        const overlap = (endTime <= booking.startTime || startTime >= booking.endTime);
+                        console.log(`Checking overlap for Doctor: ${doctor.name}`);
+                        console.log(`New Booking: ${startTime} - ${endTime}`);
+                        console.log(`Existing Booking: ${booking.startTime} - ${booking.endTime}`);
+                        console.log(`Has Overlap: ${overlap}`);
+                        return overlap;
+                    });
+                    console.log(hasNoOverlap);
+                    if (hasNoOverlap) {
+                        availableDoctors.push(doctor);
+                    }
+                }
+            }
+        }
+        return availableDoctors;
+    };
+
     const handleChooseDoctor = (booking) => {
-        const time = booking.startTime.split('T')[1];
-        const availableVetsForBooking = availableVets.filter(vet => {
-            // Check if the selected time is within the available slots
 
+        //console.log(booking)
+        //console.log(findAvailableDoctor(booking.day, booking.startTime, booking.endTime))
+        // if (booking) {
+        //     if (findAvailableDoctor(booking.day, booking.startTime, booking.endTime)) {
 
-            const startTime = vet.availableSlots.some(slot => {
-                console.log(slot)
-                return slot.startTime.split['T'][1] <= time <= slot.endTime.split['T'][1] 
-            });
-            console.log(startTime);
-            const [endTime] = vet.availableSlots.endTime.split('T');
-
-            // Check if the selected time is not within the booked slots
-            const isNotBooked = !vet.bookings.some(booking => booking === selectedTime);
-            console.log(startTime);
-            //return isWithinWorkingHours && isNotBooked;
-        }); return availableVetsForBooking.map(vet => (
-            <option key={vet.id} value={vet.name}>{vet.name}</option>
-        ));
+        console.log(findAvailableDoctor(booking.day, booking.startTime, booking.endTime));
+        // //         console.log('rrrrrr')
+        // findAvailableDoctor(booking.day, booking.startTime, booking.endTime)
+        // console.log(
+        //     findAvailableDoctor(booking.day, booking.startTime, booking.endTime));
+        //     }
+        // }
+        //<option key={doctor.id} value={doctor.name}>{doctor.name}</option>
     };
 
     return (
@@ -271,18 +359,23 @@ function ManageListBooking() {
                                                     <div className="modal-body-section">
                                                         <label>Choose Date And Time:</label>
                                                         <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
-                                                        <input type="time" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} />
+                                                        <input type="time" value={selectedStartTime} onChange={(e) => setSelectedStartTime(e.target.value)} />
+                                                        <input type="time" value={selectedEndTime} onChange={(e) => setSelectedEndTime(e.target.value)} />
                                                     </div>
 
                                                     <div className="modal-body-section">
                                                         <label>Veterinarian:</label>
                                                         <select id="veterinarian">
                                                             <option>Choose</option>
-                                                            {availableVets
-                                                                .filter((vet) => vet.availableSlots.includes(`${selectedDate}T${selectedTime}`))
-                                                                .map((vet) => (
-                                                                    <option key={vet.id} value={vet.name}>{vet.name}</option>
-                                                                ))}
+                                                            {doctorsData
+                                                                .forEach((vet) => vet.workingHours.filter((workingHour) => {
+                                                                    return selectedDate === workingHour.date
+                                                                        && (workingHour.startTime <= selectedStartTime && selectedEndTime <= workingHour.endTime)
+                                                                }))
+                                                                // .map((vet) => (
+                                                                //     <option key={vet.id} value={vet.name}>{vet.name}</option>
+                                                                // ))
+                                                            }
                                                         </select>
                                                     </div>
                                                 </div>
@@ -299,7 +392,9 @@ function ManageListBooking() {
                         <div className="main-content-list">
                             <div className="main-content-list-title">
                                 <div className="main-content-list-title-text">BookingID</div>
-                                <div className="main-content-list-title-text">Booking date</div>
+                                <div className="main-content-list-title-text">Day</div>
+                                <div className="main-content-list-title-text">Start Time</div>
+                                <div className="main-content-list-title-text">End Time</div>
                                 <div className="main-content-list-title-text">Name</div>
                                 <div className="main-content-list-title-text">Pet Type</div>
                                 <div className="main-content-list-title-text">Service</div>
@@ -309,10 +404,12 @@ function ManageListBooking() {
                                 <div className="main-content-list-title-text">View</div>
                             </div>
                             <div className="main-content-list-body-wrapper">
-                                {bookings.map(booking => (
+                                {allBookings.map(booking => (
                                     <div className="content-list-body-info" key={booking.bookingID}>
                                         <div className="content-list-body-value">{booking.bookingID}</div>
-                                        <div className="content-list-body-value">{booking.bookingDate}</div>
+                                        <div className="content-list-body-value">{booking.day}</div>
+                                        <div className="content-list-body-value">{booking.startTime}</div>
+                                        <div className="content-list-body-value">{booking.endTime}</div>
                                         <div className="content-list-body-value">{booking.name}</div>
                                         <div className="content-list-body-value">{booking.petType}</div>
                                         <div className="content-list-body-value">{booking.service}</div>
@@ -321,9 +418,32 @@ function ManageListBooking() {
                                                 booking.doctor
                                             ) : (
                                                 <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#chooseDoctorModal-${booking.bookingID}`}>
-                                                    Choose Doctor
+                                                    Choose
                                                 </button>
                                             )}
+                                        </div>
+
+                                        {/* Modal to choose doctor */}
+                                        <div className="modal fade" id={`chooseDoctorModal-${booking.bookingID}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Choose Doctor</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <select className="form-control">
+                                                            {findAvailableDoctor(booking.day, booking.startTime, booking.endTime).map((doctor) => {
+                                                                return <option key={doctor.id} value={doctor.name}>{doctor.name}</option>
+                                                            })}
+                                                        </select>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" className="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className="content-list-body-value">
                                             <input
@@ -344,27 +464,6 @@ function ManageListBooking() {
                                             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#moreinfo-${booking.bookingID}`}>
                                                 More info
                                             </button>
-                                        </div>
-
-                                        {/* Modal to choose doctor */}
-                                        <div className="modal fade" id={`chooseDoctorModal-${booking.bookingID}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div className="modal-dialog">
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Choose Doctor</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <select className="form-control">
-                                                            {handleChooseDoctor(booking.bookingDate)}
-                                                        </select>
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" className="btn btn-primary">Save</button>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         {/* Modal for more info */}
