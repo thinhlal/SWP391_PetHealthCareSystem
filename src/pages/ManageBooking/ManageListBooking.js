@@ -19,7 +19,7 @@ function ManageListBooking() {
     const [ownerSearchResults, setOwnerSearchResults] = useState([]);
     const [petInfo, setPetInfo] = useState({});
     const [ownerInfo, setOwnerInfo] = useState({});
-    const [services, setServices] = useState([{ service: ""}]);
+    const [services, setServices] = useState([{ service: "" }]);
     const [availableVets, setAvailableVets] = useState([
         { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: ["2024-06-01T08:00", "2024-06-01T09:00", "2024-06-01T10:00"] },
         { id: 2, name: "Dr. Trần Thị B", availableSlots: ["2024-06-01T11:00", "2024-06-01T13:00", "2024-06-01T15:00"] },
@@ -83,7 +83,7 @@ function ManageListBooking() {
     };
 
     const addService = () => {
-        setServices([...services, { service: ""}]);
+        setServices([...services, { service: "" }]);
     };
 
     const handleSubmit = (event) => {
@@ -109,7 +109,7 @@ function ManageListBooking() {
         setOwnerSearchResults([]);
         setPetInfo({});
         setOwnerInfo({});
-        setServices([{ service: ""}]);
+        setServices([{ service: "" }]);
         setAvailableVets([
             { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: ["2024-06-01T08:00", "2024-06-01T09:00", "2024-06-01T10:00"] },
             { id: 2, name: "Dr. Trần Thị B", availableSlots: ["2024-06-01T11:00", "2024-06-01T13:00", "2024-06-01T15:00"] },
@@ -147,7 +147,7 @@ function ManageListBooking() {
                                 </button>
                                 <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div className="modal-dialog">
-                                        <form  id="addPetForm" onSubmit={handleSubmit}>
+                                        <form id="addPetForm" onSubmit={handleSubmit}>
                                             <div className="modal-content">
                                                 <div className="modal-header">
                                                     <h1 className="modal-title fs-5" id="exampleModalLabel">Add Booking</h1>
@@ -211,8 +211,8 @@ function ManageListBooking() {
                                                         <div id="newOwnerSection" className="modal-body-section">
                                                             <label>Owner Name:</label>
                                                             <input type="text" value={ownerInfo.name || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, name: e.target.value })} />
-                                                            <label>Address:</label>
-                                                            <input type="text" value={ownerInfo.address || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, address: e.target.value })} />
+                                                            <label>Email:</label>
+                                                            <input type="email" value={ownerInfo.email || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, email: e.target.value })} />
                                                             <label>Phone Number:</label>
                                                             <input type="text" value={ownerInfo.phone || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, phone: e.target.value })} />
                                                         </div>
@@ -242,6 +242,7 @@ function ManageListBooking() {
                                                     <div className="modal-body-section">
                                                         <label>Veterinarian:</label>
                                                         <select id="veterinarian">
+                                                            <option>Choose</option>
                                                             {availableVets
                                                                 .filter((vet) => vet.availableSlots.includes(`${selectedDate}T${selectedTime}`))
                                                                 .map((vet) => (
