@@ -1,5 +1,3 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700,600|Inter:500,var(--presets-body2-font-weight),var(--body-text-font-weight)");
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -13,22 +11,22 @@ a {
   text-decoration: none;
 }
 
-.slide {
+.your-pet .slide {
   width: 100%;
 }
 
-.main-tittle {
+.your-pet .main-tittle {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 4% 0px;
 }
 
-.overlap-group {
+.your-pet .overlap-group {
   background-color: #ffffff;
 }
 
-.text-tittle {
+.your-pet .text-tittle {
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #425bb3;
@@ -38,25 +36,26 @@ a {
   line-height: 60%;
 }
 
-.overlap {
+.your-pet .overlap {
   display: flex;
   margin: 0;
   padding: 0;
 }
 
-.your-Pet-Header {
+.your-pet .your-Pet-Header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #f5f3f3;
   border-left: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
 }
 
-.search-pet {
+.your-pet .search-pet {
   padding-left: 20px;
 }
 
-.search-pet-txt {
+.your-pet .search-pet-txt {
   font-size: 18px;
   margin: 10px 0;
   letter-spacing: 0;
@@ -65,14 +64,14 @@ a {
   white-space: nowrap;
 }
 
-.search-pet-input {
+.your-pet .search-pet-input {
   position: relative;
   display: flex;
   margin-bottom: 10px;
   align-items: center;
   justify-content: center;
 }
-.search-pet-input-icons {
+.your-pet .search-pet-input-icons {
   background-color: #ffffff;
   line-height: 33px;
   text-align: center;
@@ -82,11 +81,11 @@ a {
   border-bottom-right-radius: 10px;
 }
 
-.search-pet-input-icons:hover {
+.your-pet .search-pet-input-icons:hover {
   cursor: pointer;
 }
 
-.search-pet-input input[type="text"] {
+.your-pet .search-pet-input input[type="text"] {
   height: 35px;
   width: 300px;
   outline: none;
@@ -100,41 +99,7 @@ a {
   border-bottom-left-radius: 10px;
 }
 
-.menu-icons {
-  width: 20px;
-  height: 20px;
-}
-
-.your-pet-sidebar {
-  background-color: #fafafa;
-  width: 20%;
-}
-
-.category-Header_wrapper {
-  height: 84px;
-  border-bottom: 1px solid #e2e2e2;
-}
-
-.category-Header {
-  font-family: Roboto, sans-serif;
-  font-weight: 600;
-  font-size: 30px;
-  background-color: #f5f3f3;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.category-Header-Txt {
-  margin-left: 10px;
-}
-
-.list-items-category {
-  margin-top: 20px;
-}
-
-.add-pet-button {
+.your-pet .add-pet-button {
   display: flex;
   width: 100px;
   height: 44px;
@@ -146,15 +111,15 @@ a {
   background-color: #e18213;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.your-pet .3s ease;
   font-family: Roboto, sans-serif;
 }
 
-.add-pet-button:hover {
+.your-pet .add-pet-button:hover {
   background-color: #002169;
 }
 
-.button-edit {
+.your-pet .button-edit {
   width: fit-content;
   font-family: Roboto, sans-serif;
   font-weight: 500;
@@ -165,45 +130,18 @@ a {
   white-space: nowrap;
 }
 
-.main-content {
+.your-pet .main-content {
   width: 100%;
 }
 
-.list-category {
-}
-
-.menu-item_txt {
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  color: #000000;
-  font-size: 18px;
-  letter-spacing: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-
-.menu-item {
-  display: flex;
-  height: 44px;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
-  padding: 10px 40px;
-  margin: 10px 0;
-  width: 100%;
-}
-
-.detail-information {
+.your-pet .detail-information {
   display: flex;
   justify-content: center;
   gap: 150px;
   margin: 60px 0px;
 }
 
-.info-pet {
+.your-pet .info-pet {
   justify-content: space-evenly;
   align-items: center;
   height: 250px;
@@ -211,26 +149,26 @@ a {
 
 }
 
-.your-pet-img {
+.your-pet .your-pet-img {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.your-pet-img img {
+.your-pet .your-pet-img img {
   height: 200px;
   border-radius: 50%;
 }
 
-.btn-wrapper {
+.your-pet .btn-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: Roboto, sans-serif;
 }
 
-.view-pet-btn {
+.your-pet .view-pet-btn {
   margin: 10px;
   border: none;
   color: #fff;
@@ -240,22 +178,22 @@ a {
   background-color: #e18213;
 }
 
-.view-pet-btn:hover {
+.your-pet .view-pet-btn:hover {
   background-color: #002169;
   cursor: pointer;
 }
 
-.your-pet-content-info-wrapper {
+.your-pet .your-pet-content-info-wrapper {
   width: 600px;
   display: flex;
   align-items: center;
 }
 
-.your-pet-content-info {
+.your-pet .your-pet-content-info {
   margin: 0 50px;
 }
 
-.your-pet-content-info-text {
+.your-pet .your-pet-content-info-text {
   margin: 20px 0;
   font-family: Roboto, sans-serif;
   font-weight: 500;
@@ -265,33 +203,33 @@ a {
   line-height: 24px;
   white-space: nowrap;
 }
-.your-pet-content-info-text span {
+.your-pet .your-pet-content-info-text span {
   font-weight: 700;
 }
 
 /* pop up css */
-.modal-lg .modal-content {
+.your-pet .modal-lg .modal-content {
   padding: 20px;
 }
 
-.box {
+.your-pet .box {
   width: 100%;
   height: auto;
 }
 
-.box .pop-up-form {
+.your-pet .box  .pop-up-form {
   width: 100%;
   height: auto;
 }
 
-.box .overlap-group {
+.your-pet .box  .overlap-group {
   width: 100%;
   height: auto;
   background-color: #ffffff;
   padding: 20px;
 }
 
-.box .form {
+.your-pet .box  .form {
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -299,12 +237,12 @@ a {
   flex-direction: column;
 }
 
-.box .pet-update-text {
+.your-pet .box  .pet-update-text {
   margin: 8px 0;
   width: 100%;
 }
 
-.box .pet-update-text-label {
+.your-pet .box .pet-update-text-label {
   align-self: stretch;
   font-family: Roboto, sans-serif;
   font-weight: 500;
@@ -314,7 +252,7 @@ a {
   line-height: 18px;
 }
 
-.box .pet-update-text-input {
+.your-pet .box .pet-update-text-input {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -323,7 +261,7 @@ a {
   flex: 0 0 auto;
 }
 
-.box .pet-update-text-input .type-here {
+.your-pet .box .pet-update-text-input .type-here {
   width: 100%;
   font-family: Roboto, sans-serif;
   font-weight: 400;
@@ -337,20 +275,20 @@ a {
   outline: none;
 }
 
-.box .pet-update-type {
+.your-pet .box .pet-update-type {
   width: 100%;
   margin: 10px 0;
 }
 
-.pet-update-type-header {
+.your-pet .pet-update-type-header {
 }
 
-.box .pet-update-type-radio {
+.your-pet .box .pet-update-type-radio {
   margin: 3px 0;
   display: flex;
 }
 
-.box .radio {
+.your-pet .box .radio {
   width: 24px;
   height: 24px;
   display: flex;
@@ -358,7 +296,7 @@ a {
   justify-content: center;
 }
 
-.box .radio-2 {
+.your-pet .box .radio-2 {
   width: 100%;
   height: 100%;
   background-color: #ffffff;
@@ -369,7 +307,7 @@ a {
   justify-content: center;
 }
 
-.box .radio-2 input[type="radio"] {
+.your-pet .box .radio-2 input[type="radio"] {
   opacity: 0;
   position: absolute;
   width: 100%;
@@ -378,7 +316,7 @@ a {
   cursor: pointer;
 }
 
-.box .radio-selection {
+.your-pet .box .radio-selection {
   flex: 1;
   font-family: Roboto, sans-serif;
   font-weight: 400;
@@ -388,7 +326,7 @@ a {
   line-height: 24px;
 }
 
-.box .pet-image-upload {
+.your-pet .box .pet-image-upload {
   width: 200px;
   height: 200px;
   background-color: #d9d9d9;
@@ -400,7 +338,7 @@ a {
   margin: 20px auto;
 }
 
-.box .pet-image-upload-choose-file {
+.your-pet .box .pet-image-upload-choose-file {
   margin: 10px 0;
   display: flex;
   width: 100%;
@@ -408,18 +346,18 @@ a {
   justify-content: center;
 }
 
-.pet-image-upload-choose-file-input {
+.your-pet .pet-image-upload-choose-file-input {
   width: 200px;
 }
 
-.box .cloud-upload {
+.your-pet .box .cloud-upload {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.box .button-edit-txt {
+.your-pet .box .button-edit-txt {
   width: 100%;
   font-family: Roboto, sans-serif;
   font-weight: 500;
@@ -431,20 +369,20 @@ a {
   white-space: nowrap;
 }
 
-.modal-header {
+.your-pet .modal-header {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.modal-title {
+.your-pet .modal-title {
   font-family: Roboto, sans-serif;
   font-weight: 500;
   text-align: center;
   flex: 1;
 }
 
-.add-pet_pagination {
+.your-pet .add-pet_pagination {
   border-top: 1px solid #e2e2e2;
   padding: 50px 0;
   display: flex;
@@ -455,7 +393,7 @@ a {
 }
 
 
-.profile-card-pet {
+.your-pet .profile-card-pet {
   width: 200px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -466,33 +404,33 @@ a {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.profile-card-pet:hover {
+.your-pet .profile-card-pet:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.profile-pet-image img {
+.your-pet .profile-pet-image img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
 
-.profile-info-pet {
+.your-pet .profile-info-pet {
   margin-top: 10px;
 }
 
-.profile-info-pet h2 {
+.your-pet .profile-info-pet h2 {
   margin: 10px 0;
   font-size: 24px;
   color: #333;
   transition: color 0.3s ease;
 }
 
-.profile-info-pet h2:hover {
+.your-pet .profile-info-pet h2:hover {
   color: #8b36d1;
 }
 
-.status-pet {
+.your-pet .status-pet {
   display: inline-block;
   padding: 5px 10px;
   background-color: #e0f7fa;

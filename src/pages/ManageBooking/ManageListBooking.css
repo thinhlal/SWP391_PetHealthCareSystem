@@ -179,7 +179,7 @@
   height: 20px;
 }
 
-.pagination_wrapper {
+.manage-booking-list .pagination_wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,11 +187,11 @@
   font-size: 16px;
 }
 
-.pagination_wrapper nav {
+.manage-booking-list .pagination_wrapper nav {
   margin-top: 70px;
 }
 
-.modal-body-booking-pet {
+.manage-booking-list .modal-body-booking-pet {
   background-color: #fff;
   border-color: #fff;
   font-family: Roboto, sans-serif;
@@ -200,50 +200,100 @@
   align-items: center;
 }
 
-.content-modal-booking-pet {
+.manage-booking-list .content-modal-booking-pet {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.grid-container {
+.manage-booking-list .grid-container {
   display: grid;
   grid-template-rows: auto auto;
   gap: 15px;
 }
 
-.font-weight-bold {
+.manage-booking-list .font-weight-bold {
   font-weight: 600;
   font-size: 20px;
 }
 
-.title-reason-booking-pet {
+.manage-booking-list .title-reason-booking-pet {
   color: #004cb9;
   font-weight: 600;
 }
 
-.mb-3 {
+.manage-booking-list .mb-3 {
   grid-row: span 2;
 }
 
-.close {
+.manage-booking-list .close {
   color: #000;
   cursor: pointer;
 }
 
-.close:hover {
+.manage-booking-list .close:hover {
   color: #000;
 }
 
-.theme-color {
+.manage-booking-list .theme-color {
   color: #004cb9;
 }
 
-hr.new1 {
+hr.manage-booking-list .new1 {
   border-top: dashed #fff;
-  margin: 0.4rem 0;
+  margin: 0.manage-booking-list .4rem 0;
 }
 
-.form-control {
+.manage-booking-list .form-control {
   margin-top: 10px;
+}
+
+.manage-booking-list .modal-body-section-wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.manage-booking-list .modal-body-section{
+  margin: 10px 0;
+}
+
+.manage-booking-list .modal-body-section-type-user,
+.manage-booking-list .modal-body-section-doctor-date,
+.manage-booking-list .modal-body-section-type-pet{
+  margin: 10px 0;
+}
+
+.manage-booking-list .modal-body-section label{
+  width: 70px;
+}
+
+.manage-booking-list .modal-body-section-wrapper label{
+  margin-right: 10px;
+}
+
+.manage-booking-list .modal-body-section-wrapper span{
+  margin:0 20px 0 5px;
+}
+
+.manage-booking-list .choose-Doctor-wrapper{
+  display: flex;
+  align-items: center;
+  height: 25px;
+  margin: 10px 0;
+}
+
+.manage-booking-list .choose-Doctor-wrapper input{
+  margin: 0 10px;
+}
+
+.manage-booking-list .choose-Doctor-wrapper label{
+  line-height: 25px;
+}
+
+.manage-booking-list .choose-Doctor-Not-Found{
+  color: red;
+  text-align: center;
+  line-height: 70px;
 }

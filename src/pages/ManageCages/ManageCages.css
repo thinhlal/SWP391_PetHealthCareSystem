@@ -223,7 +223,7 @@
   height: 20px;
 }
 
-.pagination_wrapper {
+.manage-cages .pagination_wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,13 +231,13 @@
   font-size: 16px;
   margin-bottom: 50px;
 }
-.pagination_wrapper nav {
+.manage-cages .pagination_wrapper nav {
   margin-top: 50px;
 }
 
 /* css modal update status */
 
-.modal-body-update-status {
+.manage-cages .modal-body-update-status {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -245,12 +245,12 @@
   margin: 20px;
 }
 
-.modal-body-update-status-title {
+.manage-cages .modal-body-update-status-title {
   font-size: 18px;
   font-weight: 600;
 }
 
-.modal-body-update-status-empty {
+.manage-cages .modal-body-update-status-empty {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,7 +258,7 @@
   font-size: 16px;
 }
 
-.modal-body-update-status-using {
+.manage-cages .modal-body-update-status-using {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,47 +266,47 @@
   font-size: 16px;
 }
 
-.modal-body-update-text {
+.manage-cages .modal-body-update-text {
   font-family: Roboto, sans-serif;
   margin: 20px;
 }
 
-.modal-body-update-text-title {
+.manage-cages .modal-body-update-text-title {
   font-size: 18px;
   font-weight: 600;
   margin: 10px 0;
 }
 
-.modal-body-update-text-info {
+.manage-cages .modal-body-update-text-info {
   width: 100%;
 }
 
-.modal-body-section {
+.manage-cages .modal-body-section {
   margin: 20px;
 }
 
-.modal-body-section label {
+.manage-cages .modal-body-section label {
   display: block;
   margin: 10px 0;
 }
 
-.modal-body-section span {
+.manage-cages .modal-body-section span {
   margin-right: 25px;
   margin-left: 5px;
 }
 
 
-.hidden {
+.manage-cages .hidden {
   display: none;
 }
 
-.service {
+.manage-cages .service {
   margin-bottom: 10px;
 }
 
 
 
-.container-modal-body-more-info {
+.manage-cages .container-modal-body-more-info {
   width: 100%;
   margin: 50px auto;
   background-color: #fff;
@@ -317,45 +317,45 @@
 }
 
 
-.tab-modal-body-more-info {
+.manage-cages .tab-modal-body-more-info {
   overflow: hidden;
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
 }
 
-.tab-modal-body-more-info button {
+.manage-cages .tab-modal-body-more-info button {
   background-color: inherit;
   float: left;
   border: none;
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  transition: 0.3s;
+  transition: 0.manage-cages .3s;
   font-size: 17px;
 }
 
-.tab-modal-body-more-info button:hover {
+.manage-cages .tab-modal-body-more-info button:hover {
   background-color: #ddd;
 }
 
-.tab-modal-body-more-info button.active {
+.manage-cages .tab-modal-body-more-info button.manage-cages .active {
   background-color: #f1f1f1;
   border-bottom: 2px solid #004cb9;
 }
 
-.tabcontent-customer {
+.manage-cages .tabcontent-customer {
   display: flex;
   margin-left: 30px;
   gap: 23px;
 }
 
-.tabcontent-pet {
+.manage-cages .tabcontent-pet {
   display: flex;
   margin-left: 30px;
   gap: 23px;
 }
 
-.tabcontent-pet-more {
+.manage-cages .tabcontent-pet-more {
   display: flex;
   margin-left: 30px;
   gap: 23px;
@@ -363,7 +363,7 @@
 
 
 
-.change-btn {
+.manage-cages .change-btn {
   display: block;
   margin: 10px auto;
   background-color: #00b4d8;
@@ -374,17 +374,17 @@
   border-radius: 5px;
 }
 
-.sub-title-profile {
+.manage-cages .sub-title-profile {
   font-weight: 600;
   color: #004cb9;
 }
 
-.sub-title-profile-pet {
+.manage-cages .sub-title-profile-pet {
   font-weight: 600;
   color: #e18213;
 }
 
-.profile-form{
+.manage-cages .profile-form{
   font-family: "Montserrat", sans-serif;
   line-height: 30px;
   font-size: 18px;
@@ -392,7 +392,7 @@
 }
 
 
-.pet-profile-form{
+.manage-cages .pet-profile-form{
   font-family: "Montserrat", sans-serif;
   line-height: 30px;
   font-size: 18px;
@@ -400,13 +400,13 @@
 }
 
 
-.change-btn {
+.manage-cages .change-btn {
   position: absolute; 
   bottom: 10px; 
   left: 50%; 
   transform: translateX(-50%); 
   padding: 5px 10px; 
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.manage-cages .5); 
   color: #fff; 
   border: none; 
   border-radius: 5px; 
@@ -415,7 +415,7 @@
 }
 
 
-.edit-customer {
+.manage-cages .edit-customer {
   border-width: 1px; 
   border-style: solid; 
   outline: none; 
@@ -424,7 +424,7 @@
   color: #626262;
 }
 
-.edit-pet {
+.manage-cages .edit-pet {
   border-width: 1px; 
   border-style: solid; 
   outline: none; 
@@ -433,12 +433,12 @@
   color: #626262;
 }
 
-.form-group{
+.manage-cages .form-group{
   justify-content: center;
   margin-bottom: 30px;
 }
 
-.save-btn {
+.manage-cages .save-btn {
   background-color: #00b4d8;
   color: white;
   border: none;

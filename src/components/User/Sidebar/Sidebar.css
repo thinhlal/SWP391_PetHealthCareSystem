@@ -1,0 +1,59 @@
+.your-pet-sidebar {
+  background-color: #fafafa;
+  width: 20%;
+}
+
+.your-pet-sidebar .category-Header_wrapper {
+  height: 84px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.your-pet-sidebar .category-Header {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  background-color: #f5f3f3;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.your-pet-sidebar .category-Header-Txt {
+  margin-left: 10px;
+}
+
+.your-pet-sidebar .list-items-category {
+  margin-top: 20px;
+}
+
+.your-pet-sidebar .list-category {
+}
+
+.your-pet-sidebar .menu-item {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 10px 40px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.your-pet-sidebar .menu-item_txt {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 18px;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.your-pet-sidebar .menu-icons {
+  width: 20px;
+  height: 20px;
+}
