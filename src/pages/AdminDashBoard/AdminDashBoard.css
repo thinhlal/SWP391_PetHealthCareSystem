@@ -335,6 +335,10 @@
   margin: 0;
 }
 
+.Admin-DashBoard-Table-Detail {
+  width: 105%;
+}
+
 .Admin-DashBoard-Main-Table-Content-Btn_Wrapper {
   border-left: 1px solid #eae8f1;
   text-align: center;
