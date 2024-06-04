@@ -47,6 +47,7 @@ function AdminDashBoard() {
                             <div className="Admin-DashBoard-Navigate-Text-Rest">
                                 <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Account</div>
                                 <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Booking</div>
+                                <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Services</div>
                                 <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Settings</div>
                             </div>
                         </div>

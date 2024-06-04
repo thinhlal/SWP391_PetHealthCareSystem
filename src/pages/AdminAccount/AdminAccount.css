@@ -255,6 +255,22 @@
     font-family: Roboto, sans-serif;
 }
 
+.Admin-Account-add-pet-btn {
+    width: 104px;
+    background-color: #e18213;
+    height: 45px;
+    outline: none;
+    border: none;
+    color: #fff;
+    width: 100px;
+    border-radius: 10px;
+  }
+  
+.Admin-Account-add-pet-btn:hover {
+    background-color: #002169;
+    cursor: pointer;
+  }
+
 .Admin-Account-Main-Table-Wrapper {
     margin: 50px 3%;
     padding: 0;
@@ -370,6 +386,10 @@
     padding-right: 5px;
 }
 
+.Admin-Account-modal-add-account {
+    padding: 15px;
+}
+
 .Admin-Account-modal-update {
     display: flex;
     padding-left: 5px;
@@ -394,7 +414,7 @@
 
 .Admin-Account-input-phone {
     margin-top: 5px;
-    width: 114px;
+    width: 109px;
     height: 30px;
     line-height: 24px;
     font-size: 16px;

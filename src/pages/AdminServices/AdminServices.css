@@ -253,6 +253,7 @@
     border-bottom-right-radius: 10px;
 }
 .Admin-Services-add-pet-btn {
+    font-family: Roboto, sans-serif;
     background-color: #e18213;
     height: 45px;
     outline: none;
