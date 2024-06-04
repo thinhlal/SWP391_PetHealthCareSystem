@@ -382,12 +382,19 @@
 }
 
 .Admin-Account-modal-initials {
+    color: #696cff;
     font-weight: 600;
     padding-right: 5px;
 }
 
 .Admin-Account-modal-add-account {
     padding: 15px;
+}
+
+.Admin-Account-modal-add {
+    color: #696cff;
+    font-weight: 600;
+
 }
 
 .Admin-Account-modal-update {
