@@ -9,6 +9,7 @@
   background-color: #fff;
   height: 63px;
 }
+
 .admin-DashBoard-Header-Logo {
   padding: 0;
   margin: 0;
@@ -287,6 +288,7 @@
   text-align: center;
   border-bottom: 1px solid #eae8f1;
 }
+
 .Admin-DashBoard-Main-Table-Header-Title {
   width: 100%;
   background-color: #F1F5F9;
@@ -337,7 +339,7 @@
   border-left: 1px solid #eae8f1;
   text-align: center;
   width: 100%;
-  padding: 0 0 0 10px;
+  padding: 0px 32px 0px 31px;
   margin: 0;
 }
 
@@ -347,24 +349,12 @@
 
 .Admin-DashBoard-Main-Table-Content-Btn {
   border: none;
-  width: 100px;
+  width: 123px;
   line-height: 30px;
   border-radius: 5px;
-}
-.Admin-DashBoard-Main-Table-Content-Btn:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
 }
 
-.Admin-DashBoard-Main-Table-Content-Btn-Remove {
-  border: none;
-  width: 100px;
-  line-height: 30px;
-  border-radius: 5px;
-  color: red;
-}
-.Admin-DashBoard-Main-Table-Content-Btn-Remove:hover {
+.Admin-DashBoard-Main-Table-Content-Btn:hover {
   color: rgb(70, 128, 255);
   cursor: pointer;
   background-color: #e3eafc;
@@ -375,4 +365,72 @@
   align-items: center;
   justify-content: center;
   padding: 20px 0 10px 0;
+}
+
+.Admin-DashBoard-sub-title-profile-customer {
+  padding-right: 5px;
+  text-align: left;
+  color: #696cff;
+  font-weight: 600;
+}
+
+.Admin-DashBoard-form-group {
+  display: flex;
+  justify-content: left;
+}
+
+.Admin-DashBoard-sub-title-profile-pet {
+  padding-right: 5px;
+  text-align: left;
+  color: #696cff;
+  font-weight: 600;
+
+}
+
+.Admin-DashBoard-tab-modal-body-more-info {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.Admin-DashBoard-tab-modal-body-more-info button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.Admin-DashBoard-tab-modal-body-more-info button:hover {
+  background-color: #ddd;
+}
+
+.Admin-DashBoard-tab-modal-body-more-info button.active {
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #004cb9;
+}
+
+.Admin-DashBoard-container-modal-body-more-info {
+  width: 100%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.Admin-DashBoard-tabcontent-customer {
+  display: flex;
+  margin-left: 30px;
+  gap: 23px;
+}
+
+.Admin-DashBoard-tabcontent-pet {
+  display: flex;
+  margin-left: 30px;
+  gap: 23px;
 }

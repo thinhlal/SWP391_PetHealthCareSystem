@@ -1,15 +1,95 @@
-//Css
 import './ManageListBooking.css';
-//Component
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
-//images
-import search_icon from '../../assets/images/img_ManageBookings/search.svg'
+import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
+
+const doctorsData = [
+    {
+        id: "DOC001",
+        name: "Dr. Nguyễn Văn A",
+        workingHours: [
+            {
+                date: "2024-06-01",
+                startTime: "09:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "12:00", endTime: "13:00" }
+                ]
+            },
+            {
+                date: "2024-07-01",
+                startTime: "07:00",
+                endTime: "11:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "07:00", endTime: "08:00" },
+                    { startTime: "09:00", endTime: "10:00" }
+                ]
+            }
+        ]
+    },
+    {
+        id: "DOC002",
+        name: "Dr. Nguyễn Văn B",
+        workingHours: [
+            {
+                date: "2024-06-01",
+                startTime: "11:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "10:00", endTime: "11:00" }
+                ]
+            },
+            {
+                date: "2024-07-01",
+                startTime: "09:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "13:00", endTime: "14:00" },
+                    { startTime: "9:00", endTime: "10:00" }
+                ]
+            }
+        ]
+    },
+    {
+        id: "DOC003",
+        name: "Dr. Nguyễn Văn C",
+        workingHours: [
+            {
+                date: "2024-06-01",
+                startTime: "07:00",
+                endTime: "13:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "11:00", endTime: "12:00" }
+                ]
+            },
+            {
+                date: "2024-07-01",
+                startTime: "08:00",
+                endTime: "15:00",
+                isOff: false,
+                bookings: [
+                    { startTime: "08:00", endTime: "09:00" },
+                    { startTime: "09:00", endTime: "10:00" }
+                ]
+            }
+        ]
+    }
+    // Thêm các bác sĩ khác nếu cần
+];
+
 
 function ManageListBooking() {
 
@@ -20,13 +100,16 @@ function ManageListBooking() {
     const [petInfo, setPetInfo] = useState({});
     const [ownerInfo, setOwnerInfo] = useState({});
     const [services, setServices] = useState([{ service: "" }]);
-    const [availableVets, setAvailableVets] = useState([
-        { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: ["2024-06-01T08:00", "2024-06-01T09:00", "2024-06-01T10:00"] },
-        { id: 2, name: "Dr. Trần Thị B", availableSlots: ["2024-06-01T11:00", "2024-06-01T13:00", "2024-06-01T15:00"] },
-        { id: 3, name: "Dr. Lê Văn C", availableSlots: ["2024-06-01T08:30", "2024-06-01T09:30", "2024-06-01T10:30"] }
-    ]);
     const [selectedDate, setSelectedDate] = useState("");
-    const [selectedTime, setSelectedTime] = useState("");
+    const [selectedStartTime, setSelectedStartTime] = useState("");
+    const [selectedEndTime, setSelectedEndTime] = useState("");
+    const allBookings = [
+        { bookingID: "SE123456", day: "2024-06-01", startTime: "8:00", endTime: "9:00", name: "John Doe", petType: "Dog", service: "Blooming", doctor: "Chen", checkIn: false },
+        { bookingID: "SE123457", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "JaAAA", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
+        { bookingID: "SE123458", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "B AASSe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
+        { bookingID: "SE123459", day: "2024-06-01", startTime: "13:00", endTime: "14:00", name: "B Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
+        { bookingID: "SE123460", day: "2024-06-01", startTime: "15:00", endTime: "16:00", name: "C Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false }
+    ];
 
     const availableServices = [
         { id: 1, name: "X-quang" },
@@ -36,7 +119,6 @@ function ManageListBooking() {
     ];
 
     const handlePetOptionChange = (event) => {
-        console.log(event.target.value);
         setPetOption(event.target.value);
     };
 
@@ -88,17 +170,17 @@ function ManageListBooking() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const formData = {
-            petInfo,
-            ownerInfo,
-            services,
-            reasonForAdmission: document.getElementById("reasonForAdmission").value,
-            currentCondition: document.getElementById("currentCondition").value,
-            cageNumber: document.getElementById("cageNumber").value,
-            admissionTime: document.getElementById("admissionTime").value,
-            veterinarian: document.getElementById("veterinarian").value,
-        };
-        console.log(formData);
+        // const formData = {
+        //     petInfo,
+        //     ownerInfo,
+        //     services,
+        //     reasonForAdmission: document.getElementById("reasonForAdmission").value,
+        //     currentCondition: document.getElementById("currentCondition").value,
+        //     cageNumber: document.getElementById("cageNumber").value,
+        //     admissionTime: document.getElementById("admissionTime").value,
+        //     veterinarian: document.getElementById("veterinarian").value,
+        // };
+        // console.log(formData)
         // Perform form submission logic here
     };
 
@@ -110,15 +192,56 @@ function ManageListBooking() {
         setPetInfo({});
         setOwnerInfo({});
         setServices([{ service: "" }]);
-        setAvailableVets([
-            { id: 1, name: "Dr. Nguyễn Văn A", availableSlots: ["2024-06-01T08:00", "2024-06-01T09:00", "2024-06-01T10:00"] },
-            { id: 2, name: "Dr. Trần Thị B", availableSlots: ["2024-06-01T11:00", "2024-06-01T13:00", "2024-06-01T15:00"] },
-            { id: 3, name: "Dr. Lê Văn C", availableSlots: ["2024-06-01T08:30", "2024-06-01T09:30", "2024-06-01T10:30"] }
-        ]);
         setSelectedDate("");
-        setSelectedTime("");
+        setSelectedEndTime("");
+        setSelectedStartTime("");
         document.getElementById("addPetForm").reset();
     };
+
+    const findAvailableDoctor = (date, startTime, endTime) => {
+        const availableDoctors = [];
+        for (const doctor of doctorsData) {
+            const workingHour = doctor.workingHours.find(wh => wh.date === date && !wh.isOff);
+            if (workingHour) {
+                const withinWorkingHours = (
+                    startTime >= workingHour.startTime && endTime <= workingHour.endTime
+                );
+                if (withinWorkingHours) {
+                    const hasNoOverlap = workingHour.bookings.every(booking => {
+                        const overlap = (endTime <= booking.startTime || startTime >= booking.endTime);
+                        console.log(`Checking overlap for Doctor: ${doctor.name}`);
+                        console.log(`New Booking: ${startTime} - ${endTime}`);
+                        console.log(`Existing Booking: ${booking.startTime} - ${booking.endTime}`);
+                        console.log(`Has Overlap: ${overlap}`);
+                        return overlap;
+                    });
+                    console.log(hasNoOverlap);
+                    if (hasNoOverlap) {
+                        availableDoctors.push(doctor);
+                    }
+                }
+            }
+        }
+        return availableDoctors;
+    };
+
+    const handleChooseDoctor = (booking) => {
+
+        //console.log(booking)
+        //console.log(findAvailableDoctor(booking.day, booking.startTime, booking.endTime))
+        // if (booking) {
+        //     if (findAvailableDoctor(booking.day, booking.startTime, booking.endTime)) {
+
+        console.log(findAvailableDoctor(booking.day, booking.startTime, booking.endTime));
+        // //         console.log('rrrrrr')
+        // findAvailableDoctor(booking.day, booking.startTime, booking.endTime)
+        // console.log(
+        //     findAvailableDoctor(booking.day, booking.startTime, booking.endTime));
+        //     }
+        // }
+        //<option key={doctor.id} value={doctor.name}>{doctor.name}</option>
+    };
+
     return (
         <div className="manage-booking-list container-fluid">
             <div className="row">
@@ -236,24 +359,29 @@ function ManageListBooking() {
                                                     <div className="modal-body-section">
                                                         <label>Choose Date And Time:</label>
                                                         <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
-                                                        <input type="time" value={selectedTime} onChange={(e) => setSelectedTime(e.target.value)} />
+                                                        <input type="time" value={selectedStartTime} onChange={(e) => setSelectedStartTime(e.target.value)} />
+                                                        <input type="time" value={selectedEndTime} onChange={(e) => setSelectedEndTime(e.target.value)} />
                                                     </div>
 
                                                     <div className="modal-body-section">
                                                         <label>Veterinarian:</label>
                                                         <select id="veterinarian">
                                                             <option>Choose</option>
-                                                            {availableVets
-                                                                .filter((vet) => vet.availableSlots.includes(`${selectedDate}T${selectedTime}`))
-                                                                .map((vet) => (
-                                                                    <option key={vet.id} value={vet.name}>{vet.name}</option>
-                                                                ))}
+                                                            {doctorsData
+                                                                .forEach((vet) => vet.workingHours.filter((workingHour) => {
+                                                                    return selectedDate === workingHour.date
+                                                                        && (workingHour.startTime <= selectedStartTime && selectedEndTime <= workingHour.endTime)
+                                                                }))
+                                                                // .map((vet) => (
+                                                                //     <option key={vet.id} value={vet.name}>{vet.name}</option>
+                                                                // ))
+                                                            }
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div className="modal-footer">
                                                     <button type="button" onClick={resetForm} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-success">Add</button>
+                                                    <button type="submit" className="btn btn-success">Add</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -264,7 +392,9 @@ function ManageListBooking() {
                         <div className="main-content-list">
                             <div className="main-content-list-title">
                                 <div className="main-content-list-title-text">BookingID</div>
-                                <div className="main-content-list-title-text">Booking date</div>
+                                <div className="main-content-list-title-text">Day</div>
+                                <div className="main-content-list-title-text">Start Time</div>
+                                <div className="main-content-list-title-text">End Time</div>
                                 <div className="main-content-list-title-text">Name</div>
                                 <div className="main-content-list-title-text">Pet Type</div>
                                 <div className="main-content-list-title-text">Service</div>
@@ -274,282 +404,87 @@ function ManageListBooking() {
                                 <div className="main-content-list-title-text">View</div>
                             </div>
                             <div className="main-content-list-body-wrapper">
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">ssss</div>
-                                    <div className="content-list-body-value">Dog</div>
-                                    <div className="content-list-body-value">Blooming</div>
+                                {allBookings.map(booking => (
+                                    <div className="content-list-body-info" key={booking.bookingID}>
+                                        <div className="content-list-body-value">{booking.bookingID}</div>
+                                        <div className="content-list-body-value">{booking.day}</div>
+                                        <div className="content-list-body-value">{booking.startTime}</div>
+                                        <div className="content-list-body-value">{booking.endTime}</div>
+                                        <div className="content-list-body-value">{booking.name}</div>
+                                        <div className="content-list-body-value">{booking.petType}</div>
+                                        <div className="content-list-body-value">{booking.service}</div>
+                                        <div className="content-list-body-value">
+                                            {booking.doctor ? (
+                                                booking.doctor
+                                            ) : (
+                                                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#chooseDoctorModal-${booking.bookingID}`}>
+                                                    Choose
+                                                </button>
+                                            )}
+                                        </div>
 
-                                    <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#choosedoctor">
-                                            Choose Doctor
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="choosedoctor" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Doctor List</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    <div className="add-booking">
-                                                        <small className='title-add-booking'>Doctor:&nbsp;</small>
-                                                        <select className="form-control" id="Doctor">
-                                                            <option value="Doctor">NameDoctor</option>
-                                                            <option value="Doctor">NameDoctor</option>
-                                                            <option value="Doctor">NameDoctor</option>
-                                                            <option value="Doctor">NameDoctor</option>
+                                        {/* Modal to choose doctor */}
+                                        <div className="modal fade" id={`chooseDoctorModal-${booking.bookingID}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Choose Doctor</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <select className="form-control">
+                                                            {findAvailableDoctor(booking.day, booking.startTime, booking.endTime).map((doctor) => {
+                                                                return <option key={doctor.id} value={doctor.name}>{doctor.name}</option>
+                                                            })}
                                                         </select>
                                                     </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" className="btn btn-primary">Save</button>
+                                                    </div>
                                                 </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save </button>
+                                            </div>
+                                        </div>
+                                        <div className="content-list-body-value">
+                                            <input
+                                                type="checkbox"
+                                                className="content-list-body-checkbox"
+                                                defaultChecked={booking.checkIn}
+                                            />
+                                        </div>
+                                        <div className="content-list-body-value">
+                                            <input
+                                                type="checkbox"
+                                                className="content-list-body-checkbox"
+                                                disabled
+                                                defaultChecked={true}
+                                            />
+                                        </div>
+                                        <div className="content-list-body-value">
+                                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#moreinfo-${booking.bookingID}`}>
+                                                More info
+                                            </button>
+                                        </div>
+
+                                        {/* Modal for more info */}
+                                        <div className="modal fade" id={`moreinfo-${booking.bookingID}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Details</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        ....
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                            disabled
-                                            checked="checked"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#moreinfo">
-                                            More info
-                                        </button>
-
-                                    </div>
-                                    <div className="modal fade" id="moreinfo" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Details</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body-booking-pet">
-                                                <div className="main-modal-content-booking-pet">
-                                                   <i className="fa fa-close close" data-dismiss="modal"></i>
-      
-                                                   <div className="grid-container">
-                                                     <div className="content-modal-booking-pet">
-                                                       <div className="reason-booking-pet">
-                                                         <span className="font-weight-bold">Pet Information</span>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>Name Pet:&nbsp;</small>
-                                                         <small>LuLu</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>Breed species:&nbsp;</small>
-                                                         <small>........</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>BirthDay:&nbsp;</small>
-                                                         <small>24/12/2020</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>Type:&nbsp;</small>
-                                                         <small>Dog</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>Gender:&nbsp;</small>
-                                                         <small>Male</small>
-                                                       </div>
-                                                       
-                                                     </div>
-
-                                                     <div className="mb-3">
-                                                       <hr className="new1" />
-                                                     </div>
-
-                                                     <div className="content-modal-booking-pet">
-                                                       <div className="reason-booking-pet">
-                                                         <span className="font-weight-bold">Customer Information</span>
-                                                       </div>
-                                                       <div className="reason-booking-pet">    
-                                                         <small className='title-reason-booking-pet'>Customer ID:&nbsp;</small>
-                                                         <small>2123</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">    
-                                                         <small className='title-reason-booking-pet'>Account ID:&nbsp;</small>
-                                                         <small>1213</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>Name:&nbsp;</small>
-                                                         <small>Nguyen Van A</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>Phone:&nbsp;</small>
-                                                         <small>12345675</small>
-                                                       </div>
-                                                       <div className="reason-booking-pet">
-                                                         <small className='title-reason-booking-pet'>Email:&nbsp;</small>
-                                                         <small>abc@gmail.com</small>
-                                                       </div>
-                                                
-                                                     </div>
-
-                                                     <div className="mb-3">
-                                                       <hr className="new1" />
-                                                     </div>
-                                                   </div>
-                                                 </div>                                             
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">ssss</div>
-                                    <div className="content-list-body-value">Dog</div>
-                                    <div className="content-list-body-value">Blooming</div>
-                                    <div className="content-list-body-value">Chen</div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                            disabled
-                                            checked="checked"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#moreinfo">
-                                            More info
-                                        </button>
-
-                                    </div>
-                                    <div className="modal fade" id="moreinfo" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    .....
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">ssss</div>
-                                    <div className="content-list-body-value">Dog</div>
-                                    <div className="content-list-body-value">Blooming</div>
-                                    <div className="content-list-body-value">Chen</div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                            disabled
-                                            checked="checked"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#moreinfo">
-                                            More info
-                                        </button>
-
-                                    </div>
-                                    <div className="modal fade" id="moreinfo" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    .....
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">SE123456</div>
-                                    <div className="content-list-body-value">ssss</div>
-                                    <div className="content-list-body-value">Dog</div>
-                                    <div className="content-list-body-value">Blooming</div>
-                                    <div className="content-list-body-value">Chen</div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <input
-                                            type="checkbox"
-                                            className="content-list-body-checkbox"
-                                            disabled
-                                            checked="checked"
-                                        />
-                                    </div>
-                                    <div className="content-list-body-value">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#moreinfo">
-                                            More info
-                                        </button>
-
-                                    </div>
-                                    <div className="modal fade" id="moreinfo" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    .....
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -564,8 +499,8 @@ function ManageListBooking() {
                             <li className="page-item active" aria-current="page">
                                 <a className="page-link" href="#123">1</a>
                             </li>
-                            <li className="page-item" >
-                                <a className="page-link" href="#123" >2</a>
+                            <li className="page-item">
+                                <a className="page-link" href="#123">2</a>
                             </li>
                             <li className="page-item">
                                 <a className="page-link" href="#123">3</a>
@@ -577,7 +512,7 @@ function ManageListBooking() {
                     </nav>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 

@@ -55,6 +55,7 @@ const Booking = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [availableSlots, setAvailableSlots] = useState([]);
     const [isDayOff, setIsDayOff] = useState(false);
+    const [selectedSlot, setSelectedSlot] = useState(null);
 
     const handleDoctorChange = (e) => {
         const newDoctorId = e.target.value;
@@ -66,6 +67,12 @@ const Booking = () => {
         const newDate = e.target.value;
         setSelectedDate(newDate);
         updateAvailableSlots(selectedDoctor, newDate);
+    };
+
+    const handleSlotClick = (slot) => {
+        if (!slot.isBooked) {
+            setSelectedSlot(slot);
+        }
     };
 
     const updateAvailableSlots = (doctorId, date) => {
@@ -121,6 +128,21 @@ const Booking = () => {
             slots.push({ startTime: new Date(current), endTime: new Date(next), isBooked });
         }
         return slots;
+    };
+
+    const handleBookingSubmit = () => {
+        if (selectedSlot && selectedDate) {
+            const bookingData = {
+                doctorId: selectedDoctor,
+                date: selectedDate,
+                startTime: selectedSlot.startTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false }),
+                endTime: selectedSlot.endTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false })
+            };
+            console.log("Booking Data:", bookingData);
+            // Xử lý gửi dữ liệu booking lên server tại đây
+        } else {
+            alert("Please select a slot to book.");
+        }
     };
 
     return (
@@ -212,8 +234,6 @@ const Booking = () => {
                                     </select>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                     <div className="available-tittle">
@@ -239,6 +259,7 @@ const Booking = () => {
                                     <div
                                         key={index}
                                         className={slot.isBooked ? "element-button-red" : "element-button-green"}
+                                        onClick={() => handleSlotClick(slot)}
                                     >
                                         <div className="booking-select_time">
                                             {slot.startTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false })} - {slot.endTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false })}
@@ -254,7 +275,7 @@ const Booking = () => {
                             <div className="booking-pay-money-price">50</div>
                         </div>
                     </div>
-                    <button className="CONFIRM-BOOK" type="submit">
+                    <button className="CONFIRM-BOOK" type="submit" onClick={handleBookingSubmit}>
                         <div className="BOOKING-NOW">Confirm Booking</div>
                     </button>
                 </div>

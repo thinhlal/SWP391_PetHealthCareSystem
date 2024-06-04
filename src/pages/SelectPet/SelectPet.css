@@ -1,0 +1,93 @@
+.select-pet-title-content{
+    font-family: "Roboto", sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+}
+.select-pet-title-content-1{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    
+}
+.select-pet-body {
+    display: flex;
+    gap: 15px; 
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.pet-card {
+ 
+    position: relative;
+    background-color:rgb(228, 228, 228);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 15%;
+    transition: transform 0.2s;
+
+}
+.select-add-pet-button{
+    display: flex;
+    width: 100px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 16px;
+    color: #fff;
+    background-color: #e18213;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Roboto, sans-serif;
+    margin-left: 22%;
+    margin-top: 19%;
+}
+.select-add-pet-button:hover {
+    background-color: #002169;
+  }
+.pet-card:hover {
+    transform: scale(1.05);
+}
+
+.image-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 10px auto;
+}
+
+.pet-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pet-id {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #333333;
+    font-family: Roboto, sans-serif;
+}
+
+.select-button {
+    display: flex;
+    width: 100px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 16px;
+    color: #fff;
+    background-color: #e18213;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Roboto, sans-serif;
+    margin-left: 22%;
+    border: none;
+}
+
+.select-button:hover {
+    background-color: #002169;
+}

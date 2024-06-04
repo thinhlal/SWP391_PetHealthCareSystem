@@ -1,5 +1,6 @@
 //css
 import './AdminDashBoard.css';
+import React, { useState } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
@@ -10,6 +11,11 @@ import Stack from '@mui/material/Stack';
 import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg'
 import logo_pet_health_care from '../../assets/images/img_AdminDashBoard/logo_pethealthcare.png'
 function AdminDashBoard() {
+    const [activeTab, setActiveTab] = useState('Profile');
+
+    const openTab = (tabName) => setActiveTab(tabName);
+
+
     return (
 
         <div className="Admin-DashBoard container-fluid">
@@ -45,9 +51,9 @@ function AdminDashBoard() {
                             </div>
                         </div>
                         <div className="Admin-DashBoard-Navigate-Logout">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="42" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
-                                <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="42" fill="currentColor" className="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z" />
+                                <path fillRule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z" />
                             </svg>
                             <span>
                                 Logout
@@ -64,19 +70,19 @@ function AdminDashBoard() {
                             <div className="Admin-DashBoard-Main_Title-Right">
                                 <label className='Admin-DashBoard-title-Star'>Customer Ratings</label>
                                 <div className='Admin-DashBoard-Star'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#fbbc0b" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#fbbc0b" className="bi bi-star-fill" viewBox="0 0 16 16">
                                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                     </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#fbbc0b" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#fbbc0b" className="bi bi-star-fill" viewBox="0 0 16 16">
                                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                     </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" className="bi bi-star-fill" viewBox="0 0 16 16">
                                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                     </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" className="bi bi-star-fill" viewBox="0 0 16 16">
                                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                     </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" fill="#97a3b9" className="bi bi-star-fill" viewBox="0 0 16 16">
                                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                     </svg>
                                     <span>(14.000)</span>
@@ -86,11 +92,10 @@ function AdminDashBoard() {
                         <div className="Admin-DashBoard-Main-ChooseDate">
                             <div className="Admin-DashBoard-Main-ChooseDate_Text">Choose Date:</div>
                             <input type="date"
-                                id="start"
+                                id="Admin-DashBoard-start"
                                 name="trip-start"
-                                value="2022-07-22"
+                                defaultValue="2022-07-22"
                                 min="2018-01-01" max="2026-12-31" />
-
                         </div>
 
                         <div className="Admin-DashBoard-Main-Header row">
@@ -140,254 +145,6 @@ function AdminDashBoard() {
                                     <div className="Admin-DashBoard-Main-Table-Header-Title-Btn "> Details </div>
                                 </div>
 
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
@@ -396,69 +153,78 @@ function AdminDashBoard() {
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
                                     <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
 
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
 
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
-                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
-
-                                    <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
-                                        <button type="button" class="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            Details
-                                        </button>
-
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        ...
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-
-
 
 
                                 <div className='Admin-DashBoard-Pagination'>

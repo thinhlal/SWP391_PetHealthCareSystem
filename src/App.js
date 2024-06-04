@@ -16,7 +16,8 @@ import YourBooking from './pages/YourBooking/YourBooking.js'
 import AdminAccount from './pages/AdminAccount/AdminAccount.js';
 import PetExamRecord from './pages/PetExamRecord/PetExamRecord.js';
 import VeterinarianInfo from './pages/VeterinarianInfo/VeterinarianInfo.js';
-
+import SelectPet from './pages/SelectPet/SelectPet.js';
+import AdminServices from './pages/AdminServices/AdminServices.js';
 function App() {
   return (
     <Routes>
@@ -30,12 +31,14 @@ function App() {
       <Route path='/manage-cages' element={<ManageCages />} />
       <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
       <Route path="/admin-dashboard" element={<AdminDashBoard />} />
-      <Route path="/work_schedule" element={<WorkSchedule />} />
+      <Route path="/work-schedule" element={<WorkSchedule />} />
       <Route path="/sick-pet" element={<ManageSickPet />} />
       <Route path="/your-booking" element={<YourBooking />} />
       <Route path="/admin-account" element={<AdminAccount />} />
-      <Route path="/pet_exam_record" element={<PetExamRecord />} />
-      <Route path="/veterinarian_info" element={<VeterinarianInfo />}/>
+      <Route path="/pet-exam-record" element={<PetExamRecord />} />
+      <Route path="/veterinarian-info" element={<VeterinarianInfo />}/>
+      <Route path="/select-pet" element={<SelectPet />}/>
+      <Route path="/admin-services" element={<AdminServices />} />
     </Routes>
   );
 }
