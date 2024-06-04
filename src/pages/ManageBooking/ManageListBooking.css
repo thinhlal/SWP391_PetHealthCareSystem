@@ -191,63 +191,6 @@
   margin-top: 70px;
 }
 
-.manage-booking-list .modal-body-booking-pet {
-  background-color: #fff;
-  border-color: #fff;
-  font-family: Roboto, sans-serif;
-  margin: 30px 20px;
-  display: flex;
-  align-items: center;
-}
-
-.manage-booking-list .content-modal-booking-pet {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.manage-booking-list .grid-container {
-  display: grid;
-  grid-template-rows: auto auto;
-  gap: 15px;
-}
-
-.manage-booking-list .font-weight-bold {
-  font-weight: 600;
-  font-size: 20px;
-}
-
-.manage-booking-list .title-reason-booking-pet {
-  color: #004cb9;
-  font-weight: 600;
-}
-
-.manage-booking-list .mb-3 {
-  grid-row: span 2;
-}
-
-.manage-booking-list .close {
-  color: #000;
-  cursor: pointer;
-}
-
-.manage-booking-list .close:hover {
-  color: #000;
-}
-
-.manage-booking-list .theme-color {
-  color: #004cb9;
-}
-
-hr.manage-booking-list .new1 {
-  border-top: dashed #fff;
-  margin: 0.manage-booking-list .4rem 0;
-}
-
-.manage-booking-list .form-control {
-  margin-top: 10px;
-}
-
 .manage-booking-list .modal-body-section-wrapper{
   display: flex;
   flex-direction: column;
