@@ -158,7 +158,7 @@
 .all-services .text-wrapper-cat {
   position: relative;
   width: 350px;
-  height: 78px;
+  height: 100px;
   font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #444444;
@@ -166,7 +166,6 @@
   letter-spacing: 0;
   line-height: 24px;
   overflow: hidden;
-  text-overflow: ellipsis;
   text-align: left;
   display: flex;
   align-items: center;
