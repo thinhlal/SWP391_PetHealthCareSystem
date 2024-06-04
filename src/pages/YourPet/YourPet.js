@@ -8,6 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
 // Images
 import pet_img1 from '../../assets/images/img_YourPet/c2dc9a5328014cead97d6268b688a16e.jpg';
+import pet_img2 from '../../assets/images/img_YourPet/30c8eac7d84112a145ab7b06ce9e6eb1.jpg';
+import pet_img3 from '../../assets/images/img_YourPet/f86eb143541c5a58b7132ab54d6d1f12.jpg';
 import dog_icon from '../../assets/images/img_YourPet/dog_icon.png';
 function YourPet() {
     const [avatar, setAvatar] = useState();
@@ -195,262 +197,46 @@ function YourPet() {
                                 </div>
                             </div>
                         </div>
+
                         <div className="detail-information">
-                            <div className="info-pet">
-                                <div className="your-pet-img">
-                                    <img src={pet_img1} alt=""></img>
-                                </div>
-                                <div className="your-pet-content-info-wrapper">
-                                    <div className="your-pet-content-info">
-                                        <div className="your-pet-content-info-text">
-                                            <span>Name:</span>&nbsp;
-                                            Boby
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Pet ID:</span>&nbsp;
-                                            0123456
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Breed species:</span>&nbsp;
-                                            Golden Retriever
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>BirthDay:</span>&nbsp;
-                                            1/1/1
-                                        </div>
-                                    </div >
-                                    <div className="your-pet-content-info">
-                                        <div className="your-pet-content-info-text">
-                                            <span>Type:</span>&nbsp;
-                                            Dog
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Gender:</span>&nbsp;
-                                            Male
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Status:</span>&nbsp;
-                                            Good
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>In Cage:</span>&nbsp;
-                                            Good
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="btn-wrapper">
-                                    <button type="button" className="view-pet-btn" data-bs-toggle="modal" data-bs-target="#view">
-                                        View Details
-                                    </button>
-                                    <div className="modal fade" id="view" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    ...
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button" className="view-pet-btn" data-bs-toggle="modal" data-bs-target="#history">
-                                        View Medical History
-                                    </button>
-                                    <div className="modal fade" id="history" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    ...
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            {/* img 1 */}
+                            <a href="http://example.com" className="profile-card-link">
+                            <div className="profile-card-pet">
+                              <div className="profile-pet-image">
+                                <img src={pet_img1} alt="Profile" />
+                              </div>
+                              <div className="profile-info-pet">
+                                <h2>KiKi</h2>
+                                <span className="status-pet">Active</span>
+                              </div>
                             </div>
-                            <div className="info-pet">
-                                <div className="your-pet-img">
-                                    <img src={pet_img1} alt=""></img>
-                                </div>
-                                <div className="your-pet-content-info-wrapper">
-                                    <div className="your-pet-content-info">
-                                        <div className="your-pet-content-info-text">
-                                            <span>Name:</span>&nbsp;
-                                            Boby
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Pet ID:</span>&nbsp;
-                                            0123456
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Breed species:</span>&nbsp;
-                                            Golden Retriever
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>BirthDay:</span>&nbsp;
-                                            1/1/1
-                                        </div>
-                                    </div >
-                                    <div className="your-pet-content-info">
-                                        <div className="your-pet-content-info-text">
-                                            <span>Type:</span>&nbsp;
-                                            Dog
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Gender:</span>&nbsp;
-                                            Male
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Status:</span>&nbsp;
-                                            Good
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>In Cage:</span>&nbsp;
-                                            Good
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="btn-wrapper">
-                                    <button type="button" className="view-pet-btn" data-bs-toggle="modal" data-bs-target="#view">
-                                        View Details
-                                    </button>
-                                    <div className="modal fade" id="view" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    ...
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button" className="view-pet-btn" data-bs-toggle="modal" data-bs-target="#history">
-                                        View Medical History
-                                    </button>
-                                    <div className="modal fade" id="history" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    ...
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </a>
+
+                            {/* img 2 */}
+                            <a href="http://example.com" className="profile-card-link">
+                            <div className="profile-card-pet">
+                              <div className="profile-pet-image">
+                                <img src={pet_img2} alt="Profile" />
+                              </div>
+                              <div className="profile-info-pet">
+                                <h2>MiMi</h2>
+                                <span className="status-pet">Active</span>
+                              </div>
                             </div>
-                            <div className="info-pet">
-                                <div className="your-pet-img">
-                                    <img src={pet_img1} alt=""></img>
-                                </div>
-                                <div className="your-pet-content-info-wrapper">
-                                    <div className="your-pet-content-info">
-                                        <div className="your-pet-content-info-text">
-                                            <span>Name:</span>&nbsp;
-                                            Boby
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Pet ID:</span>&nbsp;
-                                            0123456
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Breed species:</span>&nbsp;
-                                            Golden Retriever
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>BirthDay:</span>&nbsp;
-                                            1/1/1
-                                        </div>
-                                    </div >
-                                    <div className="your-pet-content-info">
-                                        <div className="your-pet-content-info-text">
-                                            <span>Type:</span>&nbsp;
-                                            Dog
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Gender:</span>&nbsp;
-                                            Male
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>Status:</span>&nbsp;
-                                            Good
-                                        </div>
-                                        <div className="your-pet-content-info-text">
-                                            <span>In Cage:</span>&nbsp;
-                                            Good
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="btn-wrapper">
-                                    <button type="button" className="view-pet-btn" data-bs-toggle="modal" data-bs-target="#view">
-                                        View Details
-                                    </button>
-                                    <div className="modal fade" id="view" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    ...
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="button" className="view-pet-btn" data-bs-toggle="modal" data-bs-target="#history">
-                                        View Medical History
-                                    </button>
-                                    <div className="modal fade" id="history" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    ...
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </a>
+
+                            {/* img 3 */}
+                            <a href="http://example.com" className="profile-card-link">
+                            <div className="profile-card-pet">
+                              <div className="profile-pet-image">
+                                <img src={pet_img3} alt="Profile" />
+                              </div>
+                              <div className="profile-info-pet">
+                                <h2>LaLa</h2>
+                                <span className="status-pet">Active</span>
+                              </div>
                             </div>
+                            </a>
 
                         </div>
                     </div>

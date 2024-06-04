@@ -49,6 +49,7 @@ function AdminAccount() {
                             <div className="Admin-Account-Navigate-Text-Rest">
                                 <div className='Admin-Account-Navigate-Text-Rest-Menu'>Account</div>
                                 <div className='Admin-Account-Navigate-Text-Rest-Menu'>Booking</div>
+                                <div className='Admin-Account-Navigate-Text-Rest-Menu'>Services</div>
                                 <div className='Admin-Account-Navigate-Text-Rest-Menu'>Settings</div>
                             </div>
                         </div>
@@ -161,6 +162,58 @@ function AdminAccount() {
                                             <option>Admin</option>
                                         </select>
                                     </div>
+
+                                    <div className="Admin-Account-Add-Services">
+                                        <button type="button" className="Admin-Account-add-pet-btn" data-bs-toggle="modal" data-bs-target="#Admin-Account-exampleModal">
+                                            Add Account </button>
+
+                                        <div className="modal fade" id="Admin-Account-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Add Services</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <div className="Admin-Account-modal-add-account">
+                                                            <div className="Admin-Account-modal-title-name"> Name </div>
+
+                                                            <div className="Admin-Account-modal-add"> Name: <input className="Admin-Account-input" placeholder="Services" /> </div>
+                                                        </div>
+
+                                                        <div className="Admin-Account-modal-add-account">
+                                                            <div className="Admin-Account-modal-title-name"> Mail </div>
+
+                                                            <div className="Admin-Account-modal-add"> Mail: <input className="Admin-Account-input" placeholder="Email@gmail.com" /> </div>
+                                                        </div>
+                                                        <div className="Admin-Account-modal-add-account">
+                                                            <div className="Admin-Account-modal-title-name"> Phone number </div>
+
+                                                            <div className="Admin-Account-modal-add"> Phone: <input className="Admin-Account-input-phone" placeholder="XXXXXXXXXX" /> </div>
+                                                        </div>
+                                                        <div className="Admin-Account-modal-add-account">
+                                                            <div className="Admin-Account-modal-title-name"> Role </div>
+
+                                                            <div className="Admin-Account-modal-add"> Role:
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" className="btn btn-success">Add </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
 
                                 <div className="Admin-Account-Main-Table-Header">
@@ -1451,7 +1504,7 @@ function AdminAccount() {
                                     </div>
                                 </div>
 
-                                
+
 
 
 
