@@ -37,6 +37,7 @@ function VeterinarianInfo() {
 
 			{/* vet Part */}
 			<div className="vet-part" data-aos="fade-left">
+				<div className="title-services-vet">Vet. Minh</div>
 				<div className='vet-picture-wrapper'>
 					<div className="vet-picture">
 						<img className="img-service-vet" src={vet1} alt="vet" />
@@ -62,37 +63,33 @@ function VeterinarianInfo() {
 				</div>
 
 				<div className="content-vet">
-					<div className="list-item-vet">
-						<div className="title-services-vet">Veterinarian: Vet. Minh</div>
-
-						<div className="content-list-vet">
-							<div className="text-content-vet">
-								<div className="title-text-content-vet">Personal Information</div>
-								<div className="text-vet">
-									<div className="vet-p">Veterinarian ID: Vet001</div>
-									<div className="vet-p">Email: minh@gmail.com</div>
-									<div className="vet-p">Gender: Male</div>
-									<div className="vet-p">Date of Birth:  30-2-1982</div>
-									<div className="vet-p">Place of Birth: London, United Kingdom</div>
-									<div className="vet-p">Phone Number: 0364564747</div>
-									<div className="vet-p">Experience: 15 years</div>
-								</div>
+					<div className="content-list-vet">
+						<div className="text-content-vet">
+							<div className="title-text-content-vet">Personal Information</div>
+							<div className="text-vet">
+								<div className="vet-p">Veterinarian ID: Vet001</div>
+								<div className="vet-p">Email: minh@gmail.com</div>
+								<div className="vet-p">Gender: Male</div>
+								<div className="vet-p">Date of Birth:  30-2-1982</div>
+								<div className="vet-p">Place of Birth: London, United Kingdom</div>
+								<div className="vet-p">Phone Number: 0364564747</div>
+								<div className="vet-p">Experience: 15 years</div>
 							</div>
 						</div>
+					</div>
 
-						<div className="content-list-vet">
-							<div className="text-content-vet">
-								<div className="title-text-content-vet">Introduction</div>
-								<div className="text-vet">
-									<div className="vet-p">
-										- Known not only as one of the leading experts in the field of veterinary medicine in Vietnam, Vet. Minh is also loved by everyone for his closeness, dedication and dedication.
-									</div>
-									<div className="vet-p">
-										✓ Vet. Minh is considered the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam
-									</div>
-									<div className="vet-p">
-										✓ The only veterinarian in Vietnam to achieve Black Diamond rank for 2 consecutive years
-									</div>
+					<div className="content-list-vet">
+						<div className="text-content-vet">
+							<div className="title-text-content-vet">Introduction</div>
+							<div className="text-vet">
+								<div className="vet-p">
+									- Known not only as one of the leading experts in the field of veterinary medicine in Vietnam, Vet. Minh is also loved by everyone for his closeness, dedication and dedication.
+								</div>
+								<div className="vet-p">
+									✓ Vet. Minh is considered the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam
+								</div>
+								<div className="vet-p">
+									✓ The only veterinarian in Vietnam to achieve Black Diamond rank for 2 consecutive years
 								</div>
 							</div>
 						</div>
