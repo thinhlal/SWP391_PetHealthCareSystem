@@ -48,6 +48,7 @@ function AdminServices() {
                                 <div className="Admin-Services-Navigate-Text-Rest">
                                     <div className='Admin-Services-Navigate-Text-Rest-Menu'>Account</div>
                                     <div className='Admin-Services-Navigate-Text-Rest-Menu'>Booking</div>
+                                    <div className='Admin-Services-Navigate-Text-Rest-Menu'>Services</div>
                                     <div className='Admin-Services-Navigate-Text-Rest-Menu'>Settings</div>
                                 </div>
                             </div>
@@ -184,6 +185,1023 @@ function AdminServices() {
 
                                     </div>
 
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
+                                        <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> Services Description </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row "> $ 60 </div>
+                                        <div className="Admin-Services-Main-Table-Content-Row ">
+
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                    <BorderColorOutlinedIcon
+                                                        sx={{
+                                                            color: blue[400],
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title-name"> Name </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                </div>
+                                                                <div className="Admin-Services-modal-update-name">
+                                                                    <div className="Admin-Services-modal-title"> Price </div>
+
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-success">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                    <DeleteOutlineIcon
+                                                        sx={{
+                                                            color: red[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                            <span className="Admin-Services-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-Services-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                    <MoreVertOutlinedIcon
+                                                        sx={{
+                                                            color: green[400]
+                                                        }}
+                                                    />
+                                                </button>
+
+                                                <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>

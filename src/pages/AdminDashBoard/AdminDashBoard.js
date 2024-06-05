@@ -47,6 +47,7 @@ function AdminDashBoard() {
                             <div className="Admin-DashBoard-Navigate-Text-Rest">
                                 <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Account</div>
                                 <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Booking</div>
+                                <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Services</div>
                                 <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>Settings</div>
                             </div>
                         </div>
@@ -225,6 +226,727 @@ function AdminDashBoard() {
                                         </div>
                                     </div>
                                 </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="Admin-DashBoard-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> B00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> C00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> P00001 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> $ 120 </div>
+                                    <div className="Admin-DashBoard-Main-Table-Content-Row "> 2/6/2024 </div>
+
+                                    <div className="Admin-DashBoard-Table-Detail">
+                                        <div className="Admin-DashBoard-Detail-Btn ">
+                                            <div className="Admin-DashBoard-Main-Table-Content-Btn_Wrapper ">
+                                                <button type="button" className="Admin-DashBoard-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#Admin-DashBoard-exampleModal">
+                                                    Details
+                                                </button>
+
+                                                <div className="modal fade" id="Admin-DashBoard-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div className="modal-dialog">
+                                                        <div className="modal-content">
+                                                            <div className="modal-header">
+                                                                <h1 className="modal-title fs-5" id="Admin-DashBoard-exampleModalLabel">More Info</h1>
+                                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div className="modal-body">
+                                                                <div className="Admin-DashBoard-container-modal-body-more-info">
+                                                                    <div className="Admin-DashBoard-tab-modal-body-more-info">
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Profile')}>
+                                                                            Customer Profile
+                                                                        </button>
+                                                                        <button
+                                                                            className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                                                            onClick={() => openTab('Pet')}>
+                                                                            Pet
+                                                                        </button>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-profile-customer" className="Admin-DashBoard-tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Name:</div>
+                                                                            <div>Liza Doe</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Email:</div>
+                                                                            <div >support@gmail.com</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-customer">Phone:</div>
+                                                                            <div>+1234 55 66 777</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="Admin-DashBoard-Vacancies" className="Admin-DashBoard-tabcontent-pet" style={{ display: activeTab === 'Pet' ? 'block' : 'none' }}>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Name:</div>
+                                                                            <div >Boby</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Breed:</div>
+                                                                            <div>Golden</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Species:</div>
+                                                                            <div >Dog</div>
+                                                                        </div>
+                                                                        <div className="Admin-DashBoard-form-group">
+                                                                            <div className="Admin-DashBoard-sub-title-profile-pet">Gender:</div>
+                                                                            <div  >Male</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="modal-footer">
+                                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
 
                                 <div className='Admin-DashBoard-Pagination'>

@@ -1,6 +1,6 @@
 import './ManageListBooking.css';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
@@ -19,7 +19,8 @@ const doctorsData = [
                 endTime: "15:00",
                 isOff: false,
                 bookings: [
-                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "9:00", endTime: "10:00" },
+                    { startTime: "10:00", endTime: "11:00" },
                     { startTime: "12:00", endTime: "13:00" }
                 ]
             },
@@ -71,7 +72,7 @@ const doctorsData = [
                 endTime: "13:00",
                 isOff: false,
                 bookings: [
-                    { startTime: "09:00", endTime: "10:00" },
+                    { startTime: "12:00", endTime: "13:00" },
                     { startTime: "11:00", endTime: "12:00" }
                 ]
             },
@@ -103,13 +104,14 @@ function ManageListBooking() {
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedStartTime, setSelectedStartTime] = useState("");
     const [selectedEndTime, setSelectedEndTime] = useState("");
-    const allBookings = [
+    const [allBookings, setAllBookings] = useState([
         { bookingID: "SE123456", day: "2024-06-01", startTime: "8:00", endTime: "9:00", name: "John Doe", petType: "Dog", service: "Blooming", doctor: "Chen", checkIn: false },
         { bookingID: "SE123457", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "JaAAA", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
         { bookingID: "SE123458", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "B AASSe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
         { bookingID: "SE123459", day: "2024-06-01", startTime: "13:00", endTime: "14:00", name: "B Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
         { bookingID: "SE123460", day: "2024-06-01", startTime: "15:00", endTime: "16:00", name: "C Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false }
-    ];
+    ]);
+    const [chosenDoctor, setChosenDoctor] = useState("");
 
     const availableServices = [
         { id: 1, name: "X-quang" },
@@ -207,40 +209,36 @@ function ManageListBooking() {
                     startTime >= workingHour.startTime && endTime <= workingHour.endTime
                 );
                 if (withinWorkingHours) {
-                    const hasNoOverlap = workingHour.bookings.every(booking => {
-                        const overlap = (endTime <= booking.startTime || startTime >= booking.endTime);
-                        console.log(`Checking overlap for Doctor: ${doctor.name}`);
-                        console.log(`New Booking: ${startTime} - ${endTime}`);
-                        console.log(`Existing Booking: ${booking.startTime} - ${booking.endTime}`);
-                        console.log(`Has Overlap: ${overlap}`);
-                        return overlap;
-                    });
-                    console.log(hasNoOverlap);
+                    const hasNoOverlap = workingHour.bookings.every(booking => (
+                        (endTime !== booking.endTime && startTime !== booking.startTime)
+                    ));
                     if (hasNoOverlap) {
                         availableDoctors.push(doctor);
                     }
                 }
             }
         }
-        return availableDoctors;
+        if (availableDoctors.length === 0) {
+            return null;
+        } else {
+            return availableDoctors;
+        }
     };
 
-    const handleChooseDoctor = (booking) => {
-
-        //console.log(booking)
-        //console.log(findAvailableDoctor(booking.day, booking.startTime, booking.endTime))
-        // if (booking) {
-        //     if (findAvailableDoctor(booking.day, booking.startTime, booking.endTime)) {
-
-        console.log(findAvailableDoctor(booking.day, booking.startTime, booking.endTime));
-        // //         console.log('rrrrrr')
-        // findAvailableDoctor(booking.day, booking.startTime, booking.endTime)
-        // console.log(
-        //     findAvailableDoctor(booking.day, booking.startTime, booking.endTime));
-        //     }
-        // }
-        //<option key={doctor.id} value={doctor.name}>{doctor.name}</option>
+    const handleDoctorChange = (event) => {
+        setChosenDoctor(event.target.value);
     };
+
+    const handleSave = (bookingID) => {
+        setAllBookings(allBookings.map(booking => {
+            if (booking.bookingID === bookingID) {
+                return { ...booking, doctor: chosenDoctor };
+            } else {
+                return booking;
+            }
+        }))
+        setChosenDoctor("");
+    }
 
     return (
         <div className="manage-booking-list container-fluid">
@@ -277,106 +275,146 @@ function ManageListBooking() {
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div className="modal-body">
-                                                    <div className="modal-body-section">
-                                                        <label>Type:</label>
-                                                        <input type="radio" name="petOption" value="hasPetID" checked={petOption === "hasPetID"} onChange={handlePetOptionChange} /> <span>Has Pet ID</span>
-                                                        <input type="radio" name="petOption" value="noPetID" checked={petOption === "noPetID"} onChange={handlePetOptionChange} /> <span>Not Has Pet ID</span>
-                                                    </div>
-
-                                                    {petOption === "hasPetID" && (
-                                                        <div id="searchPetSection" className="modal-body-section">
-                                                            <label>Search Pet ID:</label>
-                                                            <input type="text" id="searchPetInput" />
-                                                            <button type="button" onClick={handleSearchPet}>Search</button>
-                                                            <select onChange={handlePetSelect}>
-                                                                {petSearchResults.map((pet) => (
-                                                                    <option key={pet.petID} value={pet.petID}>{`${pet.petID} - ${pet.name}`}</option>
-                                                                ))}
-                                                            </select>
+                                                    <div className="modal-body-section-wrapper">
+                                                        <div className='modal-body-section-type-pet'>
+                                                            <label>Type:</label>
+                                                            <input type="radio" name="petOption" value="hasPetID" checked={petOption === "hasPetID"} onChange={handlePetOptionChange} /> <span>Has Pet ID</span>
+                                                            <input type="radio" name="petOption" value="noPetID" checked={petOption === "noPetID"} onChange={handlePetOptionChange} /> <span>Not Has Pet ID</span>
                                                         </div>
-                                                    )}
-
-                                                    {petOption === "noPetID" && (
-                                                        <div id="newPetSection" className="modal-body-section">
-                                                            <label>Pet Name:</label>
-                                                            <input type="text" value={petInfo.name || ""} onChange={(e) => setPetInfo({ ...petInfo, name: e.target.value })} />
-                                                            <label>Species:</label>
-                                                            <input type="text" value={petInfo.species || ""} onChange={(e) => setPetInfo({ ...petInfo, species: e.target.value })} />
-                                                            <label>Breed:</label>
-                                                            <input type="text" value={petInfo.breed || ""} onChange={(e) => setPetInfo({ ...petInfo, breed: e.target.value })} />
-                                                            <label>Age:</label>
-                                                            <input type="number" value={petInfo.age || ""} onChange={(e) => setPetInfo({ ...petInfo, age: e.target.value })} />
-                                                            <label>Gender:</label>
-                                                            <input type="text" value={petInfo.gender || ""} onChange={(e) => setPetInfo({ ...petInfo, gender: e.target.value })} />
-                                                        </div>
-                                                    )}
-
-                                                    <div className="modal-body-section">
-                                                        <label>Customer:</label>
-                                                        <input type="radio" name="ownerOption" value="hasOwnerID" checked={ownerOption === "hasOwnerID"} onChange={handleOwnerOptionChange} /><span>Have CustomerID</span>
-                                                        <input type="radio" name="ownerOption" value="noOwnerID" checked={ownerOption === "noOwnerID"} onChange={handleOwnerOptionChange} /><span>Not Have CustomerID</span>
-                                                    </div>
-
-                                                    {ownerOption === "hasOwnerID" && (
-                                                        <div id="searchOwnerSection" className="modal-body-section">
-                                                            <label>Search Customer:</label>
-                                                            <input type="text" id="searchOwnerInput" />
-                                                            <button type="button" onClick={handleSearchOwner}>Tìm</button>
-                                                            <select onChange={handleOwnerSelect}>
-                                                                {ownerSearchResults.map((owner) => (
-                                                                    <option key={owner.ownerID} value={owner.ownerID}>{`${owner.ownerID} - ${owner.name}`}</option>
-                                                                ))}
-                                                            </select>
-                                                        </div>
-                                                    )}
-
-                                                    {ownerOption === "noOwnerID" && (
-                                                        <div id="newOwnerSection" className="modal-body-section">
-                                                            <label>Owner Name:</label>
-                                                            <input type="text" value={ownerInfo.name || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, name: e.target.value })} />
-                                                            <label>Email:</label>
-                                                            <input type="email" value={ownerInfo.email || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, email: e.target.value })} />
-                                                            <label>Phone Number:</label>
-                                                            <input type="text" value={ownerInfo.phone || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, phone: e.target.value })} />
-                                                        </div>
-                                                    )}
-
-                                                    <div className="modal-body-section">
-                                                        <label>Services used:</label>
-                                                        {services.map((service, index) => (
-                                                            <div key={index} className="service">
-                                                                <label>Service:</label>
-                                                                <select value={service.service} onChange={(e) => handleServiceChange(index, "service", e.target.value)}>
-                                                                    {availableServices.map((availableService) => (
-                                                                        <option key={availableService.id} value={availableService.name}>{availableService.name}</option>
-                                                                    ))}
-                                                                </select>
+                                                        {petOption === "hasPetID" && (
+                                                            <div id="searchPetSection" >
+                                                                <div>
+                                                                    <label>Search Pet ID:</label>
+                                                                    <input type="text" id="searchPetInput" />
+                                                                    <button type="button" onClick={handleSearchPet}>Search</button>
+                                                                    <select onChange={handlePetSelect}>
+                                                                        {petSearchResults.map((pet) => (
+                                                                            <option key={pet.petID} value={pet.petID}>{`${pet.petID} - ${pet.name}`}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
                                                             </div>
-                                                        ))}
-                                                        <button type="button" onClick={addService}>Add service</button>
+                                                        )}
+
+                                                        {petOption === "noPetID" && (
+                                                            <div id="newPetSection">
+                                                                <div>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Pet Name:</label>
+                                                                        <input type="text" value={petInfo.name || ""} onChange={(e) => setPetInfo({ ...petInfo, name: e.target.value })} />
+                                                                    </div>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Species:</label>
+                                                                        <input type="text" value={petInfo.species || ""} onChange={(e) => setPetInfo({ ...petInfo, species: e.target.value })} />
+                                                                    </div>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Breed:</label>
+                                                                        <input type="text" value={petInfo.breed || ""} onChange={(e) => setPetInfo({ ...petInfo, breed: e.target.value })} />
+                                                                    </div>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Age:</label>
+                                                                        <input type="number" value={petInfo.age || ""} onChange={(e) => setPetInfo({ ...petInfo, age: e.target.value })} />
+                                                                    </div>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Gender:</label>
+                                                                        <input type="text" value={petInfo.gender || ""} onChange={(e) => setPetInfo({ ...petInfo, gender: e.target.value })} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
 
-                                                    <div className="modal-body-section">
-                                                        <label>Choose Date And Time:</label>
-                                                        <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
-                                                        <input type="time" value={selectedStartTime} onChange={(e) => setSelectedStartTime(e.target.value)} />
-                                                        <input type="time" value={selectedEndTime} onChange={(e) => setSelectedEndTime(e.target.value)} />
+                                                    <div className="modal-body-section-wrapper">
+                                                        <div className='modal-body-section-type-user'>
+                                                            <label>Customer:</label>
+                                                            <input type="radio" name="ownerOption" value="hasOwnerID" checked={ownerOption === "hasOwnerID"} onChange={handleOwnerOptionChange} /><span>Have CustomerID</span>
+                                                            <input type="radio" name="ownerOption" value="noOwnerID" checked={ownerOption === "noOwnerID"} onChange={handleOwnerOptionChange} /><span>Not Have CustomerID</span>
+                                                        </div>
+                                                        {ownerOption === "hasOwnerID" && (
+                                                            <div id="searchOwnerSection">
+                                                                <div>
+                                                                    <label>Search Customer:</label>
+                                                                    <input type="text" id="searchOwnerInput" />
+                                                                    <button type="button" onClick={handleSearchOwner}>Tìm</button>
+                                                                    <select onChange={handleOwnerSelect}>
+                                                                        {ownerSearchResults.map((owner) => (
+                                                                            <option key={owner.ownerID} value={owner.ownerID}>{`${owner.ownerID} - ${owner.name}`}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {ownerOption === "noOwnerID" && (
+                                                            <div id="newOwnerSection">
+                                                                <div className=''>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Name:</label>
+                                                                        <input type="text" value={ownerInfo.name || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, name: e.target.value })} />
+                                                                    </div>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Email:</label>
+                                                                        <input type="email" value={ownerInfo.email || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, email: e.target.value })} />
+                                                                    </div>
+                                                                    <div className='modal-body-section'>
+                                                                        <label>Phone:</label>
+                                                                        <input type="text" value={ownerInfo.phone || ""} onChange={(e) => setOwnerInfo({ ...ownerInfo, phone: e.target.value })} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
                                                     </div>
 
-                                                    <div className="modal-body-section">
-                                                        <label>Veterinarian:</label>
-                                                        <select id="veterinarian">
-                                                            <option>Choose</option>
-                                                            {doctorsData
-                                                                .forEach((vet) => vet.workingHours.filter((workingHour) => {
-                                                                    return selectedDate === workingHour.date
-                                                                        && (workingHour.startTime <= selectedStartTime && selectedEndTime <= workingHour.endTime)
-                                                                }))
-                                                                // .map((vet) => (
-                                                                //     <option key={vet.id} value={vet.name}>{vet.name}</option>
-                                                                // ))
-                                                            }
-                                                        </select>
+                                                    <div className="modal-body-section-wrapper">
+                                                        <div>
+                                                            <label>Services used:</label>
+                                                            {services.map((service, index) => (
+                                                                <div key={index} className="service">
+                                                                    <label>Service:</label>
+                                                                    <select value={service.service} onChange={(e) => handleServiceChange(index, "service", e.target.value)}>
+                                                                        {availableServices.map((availableService) => (
+                                                                            <option key={availableService.id} value={availableService.name}>{availableService.name}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                </div>
+                                                            ))}
+                                                            <button type="button" onClick={addService}>Add service</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="modal-body-section-wrapper">
+                                                        <div>
+                                                            <div className='modal-body-section-doctor-date'>
+                                                                <label>Choose Date:</label>
+                                                                <input type="date" value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
+                                                            </div>
+                                                            <div className='modal-body-section-doctor-date'>
+                                                                <label>Choose StartTime:</label>
+                                                                <input type="time" value={selectedStartTime} onChange={(e) => setSelectedStartTime(e.target.value)} />
+                                                            </div>
+                                                            <div className='modal-body-section-doctor-date'>
+                                                                <label>Choose EndTime:</label>
+                                                                <input type="time" value={selectedEndTime} onChange={(e) => setSelectedEndTime(e.target.value)} />
+                                                            </div>
+                                                            <div className='modal-body-section-doctor-date'>
+                                                                <label>Veterinarian:</label>
+                                                                <div id="veterinarian">
+                                                                    {findAvailableDoctor(selectedDate, selectedStartTime, selectedEndTime)
+                                                                        ? findAvailableDoctor(selectedDate, selectedStartTime, selectedEndTime).map((doctorAdd, index) => {
+                                                                            return (
+                                                                                <div key={doctorAdd.id} className='choose-Doctor-wrapper'>
+                                                                                    <input type="radio" id={`doctor-${index}`} name="doctor" value={doctorAdd.name} onChange={(e) => handleDoctorChange(e)} />
+                                                                                    <label htmlFor={`doctor-${index}`}>{doctorAdd.name}</label>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                        : <div className='choose-Doctor-Not-Found'>
+                                                                            No Doctors Found
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="modal-footer">
@@ -432,15 +470,20 @@ function ManageListBooking() {
                                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div className="modal-body">
-                                                        <select className="form-control">
-                                                            {findAvailableDoctor(booking.day, booking.startTime, booking.endTime).map((doctor) => {
-                                                                return <option key={doctor.id} value={doctor.name}>{doctor.name}</option>
-                                                            })}
-                                                        </select>
+                                                        {findAvailableDoctor(booking.day, booking.startTime, booking.endTime)
+                                                            ? findAvailableDoctor(booking.day, booking.startTime, booking.endTime).map((doctor, index) => {
+                                                                return (<div className='choose-Doctor-wrapper' key={doctor.id}>
+                                                                    <input type="radio" id={`doctor-${booking.bookingID}-${doctor.name}`} name="doctor" value={doctor.name} onChange={(e) => handleDoctorChange(e)} />
+                                                                    <label htmlFor={`doctor-${booking.bookingID}-${doctor.name}`}>{doctor.name}</label>
+                                                                </div>)
+                                                            })
+                                                            : <div className='choose-Doctor-Not-Found'>
+                                                                No Doctors Found In This Time
+                                                            </div>}
                                                     </div>
                                                     <div className="modal-footer">
                                                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" className="btn btn-primary">Save</button>
+                                                        <button type="button" onClick={() => handleSave(booking.bookingID)} className="btn btn-primary" data-bs-dismiss="modal">Save</button>
                                                     </div>
                                                 </div>
                                             </div>
