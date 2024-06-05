@@ -1,0 +1,264 @@
+.main-container-pet-profile {
+  background-color: #f0f4f8;
+}
+
+.container-pet-profile {
+  font-family: Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f0f4f8;
+  width: 100%;
+}
+
+.sub-title-info-pet {
+  font-weight: 600;
+  color: #002169;
+}
+
+.ID-pet-profile {
+  color: #218838;
+}
+
+.sub-title-info-pet-line {
+  font-weight: 600;
+  color: #002169;
+  margin-bottom: 10px;
+  position: relative; 
+}
+
+.sub-title-info-pet-line::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px; 
+  background-color: #ddd; 
+  position: absolute;
+  bottom: -5px; 
+  left: 0;
+}
+
+
+.sidebar-pet-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-right: 20px;
+  width: 250px;
+  height: 295px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  line-height: 2;
+  font-size: 18px;
+}
+
+.pet-avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.pet-parent, .status {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.status-active {
+  color: green;
+  font-weight: bold;
+}
+
+.pet-id-info {
+  font-size: 12px;
+  color: #555;
+}
+
+.main-content-pet {
+  display: flex;
+  gap: 30px;
+  font-size: 18px;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.8;
+}
+
+.pet-info, .vaccination-info, .medical-info {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-edit-button-pet-info, .main-edit-button-medical {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main-add-button-vaccination, .main-add-button-medical {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-button-pet-info, .edit-button-medical {
+  background-color: #007bff; 
+  color: white; 
+  padding: 5px 12px; /* Thu nhỏ padding của nút */
+  margin: 10px 0;
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer; 
+  font-size: 14px; /* Thu nhỏ font-size của nút */
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.edit-button-pet-info:hover, .edit-button-medical:hover {
+  background-color: #0056b3; 
+  transform: scale(1.05); 
+}
+
+.add-button-vaccination, .delete-button-vaccination, .delete-button-medical, .view-button-medical {
+  background-color: #cccc;
+  color: white;
+  padding: 5px 12px; /* Thu nhỏ padding của nút */
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px; /* Thu nhỏ font-size của nút */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.delete-button-vaccination, .delete-button-medical {
+  background-color: #dc3545;
+  white-space: nowrap; /* Ngăn chữ xuống dòng */
+}
+
+.view-button-medical {
+  background-color: #28a745;
+}
+
+.add-button-vaccination:hover, .delete-button-vaccination:hover, .delete-button-medical:hover, .view-button-medical:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.delete-button-vaccination:hover, .delete-button-medical:hover {
+  background-color: #c82333;
+}
+
+.view-button-medical:hover {
+  background-color: #218838;
+}
+
+.pet-details h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.pet-details p {
+  margin: 5px 0;
+}
+
+.vaccination-info h2, .medical-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 150px;
+}
+
+th {
+  background-color: #f8f8f8;
+}
+
+.edit-form, .add-vaccination-form, .edit-medical-form {
+  display: block;
+  margin-top: 20px;
+}
+
+.edit-form label, .add-vaccination-form label, .edit-medical-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.edit-form input, .add-vaccination-form input, .edit-medical-form input, .edit-medical-form select, .edit-medical-form textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.select-pet-type {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.select-pet-type select {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+}
+
+.save-button {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+.close-button {
+  background-color: #cccc;
+  color: white;
+  padding: 5px 22px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: #45a049;
+}
