@@ -31,6 +31,7 @@ function App() {
       <Route path="/your-booking" element={<YourBooking />} />
       <Route path="/select-pet" element={<SelectPet />}/>
       <Route path="/booking" element={<Booking />} />
+      <Route path="/pet-profile" element={<ProfilePet />} />
 
       <Route path="/manage-booking" element={<ManageListBooking />} />
       <Route path='/manage-cages' element={<ManageCages />} />
@@ -43,7 +44,6 @@ function App() {
       <Route path="/admin-account" element={<AdminAccount />} />
       <Route path="/admin-dashboard" element={<AdminDashBoard />} />
       <Route path="/admin-services" element={<AdminServices />} />
-      <Route path="/pet-profile" element={<ProfilePet />} />
     </Routes>
   );
 }
