@@ -80,8 +80,15 @@
 }
 
 /* vet part */
+.vet-part-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .vet-part {
   margin: 70px 0;
+  width: 1220px;
 }
 
 .vet-picture-wrapper {
@@ -98,6 +105,7 @@
 
 .all-vet .img-service-vet {
   height: 100%;
+  width: 590px;
 }
 
 .all-vet .vet-picture-content {
@@ -154,55 +162,45 @@
 
 /* content vet */
 .all-vet .content-vet {
-  font-family: Roboto, sans-serif;
-}
-
-.all-vet .content-list-vet {
-  align-self: stretch;
-  width: 600px;
+  padding: 20px 30px;
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 0px;
-  position: relative;
-  flex: 0 0 auto;
-  border-radius: 8px;
+  justify-content: center;
+  font-family: Roboto, sans-serif;
 }
 
-.all-vet .title-text-content-vet {
-  font-family: Roboto, sans-serif;
-  color: #002169;
-  font-size: 25px;
-  letter-spacing: -0.72px;
-  line-height: 50.4px;
+.all-vet .content-list-vet:first-child {
+  padding-right: 40px;
+  width: 100%;
+}
+
+.all-vet .content-list-vet:last-child {
+  padding-right: 10px;
+  width: 100%;
 }
 
 .all-vet .text-vet {
-  position: relative;
-  width: 600px;
-  height: 215px;
   font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #444444;
-  font-size: 16px;
-  letter-spacing: 0;
+  font-size: 14px;
   line-height: 24px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-  align-items: center;
 }
 
 .vet-p {
-  margin-bottom: 7px;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.618;
+  text-decoration: none;
 }
 
 .all-vet .title-services-vet {
   font-family: Roboto, sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   color: #333;
-  margin-bottom: 30px;
-  margin-left: 180px;
+  margin-bottom: 20px;
+  margin-left: 30px;
   font-weight: 700;
   line-height: 1.3;
 }
