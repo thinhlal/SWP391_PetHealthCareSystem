@@ -21,23 +21,26 @@ import AdminServices from './pages/AdminServices/AdminServices.js';
 function App() {
   return (
     <Routes>
-      <Route path="/booking" element={<Booking />} />
       <Route path="/" element={<Home />} /> 
-      <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/manage-booking" element={<ManageListBooking />} />
-      <Route path="/your-pet" element={<YourPet />} />
-      <Route path="/services" element={<Services />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/veterinarian-info" element={<VeterinarianInfo />}/>
+      <Route path="/your-pet" element={<YourPet />} />
+      <Route path="/your-booking" element={<YourBooking />} />
+      <Route path="/select-pet" element={<SelectPet />}/>
+      <Route path="/booking" element={<Booking />} />
+
+      <Route path="/manage-booking" element={<ManageListBooking />} />
       <Route path='/manage-cages' element={<ManageCages />} />
+      
       <Route path="/manage-doctor-calender" element={<ManageDoctorCalender />} />
-      <Route path="/admin-dashboard" element={<AdminDashBoard />} />
       <Route path="/work-schedule" element={<WorkSchedule />} />
       <Route path="/sick-pet" element={<ManageSickPet />} />
-      <Route path="/your-booking" element={<YourBooking />} />
-      <Route path="/admin-account" element={<AdminAccount />} />
       <Route path="/pet-exam-record" element={<PetExamRecord />} />
-      <Route path="/veterinarian-info" element={<VeterinarianInfo />}/>
-      <Route path="/select-pet" element={<SelectPet />}/>
+      
+      <Route path="/admin-account" element={<AdminAccount />} />
+      <Route path="/admin-dashboard" element={<AdminDashBoard />} />
       <Route path="/admin-services" element={<AdminServices />} />
     </Routes>
   );
