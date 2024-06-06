@@ -107,12 +107,12 @@
 .edit-button-pet-info, .edit-button-medical {
   background-color: #007bff; 
   color: white; 
-  padding: 5px 12px; /* Thu nhỏ padding của nút */
+  padding: 5px 12px; 
   margin: 10px 0;
   border: none; 
   border-radius: 10px; 
   cursor: pointer; 
-  font-size: 14px; /* Thu nhỏ font-size của nút */
+  font-size: 14px; 
   transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
@@ -124,18 +124,18 @@
 .add-button-vaccination, .delete-button-vaccination, .delete-button-medical, .view-button-medical {
   background-color: #cccc;
   color: white;
-  padding: 5px 12px; /* Thu nhỏ padding của nút */
+  padding: 5px 12px; 
   margin: 10px 0;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 14px; /* Thu nhỏ font-size của nút */
+  font-size: 14px; 
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .delete-button-vaccination, .delete-button-medical {
   background-color: #dc3545;
-  white-space: nowrap; /* Ngăn chữ xuống dòng */
+  white-space: nowrap; 
 }
 
 .view-button-medical {
