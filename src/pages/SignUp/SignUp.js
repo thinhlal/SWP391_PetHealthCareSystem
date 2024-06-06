@@ -35,6 +35,9 @@ function SignUp() {
                                     <input className="form_SignUp_Input-Text" placeholder="Password" type="password" />
                                 </div>
                                 <div className="form_SignUp_Input">
+                                    <input className="form_SignUp_Input-Text" placeholder="Confirm Password" type="password" />
+                                </div>
+                                <div className="form_SignUp_Input">
                                     <input className="form_SignUp_Input-Text" placeholder="Name" type="text" />
                                 </div>
                             </div>

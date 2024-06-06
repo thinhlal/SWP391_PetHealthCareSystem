@@ -33,7 +33,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 4% 0px;
+  margin: 100px 0px;
 }
 
 .overlap-group-booking {
@@ -53,65 +53,6 @@ a {
 .overlap-booking {
   display: flex;
 }
-
-.your-booking-sidebar {
-  background-color: #fafafa;
-  width: 20%;
-}
-
-.category-main-header-booking {
-  height: 84px;
-  border-bottom: 1px solid #e2e2e2;
-}
-
-.category-header-booking {
-  font-family: Roboto, sans-serif;
-  font-weight: 600;
-  font-size: 30px;
-  background-color: #f5f3f3;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.category-header-text-booking {
-  margin-left: 10px;
-}
-
-.list-booking-items-category-booking {
-  margin-top: 20px;
-}
-
-.menu-item-your-booking {
-  display: flex;
-  height: 44px;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
-  padding: 10px 40px;
-  margin: 10px 0;
-  width: 100%;
-}
-
-.menu-icons-your-booking {
-  width: 20px;
-  height: 20px;
-}
-
-.menu-item_text-booking {
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  color: #000000;
-  font-size: 18px;
-  letter-spacing: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  white-space: nowrap;
-  width: 100%;
-}
-
 .main-content-booking {
   width: 100%;
 }
@@ -122,6 +63,7 @@ a {
   justify-content: space-between;
   background-color: #f5f3f3;
   border-left: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e2e2e2;
   height: 84px;
 }
 
@@ -209,13 +151,13 @@ a {
   flex-direction: column;
   gap: 35px;
   margin: 15px 15px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .detail-number-ID {
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 }
 
