@@ -40,6 +40,11 @@
   width: 100%;
 }
 
+.your-pet-sidebar .menu-item:hover {
+  background-color: #e2e2e2;
+  cursor: pointer;
+}
+
 .your-pet-sidebar .menu-item_txt {
   font-family: Roboto, sans-serif;
   font-weight: 500;

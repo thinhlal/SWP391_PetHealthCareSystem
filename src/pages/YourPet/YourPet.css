@@ -11,19 +11,11 @@ a {
   text-decoration: none;
 }
 
-.your-pet .slide {
-  width: 100%;
-}
-
 .your-pet .main-tittle {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 4% 0px;
-}
-
-.your-pet .overlap-group {
-  background-color: #ffffff;
 }
 
 .your-pet .text-tittle {
@@ -119,17 +111,6 @@ a {
   background-color: #002169;
 }
 
-.your-pet .button-edit {
-  width: fit-content;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  color: #ffffff;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-  white-space: nowrap;
-}
-
 .your-pet .main-content {
   width: 100%;
 }
@@ -137,262 +118,11 @@ a {
 .your-pet .detail-information {
   display: flex;
   justify-content: center;
-  gap: 150px;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
-
-.your-pet .info-pet {
-  justify-content: space-evenly;
-  align-items: center;
-  height: 250px;
-  background-color: #fafafa;
-
-}
-
-.your-pet .your-pet-img {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.your-pet .your-pet-img img {
-  height: 200px;
-  border-radius: 50%;
-}
-
-.your-pet .btn-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Roboto, sans-serif;
-}
-
-.your-pet .view-pet-btn {
-  margin: 10px;
-  border: none;
-  color: #fff;
-  width: 120px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #e18213;
-}
-
-.your-pet .view-pet-btn:hover {
-  background-color: #002169;
-  cursor: pointer;
-}
-
-.your-pet .your-pet-content-info-wrapper {
-  width: 600px;
-  display: flex;
-  align-items: center;
-}
-
-.your-pet .your-pet-content-info {
-  margin: 0 50px;
-}
-
-.your-pet .your-pet-content-info-text {
-  margin: 20px 0;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  color: #000000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-  white-space: nowrap;
-}
-.your-pet .your-pet-content-info-text span {
-  font-weight: 700;
-}
-
-/* pop up css */
-.your-pet .modal-lg .modal-content {
-  padding: 20px;
-}
-
-.your-pet .box {
-  width: 100%;
-  height: auto;
-}
-
-.your-pet .box  .pop-up-form {
-  width: 100%;
-  height: auto;
-}
-
-.your-pet .box  .overlap-group {
-  width: 100%;
-  height: auto;
-  background-color: #ffffff;
-  padding: 20px;
-}
-
-.your-pet .box  .form {
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-}
-
-.your-pet .box  .pet-update-text {
-  margin: 8px 0;
-  width: 100%;
-}
-
-.your-pet .box .pet-update-text-label {
-  align-self: stretch;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  color: #666666;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 18px;
-}
-
-.your-pet .box .pet-update-text-input {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-}
-
-.your-pet .box .pet-update-text-input .type-here {
-  width: 100%;
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
-  color: #000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 30px;
-  background: transparent;
-  border: 1px solid #cccccc;
-  padding: 0 10px;
-  outline: none;
-}
-
-.your-pet .box .pet-update-type {
-  width: 100%;
-  margin: 10px 0;
-}
-
-.your-pet .pet-update-type-header {
-}
-
-.your-pet .box .pet-update-type-radio {
-  margin: 3px 0;
-  display: flex;
-}
-
-.your-pet .box .radio {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.your-pet .box .radio-2 {
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  border-radius: 50%;
-  border: 1px solid #cccccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.your-pet .box .radio-2 input[type="radio"] {
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  cursor: pointer;
-}
-
-.your-pet .box .radio-selection {
-  flex: 1;
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
-  color: #000;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-}
-
-.your-pet .box .pet-image-upload {
-  width: 200px;
-  height: 200px;
-  background-color: #d9d9d9;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 20px auto;
-}
-
-.your-pet .box .pet-image-upload-choose-file {
-  margin: 10px 0;
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.your-pet .pet-image-upload-choose-file-input {
-  width: 200px;
-}
-
-.your-pet .box .cloud-upload {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.your-pet .box .button-edit-txt {
-  width: 100%;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  color: #000000;
-  font-size: 32px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-}
-
-.your-pet .modal-header {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.your-pet .modal-title {
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  text-align: center;
-  flex: 1;
-}
-
-.your-pet .add-pet_pagination {
-  border-top: 1px solid #e2e2e2;
-  padding: 50px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fafafa;
-  font-family: Roboto, sans-serif;
-}
-
 
 .your-pet .profile-card-pet {
   width: 240px;
@@ -410,8 +140,8 @@ a {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.profile-pet-image {
-  perspective: 1000px; 
+.your-pet .profile-pet-image {
+  perspective: 1000px;
 }
 
 .profile-pet-image img {
@@ -423,19 +153,6 @@ a {
 .profile-card-pet:hover .profile-pet-image img {
   transform: rotateY(180deg);
 }
-
-.status-pet {
-  display: inline-block;
-  padding: 5px 10px;
-  border: none; 
-  border-radius: 5px;
-  transition: box-shadow 0.3s ease;
-}
-
-.profile-card-pet:hover .status-pet {
-  box-shadow: 0 0 10px rgba(109, 216, 136, 0.6); 
-}
-
 
 .your-pet .profile-pet-image img {
   width: 100px;
@@ -453,8 +170,6 @@ a {
   color: #333;
   transition: color 0.3s ease;
 }
-
-
 
 .your-pet .status-pet {
   display: inline-block;
