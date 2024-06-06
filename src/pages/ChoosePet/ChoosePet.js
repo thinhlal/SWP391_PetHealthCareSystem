@@ -25,6 +25,7 @@ function ChoosePet() {
     image: '',
   });
   const [imagePreview, setImagePreview] = useState('');
+  const [selectedPetId, setSelectedPetId] = useState(null); // Thêm state để quản lý lựa chọn
 
   const addPet = () => {
     const pet = { id: pets.length + 1, ...newPet };
@@ -63,6 +64,10 @@ function ChoosePet() {
     setPets(updatedPets);
   };
 
+  const handleCardClick = (id) => {
+    setSelectedPetId(selectedPetId === id ? null : id);
+  };
+
   return (
     <div className="main-choose-pet">
         <Header></Header>
@@ -77,16 +82,18 @@ function ChoosePet() {
           <div>Add Pet</div>
         </div>
         {pets.map((pet) => (
-          <div className="choose-pet-card" key={pet.id}>
+          <div
+            className={`choose-pet-card ${selectedPetId === pet.id ? 'selected' : ''}`} // Thêm class 'selected' khi được chọn
+            key={pet.id}
+            onClick={() => handleCardClick(pet.id)}
+          >
             <img src={pet.image} alt={pet.name} />
             <div className='name-pet-card'>{pet.name}</div>
             <div className='main-button-choose-pet'>
-            <button className='button-choose-pet'>Select</button>
             <button className="button-choose-pet" onClick={() => deletePet(pet.id)}>Delete</button>
             </div>
           </div>
         ))}
-      
       </div>
       <button className="select-service-pet">Booking</button>
 
@@ -100,20 +107,16 @@ function ChoosePet() {
         <input type="text" name="name" placeholder="Name" value={newPet.name} onChange={handleChange} />
         <input type="text" name="age" placeholder="Age" value={newPet.age} onChange={handleChange} />
         <input type="text" name="breed" placeholder="Breed" value={newPet.breed} onChange={handleChange} />
-        <form>
-    <select name="type" value={newPet.type} onChange={handleChange}>
-        <option value="" disabled selected>Type</option>
-        <option value="dog">Dog</option>
-        <option value="cat">Cat</option>
-    </select>
-    
-    <select name="gender" value={newPet.gender} onChange={handleChange}>
-        <option value="" disabled selected>Gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-    </select>
-</form>
-
+        <select name="type" value={newPet.type} onChange={handleChange}>
+            <option value="" disabled selected>Type</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+        </select>
+        <select name="gender" value={newPet.gender} onChange={handleChange}>
+            <option value="" disabled selected>Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
       </form>
       <button className='button-modal-choose-pet' onClick={addPet}>Add Pet</button>
       <button className='button-modal-choose-pet' onClick={() => setIsModalOpen(false)}>Close</button>

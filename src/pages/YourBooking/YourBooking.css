@@ -23,6 +23,21 @@ a {
   width: 100%;
 }
 
+
+.status-booking {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.status-pending {
+  color: red;
+}
+
+.status-completed {
+  color: green;
+}
+
+
 .row-your-booking {
   display: flex;
   flex-direction: column;
