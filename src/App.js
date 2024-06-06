@@ -16,7 +16,6 @@ import YourBooking from './pages/YourBooking/YourBooking.js'
 import AdminAccount from './pages/AdminAccount/AdminAccount.js';
 import PetExamRecord from './pages/PetExamRecord/PetExamRecord.js';
 import VeterinarianInfo from './pages/VeterinarianInfo/VeterinarianInfo.js';
-import SelectPet from './pages/SelectPet/SelectPet.js';
 import AdminServices from './pages/AdminServices/AdminServices.js';
 import ProfilePet from './pages/ProfilePet/ProfilePet.js';
 import ChoosePet from './pages/ChoosePet/ChoosePet.js'
@@ -30,7 +29,6 @@ function App() {
       <Route path="/veterinarian-info" element={<VeterinarianInfo />}/>
       <Route path="/your-pet" element={<YourPet />} />
       <Route path="/your-booking" element={<YourBooking />} />
-      <Route path="/select-pet" element={<SelectPet />}/>
       <Route path="/booking" element={<Booking />} />
       <Route path="/choose" element={<ChoosePet />} />
       <Route path="/pet-profile" element={<ProfilePet />} />
