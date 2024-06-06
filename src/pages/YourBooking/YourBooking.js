@@ -8,9 +8,43 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 // Images
 import Sidebar from "../../components/User/Sidebar/Sidebar.js";
 
+const bookings = [
+  {
+    id: "OD45345345435",
+    status: "Pending",
+    date: "29 nov 2024",
+    time: "10:00 - 11:00",
+    petName: "ABC",
+    petType: "Dog",
+    doctor: "Alex",
+    services: "Periodic health check-ups for dogs",
+    price: "70$",
+  },
+  {
+    id: "OD45345345436",
+    status: "Pending",
+    date: "10 nov 2024",
+    time: "12:00 - 13:00",
+    petName: "DEF",
+    petType: "Cat",
+    doctor: "John",
+    services: "Vaccination",
+    price: "50$",
+  },
+  {
+    id: "OD45345345437",
+    status: "Completed booking",
+    date: "20 nov 2024",
+    time: "15:00 - 16:00",
+    petName: "GHI",
+    petType: "Dog",
+    doctor: "Alex",
+    services: "Grooming",
+    price: "45$",
+  },
+];
 
 function YourBooking() {
-
   return (
     <div className="container-your-booking">
       <div className="row-your-booking">
@@ -51,250 +85,103 @@ function YourBooking() {
             </div>
 
             <div className="detail-information-booking">
-              {/* column 1 */}
-              <div className="info-detail-booking">
-                <div className="detail-booking-confirm-booking">
-                  <div className="card-detail-booking-confirm-booking">
-                    <div className="card-ID-booking">
-                      <div className="detail-number-ID">ID: OD45345345435
-                        <div className="status-booking-1">Status: Pending</div>
-                      </div>
-                      <div className="card-body-content-booking">
-                        <div className="text-card-body-content-booking">
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Date Booking:
-                            </div>{" "}
-                            <br />
-                            29 nov 2024
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Time:
-                            </div>{" "}
-                            <br />
-                            10:00
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Pet Name:
-                            </div>{" "}
-                            <br />
-                            ABC
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Pet Type:
-                            </div>{" "}
-                            <br />
-                            Dog
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Selected Doctor:
-                            </div>{" "}
-                            <br />
-                            Alex
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Services:
-                            </div>{" "}
-                            <br />
-                            Periodic health check-ups for dogs
+              {bookings.map((booking, index) => (
+                <div key={index} className="info-detail-booking">
+                  <div className="detail-booking-confirm-booking">
+                    <div className="card-detail-booking-confirm-booking">
+                      <div className="card-ID-booking">
+                        <div className="detail-number-ID">
+                          ID: {booking.id}
+                          <div
+                            className={`status-booking ${
+                              booking.status === "Pending"
+                                ? "status-pending"
+                                : "status-completed"
+                            }`}
+                          >
+                            Status: {booking.status}
                           </div>
                         </div>
-                      </div>
+                        <div className="card-body-content-booking">
+                          <div className="text-card-body-content-booking">
+                            <div className="col-booking">
+                              <div className="mini-title-detail-booking">
+                                Date Booking:
+                              </div>{" "}
+                              <br />
+                              {booking.date}
+                            </div>
+                            <div className="col-booking">
+                              <div className="mini-title-detail-booking">
+                                Time:
+                              </div>{" "}
+                              <br />
+                              {booking.time}
+                            </div>
+                            <div className="col-booking">
+                              <div className="mini-title-detail-booking">
+                                Pet Name:
+                              </div>{" "}
+                              <br />
+                              {booking.petName}
+                            </div>
+                            <div className="col-booking">
+                              <div className="mini-title-detail-booking">
+                                Pet Type:
+                              </div>{" "}
+                              <br />
+                              {booking.petType}
+                            </div>
+                            <div className="col-booking">
+                              <div className="mini-title-detail-booking">
+                                Selected Doctor:
+                              </div>{" "}
+                              <br />
+                              {booking.doctor}
+                            </div>
+                            <div className="col-booking">
+                              <div className="mini-title-detail-booking">
+                                Services:
+                              </div>{" "}
+                              <br />
+                              {booking.services}
+                            </div>
+                          </div>
+                        </div>
 
-                      <div className="price-cancel-rate-booking">
-                        <div className="total-price-booking">
-                          Total Price:&nbsp;{" "}
-                          <div className="detail-price-booking">70$</div>
-                        </div>
-                        <a href="/" className="cancel-booking-button-1">
-                          <div className="text-sign-in-button-booking">
-                            Cancel Booking
+                        <div className="price-cancel-rate-booking">
+                          <div className="total-price-booking">
+                            Total Price:&nbsp;
+                            <div className="detail-price-booking">
+                              {booking.price}
+                            </div>
                           </div>
-                        </a>
-                        {/* button feedback */}
-                        <button type="button" className="btn btn-primary feedback-rate-booking" data-bs-toggle="modal" data-bs-target="#newModal">
-                          <div className="text-feedback-rate-booking">Feedback</div>
-                        </button>
+                          {booking.status === "Pending" ? (
+                            <a href="/" className="cancel-booking-button-1">
+                              <div className="text-sign-in-button-booking">
+                                Cancel Booking
+                              </div>
+                            </a>
+                          ) : (
+                            <button
+                              type="button"
+                              className="btn btn-primary feedback-rate-booking"
+                              data-bs-toggle="modal"
+                              data-bs-target="#newModal"
+                            >
+                              <div className="text-feedback-rate-booking">
+                                Feedback
+                              </div>
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* column 2 */}
-              <div className="info-detail-booking">
-                <div className="detail-booking-confirm-booking">
-                  <div className="card-detail-booking-confirm-booking">
-                    <div className="card-ID-booking">
-                      <div className="detail-number-ID">ID: OD45345345435
-                        <div className="status-booking-2">Status: Completed booking</div>
-                      </div>
-                      <div className="card-body-content-booking">
-                        <div className="text-card-body-content-booking">
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Date Booking:
-                            </div>{" "}
-                            <br />
-                            10 nov 2024
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Time:
-                            </div>{" "}
-                            <br />
-                            12:00
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Selected Doctor:
-                            </div>{" "}
-                            <br />
-                            Alex
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Services:
-                            </div>{" "}
-                            <br />
-                            Periodic health check-ups for dogs
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="price-cancel-rate-booking">
-                        <div className="total-price-booking">
-                          Total Price:&nbsp;{" "}
-                          <div className="detail-price-booking">50$</div>
-                        </div>
-                        <a href="/" className="cancel-booking-button-2">
-                          <div className="text-sign-in-button-booking">
-                            Cancel Booking
-                          </div>
-                        </a>
-                        {/* button feedback */}
-                        <button type="button" className="btn btn-primary feedback-rate-booking" data-bs-toggle="modal" data-bs-target="#newModal">
-                          <div className="text-feedback-rate-booking">Feedback</div>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* column 3 */}
-              <div className="info-detail-booking">
-                <div className="detail-booking-confirm-booking">
-                  <div className="card-detail-booking-confirm-booking">
-                    <div className="card-ID-booking">
-                      <div className="detail-number-ID">ID: OD45345345435
-                        <div className="status-booking-3">Status: Completed booking</div>
-                      </div>
-                      <div className="card-body-content-booking">
-                        <div className="text-card-body-content-booking">
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Date Booking:
-                            </div>{" "}
-                            <br />
-                            20 nov 2024
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Time:
-                            </div>{" "}
-                            <br />
-                            15:00
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Selected Doctor:
-                            </div>{" "}
-                            <br />
-                            Alex
-                          </div>
-                          <div className="col-booking">
-                            <div className="mini-title-detail-booking">
-                              Services:
-                            </div>{" "}
-                            <br />
-                            Periodic health check-ups for dogs
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="price-cancel-rate-booking">
-                        <div className="total-price-booking">
-                          Total Price:&nbsp;{" "}
-                          <div className="detail-price-booking">45$</div>
-                        </div>
-                        <a href="/" className="cancel-booking-button-3">
-                          <div className="text-sign-in-button-booking">
-                            Cancel Booking
-                          </div>
-                        </a>
-                        {/* button feedback */}
-                        <button type="button" className="btn btn-primary feedback-rate-booking" data-bs-toggle="modal" data-bs-target="#newModal">
-                          <div className="text-feedback-rate-booking">Feedback</div>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* modal rating */}
-
-            <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="newModalLabel">Your opinion matters to us!</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div className="rating-container">
-                      <div className="main-title-rate">How was quality of the call?</div>
-                      <div className="rate-success">
-
-                        <div className="rating">
-                          <input type="radio" name="rating" value="5" id="5" />
-                          <label htmlFor="5">☆</label>
-                          <input type="radio" name="rating" value="4" id="4" />
-                          <label htmlFor="4">☆</label>
-                          <input type="radio" name="rating" value="3" id="3" />
-                          <label htmlFor="3">☆</label>
-                          <input type="radio" name="rating" value="2" id="2" />
-                          <label htmlFor="2">☆</label>
-                          <input type="radio" name="rating" value="1" id="1" />
-                          <label htmlFor="1">☆</label>
-                        </div>
-                      </div>
-
-                      <textarea placeholder="Leave a message, if you want"></textarea>
-                      <button className="rating-button">Rate now</button>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="button-secondary" data-bs-dismiss="modal">Maybe later</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* modal confirm  */}
-
-          </div>
-        </div>
-
-        {/* pagination */}
-        <div className="add-pet_pagination">
+              ))}
+              {/* pagination */}
+               <div className="add-pet_pagination">
           <nav aria-label="...">
             <ul className="pagination">
               <li className="page-item disabled">
@@ -325,6 +212,98 @@ function YourBooking() {
             </ul>
           </nav>
         </div>
+            </div>
+
+            {/* modal rating */}
+            <div
+              className="modal fade"
+              id="newModal"
+              tabIndex="-1"
+              aria-labelledby="newModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="newModalLabel">
+                      Your opinion matters to us!
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <div className="rating-container">
+                      <div className="main-title-rate">
+                        How was quality of the call?
+                      </div>
+                      <div className="rate-success">
+                        <div className="rating">
+                          <input
+                            type="radio"
+                            name="rating"
+                            value="5"
+                            id="5"
+                          />
+                          <label htmlFor="5">☆</label>
+                          <input
+                            type="radio"
+                            name="rating"
+                            value="4"
+                            id="4"
+                          />
+                          <label htmlFor="4">☆</label>
+                          <input
+                            type="radio"
+                            name="rating"
+                            value="3"
+                            id="3"
+                          />
+                          <label htmlFor="3">☆</label>
+                          <input
+                            type="radio"
+                            name="rating"
+                            value="2"
+                            id="2"
+                          />
+                          <label htmlFor="2">☆</label>
+                          <input
+                            type="radio"
+                            name="rating"
+                            value="1"
+                            id="1"
+                          />
+                          <label htmlFor="1">☆</label>
+                        </div>
+                      </div>
+
+                      <textarea placeholder="Leave a message, if you want"></textarea>
+                      <button className="rating-button">Rate now</button>
+                    </div>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="button-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Maybe later
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* modal confirm  */}
+            
+          </div>
+        </div>
+
+        {/* pagination */}
+       
 
         <Footer></Footer>
       </div>
