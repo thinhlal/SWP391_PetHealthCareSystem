@@ -4,8 +4,9 @@ import './PetExamRecord.css';
 import logo_petE from '../../assets/images/img_PetExamRecord/logo_petE.png';
 import icon_user from '../../assets/images/img_PetExamRecord/icon_user.png';
 
-function PetExamRecord() {
 
+function PetExamRecord() {
+	
     return (
 
     <div>
@@ -53,19 +54,19 @@ function PetExamRecord() {
 		</div>
 		<div className="form-petExam-3">
 			<div class="pet-info-1">Pet Diagnostic</div>
-			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter Diagnostic"></textarea>
+			<textarea className="petE-control"placeholder="Enter Diagnostic"></textarea>
 		  </div>
 		  <div className="form-petExam-3">
 			<div class="pet-info-1">Pet Symptoms</div>
-			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter Symptoms"></textarea>
+			<textarea className="petE-control" placeholder="Enter Symptoms"></textarea>
 		  </div>
 		<div className="form-petExam-3">
   			<div class="pet-info-1">Prescription</div>
-  			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter prescription"></textarea>
+  			<textarea className="petE-control" placeholder="Enter prescription"></textarea>
 		</div>
 		<div className="form-petExam-3">
   			<div class="pet-info-1">Note</div>
-  			<textarea className="petE-control" rows="1" cols="30" placeholder="Enter note"></textarea>
+  			<textarea className="petE-control" placeholder="Enter note"></textarea>
 		</div>
 		<div className="final-petE">
 		<a href="work-schedule" className="btn-save">Save</a>

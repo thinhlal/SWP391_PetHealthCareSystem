@@ -67,25 +67,22 @@ function VeterinarianInfo() {
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">Known not only as one of the leading experts in the field of orthodontics in Vietnam, Dr. Pham Hong Duc is also loved by everyone for his friendliness, dedication and enthusiasm.</div>
-								<div className="vet-p">✓ Bác sĩ Đức được hàng Invisalign đánh giá là bác sĩ TOP 1 tại Đông Nam Á và TOP 1 về kinh nghiệm, chuyên môn tại Việt Nam</div>
-								<div className="vet-p">✓ Bác sĩ duy nhất tại Việt Nam 2 năm liên tiếp đạt thứ hạng Black Diamond</div>
+								<div className="vet-p">✓ Dr. Minh is rated by Invisalign as the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam.</div>
+								<div className="vet-p">✓ The only doctor in Vietnam to achieve Black Diamond rank for 2 consecutive years</div>
 							</div>
 						</div>
 
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">
-									✓ 1 trong 3 bác sĩ sử dụng hệ thống mắc cài tự động Damon thành công nhất Việt Nam
+									✓ 1 of 3 doctors using the Damon automatic braces system most successfully in Vietnam
 								</div>
 								<div className="vet-p">
-									✓ Dịch giả của những cuốn sách chỉnh nha nổi tiếng như 1001 bí kíp lâm sàng trong chỉnh nha (2015), Các ca lâm sàng trong chỉnh nha (2015), Cơ sinh học trong chỉnh nha (2016),…
-								</div>
+								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
-									✓ Bác sĩ Đức đã có kinh nghiệm điều trị hơn 6500 ca chỉnh nha, được coi là một trong những bác sĩ có số lượng KH niềng răng lớn nhất Hà Nội.
-								</div>
+								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
 								<div className="vet-p">
-									✓ Là người đầu tiên đưa phương pháp Niềng không nhổ răng F.A.C.E từ nước ngoài về ứng dụng tại Việt Nam, giúp hạn chế tối đa việc nhổ răng thậm chí không cần nhổ răng mà vẫn mang lại hiệu quả điều trị cao nhất.
-								</div>
+								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>
@@ -94,7 +91,7 @@ function VeterinarianInfo() {
 
 			<div className="vet-part-wrapper" data-aos="fade-left">
 				<div className="vet-part">
-					<div className="title-services-vet">Vet. Minh</div>
+					<div className="title-services-vet">Vet. Tung</div>
 					<div className='vet-picture-wrapper'>
 						<div className="vet-picture">
 							<img className="img-service-vet" src={vet6} alt="vet" />
@@ -123,25 +120,21 @@ function VeterinarianInfo() {
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">Known not only as one of the leading experts in the field of orthodontics in Vietnam, Dr. Pham Hong Duc is also loved by everyone for his friendliness, dedication and enthusiasm.</div>
-								<div className="vet-p">✓ Bác sĩ Đức được hàng Invisalign đánh giá là bác sĩ TOP 1 tại Đông Nam Á và TOP 1 về kinh nghiệm, chuyên môn tại Việt Nam</div>
-								<div className="vet-p">✓ Bác sĩ duy nhất tại Việt Nam 2 năm liên tiếp đạt thứ hạng Black Diamond</div>
+								<div className="vet-p">✓ Dr. Tung is rated by Invisalign as the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam.</div>
+								<div className="vet-p">✓ The only doctor in Vietnam to achieve Black Diamond rank for 2 consecutive years</div>
 							</div>
 						</div>
 
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">
-									✓ 1 trong 3 bác sĩ sử dụng hệ thống mắc cài tự động Damon thành công nhất Việt Nam
-								</div>
+								✓ 1 in 3 doctors using the Damon automatic braces system most successfully in Vietnam								</div>
 								<div className="vet-p">
-									✓ Dịch giả của những cuốn sách chỉnh nha nổi tiếng như 1001 bí kíp lâm sàng trong chỉnh nha (2015), Các ca lâm sàng trong chỉnh nha (2015), Cơ sinh học trong chỉnh nha (2016),…
-								</div>
+								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
-									✓ Bác sĩ Đức đã có kinh nghiệm điều trị hơn 6500 ca chỉnh nha, được coi là một trong những bác sĩ có số lượng KH niềng răng lớn nhất Hà Nội.
-								</div>
+								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
 								<div className="vet-p">
-									✓ Là người đầu tiên đưa phương pháp Niềng không nhổ răng F.A.C.E từ nước ngoài về ứng dụng tại Việt Nam, giúp hạn chế tối đa việc nhổ răng thậm chí không cần nhổ răng mà vẫn mang lại hiệu quả điều trị cao nhất.
-								</div>
+								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>
@@ -149,7 +142,7 @@ function VeterinarianInfo() {
 			</div>
 			<div className="vet-part-wrapper" data-aos="fade-left">
 				<div className="vet-part">
-					<div className="title-services-vet">Vet. Minh</div>
+					<div className="title-services-vet">Vet. Dat</div>
 					<div className='vet-picture-wrapper'>
 						<div className="vet-picture">
 							<img className="img-service-vet" src={vet2} alt="vet" />
@@ -178,25 +171,21 @@ function VeterinarianInfo() {
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">Known not only as one of the leading experts in the field of orthodontics in Vietnam, Dr. Pham Hong Duc is also loved by everyone for his friendliness, dedication and enthusiasm.</div>
-								<div className="vet-p">✓ Bác sĩ Đức được hàng Invisalign đánh giá là bác sĩ TOP 1 tại Đông Nam Á và TOP 1 về kinh nghiệm, chuyên môn tại Việt Nam</div>
-								<div className="vet-p">✓ Bác sĩ duy nhất tại Việt Nam 2 năm liên tiếp đạt thứ hạng Black Diamond</div>
+								<div className="vet-p">✓ Dr. Dat is rated by Invisalign as the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam.</div>
+								<div className="vet-p">✓ The only doctor in Vietnam to achieve Black Diamond rank for 2 consecutive years</div>
 							</div>
 						</div>
 
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">
-									✓ 1 trong 3 bác sĩ sử dụng hệ thống mắc cài tự động Damon thành công nhất Việt Nam
-								</div>
+								✓ 1 in 3 doctors using the Damon automatic braces system most successfully in Vietnam								</div>
 								<div className="vet-p">
-									✓ Dịch giả của những cuốn sách chỉnh nha nổi tiếng như 1001 bí kíp lâm sàng trong chỉnh nha (2015), Các ca lâm sàng trong chỉnh nha (2015), Cơ sinh học trong chỉnh nha (2016),…
-								</div>
+								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
-									✓ Bác sĩ Đức đã có kinh nghiệm điều trị hơn 6500 ca chỉnh nha, được coi là một trong những bác sĩ có số lượng KH niềng răng lớn nhất Hà Nội.
-								</div>
+								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
 								<div className="vet-p">
-									✓ Là người đầu tiên đưa phương pháp Niềng không nhổ răng F.A.C.E từ nước ngoài về ứng dụng tại Việt Nam, giúp hạn chế tối đa việc nhổ răng thậm chí không cần nhổ răng mà vẫn mang lại hiệu quả điều trị cao nhất.
-								</div>
+								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>
@@ -204,7 +193,7 @@ function VeterinarianInfo() {
 			</div>
 			<div className="vet-part-wrapper" data-aos="fade-left">
 				<div className="vet-part">
-					<div className="title-services-vet">Vet. Minh</div>
+					<div className="title-services-vet">Vet. Duong</div>
 					<div className='vet-picture-wrapper'>
 						<div className="vet-picture">
 							<img className="img-service-vet" src={vet3} alt="vet" />
@@ -233,25 +222,21 @@ function VeterinarianInfo() {
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">Known not only as one of the leading experts in the field of orthodontics in Vietnam, Dr. Pham Hong Duc is also loved by everyone for his friendliness, dedication and enthusiasm.</div>
-								<div className="vet-p">✓ Bác sĩ Đức được hàng Invisalign đánh giá là bác sĩ TOP 1 tại Đông Nam Á và TOP 1 về kinh nghiệm, chuyên môn tại Việt Nam</div>
-								<div className="vet-p">✓ Bác sĩ duy nhất tại Việt Nam 2 năm liên tiếp đạt thứ hạng Black Diamond</div>
+								<div className="vet-p">✓ Dr. Duong is rated by Invisalign as the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam.</div>
+								<div className="vet-p">✓The only doctor in Vietnam to achieve Black Diamond rank for 2 consecutive years</div>
 							</div>
 						</div>
 
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">
-									✓ 1 trong 3 bác sĩ sử dụng hệ thống mắc cài tự động Damon thành công nhất Việt Nam
-								</div>
+								✓ 1 in 3 doctors using the Damon automatic braces system most successfully in Vietnam								</div>
 								<div className="vet-p">
-									✓ Dịch giả của những cuốn sách chỉnh nha nổi tiếng như 1001 bí kíp lâm sàng trong chỉnh nha (2015), Các ca lâm sàng trong chỉnh nha (2015), Cơ sinh học trong chỉnh nha (2016),…
-								</div>
+								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
-									✓ Bác sĩ Đức đã có kinh nghiệm điều trị hơn 6500 ca chỉnh nha, được coi là một trong những bác sĩ có số lượng KH niềng răng lớn nhất Hà Nội.
-								</div>
+								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
 								<div className="vet-p">
-									✓ Là người đầu tiên đưa phương pháp Niềng không nhổ răng F.A.C.E từ nước ngoài về ứng dụng tại Việt Nam, giúp hạn chế tối đa việc nhổ răng thậm chí không cần nhổ răng mà vẫn mang lại hiệu quả điều trị cao nhất.
-								</div>
+								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>
@@ -259,7 +244,7 @@ function VeterinarianInfo() {
 			</div>
 			<div className="vet-part-wrapper" data-aos="fade-left">
 				<div className="vet-part">
-					<div className="title-services-vet">Vet. Minh</div>
+					<div className="title-services-vet">Vet. Thinh</div>
 					<div className='vet-picture-wrapper'>
 						<div className="vet-picture">
 							<img className="img-service-vet" src={vet4} alt="vet" />
@@ -288,25 +273,21 @@ function VeterinarianInfo() {
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">Known not only as one of the leading experts in the field of orthodontics in Vietnam, Dr. Pham Hong Duc is also loved by everyone for his friendliness, dedication and enthusiasm.</div>
-								<div className="vet-p">✓ Bác sĩ Đức được hàng Invisalign đánh giá là bác sĩ TOP 1 tại Đông Nam Á và TOP 1 về kinh nghiệm, chuyên môn tại Việt Nam</div>
-								<div className="vet-p">✓ Bác sĩ duy nhất tại Việt Nam 2 năm liên tiếp đạt thứ hạng Black Diamond</div>
+								<div className="vet-p">✓ Dr. Thinh is rated by Invisalign as the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam.</div>
+								<div className="vet-p">✓ The only doctor in Vietnam to achieve Black Diamond rank for 2 consecutive years</div>
 							</div>
 						</div>
 
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">
-									✓ 1 trong 3 bác sĩ sử dụng hệ thống mắc cài tự động Damon thành công nhất Việt Nam
-								</div>
+								✓ 1 in 3 doctors using the Damon automatic braces system most successfully in Vietnam								</div>
 								<div className="vet-p">
-									✓ Dịch giả của những cuốn sách chỉnh nha nổi tiếng như 1001 bí kíp lâm sàng trong chỉnh nha (2015), Các ca lâm sàng trong chỉnh nha (2015), Cơ sinh học trong chỉnh nha (2016),…
-								</div>
+								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
-									✓ Bác sĩ Đức đã có kinh nghiệm điều trị hơn 6500 ca chỉnh nha, được coi là một trong những bác sĩ có số lượng KH niềng răng lớn nhất Hà Nội.
-								</div>
+								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
 								<div className="vet-p">
-									✓ Là người đầu tiên đưa phương pháp Niềng không nhổ răng F.A.C.E từ nước ngoài về ứng dụng tại Việt Nam, giúp hạn chế tối đa việc nhổ răng thậm chí không cần nhổ răng mà vẫn mang lại hiệu quả điều trị cao nhất.
-								</div>
+								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>
@@ -314,7 +295,7 @@ function VeterinarianInfo() {
 			</div>
 			<div className="vet-part-wrapper" data-aos="fade-left">
 				<div className="vet-part">
-					<div className="title-services-vet">Vet. Minh</div>
+					<div className="title-services-vet">Vet. Phat</div>
 					<div className='vet-picture-wrapper'>
 						<div className="vet-picture">
 							<img className="img-service-vet" src={vet5} alt="vet" />
@@ -343,25 +324,21 @@ function VeterinarianInfo() {
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">Known not only as one of the leading experts in the field of orthodontics in Vietnam, Dr. Pham Hong Duc is also loved by everyone for his friendliness, dedication and enthusiasm.</div>
-								<div className="vet-p">✓ Bác sĩ Đức được hàng Invisalign đánh giá là bác sĩ TOP 1 tại Đông Nam Á và TOP 1 về kinh nghiệm, chuyên môn tại Việt Nam</div>
-								<div className="vet-p">✓ Bác sĩ duy nhất tại Việt Nam 2 năm liên tiếp đạt thứ hạng Black Diamond</div>
+								<div className="vet-p">✓ Dr. Phat is rated by Invisalign as the TOP 1 doctor in Southeast Asia and TOP 1 in terms of experience and expertise in Vietnam.</div>
+								<div className="vet-p">✓ The only doctor in Vietnam to achieve Black Diamond rank for 2 consecutive years</div>
 							</div>
 						</div>
 
 						<div className="content-list-vet">
 							<div className="text-vet">
 								<div className="vet-p">
-									✓ 1 trong 3 bác sĩ sử dụng hệ thống mắc cài tự động Damon thành công nhất Việt Nam
-								</div>
+								✓ 1 in 3 doctors using the Damon automatic braces system most successfully in Vietnam								</div>
 								<div className="vet-p">
-									✓ Dịch giả của những cuốn sách chỉnh nha nổi tiếng như 1001 bí kíp lâm sàng trong chỉnh nha (2015), Các ca lâm sàng trong chỉnh nha (2015), Cơ sinh học trong chỉnh nha (2016),…
-								</div>
+								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
-									✓ Bác sĩ Đức đã có kinh nghiệm điều trị hơn 6500 ca chỉnh nha, được coi là một trong những bác sĩ có số lượng KH niềng răng lớn nhất Hà Nội.
-								</div>
+								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
 								<div className="vet-p">
-									✓ Là người đầu tiên đưa phương pháp Niềng không nhổ răng F.A.C.E từ nước ngoài về ứng dụng tại Việt Nam, giúp hạn chế tối đa việc nhổ răng thậm chí không cần nhổ răng mà vẫn mang lại hiệu quả điều trị cao nhất.
-								</div>
+								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>
