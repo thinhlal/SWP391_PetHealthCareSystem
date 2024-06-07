@@ -312,12 +312,12 @@ function AdminAccount() {
                                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div className="modal-body">
-                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Account ID: </div> A00001 </div>
-                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
-                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">User name: </div> leslie123 </div>
-                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
-                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
-                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -345,12 +345,1191 @@ function AdminAccount() {
                                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div className="modal-body">
-                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Account ID: </div> A00001 </div>
-                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">Name: </div> Leslie </div>
-                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-initials">User name: </div> leslie123 </div>
-                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Email: </div> Leslie23@gmail.com </div>
-                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Phone number: </div> 0777123456 </div>
-                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-initials">Role: </div> Veterinarians </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="Admin-Account-Main-Table-Content-Row-Wrapper">
+                                    <div className="Admin-Account-Main-Table-Content-Row "> A00001 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> leslie123 </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row "> Veterinarians </div>
+                                    <div className="Admin-Account-Main-Table-Content-Row ">
+
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" >
+                                                <BorderColorOutlinedIcon
+                                                    sx={{
+                                                        color: blue[400],
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalEdit" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelEdit">Update Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title-name"> Name </div>
+                                                                <div className="Admin-Account-modal-update-old" ><div className="Admin-Account-modal-initials">Old name: </div> Leslie </div>
+                                                                <label className="Admin-Account-modal-update-new"> New name: </label>
+                                                                <input className="Admin-Account-input" placeholder="Username/Email" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Email </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old email: </div> Leslie23@gmail.com </div>
+                                                                <label className="Admin-Account-modal-update-new"  >New email:  </label>
+                                                                <input className="Admin-Account-input" type="email" placeholder="Example@gmail.com" />
+                                                            </div>
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Phone </div>
+                                                                <div className="Admin-Account-modal-update-old"  ><div className="Admin-Account-modal-initials">Old phone number: </div> 0777123456</div>
+                                                                <label className="Admin-Account-modal-update-new"  >New phone number: </label>
+                                                                <input className="Admin-Account-input" placeholder="Phone number" />
+                                                            </div>
+
+                                                            <div className="Admin-Account-modal-update">
+                                                                <div className="Admin-Account-modal-title"> Role </div>
+                                                                <div className="Admin-Account-modal-update-old"  > <div className="Admin-Account-modal-initials">Old role: </div> Veterinarians </div>
+                                                                <label className="Admin-Account-modal-initials">New role: </label>
+                                                                <select className="Admin-Account-input-role">
+                                                                    <option>Customer</option>
+                                                                    <option>Veterinarians</option>
+                                                                    <option>Staff</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-success">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
+                                                <DeleteOutlineIcon
+                                                    sx={{
+                                                        color: red[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalDelete" tabIndex="-1" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelDelete">Delete Account</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-delete" > <div className="Admin-Account-modal-delete-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-delete" ><div className="Admin-Account-modal-delete-title">Role: </div> Veterinarians </div>
+                                                        </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" className="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </span>
+
+                                        <span className="Admin-Account-Main-Table-Content-Btn_Wrapper ">
+                                            <button type="button" className="Admin-Account-Main-Table-Content-Btn" data-bs-toggle="modal" data-bs-target="#exampleModalMore" >
+                                                <MoreVertOutlinedIcon
+                                                    sx={{
+                                                        color: green[400]
+                                                    }}
+                                                />
+                                            </button>
+
+                                            <div className="modal fade" id="exampleModalMore" tabIndex="-1" aria-labelledby="exampleModalLabelMore" aria-hidden="true">
+                                                <div className="modal-dialog">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabelMore">Account Information</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="modal-body">
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Account ID: </div> A00001 </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">Name: </div> Leslie </div>
+                                                            <div className="Admin-Account-modal-more" > <div className="Admin-Account-modal-more-title">User name: </div> leslie123 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Email: </div> Leslie23@gmail.com </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                            <div className="Admin-Account-modal-more" ><div className="Admin-Account-modal-more-title">Role: </div> Veterinarians </div>
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
