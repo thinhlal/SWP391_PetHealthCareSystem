@@ -143,7 +143,7 @@ function AdminServices() {
                                             <button className="Admin-Services-Main-Search-Button"> <img src={icon_search} alt="" /> </button>
                                         </div>
                                         <div className="Admin-Services-Add-Services">
-                                            <button type="button" className="Admin-Services-add-pet-btn" data-bs-toggle="modal" data-bs-target="#Admin-Services-exampleModal">
+                                            <button type="button" className="Admin-Services-add-services-btn" data-bs-toggle="modal" data-bs-target="#Admin-Services-exampleModal">
                                                 Add Services </button>
 
                                             <div className="modal fade" id="Admin-Services-exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
@@ -155,13 +155,16 @@ function AdminServices() {
                                                         </div>
                                                         <div className="modal-body">
                                                             <div className="Admin-Services-modal-update-name">
-                                                                <div className="Admin-Services-modal-initials"> Services Name: <input className="Admin-Services-input" placeholder="Services" /> </div>
+                                                                <label className="Admin-Services-modal-initials"> Services name:</label>
+                                                                <input className="Admin-Services-input" placeholder="Services" />
                                                             </div>
                                                             <div className="Admin-Services-modal-update-name">
-                                                                <div className="Admin-Services-modal-initials"> Services Description: <input className="Admin-Services-input" placeholder="Description" /> </div>
+                                                                <label className="Admin-Services-modal-initials"> Services description:</label>
+                                                                <input className="Admin-Services-input" placeholder="Description" />
                                                             </div>
                                                             <div className="Admin-Services-modal-update-name">
-                                                                <div className="Admin-Services-modal-initials"> Services Price: <input className="Admin-Services-input" placeholder="Price" /> </div>
+                                                                <label className="Admin-Services-modal-initials"> Services price: </label>
+                                                                <input className="Admin-Services-input" placeholder="Price" />
                                                             </div>
                                                         </div>
                                                         <div className="modal-footer">
@@ -211,19 +214,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -252,10 +257,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -283,10 +288,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -297,6 +302,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -324,19 +330,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -365,10 +373,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -396,10 +404,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -410,6 +418,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -437,19 +446,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -478,10 +489,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -509,10 +520,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -523,6 +534,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -550,19 +562,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -591,10 +605,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -622,10 +636,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -636,6 +650,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -663,19 +678,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -704,10 +721,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -735,10 +752,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -749,6 +766,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -776,19 +794,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -817,10 +837,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -848,10 +868,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -862,6 +882,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -889,19 +910,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -930,10 +953,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -961,10 +984,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -975,6 +998,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -1002,19 +1026,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -1043,10 +1069,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1074,10 +1100,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1088,6 +1114,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -1115,19 +1142,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -1156,10 +1185,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1187,10 +1216,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1201,6 +1230,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
                                     <div className="Admin-Services-Main-Table-Content-Row-Wrapper">
                                         <div className="Admin-Services-Main-Table-Content-Row "> S00001 </div>
                                         <div className="Admin-Services-Main-Table-Content-Row "> Vaccinations </div>
@@ -1228,19 +1258,21 @@ function AdminServices() {
                                                             <div className="modal-body">
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title-name"> Name </div>
-                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-initials">Old name: </div> Vaccinations </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old name: </div> Vaccinations </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New name: </div><input className="Admin-Services-input" placeholder="Name" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Description: </div> Services Description </div>
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">Old Description: </div> Services Description </div>
+                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-update-title">New Description: </div> <input className="Admin-Services-input" type="email" placeholder="Description" /> </div>
                                                                 </div>
                                                                 <div className="Admin-Services-modal-update-name">
                                                                     <div className="Admin-Services-modal-title"> Price </div>
 
-                                                                    <div className="Admin-Services-modal-update"  ><div className="Admin-Services-modal-initials">Old Price: </div> $ 60</div>
-                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-initials">New Price: </div> <input className="Admin-Services-input-phone" placeholder="$$$" /> </div>
+                                                                    <div className="Admin-Services-modal-update"  >
+                                                                    <div className="Admin-Services-modal-update" ><div className="Admin-Services-modal-update-title">Old price: </div> Vaccinations </div>
+                                                                    </div>
+                                                                    <div className="Admin-Services-modal-update"  > <div className="Admin-Services-modal-update-title">New Price: </div> <input className="Admin-Services-input-phone" placeholder="Price" /> </div>
                                                                 </div>
                                                             </div>
                                                             <div className="modal-footer">
@@ -1269,10 +1301,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-delete" > <div className="Admin-Services-modal-delete-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-delete" ><div className="Admin-Services-modal-delete-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1300,10 +1332,10 @@ function AdminServices() {
                                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div className="modal-body">
-                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-initials">Name: </div> Vaccinations </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Description: </div> Services Description </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Phone number: </div> 0777123456 </div>
-                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-initials">Price: </div> $ 60 </div>
+                                                                <div className="Admin-Services-modal-more" > <div className="Admin-Services-modal-more-title">Name: </div> Vaccinations </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Description: </div> Services Description </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Phone number: </div> 0777123456 </div>
+                                                                <div className="Admin-Services-modal-more" ><div className="Admin-Services-modal-more-title">Price: </div> $ 60 </div>
                                                             </div>
                                                             <div className="modal-footer">
                                                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1314,6 +1346,7 @@ function AdminServices() {
                                             </span>
                                         </div>
                                     </div>
+
 
 
 

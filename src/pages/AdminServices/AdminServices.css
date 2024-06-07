@@ -133,89 +133,90 @@
     align-items: center;
     justify-content: space-between;
     margin: 10px 3%;
-  }
-  
-  .Admin-Services-Main_Title-Left {
+}
+
+.Admin-Services-Main_Title-Left {
     font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Services-Main_Title-Left-Intro {
+}
+
+.Admin-Services-Main_Title-Left-Intro {
     color: #242f48;
     font-weight: 600;
     font-size: 20px;
     text-indent: -1px;
     line-height: 1;
     margin-bottom: 5px;
-  }
-  
-  .Admin-Services-Main_Title-Left-text {
+}
+
+.Admin-Services-Main_Title-Left-text {
     color: #78829a;
     font-weight: 400;
     font-size: 12px;
-  }
-  
-  .Admin-Services-Main_Title-Right {
+}
+
+.Admin-Services-Main_Title-Right {
     font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Services-title-Star {
+}
+
+.Admin-Services-title-Star {
     color: #78829a;
     font-size: 13px;
-  }
-  
-  .Admin-Services-Star span {
+}
+
+.Admin-Services-Star span {
     font-size: 13px;
     margin-left: 5px;
-  }
+}
 
-  .Admin-Services-Main-ChooseDate {
+.Admin-Services-Main-ChooseDate {
     display: flex;
     align-items: center;
     font-family: "Montserrat", Helvetica;
     margin: 25px 20px 0 3%;
-  }
-  
-  .Admin-Services-Main-ChooseDate_Text {
-    margin-right: 10px;
-  }
+}
 
-  .Admin-Services-Main-Header {
+.Admin-Services-Main-ChooseDate_Text {
+    margin-right: 10px;
+}
+
+.Admin-Services-Main-Header {
     margin: 40px 0 0 0;
     font-family: Roboto, sans-serif;
     padding: 0;
     justify-content: space-evenly;
-  }
-  
-  .Admin-Services-Main-Header-Income {
+}
+
+.Admin-Services-Main-Header-Income {
     background-color: white;
     border-radius: 8px;
     width: 260px;
     border: 1px solid #eae8f1;
     box-shadow: -2px 4px 18px #dadee8;
-  }
-  
-  .Admin-Services-Main-Header-Note {
+}
+
+.Admin-Services-Main-Header-Note {
     padding-top: 3%;
     color: #696cff;
     font-size: 15px;
-  }
-  
-  .Admin-Services-Main-Header-Money {
+}
+
+.Admin-Services-Main-Header-Money {
     line-height: 60px;
     font-size: 22px;
     font-weight: 600;
-  }
-  
-  .Admin-Services-Main-Header-Percent {
+}
+
+.Admin-Services-Main-Header-Percent {
     padding-bottom: 3%;
     font-size: 14px;
     color: #828282;
-  }
+}
+
 .Admin-Services-Main-Filter-Add {
     display: flex;
     justify-content: space-between;
 }
-  
+
 .Admin-Services-Main-Search {
     display: flex;
     align-items: center;
@@ -252,7 +253,12 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.Admin-Services-add-pet-btn {
+
+.Admin-Services-Add-Services {
+    margin-bottom:10px ;
+}
+
+.Admin-Services-add-services-btn {
     font-family: Roboto, sans-serif;
     background-color: #e18213;
     height: 45px;
@@ -261,12 +267,12 @@
     color: #fff;
     width: 100px;
     border-radius: 10px;
-  }
-  
-.Admin-Services-add-pet-btn:hover {
+}
+
+.Admin-Services-add-services-btn:hover {
     background-color: #002169;
     cursor: pointer;
-  }
+}
 
 .Admin-Services-input {
     height: 30px;
@@ -376,16 +382,41 @@
 }
 
 .Admin-Services-modal-initials {
-    color: #696cff;
+    color: #000000;
     font-family: Roboto, sans-serif;
     font-weight: 600;
     padding-right: 5px;
+    display: inline-block;
+    width: 175px;
 }
 
 
 .Admin-Services-modal-update {
+    font-family: Roboto, sans-serif;
+}
+
+.Admin-Services-modal-update-title {
+    display: inline-block;
+    font-weight: 600;
+    width: 135px;
+}
+
+.Admin-Services-modal-delete-title {
+    display: inline-block;
+    font-weight: 600;
+    width: 125px;
+}
+
+.Admin-Services-modal-more-title {
+    display: inline-block;
+    font-weight: 600;
+    width: 122px;
+}
+
+.Admin-Services-modal-delete {
+    font-weight: 700px;
     display: flex;
-    padding-left: 5px;
+    padding: 5px;
 }
 
 .Admin-Services-modal-more {
@@ -399,6 +430,7 @@
 }
 
 .Admin-Services-input {
+    font-family: Roboto, sans-serif;
     height: 30px;
     margin-top: 5px;
     line-height: 24px;
@@ -407,7 +439,6 @@
 
 .Admin-Services-input-phone {
     margin-top: 5px;
-    width: 114px;
     height: 30px;
     line-height: 24px;
     font-size: 16px;
