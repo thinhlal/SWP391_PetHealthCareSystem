@@ -133,84 +133,84 @@
     align-items: center;
     justify-content: space-between;
     margin: 10px 3%;
-  }
-  
-  .Admin-Account-Main_Title-Left {
+}
+
+.Admin-Account-Main_Title-Left {
     font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Account-Main_Title-Left-Intro {
+}
+
+.Admin-Account-Main_Title-Left-Intro {
     color: #242f48;
     font-weight: 600;
     font-size: 20px;
     text-indent: -1px;
     line-height: 1;
     margin-bottom: 5px;
-  }
-  
-  .Admin-Account-Main_Title-Left-text {
+}
+
+.Admin-Account-Main_Title-Left-text {
     color: #78829a;
     font-weight: 400;
     font-size: 12px;
-  }
-  
-  .Admin-Account-Main_Title-Right {
+}
+
+.Admin-Account-Main_Title-Right {
     font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Account-title-Star {
+}
+
+.Admin-Account-title-Star {
     color: #78829a;
     font-size: 13px;
-  }
-  
-  .Admin-Account-Star span {
+}
+
+.Admin-Account-Star span {
     font-size: 13px;
     margin-left: 5px;
-  }
+}
 
-  .Admin-Account-Main-ChooseDate {
+.Admin-Account-Main-ChooseDate {
     display: flex;
     align-items: center;
     font-family: "Montserrat", Helvetica;
     margin: 25px 20px 0 3%;
-  }
-  
-  .Admin-Account-Main-ChooseDate_Text {
-    margin-right: 10px;
-  }
+}
 
-  .Admin-Account-Main-Header {
+.Admin-Account-Main-ChooseDate_Text {
+    margin-right: 10px;
+}
+
+.Admin-Account-Main-Header {
     margin: 40px 0 0 0;
     font-family: Roboto, sans-serif;
     padding: 0;
     justify-content: space-evenly;
-  }
-  
-  .Admin-Account-Main-Header-Income {
+}
+
+.Admin-Account-Main-Header-Income {
     background-color: white;
     border-radius: 8px;
     width: 260px;
     border: 1px solid #eae8f1;
     box-shadow: -2px 4px 18px #dadee8;
-  }
-  
-  .Admin-Account-Main-Header-Note {
+}
+
+.Admin-Account-Main-Header-Note {
     padding-top: 3%;
     color: #696cff;
     font-size: 15px;
-  }
-  
-  .Admin-Account-Main-Header-Money {
+}
+
+.Admin-Account-Main-Header-Money {
     line-height: 60px;
     font-size: 22px;
     font-weight: 600;
-  }
-  
-  .Admin-Account-Main-Header-Percent {
+}
+
+.Admin-Account-Main-Header-Percent {
     padding-bottom: 3%;
     font-size: 14px;
     color: #828282;
-  }
+}
 
 .Admin-Account-Main-Search {
     display: flex;
@@ -219,7 +219,6 @@
     width: 300px;
     height: 35px;
     margin-top: 5px;
-    margin-bottom: 10px;
 }
 
 .Admin-Account-Main-Search-Input {
@@ -255,8 +254,20 @@
     font-family: Roboto, sans-serif;
 }
 
+.Admin-Account-Select-Role {
+    font-family: Roboto, sans-serif;
+
+    font-weight: 600;
+    line-height: 10px;
+    margin-right: 52%;
+    margin-top: 10px;
+}
+
+.Admin-Account-Select-Filter {
+    margin-left: 5px;
+}
+
 .Admin-Account-add-pet-btn {
-    width: 104px;
     background-color: #e18213;
     height: 45px;
     outline: none;
@@ -264,12 +275,13 @@
     color: #fff;
     width: 100px;
     border-radius: 10px;
-  }
-  
+    margin-bottom: 10px;
+}
+
 .Admin-Account-add-pet-btn:hover {
     background-color: #002169;
     cursor: pointer;
-  }
+}
 
 .Admin-Account-Main-Table-Wrapper {
     margin: 50px 3%;
@@ -368,7 +380,6 @@
 
 .Admin-Account-modal-title {
     height: 45px;
-    text-align: center;
     font-weight: 600;
     font-size: 20px;
     padding-top: 15px;
@@ -376,15 +387,16 @@
 
 .Admin-Account-modal-title-name {
     height: 30px;
-    text-align: center;
     font-weight: 600;
     font-size: 20px;
 }
 
 .Admin-Account-modal-initials {
-    color: #696cff;
-    font-weight: 600;
+    color: #000000;
+    font-weight: 500;
     padding-right: 5px;
+    display: inline-block;
+    width: 150px;
 }
 
 .Admin-Account-modal-add-account {
@@ -392,14 +404,25 @@
 }
 
 .Admin-Account-modal-add {
-    color: #696cff;
-    font-weight: 600;
+    color: #000000;
+    font-weight: 500;
+    display: inline-block;
+    width: 85px;
+}
 
+.Admin-Account-modal-update-old {
+    display: flex;
+}
+
+.Admin-Account-modal-update-new {
+    color: #000000;
+    font-weight: 500;
+    display: inline-block;
+    width: 150px;
 }
 
 .Admin-Account-modal-update {
-    display: flex;
-    padding-left: 5px;
+    margin-left: 10px;
 }
 
 .Admin-Account-modal-more {
@@ -417,19 +440,13 @@
     margin-top: 5px;
     line-height: 24px;
     font-size: 16px;
+    padding-left: 5px;
 }
 
-.Admin-Account-input-phone {
-    margin-top: 5px;
-    width: 109px;
-    height: 30px;
-    line-height: 24px;
-    font-size: 16px;
 
-}
 
-.Admin-Account-input-role {
-    margin: 4px;
+.Admin-Account-input-confirm {
+    padding-top: 40px;
 }
 
 .Admin-Account-Main-Table-Content-Btn :hover {
