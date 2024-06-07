@@ -98,7 +98,14 @@ function ManageListBooking() {
     const [ownerOption, setOwnerOption] = useState("");
     const [petSearchResults, setPetSearchResults] = useState([]);
     const [ownerSearchResults, setOwnerSearchResults] = useState([]);
-    const [petInfo, setPetInfo] = useState({});
+    const [petInfo, setPetInfo] = useState({
+        petID: 'abc',
+        name: 'Tung',
+        type: 'Grass',
+        breed: 'M',
+        gender: 'Male',
+        status: 'Not Good',
+      });
     const [ownerInfo, setOwnerInfo] = useState({});
     const [services, setServices] = useState([{ service: "" }]);
     const [selectedDate, setSelectedDate] = useState("");
@@ -239,7 +246,13 @@ function ManageListBooking() {
         }))
         setChosenDoctor("");
     }
-
+    const [customerInfo] = useState({
+        customerID: 'Treatment of pneumonia',
+        name: 'Nguyen Van A',
+        phone: '09843443abc',
+        email: 'a@gmail.com',
+        accountID: 'aaa1',
+      });
     return (
         <div className="manage-booking-list container-fluid">
             <div className="row">
@@ -512,18 +525,88 @@ function ManageListBooking() {
                                         {/* Modal for more info */}
                                         <div className="modal fade" id={`moreinfo-${booking.bookingID}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div className="modal-dialog">
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Details</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        ....
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    </div>
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Details</h1>
+                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div className="modal-body-manage-booking">
+                                                <div className="main-modal-content-manage-booking">
+                                                   <i className="fa fa-close close" data-dismiss="modal"></i>
+      
+                                                   <div className="grid-container">
+                                                     <div className="content-modal-manage-booking">
+                                                       <div className="reason-manage-booking">
+                                                         <span className="font-weight-bold">Customer Information</span>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>CustomerID:&nbsp;</small>
+                                                         <small> {customerInfo.customerID}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Name:&nbsp;</small>
+                                                         <small>{customerInfo.name}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Phone:&nbsp;</small>
+                                                         <small>{customerInfo.phone}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Email:&nbsp;</small>
+                                                         <small>{customerInfo.email}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Account ID:&nbsp;</small>
+                                                         <small>{customerInfo.accountID}</small>
+                                                       </div>
+                                                     </div>
+
+                                                     <div className="mb-3">
+                                                       <hr className="new1" />
+                                                     </div>
+
+                                                     <div className="content-modal-manage-booking">
+                                                       <div className="reason-manage-booking">
+                                                         <span className="font-weight-bold">Pet Information</span>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Pet ID:&nbsp;</small>
+                                                         <small>{petInfo.petID}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Name:&nbsp;</small>
+                                                         <small>{petInfo.name}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Type:&nbsp;</small>
+                                                         <small>{petInfo.type}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Breed:&nbsp;</small>
+                                                         <small>{petInfo.breed}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Gender:&nbsp;</small>
+                                                         <small>{petInfo.gender}</small>
+                                                       </div>
+                                                       <div className="reason-manage-booking">
+                                                         <small className='title-reason-manage-booking'>Status:&nbsp;</small>
+                                                         <small>{petInfo.status}</small>
+                                                       </div>
+
+                                                     </div>
+
+                                                     <div className="mb-3">
+                                                       <hr className="new1" />
+                                                     </div>
+                                             
+                                                   </div>
+                                                 </div>                                             
+                                                </div>
+                                                <div className="modal-footer">
+                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
