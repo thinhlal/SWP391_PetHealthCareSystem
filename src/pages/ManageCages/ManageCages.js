@@ -1,6 +1,5 @@
-//css
 import './ManageCages.css';
-//Component
+// Component
 import { useState } from 'react';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
@@ -8,9 +7,8 @@ import Sidebar from '../../components/Employee/Sidebar/Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
-//images
-import search_icon from '../../assets/images/img_ManageBookings/search.svg'
-
+// images
+import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 
 function ManageCages() {
     const [petOption, setPetOption] = useState("");
@@ -27,6 +25,15 @@ function ManageCages() {
     ]);
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
+    const [activeTab, setActiveTab] = useState('Profile');
+    const [cageData, setCageData] = useState([
+        { id: "CG111111", name: "A01", description: "Large Cage", status: "Using", petStatus: "Not Recover", petDetails: { name: "Boby", breed: "Golden", species: "Dog", gender: "Male", inCage: "Good", services: "X-quang", dateTime: "10:00 AM | 2024-06-02", doctor: "Johny", cageNumber: "A01", admissionTime: "15:00 AM | 2024-10-02" } },
+        { id: "CG222222", name: "A02", description: "Large Cage", status: "Using", petStatus: "Not Recover", petDetails: { name: "Boby", breed: "Golden", species: "Dog", gender: "Male", inCage: "Good", services: "X-quang", dateTime: "10:00 AM | 2024-06-02", doctor: "Johny", cageNumber: "A01", admissionTime: "15:00 AM | 2024-10-02" } },
+        { id: "CG333333", name: "A03", description: "Large Cage", status: "Empty", petStatus: "Not Recover", petDetails: {} },
+        { id: "CG444444", name: "A04", description: "Large Cage", status: "Empty", petStatus: "Not Recover", petDetails: {} },
+        { id: "CG555555", name: "A05", description: "Large Cage", status: "Empty", petStatus: "Not Recover", petDetails: {} }
+    ]);
+    const [selectedCage, setSelectedCage] = useState(null);
 
     const availableServices = [
         { id: 1, name: "X-quang" },
@@ -36,7 +43,6 @@ function ManageCages() {
     ];
 
     const handlePetOptionChange = (event) => {
-        console.log(event.target.value);
         setPetOption(event.target.value);
     };
 
@@ -99,7 +105,7 @@ function ManageCages() {
             veterinarian: document.getElementById("veterinarian").value,
         };
         console.log(formData);
-        // Perform form submission logic here
+        
     };
 
     const resetForm = () => {
@@ -120,21 +126,32 @@ function ManageCages() {
         document.getElementById("addPetForm").reset();
     };
 
-    // more information
-    const [activeTab, setActiveTab] = useState('Profile');
-
     const openTab = (tabName) => {
-      setActiveTab(tabName);
+        setActiveTab(tabName);
     };
+
+    const handleUpdateStatus = (cageId, newCageStatus, newPetStatus) => {
+        const updatedCageData = cageData.map((cage) => {
+            if (cage.id === cageId) {
+                if (newCageStatus === 'Empty' || newPetStatus === 'Recover') {
+                    return { ...cage, status: newCageStatus, petStatus: newPetStatus, petDetails: {} };
+                }
+                return { ...cage, status: newCageStatus, petStatus: newPetStatus };
+            }
+            return cage;
+        });
+        setCageData(updatedCageData);
+    };
+
     return (
         <div className="manage-cages container-fluid">
             <div className="row">
-                <HeaderManager></HeaderManager>
+                <HeaderManager />
                 <div className="manage-cages-title">
                     <div className="manage-cages-title-text">Pet Health Care - Manage Cages</div>
                 </div>
                 <div className="manage-cages-content">
-                    <Sidebar></Sidebar>
+                    <Sidebar />
                     <div className="manage-booking-main-content">
                         <div className="main-content-header">
                             <div className="main-content-header-search">
@@ -149,7 +166,6 @@ function ManageCages() {
                                 </div>   
 
                                  <div className="filter-cage-number">
-                                       
                                         Status:&nbsp;
                                         <select className="Status-Select-Filter" name="role">
                                             <option>Empty</option>
@@ -170,7 +186,7 @@ function ManageCages() {
                                         <form id="addPetForm" onSubmit={handleSubmit}>
                                             <div className="modal-content">
                                                 <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Add Pet</h1>
                                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
@@ -289,7 +305,7 @@ function ManageCages() {
                                                 </div>
                                                 <div className="modal-footer">
                                                     <button type="button" onClick={resetForm} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-success">Add</button>
+                                                    <button type="submit" className="btn btn-success">Add</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -307,641 +323,194 @@ function ManageCages() {
                                 <div className="main-content-list-title-text-button">Update</div>
                             </div>
 
-                            {/* col-1 */}
-                            <div className="main-content-list-body-wrapper">
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">CG111111</div>
-                                    <div className="content-list-body-value">A01</div>
-                                    <div className="content-list-body-value">Large Cage</div>
-                                    <div className="content-list-body-value">
-                                        Using
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more_info">
-                                            More Details
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                <div className="container-modal-body-more-info">
-                                                    <div className="tab-modal-body-more-info">
-                                                        <button
-                                                          className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                                          onClick={() => openTab('Profile')}>
-                                                          Customer Profile
-                                                        </button>
-                                                
-                                                        <button
-                                                          className={`tablinks ${activeTab === 'Vacancies' ? 'active' : ''}`}
-                                                          onClick={() => openTab('Vacancies')}>
-                                                          Pet
-                                                        </button>
-
-                                                        <button
-                                                          className={`tablinks ${activeTab === 'More' ? 'active' : ''}`}
-                                                          onClick={() => openTab('More')}>
-                                                          More
-                                                        </button>
+                            {cageData.map((cage) => (
+                                <div className="main-content-list-body-wrapper" key={cage.id}>
+                                    <div className="content-list-body-info">
+                                        <div className="content-list-body-value">{cage.id}</div>
+                                        <div className="content-list-body-value">{cage.name}</div>
+                                        <div className="content-list-body-value">{cage.description}</div>
+                                        <div className={`content-list-body-value ${cage.status === "Using" ? "status-using" : "status-empty"}`}>{cage.status}</div>
+                                        <div className="content-list-body-value-button">
+                                            <button type="button" className={`btn ${cage.status === "Empty" ? "btn-secondary" : "btn-primary"}`} data-bs-toggle="modal" data-bs-target={`#more_info_${cage.id}`} disabled={cage.status === "Empty" || cage.petStatus === "Recover"}>
+                                                More Details
+                                            </button>
+                                        </div>
+                                        <div className="modal fade" id={`more_info_${cage.id}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
+                                                    <div className="modal-body">
+                                                        <div className="container-modal-body-more-info">
+                                                            <div className="tab-modal-body-more-info">
+                                                                <button
+                                                                    className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                                                    onClick={() => openTab('Profile')}>
+                                                                    Customer Profile
+                                                                </button>
+                                                                <button
+                                                                    className={`tablinks ${activeTab === 'Vacancies' ? 'active' : ''}`}
+                                                                    onClick={() => openTab('Vacancies')}>
+                                                                    Pet
+                                                                </button>
+                                                                <button
+                                                                    className={`tablinks ${activeTab === 'More' ? 'active' : ''}`}
+                                                                    onClick={() => openTab('More')}>
+                                                                    More
+                                                                </button>
+                                                            </div>
+
+                                                            {/* profile customer */}
+                                                            <div id="profile-customer" className="tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'flex' : 'none' }}>
+                                                                <form className="profile-form">
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile'>Name:</div>
+                                                                        <input type="text" className="edit-customer" name="name" defaultValue="Liza Doe" />
+                                                                    </div>
                                                     
-                                                    {/* profile customer */}
-                                                    <div id="profile-customer" className="tabcontent-customer" style={{ display: activeTab === 'Profile' ? 'flex' : 'none' }}>
-                                                       
-                                                
-                                                        <form className="profile-form">
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile'>Name:</div>
-                                                            <input type="text" className="edit-customer" name="name" defaultValue="Liza Doe" />
-                                                          </div>
-                                                
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile'>Email:</div>
-                                                            <input type="email" className="edit-customer" name="email" defaultValue="support@gmail.com" />
-                                                          </div>
-                                                
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile'>Phone:</div>
-                                                            <input type="tel" className="edit-customer" name="phone" defaultValue="+1234 55 66 777" />
-                                                          </div>
-                                    
-                                                        </form>
-                                                    </div>
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile'>Email:</div>
+                                                                        <input type="email" className="edit-customer" name="email" defaultValue="support@gmail.com" />
+                                                                    </div>
                                                     
-                                                    {/* pet profile */}
-                                                    <div id="Vacancies" className="tabcontent-pet" style={{ display: activeTab === 'Vacancies' ? 'flex' : 'none' }}>
-                                                     <form className="pet-profile-form">
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Name:</div>
-                                                            <input type="text" className="edit-pet" name="name" defaultValue="Boby" />
-                                                          </div>
-                                                
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Breed:</div>
-                                                            <input type="text" className="edit-pet" name="breed" defaultValue="Golden" />
-                                                          </div>
-                                                
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Species:</div>
-                                                            <input type="text" className="edit-pet" name="species" defaultValue="Dog" />
-                                                          </div>
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile'>Phone:</div>
+                                                                        <input type="tel" className="edit-customer" name="phone" defaultValue="+1234 55 66 777" />
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        
+                                                            {/* pet profile */}
+                                                            <div id="Vacancies" className="tabcontent-pet" style={{ display: activeTab === 'Vacancies' ? 'flex' : 'none' }}>
+                                                                <form className="pet-profile-form">
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Name:</div>
+                                                                        <input type="text" className="edit-pet" name="name" defaultValue={cage.petDetails.name || ""} />
+                                                                    </div>
+                                                    
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Breed:</div>
+                                                                        <input type="text" className="edit-pet" name="breed" defaultValue={cage.petDetails.breed || ""} />
+                                                                    </div>
+                                                    
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Species:</div>
+                                                                        <input type="text" className="edit-pet" name="species" defaultValue={cage.petDetails.species || ""} />
+                                                                    </div>
 
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Gender:</div>
-                                                            <input type="text" className="edit-pet" name="gender" defaultValue="Male" />
-                                                          </div>
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Gender:</div>
+                                                                        <input type="text" className="edit-pet" name="gender" defaultValue={cage.petDetails.gender || ""} />
+                                                                    </div>
 
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>In cage:</div>
-                                                            <input type="text" className="edit-pet" name="in-cage" defaultValue="Good" />
-                                                          </div>
-                                    
-                                                        </form>
-                                                      </div>
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>In cage:</div>
+                                                                        <input type="text" className="edit-pet" name="in-cage" defaultValue={cage.petDetails.inCage || ""} />
+                                                                    </div>
+                                                                </form>
+                                                            </div>
 
-                                                      {/* more  */}
-                                                      <div id="More" className="tabcontent-pet-more" style={{ display: activeTab === 'More' ? 'flex' : 'none' }}>
-                                                     <form className="pet-profile-form">
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Services:</div>
-                                                            <input type="text" className="edit-pet" name="name-more" defaultValue="X-quang" />
-                                                          </div>
-                                                
-                                                          <div className="form-group">
-                                                              <div className='sub-title-profile-pet'>Date and Time:</div>
-                                                              <input type="text" className="edit-pet" name="breed-more" defaultValue="10:00 AM &nbsp; | &nbsp; 2024-06-02" />
-                                                          </div>
+                                                            {/* more */}
+                                                            <div id="More" className="tabcontent-pet-more" style={{ display: activeTab === 'More' ? 'flex' : 'none' }}>
+                                                                <form className="pet-profile-form">
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Services:</div>
+                                                                        <input type="text" className="edit-pet" name="services" defaultValue={cage.petDetails.services || ""} />
+                                                                    </div>
+                                                    
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Date and Time:</div>
+                                                                        <input type="text" className="edit-pet" name="dateTime" defaultValue={cage.petDetails.dateTime || ""} />
+                                                                    </div>
 
-                                                
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Doctor:</div>
-                                                            <input type="text" className="edit-pet" name="species-more" defaultValue="Johny" />
-                                                          </div>
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Doctor:</div>
+                                                                        <input type="text" className="edit-pet" name="doctor" defaultValue={cage.petDetails.doctor || ""} />
+                                                                    </div>
 
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Cage Number:</div>
-                                                            <input type="text" className="edit-pet" name="gender-more" defaultValue="A01" />
-                                                          </div>
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Cage Number:</div>
+                                                                        <input type="text" className="edit-pet" name="cageNumber" defaultValue={cage.petDetails.cageNumber || ""} />
+                                                                    </div>
 
-                                                          <div className="form-group">
-                                                            <div className='sub-title-profile-pet'>Admission Time:</div>
-                                                            <input type="text" className="edit-pet" name="in-cage-more" defaultValue="15:00 AM &nbsp; | &nbsp; 2024-10-02" />
-                                                          </div>
-                                    
-                                                        </form>
-                                                      </div>
+                                                                    <div className="form-group">
+                                                                        <div className='sub-title-profile-pet'>Admission Time:</div>
+                                                                        <input type="text" className="edit-pet" name="admissionTime" defaultValue={cage.petDetails.admissionTime || ""} />
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                                    <div className="modal-footer">
+                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" className="btn btn-primary">Save changes</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-status">
-                                            Update
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="update-status" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <form>
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of Cage:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Empty</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="using" name="status-of-cage" value="Using" />
-                                                                <div className='modal-body-update-status-using-text'>Using</div>
-                                                            </div>
+                                        <div className="content-list-body-value-button">
+                                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#update_status_${cage.id}`} onClick={() => setSelectedCage(cage)}>
+                                                Update
+                                            </button>
+                                        </div>
+                                        <div className="modal fade" id={`update_status_${cage.id}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div className="modal-dialog">
+                                                <form onSubmit={(e) => {
+                                                    e.preventDefault();
+                                                    handleUpdateStatus(selectedCage.id, e.target['status-of-cage'].value, e.target['status-of-pet'].value);
+                                                }}>
+                                                    <div className="modal-content">
+                                                        <div className="modal-header">
+                                                            <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of pet:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Not Recover</div>
+                                                        <div className="modal-body">
+                                                            <div className='modal-body-update-status'>
+                                                                <div className='modal-body-update-status-title'>Status of Cage:</div>
+                                                                <div className='modal-body-update-status-empty'>
+                                                                    <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked={selectedCage?.status === 'Empty'} disabled={selectedCage?.status !== 'Empty' && selectedCage?.status !== 'Using'} />
+                                                                    <div className='modal-body-update-status-empty-text'>Empty</div>
+                                                                </div>
+                                                                <div className='modal-body-update-status-using'>
+                                                                    <input type="radio" id="using" name="status-of-cage" value="Using" defaultChecked={selectedCage?.status === 'Using'} />
+                                                                    <div className='modal-body-update-status-using-text'>Using</div>
+                                                                </div>
                                                             </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="Recover" name="status-of-pet" value="Recover" />
-                                                                <div className='modal-body-update-status-using-text'>Recover</div>
+                                                            <div className='modal-body-update-status'>
+                                                                <div className='modal-body-update-status-title'>Status of pet:</div>
+                                                                <div className='modal-body-update-status-empty'>
+                                                                    <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked={selectedCage?.petStatus === 'NotRecover'} disabled={selectedCage?.status !== 'Using'} />
+                                                                    <div className='modal-body-update-status-empty-text'>Not Recover</div>
+                                                                </div>
+                                                                <div className='modal-body-update-status-using'>
+                                                                    <input type="radio" id="Recover" name="status-of-pet" value="Recover" defaultChecked={selectedCage?.petStatus === 'Recover'} disabled={selectedCage?.status !== 'Using'} />
+                                                                    <div className='modal-body-update-status-using-text'>Recover</div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div className='modal-body-update-text'>
-                                                            <div className='modal-body-update-text-title'>Update Info Of Pet:</div>
-                                                            <div className='modal-body-update-text-info'>
-                                                                <div className="mb-3">
-                                                                    <textarea className="form-control" rows="3" name='update-info-of-pet'></textarea>
+                                                            <div className='modal-body-update-text'>
+                                                                <div className='modal-body-update-text-title'>Update Info Of Pet:</div>
+                                                                <div className='modal-body-update-text-info'>
+                                                                    <div className="mb-3">
+                                                                        <textarea className="form-control" rows="3" name='update-info-of-pet'></textarea>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div className="modal-footer">
+                                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" className="btn btn-primary">Update</button>
+                                                        </div>
                                                     </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" className="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            {/* col-2 */}
-                            <div className="main-content-list-body-wrapper">
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">CG222222</div>
-                                    <div className="content-list-body-value">A02</div>
-                                    <div className="content-list-body-value">Large Cage</div>
-                                    <div className="content-list-body-value">
-                                        Using
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#more_info">
-                                            More Details
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-status">
-                                            Update
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="update-status" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <form>
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of Cage:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Empty</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="using" name="status-of-cage" value="Using" />
-                                                                <div className='modal-body-update-status-using-text'>Using</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of pet:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Not Recover</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="Recover" name="status-of-pet" value="Recover" />
-                                                                <div className='modal-body-update-status-using-text'>Recover</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-text'>
-                                                            <div className='modal-body-update-text-title'>Update Info Of Pet:</div>
-                                                            <div className='modal-body-update-text-info'>
-                                                                <div className="mb-3">
-                                                                    <textarea className="form-control" rows="3" name='update-info-of-pet'></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" className="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
                                 </div>
+                            ))}
 
-                            </div>
-
-                            {/* col-3 */}
-                            <div className="main-content-list-body-wrapper">
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">CG333333</div>
-                                    <div className="content-list-body-value">A03</div>
-                                    <div className="content-list-body-value">Large Cage</div>
-                                    <div className="content-list-body-value">
-                                        Empty
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary-empty" data-bs-toggle="modal" data-bs-target="#more_info">
-                                            More Details
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-status">
-                                            Update
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="update-status" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <form>
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of Cage:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Empty</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="using" name="status-of-cage" value="Using" />
-                                                                <div className='modal-body-update-status-using-text'>Using</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of pet:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Not Recover</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="Recover" name="status-of-pet" value="Recover" />
-                                                                <div className='modal-body-update-status-using-text'>Recover</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-text'>
-                                                            <div className='modal-body-update-text-title'>Update Info Of Pet:</div>
-                                                            <div className='modal-body-update-text-info'>
-                                                                <div className="mb-3">
-                                                                    <textarea className="form-control" rows="3" name='update-info-of-pet'></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" className="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            {/* col-4 */}
-                            <div className="main-content-list-body-wrapper">
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">CG444444</div>
-                                    <div className="content-list-body-value">A04</div>
-                                    <div className="content-list-body-value">Large Cage</div>
-                                    <div className="content-list-body-value">
-                                        Empty
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary-empty" data-bs-toggle="modal" data-bs-target="#more_info">
-                                            More Details
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                      
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-status">
-                                            Update
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="update-status" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <form>
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of Cage:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Empty</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="using" name="status-of-cage" value="Using" />
-                                                                <div className='modal-body-update-status-using-text'>Using</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of pet:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Not Recover</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="Recover" name="status-of-pet" value="Recover" />
-                                                                <div className='modal-body-update-status-using-text'>Recover</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-text'>
-                                                            <div className='modal-body-update-text-title'>Update Info Of Pet:</div>
-                                                            <div className='modal-body-update-text-info'>
-                                                                <div className="mb-3">
-                                                                    <textarea className="form-control" rows="3" name='update-info-of-pet'></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" className="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            {/* col-5 */}
-                            <div className="main-content-list-body-wrapper">
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">CG444444</div>
-                                    <div className="content-list-body-value">A04</div>
-                                    <div className="content-list-body-value">Large Cage</div>
-                                    <div className="content-list-body-value">
-                                        Empty
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary-empty" data-bs-toggle="modal" data-bs-target="#more_info">
-                                            More Details
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                      
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-status">
-                                            Update
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="update-status" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <form>
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of Cage:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Empty</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="using" name="status-of-cage" value="Using" />
-                                                                <div className='modal-body-update-status-using-text'>Using</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of pet:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Not Recover</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="Recover" name="status-of-pet" value="Recover" />
-                                                                <div className='modal-body-update-status-using-text'>Recover</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-text'>
-                                                            <div className='modal-body-update-text-title'>Update Info Of Pet:</div>
-                                                            <div className='modal-body-update-text-info'>
-                                                                <div className="mb-3">
-                                                                    <textarea className="form-control" rows="3" name='update-info-of-pet'></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" className="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            {/* col-6 */}
-                            <div className="main-content-list-body-wrapper">
-                                <div className="content-list-body-info">
-                                    <div className="content-list-body-value">CG444444</div>
-                                    <div className="content-list-body-value">A04</div>
-                                    <div className="content-list-body-value">Large Cage</div>
-                                    <div className="content-list-body-value">
-                                        Empty
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary-empty" data-bs-toggle="modal" data-bs-target="#more_info">
-                                            More Details
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="more_info" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h1 className="modal-title fs-5" id="exampleModalLabel">More Info</h1>
-                                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                      
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="content-list-body-value-button">
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-status">
-                                            Update
-                                        </button>
-                                    </div>
-                                    <div className="modal fade" id="update-status" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <form>
-                                                <div className="modal-content">
-                                                    <div className="modal-header">
-                                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
-                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div className="modal-body">
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of Cage:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Empty</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="using" name="status-of-cage" value="Using" />
-                                                                <div className='modal-body-update-status-using-text'>Using</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-status'>
-                                                            <div className='modal-body-update-status-title'>Status of pet:</div>
-                                                            <div className='modal-body-update-status-empty'>
-                                                                <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked />
-                                                                <div className='modal-body-update-status-empty-text'>Not Recover</div>
-                                                            </div>
-                                                            <div className='modal-body-update-status-using'>
-                                                                <input type="radio" id="Recover" name="status-of-pet" value="Recover" />
-                                                                <div className='modal-body-update-status-using-text'>Recover</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className='modal-body-update-text'>
-                                                            <div className='modal-body-update-text-title'>Update Info Of Pet:</div>
-                                                            <div className='modal-body-update-text-info'>
-                                                                <div className="mb-3">
-                                                                    <textarea className="form-control" rows="3" name='update-info-of-pet'></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="modal-footer">
-                                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" className="btn btn-primary">Update</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -955,8 +524,8 @@ function ManageCages() {
                             <li className="page-item active" aria-current="page">
                                 <a className="page-link" href="#123">1</a>
                             </li>
-                            <li className="page-item" >
-                                <a className="page-link" href="#123" >2</a>
+                            <li className="page-item">
+                                <a className="page-link" href="#123">2</a>
                             </li>
                             <li className="page-item">
                                 <a className="page-link" href="#123">3</a>
@@ -968,11 +537,8 @@ function ManageCages() {
                     </nav>
                 </div>
             </div>
-            
-        </div >
-    )
+        </div>
+    );
 }
-
-
 
 export default ManageCages;

@@ -450,3 +450,16 @@
   border-radius: 5px;
 }
 
+.status-using {
+  color: green;
+}
+
+.status-empty {
+  color: red;
+}
+
+.btn-secondary {
+  background-color: #cccccc;
+  border-color: #cccccc;
+  color: #ffffff;
+}
