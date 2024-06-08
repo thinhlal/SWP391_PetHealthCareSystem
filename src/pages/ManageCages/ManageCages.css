@@ -422,6 +422,8 @@
   border-radius: 10px;
   border-color: #ccc;
   color: #626262;
+  margin-top: 10px;
+  padding: .375rem .75rem;
 }
 
 .manage-cages .edit-pet {
@@ -431,6 +433,7 @@
   border-radius: 10px;
   border-color: #ccc;
   color: #626262;
+  padding: .375rem .75rem;
 }
 
 .manage-cages .form-group{
