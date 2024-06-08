@@ -113,7 +113,7 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     };
 
     const handleImageChange = (e) => {
-        const file = e.target.files[0]
+        const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -123,37 +123,44 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
             };
             reader.readAsDataURL(file);
         }
-    }
+    };
 
     if (!isOpen) return null;
 
+    const handleModalClick = (e) => {
+        if (e.target.classList.contains('modal-choose-pet')) {
+            onClose();
+        }
+    };
+
     return (
-        <div className="modal-choose-pet show">
+        <div className="modal-choose-pet show" onClick={handleModalClick}>
             <div className="modal-choose-pet-content show">
-                <div className='title-modal-choose-pet'>Add New Pet</div>
+                <button className="modal-close-button" onClick={onClose}>×</button>
+                <div className="title-modal-choose-pet">Add New Pet</div>
                 <form>
-                    <div className='choose-pet-img-wrapper'>
+                    <div className="choose-pet-img-wrapper">
                         {imagePreview && <img src={imagePreview} alt="Preview" className="choose-pet-image-preview" />}
-                        <input className='choose-img-pet' type="file" name="image" onChange={handleImageChange} />
+                        <input className="choose-img-pet" type="file" name="image" onChange={handleImageChange} />
                         {errorMessageImage && <div className="choose-pet-error-message">{errorMessageImage}</div>}
                     </div>
-                    <div className='choose-pet-input-wrapper'>
-                        <div className='choose-pet-input-text-title'>Name:</div>
+                    <div className="choose-pet-input-wrapper">
+                        <div className="choose-pet-input-text-title">Name:</div>
                         <input type="text" name="name" placeholder="Name" value={newPet.name} onChange={handleChange} />
                         {errorMessageName && <div className="choose-pet-error-message">{errorMessageName}</div>}
                     </div>
-                    <div className='choose-pet-input-wrapper'>
-                        <div className='choose-pet-input-text-title'>BirthDay:</div>
+                    <div className="choose-pet-input-wrapper">
+                        <div className="choose-pet-input-text-title">BirthDay:</div>
                         <input type="date" name="age" placeholder="Birthday" value={newPet.age} onChange={handleChange} />
                         {errorMessageAge && <div className="choose-pet-error-message">{errorMessageAge}</div>}
                     </div>
-                    <div className='choose-pet-input-wrapper'>
-                        <div className='choose-pet-input-text-title'>Breed:</div>
+                    <div className="choose-pet-input-wrapper">
+                        <div className="choose-pet-input-text-title">Breed:</div>
                         <input type="text" name="breed" placeholder="Breed" value={newPet.breed} onChange={handleChange} />
                         {errorMessageBreed && <div className="choose-pet-error-message">{errorMessageBreed}</div>}
                     </div>
-                    <div className='choose-pet-input-wrapper'>
-                        <div className='choose-pet-input-text-title'>Type:</div>
+                    <div className="choose-pet-input-wrapper">
+                        <div className="choose-pet-input-text-title">Type:</div>
                         <select name="type" value={newPet.type} onChange={handleChange}>
                             <option value="" disabled defaultValue>Type</option>
                             <option value="dog">Dog</option>
@@ -161,8 +168,8 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
                         </select>
                         {errorMessageType && <div className="choose-pet-error-message">{errorMessageType}</div>}
                     </div>
-                    <div className='choose-pet-input-wrapper'>
-                        <div className='choose-pet-input-text-title'>Gender:</div>
+                    <div className="choose-pet-input-wrapper">
+                        <div className="choose-pet-input-text-title">Gender:</div>
                         <select name="gender" value={newPet.gender} onChange={handleChange}>
                             <option value="" disabled defaultValue>Gender</option>
                             <option value="male">Male</option>
@@ -171,8 +178,8 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
                         {errorMessageGender && <div className="choose-pet-error-message">{errorMessageGender}</div>}
                     </div>
                 </form>
-                <button className='button-modal-choose-pet' onClick={addPet}>Add Pet</button>
-                <button className='button-modal-choose-pet' onClick={onClose}>Close</button>
+                <button className="button-modal-choose-pet" onClick={addPet}>Add Pet</button>
+                <button className="button-modal-choose-pet" onClick={onClose}>Close</button>
             </div>
         </div>
     );

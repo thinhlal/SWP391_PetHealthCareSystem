@@ -106,7 +106,7 @@
 }
 
 .main-choose-pet .button-choose-pet {
-  background: #af9578;
+  background: #002169;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -150,4 +150,18 @@
 
 .main-choose-pet .select-service-pet:hover {
   transform: translateY(-5px);
+}
+
+.main-choose-pet .choose-pet-card.selected {
+  border-color: #4caf50; /* màu viền khi chọn */
+  background-color: #e8f5e9; /* màu nền khi chọn */
+}
+
+.main-choose-pet .choose-pet-card.selected::after {
+  content: '✔';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #4caf50; /* màu của icon */
 }
