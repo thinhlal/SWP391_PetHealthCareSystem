@@ -5,12 +5,12 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 //images
 import logo_petE from '../../assets/images/img_VeterinarianInfo/banner.png';
-import vet1 from '../../assets/images/img_VeterinarianInfo/vet1.jpg';
-import vet2 from '../../assets/images/img_VeterinarianInfo/vet2.jpg';
-import vet3 from '../../assets/images/img_VeterinarianInfo/vet3.jpg';
-import vet4 from '../../assets/images/img_VeterinarianInfo/vet4.jpg';
-import vet5 from '../../assets/images/img_VeterinarianInfo/vet5.jpg';
-import vet6 from '../../assets/images/img_VeterinarianInfo/vet6.jpg';
+import vet1 from '../../assets/images/img_VeterinarianInfo/pexels-cristian-rojas-8460157.jpg';
+import vet2 from '../../assets/images/img_VeterinarianInfo/pexels-thirdman-5327580.jpg';
+import vet3 from '../../assets/images/img_VeterinarianInfo/pexels-shkrabaanthony-5215024.jpg';
+import vet4 from '../../assets/images/img_VeterinarianInfo/pexels-klaus-nielsen-6303564.jpg';
+import vet5 from '../../assets/images/img_VeterinarianInfo/pexels-tima-miroshnichenko-6235666.jpg';
+import vet6 from '../../assets/images/img_VeterinarianInfo/pexels-karolina-grabowska-6627919.jpg';
 //component
 import Header from '../../components/User/Header/Header.js';
 import Footer from '../../components/User/Footer/Footer.js';
