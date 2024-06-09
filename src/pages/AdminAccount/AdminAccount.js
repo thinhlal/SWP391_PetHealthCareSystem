@@ -1,5 +1,7 @@
 //css
 import './AdminAccount.css';
+//jsx
+import React, { useState, useEffect } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
@@ -18,6 +20,29 @@ import { red } from '@mui/material/colors';
 import { green } from '@mui/material/colors';
 
 function AdminAccount() {
+
+    const [randomValue, setRandomValue] = useState();
+    const [randomPercent, setRandomPercent] = useState();
+    const [selectedDate, setSelectedDate] = useState('');
+
+
+
+
+    const handleDateChange = (event) => {
+        const randomNum = Math.floor(Math.random() * 100000) + 1;
+        setRandomValue(randomNum);
+        const randomPercen = Math.floor(Math.random() * 10) + 1;
+        setRandomPercent(randomPercen);
+        setSelectedDate(event.target.value); 
+
+    };
+
+    useEffect(() => {
+        const today = new Date();
+        const formattedDate = today.toISOString().substr(0, 10);
+        setSelectedDate(formattedDate);
+      }, []);
+
     return (
 
         <div className="Admin-Account container-fluid">
@@ -101,37 +126,33 @@ function AdminAccount() {
 
                         <div className="Admin-Account-Main-ChooseDate">
                             <div className="Admin-Account-Main-ChooseDate_Text">Choose Date:</div>
-                            <input type="date"
-                                id="start"
-                                name="trip-start"
-                                value="2022-07-22"
-                                min="2018-01-01" max="2026-12-31" />
+                            <input type="date" onChange={handleDateChange} value={selectedDate} />
                         </div>
 
 
                         <div className="Admin-Account-Main-Header row">
                             <div className="Admin-Account-Main-Header-Income col-md-3">
                                 <div className="Admin-Account-Main-Header-Note"> Daily income </div>
-                                <div className="Admin-Account-Main-Header-Money"> $5,678.90 </div>
-                                <div className="Admin-Account-Main-Header-Percent"> +20% day over day </div>
+                                <div className="Admin-Account-Main-Header-Money">${randomValue}</div>
+                                <div className="Admin-Account-Main-Header-Percent"> +{randomPercent}% day over day </div>
                             </div>
 
                             <div className="Admin-Account-Main-Header-Income col-md-3">
                                 <div className="Admin-Account-Main-Header-Note">Weekly income </div>
-                                <div className="Admin-Account-Main-Header-Money"> $45,678.90 </div>
-                                <div className="Admin-Account-Main-Header-Percent"> +10% day over week </div>
+                                <div className="Admin-Account-Main-Header-Money"> ${randomValue} </div>
+                                <div className="Admin-Account-Main-Header-Percent"> +{randomPercent}% day over week </div>
                             </div>
 
                             <div className="Admin-Account-Main-Header-Income col-md-3">
                                 <div className="Admin-Account-Main-Header-Note"> Monthly income </div>
-                                <div className="Admin-Account-Main-Header-Money"> $230,678.90 </div>
-                                <div className="Admin-Account-Main-Header-Percent"> +23% day over month </div>
+                                <div className="Admin-Account-Main-Header-Money"> ${randomValue} </div>
+                                <div className="Admin-Account-Main-Header-Percent"> +{randomPercent}% day over month </div>
                             </div>
 
                             <div className="Admin-Account-Main-Header-Income col-md-3">
                                 <div className="Admin-Account-Main-Header-Note"> Total </div>
-                                <div className="Admin-Account-Main-Header-Money"> $5,678.90 </div>
-                                <div className="Admin-Account-Main-Header-Percent"> +20% day over day </div>
+                                <div className="Admin-Account-Main-Header-Money">${randomValue}</div>
+                                <div className="Admin-Account-Main-Header-Percent"> +{randomPercent}% day over day </div>
                             </div>
                         </div>
 
