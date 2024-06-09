@@ -91,7 +91,6 @@ const doctorsData = [
     // Thêm các bác sĩ khác nếu cần
 ];
 
-
 function ManageListBooking() {
 
     const [petOption, setPetOption] = useState("");
@@ -99,24 +98,30 @@ function ManageListBooking() {
     const [petSearchResults, setPetSearchResults] = useState([]);
     const [ownerSearchResults, setOwnerSearchResults] = useState([]);
     const [petInfo, setPetInfo] = useState({
-        petID: 'abc',
-        name: 'Tung',
-        type: 'Grass',
-        breed: 'M',
+        petID: 'PET001',
+        name: 'Buddy',
+        type: 'Dog',
+        breed: 'Golden Retriever',
         gender: 'Male',
-        status: 'Not Good',
-      });
-    const [ownerInfo, setOwnerInfo] = useState({});
+        status: 'Healthy',
+    });
+    const [ownerInfo, setOwnerInfo] = useState({
+        customerID: 'CUST001',
+        name: 'John Doe',
+        phone: '123-456-7890',
+        email: 'john.doe@example.com',
+        accountID: 'ACC001'
+    });
     const [services, setServices] = useState([{ service: "" }]);
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedStartTime, setSelectedStartTime] = useState("");
     const [selectedEndTime, setSelectedEndTime] = useState("");
     const [allBookings, setAllBookings] = useState([
-        { bookingID: "SE123456", day: "2024-06-01", startTime: "8:00", endTime: "9:00", name: "John Doe", petType: "Dog", service: "Blooming", doctor: "Chen", checkIn: false },
-        { bookingID: "SE123457", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "JaAAA", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
-        { bookingID: "SE123458", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "B AASSe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
-        { bookingID: "SE123459", day: "2024-06-01", startTime: "13:00", endTime: "14:00", name: "B Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false },
-        { bookingID: "SE123460", day: "2024-06-01", startTime: "15:00", endTime: "16:00", name: "C Doe", petType: "Cat", service: "X-ray", doctor: "", checkIn: false }
+        { bookingID: "SE123456", day: "2024-06-01", startTime: "8:00", endTime: "9:00", name: "John Doe", petType: "Dog", service: "Grooming" },
+        { bookingID: "SE123457", day: "2024-06-01", startTime: "9:00", endTime: "10:00", name: "Jane Smith", petType: "Cat", service: "Check-up" },
+        { bookingID: "SE123458", day: "2024-06-01", startTime: "10:00", endTime: "11:00", name: "Mike Johnson", petType: "Cat", service: "Vaccination" },
+        { bookingID: "SE123459", day: "2024-06-01", startTime: "11:00", endTime: "12:00", name: "Emily Davis", petType: "Dog", service: "Wing Clipping" },
+        { bookingID: "SE123460", day: "2024-06-01", startTime: "12:00", endTime: "13:00", name: "Chris Lee", petType: "Dog", service: "Dental Cleaning" }
     ]);
     const [chosenDoctor, setChosenDoctor] = useState("");
 
@@ -246,13 +251,7 @@ function ManageListBooking() {
         }))
         setChosenDoctor("");
     }
-    const [customerInfo] = useState({
-        customerID: 'Treatment of pneumonia',
-        name: 'Nguyen Van A',
-        phone: '09843443abc',
-        email: 'a@gmail.com',
-        accountID: 'aaa1',
-      });
+
     return (
         <div className="manage-booking-list container-fluid">
             <div className="row">
@@ -541,23 +540,23 @@ function ManageListBooking() {
                                                        </div>
                                                        <div className="reason-manage-booking">
                                                          <small className='title-reason-manage-booking'>CustomerID:&nbsp;</small>
-                                                         <small> {customerInfo.customerID}</small>
+                                                         <small> {ownerInfo.customerID}</small>
                                                        </div>
                                                        <div className="reason-manage-booking">
                                                          <small className='title-reason-manage-booking'>Name:&nbsp;</small>
-                                                         <small>{customerInfo.name}</small>
+                                                         <small>{ownerInfo.name}</small>
                                                        </div>
                                                        <div className="reason-manage-booking">
                                                          <small className='title-reason-manage-booking'>Phone:&nbsp;</small>
-                                                         <small>{customerInfo.phone}</small>
+                                                         <small>{ownerInfo.phone}</small>
                                                        </div>
                                                        <div className="reason-manage-booking">
                                                          <small className='title-reason-manage-booking'>Email:&nbsp;</small>
-                                                         <small>{customerInfo.email}</small>
+                                                         <small>{ownerInfo.email}</small>
                                                        </div>
                                                        <div className="reason-manage-booking">
                                                          <small className='title-reason-manage-booking'>Account ID:&nbsp;</small>
-                                                         <small>{customerInfo.accountID}</small>
+                                                         <small>{ownerInfo.accountID}</small>
                                                        </div>
                                                      </div>
 

@@ -233,12 +233,14 @@
 
 .manage-booking-list .choose-Doctor-wrapper label{
   line-height: 25px;
+  font-family: "Roboto", sans-serif;
 }
 
 .manage-booking-list .choose-Doctor-Not-Found{
   color: red;
   text-align: center;
   line-height: 70px;
+  font-family: "Roboto", sans-serif;
 }
  .modal-body-manage-booking {
     background-color: #fff;
