@@ -27,9 +27,6 @@ function WorkSchedule() {
     if (status !== 'Canceled' && window.confirm('Are you sure you want to receive this pet?')) {
       window.location.href = 'pet-exam-record'; // Redirect to the specified page	  
     }
-	else if(status ==='Done'){
-		
-	}
   };
 
   return (
