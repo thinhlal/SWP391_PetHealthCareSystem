@@ -96,6 +96,21 @@ function ManageListBooking() {
     const [ownerOption, setOwnerOption] = useState('');
     const [petSearchResults, setPetSearchResults] = useState([]);
     const [ownerSearchResults, setOwnerSearchResults] = useState([]);
+    const [createPetInfo, setCreatePetInfo] = useState({
+        petID: '',
+        name: '',
+        type: '',
+        breed: '',
+        gender: '',
+        birthday: '',
+        status: '',
+    });
+
+    const [createOwnerInfo, setCreateOwnerInfo] = useState({
+        name: '',
+        phone: '',
+        email: '',
+    });
     const [petInfo, setPetInfo] = useState({
         petID: 'PET001',
         name: 'Buddy',
@@ -116,14 +131,15 @@ function ManageListBooking() {
     const [selectedStartTime, setSelectedStartTime] = useState('');
     const [selectedEndTime, setSelectedEndTime] = useState('');
     const [allBookings, setAllBookings] = useState([
-        { bookingID: 'SE123456', day: '2024-06-01', startTime: '8:00', endTime: '9:00', name: 'John Doe', petType: 'Dog', doctor: 'Chen', service: 'Grooming' },
-        { bookingID: 'SE123457', day: '2024-06-01', startTime: '9:00', endTime: '10:00', name: 'Jane Smith', petType: 'Cat', service: 'Check-up' },
-        { bookingID: 'SE123458', day: '2024-06-01', startTime: '10:00', endTime: '11:00', name: 'Mike Johnson', petType: 'Cat', service: 'Vaccination' },
-        { bookingID: 'SE123459', day: '2024-06-01', startTime: '11:00', endTime: '12:00', name: 'Emily Davis', petType: 'Dog', service: 'Wing Clipping' },
-        { bookingID: 'SE123460', day: '2024-06-01', startTime: '12:00', endTime: '13:00', name: 'Chris Lee', petType: 'Dog', service: 'Dental Cleaning' },
-        { bookingID: 'SE123461', day: '2024-07-01', startTime: '13:00', endTime: '14:00', name: 'Th', petType: 'Cat', service: 'Wing Clipping' }
+        { bookingID: 'SE123456', day: '2024-06-01', startTime: '8:00', endTime: '9:00', name: 'John Doe', petType: 'Dog', petName: 'Lau', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: 'Chen', service: 'Grooming' },
+        { bookingID: 'SE123457', day: '2024-06-01', startTime: '9:00', endTime: '10:00', name: 'Jane Smith', petType: 'Cat', petName: 'Jhs', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Check-up' },
+        { bookingID: 'SE123458', day: '2024-06-01', startTime: '10:00', endTime: '11:00', name: 'Mike Johnson', petType: 'Cat', petName: 'Abas', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Vaccination' },
+        { bookingID: 'SE123459', day: '2024-06-01', startTime: '11:00', endTime: '12:00', name: 'Emily Davis', petType: 'Dog', petName: 'Mok', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Wing Clipping' },
+        { bookingID: 'SE123460', day: '2024-06-01', startTime: '12:00', endTime: '13:00', name: 'Chris Lee', petType: 'Dog', petName: 'Ams', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Dental Cleaning' },
+        { bookingID: 'SE123461', day: '2024-07-01', startTime: '13:00', endTime: '14:00', name: 'Th', petType: 'Cat', petName: 'IMsa', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Wing Clipping' }
     ]);
     const [chosenDoctor, setChosenDoctor] = useState('');
+    const [errors, setErrors] = useState({});
 
     const availableServices = [
         { id: 1, name: 'X-quang' },
@@ -184,18 +200,7 @@ function ManageListBooking() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // const formData = {
-        //     petInfo,
-        //     ownerInfo,
-        //     services,
-        //     reasonForAdmission: document.getElementById('reasonForAdmission').value,
-        //     currentCondition: document.getElementById('currentCondition').value,
-        //     cageNumber: document.getElementById('cageNumber').value,
-        //     admissionTime: document.getElementById('admissionTime').value,
-        //     veterinarian: document.getElementById('veterinarian').value,
-        // };
-        // console.log(formData)
-        // Perform form submission logic here
+        // Handle submit logic here
     };
 
     const resetForm = () => {
@@ -203,12 +208,13 @@ function ManageListBooking() {
         setOwnerOption('');
         setPetSearchResults([]);
         setOwnerSearchResults([]);
-        setPetInfo({});
-        setOwnerInfo({});
+        setCreatePetInfo({});
+        setCreateOwnerInfo({});
         setServices([{ service: '' }]);
         setSelectedDate('');
         setSelectedEndTime('');
         setSelectedStartTime('');
+        setErrors({});
         document.getElementById('addPetForm').reset();
     };
 
@@ -230,17 +236,12 @@ function ManageListBooking() {
                 }
             }
         }
-        if (availableDoctors.length === 0) {
-            return null;
-        } else {
-            return availableDoctors;
-        }
+        return availableDoctors.length ? availableDoctors : null;
     };
 
     const handleDoctorChange = (event) => {
         setChosenDoctor(event.target.value);
     };
-
     const handleSave = (bookingID) => {
         setAllBookings(allBookings.map(booking => {
             if (booking.bookingID === bookingID) {
@@ -252,15 +253,69 @@ function ManageListBooking() {
         setChosenDoctor('');
     }
 
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (!selectedDate) newErrors.selectedDate = "Date is required.";
+        if (!selectedStartTime) newErrors.selectedStartTime = "Start Time is required.";
+        if (!selectedEndTime) newErrors.selectedEndTime = "End Time is required.";
+        if (!chosenDoctor) newErrors.chosenDoctor = "Doctor is required.";
+        if (services.length === 0) newErrors.services = "At least one service is required.";
+
+        if (petOption === 'noPetID') {
+            const { name, type, breed, gender, birthday } = createPetInfo;
+            if (!name) newErrors.petName = "Pet name is required.";
+            if (!type) newErrors.petType = "Pet type is required.";
+            if (!breed) newErrors.petBreed = "Pet breed is required.";
+            if (!gender) newErrors.petGender = "Pet gender is required.";
+            if (!birthday) newErrors.petBirthday = "Pet birthday is required.";
+        }
+
+        if (ownerOption === 'noOwnerID') {
+            const { name, phone, email } = createOwnerInfo;
+            if (!name) newErrors.ownerName = "Owner name is required.";
+            if (!phone) newErrors.ownerPhone = "Owner phone is required.";
+            if (!email) newErrors.ownerEmail = "Owner email is required.";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleAddBooking = (event) => {
+        event.preventDefault();
+        if (!validateForm()) return;
+
+        const newBooking = {
+            bookingID: `SE${Math.floor(Math.random() * 1000000)}`,
+            day: selectedDate,
+            startTime: selectedStartTime,
+            endTime: selectedEndTime,
+            name: createOwnerInfo.name,
+            petType: createPetInfo.type,
+            petName: createPetInfo.name,
+            birthday: createPetInfo.birthday,
+            breed: createPetInfo.breed,
+            gender: createPetInfo.gender,
+            doctor: chosenDoctor,
+            service: services.map(service => service.service).join(', '),
+        };
+
+        setAllBookings([...allBookings, newBooking]);
+        resetForm();
+        // Close modal after adding the booking
+        document.querySelector('#exampleModal .btn-close').click();
+    };
+
     return (
         <div className='manage-booking-list container-fluid'>
             <div className='row'>
-                <HeaderManager></HeaderManager>
+                <HeaderManager />
                 <div className='manage-booking-list-title'>
                     <div className='manage-booking-list-title-text'>Pet Health Care - Manage Booking Lists</div>
                 </div>
                 <div className='manage-booking-list-content'>
-                    <Sidebar></Sidebar>
+                    <Sidebar />
                     <div className='manage-booking-main-content'>
                         <div className='main-content-header'>
                             <div className='main-content-header-search'>
@@ -294,7 +349,7 @@ function ManageListBooking() {
                                                             <input type='radio' name='petOption' value='noPetID' checked={petOption === 'noPetID'} onChange={handlePetOptionChange} /> <span>Not Has Pet ID</span>
                                                         </div>
                                                         {petOption === 'hasPetID' && (
-                                                            <div id='searchPetSection' >
+                                                            <div id='searchPetSection'>
                                                                 <div>
                                                                     <label>Search Pet ID:</label>
                                                                     <input type='text' id='searchPetInput' />
@@ -313,23 +368,30 @@ function ManageListBooking() {
                                                                 <div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Pet Name:</label>
-                                                                        <input type='text' value={petInfo.name || ''} onChange={(e) => setPetInfo({ ...petInfo, name: e.target.value })} />
+                                                                        <input type='text' value={createPetInfo.name || ''} onChange={(e) => setCreatePetInfo({ ...createPetInfo, name: e.target.value })} required />
+                                                                        {errors.petName && <span className='error'>{errors.petName}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
-                                                                        <label>Species:</label>
-                                                                        <input type='text' value={petInfo.species || ''} onChange={(e) => setPetInfo({ ...petInfo, species: e.target.value })} />
+                                                                        <label>Type:</label>
+                                                                        <input type='radio' name='petType' value='Dog' checked={createPetInfo.type === 'Dog'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, type: e.target.value })} required /> <span>Dog</span>
+                                                                        <input type='radio' name='petType' value='Cat' checked={createPetInfo.type === 'Cat'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, type: e.target.value })} required /> <span>Cat</span>
+                                                                        {errors.petType && <span className='error'>{errors.petType}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Breed:</label>
-                                                                        <input type='text' value={petInfo.breed || ''} onChange={(e) => setPetInfo({ ...petInfo, breed: e.target.value })} />
+                                                                        <input type='text' value={createPetInfo.breed || ''} onChange={(e) => setCreatePetInfo({ ...createPetInfo, breed: e.target.value })} required />
+                                                                        {errors.petBreed && <span className='error'>{errors.petBreed}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
-                                                                        <label>Age:</label>
-                                                                        <input type='number' value={petInfo.age || ''} onChange={(e) => setPetInfo({ ...petInfo, age: e.target.value })} />
+                                                                        <label>Birthday:</label>
+                                                                        <input type='date' value={createPetInfo.birthday || ''} onChange={(e) => setCreatePetInfo({ ...createPetInfo, birthday: e.target.value })} required />
+                                                                        {errors.petBirthday && <span className='error'>{errors.petBirthday}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Gender:</label>
-                                                                        <input type='text' value={petInfo.gender || ''} onChange={(e) => setPetInfo({ ...petInfo, gender: e.target.value })} />
+                                                                        <input type='radio' name='gender' value='Male' checked={createPetInfo.gender === 'Male'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, gender: e.target.value })} required /> <span>Male</span>
+                                                                        <input type='radio' name='gender' value='Female' checked={createPetInfo.gender === 'Female'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, gender: e.target.value })} required /> <span>Female</span>
+                                                                        {errors.petGender && <span className='error'>{errors.petGender}</span>}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -347,7 +409,7 @@ function ManageListBooking() {
                                                                 <div>
                                                                     <label>Search Customer:</label>
                                                                     <input type='text' id='searchOwnerInput' />
-                                                                    <button type='button' onClick={handleSearchOwner}>Tìm</button>
+                                                                    <button type='button' onClick={handleSearchOwner}>Search</button>
                                                                     <select onChange={handleOwnerSelect}>
                                                                         {ownerSearchResults.map((owner) => (
                                                                             <option key={owner.ownerID} value={owner.ownerID}>{`${owner.ownerID} - ${owner.name}`}</option>
@@ -362,15 +424,18 @@ function ManageListBooking() {
                                                                 <div className=''>
                                                                     <div className='modal-body-section'>
                                                                         <label>Name:</label>
-                                                                        <input type='text' value={ownerInfo.name || ''} onChange={(e) => setOwnerInfo({ ...ownerInfo, name: e.target.value })} />
+                                                                        <input type='text' value={createOwnerInfo.name || ''} onChange={(e) => setCreateOwnerInfo({ ...createOwnerInfo, name: e.target.value })} required />
+                                                                        {errors.ownerName && <span className='error'>{errors.ownerName}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Email:</label>
-                                                                        <input type='email' value={ownerInfo.email || ''} onChange={(e) => setOwnerInfo({ ...ownerInfo, email: e.target.value })} />
+                                                                        <input type='email' value={createOwnerInfo.email || ''} onChange={(e) => setCreateOwnerInfo({ ...createOwnerInfo, email: e.target.value })} required />
+                                                                        {errors.ownerEmail && <span className='error'>{errors.ownerEmail}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Phone:</label>
-                                                                        <input type='text' value={ownerInfo.phone || ''} onChange={(e) => setOwnerInfo({ ...ownerInfo, phone: e.target.value })} />
+                                                                        <input type='text' value={createOwnerInfo.phone || ''} onChange={(e) => setCreateOwnerInfo({ ...createOwnerInfo, phone: e.target.value })} required />
+                                                                        {errors.ownerPhone && <span className='error'>{errors.ownerPhone}</span>}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -383,7 +448,7 @@ function ManageListBooking() {
                                                             {services.map((service, index) => (
                                                                 <div key={index} className='service'>
                                                                     <label>Service:</label>
-                                                                    <select value={service.service} onChange={(e) => handleServiceChange(index, 'service', e.target.value)}>
+                                                                    <select value={service.service} onChange={(e) => handleServiceChange(index, 'service', e.target.value)} required>
                                                                         {availableServices.map((availableService) => (
                                                                             <option key={availableService.id} value={availableService.name}>{availableService.name}</option>
                                                                         ))}
@@ -391,6 +456,7 @@ function ManageListBooking() {
                                                                 </div>
                                                             ))}
                                                             <button type='button' onClick={addService}>Add service</button>
+                                                            {errors.services && <span className='error'>{errors.services}</span>}
                                                         </div>
                                                     </div>
 
@@ -398,15 +464,18 @@ function ManageListBooking() {
                                                         <div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Choose Date:</label>
-                                                                <input type='date' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
+                                                                <input type='date' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} required />
+                                                                {errors.selectedDate && <span className='error'>{errors.selectedDate}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Choose StartTime:</label>
-                                                                <input type='time' value={selectedStartTime} onChange={(e) => setSelectedStartTime(e.target.value)} />
+                                                                <input type='time' value={selectedStartTime} onChange={(e) => setSelectedStartTime(e.target.value)} required />
+                                                                {errors.selectedStartTime && <span className='error'>{errors.selectedStartTime}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Choose EndTime:</label>
-                                                                <input type='time' value={selectedEndTime} onChange={(e) => setSelectedEndTime(e.target.value)} />
+                                                                <input type='time' value={selectedEndTime} onChange={(e) => setSelectedEndTime(e.target.value)} required />
+                                                                {errors.selectedEndTime && <span className='error'>{errors.selectedEndTime}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Veterinarian:</label>
@@ -425,13 +494,14 @@ function ManageListBooking() {
                                                                         </div>
                                                                     }
                                                                 </div>
+                                                                {errors.chosenDoctor && <span className='error'>{errors.chosenDoctor}</span>}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className='modal-footer'>
                                                     <button type='button' onClick={resetForm} className='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-                                                    <button type='submit' className='btn btn-success'>Add</button>
+                                                    <button type='submit' className='btn btn-success' onClick={(e) => handleAddBooking(e)}>Add</button>
                                                 </div>
                                             </div>
                                         </form>
