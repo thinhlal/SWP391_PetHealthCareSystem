@@ -338,6 +338,14 @@
   background-color: #ddd;
 }
 
+.btn:disabled {
+  background-color: #858383 !important;
+  border: none;
+  color: #ffffff !important;
+  cursor: not-allowed;
+}
+
+
 .manage-cages .tab-modal-body-more-info button.manage-cages .active {
   background-color: #f1f1f1;
   border-bottom: 2px solid #004cb9;
@@ -459,7 +467,8 @@
 }
 
 .btn-secondary {
-  background-color: #cccccc;
+  background-color: #e18213;
   border-color: #cccccc;
   color: #ffffff;
 }
+
