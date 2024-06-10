@@ -136,3 +136,12 @@ tr:hover {
   pointer-events: none;
   cursor: default;
 }
+
+.final-petExam{
+  text-align: center;
+  margin-top: 100px;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color:#113179;
+}
