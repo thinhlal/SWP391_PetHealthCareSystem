@@ -105,7 +105,8 @@ function ManageCages() {
             veterinarian: document.getElementById("veterinarian").value,
         };
         console.log(formData);
-        
+        // Close modal on form submit
+        document.querySelector("#exampleModal .btn-close").click();
     };
 
     const resetForm = () => {
@@ -133,10 +134,12 @@ function ManageCages() {
     const handleUpdateStatus = (cageId, newCageStatus, newPetStatus) => {
         const updatedCageData = cageData.map((cage) => {
             if (cage.id === cageId) {
-                if (newCageStatus === 'Empty' || newPetStatus === 'Recover') {
-                    return { ...cage, status: newCageStatus, petStatus: newPetStatus, petDetails: {} };
+                const updatedStatus = newPetStatus === 'Recover' ? 'Empty' : 'Using';
+                const updatedCage = { ...cage, status: updatedStatus, petStatus: newPetStatus };
+                if (updatedStatus === 'Empty') {
+                    updatedCage.petDetails = {};
                 }
-                return { ...cage, status: newCageStatus, petStatus: newPetStatus };
+                return updatedCage;
             }
             return cage;
         });
@@ -174,10 +177,9 @@ function ManageCages() {
                                  </div>                            
                             </div>
 
-
+                             {/* add pet button */}
                             <div className="main-content-header-add-booking">
-                                
-                                <button type="button" className="booking-btn-add" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" className="booking-btn-add" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>
                                     Add Pet
                                 </button>
                                 <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -312,6 +314,7 @@ function ManageCages() {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div className="main-content-list">
                             <div className="main-content-list-title">
@@ -331,7 +334,7 @@ function ManageCages() {
                                         <div className="content-list-body-value">{cage.description}</div>
                                         <div className={`content-list-body-value ${cage.status === "Using" ? "status-using" : "status-empty"}`}>{cage.status}</div>
                                         <div className="content-list-body-value-button">
-                                            <button type="button" className={`btn ${cage.status === "Empty" ? "btn-secondary" : "btn-primary"}`} data-bs-toggle="modal" data-bs-target={`#more_info_${cage.id}`} disabled={cage.status === "Empty" || cage.petStatus === "Recover"}>
+                                            <button type="button" className={`btn ${cage.status === "Empty" ? "btn-secondary" : "btn-primary"}`} data-bs-toggle="modal" data-bs-target={`#more_info_${cage.id}`} disabled={cage.status === "Empty"}>
                                                 More Details
                                             </button>
                                         </div>
@@ -452,15 +455,23 @@ function ManageCages() {
                                             </div>
                                         </div>
                                         <div className="content-list-body-value-button">
-                                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#update_status_${cage.id}`} onClick={() => setSelectedCage(cage)}>
-                                                Update
-                                            </button>
+                                            {cage.status === "Empty" && (
+                                                <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    Add Pet
+                                                </button>
+                                            )}
+                                            {cage.status === "Using" && (
+                                                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#update_status_${cage.id}`} onClick={() => setSelectedCage(cage)}>
+                                                    Update
+                                                </button>
+                                            )}
                                         </div>
                                         <div className="modal fade" id={`update_status_${cage.id}`} aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div className="modal-dialog">
                                                 <form onSubmit={(e) => {
                                                     e.preventDefault();
                                                     handleUpdateStatus(selectedCage.id, e.target['status-of-cage'].value, e.target['status-of-pet'].value);
+                                                    document.querySelector(`#update_status_${cage.id} .btn-close`).click();
                                                 }}>
                                                     <div className="modal-content">
                                                         <div className="modal-header">
@@ -470,23 +481,19 @@ function ManageCages() {
                                                         <div className="modal-body">
                                                             <div className='modal-body-update-status'>
                                                                 <div className='modal-body-update-status-title'>Status of Cage:</div>
-                                                                <div className='modal-body-update-status-empty'>
-                                                                    <input type="radio" id="empty" name="status-of-cage" value="Empty" defaultChecked={selectedCage?.status === 'Empty'} disabled={selectedCage?.status !== 'Empty' && selectedCage?.status !== 'Using'} />
-                                                                    <div className='modal-body-update-status-empty-text'>Empty</div>
-                                                                </div>
                                                                 <div className='modal-body-update-status-using'>
-                                                                    <input type="radio" id="using" name="status-of-cage" value="Using" defaultChecked={selectedCage?.status === 'Using'} />
+                                                                    <input type="radio" id="using" name="status-of-cage" value="Using" defaultChecked={selectedCage?.status === 'Using' || !selectedCage?.id } />
                                                                     <div className='modal-body-update-status-using-text'>Using</div>
                                                                 </div>
                                                             </div>
                                                             <div className='modal-body-update-status'>
                                                                 <div className='modal-body-update-status-title'>Status of pet:</div>
                                                                 <div className='modal-body-update-status-empty'>
-                                                                    <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked={selectedCage?.petStatus === 'NotRecover'} disabled={selectedCage?.status !== 'Using'} />
+                                                                    <input type="radio" id="NotRecover" name="status-of-pet" value="NotRecover" defaultChecked={selectedCage?.petStatus === 'NotRecover' || !selectedCage?.id  } />
                                                                     <div className='modal-body-update-status-empty-text'>Not Recover</div>
                                                                 </div>
                                                                 <div className='modal-body-update-status-using'>
-                                                                    <input type="radio" id="Recover" name="status-of-pet" value="Recover" defaultChecked={selectedCage?.petStatus === 'Recover'} disabled={selectedCage?.status !== 'Using'} />
+                                                                    <input type="radio" id="Recover" name="status-of-pet" value="Recover" defaultChecked={selectedCage?.petStatus === 'Recover'} />
                                                                     <div className='modal-body-update-status-using-text'>Recover</div>
                                                                 </div>
                                                             </div>

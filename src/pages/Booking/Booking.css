@@ -238,6 +238,19 @@ body {
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
+.booking-container .element-button-selected {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background-color: #4345a5; /* Màu vàng nhạt cho ô đã chọn */
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  border: 2px solid #e631d6;
+}
+
 .booking-container .booking-select_time {
   font-family: Roboto, sans-serif;
   font-weight: 500;

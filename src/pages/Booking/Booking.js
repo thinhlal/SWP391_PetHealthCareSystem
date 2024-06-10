@@ -55,7 +55,7 @@ const Booking = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [availableSlots, setAvailableSlots] = useState([]);
     const [isDayOff, setIsDayOff] = useState(false);
-    const [selectedSlot, setSelectedSlot] = useState(null);
+    const [selectedSlot, setSelectedSlot] = useState(null); // State để lưu ô giờ đã chọn
 
     const handleDoctorChange = (e) => {
         const newDoctorId = e.target.value;
@@ -69,9 +69,9 @@ const Booking = () => {
         updateAvailableSlots(selectedDoctor, newDate);
     };
 
-    const handleSlotClick = (slot) => {
+    const handleSlotClick = (slot) => { // Hàm xử lý khi click vào ô giờ
         if (!slot.isBooked) {
-            setSelectedSlot(slot);
+            setSelectedSlot(slot); // Lưu ô giờ đã chọn vào state
         }
     };
 
@@ -258,8 +258,8 @@ const Booking = () => {
                                 availableSlots.map((slot, index) => (
                                     <div
                                         key={index}
-                                        className={slot.isBooked ? "element-button-red" : "element-button-green"}
-                                        onClick={() => handleSlotClick(slot)}
+                                        className={`element-button ${slot.isBooked ? "element-button-red" : (selectedSlot === slot ? "element-button-selected" : "element-button-green")}`} // Thêm class để thay đổi màu sắc ô đã chọn
+                                        onClick={() => handleSlotClick(slot)} // click để chọn ô giờ
                                     >
                                         <div className="booking-select_time">
                                             {slot.startTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false })} - {slot.endTime.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit', hour12: false })}

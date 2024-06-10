@@ -13,7 +13,7 @@ function PetExamRecord() {
         { id: 'PET05', type: 'Cat', weight: '0.2 kg', name: 'Nemo', owner: 'Salah', gender: 'Unknown' }
     ];
 
-    // Chọn thú cưng theo index (Ví dụ: 0 để chọn pet đầu tiên)
+    // select index (thứ tự pet = 0, 1, 2, 3, .....)
     const selectedPetIndex = 0; 
     const selectedPet = renderPetData[selectedPetIndex];
     //yêu cầu xác nhận khi ấn cancel
