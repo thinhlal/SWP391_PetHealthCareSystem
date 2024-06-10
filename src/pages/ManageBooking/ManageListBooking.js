@@ -96,6 +96,14 @@ function ManageListBooking() {
     const [ownerOption, setOwnerOption] = useState('');
     const [petSearchResults, setPetSearchResults] = useState([]);
     const [ownerSearchResults, setOwnerSearchResults] = useState([]);
+    const availableBreeds = [
+        "Golden Retriever",
+        "Labrador Retriever",
+        "Poodle",
+        "Bulldog",
+        "Beagle",
+        "Chihuahua",
+    ];
     const [createPetInfo, setCreatePetInfo] = useState({
         petID: '',
         name: '',
@@ -139,7 +147,23 @@ function ManageListBooking() {
         { bookingID: 'SE123461', day: '2024-07-01', startTime: '13:00', endTime: '14:00', name: 'Th', petType: 'Cat', petName: 'IMsa', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Wing Clipping' }
     ]);
     const [chosenDoctor, setChosenDoctor] = useState('');
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({
+        petOption: '',
+        ownerOption: '',
+        selectedDate: '',
+        selectedStartTime: '',
+        selectedEndTime: '',
+        chosenDoctor: '',
+        services: '',
+        petName: '',
+        petType: '',
+        petBreed: '',
+        petGender: '',
+        petBirthday: '',
+        ownerName: '',
+        ownerPhone: '',
+        ownerEmail: ''
+    });
 
     const availableServices = [
         { id: 1, name: 'X-quang' },
@@ -150,10 +174,12 @@ function ManageListBooking() {
 
     const handlePetOptionChange = (event) => {
         setPetOption(event.target.value);
+        setErrors(prev => ({ ...prev, petOption: '' }));
     };
 
     const handleOwnerOptionChange = (event) => {
         setOwnerOption(event.target.value);
+        setErrors(prev => ({ ...prev, ownerOption: '' }));
     };
 
     const handleSearchPet = () => {
@@ -192,6 +218,7 @@ function ManageListBooking() {
         const newServices = [...services];
         newServices[index][field] = value;
         setServices(newServices);
+        setErrors(prev => ({ ...prev, services: '' }));
     };
 
     const addService = () => {
@@ -241,7 +268,9 @@ function ManageListBooking() {
 
     const handleDoctorChange = (event) => {
         setChosenDoctor(event.target.value);
+        setErrors(prev => ({ ...prev, chosenDoctor: '' }));
     };
+
     const handleSave = (bookingID) => {
         setAllBookings(allBookings.map(booking => {
             if (booking.bookingID === bookingID) {
@@ -256,6 +285,8 @@ function ManageListBooking() {
     const validateForm = () => {
         const newErrors = {};
 
+        if (!petOption) newErrors.petOption = "Please select a pet option.";
+        if (!ownerOption) newErrors.ownerOption = "Please select an owner option.";
         if (!selectedDate) newErrors.selectedDate = "Date is required.";
         if (!selectedStartTime) newErrors.selectedStartTime = "Start Time is required.";
         if (!selectedEndTime) newErrors.selectedEndTime = "End Time is required.";
@@ -275,7 +306,7 @@ function ManageListBooking() {
             const { name, phone, email } = createOwnerInfo;
             if (!name) newErrors.ownerName = "Owner name is required.";
             if (!phone) newErrors.ownerPhone = "Owner phone is required.";
-            if (!email) newErrors.ownerEmail = "Owner email is required.";
+            if (!email || !validateEmail(email)) newErrors.ownerEmail = "Valid owner email is required.";
         }
 
         setErrors(newErrors);
@@ -287,7 +318,7 @@ function ManageListBooking() {
         if (!validateForm()) return;
 
         const newBooking = {
-            bookingID: `SE${Math.floor(Math.random() * 1000000)}`,
+            bookingID: `SE${parseInt(allBookings[allBookings.length - 1].bookingID.split(2)) + 1}`,
             day: selectedDate,
             startTime: selectedStartTime,
             endTime: selectedEndTime,
@@ -305,6 +336,11 @@ function ManageListBooking() {
         resetForm();
         // Close modal after adding the booking
         document.querySelector('#exampleModal .btn-close').click();
+    };
+
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
     };
 
     return (
@@ -347,6 +383,7 @@ function ManageListBooking() {
                                                             <label>Type:</label>
                                                             <input type='radio' name='petOption' value='hasPetID' checked={petOption === 'hasPetID'} onChange={handlePetOptionChange} /> <span>Has Pet ID</span>
                                                             <input type='radio' name='petOption' value='noPetID' checked={petOption === 'noPetID'} onChange={handlePetOptionChange} /> <span>Not Has Pet ID</span>
+                                                            {errors.petOption && <span className='error'>{errors.petOption}</span>}
                                                         </div>
                                                         {petOption === 'hasPetID' && (
                                                             <div id='searchPetSection'>
@@ -368,29 +405,34 @@ function ManageListBooking() {
                                                                 <div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Pet Name:</label>
-                                                                        <input type='text' value={createPetInfo.name || ''} onChange={(e) => setCreatePetInfo({ ...createPetInfo, name: e.target.value })} required />
+                                                                        <input type='text' value={createPetInfo.name || ''} onChange={(e) => { setCreatePetInfo({ ...createPetInfo, name: e.target.value }); setErrors(prev => ({ ...prev, petName: '' })); }} required />
                                                                         {errors.petName && <span className='error'>{errors.petName}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Type:</label>
-                                                                        <input type='radio' name='petType' value='Dog' checked={createPetInfo.type === 'Dog'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, type: e.target.value })} required /> <span>Dog</span>
-                                                                        <input type='radio' name='petType' value='Cat' checked={createPetInfo.type === 'Cat'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, type: e.target.value })} required /> <span>Cat</span>
+                                                                        <input type='radio' name='petType' value='Dog' checked={createPetInfo.type === 'Dog'} onChange={(e) => { setCreatePetInfo({ ...createPetInfo, type: e.target.value }); setErrors(prev => ({ ...prev, petType: '' })); }} required /> <span>Dog</span>
+                                                                        <input type='radio' name='petType' value='Cat' checked={createPetInfo.type === 'Cat'} onChange={(e) => { setCreatePetInfo({ ...createPetInfo, type: e.target.value }); setErrors(prev => ({ ...prev, petType: '' })); }} required /> <span>Cat</span>
                                                                         {errors.petType && <span className='error'>{errors.petType}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Breed:</label>
-                                                                        <input type='text' value={createPetInfo.breed || ''} onChange={(e) => setCreatePetInfo({ ...createPetInfo, breed: e.target.value })} required />
+                                                                        <select value={createPetInfo.breed} onChange={(e) => { setCreatePetInfo({ ...createPetInfo, breed: e.target.value }); setErrors(prev => ({ ...prev, petBreed: '' })); }} required>
+                                                                            <option value=''>Select Breed</option>
+                                                                            {availableBreeds.map((breed, index) => (
+                                                                                <option key={index} value={breed}>{breed}</option>
+                                                                            ))}
+                                                                        </select>
                                                                         {errors.petBreed && <span className='error'>{errors.petBreed}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Birthday:</label>
-                                                                        <input type='date' value={createPetInfo.birthday || ''} onChange={(e) => setCreatePetInfo({ ...createPetInfo, birthday: e.target.value })} required />
+                                                                        <input type='date' value={createPetInfo.birthday || ''} onChange={(e) => { setCreatePetInfo({ ...createPetInfo, birthday: e.target.value }); setErrors(prev => ({ ...prev, petBirthday: '' })); }} required />
                                                                         {errors.petBirthday && <span className='error'>{errors.petBirthday}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Gender:</label>
-                                                                        <input type='radio' name='gender' value='Male' checked={createPetInfo.gender === 'Male'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, gender: e.target.value })} required /> <span>Male</span>
-                                                                        <input type='radio' name='gender' value='Female' checked={createPetInfo.gender === 'Female'} onChange={(e) => setCreatePetInfo({ ...createPetInfo, gender: e.target.value })} required /> <span>Female</span>
+                                                                        <input type='radio' name='gender' value='Male' checked={createPetInfo.gender === 'Male'} onChange={(e) => { setCreatePetInfo({ ...createPetInfo, gender: e.target.value }); setErrors(prev => ({ ...prev, petGender: '' })); }} required /> <span>Male</span>
+                                                                        <input type='radio' name='gender' value='Female' checked={createPetInfo.gender === 'Female'} onChange={(e) => { setCreatePetInfo({ ...createPetInfo, gender: e.target.value }); setErrors(prev => ({ ...prev, petGender: '' })); }} required /> <span>Female</span>
                                                                         {errors.petGender && <span className='error'>{errors.petGender}</span>}
                                                                     </div>
                                                                 </div>
@@ -403,6 +445,7 @@ function ManageListBooking() {
                                                             <label>Customer:</label>
                                                             <input type='radio' name='ownerOption' value='hasOwnerID' checked={ownerOption === 'hasOwnerID'} onChange={handleOwnerOptionChange} /><span>Have CustomerID</span>
                                                             <input type='radio' name='ownerOption' value='noOwnerID' checked={ownerOption === 'noOwnerID'} onChange={handleOwnerOptionChange} /><span>Not Have CustomerID</span>
+                                                            {errors.ownerOption && <span className='error'>{errors.ownerOption}</span>}
                                                         </div>
                                                         {ownerOption === 'hasOwnerID' && (
                                                             <div id='searchOwnerSection'>
@@ -424,17 +467,25 @@ function ManageListBooking() {
                                                                 <div className=''>
                                                                     <div className='modal-body-section'>
                                                                         <label>Name:</label>
-                                                                        <input type='text' value={createOwnerInfo.name || ''} onChange={(e) => setCreateOwnerInfo({ ...createOwnerInfo, name: e.target.value })} required />
+                                                                        <input type='text' value={createOwnerInfo.name || ''} onChange={(e) => { setCreateOwnerInfo({ ...createOwnerInfo, name: e.target.value }); setErrors(prev => ({ ...prev, ownerName: '' })); }} required />
                                                                         {errors.ownerName && <span className='error'>{errors.ownerName}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Email:</label>
-                                                                        <input type='email' value={createOwnerInfo.email || ''} onChange={(e) => setCreateOwnerInfo({ ...createOwnerInfo, email: e.target.value })} required />
+                                                                        <input type='email' value={createOwnerInfo.email || ''} onChange={(e) => {
+                                                                            const email = e.target.value;
+                                                                            setCreateOwnerInfo({ ...createOwnerInfo, email });
+                                                                            if (!validateEmail(email)) {
+                                                                                setErrors(prev => ({ ...prev, ownerEmail: 'Invalid email format' }));
+                                                                            } else {
+                                                                                setErrors(prev => ({ ...prev, ownerEmail: '' }));
+                                                                            }
+                                                                        }} required />
                                                                         {errors.ownerEmail && <span className='error'>{errors.ownerEmail}</span>}
                                                                     </div>
                                                                     <div className='modal-body-section'>
                                                                         <label>Phone:</label>
-                                                                        <input type='text' value={createOwnerInfo.phone || ''} onChange={(e) => setCreateOwnerInfo({ ...createOwnerInfo, phone: e.target.value })} required />
+                                                                        <input type='text' value={createOwnerInfo.phone || ''} onChange={(e) => { setCreateOwnerInfo({ ...createOwnerInfo, phone: e.target.value }); setErrors(prev => ({ ...prev, ownerPhone: '' })); }} required />
                                                                         {errors.ownerPhone && <span className='error'>{errors.ownerPhone}</span>}
                                                                     </div>
                                                                 </div>
@@ -464,17 +515,17 @@ function ManageListBooking() {
                                                         <div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Choose Date:</label>
-                                                                <input type='date' value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} required />
+                                                                <input type='date' value={selectedDate} onChange={(e) => { setSelectedDate(e.target.value); setErrors(prev => ({ ...prev, selectedDate: '' })); }} required />
                                                                 {errors.selectedDate && <span className='error'>{errors.selectedDate}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Choose StartTime:</label>
-                                                                <input type='time' value={selectedStartTime} onChange={(e) => setSelectedStartTime(e.target.value)} required />
+                                                                <input type='time' value={selectedStartTime} onChange={(e) => { setSelectedStartTime(e.target.value); setErrors(prev => ({ ...prev, selectedStartTime: '' })); }} required />
                                                                 {errors.selectedStartTime && <span className='error'>{errors.selectedStartTime}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Choose EndTime:</label>
-                                                                <input type='time' value={selectedEndTime} onChange={(e) => setSelectedEndTime(e.target.value)} required />
+                                                                <input type='time' value={selectedEndTime} onChange={(e) => { setSelectedEndTime(e.target.value); setErrors(prev => ({ ...prev, selectedEndTime: '' })); }} required />
                                                                 {errors.selectedEndTime && <span className='error'>{errors.selectedEndTime}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>

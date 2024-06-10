@@ -246,7 +246,7 @@
   line-height: 70px;
   font-family: "Roboto", sans-serif;
 }
-.modal-body-manage-booking {
+.manage-booking-list .modal-body-manage-booking {
   background-color: #fff;
   border-color: #fff;
   font-family: Roboto, sans-serif;
@@ -255,58 +255,54 @@
   align-items: center;
 }
 
-.content-modal-manage-booking {
+.manage-booking-list .content-modal-manage-booking {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.grid-container {
+.manage-booking-list .grid-container {
   display: grid;
   grid-template-rows: auto auto;
   gap: 15px;
 }
 
-.font-weight-bold {
+.manage-booking-list .font-weight-bold {
   font-weight: 600;
   font-size: 20px;
 }
 
-.title-reason-manage-booking {
+.manage-booking-list .title-reason-manage-booking {
   color: #004cb9;
   font-weight: 600;
 }
 
-.mb-3 {
+.manage-booking-list .mb-3 {
   grid-row: span 2; /* Để dòng này nằm riêng giữa hai phần trên và dưới */
 }
 
-.close {
+.manage-booking-list .close {
   color: #000;
   cursor: pointer;
 }
 
-.close:hover {
+.manage-booking-list .close:hover {
   color: #000;
 }
 
-.theme-color {
+.manage-booking-list .theme-color {
   color: #004cb9;
 }
-hr.new1 {
+.manage-booking-list hr.new1 {
   border-top: dashed #fff;
   margin: 0.4rem 0;
 }
 
-.form-control {
+.manage-booking-list .form-control {
   margin-top: 10px;
 }
 
-.error {
+.manage-booking-list .error {
   color: red;
   font-size: 0.8em;
-}
-
-input:invalid {
-  border: 1px solid red;
 }
