@@ -55,7 +55,7 @@ function YourBooking() {
           </div>
         </div>
         <div className="overlap-booking">
-          <Sidebar/>
+          <Sidebar />
           <div className="main-content-booking">
             <div className="your-Pet-Header-booking">
               <div className="search-pet-booking">
@@ -93,11 +93,10 @@ function YourBooking() {
                         <div className="detail-number-ID">
                           ID: {booking.id}
                           <div
-                            className={`status-booking ${
-                              booking.status === "Pending"
+                            className={`status-booking ${booking.status === "Pending"
                                 ? "status-pending"
                                 : "status-completed"
-                            }`}
+                              }`}
                           >
                             Status: {booking.status}
                           </div>
@@ -181,40 +180,39 @@ function YourBooking() {
                 </div>
               ))}
               {/* pagination */}
-               <div className="add-pet_pagination">
-          <nav aria-label="...">
-            <ul className="pagination">
-              <li className="page-item disabled">
-                <a className="page-link" href="#123">
-                  Previous
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#123">
-                  1
-                </a>
-              </li>
-              <li className="page-item active" aria-current="page">
-                <a className="page-link" href="123">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#123">
-                  3
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="123">
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+              <div className="add-pet_pagination">
+                <nav aria-label="...">
+                  <ul className="pagination">
+                    <li className="page-item disabled">
+                      <a className="page-link" href="#123">
+                        Previous
+                      </a>
+                    </li>
+                    <li className="page-item">
+                      <a className="page-link" href="#123">
+                        1
+                      </a>
+                    </li>
+                    <li className="page-item active" aria-current="page">
+                      <a className="page-link" href="123">
+                        2
+                      </a>
+                    </li>
+                    <li className="page-item">
+                      <a className="page-link" href="#123">
+                        3
+                      </a>
+                    </li>
+                    <li className="page-item">
+                      <a className="page-link" href="123">
+                        Next
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
             </div>
 
-            {/* modal rating */}
             <div
               className="modal fade"
               id="newModal"
@@ -296,15 +294,8 @@ function YourBooking() {
                 </div>
               </div>
             </div>
-
-            {/* modal confirm  */}
-            
           </div>
         </div>
-
-        {/* pagination */}
-       
-
         <Footer></Footer>
       </div>
     </div>

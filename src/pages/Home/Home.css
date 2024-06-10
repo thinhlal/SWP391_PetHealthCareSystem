@@ -419,6 +419,7 @@ a {
 }
 
 .main .service_Info_Detail-button-wrapper {
+  position: relative;
 }
 
 .main .service_Info_Detail-button {
@@ -430,9 +431,7 @@ a {
   text-decoration: none;
   background-color: #e18213;
   color: #fff;
-  letter-spacing: 2px;
   text-align: center;
-  position: relative;
   transition: all 0.35s;
   border-radius: 5px;
 }

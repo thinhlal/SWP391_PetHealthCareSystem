@@ -191,112 +191,122 @@
   margin-top: 70px;
 }
 
-.manage-booking-list .modal-body-section-wrapper{
+.manage-booking-list .modal-body-section-wrapper {
   display: flex;
   flex-direction: column;
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
 
-.manage-booking-list .modal-body-section{
+.manage-booking-list .modal-body-section {
   margin: 10px 0;
+  display: flex;
+  align-items: center;
 }
 
 .manage-booking-list .modal-body-section-type-user,
 .manage-booking-list .modal-body-section-doctor-date,
-.manage-booking-list .modal-body-section-type-pet{
+.manage-booking-list .modal-body-section-type-pet {
   margin: 10px 0;
+  display: flex;
+  align-items: center;
 }
 
-.manage-booking-list .modal-body-section label{
+.manage-booking-list .modal-body-section label {
   width: 70px;
 }
 
-.manage-booking-list .modal-body-section-wrapper label{
+.manage-booking-list .modal-body-section-wrapper label {
   margin-right: 10px;
 }
 
-.manage-booking-list .modal-body-section-wrapper span{
-  margin:0 20px 0 5px;
+.manage-booking-list .modal-body-section-wrapper span {
+  margin: 0 20px 0 5px;
 }
 
-.manage-booking-list .choose-Doctor-wrapper{
+.manage-booking-list .choose-Doctor-wrapper {
   display: flex;
   align-items: center;
   height: 25px;
   margin: 10px 0;
 }
 
-.manage-booking-list .choose-Doctor-wrapper input{
+.manage-booking-list .choose-Doctor-wrapper input {
   margin: 0 10px;
 }
 
-.manage-booking-list .choose-Doctor-wrapper label{
+.manage-booking-list .choose-Doctor-wrapper label {
   line-height: 25px;
   font-family: "Roboto", sans-serif;
 }
 
-.manage-booking-list .choose-Doctor-Not-Found{
+.manage-booking-list .choose-Doctor-Not-Found {
   color: red;
   text-align: center;
   line-height: 70px;
   font-family: "Roboto", sans-serif;
 }
- .modal-body-manage-booking {
-    background-color: #fff;
-    border-color: #fff;
-    font-family: Roboto, sans-serif;
-    margin: 30px 20px;
-    display: flex;
-    align-items: center
-  }
+.modal-body-manage-booking {
+  background-color: #fff;
+  border-color: #fff;
+  font-family: Roboto, sans-serif;
+  margin: 30px 20px;
+  display: flex;
+  align-items: center;
+}
 
-  .content-modal-manage-booking {
-    display: flex;
-    flex-direction: column; 
-    gap: 16px; 
-  }
-  
-  .grid-container {
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 15px; 
-  }
-  
-  .font-weight-bold{
-    font-weight: 600;
-    font-size: 20px;
-  }
+.content-modal-manage-booking {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-  .title-reason-manage-booking{
-    color: #004cb9;
-    font-weight: 600;
-  }
+.grid-container {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 15px;
+}
 
-  .mb-3 {
-    grid-row: span 2; /* Để dòng này nằm riêng giữa hai phần trên và dưới */
-  }
-  
-  .close {
-    color: #000;
-    cursor: pointer;
-  }
-  
-  .close:hover {
-    color: #000;
-  }
-  
-  
-  .theme-color{
-  
-    color: #004cb9;
-  }
-  hr.new1 {
-    border-top:  dashed #fff;
-    margin: 0.4rem 0;
-  }
-  
-  .form-control {
-    margin-top: 10px;
-  }
-  
+.font-weight-bold {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.title-reason-manage-booking {
+  color: #004cb9;
+  font-weight: 600;
+}
+
+.mb-3 {
+  grid-row: span 2; /* Để dòng này nằm riêng giữa hai phần trên và dưới */
+}
+
+.close {
+  color: #000;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+.theme-color {
+  color: #004cb9;
+}
+hr.new1 {
+  border-top: dashed #fff;
+  margin: 0.4rem 0;
+}
+
+.form-control {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+}
+
+input:invalid {
+  border: 1px solid red;
+}
