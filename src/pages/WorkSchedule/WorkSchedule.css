@@ -123,6 +123,16 @@ tr:hover {
   font-size: 13px;
 }
 
+.cancel-booking-button:hover{
+  background-color: orange;
+}
+
+.gray-button {
+  background-color: gray;
+  pointer-events: none;
+}
+
+
 .doctor-status-pending {
   color: red;
 }
