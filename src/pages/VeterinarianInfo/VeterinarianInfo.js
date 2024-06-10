@@ -184,8 +184,6 @@ function VeterinarianInfo() {
 								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
 								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
-								<div className="vet-p">
-								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>
@@ -233,8 +231,6 @@ function VeterinarianInfo() {
 								✓ 1 in 3 doctors using the Damon automatic braces system most successfully in Vietnam								</div>
 								<div className="vet-p">
 								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
-								<div className="vet-p">
-								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
 								<div className="vet-p">
 								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
@@ -337,8 +333,6 @@ function VeterinarianInfo() {
 								✓ Translator of famous orthodontic books such as 1001 clinical tips in orthodontics (2015), Clinical cases in orthodontics (2015), Biomechanics in orthodontics (2016),...								</div>
 								<div className="vet-p">
 								✓ Doctor Duc has experience in treating more than 6,500 orthodontic cases, and is considered one of the doctors with the largest number of orthodontic patients in Hanoi.								</div>
-								<div className="vet-p">
-								✓ Be the first person to bring the F.A.C.E Braces Without Extraction method from abroad to apply in Vietnam, helping to minimize tooth extraction even without tooth extraction while still bringing the highest treatment effectiveness.								</div>
 							</div>
 						</div>
 					</div>

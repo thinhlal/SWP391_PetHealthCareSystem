@@ -1,9 +1,7 @@
 //css
 import './PetExamRecord.css';
-import logo from '../../assets/images/img_PetExamRecord/logo.png';
-
-//images
-import icon_user from '../../assets/images/img_PetExamRecord/icon_user.png';
+import Header from '../../components/Doctor/Header/Header.js';
+import React from 'react';
 
 function PetExamRecord() {
     // render
@@ -18,25 +16,22 @@ function PetExamRecord() {
     // Chọn thú cưng theo index (Ví dụ: 0 để chọn pet đầu tiên)
     const selectedPetIndex = 0; 
     const selectedPet = renderPetData[selectedPetIndex];
-
+    //yêu cầu xác nhận khi ấn cancel
+      const handleCancelClick = (e) => {
+        e.preventDefault();
+        if (window.confirm('Are you sure you want to cancel?')) {
+          window.location.href = 'work-schedule';
+        }
+      };    
     return (
         <div>
+            <Header></Header>
             <div className="petExam">
                 <div>
-                    <div className="menu">
-                        <nav className="nav-head">
-                            <div className="logo_ad">
-                                <img src={logo} alt="Pet Health Logo" className="nav-logo" />
-                            </div>
-                            <div className="icon_user">
-                                <img src={icon_user} alt="User Icon" />
-                            </div>
-                        </nav>
-                    </div>
                     <div>
                         <div className="petE-head">
                             <div className="petE-tittle">Pet Exam Record</div>
-                            <div className="petE-tittle-1">Create a new examination pool for pet</div>
+                            <div className="petE-tittle-1">Receive a examination pool for pet</div>
                         </div>
                     </div>
                 </div>
@@ -83,7 +78,7 @@ function PetExamRecord() {
                     </div>
                     <div className="final-petE">
                         <a href="work-schedule" className="btn-save">Save</a>
-                        <a href="work-schedule" className="btn-cancel">Cancel</a>
+                        <a href="work-schedule" className="btn-cancel" onClick={handleCancelClick}>Cancel</a>
                     </div>
                 </form>
                 <div>
