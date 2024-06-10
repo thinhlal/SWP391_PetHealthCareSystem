@@ -116,6 +116,16 @@ function ManageListBooking() {
         { startTime: "16:00", endTime: "17:00" },
         // thêm các khung giờ khác tại đây
     ];
+    const fakePetSearchResults = [
+        { petID: 'PET001', name: 'Buddy', type: 'Dog', breed: 'Golden Retriever', gender: 'Male', birthday: '2020-01-01', status: 'Healthy' },
+        { petID: 'PET002', name: 'Max', type: 'Cat', breed: 'Siamese', gender: 'Female', birthday: '2021-02-02', status: 'Healthy' },
+    ];
+
+    const fakeOwnerSearchResults = [
+        { ownerID: 'CUST001', name: 'John Doe', phone: '123-456-7890', email: 'john.doe@example.com' },
+        { ownerID: 'CUST002', name: 'Jane Smith', phone: '987-654-3210', email: 'jane.smith@example.com' },
+    ];
+
     const [createPetInfo, setCreatePetInfo] = useState({
         petID: '',
         name: '',
@@ -192,36 +202,58 @@ function ManageListBooking() {
         setErrors(prev => ({ ...prev, ownerOption: '' }));
     };
 
+    // const handleSearchPet = () => {
+    //     const query = document.getElementById('searchPetInput').value;
+    //     fetch(`/searchPet?query=${query}`)
+    //         .then((response) => response.json())
+    //         .then((data) => setPetSearchResults(data))
+    //         .catch((error) => console.error('Error:', error));
+    // };
+
     const handleSearchPet = () => {
-        const query = document.getElementById('searchPetInput').value;
-        fetch(`/searchPet?query=${query}`)
-            .then((response) => response.json())
-            .then((data) => setPetSearchResults(data))
-            .catch((error) => console.error('Error:', error));
+        const query = document.getElementById('searchPetInput').value.toLowerCase();
+        const results = fakePetSearchResults.filter(pet => pet.petID.toLowerCase().includes(query));
+        setPetSearchResults(results);
+        if (results.length === 1) {
+            setPetInfo(results[0]);
+        }
+    };
+
+    // const handleSearchOwner = () => {
+    //     const query = document.getElementById('searchOwnerInput').value;
+    //     fetch(`/searchOwner?query=${query}`)
+    //         .then((response) => response.json())
+    //         .then((data) => setOwnerSearchResults(data))
+    //         .catch((error) => console.error('Error:', error));
+    // };
+
+    const handleSearchOwner = () => {
+        const query = document.getElementById('searchOwnerInput').value.toLowerCase();
+        const results = fakeOwnerSearchResults.filter(owner => owner.ownerID.toLowerCase().includes(query));
+        setOwnerSearchResults(results);
+        if (results.length === 1) {
+            setOwnerInfo(results[0]);
+        }
+    };
+
+    // const handleOwnerSelect = (event) => {
+    //     const ownerID = event.target.value;
+    //     fetch(`/getOwnerInfo?ownerID=${ownerID}`)
+    //         .then((response) => response.json())
+    //         .then((data) => setOwnerInfo(data))
+    //         .catch((error) => console.error('Error:', error));
+    // };
+
+    const handleOwnerSelect = (event) => {
+        const ownerID = event.target.value;
+        const owner = fakeOwnerSearchResults.find(owner => owner.ownerID === ownerID);
+        setOwnerInfo(owner);
     };
 
     const handlePetSelect = (event) => {
         const petID = event.target.value;
-        fetch(`/getPetInfo?petID=${petID}`)
-            .then((response) => response.json())
-            .then((data) => setPetInfo(data))
-            .catch((error) => console.error('Error:', error));
-    };
-
-    const handleSearchOwner = () => {
-        const query = document.getElementById('searchOwnerInput').value;
-        fetch(`/searchOwner?query=${query}`)
-            .then((response) => response.json())
-            .then((data) => setOwnerSearchResults(data))
-            .catch((error) => console.error('Error:', error));
-    };
-
-    const handleOwnerSelect = (event) => {
-        const ownerID = event.target.value;
-        fetch(`/getOwnerInfo?ownerID=${ownerID}`)
-            .then((response) => response.json())
-            .then((data) => setOwnerInfo(data))
-            .catch((error) => console.error('Error:', error));
+        const pet = fakePetSearchResults.find(pet => pet.petID === petID);
+        setPetInfo(pet);
     };
 
     const handleServiceChange = (index, field, value) => {
