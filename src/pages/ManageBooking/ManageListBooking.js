@@ -57,7 +57,8 @@ const doctorsData = [
                 isOff: false,
                 bookings: [
                     { startTime: '13:00', endTime: '14:00' },
-                    { startTime: '9:00', endTime: '10:00' }
+                    { startTime: '9:00', endTime: '10:00' },
+                    { startTime: '14:00', endTime: '15:00' },
                 ]
             }
         ]
@@ -104,6 +105,17 @@ function ManageListBooking() {
         "Beagle",
         "Chihuahua",
     ];
+    const availableTimeSlots = [
+        { startTime: "08:00", endTime: "09:00" },
+        { startTime: "09:00", endTime: "10:00" },
+        { startTime: "10:00", endTime: "11:00" },
+        { startTime: "11:00", endTime: "12:00" },
+        { startTime: "13:00", endTime: "14:00" },
+        { startTime: "14:00", endTime: "15:00" },
+        { startTime: "15:00", endTime: "16:00" },
+        { startTime: "16:00", endTime: "17:00" },
+        // thêm các khung giờ khác tại đây
+    ];
     const [createPetInfo, setCreatePetInfo] = useState({
         petID: '',
         name: '',
@@ -136,8 +148,7 @@ function ManageListBooking() {
     });
     const [services, setServices] = useState([{ service: '' }]);
     const [selectedDate, setSelectedDate] = useState('');
-    const [selectedStartTime, setSelectedStartTime] = useState('');
-    const [selectedEndTime, setSelectedEndTime] = useState('');
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState({});
     const [allBookings, setAllBookings] = useState([
         { bookingID: 'SE123456', day: '2024-06-01', startTime: '8:00', endTime: '9:00', name: 'John Doe', petType: 'Dog', petName: 'Lau', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: 'Chen', service: 'Grooming' },
         { bookingID: 'SE123457', day: '2024-06-01', startTime: '9:00', endTime: '10:00', name: 'Jane Smith', petType: 'Cat', petName: 'Jhs', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Check-up' },
@@ -151,8 +162,7 @@ function ManageListBooking() {
         petOption: '',
         ownerOption: '',
         selectedDate: '',
-        selectedStartTime: '',
-        selectedEndTime: '',
+        selectedTimeSlot: '',
         chosenDoctor: '',
         services: '',
         petName: '',
@@ -239,8 +249,7 @@ function ManageListBooking() {
         setCreateOwnerInfo({});
         setServices([{ service: '' }]);
         setSelectedDate('');
-        setSelectedEndTime('');
-        setSelectedStartTime('');
+        setSelectedTimeSlot({});
         setErrors({});
         document.getElementById('addPetForm').reset();
     };
@@ -288,8 +297,7 @@ function ManageListBooking() {
         if (!petOption) newErrors.petOption = "Please select a pet option.";
         if (!ownerOption) newErrors.ownerOption = "Please select an owner option.";
         if (!selectedDate) newErrors.selectedDate = "Date is required.";
-        if (!selectedStartTime) newErrors.selectedStartTime = "Start Time is required.";
-        if (!selectedEndTime) newErrors.selectedEndTime = "End Time is required.";
+        if (!selectedTimeSlot.startTime || !selectedTimeSlot.endTime) newErrors.selectedTimeSlot = "Time slot is required.";
         if (!chosenDoctor) newErrors.chosenDoctor = "Doctor is required.";
         if (services.length === 0) newErrors.services = "At least one service is required.";
 
@@ -318,10 +326,10 @@ function ManageListBooking() {
         if (!validateForm()) return;
 
         const newBooking = {
-            bookingID: `SE${parseInt(allBookings[allBookings.length - 1].bookingID.split(2)) + 1}`,
+            bookingID: `SE${parseInt(allBookings[allBookings.length - 1].bookingID.substring(2)) + 1}`,
             day: selectedDate,
-            startTime: selectedStartTime,
-            endTime: selectedEndTime,
+            startTime: selectedTimeSlot.startTime,
+            endTime: selectedTimeSlot.endTime,
             name: createOwnerInfo.name,
             petType: createPetInfo.type,
             petName: createPetInfo.name,
@@ -336,6 +344,12 @@ function ManageListBooking() {
         resetForm();
         // Close modal after adding the booking
         document.querySelector('#exampleModal .btn-close').click();
+    };
+
+    const handleTimeSlotChange = (event) => {
+        const [startTime, endTime] = event.target.value.split("-");
+        setSelectedTimeSlot({ startTime, endTime });
+        setErrors(prev => ({ ...prev, selectedTimeSlot: '' }));
     };
 
     const validateEmail = (email) => {
@@ -519,20 +533,20 @@ function ManageListBooking() {
                                                                 {errors.selectedDate && <span className='error'>{errors.selectedDate}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>
-                                                                <label>Choose StartTime:</label>
-                                                                <input type='time' value={selectedStartTime} onChange={(e) => { setSelectedStartTime(e.target.value); setErrors(prev => ({ ...prev, selectedStartTime: '' })); }} required />
-                                                                {errors.selectedStartTime && <span className='error'>{errors.selectedStartTime}</span>}
-                                                            </div>
-                                                            <div className='modal-body-section-doctor-date'>
-                                                                <label>Choose EndTime:</label>
-                                                                <input type='time' value={selectedEndTime} onChange={(e) => { setSelectedEndTime(e.target.value); setErrors(prev => ({ ...prev, selectedEndTime: '' })); }} required />
-                                                                {errors.selectedEndTime && <span className='error'>{errors.selectedEndTime}</span>}
+                                                                <label>Choose Time Slot:</label>
+                                                                <select value={`${selectedTimeSlot.startTime}-${selectedTimeSlot.endTime}`} onChange={handleTimeSlotChange} required>
+                                                                    <option value=''>Select Time Slot</option>
+                                                                    {availableTimeSlots.map((slot, index) => (
+                                                                        <option key={index} value={`${slot.startTime}-${slot.endTime}`}>{`${slot.startTime} - ${slot.endTime}`}</option>
+                                                                    ))}
+                                                                </select>
+                                                                {errors.selectedTimeSlot && <span className='error'>{errors.selectedTimeSlot}</span>}
                                                             </div>
                                                             <div className='modal-body-section-doctor-date'>
                                                                 <label>Veterinarian:</label>
                                                                 <div id='veterinarian'>
-                                                                    {findAvailableDoctor(selectedDate, selectedStartTime, selectedEndTime)
-                                                                        ? findAvailableDoctor(selectedDate, selectedStartTime, selectedEndTime).map((doctorAdd, index) => {
+                                                                    {findAvailableDoctor(selectedDate, selectedTimeSlot.startTime, selectedTimeSlot.endTime)
+                                                                        ? findAvailableDoctor(selectedDate, selectedTimeSlot.startTime, selectedTimeSlot.endTime).map((doctorAdd, index) => {
                                                                             return (
                                                                                 <div key={doctorAdd.id} className='choose-Doctor-wrapper'>
                                                                                     <input type='radio' id={`doctor-${index}`} name='doctor' value={doctorAdd.name} onChange={(e) => handleDoctorChange(e)} />
