@@ -346,7 +346,7 @@
 }
 
 
-.manage-cages .tab-modal-body-more-info button.manage-cages .active {
+.manage-cages .tab-modal-body-more-info button.active {
   background-color: #f1f1f1;
   border-bottom: 2px solid #004cb9;
 }
@@ -471,4 +471,6 @@
   border-color: #cccccc;
   color: #ffffff;
 }
+
+
 
