@@ -1,9 +1,7 @@
 import './ManageListBooking.css';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import { useState } from 'react';
-// Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-// Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
@@ -92,19 +90,11 @@ const doctorsData = [
 ];
 
 function ManageListBooking() {
-
     const [petOption, setPetOption] = useState('');
     const [ownerOption, setOwnerOption] = useState('');
     const [petSearchResults, setPetSearchResults] = useState([]);
     const [ownerSearchResults, setOwnerSearchResults] = useState([]);
-    const availableBreeds = [
-        "Golden Retriever",
-        "Labrador Retriever",
-        "Poodle",
-        "Bulldog",
-        "Beagle",
-        "Chihuahua",
-    ];
+    const availableBreeds = ["Golden Retriever", "Labrador Retriever", "Poodle", "Bulldog", "Beagle", "Chihuahua"];
     const availableTimeSlots = [
         { startTime: "08:00", endTime: "09:00" },
         { startTime: "09:00", endTime: "10:00" },
@@ -118,7 +108,7 @@ function ManageListBooking() {
     ];
     const fakePetSearchResults = [
         { petID: 'PET001', name: 'Buddy', type: 'Dog', breed: 'Golden Retriever', gender: 'Male', birthday: '2020-01-01', status: 'Healthy' },
-        { petID: 'PET002', name: 'Maxxxxxxxxx', type: 'Cat', breed: 'Siamese', gender: 'Female', birthday: '2021-02-02', status: 'Healthy' },
+        { petID: 'PET002', name: 'Max', type: 'Cat', breed: 'Siamese', gender: 'Female', birthday: '2021-02-02', status: 'Healthy' },
     ];
 
     const fakeOwnerSearchResults = [
@@ -151,7 +141,7 @@ function ManageListBooking() {
         status: 'Healthy',
     });
     const [ownerInfo, setOwnerInfo] = useState({
-        customerID: 'CUST001',
+        ownerID: 'CUST001',
         name: 'John Doe',
         phone: '123-456-7890',
         email: 'john.doe@example.com',
@@ -182,24 +172,26 @@ function ManageListBooking() {
         petBirthday: '',
         ownerName: '',
         ownerPhone: '',
-        ownerEmail: ''
+        ownerEmail: '',
+        ownerSelect: '',
+        petSelect: ''
     });
 
     const availableServices = [
-        { id: 1, name: 'X-quang' },
-        { id: 2, name: 'Siêu âm' },
-        { id: 3, name: 'Khám tổng quát' },
-        { id: 4, name: 'Tiêm chủng' }
+        { id: 1, name: 'Grooming', price: 5 },
+        { id: 2, name: 'Vaccination', price: 350 },
+        { id: 3, name: 'Wing Clipping', price: 50 },
+        { id: 4, name: 'Dental Cleaning', price: 20 }
     ];
 
     const handlePetOptionChange = (event) => {
         setPetOption(event.target.value);
-        setErrors(prev => ({ ...prev, petOption: '' }));
+        setErrors(prev => ({ ...prev, petOption: '', petSelect: '' }));
     };
 
     const handleOwnerOptionChange = (event) => {
         setOwnerOption(event.target.value);
-        setErrors(prev => ({ ...prev, ownerOption: '' }));
+        setErrors(prev => ({ ...prev, ownerOption: '', ownerSelect: '' }));
     };
 
     // const handleSearchPet = () => {
@@ -225,6 +217,7 @@ function ManageListBooking() {
             if (newPetInfo) {
                 setCreatePetInfo(newPetInfo);
                 setPetInfo(newPetInfo);
+                setErrors(prev => ({ ...prev, petSelect: '' }));
             }
         }
     };
@@ -260,6 +253,7 @@ function ManageListBooking() {
             if (owner) {
                 setCreateOwnerInfo(owner);
                 setOwnerInfo(owner);
+                setErrors(prev => ({ ...prev, ownerSelect: '' }));
             }
         }
     };
@@ -336,6 +330,9 @@ function ManageListBooking() {
 
         if (!petOption) newErrors.petOption = "Please select a pet option.";
         if (!ownerOption) newErrors.ownerOption = "Please select an owner option.";
+        if (petOption === 'hasPetID' && !petInfo.petID) newErrors.petSelect = "Please select a pet.";
+        if (ownerOption === 'hasOwnerID' && !ownerInfo.ownerID) newErrors.ownerSelect = "Please select a customer.";
+        if (services.some(service => !service.service)) newErrors.services = "Please select service.";
         if (!selectedDate) newErrors.selectedDate = "Date is required.";
         if (!selectedTimeSlot.startTime || !selectedTimeSlot.endTime) newErrors.selectedTimeSlot = "Time slot is required.";
         if (!chosenDoctor) newErrors.chosenDoctor = "Doctor is required.";
@@ -361,6 +358,7 @@ function ManageListBooking() {
         return Object.keys(newErrors).length === 0;
     };
 
+
     const handleAddBooking = (event) => {
         event.preventDefault();
         if (!validateForm()) return;
@@ -382,7 +380,6 @@ function ManageListBooking() {
 
         setAllBookings([...allBookings, newBooking]);
         resetForm();
-        // Close modal after adding the booking
         document.querySelector('#exampleModal .btn-close').click();
     };
 
@@ -441,18 +438,18 @@ function ManageListBooking() {
                                                         </div>
                                                         {petOption === 'hasPetID' && (
                                                             <div id='searchPetSection'>
-                                                                <div>
+                                                                <div className='searchPetSection-child'>
                                                                     <label>Search Pet ID:</label>
-                                                                    <input type='text' id='searchPetInput' />
-                                                                    <button type='button' onClick={handleSearchPet}>Search</button>
-                                                                    <div>
-                                                                        <select onChange={handlePetSelect}>
-                                                                            <option value=''>Select Pet</option>
-                                                                            {petSearchResults.map((pet) => (
-                                                                                <option key={pet.petID} value={pet.petID}>{`${pet.petID} - ${pet.name}`}</option>
-                                                                            ))}
-                                                                        </select>
-                                                                    </div>
+                                                                    <input type='text' id='searchPetInput' onChange={handleSearchPet} />
+                                                                </div>
+                                                                <div className='has-select-option'>
+                                                                    <select onChange={handlePetSelect}>
+                                                                        <option value=''>Choose Pet</option>
+                                                                        {petSearchResults.map((pet) => (
+                                                                            <option key={pet.petID} value={pet.petID}>{`${pet.petID} - ${pet.name}`}</option>
+                                                                        ))}
+                                                                    </select>
+                                                                    {errors.petSelect && <span className='error'>{errors.petSelect}</span>}
                                                                 </div>
                                                             </div>
                                                         )}
@@ -506,18 +503,20 @@ function ManageListBooking() {
                                                         </div>
                                                         {ownerOption === 'hasOwnerID' && (
                                                             <div id='searchOwnerSection'>
-                                                                <div>
+                                                                <div className='search-owner-option-section'>
                                                                     <label>Search Customer:</label>
-                                                                    <input type='text' id='searchOwnerInput' />
-                                                                    <button type='button' onClick={handleSearchOwner}>Search</button>
-                                                                    <div>
-                                                                        <select onChange={handleOwnerSelect}>
-                                                                            <option value=''>Select Customer</option>
-                                                                            {ownerSearchResults.map((owner) => (
-                                                                                <option key={owner.ownerID} value={owner.ownerID}>{`${owner.ownerID} - ${owner.name}`}</option>
-                                                                            ))}
-                                                                        </select>
-                                                                    </div>
+                                                                    <input type='text' id='searchOwnerInput' onChange={handleSearchOwner} />
+                                                                </div>
+                                                                <div className='has-select-option'>
+                                                                    <select onChange={handleOwnerSelect}>
+                                                                        <option value=''>Choose Customer</option>
+                                                                        {ownerSearchResults.map((owner) => (
+                                                                            <option key={owner.ownerID} value={owner.ownerID}>
+                                                                                {`${owner.ownerID} - ${owner.name}`}
+                                                                            </option>
+                                                                        ))}
+                                                                    </select>
+                                                                    {errors.ownerSelect && <span className='error'>{errors.ownerSelect}</span>}
                                                                 </div>
                                                             </div>
                                                         )}
@@ -567,7 +566,12 @@ function ManageListBooking() {
                                                                     </select>
                                                                 </div>
                                                             ))}
-                                                            <button type='button' className='btn-add-services' onClick={addService}>Add service</button>
+                                                            <div className='btn-add-services' onClick={addService}>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
+                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                </svg>
+                                                                <div>Add service</div>
+                                                            </div>
                                                             {errors.services && <span className='error'>{errors.services}</span>}
                                                         </div>
                                                     </div>
@@ -722,7 +726,7 @@ function ManageListBooking() {
                                                                     </div>
                                                                     <div className='reason-manage-booking'>
                                                                         <small className='title-reason-manage-booking'>CustomerID:&nbsp;</small>
-                                                                        <small> {ownerInfo.customerID}</small>
+                                                                        <small> {ownerInfo.ownerID}</small>
                                                                     </div>
                                                                     <div className='reason-manage-booking'>
                                                                         <small className='title-reason-manage-booking'>Name:&nbsp;</small>

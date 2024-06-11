@@ -306,3 +306,41 @@
   color: red;
   font-size: 0.8em;
 }
+
+.manage-booking-list .has-select-option{
+  margin: 8px 0 5px 0px;
+}
+
+.manage-booking-list .has-select-option select{
+  width: 200px;
+}
+
+.manage-booking-list .btn-add-services{
+  width: 100px;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  background-color: #ccc;
+  font-size: 14px;
+  height: 23px;
+  border-radius: 5px;
+  padding: 0 5px 0 3px;
+  cursor: pointer;
+}
+
+.manage-booking-list .btn-add-services div{
+  border: none;
+  background-color: #ccc;
+  font-size: 14px;
+  line-height: 23px;
+}
+
+.manage-booking-list .service {
+  margin: 10px 0;
+}
+
+.search-owner-option-section,
+.searchPetSection-child{
+  display: flex;
+  align-items: center;
+}
