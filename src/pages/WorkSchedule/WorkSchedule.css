@@ -10,7 +10,7 @@
   margin-top: 50px;
 }
 
-.ver-id {
+.vet-id {
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: black;
@@ -19,7 +19,16 @@
   margin-bottom: 20px;
 }
 
-.ver-name {
+.vet-name {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  color: black;
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.vet-select{
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: black;
@@ -83,7 +92,7 @@
   gap: 20px;
 }
 
-tr:hover {
+tr:hovet {
   background-color: #f5f5f5;
 }
 
@@ -103,7 +112,7 @@ tr:hover {
   font-size: 13px;
 }
 
-.click-button:hover {
+.click-button:hovet {
   background-color: orange;
 }
 
@@ -123,7 +132,7 @@ tr:hover {
   font-size: 13px;
 }
 
-.cancel-booking-button:hover{
+.cancel-booking-button:hovet{
   background-color: orange;
 }
 
