@@ -3,31 +3,117 @@ import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
 
 function WorkSchedule() {
-  const initialState = [
-    { id: 1, petId: 'PET01', petType: 'Dog', gender: 'Male', registerHour: '9:00 - 10:00', petOwner: 'Minh', status: 'Pending' },
-    { id: 2, petId: 'PET02', petType: 'Dog', gender: 'Female', registerHour: '10:00 - 11:00', petOwner: 'Phat', status: 'Pending' },
-    { id: 3, petId: 'PET03', petType: 'Cat', gender: 'Male', registerHour: '13:00 - 14:00', petOwner: 'Dat', status: 'Pending' },
-    { id: 4, petId: 'PET04', petType: 'Dog', gender: 'Male', registerHour: '15:00 - 16:00', petOwner: 'Thinh', status: 'Pending' },
-    { id: 5, petId: 'PET05', petType: 'Cat', gender: 'Female', registerHour: '16:00 - 17:00', petOwner: 'Thinh', status: 'Pending' },
-    { id: 6, petId: 'PET06', petType: 'Dog', gender: 'Male', registerHour: '17:00 - 18:00', petOwner: 'Thinh', status: 'Pending' },
-  ];
+  const initialSchedules = {
+    //ngày 12-6
+    '2023-06-12': {
+      '001': {
+        vetName: 'Vet. Minh',
+        appointments: [
+          { id: 1, petId: 'PET01', petType: 'Dog', gender: 'Male', registerHour: '9:00 - 10:00', petOwner: 'Ronaldo', status: 'Pending' },
+          { id: 2, petId: 'PET02', petType: 'Cat', gender: 'Female', registerHour: '10:00 - 11:00', petOwner: 'Messi', status: 'Pending' },
+          { id: 3, petId: 'PET06', petType: 'Dog', gender: 'Male', registerHour: '13:00 - 14:00', petOwner: 'Neymar', status: 'Pending' },
+          { id: 4, petId: 'PET08', petType: 'Dog', gender: 'Male', registerHour: '15:00 - 16:00', petOwner: 'Mbappe', status: 'Pending' },
+        ]
+      },
+      '002': {
+        vetName: 'Vet. Phat',
+        appointments: [
+          { id: 1, petId: 'PET03', petType: 'Cat', gender: 'Male', registerHour: '10:00 - 11:00', petOwner: 'Vini', status: 'Pending' },
+          { id: 2, petId: 'PET04', petType: 'Dog', gender: 'Male', registerHour: '13:00 - 14:00', petOwner: 'De Bruyne', status: 'Pending' },
+          { id: 3, petId: 'PET07', petType: 'Dog', gender: 'Female', registerHour: '14:00 - 15:00', petOwner: 'Saka', status: 'Pending' },
+          { id: 4, petId: 'PET10', petType: 'Dog', gender: 'Female', registerHour: '15:00 - 16:00', petOwner: 'Bruno', status: 'Pending' },
+          { id: 5, petId: 'PET12', petType: 'Cat', gender: 'Female', registerHour: '17:00 - 18:00', petOwner: 'Felix', status: 'Pending' },
+        ]
+      },
+      '006': {
+        vetName: 'Vet. Tung',
+        appointments: [
+          { id: 1, petId: 'PET09', petType: 'Cat', gender: 'Male', registerHour: '9:00 - 10:00', petOwner: 'Mount', status: 'Pending' },
+          { id: 2, petId: 'PET11', petType: 'Dog', gender: 'Male', registerHour: '10:00 - 11:00', petOwner: 'Havertz', status: 'Pending' },
+          { id: 3, petId: 'PET13', petType: 'Cat', gender: 'Female', registerHour: '13:00 - 14:00', petOwner: 'Reus', status: 'Pending' },
+        ]
+      },
+    },
+    //ngày 13-6
+    '2023-06-13': {
+      '004': {
+        vetName: 'Vet. Thinh',
+        appointments: [
+          { id: 1, petId: 'PET01', petType: 'Dog', gender: 'Male', registerHour: '9:00 - 10:00', petOwner: 'Ronaldo', status: 'Pending' },
+          { id: 2, petId: 'PET02', petType: 'Cat', gender: 'Female', registerHour: '10:00 - 11:00', petOwner: 'Messi', status: 'Pending' },
+          { id: 3, petId: 'PET06', petType: 'Dog', gender: 'Male', registerHour: '13:00 - 14:00', petOwner: 'Neymar', status: 'Pending' },
+          { id: 4, petId: 'PET12', petType: 'Dog', gender: 'Male', registerHour: '15:00 - 16:00', petOwner: 'Mbappe', status: 'Pending' },
+          { id: 5, petId: 'PET13', petType: 'Cat', gender: 'Female', registerHour: '16:00 - 17:00', petOwner: 'Haaland', status: 'Pending' },
+        ]
+      },
+      '003': {
+        vetName: 'Vet. Duong',
+        appointments: [
+          { id: 1, petId: 'PET03', petType: 'Cat', gender: 'Male', registerHour: '10:00 - 11:00', petOwner: 'Vini', status: 'Pending' },
+          { id: 2, petId: 'PET04', petType: 'Dog', gender: 'Male', registerHour: '13:00 - 14:00', petOwner: 'De Bruyne', status: 'Pending' },
+          { id: 3, petId: 'PET07', petType: 'Dog', gender: 'Female', registerHour: '14:00 - 15:00', petOwner: 'Saka', status: 'Pending' },
+          { id: 4, petId: 'PET10', petType: 'Dog', gender: 'Female', registerHour: '15:00 - 16:00', petOwner: 'Bruno', status: 'Pending' },
+        ]
+      },
+      '005': {
+        vetName: 'Vet. Dat',
+        appointments: [
+          { id: 1, petId: 'PET08', petType: 'Cat', gender: 'Male', registerHour: '9:00 - 10:00', petOwner: 'Mount', status: 'Pending' },
+          { id: 2, petId: 'PET09', petType: 'Dog', gender: 'Male', registerHour: '10:00 - 11:00', petOwner: 'Havertz', status: 'Pending' },
+          { id: 3, petId: 'PET11', petType: 'Cat', gender: 'Female', registerHour: '13:00 - 14:00', petOwner: 'Reus', status: 'Pending' },
+          { id: 4, petId: 'PET14', petType: 'Cat', gender: 'Male', registerHour: '14:00 - 15:00', petOwner: 'Lukaku', status: 'Pending' },
+        ]
+      },
+     
+    },
 
-  const [rows, setRows] = useState(initialState);
+  };
+
+  const [schedules, setSchedules] = useState(initialSchedules);
+  const [selectedDate, setSelectedDate] = useState('2023-06-12');
+  const [selectedVet, setSelectedVet] = useState('001');
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+    setSelectedVet(Object.keys(schedules[e.target.value])[0]); // Đặt bác sĩ đầu tiên làm mặc định
+  };
+
+  const handleVetChange = (e) => {
+    setSelectedVet(e.target.value);
+  };
+
   const handleCancelClick = (e, id) => {
     e.preventDefault();
     if (window.confirm('Are you sure you want to cancel this booking?')) {
-      setRows(rows.map(row => 
-        row.id === id ? { ...row, status: 'Canceled' } : row
-      ));
+      setSchedules({
+        ...schedules,
+        [selectedDate]: {
+          ...schedules[selectedDate],
+          [selectedVet]: {
+            ...schedules[selectedDate][selectedVet],
+            appointments: schedules[selectedDate][selectedVet].appointments.map(row =>
+              row.id === id ? { ...row, status: 'Canceled' } : row
+            )
+          }
+        }
+      });
     }
   };
 
   const handleReceiveClick = (e, status) => {
     e.preventDefault();
     if (status !== 'Canceled' && window.confirm('Are you sure you want to receive this pet?')) {
-      window.location.href = 'pet-exam-record'; // Redirect to the specified page	  
+      window.location.href = 'pet-exam-record'; // Redirect to the specified page
     }
   };
+
+  const selectedSchedule = schedules[selectedDate] && schedules[selectedDate][selectedVet] 
+    ? schedules[selectedDate][selectedVet] 
+    : { vetName: '', appointments: [] };
+
+  const vetOptions = schedules[selectedDate] 
+    ? Object.keys(schedules[selectedDate]).map(vetId => ({ vetId, vetName: schedules[selectedDate][vetId].vetName })) 
+    : [];
 
   return (
     <div>
@@ -36,14 +122,24 @@ function WorkSchedule() {
         <div>
           <p className='tittle'> Today's Work Schedule</p>
         </div>
-        <div className='ver-container'>
-          <p className='ver-id'>Veterinarian ID: 001</p>
-          <p className='ver-name'>Vet. MINH</p>
+        <div className='vet-container'>
+          <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
+          <p className='vet-name'>Vet. {selectedSchedule.vetName}</p>
+        </div>
+        <div className="vet-select">
+          Select Veterinarian: 
+          <select value={selectedVet} onChange={handleVetChange}>
+            {vetOptions.map(option => (
+              <option key={option.vetId} value={option.vetId}>
+                {option.vetName}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
       <div>
         <div className='date-work'>
-          Date's work schedule: <input type='date' name='date' />
+          Date's work schedule: <input type='date' name='date' value={selectedDate} onChange={handleDateChange} />
         </div>
         <div className='table-schedule' id='tables'>
           <form className='form_table-schedule'>
@@ -61,7 +157,7 @@ function WorkSchedule() {
                 </tr>
               </thead>
               <tbody>
-                {rows.map(row => (
+                {selectedSchedule.appointments.map(row => (
                   <tr key={row.id}>
                     <td className='td_table-schedule'>{row.id}</td>
                     <td className='td_table-schedule'>{row.petId}</td>
@@ -94,7 +190,7 @@ function WorkSchedule() {
           </form>
         </div>
       </div>
-				<p class="final-petExam">----------Today's working hour start at 9:00 a.m and end at 18:00 p.m----------</p>
+      <p className="final-petExam">----------Today's working hour start at 9:00 a.m and end at 18:00 p.m----------</p>
     </div>
   );
 }
