@@ -64,9 +64,7 @@ function WorkSchedule() {
           { id: 4, petId: 'PET14', petType: 'Cat', gender: 'Male', registerHour: '14:00 - 15:00', petOwner: 'Lukaku', status: 'Pending' },
         ]
       },
-     
-    },
-
+    }
   };
 
   const [schedules, setSchedules] = useState(initialSchedules);
@@ -74,8 +72,16 @@ function WorkSchedule() {
   const [selectedVet, setSelectedVet] = useState('001');
 
   const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
-    setSelectedVet(Object.keys(schedules[e.target.value])[0]); // Đặt bác sĩ đầu tiên làm mặc định
+    const newDate = e.target.value;
+    if (!schedules[newDate]) {
+      setSchedules(prevSchedules => ({
+        ...prevSchedules,
+        [newDate]: {}
+      }));
+    }
+    setSelectedDate(newDate);
+    const firstVetId = Object.keys(schedules[newDate] || {})[0];
+    setSelectedVet(firstVetId || '');
   };
 
   const handleVetChange = (e) => {
@@ -108,91 +114,92 @@ function WorkSchedule() {
   };
 
   const selectedSchedule = schedules[selectedDate] && schedules[selectedDate][selectedVet] 
-    ? schedules[selectedDate][selectedVet] 
-    : { vetName: '', appointments: [] };
+  ? schedules[selectedDate][selectedVet] 
+  : { vetName: '', appointments: [] };
 
-  const vetOptions = schedules[selectedDate] 
-    ? Object.keys(schedules[selectedDate]).map(vetId => ({ vetId, vetName: schedules[selectedDate][vetId].vetName })) 
-    : [];
+const vetOptions = schedules[selectedDate] 
+  ? Object.keys(schedules[selectedDate]).map(vetId => ({ vetId, vetName: schedules[selectedDate][vetId]?.vetName })) 
+  : [];
 
-  return (
+return (
+  <div>
+    <Header />
     <div>
-      <Header />
       <div>
-        <div>
-          <p className='tittle'> Today's Work Schedule</p>
-        </div>
-        <div className='vet-container'>
-          <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
-          <p className='vet-name'>Vet. {selectedSchedule.vetName}</p>
-        </div>
-        <div className="vet-select">
-          Select Veterinarian: 
-          <select value={selectedVet} onChange={handleVetChange}>
-            {vetOptions.map(option => (
-              <option key={option.vetId} value={option.vetId}>
-                {option.vetName}
-              </option>
-            ))}
-          </select>
-        </div>
+        <p className='tittle'> Today's Work Schedule</p>
       </div>
-      <div>
-        <div className='date-work'>
-          Date's work schedule: <input type='date' name='date' value={selectedDate} onChange={handleDateChange} />
-        </div>
-        <div className='table-schedule' id='tables'>
-          <form className='form_table-schedule'>
-            <table className='table_table-schedule'>
-              <thead className='head_table-schedule'>
-                <tr>
-                  <th className='th_table-schedule'>Stt</th>
-                  <th className='th_table-schedule'>Pet ID</th>
-                  <th className='th_table-schedule'>Pet Type</th>
-                  <th className='th_table-schedule'>Gender</th>
-                  <th className='th_table-schedule'>Register hour</th>
-                  <th className='th_table-schedule'>Pet Owner</th>
-                  <th className='th_table-schedule'>Status</th>
-                  <th className='th_table-schedule'></th>
-                </tr>
-              </thead>
-              <tbody>
-                {selectedSchedule.appointments.map(row => (
-                  <tr key={row.id}>
-                    <td className='td_table-schedule'>{row.id}</td>
-                    <td className='td_table-schedule'>{row.petId}</td>
-                    <td className='td_table-schedule'>{row.petType}</td>
-                    <td className='td_table-schedule'>{row.gender}</td>
-                    <td className='td_table-schedule'>{row.registerHour}</td>
-                    <td className='td_table-schedule'>{row.petOwner}</td>
-                    <td className={`td_table-schedule doctor-status-${row.status.toLowerCase()}`}>{row.status}</td>
-                    <td className='td_table-schedule'>
-                      <div className='td_table-schedule-btn-center'>
-                        <a href='pet-exam-record'
-                          className={`click-button ${row.status === 'Canceled' ? 'gray-button' : ''}`}
-                          onClick={(e) => handleReceiveClick(e, row.status)}
-                          style={{ pointerEvents: row.status === 'Canceled' ? 'none' : 'auto' }}>
-                          Receive
-                        </a>
-                        {row.status !== 'Canceled' && (
-                          <a href='pet-exam-record'
-                            className='cancel-booking-button'
-                            onClick={(e) => handleCancelClick(e, row.id)}>
-                            Cancel
-                          </a>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </form>
-        </div>
+      <div className='vet-container'>
+        <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
+        <p className='vet-name'>Vet. {selectedSchedule.vetName}</p>
       </div>
-      <p className="final-petExam">----------Today's working hour start at 9:00 a.m and end at 18:00 p.m----------</p>
+      <div className="vet-select">
+        Select Veterinarian: 
+        <select value={selectedVet} onChange={handleVetChange}>
+          {vetOptions.map(option => (
+            <option key={option.vetId} value={option.vetId}>
+              {option.vetName}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
-  );
+    <div>
+      <div className='date-work'>
+        Date's work schedule: <input type='date' name='date' value={selectedDate} onChange={handleDateChange} />
+      </div>
+      <div className='table-schedule' id='tables'>
+        <form className='form_table-schedule'>
+          <table className='table_table-schedule'>
+            <thead className='head_table-schedule'>
+              <tr>
+                <th className='th_table-schedule'>Stt</th>
+                <th className='th_table-schedule'>Pet ID</th>
+                <th className='th_table-schedule'>Pet Type</th>
+                <th className='th_table-schedule'>Gender</th>
+                <th className='th_table-schedule'>Register hour</th>
+                <th className='th_table-schedule'>Pet Owner</th>
+                <th className='th_table-schedule'>Status</th>
+                <th className='th_table-schedule'></th>
+              </tr>
+            </thead>
+            <tbody>
+              {selectedSchedule.appointments.map(row => (
+                <tr key={row.id}>
+                  <td className='td_table-schedule'>{row.id}</td>
+                  <td className='td_table-schedule'>{row.petId}</td>
+                  <td className='td_table-schedule'>{row.petType}</td>
+                  <td className='td_table-schedule'>{row.gender}</td>
+                  <td className='td_table-schedule'>{row.registerHour}</td>
+                  <td className='td_table-schedule'>{row.petOwner}</td>
+                  <td className={`td_table-schedule doctor-status-${row.status.toLowerCase()}`}>{row.status}</td>
+                  <td className='td_table-schedule'>
+                    <div className='td_table-schedule-btn-center'>
+                      <a href='pet-exam-record'
+                        className={`click-button ${row.status === 'Canceled' ? 'gray-button' : ''}`}
+                        onClick={(e) => handleReceiveClick(e, row.status)}
+                        style={{ pointerEvents: row.status === 'Canceled' ? 'none' : 'auto' }}>
+                        Receive
+                      </a>
+                      {row.status !== 'Canceled' && (
+                        <a href='pet-exam-record'
+                          className='cancel-booking-button'
+                          onClick={(e) => handleCancelClick(e, row.id)}>
+                          Cancel
+                        </a>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+    <p className="final-petExam">----------Today's working hour start at 9:00 a.m and end at 18:00 p.m----------</p>
+  </div>
+);
 }
 
 export default WorkSchedule;
+
