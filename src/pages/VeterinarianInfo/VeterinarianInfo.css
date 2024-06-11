@@ -69,6 +69,7 @@
 }
 
 .vet-slider {
+  height: 300px;
   margin-top: 70px;
   display: flex;
   align-items: center;
@@ -95,7 +96,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 350px;
+  height: 443px;
 }
 
 /* image vet */
