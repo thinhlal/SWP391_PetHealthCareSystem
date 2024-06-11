@@ -333,8 +333,8 @@ function Home() {
                         <div className="text-wrapper-11">Our Valuable Expert Doctors Team</div>
 
                         <div className="service_Info_Detail-button-wrapper">
-                            <a href="#123" className="service_Info_Detail-button">
-                                <span><a href="veterinarian-info">View Doctors</a></span>
+                            <a href="veterinarian-info" className="service_Info_Detail-button">
+                                <span>View Doctors</span>
                             </a>
                         </div>
                     </div>

@@ -34,6 +34,7 @@ function ManageCages() {
         { id: "CG555555", name: "A05", description: "Large Cage", status: "Empty", petStatus: "Not Recover", petDetails: {} }
     ]);
     const [selectedCage, setSelectedCage] = useState(null);
+    const [statusFilter, setStatusFilter] = useState("All");
 
     const availableServices = [
         { id: 1, name: "X-quang" },
@@ -146,6 +147,15 @@ function ManageCages() {
         setCageData(updatedCageData);
     };
 
+    const handleStatusFilterChange = (event) => {
+        setStatusFilter(event.target.value);
+    };
+
+    const filteredCageData = cageData.filter((cage) => {
+        if (statusFilter === "All") return true;
+        return cage.status === statusFilter;
+    });
+
     return (
         <div className="manage-cages container-fluid">
             <div className="row">
@@ -168,16 +178,17 @@ function ManageCages() {
                                     <input type="text" placeholder="Search" className="main-content-header-search-input" />
                                 </div>   
 
-                                 <div className="filter-cage-number">
-                                        Status:&nbsp;
-                                        <select className="Status-Select-Filter" name="role">
-                                            <option>Empty</option>
-                                            <option>Using</option>                                       
-                                        </select>
-                                 </div>                            
+                                <div className="filter-cage-number">
+                                    Status:&nbsp;
+                                    <select className="Status-Select-Filter" value={statusFilter} onChange={handleStatusFilterChange}>
+                                        <option value="All">All</option>
+                                        <option value="Using">Using</option>
+                                        <option value="Empty">Empty</option>
+                                    </select>
+                                </div>                            
                             </div>
 
-                             {/* add pet button */}
+                            {/* add pet button */}
                             <div className="main-content-header-add-booking">
                                 <button type="button" className="booking-btn-add" data-bs-toggle="modal" data-bs-target="#exampleModal" disabled>
                                     Add Pet
@@ -326,7 +337,7 @@ function ManageCages() {
                                 <div className="main-content-list-title-text-button">Update</div>
                             </div>
 
-                            {cageData.map((cage) => (
+                            {filteredCageData.map((cage) => (
                                 <div className="main-content-list-body-wrapper" key={cage.id}>
                                     <div className="content-list-body-info">
                                         <div className="content-list-body-value">{cage.id}</div>
