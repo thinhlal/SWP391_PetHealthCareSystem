@@ -1,4 +1,7 @@
-build
+
 coverage
 .package-lock.json
 *.min.*
+node_modules/
+build/
+dist/
