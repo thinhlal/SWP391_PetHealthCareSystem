@@ -21,10 +21,10 @@ import ProfilePet from './pages/ProfilePet/ProfilePet.js';
 import ChoosePet from './pages/ChoosePet/ChoosePet.js';
 function App() {
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={<Home />}
+                                                    <Routes>
+                                          <Route
+                                            path='/'
+                                            element={<Home />}
       />
       <Route
         path='/login'
