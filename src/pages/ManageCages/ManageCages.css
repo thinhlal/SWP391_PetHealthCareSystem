@@ -8,7 +8,7 @@
 .manage-cages .manage-cages-title-text {
   width: fit-content;
   margin-top: -1px;
-  font-family: "Montserrat", Helvetica;
+  font-family: 'Montserrat', Helvetica;
   font-weight: 700;
   color: #4f3c3c;
   font-size: 40px;
@@ -52,7 +52,7 @@
   font-size: 18px;
   margin-bottom: 0 !important;
   white-space: nowrap;
-  font-family: "Inter", Helvetica;
+  font-family: 'Inter', Helvetica;
   letter-spacing: 0;
 }
 
@@ -92,7 +92,7 @@
   border-radius: 5px;
   width: 350px;
   padding-left: 10px;
-  font-family: "Inter", Helvetica;
+  font-family: 'Inter', Helvetica;
   font-weight: 400;
   color: #000;
   font-size: 16px;
@@ -112,7 +112,7 @@
 
 .manage-cages .main-content-header-add-booking {
   margin-right: 25px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 15px;
 }
 
@@ -120,7 +120,7 @@
   font-weight: 600;
   padding-right: 40%;
   padding-top: 2%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .Status-Select-Filter {
@@ -128,7 +128,6 @@
   background-color: #ebebeb;
   border-radius: 5px;
 }
-
 
 .manage-cages .booking-btn-add {
   background-color: #e18213;
@@ -162,7 +161,7 @@
   font-weight: 600;
   font-size: 16px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .manage-cages .main-content-list-title-text-button {
@@ -173,7 +172,7 @@
   font-weight: 600;
   font-size: 16px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .manage-cages .content-list-body-info {
@@ -190,7 +189,7 @@
   justify-content: left;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
 }
 .manage-cages .content-list-body-value:hover {
@@ -211,7 +210,7 @@
   justify-content: center;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
 }
 .manage-cages .content-list-body-value-button:hover {
@@ -227,7 +226,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   margin-bottom: 50px;
 }
@@ -295,7 +294,6 @@
   margin-left: 5px;
 }
 
-
 .manage-cages .hidden {
   display: none;
 }
@@ -303,8 +301,6 @@
 .manage-cages .service {
   margin-bottom: 10px;
 }
-
-
 
 .manage-cages .container-modal-body-more-info {
   width: 100%;
@@ -315,7 +311,6 @@
   margin: 0;
   padding: 0;
 }
-
 
 .manage-cages .tab-modal-body-more-info {
   overflow: hidden;
@@ -345,7 +340,6 @@
   cursor: not-allowed;
 }
 
-
 .manage-cages .tab-modal-body-more-info button.active {
   background-color: #f1f1f1;
   border-bottom: 2px solid #004cb9;
@@ -369,8 +363,6 @@
   gap: 23px;
 }
 
-
-
 .manage-cages .change-btn {
   display: block;
   margin: 10px auto;
@@ -392,59 +384,56 @@
   color: #e18213;
 }
 
-.manage-cages .profile-form{
-  font-family: "Montserrat", sans-serif;
+.manage-cages .profile-form {
+  font-family: 'Montserrat', sans-serif;
   line-height: 30px;
   font-size: 18px;
   margin-left: 10px;
 }
 
-
-.manage-cages .pet-profile-form{
-  font-family: "Montserrat", sans-serif;
+.manage-cages .pet-profile-form {
+  font-family: 'Montserrat', sans-serif;
   line-height: 30px;
   font-size: 18px;
   margin-left: 10px;
 }
-
 
 .manage-cages .change-btn {
-  position: absolute; 
-  bottom: 10px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  padding: 5px 10px; 
-  background-color: rgba(0, 0, 0, 0.manage-cages .5); 
-  color: #fff; 
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  font-size: 12px; 
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0manage-cages 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
 }
 
-
 .manage-cages .edit-customer {
-  border-width: 1px; 
-  border-style: solid; 
-  outline: none; 
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
   border-radius: 10px;
   border-color: #ccc;
   color: #626262;
   margin-top: 10px;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
 }
 
 .manage-cages .edit-pet {
-  border-width: 1px; 
-  border-style: solid; 
-  outline: none; 
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
   border-radius: 10px;
   border-color: #ccc;
   color: #626262;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
 }
 
-.manage-cages .form-group{
+.manage-cages .form-group {
   justify-content: center;
   margin-bottom: 30px;
 }
@@ -471,6 +460,3 @@
   border-color: #cccccc;
   color: #ffffff;
 }
-
-
-

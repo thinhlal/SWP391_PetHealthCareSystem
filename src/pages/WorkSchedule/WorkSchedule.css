@@ -28,7 +28,7 @@
   margin-bottom: 40px;
 }
 
-.vet-select{
+.vet-select {
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: black;
@@ -117,7 +117,7 @@ tr:hovet {
 }
 
 .cancel-booking-button {
-  background-color: #BB2D3B;
+  background-color: #bb2d3b;
   width: 90px;
   height: 35px;
   border: none;
@@ -132,7 +132,7 @@ tr:hovet {
   font-size: 13px;
 }
 
-.cancel-booking-button:hovet{
+.cancel-booking-button:hovet {
   background-color: orange;
 }
 
@@ -140,7 +140,6 @@ tr:hovet {
   background-color: gray;
   pointer-events: none;
 }
-
 
 .doctor-status-pending {
   color: red;
@@ -156,11 +155,11 @@ tr:hovet {
   cursor: default;
 }
 
-.final-petExam{
+.final-petExam {
   text-align: center;
   margin-top: 100px;
   font-family: Roboto, sans-serif;
   font-weight: 700;
   font-size: 20px;
-  color:#113179;
+  color: #113179;
 }

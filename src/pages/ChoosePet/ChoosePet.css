@@ -128,13 +128,15 @@
   cursor: pointer;
   margin: 20px 4px;
   margin-top: 40px;
-  transition: background 0.5s, transform 0.2s;
+  transition:
+    background 0.5s,
+    transform 0.2s;
   position: relative;
   overflow: hidden;
 }
 
 .main-choose-pet .select-service-pet::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;

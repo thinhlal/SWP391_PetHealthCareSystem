@@ -1,5 +1,5 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Inter:var(--small-text-font-weight),700,600,400,200");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+@import url('https://fonts.googleapis.com/css?family=Inter:var(--small-text-font-weight),700,600,400,200');
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -44,13 +44,13 @@ body {
   height: 530px;
 }
 
-.create-account-page .create-account_logo{
+.create-account-page .create-account_logo {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.create-account-page .create-account_logo img{
+.create-account-page .create-account_logo img {
   width: 245px;
   height: 50px;
   object-fit: cover;
@@ -105,7 +105,7 @@ body {
   padding-left: 10px;
 }
 
-.form_SignUp_Btn_Wrapper{
+.form_SignUp_Btn_Wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,8 +161,8 @@ body {
   -webkit-box-orient: vertical;
 }
 
-.create-account-page .form_SignUp_Regulation::after{
-  content: "";
+.create-account-page .form_SignUp_Regulation::after {
+  content: '';
   display: block;
   border: 1px solid #e8e7e7;
   margin: 30px 40px;

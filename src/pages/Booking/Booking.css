@@ -1,5 +1,5 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700,600|Inter:500,var(--small-text-font-weight),var(--body-text-font-weight)");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,600|Inter:500,var(--small-text-font-weight),var(--body-text-font-weight)');
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -269,7 +269,7 @@ body {
 .element-button-red:hover {
 }
 
-.no-slots-message{
+.no-slots-message {
   font-family: Roboto, sans-serif;
   font-weight: 500;
   font-size: 18px;

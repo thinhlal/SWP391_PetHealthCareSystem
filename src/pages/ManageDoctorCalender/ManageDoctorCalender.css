@@ -8,7 +8,7 @@
 .manage-doctor-calender .manage-doctor-calender-title-text {
   width: fit-content;
   margin-top: -1px;
-  font-family: "Montserrat", Helvetica;
+  font-family: 'Montserrat', Helvetica;
   font-weight: 700;
   color: #4f3c3c;
   font-size: 40px;
@@ -52,7 +52,7 @@
   font-size: 18px;
   margin-bottom: 0 !important;
   white-space: nowrap;
-  font-family: "Inter", Helvetica;
+  font-family: 'Inter', Helvetica;
   letter-spacing: 0;
 }
 
@@ -92,7 +92,7 @@
   border-radius: 5px;
   width: 350px;
   padding-left: 10px;
-  font-family: "Inter", Helvetica;
+  font-family: 'Inter', Helvetica;
   font-weight: 400;
   color: #000;
   font-size: 16px;
@@ -112,7 +112,7 @@
 
 .manage-doctor-calender .main-content-header-add-booking {
   margin-right: 25px;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 15px;
 }
 
@@ -147,7 +147,7 @@
   font-weight: 600;
   font-size: 16px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 .manage-doctor-calender .main-content-list-body-wrapper {
 }
@@ -165,7 +165,7 @@
   justify-content: center;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
 }
 .manage-doctor-calender .content-list-body-value:hover {
@@ -181,7 +181,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
 }
 .pagination_wrapper nav {

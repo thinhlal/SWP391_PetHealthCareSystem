@@ -1,478 +1,476 @@
 .Admin-Services {
-    background-color: #fafafa;
+  background-color: #fafafa;
 }
 
 .Admin-Services-Header {
-    border-bottom: 1px solid #eae8f1;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    height: 63px;
+  border-bottom: 1px solid #eae8f1;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  height: 63px;
 }
 
 .Admin-Services-Header-Logo {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Admin-Services-Logo {
-    width: 190px;
+  width: 190px;
 }
 
 .Admin-Services-Header-Account-Wrapper {
-    border-left: 1px solid #eae8f1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 0;
-    padding: 0;
-    font-family: Roboto, sans-serif;
-    color: white;
+  border-left: 1px solid #eae8f1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+  color: white;
 }
 
 .Admin-Services-Header-Account {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .Admin-Services-Header-Admin:hover {
-    transform: scale(1.1);
-    color: #dd6637;
-    cursor: pointer;
+  transform: scale(1.1);
+  color: #dd6637;
+  cursor: pointer;
 }
 
 .Admin-Services-Header-Account-Text {
-    font-family: Roboto, sans-serif;
-    line-height: 25px;
-    font-size: 16px;
-    color: #000;
+  font-family: Roboto, sans-serif;
+  line-height: 25px;
+  font-size: 16px;
+  color: #000;
 }
 
 .Admin-Services-Content {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .Admin-Services-Navigate {
-    padding: 0;
-    position: relative;
+  padding: 0;
+  position: relative;
 }
 
 .Admin-Services-Navigate-Dashboard {
-    font-family: Roboto, sans-serif;
-    display: flex;
-    height: 36px;
-    align-items: center;
-    margin: 10px 10px 5px 20px;
+  font-family: Roboto, sans-serif;
+  display: flex;
+  height: 36px;
+  align-items: center;
+  margin: 10px 10px 5px 20px;
 }
 
 .Admin-Services-Navigate-Text-Dashboard {
-    font-family: Roboto, sans-serif;
-    margin-left: 10px;
-    margin-top: 5px;
-    font-weight: 600;
-    font-size: 18px;
+  font-family: Roboto, sans-serif;
+  margin-left: 10px;
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .Admin-Services-Navigate-Text {
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    letter-spacing: 1px;
-    font-size: 16px;
-    text-align: center;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 16px;
+  text-align: center;
 }
 
 .Admin-Services-Navigate-Logout {
-    line-height: 42px;
-    text-align: center;
-    width: 100%;
-    font-family: Roboto, sans-serif;
-    position: absolute;
-    bottom: 50px;
+  line-height: 42px;
+  text-align: center;
+  width: 100%;
+  font-family: Roboto, sans-serif;
+  position: absolute;
+  bottom: 50px;
 }
 
 .Admin-Services-Navigate-Logout:hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
 }
 
 .Admin-Services-Navigate-Logout span {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .Admin-Services-Navigate-Text-Rest-Menu {
-    font-family: Roboto, sans-serif;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 50px;
+  font-family: Roboto, sans-serif;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
 }
 
 .Admin-Services-Navigate-Text-Rest-Menu:hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
 }
 
 .Admin-Services-Main {
-    padding: 0;
-    background-color: #f1f5f9;
-    border-left: 1px solid #f9f9fa;
+  padding: 0;
+  background-color: #f1f5f9;
+  border-left: 1px solid #f9f9fa;
 }
 
 .Admin-Services-Main_Title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 3%;
 }
 
 .Admin-Services-Main_Title-Left {
-    font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .Admin-Services-Main_Title-Left-Intro {
-    color: #242f48;
-    font-weight: 600;
-    font-size: 20px;
-    text-indent: -1px;
-    line-height: 1;
-    margin-bottom: 5px;
+  color: #242f48;
+  font-weight: 600;
+  font-size: 20px;
+  text-indent: -1px;
+  line-height: 1;
+  margin-bottom: 5px;
 }
 
 .Admin-Services-Main_Title-Left-text {
-    color: #78829a;
-    font-weight: 400;
-    font-size: 12px;
+  color: #78829a;
+  font-weight: 400;
+  font-size: 12px;
 }
 
 .Admin-Services-Main_Title-Right {
-    font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .Admin-Services-title-Star {
-    color: #78829a;
-    font-size: 13px;
+  color: #78829a;
+  font-size: 13px;
 }
 
 .Admin-Services-Star span {
-    font-size: 13px;
-    margin-left: 5px;
+  font-size: 13px;
+  margin-left: 5px;
 }
 
 .Admin-Services-Main-ChooseDate {
-    display: flex;
-    align-items: center;
-    font-family: "Montserrat", Helvetica;
-    margin: 25px 20px 0 3%;
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', Helvetica;
+  margin: 25px 20px 0 3%;
 }
 
 .Admin-Services-Main-ChooseDate_Text {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .Admin-Services-Main-Header {
-    margin: 40px 0 0 0;
-    font-family: Roboto, sans-serif;
-    padding: 0;
-    justify-content: space-evenly;
+  margin: 40px 0 0 0;
+  font-family: Roboto, sans-serif;
+  padding: 0;
+  justify-content: space-evenly;
 }
 
 .Admin-Services-Main-Header-Income {
-    background-color: white;
-    border-radius: 8px;
-    width: 260px;
-    border: 1px solid #eae8f1;
-    box-shadow: -2px 4px 18px #dadee8;
+  background-color: white;
+  border-radius: 8px;
+  width: 260px;
+  border: 1px solid #eae8f1;
+  box-shadow: -2px 4px 18px #dadee8;
 }
 
 .Admin-Services-Main-Header-Note {
-    padding-top: 3%;
-    color: #696cff;
-    font-size: 15px;
+  padding-top: 3%;
+  color: #696cff;
+  font-size: 15px;
 }
 
 .Admin-Services-Main-Header-Money {
-    line-height: 60px;
-    font-size: 22px;
-    font-weight: 600;
+  line-height: 60px;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .Admin-Services-Main-Header-Percent {
-    padding-bottom: 3%;
-    font-size: 14px;
-    color: #828282;
+  padding-bottom: 3%;
+  font-size: 14px;
+  color: #828282;
 }
 
 .Admin-Services-Main-Filter-Add {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Admin-Services-Main-Search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    height: 35px;
-    margin-top: 5px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .Admin-Services-Main-Search-Input {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 35px;
-    padding: 0 16px;
-    border: none;
-    background-color: #ecf0fa;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    color: #000000;
-    font-size: 16px;
-    line-height: 24px;
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 35px;
+  padding: 0 16px;
+  border: none;
+  background-color: #ecf0fa;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .Admin-Services-Main-Search-Input:focus {
-    outline: none;
+  outline: none;
 }
 
 .Admin-Services-Main-Search-Button {
-    background-color: #ecf0fa;
-    height: 100%;
-    border: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+  background-color: #ecf0fa;
+  height: 100%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .Admin-Services-Add-Services {
-    margin-bottom:10px ;
+  margin-bottom: 10px;
 }
 
 .Admin-Services-add-services-btn {
-    font-family: Roboto, sans-serif;
-    background-color: #e18213;
-    height: 45px;
-    outline: none;
-    border: none;
-    color: #fff;
-    width: 100px;
-    border-radius: 10px;
+  font-family: Roboto, sans-serif;
+  background-color: #e18213;
+  height: 45px;
+  outline: none;
+  border: none;
+  color: #fff;
+  width: 100px;
+  border-radius: 10px;
 }
 
 .Admin-Services-add-services-btn:hover {
-    background-color: #002169;
-    cursor: pointer;
+  background-color: #002169;
+  cursor: pointer;
 }
 
 .Admin-Services-input {
-    height: 30px;
-    margin-top: 5px;
-    line-height: 24px;
-    font-size: 16px;
+  height: 30px;
+  margin-top: 5px;
+  line-height: 24px;
+  font-size: 16px;
 }
 
 .Admin-Services-Main-Table-Wrapper {
-    margin: 50px 3%;
-    padding: 0;
-    border: 1px solid #eae8f1;
-    border-radius: 10px;
-    box-shadow: -2px 8px 18px #dadee8;
+  margin: 50px 3%;
+  padding: 0;
+  border: 1px solid #eae8f1;
+  border-radius: 10px;
+  box-shadow: -2px 8px 18px #dadee8;
 }
 
 .Admin-Services-Main-Table {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
 }
 
 .Admin-Services-Main-Table-Title {
-    color: #242f48;
-    font-family: Roboto, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 16px;
-    letter-spacing: 0.2px;
-    margin-bottom: 4px;
+  color: #242f48;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
 }
 
 .Admin-Services-Main-Table-Title-Text {
-    font-size: 12px;
-    font-family: Roboto, sans-serif;
-    margin-bottom: 15px;
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 15px;
 }
 
 .Admin-Services-Main-Table-Header {
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: Roboto, sans-serif;
-    text-align: center;
-    border-bottom: 1px solid #eae8f1;
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  border-bottom: 1px solid #eae8f1;
 }
 
 .Admin-Services-Main-Table-Header-Title {
-    width: 100%;
-    background-color: #F1F5F9;
-    line-height: 40px;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: left;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
+  width: 100%;
+  background-color: #f1f5f9;
+  line-height: 40px;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: left;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
 }
 
 .Admin-Services-Main-Table-Header-Title-Btn {
-    line-height: 40px;
-    width: 100%;
-    background-color: #F1F5F9;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: center;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
+  line-height: 40px;
+  width: 100%;
+  background-color: #f1f5f9;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: center;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
 }
 
 .Admin-Services-Main-Table-Header-Title-Btn:last-child {
-    border-top-right-radius: 8px;
-    border-right: 1px solid #eae8f1;
+  border-top-right-radius: 8px;
+  border-right: 1px solid #eae8f1;
 }
 
 .Admin-Services-Main-Table-Header-Title:first-child {
-    border-top-left-radius: 8px;
+  border-top-left-radius: 8px;
 }
 
 .Admin-Services-Main-Table-Content-Row-Wrapper {
-    display: flex;
-    line-height: 40px;
-    border-bottom: 1px solid #eae8f1;
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
+  display: flex;
+  line-height: 40px;
+  border-bottom: 1px solid #eae8f1;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
 }
 
 .Admin-Services-Main-Table-Content-Row {
-    width: 100%;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-    margin: 0;
+  width: 100%;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 10px;
+  margin: 0;
 }
 
 .Admin-Services-Main-Table-Content-Row-Btn {
-    display: flex;
+  display: flex;
 }
 
 .Admin-Services-Main-Table-Content-Btn {
-    width: 33.333%;
-    border: none;
-    background-color: white;
+  width: 33.333%;
+  border: none;
+  background-color: white;
 }
 
 .Admin-Services-modal-update-name {
-    padding-left: 10px;
-    padding-bottom: 20px;
+  padding-left: 10px;
+  padding-bottom: 20px;
 }
 
 .Admin-Services-modal-initials {
-    color: #000000;
-    font-family: Roboto, sans-serif;
-    font-weight: 600;
-    padding-right: 5px;
-    display: inline-block;
-    width: 175px;
+  color: #000000;
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  padding-right: 5px;
+  display: inline-block;
+  width: 175px;
 }
 
-
 .Admin-Services-modal-update {
-    font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .Admin-Services-modal-update-title {
-    display: inline-block;
-    font-weight: 600;
-    width: 135px;
+  display: inline-block;
+  font-weight: 600;
+  width: 135px;
 }
 
 .Admin-Services-modal-delete-title {
-    display: inline-block;
-    font-weight: 600;
-    width: 125px;
+  display: inline-block;
+  font-weight: 600;
+  width: 125px;
 }
 
 .Admin-Services-modal-more-title {
-    display: inline-block;
-    font-weight: 600;
-    width: 122px;
+  display: inline-block;
+  font-weight: 600;
+  width: 122px;
 }
 
 .Admin-Services-modal-delete {
-    font-weight: 700px;
-    display: flex;
-    padding: 5px;
+  font-weight: 700px;
+  display: flex;
+  padding: 5px;
 }
 
 .Admin-Services-modal-more {
-    font-weight: 700px;
-    display: flex;
-    padding: 5px;
+  font-weight: 700px;
+  display: flex;
+  padding: 5px;
 }
 
 .Admin-Services-modal-delete {
-    padding: 5px;
+  padding: 5px;
 }
 
 .Admin-Services-input {
-    font-family: Roboto, sans-serif;
-    height: 30px;
-    margin-top: 5px;
-    line-height: 24px;
-    font-size: 16px;
+  font-family: Roboto, sans-serif;
+  height: 30px;
+  margin-top: 5px;
+  line-height: 24px;
+  font-size: 16px;
 }
 
 .Admin-Services-input-phone {
-    margin-top: 5px;
-    height: 30px;
-    line-height: 24px;
-    font-size: 16px;
-
+  margin-top: 5px;
+  height: 30px;
+  line-height: 24px;
+  font-size: 16px;
 }
 
 .Admin-Services-input-role {
-    margin: 4px;
+  margin: 4px;
 }
 
 .Admin-Services-Main-Table-Content-Btn :hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
 }
 
 .Admin-Services-modal-title-name {
-    height: 30px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 20px;
+  height: 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
 }
 
 .Admin-Services-modal-title {
-    height: 45px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 20px;
-    padding-top: 15px;
+  height: 45px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  padding-top: 15px;
 }
 
 .Admin-Services-Pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 10px 0;
 }

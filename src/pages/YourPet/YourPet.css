@@ -77,7 +77,7 @@ a {
   cursor: pointer;
 }
 
-.your-pet .search-pet-input input[type="text"] {
+.your-pet .search-pet-input input[type='text'] {
   height: 35px;
   width: 300px;
   outline: none;
@@ -132,7 +132,9 @@ a {
   text-align: center;
   padding: 20px;
   font-family: Roboto, sans-serif;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .your-pet .profile-card-pet:hover {

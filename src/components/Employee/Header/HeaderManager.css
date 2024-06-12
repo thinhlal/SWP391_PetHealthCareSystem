@@ -38,7 +38,7 @@
 }
 
 .navigation-user::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 16px;
   width: 140px;
@@ -63,7 +63,7 @@
 }
 
 .navigation-user_notify::before {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
   top: -10px;

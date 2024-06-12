@@ -1,5 +1,5 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700,600|Inter:500,var(--presets-body2-font-weight),var(--body-text-font-weight)");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500,700,600|Inter:500,var(--presets-body2-font-weight),var(--body-text-font-weight)');
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -10,6 +10,7 @@ body {
   margin: 0px;
   height: 100%;
 }
+
 a {
   text-decoration: none;
 }
@@ -23,7 +24,6 @@ a {
   width: 100%;
 }
 
-
 .status-booking {
   font-weight: bold;
   margin-left: 10px;
@@ -36,7 +36,6 @@ a {
 .status-completed {
   color: green;
 }
-
 
 .row-your-booking {
   display: flex;
@@ -116,7 +115,7 @@ a {
   cursor: pointer;
 }
 
-.search-pet-input-booking input[type="text"] {
+.search-pet-input-booking input[type='text'] {
   height: 35px;
   width: 300px;
   outline: none;
@@ -427,7 +426,7 @@ textarea::placeholder {
 }
 
 .rating > label::before {
-  content: "\2605";
+  content: '\2605';
   position: absolute;
   opacity: 0;
 }

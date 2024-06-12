@@ -25,20 +25,19 @@
   font-weight: 600;
   color: #002169;
   margin-bottom: 10px;
-  position: relative; 
+  position: relative;
 }
 
 .sub-title-info-pet-line::after {
   content: '';
   display: block;
   width: 100%;
-  height: 2px; 
-  background-color: #ddd; 
+  height: 2px;
+  background-color: #ddd;
   position: absolute;
-  bottom: -5px; 
+  bottom: -5px;
   left: 0;
 }
-
 
 .sidebar-pet-profile {
   display: flex;
@@ -62,7 +61,8 @@
   margin-bottom: 10px;
 }
 
-.pet-parent, .status {
+.pet-parent,
+.status {
   text-align: center;
   margin-bottom: 10px;
 }
@@ -86,7 +86,9 @@
   line-height: 1.8;
 }
 
-.pet-info, .vaccination-info, .medical-info {
+.pet-info,
+.vaccination-info,
+.medical-info {
   background: white;
   border-radius: 8px;
   padding: 20px;
@@ -95,60 +97,76 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.main-edit-button-pet-info, .main-edit-button-medical {
+.main-edit-button-pet-info,
+.main-edit-button-medical {
   display: flex;
   justify-content: flex-end;
 }
 
-.main-add-button-vaccination, .main-add-button-medical {
+.main-add-button-vaccination,
+.main-add-button-medical {
   display: flex;
   justify-content: flex-end;
 }
 
-.edit-button-pet-info, .edit-button-medical {
-  background-color: #007bff; 
-  color: white; 
-  padding: 5px 12px; 
-  margin: 10px 0;
-  border: none; 
-  border-radius: 10px; 
-  cursor: pointer; 
-  font-size: 14px; 
-  transition: background-color 0.3s ease, transform 0.3s ease; 
-}
-
-.edit-button-pet-info:hover, .edit-button-medical:hover {
-  background-color: #0056b3; 
-  transform: scale(1.05); 
-}
-
-.add-button-vaccination, .delete-button-vaccination, .delete-button-medical, .view-button-medical {
-  background-color: #cccc;
+.edit-button-pet-info,
+.edit-button-medical {
+  background-color: #007bff;
   color: white;
-  padding: 5px 12px; 
+  padding: 5px 12px;
   margin: 10px 0;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 14px; 
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
-.delete-button-vaccination, .delete-button-medical {
+.edit-button-pet-info:hover,
+.edit-button-medical:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.add-button-vaccination,
+.delete-button-vaccination,
+.delete-button-medical,
+.view-button-medical {
+  background-color: #cccc;
+  color: white;
+  padding: 5px 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.delete-button-vaccination,
+.delete-button-medical {
   background-color: #dc3545;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 .view-button-medical {
   background-color: #28a745;
 }
 
-.add-button-vaccination:hover, .delete-button-vaccination:hover, .delete-button-medical:hover, .view-button-medical:hover {
+.add-button-vaccination:hover,
+.delete-button-vaccination:hover,
+.delete-button-medical:hover,
+.view-button-medical:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
 
-.delete-button-vaccination:hover, .delete-button-medical:hover {
+.delete-button-vaccination:hover,
+.delete-button-medical:hover {
   background-color: #c82333;
 }
 
@@ -165,7 +183,8 @@
   margin: 5px 0;
 }
 
-.vaccination-info h2, .medical-info h2 {
+.vaccination-info h2,
+.medical-info h2 {
   font-size: 20px;
   margin-bottom: 10px;
 }
@@ -176,11 +195,14 @@ table {
   margin-top: 10px;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #ddd;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
   word-wrap: break-word;
@@ -192,17 +214,25 @@ th {
   background-color: #f8f8f8;
 }
 
-.edit-form, .add-vaccination-form, .edit-medical-form {
+.edit-form,
+.add-vaccination-form,
+.edit-medical-form {
   display: block;
   margin-top: 20px;
 }
 
-.edit-form label, .add-vaccination-form label, .edit-medical-form label {
+.edit-form label,
+.add-vaccination-form label,
+.edit-medical-form label {
   display: block;
   margin-bottom: 10px;
 }
 
-.edit-form input, .add-vaccination-form input, .edit-medical-form input, .edit-medical-form select, .edit-medical-form textarea {
+.edit-form input,
+.add-vaccination-form input,
+.edit-medical-form input,
+.edit-medical-form select,
+.edit-medical-form textarea {
   display: block;
   width: 100%;
   padding: 8px;
@@ -240,7 +270,9 @@ th {
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 10px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .save-button:hover {
@@ -257,7 +289,9 @@ th {
   font-size: 16px;
   margin-bottom: 10px;
   margin-left: 30px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .close-button:hover {

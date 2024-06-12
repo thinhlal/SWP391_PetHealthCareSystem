@@ -12,7 +12,9 @@
   opacity: 0;
   visibility: hidden;
   z-index: 1000;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 .modal-choose-pet.show {
@@ -37,7 +39,9 @@
   overflow-y: auto; /* Add this line */
   text-align: left;
   transform: translateY(-100%);
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
   opacity: 0;
 }
 

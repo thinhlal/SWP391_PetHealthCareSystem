@@ -3,11 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 // image
 import image_pet_1 from '../../assets/images/img_ChoosePet/pexels-wildlittlethingsphoto-2253275.jpg';
 import image_pet_2 from '../../assets/images/img_ChoosePet/pexels-ingewallu-177809.jpg';
-import image_pet_3 from '../../assets/images/img_ChoosePet/pexels-svetozar-milashevich-99573-1490908.jpg'
+import image_pet_3 from '../../assets/images/img_ChoosePet/pexels-svetozar-milashevich-99573-1490908.jpg';
 // components
 import Header from '../../components/User/Header/Header';
-import Footer from "../../components/User/Footer/Footer";
-import AddPetModal from "../../components/User/AddPetModal/AddPetModal.js";
+import Footer from '../../components/User/Footer/Footer';
+import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
 
 function ChoosePet() {
   const [pets, setPets] = useState([
@@ -20,7 +20,7 @@ function ChoosePet() {
   const [selectedPetId, setSelectedPetId] = useState(null);
   const petContainerRef = useRef(null);
 
-  const addPet = (pet) => {
+  const addPet = pet => {
     setPets([...pets, pet]);
   };
 
@@ -29,12 +29,15 @@ function ChoosePet() {
   //   setPets(updatedPets);
   // };
 
-  const handleSelectPet = (id) => {
+  const handleSelectPet = id => {
     setSelectedPetId(id);
   };
 
-  const handleClickOutside = (event) => {
-    if (petContainerRef.current && !petContainerRef.current.contains(event.target)) {
+  const handleClickOutside = event => {
+    if (
+      petContainerRef.current &&
+      !petContainerRef.current.contains(event.target)
+    ) {
       setSelectedPetId(null);
     }
   };
@@ -48,25 +51,36 @@ function ChoosePet() {
   }, []);
 
   return (
-    <div className="main-choose-pet">
+    <div className='main-choose-pet'>
       <Header />
       <div className='sub-choose-pet'>
         <div className='main-title-choose-pet'>
           <div className='title-choose-pet'>Select Pet</div>
-          <div className='title-choose-pet'>Choose which pet to have an appointment</div>
+          <div className='title-choose-pet'>
+            Choose which pet to have an appointment
+          </div>
         </div>
-        <div className="choose-pet-container" ref={petContainerRef}>
-          <div className="choose-pet-card add-more-pet" onClick={() => setIsModalOpen(true)}>
-            <div className="add-icon">+</div>
+        <div
+          className='choose-pet-container'
+          ref={petContainerRef}
+        >
+          <div
+            className='choose-pet-card add-more-pet'
+            onClick={() => setIsModalOpen(true)}
+          >
+            <div className='add-icon'>+</div>
             <div>Add Pet</div>
           </div>
-          {pets.map((pet) => (
+          {pets.map(pet => (
             <div
               className={`choose-pet-card ${selectedPetId === pet.id ? 'selected' : ''}`}
               key={pet.id}
               onClick={() => handleSelectPet(pet.id)}
             >
-              <img src={pet.image} alt={pet.name} />
+              <img
+                src={pet.image}
+                alt={pet.name}
+              />
               <div className='name-pet-card'>{pet.name}</div>
               <div className='main-button-choose-pet'>
                 <button className='button-choose-pet'>Select</button>
@@ -75,8 +89,12 @@ function ChoosePet() {
             </div>
           ))}
         </div>
-        <button className="select-service-pet">Booking</button>
-        <AddPetModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onAddPet={addPet} />
+        <button className='select-service-pet'>Booking</button>
+        <AddPetModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onAddPet={addPet}
+        />
       </div>
       <Footer />
     </div>

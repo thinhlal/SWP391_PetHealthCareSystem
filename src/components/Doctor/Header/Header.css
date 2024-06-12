@@ -75,7 +75,7 @@
 }
 
 .main-header-doctor-overlap .main-header-user-account::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 16px;
   width: 148px;
@@ -83,7 +83,7 @@
 }
 
 .main-header-doctor-overlap .main-header-user-account_menu::before {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
   top: -9px;

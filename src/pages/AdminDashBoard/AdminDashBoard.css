@@ -291,7 +291,7 @@
 
 .Admin-DashBoard-Main-Table-Header-Title {
   width: 100%;
-  background-color: #F1F5F9;
+  background-color: #f1f5f9;
   line-height: 40px;
   padding: 0 0 0 10px;
   margin: 0;
@@ -303,7 +303,7 @@
 .Admin-DashBoard-Main-Table-Header-Title-Btn {
   line-height: 40px;
   width: 100%;
-  background-color: #F1F5F9;
+  background-color: #f1f5f9;
   padding: 0 0 0 10px;
   margin: 0;
   text-align: center;
@@ -388,7 +388,6 @@
   text-align: left;
   color: #000000;
   font-weight: 600;
-
 }
 
 .Admin-DashBoard-tab-modal-body-more-info {

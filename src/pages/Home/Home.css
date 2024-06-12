@@ -1,5 +1,5 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Paytone+One:400|Montserrat:800,600,500,400,700|Open+Sans:600|Inter:var(--body-text-font-weight)");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css');
+@import url('https://fonts.googleapis.com/css?family=Paytone+One:400|Montserrat:800,600,500,400,700|Open+Sans:600|Inter:var(--body-text-font-weight)');
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
@@ -98,7 +98,9 @@ a {
   letter-spacing: 0;
   line-height: 30px;
   white-space: nowrap;
-  transition: color 0.3s, transform 0.3s;
+  transition:
+    color 0.3s,
+    transform 0.3s;
 }
 
 .main .list-header-navigate-text:hover {
@@ -160,7 +162,9 @@ a {
   background-color: #e18213;
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s, color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+  transition:
+    background-color 0.3s,
+    color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
 }
 
 .main .list-header-navigate-booking-btn-link {
@@ -443,7 +447,7 @@ a {
 
 .main .service_Info_Detail-button::after {
   position: absolute;
-  content: "";
+  content: '';
   top: 0;
   left: 0;
   width: 0;
