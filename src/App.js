@@ -8,7 +8,6 @@ import YourPet from './pages/YourPet/YourPet.js';
 import Services from './pages/Services/Services.js';
 import Login from './pages/Login/Login.js';
 import ManageCages from './pages/ManageCages/ManageCages.js';
-import ManageDoctorCalender from './pages/ManageDoctorCalender/ManageDoctorCalender.js';
 import WorkSchedule from './pages/WorkSchedule/WorkSchedule.js';
 import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js';
 import ManageSickPet from './pages/ManageSickPet/ManageSickPet.js';
@@ -70,11 +69,6 @@ function App() {
       <Route
         path='/manage-cages'
         element={<ManageCages />}
-      />
-
-      <Route
-        path='/manage-doctor-calender'
-        element={<ManageDoctorCalender />}
       />
       <Route
         path='/work-schedule'
