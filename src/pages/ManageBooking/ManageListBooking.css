@@ -352,3 +352,36 @@
   display: flex;
   align-items: center;
 }
+
+.main-content-header-filter-date {
+  font-family: Roboto, sans-serif;
+  border: none;
+  border-radius: 20px;
+}
+
+/* CSS for date filter */
+.manage-booking-list .main-content-header-search-date {
+  padding: 10px;
+  border: 1px solid #c3c3c3;
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 30px;
+  outline: none;
+}
+
+.manage-booking-list .main-content-header-search-date:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* ManageListBooking.css */
+
+.status-waiting {
+  color: rgb(243, 111, 10);
+}
+
+.status-checked-in {
+  color: rgb(20, 205, 20);
+}

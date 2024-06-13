@@ -157,12 +157,12 @@ function ManageListBooking() {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTimeSlot, setSelectedTimeSlot] = useState({});
     const [allBookings, setAllBookings] = useState([
-        { bookingID: 'SE123456', day: '2024-06-01', startTime: '8:00', endTime: '9:00', name: 'John Doe', petType: 'Dog', petName: 'Lau', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: 'Chen', service: 'Grooming' },
-        { bookingID: 'SE123457', day: '2024-06-01', startTime: '9:00', endTime: '10:00', name: 'Jane Smith', petType: 'Cat', petName: 'Jhs', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Grooming' },
-        { bookingID: 'SE123458', day: '2024-06-01', startTime: '10:00', endTime: '11:00', name: 'Mike Johnson', petType: 'Cat', petName: 'Abas', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Vaccination' },
-        { bookingID: 'SE123459', day: '2024-06-01', startTime: '11:00', endTime: '12:00', name: 'Emily Davis', petType: 'Dog', petName: 'Mok', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Wing Clipping' },
-        { bookingID: 'SE123460', day: '2024-06-01', startTime: '12:00', endTime: '13:00', name: 'Chris Lee', petType: 'Dog', petName: 'Ams', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Dental Cleaning' },
-        { bookingID: 'SE123461', day: '2024-07-01', startTime: '13:00', endTime: '14:00', name: 'TheoMy', petType: 'Cat', petName: 'IMsa', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Wing Clipping' }
+        { bookingID: 'SE123456', day: '2024-06-01', startTime: '8:00', endTime: '9:00', name: 'John Doe', petType: 'Dog', petName: 'Lau', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: 'Chen', service: 'Grooming', status: 'Cancel' },
+        { bookingID: 'SE123457', day: '2024-06-01', startTime: '9:00', endTime: '10:00', name: 'Jane Smith', petType: 'Cat', petName: 'Jhs', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Grooming', status: 'Cancel' },
+        { bookingID: 'SE123458', day: '2024-06-02', startTime: '10:00', endTime: '11:00', name: 'Mike Johnson', petType: 'Cat', petName: 'Abas', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Vaccination', status: 'Waiting' },
+        { bookingID: 'SE123459', day: '2024-06-02', startTime: '11:00', endTime: '12:00', name: 'Emily Davis', petType: 'Dog', petName: 'Mok', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Wing Clipping', status: 'Waiting' },
+        { bookingID: 'SE123460', day: '2024-06-03', startTime: '12:00', endTime: '13:00', name: 'Chris Lee', petType: 'Dog', petName: 'Ams', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Dental Cleaning', status: 'Waiting' },
+        { bookingID: 'SE123461', day: '2024-06-03', startTime: '13:00', endTime: '14:00', name: 'TheoMy', petType: 'Cat', petName: 'IMsa', birthday: '2024-4-17', breed: 'Golden', gender: 'male', doctor: '', service: 'Wing Clipping', status: 'Waiting' }
     ]);
     const [chosenDoctor, setChosenDoctor] = useState('');
     const [errors, setErrors] = useState({
@@ -183,6 +183,7 @@ function ManageListBooking() {
         ownerSelect: '',
         petSelect: ''
     });
+    const [filterDate, setFilterDate] = useState(''); // Thêm trạng thái để lưu ngày lọc
 
     const handlePetOptionChange = (event) => {
         setPetOption(event.target.value);
@@ -349,7 +350,8 @@ function ManageListBooking() {
             breed: createPetInfo.breed,
             gender: createPetInfo.gender,
             doctor: chosenDoctor,
-            service: services.map(service => service.service).join(', ')
+            service: services.map(service => service.service).join(', '),
+            status: 'Waiting' // Trạng thái mới thêm luôn là 'Waiting'
         };
 
         setAllBookings([...allBookings, newBooking]);
@@ -368,7 +370,7 @@ function ManageListBooking() {
         return re.test(String(email).toLowerCase());
     };
 
-    // rut gon services info 
+    // Hàm rút gọn thông tin dịch vụ 
     function truncateText(text) {
         const items = text.split(',');
         if (items.length > 1) {
@@ -377,15 +379,14 @@ function ManageListBooking() {
         return text;
     };
 
-    // state luu thong tin services
+    // Trạng thái lưu thông tin dịch vụ
     const [selectedBooking, setSelectedBooking] = useState({
         petInfo: {},
         services: [],
         totalCost: 0
     });
-    
 
-    // update modal services
+    // Cập nhật thông tin dịch vụ trong modal
     const handleOpenModal = (booking) => {
         const selectedServices = booking.service.split(', ');
         const serviceDetails = selectedServices.map(serviceName => {
@@ -393,7 +394,7 @@ function ManageListBooking() {
             return service ? service : { name: serviceName, price: 0 }; // Nếu không tìm thấy, đặt giá = 0
         });
         const totalCost = serviceDetails.reduce((total, service) => total + service.price, 0);
-    
+
         setSelectedBooking({
             petInfo: {
                 name: booking.petName,
@@ -405,7 +406,43 @@ function ManageListBooking() {
             totalCost
         });
     };
-    
+
+    // Xử lý thay đổi ngày lọc
+    const handleFilterDateChange = (event) => {
+        setFilterDate(event.target.value);
+    };
+
+    // Lọc danh sách đặt chỗ theo ngày
+    const filteredBookings = filterDate
+        ? allBookings.filter(booking => booking.day === filterDate)
+        : allBookings;
+
+    // Hàm để lấy trạng thái của booking
+    const getStatus = (booking) => {
+        return booking.status;
+    };
+
+    // Hàm để xử lý khi nhấn nút "Xác nhận đã thanh toán"
+    const handleConfirmPayment = (bookingID) => {
+        setAllBookings(allBookings.map(booking => {
+            if (booking.bookingID === bookingID) {
+                return { ...booking, status: 'Checked in' };
+            } else {
+                return booking;
+            }
+        }));
+    };
+
+    // Hàm để lấy lớp CSS dựa trên trạng thái của booking
+const getStatusClass = (status) => {
+    if (status === 'Waiting') {
+        return 'status-waiting';
+    } else if (status === 'Checked in') {
+        return 'status-checked-in';
+    }
+    return '';
+};
+
 
     return (
         <div className='manage-booking-list container-fluid'>
@@ -425,6 +462,9 @@ function ManageListBooking() {
                                         <img className='search-input-btn-icon' src={search_icon} alt='' />
                                     </button>
                                     <input type='text' placeholder='Search' className='main-content-header-search-input' />
+                                </div>
+                                <div className='main-content-header-filter-date'>
+                                    <input type='date' value={filterDate} onChange={handleFilterDateChange} placeholder='Filter by Date' />
                                 </div>
                             </div>
                             <div className='main-content-header-add-booking'>
@@ -642,13 +682,12 @@ function ManageListBooking() {
                                 <div className='main-content-list-title-text'>Pet Type</div>
                                 <div className='main-content-list-title-text'>Service</div>
                                 <div className='main-content-list-title-text'>Doctor</div>
-                              
-                                <div className='main-content-list-title-text'>Status</div>
+                                <div className='main-content-list-title-text'>Status</div> {/* Đổi từ checkbox sang trạng thái */}
                                 <div className='main-content-list-title-text'>View</div>
                                 <div className='main-content-list-title-text'>Payment</div> {/* Thêm cột Payment */}
                             </div>
                             <div className='main-content-list-body-wrapper'>
-                                {allBookings.map(booking => (
+                                {filteredBookings.map(booking => (
                                     <div className='content-list-body-info' key={booking.bookingID}>
                                         <div className='content-list-body-value'>{booking.bookingID}</div>
                                         <div className='content-list-body-value'>{booking.day}</div>
@@ -694,10 +733,10 @@ function ManageListBooking() {
                                                 </div>
                                             </div>
                                         </div>
-                                       
                                         <div className='content-list-body-value'>
-                                            <input type='checkbox' className='content-list-body-checkbox' disabled defaultChecked={true} />
+                                            <span className={getStatusClass(booking.status)}>{getStatus(booking)}</span>
                                         </div>
+
                                         <div className='content-list-body-value'>
                                             <button type='button' className='btn btn-primary' data-bs-toggle='modal' data-bs-target={`#moreinfo-${booking.bookingID}`} onClick={() => handleOpenModal(booking)}>More info</button>
                                         </div>
@@ -796,53 +835,65 @@ function ManageListBooking() {
                                         </div>
 
                                         {/* Modal for Payment */}
-                                        {/* Modal for Payment */}
-<div className='modal fade' id={`paymentModal-${booking.bookingID}`} aria-labelledby='exampleModalLabel' aria-hidden='true'>
-    <div className='modal-dialog'>
-        <div className='modal-content'>
-            <div className='modal-header'>
-                <h1 className='modal-title fs-5' id='exampleModalLabel'>Payment Details</h1>
-                <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-            </div>
-            <div className='modal-body'>
-                <div className='main-modal-content-manage-booking'>
-                    <div className='grid-container'>
-                        <div className='content-modal-manage-booking'>
-                            <div className='reason-manage-booking'>
-                                <span className='font-weight-bold'>Service Details</span>
-                            </div>
-                            {Array.isArray(selectedBooking.services) && selectedBooking.services.map((service, index) => (
-                                <div key={index} className='reason-manage-booking'>
-                                    <small className='title-reason-manage-booking'>{service.name}:&nbsp;</small>
-                                    <small>{service.price}$</small>
-                                </div>
-                            ))}
-                        </div>
+                                        <div className='modal fade' id={`paymentModal-${booking.bookingID}`} aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                            <div className='modal-dialog'>
+                                                <div className='modal-content'>
+                                                    <div className='modal-header'>
+                                                        <h1 className='modal-title fs-5' id='exampleModalLabel'>Payment Details</h1>
+                                                        <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                                    </div>
+                                                    <div className='modal-body'>
+                                                        <div className='main-modal-content-manage-booking'>
+                                                            <div className='grid-container'>
+                                                                <div className='content-modal-manage-booking'>
+                                                                    <div className='reason-manage-booking'>
+                                                                        <span className='font-weight-bold'>Service Details</span>
+                                                                    </div>
+                                                                    {Array.isArray(selectedBooking.services) && selectedBooking.services.map((service, index) => (
+                                                                        <div key={index} className='reason-manage-booking'>
+                                                                            <small className='title-reason-manage-booking'>{service.name}:&nbsp;</small>
+                                                                            <small>{service.price}$</small>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
 
-                        <div className='mb-3'>
-                            <hr className='new1' />
-                        </div>
+                                                                <div className='mb-3'>
+                                                                    <hr className='new1' />
+                                                                </div>
 
-                        <div className='content-modal-manage-booking'>
-                            <div className='reason-manage-booking'>
-                                <span className='font-weight-bold'>Total Cost</span>
-                            </div>
-                            <div className='reason-manage-booking'>
-                                <small className='title-reason-manage-booking'>Total:&nbsp;</small>
-                                <small>{selectedBooking.totalCost}$</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className='modal-footer'>
-                <button type='button' className='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-                <button type='button' className='btn btn-success'>Pay</button>
-            </div>
-        </div>
-    </div>
-</div>
+                                                                <div className='content-modal-manage-booking'>
+                                                                    <div className='reason-manage-booking'>
+                                                                        <span className='font-weight-bold'>Total Cost</span>
+                                                                    </div>
+                                                                    <div className='reason-manage-booking'>
+                                                                        <small className='title-reason-manage-booking'>Total:&nbsp;</small>
+                                                                        <small>{selectedBooking.totalCost}$</small>
+                                                                    </div>
+                                                                </div>
 
+                                                                <div className='mb-3'>
+                                                                    <hr className='new1' />
+                                                                </div>
+
+                                                                <div className='content-modal-manage-booking'>
+                                                                    <div className='reason-manage-booking'>
+                                                                        <span className='font-weight-bold'>Trạng thái thanh toán</span>
+                                                                    </div>
+                                                                    <div className='reason-manage-booking'>
+                                                                        <small className='title-reason-manage-booking'>Status:&nbsp;</small>
+                                                                        <small>{getStatus(booking)}</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='modal-footer'>
+                                                        <button type='button' className='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                                        <button type='button' className='btn btn-success' onClick={() => handleConfirmPayment(booking.bookingID)}>Xác nhận đã thanh toán</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
