@@ -24,9 +24,11 @@ function Header() {
               />
               <div className='main-header-user-account-name'>Hi Employee</div>
               <div className='main-header-user-account_menu'>
+              <a className="forward" href='work-schedule'>
                 <div className='main-header-user-account_menu-item'>
                   Work Schedule
                 </div>
+                </a>
                 <div className='main-header-user-account_menu-item'>
                   Settings
                 </div>

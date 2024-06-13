@@ -24,6 +24,7 @@ function Sidebar() {
           </div>
         </div>
         <div className='list-items-category'>
+          <a href='your-pet'>
           <div className='menu-item'>
             <img
               className='menu-icons'
@@ -32,7 +33,8 @@ function Sidebar() {
             />
             <div className='menu-item_txt'>Your pet</div>
           </div>
-
+          </a>
+          <a className="forward" href='your-booking'>
           <div className='menu-item'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -47,7 +49,8 @@ function Sidebar() {
             </svg>
             <div className='menu-item_txt'>Your booking</div>
           </div>
-
+          </a>
+          <a className="forward" href='chua-co'>
           <div className='menu-item'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -61,7 +64,9 @@ function Sidebar() {
             </svg>
             <div className='menu-item_txt'>Pet in cage</div>
           </div>
+          </a>
         </div>
+      
       </div>
     </div>
   );
