@@ -224,21 +224,16 @@ a {
 
 .main .sign-in {
   margin-right: 15px;
-  display: flex;
   width: 100px;
   height: 50px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 14px 0px;
   background-color: #002169;
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+  transition: background-color 0.3s;
 }
 
 .main .sign-in:hover {
-  background-color: #e18213; /* Đổi màu nền khi hover */
+  background-color: #e18213;
   cursor: pointer;
 }
 
@@ -248,30 +243,36 @@ a {
 }
 
 .main .text-wrapper-3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
   font-family: Roboto, sans-serif;
   font-weight: 600;
   color: #ffffff;
 }
 
 .main .sign-up {
-  display: flex;
   width: 100px;
   height: 50px;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 24px;
   background-color: #002169;
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-  transition: background-color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+  transition: background-color 0.3s;
 }
 
 .main .sign-up:hover {
-  background-color: #e18213; /* Đổi màu nền khi hover */
+  background-color: #e18213;
   cursor: pointer;
 }
 
 .main .text-wrapper-4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
   font-family: Roboto, sans-serif;
   font-weight: 600;
   color: #ffffff;
