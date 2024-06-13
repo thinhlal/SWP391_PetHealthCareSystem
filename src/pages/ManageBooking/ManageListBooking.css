@@ -8,7 +8,7 @@
 .manage-booking-list .manage-booking-list-title-text {
   width: fit-content;
   margin-top: -1px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 700;
   color: #4f3c3c;
   font-size: 40px;
@@ -150,6 +150,13 @@
   font-family: Roboto, sans-serif;
 }
 
+
+.content-list-body-value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .manage-booking-list .main-content-list-body-wrapper {
 }
 
@@ -189,6 +196,7 @@
 
 .manage-booking-list .pagination_wrapper nav {
   margin-top: 70px;
+  margin-bottom: 30px;
 }
 
 .manage-booking-list .modal-body-section-wrapper {
@@ -237,14 +245,14 @@
 
 .manage-booking-list .choose-Doctor-wrapper label {
   line-height: 25px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .manage-booking-list .choose-Doctor-Not-Found {
   color: red;
   text-align: center;
   line-height: 70px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .manage-booking-list .modal-body-manage-booking {
   background-color: #fff;
@@ -307,15 +315,15 @@
   font-size: 0.8em;
 }
 
-.manage-booking-list .has-select-option {
+.manage-booking-list .has-select-option{
   margin: 8px 0 5px 0px;
 }
 
-.manage-booking-list .has-select-option select {
+.manage-booking-list .has-select-option select{
   width: 200px;
 }
 
-.manage-booking-list .btn-add-services {
+.manage-booking-list .btn-add-services{
   width: 100px;
   display: flex;
   align-items: center;
@@ -328,7 +336,7 @@
   cursor: pointer;
 }
 
-.manage-booking-list .btn-add-services div {
+.manage-booking-list .btn-add-services div{
   border: none;
   background-color: #ccc;
   font-size: 14px;
@@ -340,7 +348,7 @@
 }
 
 .search-owner-option-section,
-.searchPetSection-child {
+.searchPetSection-child{
   display: flex;
   align-items: center;
 }
