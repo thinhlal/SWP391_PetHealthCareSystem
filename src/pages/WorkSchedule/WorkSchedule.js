@@ -4,8 +4,8 @@ import Header from '../../components/Doctor/Header/Header.js';
 
 function WorkSchedule() {
   const initialSchedules = {
-    //ngày 12-6
-    '2023-06-12': {
+    //ngày 13-6
+    '2023-06-13': {
       '001': {
         vetName: 'Vet. Minh',
         appointments: [
@@ -130,8 +130,8 @@ function WorkSchedule() {
         ],
       },
     },
-    //ngày 13-6
-    '2023-06-13': {
+    //ngày 14-6
+    '2023-06-14': {
       '004': {
         vetName: 'Vet. Thinh',
         appointments: [
