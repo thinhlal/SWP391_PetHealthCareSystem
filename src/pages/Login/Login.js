@@ -19,6 +19,7 @@ function Login() {
     event.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/login', formData);
+      localStorage.setItem('token', response.data.token)
       setError('');
     } catch (error) {
       if (error.response) {
@@ -63,6 +64,7 @@ function Login() {
                           name='username'
                           value={formData.username}
                           onChange={handleChange}
+                          required
                         />
                       </div>
 
@@ -74,6 +76,7 @@ function Login() {
                           name='password'
                           value={formData.password}
                           onChange={handleChange}
+                          required
                         />
                       </div>
                       {error && <div className="error-message">{error}</div>}

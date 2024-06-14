@@ -1,20 +1,19 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const shortid = require('shortid');
-
+const slugify = require('slug');
 const Schema = mongoose.Schema;
 
 const Account = new Schema({
     username: {
         type: String,
         required: true,
-        maxlength: 25,
+        maxlength: 255,
         unique: true
     },
     password: {
         type: String,
         required: true,
-        maxlength: 25
+        maxlength: 255
     },
     role: {
         type: String,
@@ -24,28 +23,23 @@ const Account = new Schema({
     isAdmin: {
         type: Boolean,
         required: true
+    },
+    slug: {
+        type: String,
+        unique: true
     }
 }, {
     timestamps: true
 });
 
-Account.pre('save', async function (next) {
-    if (!this.accountID) {
-        let newID;
-        let isUnique = false;
-        while (!isUnique) {
-            newID = shortid.generate().slice(0, 8);
-            const existingAccount = await mongoose.models.Account.findOne({ accountID: newID });
-            if (!existingAccount) {
-                isUnique = true;
-            }
-        }
-        this.accountID = newID;
+Account.pre('save', function (next) {
+    if (this.isModified('username') || this.isNew) {
+        this.slug = slugify(this.username, { lower: true, strict: true });
     }
     next();
 });
 
-Account.methods.comparePassword = async function(password) {
+Account.methods.comparePassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 

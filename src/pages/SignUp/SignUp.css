@@ -67,20 +67,12 @@ body {
 }
 
 .create-account-page .form_SignUp {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .create-account-page .form_SignUp_Input {
-  display: flex;
+  margin: 10px auto 5px;
   width: 400px;
-  height: 40px;
-  align-items: center;
-  gap: 16px;
-  position: relative;
+  height: 35px;
   background-color: #ffffff;
   border-radius: 8px;
   border: 1px solid;
@@ -88,12 +80,12 @@ body {
 }
 
 .create-account-page .form_SignUp_Input-Text {
-  flex: 1;
   font-family: Roboto, sans-serif;
   color: #000;
   font-size: 16px;
+  width: 100%;
   letter-spacing: 0;
-  line-height: 37px;
+  height: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -211,6 +203,22 @@ body {
   white-space: nowrap;
 }
 
-.form_SignUp_HadAcc_SignIn:hover {
+.create-account-page .form_SignUp_HadAcc_SignIn:hover {
   opacity: 0.6;
+}
+
+.create-account-page .error-message{
+  color: red;
+  text-wrap: wrap;
+  font-size: 14px;
+  margin-left: 55px;
+  display: inline-block;
+}
+
+.create-account-page .success-message{
+  color: green;
+  text-wrap: wrap;
+  font-size: 16px;
+  margin-left: 55px;
+  display: inline-block;
 }

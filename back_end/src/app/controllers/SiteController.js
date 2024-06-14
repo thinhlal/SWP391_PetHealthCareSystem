@@ -1,7 +1,8 @@
 const Account = require('../models/Account.js');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { multipleMongooseToObject } = require('../../util/mongoose');
-
+const JWT_SECRET = 'your_jwt_secret_key';
 class SiteController {
     // [GET] /
     index(req, res, next) {
@@ -21,8 +22,8 @@ class SiteController {
             if (!isMatch) {
                 return res.status(401).json({ message: 'Wrong username or password' });
             }
-
-            res.json({ message: 'Login successful' });
+            const token = jwt.sign({ id: account._id, username: account.username }, JWT_SECRET, { expiresIn: '1h' });
+            res.json({ message: 'Login successful', token });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
@@ -32,18 +33,14 @@ class SiteController {
     async signUp(req, res, next) {
         try {
             let { username, password } = req.body;
-
-            // Kiểm tra xem username đã tồn tại hay chưa
             const existAccount = await Account.findOne({ username });
             if (existAccount) {
                 return res.status(401).json({ message: 'User already exists. Please choose a different username.' });
             }
 
-            // Mã hóa mật khẩu
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-            // Tạo tài khoản mới
             const newAccount = new Account({
                 username,
                 password: hashedPassword,
@@ -51,14 +48,11 @@ class SiteController {
                 isAdmin: false
             });
 
-            // Lưu tài khoản vào cơ sở dữ liệu
             const savedAccount = await newAccount.save();
 
-            // Tạo JWT token
-            //const token = jwt.sign({ id: savedAccount._id, username: savedAccount.username }, JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ id: savedAccount._id, username: savedAccount.username }, JWT_SECRET, { expiresIn: '1h' });
 
-            // Trả về phản hồi thành công với token
-            //res.status(201).json({ message: 'User registered successfully', token });
+            res.status(201).json({ message: 'User registered successfully', token });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
