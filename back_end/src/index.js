@@ -19,10 +19,6 @@ app.use(
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json({ message: 'Hello from the backend!' });
-});
-
 // Initialize routes
 route(app);
 

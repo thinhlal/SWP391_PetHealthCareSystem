@@ -1,11 +1,33 @@
 import './Login.css';
-
+import React, { useState } from 'react';
+import axios from 'axios';
 // image
 import catImage from '../../assets/images/img_Login/left_picture_cat.png';
 import logo from '../../assets/images/img_Login/logo.png';
 import googleLogo from '../../assets/images/img_Login/google.svg';
 
 function Login() {
+  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5000/login', formData);
+      setError('');
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      } else {
+        console.error('Error:', error);
+      }
+    }
+  };
   return (
     <div className='login-page'>
       <div className='background-blur'>
@@ -31,34 +53,42 @@ function Login() {
                       Welcome to Pet Health Care
                     </p>
                   </div>
-                  <div className='form-send-login'>
-                    <div className='input-user'>
-                      <input
-                        className='field-input-login'
-                        placeholder='Enter Username or Email.'
-                        type='email'
-                      />
-                    </div>
-
-                    <div className='input-password'>
-                      <input
-                        className='field-input-login'
-                        placeholder='Enter Password.'
-                        type='password'
-                      />
-                    </div>
-                    <a href='/'>
-                      <div className='text-button-forgot-password'>
-                        Forgot password?
+                  <form onSubmit={handleSubmit} >
+                    <div className='form-send-login'>
+                      <div className='input-user'>
+                        <input
+                          type='text'
+                          className='field-input-login'
+                          placeholder='Enter Username or Email.'
+                          name='username'
+                          value={formData.username}
+                          onChange={handleChange}
+                        />
                       </div>
-                    </a>
 
-                    <a href='/'>
-                      <div className='sign-in-button'>
-                        <div className='text-sign-in-button'>Sign in</div>
+                      <div className='input-password'>
+                        <input
+                          type='password'
+                          className='field-input-login'
+                          placeholder='Enter Password.'
+                          name='password'
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
                       </div>
-                    </a>
-                  </div>
+                      {error && <div className="error-message">{error}</div>}
+
+                      <a href='/'>
+                        <div className='text-button-forgot-password'>
+                          Forgot password?
+                        </div>
+                      </a>
+
+                      <button type='submit' className='sign-in-button'>
+                        Sign in
+                      </button>
+                    </div>
+                  </form>
 
                   <div className='title-continue-with'>
                     <div className='rectangle'></div>

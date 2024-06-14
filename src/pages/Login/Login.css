@@ -79,19 +79,19 @@
   align-items: center;
   justify-content: center;
   background-color: #696969;
+  color: #ffffff;
   border-radius: 15px;
   transition: background-color 0.3s ease;
-  margin: 10px 36%;
+  width: 100%;
+  margin: 10px auto;
+  border: none;
   height: 40px;
   font-family: Roboto, sans-serif;
 }
 
 .login-page .sign-in-button:hover {
   background-color: #002169;
-}
-
-.login-page .text-sign-in-button {
-  color: #ffffff;
+  cursor: pointer;
 }
 
 .login-page .title-continue-with {
