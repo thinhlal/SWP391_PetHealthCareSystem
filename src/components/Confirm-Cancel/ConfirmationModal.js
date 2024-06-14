@@ -8,11 +8,11 @@ function ConfirmationModal({ show, message, onConfirm, onCancel }) {
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <p className="message-header">Confirm</p>
-        <p className="message-con_can">{message}</p>
-        <div className="buttons">
+    <div className="confirm_cancel">
+      <div className="confirm-content">
+        <p className="confirm-header">Confirm</p>
+        <p className="message-confirm_cancel">{message}</p>
+        <div className="button-confirm_cancel">
           <button className="confirm" onClick={onConfirm}>Yes</button>
           <button className="cancel" onClick={onCancel}>Cancel</button>
         </div>

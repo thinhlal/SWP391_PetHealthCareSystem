@@ -9,7 +9,7 @@ function WorkSchedule() {
   const [modalMessage, setModalMessage] = useState('');
   const [modalAction, setModalAction] = useState(() => () => {});
 
-  const initialSchedules = {
+  const dataSchedules = {
     //ngày 13-6
     '2023-06-13': {
       '001': {
@@ -273,7 +273,7 @@ function WorkSchedule() {
     },
   };
 
-  const [schedules, setSchedules] = useState(initialSchedules);
+  const [schedules, setSchedules] = useState(dataSchedules);
   const [selectedDate, setSelectedDate] = useState('2023-06-12');
   const [selectedVet, setSelectedVet] = useState('001');
 

@@ -1,5 +1,5 @@
 /* ConfirmationModal.css */
-.modal-overlay {
+.confirm_cancel {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,10 +12,10 @@
   flex-direction: column;
 }
 
-.modal-content {
+.confirm-content {
   background: white;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   text-align: center;
   width: 30%;
 }
@@ -81,25 +81,26 @@
   margin-right: 20px;
 }
 
-.message-header{
+.confirm-header{
   font-family: Roboto, sans-serif;
   color:#113179;
   font-size: 30px;
-  font-weight: 600;
-  margin-bottom:30px;
+  font-weight: 500;
+  margin-bottom:20px;
   text-align: left;
 }
 
-.message-con_can{
+.message-confirm_cancel{
   font-family: Roboto, sans-serif;
   color:black;;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
+  margin-bottom: 60px;
 
 }
 
-.buttons{
+.button-confirm_cancel{
   text-align: right;
   margin-top:20px;
 }
