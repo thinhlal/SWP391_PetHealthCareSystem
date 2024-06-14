@@ -1,29 +1,24 @@
 // ConfirmationModal.js
 import React from 'react';
-import './ConfirmationModal.css';
+import './ConfirmationModal.css'; // Make sure to create a corresponding CSS file for styling
 
-const ConfirmationModal = ({ show, onConfirm, onCancel }) => {
+function ConfirmationModal({ show, message, onConfirm, onCancel }) {
   if (!show) {
     return null;
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <div className="modal-content">
-          <h4>Are you sure you want to cancel?</h4>
-          <div className="modal-actions">
-            <button className="btn-confirm" onClick={onConfirm}>
-              Confirm
-            </button>
-            <button className="btn-cancel" onClick={onCancel}>
-              Cancel
-            </button>
-          </div>
+    <div className="confirm_cancel">
+      <div className="confirm-content">
+        <p className="confirm-header">Confirm</p>
+        <p className="message-confirm_cancel">{message}</p>
+        <div className="button-confirm_cancel">
+          <button className="confirm" onClick={onConfirm}>Yes</button>
+          <button className="cancel" onClick={onCancel}>Cancel</button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default ConfirmationModal;

@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
+import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
+
 
 function WorkSchedule() {
-  const initialSchedules = {
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [modalAction, setModalAction] = useState(() => () => {});
+
+  const dataSchedules = {
     //ngày 13-6
     '2023-06-13': {
       '001': {
@@ -267,7 +273,7 @@ function WorkSchedule() {
     },
   };
 
-  const [schedules, setSchedules] = useState(initialSchedules);
+  const [schedules, setSchedules] = useState(dataSchedules);
   const [selectedDate, setSelectedDate] = useState('2023-06-12');
   const [selectedVet, setSelectedVet] = useState('001');
 
@@ -290,29 +296,34 @@ function WorkSchedule() {
 
   const handleCancelClick = (e, id) => {
     e.preventDefault();
-    if (window.confirm('Are you sure you want to cancel this booking?')) {
-      setSchedules({
-        ...schedules,
-        [selectedDate]: {
-          ...schedules[selectedDate],
-          [selectedVet]: {
-            ...schedules[selectedDate][selectedVet],
-            appointments: schedules[selectedDate][selectedVet].appointments.map(
-              row => (row.id === id ? { ...row, status: 'Canceled' } : row),
-            ),
-          },
-        },
-      });
-    }
+    setModalMessage('Are you sure you want to cancel this booking?');
+    setModalAction(() => () => cancelBooking(id));
+    setShowModal(true);
   };
 
+  const cancelBooking = (id) => {
+    setSchedules({
+      ...schedules,
+      [selectedDate]: {
+        ...schedules[selectedDate],
+        [selectedVet]: {
+          ...schedules[selectedDate][selectedVet],
+          appointments: schedules[selectedDate][selectedVet].appointments.map(
+            row => (row.id === id ? { ...row, status: 'Canceled' } : row),
+          ),
+        },
+      },
+    });
+    setShowModal(false);
+  };
+
+  // Handle receive click
   const handleReceiveClick = (e, status) => {
     e.preventDefault();
-    if (
-      status !== 'Canceled' &&
-      window.confirm('Are you sure you want to receive this pet?')
-    ) {
-      window.location.href = 'pet-exam-record'; // Redirect to the specified page
+    if (status !== 'Canceled') {
+      setModalMessage('Are you sure you want to receive this pet?');
+      setModalAction(() => () => window.location.href = 'pet-exam-record');
+      setShowModal(true);
     }
   };
 
@@ -433,6 +444,12 @@ function WorkSchedule() {
         ----------Today's working hour start at 9:00 a.m and end at 18:00
         p.m----------
       </p>
+      <ConfirmationModal
+        show={showModal}
+        message={modalMessage}
+        onConfirm={modalAction}
+        onCancel={() => setShowModal(false)}
+      />
     </div>
   );
 }

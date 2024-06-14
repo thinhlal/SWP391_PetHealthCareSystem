@@ -1,49 +1,106 @@
 /* ConfirmationModal.css */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  .modal {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-content {
-    text-align: center;
-  }
-  
-  .modal-actions {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .btn-confirm {
-    background-color: green;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-cancel {
-    background-color: red;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+.confirm_cancel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.confirm-content {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  width: 30%;
+}
+
+.modal-content button {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+.confirm,
+.cancel {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.confirm::before,
+.cancel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: orange; /* Màu nền khi hover */
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.confirm:hover::before,
+.cancel:hover::before {
+  left: 0;
+}
+
+.confirm:hover,
+.cancel:hover {
+  color: #fff; /* Màu chữ khi hover */
+}
+
+.confirm {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.cancel {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  margin-right: 20px;
+}
+
+.confirm-header{
+  font-family: Roboto, sans-serif;
+  color:#113179;
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom:20px;
+  text-align: left;
+}
+
+.message-confirm_cancel{
+  font-family: Roboto, sans-serif;
+  color:black;;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 60px;
+
+}
+
+.button-confirm_cancel{
+  text-align: right;
+  margin-top:20px;
+}
