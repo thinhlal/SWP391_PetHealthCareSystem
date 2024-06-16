@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Booking.css';
 import Footer from '../../components/User/Footer/Footer.js';
 import Header from '../../components/User/Header/Header.js';
 import red from '../../assets/images/img_Booking/red_square.png';
 import green from '../../assets/images/img_Booking/green_square.png';
+import { useLocation } from 'react-router-dom'; // Import useLocation to get state
 
 // Giả sử dữ liệu bác sĩ
 const doctorsData = [
@@ -51,11 +52,19 @@ const doctorsData = [
 ];
 
 const Booking = () => {
+  const location = useLocation(); // Use useLocation to get the state
+  const { selectedPet } = location.state || {}; // Destructure selectedPet from state
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [availableSlots, setAvailableSlots] = useState([]);
   const [isDayOff, setIsDayOff] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null); // State để lưu ô giờ đã chọn
+
+  useEffect(() => {
+    if (!selectedPet) {
+      alert('No pet selected. Please go back and select a pet.');
+    }
+  }, [selectedPet]);
 
   const handleDoctorChange = e => {
     const newDoctorId = e.target.value;
@@ -164,6 +173,7 @@ const Booking = () => {
           minute: '2-digit',
           hour12: false,
         }),
+        petID: selectedPet?.petID // Include the PetID in booking data
       };
       console.log('Booking Data:', bookingData);
       // Xử lý gửi dữ liệu booking lên server tại đây
@@ -213,7 +223,8 @@ const Booking = () => {
                 <input
                   type='text'
                   className='name_input'
-                  placeholder=''
+                  value={selectedPet?.petID || ''}
+                  readOnly
                 />
               </div>
             </div>
