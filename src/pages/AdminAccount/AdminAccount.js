@@ -6,11 +6,10 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import logo_pet_health_care from '../../assets/images/img_AdminAccount/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { blue, red, green } from '@mui/material/colors';
+import { blue, green } from '@mui/material/colors';
 
 function AdminAccount() {
   const [randomValue, setRandomValue] = useState();
@@ -18,7 +17,8 @@ function AdminAccount() {
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ setIsModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('');
   const [currentAccount, setCurrentAccount] = useState(null);
   const [accountData, setAccountData] = useState([

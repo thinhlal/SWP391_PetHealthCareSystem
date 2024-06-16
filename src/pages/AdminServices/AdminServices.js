@@ -10,12 +10,8 @@ import Stack from '@mui/material/Stack';
 import logo_pet_health_care from '../../assets/images/img_AdminServices/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminServices/icon_search.svg';
 //mui
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import { blue } from '@mui/material/colors';
-import { red } from '@mui/material/colors';
-import { green } from '@mui/material/colors';
 function AdminServices() {
   return (
     <div className='Admin-Services container-fluid'>
