@@ -89,6 +89,7 @@
 }
 
 .Admin-Account-Navigate-Logout {
+  color: #000;
   line-height: 42px;
   text-align: center;
   width: 100%;
@@ -109,6 +110,7 @@
 
 .Admin-Account-Navigate-Text-Rest-Menu {
   font-family: Roboto, sans-serif;
+  color: #000;
   height: 42px;
   display: flex;
   align-items: center;
@@ -373,7 +375,7 @@
 }
 
 .Admin-Account-Main-Table-Content-Btn {
-  width: 33.333%;
+  width: 50%;
   border: none;
   background-color: white;
 }
@@ -391,13 +393,20 @@
   font-size: 20px;
 }
 
+.Admin-Account-modal-title-radio {
+  display: flex;
+}
+
+.Admin-Account-modal-title-radio-Enable {
+  padding-right: 20px;
+}
+
 .Admin-Account-modal-initials {
   color: #000000;
   font-weight: 600;
   font-size: 15px;
-  padding-right: 5px;
-  display: inline-block;
-  width: 160px;
+  padding-right: 10px;
+
 }
 
 .Admin-Account-modal-add-account {
@@ -407,8 +416,7 @@
 .Admin-Account-modal-add {
   color: #000000;
   font-weight: 500;
-  display: inline-block;
-  width: 85px;
+  padding-right: 10px;
 }
 
 .Admin-Account-modal-update-old {
@@ -419,8 +427,7 @@
   color: #000000;
   font-weight: 600;
   font-size: 15px;
-  display: inline-block;
-  width: 160px;
+  padding-right: 10px;
 }
 
 .Admin-Account-modal-update {

@@ -87,6 +87,7 @@
 }
 
 .Admin-DashBoard-Navigate-Logout {
+  color: #000;
   line-height: 42px;
   text-align: center;
   width: 100%;
@@ -110,6 +111,7 @@
 }
 
 .Admin-DashBoard-Navigate-Text-Rest-Menu {
+  color: #000;
   height: 42px;
   display: flex;
   align-items: center;
