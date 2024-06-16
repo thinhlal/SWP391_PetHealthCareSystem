@@ -1,13 +1,17 @@
 import './ChoosePet.css';
 import React, { useState, useEffect, useRef } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 // image
 import image_pet_1 from '../../assets/images/img_ChoosePet/pexels-wildlittlethingsphoto-2253275.jpg';
 import image_pet_2 from '../../assets/images/img_ChoosePet/pexels-ingewallu-177809.jpg';
 import image_pet_3 from '../../assets/images/img_ChoosePet/pexels-svetozar-milashevich-99573-1490908.jpg';
+
 // components
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
 import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
+import AnimationComponent from '../../components/Animation/AnimationComponent.js'; // Import component animation
 
 function ChoosePet() {
   const [pets, setPets] = useState([
@@ -42,6 +46,8 @@ function ChoosePet() {
     }
   };
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -49,6 +55,21 @@ function ChoosePet() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+
+    // Giả lập thời gian tải trang
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Thời gian giả lập tải trang (2 giây)
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <AnimationComponent />;
+  }
 
   return (
     <div className='main-choose-pet'>
