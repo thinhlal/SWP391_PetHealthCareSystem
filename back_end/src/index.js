@@ -1,9 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const app = express();
 const route = require('./routes');
 const db = require('./config/db');
-const port = 5000;
+const port = process.env.PORT;
 
 //multiple start different domain
 app.use(cors());
@@ -18,6 +21,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use(cookieParser());
 
 // Initialize routes
 route(app);
