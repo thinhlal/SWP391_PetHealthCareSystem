@@ -101,7 +101,7 @@
 
 .all-services .photo-frame-img-service {
   object-fit: cover;
-  /* width: 100%; */
+  width: 100%;
 }
 
 /* content cat */

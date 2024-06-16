@@ -111,7 +111,7 @@ function Home() {
             <div className='list-header-navigate-booking-btn'>
               <a
                 className='list-header-navigate-booking-btn-link'
-                href='booking'
+                href='choose'
               >
                 BOOKING NOW!
               </a>

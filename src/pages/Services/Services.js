@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './Services.css';
@@ -6,6 +6,7 @@ import './Services.css';
 // components
 import Footer from '../../components/User/Footer/Footer.js';
 import Header from '../../components/User/Header/Header.js';
+import AnimationComponent from '../../components/Animation/AnimationComponent.js'; // Import component animation
 
 // image
 import Cat from '../../assets/images/img_Services/rectangle-1.png';
@@ -13,9 +14,22 @@ import Tick from '../../assets/images/img_Services/rectangle-1-7.png';
 import Dog from '../../assets/images/img_Services/rectangle-1-4.png';
 
 function Services() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
+
+    // Giả lập thời gian tải trang
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Thời gian giả lập tải trang (2 giây)
+
+    return () => clearTimeout(timer);
   }, []);
+
+  if (loading) {
+    return <AnimationComponent />;
+  }
 
   return (
     <div className='all-services'>
@@ -114,7 +128,7 @@ function Services() {
             </div>
             <button
               className='booking-services-button'
-              onClick={() => (window.location.href = 'booking')}
+              onClick={() => (window.location.href = 'choose')}
               style={{ border: 'none' }}
             >
               <div className='text-booking-services-button'>Book now</div>
@@ -185,7 +199,7 @@ function Services() {
             </div>
             <button
               className='booking-services-button'
-              onClick={() => (window.location.href = 'booking')}
+              onClick={() => (window.location.href = 'choose')}
               style={{ border: 'none' }}
             >
               <div className='text-booking-services-button'>Book now</div>
