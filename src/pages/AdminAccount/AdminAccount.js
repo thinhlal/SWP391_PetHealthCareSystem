@@ -30,45 +30,50 @@ function AdminAccount() {
     {
       id: 1,
       account_id: 'A00001',
+      status: 'Disable',
       user_name: 'leslie123',
       name: 'Leslie',
-      email:  'leslie14@gmail.com',
+      email: 'leslie14@gmail.com',
       phoneNum: '0888888888',
       role: 'Veterinarian',
     },
     {
       id: 2,
       account_id: 'A00002',
+      status: 'Disable',
       user_name: 'ronaldo123',
       name: 'Ronal Đỗ',
-      email:  'thichpen12@gmail.com',
+      email: 'thichpen12@gmail.com',
       phoneNum: '0777777777',
       role: 'Staff',
     },
     {
       id: 3,
       account_id: 'A00003',
+      status: 'Disable',
       user_name: 'messi123',
       name: 'Pessi',
-      email:  'thichvuotrau2@gmail.com',
+      email: 'thichvuotrau2@gmail.com',
       phoneNum: '0101010100',
       role: 'Customer',
     },
     {
       id: 4,
       account_id: 'A00004',
+      status: 'Disable',
       user_name: 'victoria123',
       name: 'Victoria',
-      email:  'victoriasecret13@gmail.com',
+      email: 'victoriasecret13@gmail.com',
       phoneNum: '0778774546',
       role: 'Customer',
     },
     {
       id: 5,
       account_id: 'A00005',
+      status: 'Disable',
       user_name: 'john123',
       name: 'John',
-      email:  'johnydog143@gmail.com',
+      email: 'johnydog143@gmail.com',
       phoneNum: '0777123454',
       role: 'Admin',
     },
@@ -502,6 +507,10 @@ function AdminAccount() {
                     {' '}
                     Role{' '}
                   </div>
+                  <div className='Admin-Account-Main-Table-Header-Title '>
+                    {' '}
+                    Status{' '}
+                  </div>
                   <div className='Admin-Account-Main-Table-Header-Title-Btn '>
                     {' '}
                     Action{' '}
@@ -521,6 +530,9 @@ function AdminAccount() {
                     </div>
                     <div className='Admin-Account-Main-Table-Content-Row'>
                       {item.role}
+                    </div>
+                    <div className='Admin-Account-Main-Table-Content-Row' >
+                      {item.status}
                     </div>
                     <div className='Admin-Account-Main-Table-Content-Row '>
                       <span className='Admin-Account-Main-Table-Content-Btn_Wrapper '>
@@ -637,6 +649,19 @@ function AdminAccount() {
                                     <option>Admin</option>
                                   </select>
                                 </div>
+                                <div className='Admin-Account-modal-update' >
+                                  <div className='Admin-Account-modal-title'>
+                                    Status
+                                  </div>
+                                  <div>
+                                    <input type='radio' name='status' />
+                                    <label> Enable </label>
+                                  </div>
+                                  <div>
+                                    <input type='radio' name='status' />
+                                    <label> Disable </label>
+                                  </div>
+                                </div>
                               </div>
                               <div className='modal-footer'>
                                 <button
@@ -651,101 +676,6 @@ function AdminAccount() {
                                   className='btn btn-success'
                                 >
                                   Save changes
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-
-                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-Account-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#exampleModalDelete'
-                        >
-                          <DeleteOutlineIcon
-                            sx={{
-                              color: red[400],
-                            }}
-                          />
-                        </button>
-                        {/* Modal Delete */}
-                        <div
-                          className='modal fade'
-                          id='exampleModalDelete'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelDelete'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelDelete'
-                                >
-                                  Delete Account
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Account-modal-delete'>
-                                  <div className='Admin-Account-modal-delete-title'>
-                                    Account ID:
-                                  </div>
-                                  A00001
-                                </div>
-                                <div className='Admin-Account-modal-delete'>
-                                  <div className='Admin-Account-modal-delete-title'>
-                                    Name:
-                                  </div>
-                                  Leslie
-                                </div>
-                                <div className='Admin-Account-modal-delete'>
-                                  <div className='Admin-Account-modal-delete-title'>
-                                    User name:
-                                  </div>
-                                  leslie123
-                                </div>
-                                <div className='Admin-Account-modal-delete'>
-                                  <div className='Admin-Account-modal-delete-title'>
-                                    Email:
-                                  </div>
-                                  Leslie23@gmail.com
-                                </div>
-                                <div className='Admin-Account-modal-delete'>
-                                  <div className='Admin-Account-modal-delete-title'>
-                                    Phone number:
-                                  </div>
-                                  0777123456
-                                </div>
-                                <div className='Admin-Account-modal-delete'>
-                                  <div className='Admin-Account-modal-delete-title'>
-                                    Role:
-                                  </div>
-                                  Veterinarian
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-danger'
-                                >
-                                  Delete
                                 </button>
                               </div>
                             </div>
