@@ -17,8 +17,6 @@ function AdminAccount() {
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
-  //  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [ setIsModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('');
   const [currentAccount, setCurrentAccount] = useState(null);
   const [accountData, setAccountData] = useState([
@@ -59,13 +57,11 @@ function AdminAccount() {
       return account;
     });
     setAccountData(updatedAccountData);
-    setIsModalOpen(false);
   };
 
   const openEditModal = (account) => {
     setCurrentAccount(account);
     setSelectedStatus(account.status);
-    setIsModalOpen(true);
   };
 
   const filteredAccountData = accountData.filter(account => {
