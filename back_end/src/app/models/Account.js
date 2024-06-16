@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const slugify = require('slug');
 const Schema = mongoose.Schema;
 
@@ -38,9 +37,5 @@ Account.pre('save', function (next) {
     }
     next();
 });
-
-Account.methods.comparePassword = async function (password) {
-    return bcrypt.compare(password, this.password);
-};
 
 module.exports = mongoose.model('Account', Account);

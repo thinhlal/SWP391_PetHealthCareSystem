@@ -30,7 +30,7 @@ function App() {
         element={<Login />}
       />
       <Route
-        path='/sign-up'
+        path='/signup'
         element={<SignUp />}
       />
       <Route

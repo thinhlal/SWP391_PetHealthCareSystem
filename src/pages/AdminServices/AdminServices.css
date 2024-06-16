@@ -89,6 +89,7 @@
 }
 
 .Admin-Services-Navigate-Logout {
+  color: #000;
   line-height: 42px;
   text-align: center;
   width: 100%;
@@ -109,6 +110,7 @@
 
 .Admin-Services-Navigate-Text-Rest-Menu {
   font-family: Roboto, sans-serif;
+  color: #000;
   height: 42px;
   display: flex;
   align-items: center;
@@ -371,7 +373,7 @@
 }
 
 .Admin-Services-Main-Table-Content-Btn {
-  width: 33.333%;
+  width: 100%;
   border: none;
   background-color: white;
 }
@@ -384,38 +386,21 @@
 .Admin-Services-modal-initials {
   color: #000000;
   font-family: Roboto, sans-serif;
-  font-weight: 600;
   padding-right: 5px;
-  display: inline-block;
-  width: 175px;
 }
 
 .Admin-Services-modal-update {
   font-family: Roboto, sans-serif;
+  display: flex;
 }
 
 .Admin-Services-modal-update-title {
-  display: inline-block;
-  font-weight: 600;
-  width: 135px;
-}
-
-.Admin-Services-modal-delete-title {
-  display: inline-block;
-  font-weight: 600;
-  width: 125px;
+  padding-right: 10px;
 }
 
 .Admin-Services-modal-more-title {
-  display: inline-block;
+  padding-right: 10px;
   font-weight: 600;
-  width: 122px;
-}
-
-.Admin-Services-modal-delete {
-  font-weight: 700px;
-  display: flex;
-  padding: 5px;
 }
 
 .Admin-Services-modal-more {
@@ -424,8 +409,12 @@
   padding: 5px;
 }
 
-.Admin-Services-modal-delete {
-  padding: 5px;
+.Admin-Services-modal-radio {
+  display: flex;
+}
+
+.Admin-Services-modal-radio-text {
+  padding-right: 20px;
 }
 
 .Admin-Services-input {
@@ -455,14 +444,13 @@
 
 .Admin-Services-modal-title-name {
   height: 30px;
-  text-align: center;
   font-weight: 600;
   font-size: 20px;
 }
 
 .Admin-Services-modal-title {
+  font-family: Roboto, sans-serif;
   height: 45px;
-  text-align: center;
   font-weight: 600;
   font-size: 20px;
   padding-top: 15px;

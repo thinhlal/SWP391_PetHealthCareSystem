@@ -4,6 +4,7 @@ import axios from 'axios';
 //images
 import jonas from '../../assets/images/img_SignUp/background.png';
 import logo from '../../assets/images/img_SignUp/logo.png';
+import { Link } from 'react-router-dom';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -140,30 +141,28 @@ function SignUp() {
             {successMessage && <div className="success-message">{successMessage}</div>}
             <div className='form_SignUp_Regulation'>
               <span className='form_SignUp_Regulation_Span'>
-                By clicking sign up, you agree to our{' '}
+                By clicking sign up, you agree to our
               </span>
-              <a
+              <span
                 className='form_SignUp_Regulation_Link'
-                href='#sad'
               >
-                Terms of Service
-              </a>
+                &nbsp;Terms of Service
+              </span>
               <span className='form_SignUp_Regulation_Span'> and </span>
-              <a
+              <span
                 className='form_SignUp_Regulation_Link'
-                href='#sad'
               >
                 Privacy Policy
-              </a>
+              </span>
             </div>
             <div className='form_SignUp_HadAcc'>
-              <div className='text-wrapper-4'>Already have a account?</div>
-              <a
-                href='#sad'
+              <div className='text-wrapper-4'>Already have a account?&nbsp;</div>
+              <Link
+                to='/login'
                 className='form_SignUp_HadAcc_SignIn'
               >
                 Sign in now
-              </a>
+              </Link>
             </div>
           </div>
         </div>

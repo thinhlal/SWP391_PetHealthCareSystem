@@ -5,10 +5,12 @@ import axios from 'axios';
 import catImage from '../../assets/images/img_Login/left_picture_cat.png';
 import logo from '../../assets/images/img_Login/logo.png';
 import googleLogo from '../../assets/images/img_Login/google.svg';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,6 +23,7 @@ function Login() {
       const response = await axios.post('http://localhost:5000/login', formData);
       localStorage.setItem('token', response.data.token)
       setError('');
+      navigate('/');
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message);
@@ -81,12 +84,6 @@ function Login() {
                       </div>
                       {error && <div className="error-message">{error}</div>}
 
-                      <a href='/'>
-                        <div className='text-button-forgot-password'>
-                          Forgot password?
-                        </div>
-                      </a>
-
                       <button type='submit' className='sign-in-button'>
                         Sign in
                       </button>
@@ -108,11 +105,9 @@ function Login() {
                   </button>
                   <div className='new-user-create'>
                     <span className='text-new-user'>New user? </span>
-                    <a href='sign-up'>
-                      <span className='text-create-account'>
-                        Create Account
-                      </span>
-                    </a>
+                    <Link to='/signup' className='text-create-account'>
+                      Create Account
+                    </Link>
                   </div>
                 </div>
               </div>
