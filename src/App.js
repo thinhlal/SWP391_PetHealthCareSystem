@@ -1,6 +1,9 @@
 // import { Routes, Route, Link } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import PublicRoute from './components/HandleRoutes/PublicRoute.js';
+import ProtectedRoute from './components/HandleRoutes/ProtectedRoute.js';
+//Component
 import Booking from './pages/Booking/Booking.js';
 import Home from './pages/Home/Home.js';
 import SignUp from './pages/SignUp/SignUp.js';
@@ -29,7 +32,11 @@ function App() {
         />
         <Route
           path='/login'
-          element={<Login />}
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
         />
         <Route
           path='/signup'
@@ -53,11 +60,19 @@ function App() {
         />
         <Route
           path='/booking'
-          element={<Booking />}
+          element={
+            <ProtectedRoute>
+              <Booking />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/choose'
-          element={<ChoosePet />}
+          element={
+            <ProtectedRoute>
+              <ChoosePet />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/pet-profile'
