@@ -1,5 +1,7 @@
 //css
 import './AdminServices.css';
+//React
+import React, { useState } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
@@ -13,6 +15,60 @@ import icon_search from '../../assets/images/img_AdminServices/icon_search.svg';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { blue } from '@mui/material/colors';
 function AdminServices() {
+  const [search, setSearch] = useState('');
+
+  const servicesData = [
+    {
+      id: 1,
+      services_id: 'S00001',
+      services_name: 'Vaccinations',
+      describe: 'Services Description',
+      price: '$40',
+      status: 'Enable'
+    },
+    {
+      id: 2,
+      services_id: 'S00002',
+      services_name: 'Deworm',
+      describe: 'Services Description',
+      price: '$10',
+      status: 'Enable'
+    },
+    {
+      id: 3,
+      services_id: 'S00003',
+      services_name: 'Surgery',
+      describe: 'Services Description',
+      price: '$70',
+      status: 'Enable'
+    },
+    {
+      id: 4,
+      services_id: 'S00004',
+      services_name: 'Groom',
+      describe: 'Services Description',
+      price: '$20',
+      status: 'Enable'
+    },
+    {
+      id: 5,
+      services_id: 'S00005',
+      services_name: 'Bathe',
+      describe: 'Services Description',
+      price: '$10',
+      status: 'Disable'
+    },
+  ];
+
+
+  const searchServicesData = servicesData.filter(services => {
+    const matchesSearch =
+      search === '' ||
+      services.services_name.toLowerCase().includes(search.toLowerCase());
+    return matchesSearch;
+  });
+
+
   return (
     <div className='Admin-Services container-fluid'>
       <div className='row'>
@@ -265,6 +321,7 @@ function AdminServices() {
                         type='text'
                         placeholder='Search Name'
                         className='Admin-Services-Main-Search-Input '
+                        onChange={e => setSearch(e.target.value)}
                       />
                       <button className='Admin-Services-Main-Search-Button'>
                         {' '}
@@ -399,693 +456,183 @@ function AdminServices() {
                     </div>
                   </div>
 
-                  <div className='Admin-Services-Main-Table-Content-Row-Wrapper'>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      S00001{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Vaccinations{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Services Description{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      $ 60{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Disable{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      <span className='Admin-Services-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-Services-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#exampleModalEdit'
-                        >
-                          <BorderColorOutlinedIcon
-                            sx={{
-                              color: blue[400],
-                            }}
-                          />
-                        </button>
 
-                        <div
-                          className='modal fade'
-                          id='exampleModalEdit'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelEdit'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelEdit'
-                                >
-                                  Update Information
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title-name'>
-                                    {' '}
-                                    Name{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old name:{' '}
-                                    </div>{' '}
-                                    Vaccinations{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New name:{' '}
+                  {searchServicesData.map(item => (
+
+                    <div className='Admin-Services-Main-Table-Content-Row-Wrapper' key={item.id} >
+                      <div className='Admin-Services-Main-Table-Content-Row '>
+                        {' '}
+                        {item.services_id}{' '}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row '>
+                        {' '}
+                        {item.services_name}{' '}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row '>
+                        {' '}
+                        {item.describe}{' '}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row '>
+                        {' '}
+                        {item.price}{' '}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row '>
+                        {' '}
+                        {item.status}{' '}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row '>
+                        <span className='Admin-Services-Main-Table-Content-Btn_Wrapper '>
+                          <button
+                            type='button'
+                            className='Admin-Services-Main-Table-Content-Btn'
+                            data-bs-toggle='modal'
+                            data-bs-target='#exampleModalEdit'
+                          >
+                            <BorderColorOutlinedIcon
+                              sx={{
+                                color: blue[400],
+                              }}
+                            />
+                          </button>
+
+                          <div
+                            className='modal fade'
+                            id='exampleModalEdit'
+                            tabIndex='-1'
+                            aria-labelledby='exampleModalLabelEdit'
+                            aria-hidden='true'
+                          >
+                            <div className='modal-dialog'>
+                              <div className='modal-content'>
+                                <div className='modal-header'>
+                                  <h1
+                                    className='modal-title fs-5'
+                                    id='exampleModalLabelEdit'
+                                  >
+                                    Update Information
+                                  </h1>
+                                  <button
+                                    type='button'
+                                    className='btn-close'
+                                    data-bs-dismiss='modal'
+                                    aria-label='Close'
+                                  ></button>
+                                </div>
+                                <div className='modal-body'>
+                                  <div className='Admin-Services-modal-update-name'>
+                                    <div className='Admin-Services-modal-title-name'>
+                                      {' '}
+                                      Name{' '}
                                     </div>
-                                    <input
-                                      className='Admin-Services-input'
-                                      placeholder='Name'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old Description:{' '}
-                                    </div>{' '}
-                                    Services Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Description:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input'
-                                      type='email'
-                                      placeholder='Description'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Price{' '}
-                                  </div>
-
-                                  <div className='Admin-Services-modal-update'>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
-                                        Old price:{' '}
+                                        Old name:{' '}
                                       </div>{' '}
                                       Vaccinations{' '}
                                     </div>
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    {' '}
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Price:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input-phone'
-                                      placeholder='Price'
-                                    />{' '}
-                                  </div>
-                                  <div>
-                                    <div className='Admin-Services-modal-title'>
-                                      Status
-                                    </div>
-                                    <div className='Admin-Services-modal-radio'>
-                                      <div className='Admin-Services-modal-radio-text'>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Enable </label>
-                                      </div>
-                                      <div>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Disable </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                >
-                                  Save changes
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className='Admin-Services-Main-Table-Content-Row-Wrapper'>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      S00001{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Vaccinations{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Services Description{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      $ 60{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Disable{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      <span className='Admin-Services-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-Services-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#exampleModalEdit'
-                        >
-                          <BorderColorOutlinedIcon
-                            sx={{
-                              color: blue[400],
-                            }}
-                          />
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='exampleModalEdit'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelEdit'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelEdit'
-                                >
-                                  Update Information
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title-name'>
-                                    {' '}
-                                    Name{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old name:{' '}
-                                    </div>{' '}
-                                    Vaccinations{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New name:{' '}
-                                    </div>
-                                    <input
-                                      className='Admin-Services-input'
-                                      placeholder='Name'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old Description:{' '}
-                                    </div>{' '}
-                                    Services Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Description:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input'
-                                      type='email'
-                                      placeholder='Description'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Price{' '}
-                                  </div>
-
-                                  <div className='Admin-Services-modal-update'>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
-                                        Old price:{' '}
-                                      </div>{' '}
-                                      Vaccinations{' '}
+                                        New name:{' '}
+                                      </div>
+                                      <input
+                                        className='Admin-Services-input'
+                                        placeholder='Name'
+                                      />{' '}
                                     </div>
                                   </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    {' '}
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Price:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input-phone'
-                                      placeholder='Price'
-                                    />{' '}
-                                  </div>
-                                  <div>
+                                  <div className='Admin-Services-modal-update-name'>
                                     <div className='Admin-Services-modal-title'>
-                                      Status
+                                      {' '}
+                                      Description{' '}
                                     </div>
-                                    <div className='Admin-Services-modal-radio'>
-                                      <div className='Admin-Services-modal-radio-text'>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Enable </label>
-                                      </div>
-                                      <div>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Disable </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                >
-                                  Save changes
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className='Admin-Services-Main-Table-Content-Row-Wrapper'>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      S00001{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Vaccinations{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Services Description{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      $ 60{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Disable{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      <span className='Admin-Services-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-Services-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#exampleModalEdit'
-                        >
-                          <BorderColorOutlinedIcon
-                            sx={{
-                              color: blue[400],
-                            }}
-                          />
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='exampleModalEdit'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelEdit'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelEdit'
-                                >
-                                  Update Information
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title-name'>
-                                    {' '}
-                                    Name{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old name:{' '}
-                                    </div>{' '}
-                                    Vaccinations{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New name:{' '}
-                                    </div>
-                                    <input
-                                      className='Admin-Services-input'
-                                      placeholder='Name'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old Description:{' '}
-                                    </div>{' '}
-                                    Services Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Description:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input'
-                                      type='email'
-                                      placeholder='Description'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Price{' '}
-                                  </div>
-
-                                  <div className='Admin-Services-modal-update'>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
-                                        Old price:{' '}
+                                        Old Description:{' '}
                                       </div>{' '}
-                                      Vaccinations{' '}
+                                      Services Description{' '}
                                     </div>
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    {' '}
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Price:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input-phone'
-                                      placeholder='Price'
-                                    />{' '}
-                                  </div>
-                                  <div>
-                                    <div className='Admin-Services-modal-title'>
-                                      Status
-                                    </div>
-                                    <div className='Admin-Services-modal-radio'>
-                                      <div className='Admin-Services-modal-radio-text'>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Enable </label>
-                                      </div>
-                                      <div>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Disable </label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                >
-                                  Save changes
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className='Admin-Services-Main-Table-Content-Row-Wrapper'>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      S00001{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Vaccinations{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Services Description{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      $ 60{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      {' '}
-                      Disable{' '}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row '>
-                      <span className='Admin-Services-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-Services-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#exampleModalEdit'
-                        >
-                          <BorderColorOutlinedIcon
-                            sx={{
-                              color: blue[400],
-                            }}
-                          />
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='exampleModalEdit'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelEdit'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelEdit'
-                                >
-                                  Update Information
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title-name'>
-                                    {' '}
-                                    Name{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old name:{' '}
-                                    </div>{' '}
-                                    Vaccinations{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New name:{' '}
-                                    </div>
-                                    <input
-                                      className='Admin-Services-input'
-                                      placeholder='Name'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old Description:{' '}
-                                    </div>{' '}
-                                    Services Description{' '}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Description:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input'
-                                      type='email'
-                                      placeholder='Description'
-                                    />{' '}
-                                  </div>
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    {' '}
-                                    Price{' '}
-                                  </div>
-
-                                  <div className='Admin-Services-modal-update'>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
-                                        Old price:{' '}
+                                        New Description:{' '}
                                       </div>{' '}
-                                      Vaccinations{' '}
+                                      <input
+                                        className='Admin-Services-input'
+                                        type='email'
+                                        placeholder='Description'
+                                      />{' '}
                                     </div>
                                   </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    {' '}
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Price:{' '}
-                                    </div>{' '}
-                                    <input
-                                      className='Admin-Services-input-phone'
-                                      placeholder='Price'
-                                    />{' '}
-                                  </div>
-                                  <div>
+                                  <div className='Admin-Services-modal-update-name'>
                                     <div className='Admin-Services-modal-title'>
-                                      Status
+                                      {' '}
+                                      Price{' '}
                                     </div>
-                                    <div className='Admin-Services-modal-radio'>
-                                      <div className='Admin-Services-modal-radio-text'>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Enable </label>
+
+                                    <div className='Admin-Services-modal-update'>
+                                      <div className='Admin-Services-modal-update'>
+                                        <div className='Admin-Services-modal-update-title'>
+                                          Old price:{' '}
+                                        </div>{' '}
+                                        Vaccinations{' '}
                                       </div>
-                                      <div>
-                                        <input
-                                          type='radio'
-                                          name='status'
-                                        />
-                                        <label> Disable </label>
+                                    </div>
+                                    <div className='Admin-Services-modal-update'>
+                                      {' '}
+                                      <div className='Admin-Services-modal-update-title'>
+                                        New Price:{' '}
+                                      </div>{' '}
+                                      <input
+                                        className='Admin-Services-input-phone'
+                                        placeholder='Price'
+                                      />{' '}
+                                    </div>
+                                    <div>
+                                      <div className='Admin-Services-modal-title'>
+                                        Status
+                                      </div>
+                                      <div className='Admin-Services-modal-radio'>
+                                        <div className='Admin-Services-modal-radio-text'>
+                                          <input
+                                            type='radio'
+                                            name='status'
+                                          />
+                                          <label> Enable </label>
+                                        </div>
+                                        <div>
+                                          <input
+                                            type='radio'
+                                            name='status'
+                                          />
+                                          <label> Disable </label>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                >
-                                  Save changes
-                                </button>
+                                <div className='modal-footer'>
+                                  <button
+                                    type='button'
+                                    className='btn btn-secondary'
+                                    data-bs-dismiss='modal'
+                                  >
+                                    Close
+                                  </button>
+                                  <button
+                                    type='button'
+                                    className='btn btn-success'
+                                  >
+                                    Save changes
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </span>
+                        </span>
+                      </div>
                     </div>
-                  </div>
+
+                  ))}
+
 
                   <div className='Admin-Services-Pagination'>
                     <Stack spacing={2}>
