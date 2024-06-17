@@ -1,9 +1,10 @@
 import './AdminAccount.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min'; // Thêm dòng này
 import logo_pet_health_care from '../../assets/images/img_AdminAccount/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
@@ -72,11 +73,25 @@ function AdminAccount() {
     },
   ]);
 
+  const [newAccount, setNewAccount] = useState({
+    user_name: '',
+    password: '',
+    confirmPassword: '',
+    name: '',
+    email: '',
+    phoneNum: '',
+    role: 'Customer',
+    status: 'Enable', 
+  });
+
+  const [errors, setErrors] = useState({});
+  const modalRef = useRef(null); 
+
   const handleDateChange = event => {
     const randomNum = Math.floor(Math.random() * 100000) + 1;
     setRandomValue(randomNum);
-    const randomPercen = Math.floor(Math.random() * 10) + 1;
-    setRandomPercent(randomPercen);
+    const randomPercent = Math.floor(Math.random() * 10) + 1;
+    setRandomPercent(randomPercent);
     setSelectedDate(event.target.value);
   };
 
@@ -107,6 +122,53 @@ function AdminAccount() {
   const openEditModal = account => {
     setCurrentAccount(account);
     setSelectedStatus(account.status);
+  };
+
+  const handleNewAccountChange = e => {
+    const { name, value } = e.target;
+    setNewAccount(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleAddAccount = () => {
+    const newErrors = {};
+    if (!newAccount.user_name) newErrors.user_name = 'User name is required';
+    if (!newAccount.password) newErrors.password = 'Password is required';
+    if (!newAccount.confirmPassword) newErrors.confirmPassword = 'Confirm password is required';
+    if (newAccount.password !== newAccount.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!newAccount.name) newErrors.name = 'Name is required';
+    if (!newAccount.email) newErrors.email = 'Email is required';
+    if (!newAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    const newId = accountData.length + 1;
+    const newAccountData = {
+      ...newAccount,
+      id: newId,
+      account_id: `A0000${newId}`,
+    };
+    setAccountData([...accountData, newAccountData]);
+    setNewAccount({
+      user_name: '',
+      password: '',
+      confirmPassword: '',
+      name: '',
+      email: '',
+      phoneNum: '',
+      role: 'Customer',
+      status: 'Enable', 
+    });
+    setErrors({});
+    const modal = bootstrap.Modal.getInstance(modalRef.current);
+    if (modal) {
+      modal.hide();
+    }
   };
 
   const filteredAccountData = accountData.filter(account => {
@@ -413,6 +475,7 @@ function AdminAccount() {
                       tabIndex='-1'
                       aria-labelledby='exampleModalLabelEdit'
                       aria-hidden='true'
+                      ref={modalRef}
                     >
                       <div className='modal-dialog'>
                         <div className='modal-content'>
@@ -437,15 +500,18 @@ function AdminAccount() {
                                 {' '}
                                 User name{' '}
                               </div>
-
                               <label className='Admin-Account-modal-add'>
                                 {' '}
                                 User name:{' '}
                               </label>
                               <input
                                 className='Admin-Account-input'
-                                placeholder='Username/Email'
+                                name='user_name'
+                                value={newAccount.user_name}
+                                onChange={handleNewAccountChange}
+                                placeholder='Username'
                               />
+                              {errors.user_name && <div className="Admin-Account-Error">{errors.user_name}</div>}
                             </div>
 
                             <div className='Admin-Account-modal-add-account'>
@@ -460,8 +526,12 @@ function AdminAccount() {
                               <input
                                 className='Admin-Account-input'
                                 type='password'
+                                name='password'
+                                value={newAccount.password}
+                                onChange={handleNewAccountChange}
                                 placeholder='Password'
                               />
+                              {errors.password && <div className="Admin-Account-Error">{errors.password}</div>}
                               <div className='Admin-Account-input-confirm'>
                                 <label className='Admin-Account-modal-add'>
                                   {' '}
@@ -470,8 +540,12 @@ function AdminAccount() {
                                 <input
                                   className='Admin-Account-input'
                                   type='password'
+                                  name='confirmPassword'
+                                  value={newAccount.confirmPassword}
+                                  onChange={handleNewAccountChange}
                                   placeholder='Confirm password'
                                 />
+                                {errors.confirmPassword && <div className="Admin-Account-Error">{errors.confirmPassword}</div>}
                               </div>
                             </div>
 
@@ -486,20 +560,68 @@ function AdminAccount() {
                               </label>
                               <input
                                 className='Admin-Account-input'
+                                name='name'
+                                value={newAccount.name}
+                                onChange={handleNewAccountChange}
                                 placeholder='Name'
                               />
+                              {errors.name && <div className="Admin-Account-Error">{errors.name}</div>}
                             </div>
+
+                            <div className='Admin-Account-modal-add-account'>
+                              <div className='Admin-Account-modal-title-name'>
+                                {' '}
+                                Email{' '}
+                              </div>
+                              <label className='Admin-Account-modal-add'>
+                                {' '}
+                                Email:{' '}
+                              </label>
+                              <input
+                                className='Admin-Account-input'
+                                type='email'
+                                name='email'
+                                value={newAccount.email}
+                                onChange={handleNewAccountChange}
+                                placeholder='Email'
+                              />
+                              {errors.email && <div className="Admin-Account-Error">{errors.email}</div>}
+                            </div>
+
+                            <div className='Admin-Account-modal-add-account'>
+                              <div className='Admin-Account-modal-title-name'>
+                                {' '}
+                                Phone Number{' '}
+                              </div>
+                              <label className='Admin-Account-modal-add'>
+                                {' '}
+                                Phone Number:{' '}
+                              </label>
+                              <input
+                                className='Admin-Account-input'
+                                name='phoneNum'
+                                value={newAccount.phoneNum}
+                                onChange={handleNewAccountChange}
+                                placeholder='Phone Number'
+                              />
+                              {errors.phoneNum && <div className="Admin-Account-Error">{errors.phoneNum}</div>}
+                            </div>
+
                             <div className='Admin-Account-modal-add-account'>
                               <div className='Admin-Account-modal-title-name'>
                                 {' '}
                                 Role{' '}
                               </div>
-
                               <label className='Admin-Account-modal-add'>
                                 {' '}
                                 Role:{' '}
                               </label>
-                              <select className='Admin-Account-input-role'>
+                              <select
+                                className='Admin-Account-input-role'
+                                name='role'
+                                value={newAccount.role}
+                                onChange={handleNewAccountChange}
+                              >
                                 <option>Customer</option>
                                 <option>Veterinarian</option>
                                 <option>Staff</option>
@@ -519,6 +641,7 @@ function AdminAccount() {
                             <button
                               type='button'
                               className='btn btn-success'
+                              onClick={handleAddAccount}
                             >
                               {' '}
                               Add{' '}
@@ -712,6 +835,7 @@ function AdminAccount() {
                                         value='Enable'
                                         onChange={handleStatusChange}
                                         checked={selectedStatus === 'Enable'}
+                                        className='Admin-Account-modal-radio'
                                       />
                                       <label> Enable </label>
                                     </div>
@@ -722,6 +846,7 @@ function AdminAccount() {
                                         value='Disable'
                                         onChange={handleStatusChange}
                                         checked={selectedStatus === 'Disable'}
+                                        className='Admin-Account-modal-radio'
                                       />
                                       <label> Disable </label>
                                     </div>

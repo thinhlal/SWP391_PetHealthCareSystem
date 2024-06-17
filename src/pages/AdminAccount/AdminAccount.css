@@ -400,6 +400,10 @@
   padding-right: 20px;
 }
 
+.Admin-Account-modal-radio {
+  margin-right: 8px;
+}
+
 .Admin-Account-modal-initials {
   color: #000000;
   font-weight: 600;
@@ -479,4 +483,10 @@
   align-items: center;
   justify-content: center;
   padding: 20px 0 10px 0;
+}
+
+.Admin-Account-Error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 0.25em;
 }
