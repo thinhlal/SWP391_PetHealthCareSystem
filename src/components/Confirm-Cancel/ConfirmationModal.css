@@ -67,7 +67,7 @@
 }
 
 .confirm {
-  background-color: #007bff;
+  background-color: #113179;
   color: #fff;
   border: none;
   margin-right: 20px;
@@ -85,7 +85,7 @@
   font-family: Roboto, sans-serif;
   color:#113179;
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom:20px;
   text-align: left;
 }

@@ -10,8 +10,8 @@ function WorkSchedule() {
   const [modalAction, setModalAction] = useState(() => () => {});
 
   const dataSchedules = {
-    //ngày 13-6
-    '2023-06-13': {
+    //ngày 17-6
+    '2023-06-17': {
       '001': {
         vetName: 'Vet. Minh',
         appointments: [
@@ -136,8 +136,8 @@ function WorkSchedule() {
         ],
       },
     },
-    //ngày 14-6
-    '2023-06-14': {
+    //ngày 18-6
+    '2023-06-18': {
       '004': {
         vetName: 'Vet. Thinh',
         appointments: [
@@ -274,7 +274,7 @@ function WorkSchedule() {
   };
 
   const [schedules, setSchedules] = useState(dataSchedules);
-  const [selectedDate, setSelectedDate] = useState('2023-06-12');
+  const [selectedDate, setSelectedDate] = useState('2023-06-17');
   const [selectedVet, setSelectedVet] = useState('001');
 
   const handleDateChange = e => {
