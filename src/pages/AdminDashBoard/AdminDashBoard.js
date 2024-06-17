@@ -1,10 +1,12 @@
 //css
 import './AdminDashBoard.css';
-import React, { useState } from 'react';
+//React
+import React, { useState, useEffect, useRef } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+//MUI
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 //images
@@ -12,8 +14,58 @@ import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg'
 import logo_pet_health_care from '../../assets/images/img_AdminDashBoard/logo_pethealthcare.png';
 function AdminDashBoard() {
   const [activeTab, setActiveTab] = useState('Profile');
-
+  const [search, setSearch] = useState('');
   const openTab = tabName => setActiveTab(tabName);
+
+  const bookingData = [
+    {
+      id: 1,
+      booking_id: 'B00001',
+      customer_id: 'C00001',
+      pet_id: 'P00001',
+      price: '$200',
+      date: '17/6/2024'
+    },
+    {
+      id: 2,
+      booking_id: 'B00002',
+      customer_id: 'C00002',
+      pet_id: 'P00002',
+      price: '$150',
+      date: '17/6/2024'
+    },
+    {
+      id: 3,
+      booking_id: 'B00003',
+      customer_id: 'C00003',
+      pet_id: 'P00003',
+      price: '$240',
+      date: '17/6/2024'
+    },
+    {
+      id: 4,
+      booking_id: 'B00004',
+      customer_id: 'C00004',
+      pet_id: 'P00004',
+      price: '$100',
+      date: '17/6/2024'
+    },
+    {
+      id: 5,
+      booking_id: 'B00005',
+      customer_id: 'C00005',
+      pet_id: 'P00005',
+      price: '$90',
+      date: '17/6/2024'
+    },
+  ];
+
+  const searchBookingData = bookingData.filter(booking => {
+    const matchesSearch =
+      search === '' ||
+      booking.booking_id.toLowerCase().includes(search.toLowerCase());
+    return matchesSearch;
+  });
 
   return (
     <div className='Admin-DashBoard container-fluid'>
@@ -265,6 +317,7 @@ function AdminDashBoard() {
                     type='text'
                     placeholder='Search Name'
                     className='Admin-DashBoard-Main-Search-Input '
+                    onChange={e => setSearch(e.target.value)}
                   />
                   <button className='Admin-DashBoard-Main-Search-Button'>
                     {' '}
@@ -300,195 +353,198 @@ function AdminDashBoard() {
                     Details{' '}
                   </div>
                 </div>
+                {searchBookingData.map(item => (
+                  <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'
+                      key={item.id}
+                  >
+                    <div className='Admin-DashBoard-Main-Table-Content-Row '>
+                      {' '}
+                      {item.booking_id} {' '}
+                    </div>
+                    <div className='Admin-DashBoard-Main-Table-Content-Row '>
+                      {' '}
+                      {item.customer_id} {' '}
+                    </div>
+                    <div className='Admin-DashBoard-Main-Table-Content-Row '>
+                      {' '}
+                      {item.pet_id}{' '}
+                    </div>
+                    <div className='Admin-DashBoard-Main-Table-Content-Row '>
+                      {' '}
+                      {item.price}{' '}
+                    </div>
+                    <div className='Admin-DashBoard-Main-Table-Content-Row '>
+                      {' '}
+                      {item.date}{' '}
+                    </div>
 
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
+                    <div className='Admin-DashBoard-Table-Detail'>
+                      <div className='Admin-DashBoard-Detail-Btn '>
+                        <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
+                          <button
+                            type='button'
+                            className='Admin-DashBoard-Main-Table-Content-Btn'
+                            data-bs-toggle='modal'
+                            data-bs-target='#Admin-DashBoard-exampleModal'
+                          >
+                            Details
+                          </button>
 
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
+                          <div
+                            className='modal fade'
+                            id='Admin-DashBoard-exampleModal'
+                            tabIndex='-1'
+                            aria-labelledby='exampleModalLabel'
+                            aria-hidden='true'
+                          >
+                            <div className='modal-dialog'>
+                              <div className='modal-content'>
+                                <div className='modal-header'>
+                                  <h1
+                                    className='modal-title fs-5'
+                                    id='Admin-DashBoard-exampleModalLabel'
                                   >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
+                                    More Info
+                                  </h1>
+                                  <button
+                                    type='button'
+                                    className='btn-close'
+                                    data-bs-dismiss='modal'
+                                    aria-label='Close'
+                                  ></button>
+                                </div>
+                                <div className='modal-body'>
+                                  <div className='Admin-DashBoard-container-modal-body-more-info'>
+                                    <div className='Admin-DashBoard-tab-modal-body-more-info'>
+                                      <button
+                                        className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                        onClick={() => openTab('Profile')}
+                                      >
+                                        Customer Profile
+                                      </button>
+                                      <button
+                                        className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                        onClick={() => openTab('Pet')}
+                                      >
+                                        Pet
+                                      </button>
+                                      <button
+                                        className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
+                                        onClick={() => openTab('Services')}
+                                      >
+                                        Services
+                                      </button>
                                     </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
+                                    <div
+                                      id='Admin-DashBoard-profile-customer'
+                                      className='Admin-DashBoard-tabcontent-customer'
+                                      style={{
+                                        display:
+                                          activeTab === 'Profile'
+                                            ? 'block'
+                                            : 'none',
+                                      }}
+                                    >
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-customer'>
+                                          Name:
+                                        </div>
+                                        <div>Liza Doe</div>
                                       </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-customer'>
+                                          Email:
+                                        </div>
+                                        <div>support@gmail.com</div>
                                       </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-customer'>
+                                          Phone:
+                                        </div>
+                                        <div>+1234 55 66 777</div>
                                       </div>
                                     </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
+                                    <div
+                                      id='Admin-DashBoard-Vacancies'
+                                      className='Admin-DashBoard-tabcontent-pet'
+                                      style={{
+                                        display:
+                                          activeTab === 'Pet' ? 'block' : 'none',
+                                      }}
+                                    >
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          Name:
+                                        </div>
+                                        <div>Boby</div>
                                       </div>
-                                      <div>13h30</div>
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          Breed:
+                                        </div>
+                                        <div>Golden</div>
+                                      </div>
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          Species:
+                                        </div>
+                                        <div>Dog</div>
+                                      </div>
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          Gender:
+                                        </div>
+                                        <div>Male</div>
+                                      </div>
                                     </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
+                                    <div
+                                      id='Admin-DashBoard-Vacancies'
+                                      className='Admin-DashBoard-tabcontent-services'
+                                      style={{
+                                        display:
+                                          activeTab === 'Services'
+                                            ? 'block'
+                                            : 'none',
+                                      }}
+                                    >
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          Services:
+                                        </div>
+                                        <div>
+                                          Vaccination( $60 ), X Ray( $60 )
+                                        </div>
                                       </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          Start time:
+                                        </div>
+                                        <div>13h30</div>
                                       </div>
-                                      <div>John</div>
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          End time:
+                                        </div>
+                                        <div>15h30</div>
+                                      </div>
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          veterinarian name:
+                                        </div>
+                                        <div>John</div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
+                                <div className='modal-footer'>
+                                  <button
+                                    type='button'
+                                    className='btn btn-secondary'
+                                    data-bs-dismiss='modal'
+                                  >
+                                    Close
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -496,1771 +552,10 @@ function AdminDashBoard() {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
 
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
 
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
+                ))}
 
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
-
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
-
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
-
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
-
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
-
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
-
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    B00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    C00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    P00001{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    $ 120{' '}
-                  </div>
-                  <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                    {' '}
-                    2/6/2024{' '}
-                  </div>
-
-                  <div className='Admin-DashBoard-Table-Detail'>
-                    <div className='Admin-DashBoard-Detail-Btn '>
-                      <div className='Admin-DashBoard-Main-Table-Content-Btn_Wrapper '>
-                        <button
-                          type='button'
-                          className='Admin-DashBoard-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target='#Admin-DashBoard-exampleModal'
-                        >
-                          Details
-                        </button>
-
-                        <div
-                          className='modal fade'
-                          id='Admin-DashBoard-exampleModal'
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabel'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='Admin-DashBoard-exampleModalLabel'
-                                >
-                                  More Info
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-DashBoard-container-modal-body-more-info'>
-                                  <div className='Admin-DashBoard-tab-modal-body-more-info'>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                      onClick={() => openTab('Profile')}
-                                    >
-                                      Customer Profile
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
-                                      onClick={() => openTab('Pet')}
-                                    >
-                                      Pet
-                                    </button>
-                                    <button
-                                      className={`tablinks ${activeTab === 'Services' ? 'active' : ''}`}
-                                      onClick={() => openTab('Services')}
-                                    >
-                                      Services
-                                    </button>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-profile-customer'
-                                    className='Admin-DashBoard-tabcontent-customer'
-                                    style={{
-                                      display:
-                                        activeTab === 'Profile'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Name:
-                                      </div>
-                                      <div>Liza Doe</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Email:
-                                      </div>
-                                      <div>support@gmail.com</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-customer'>
-                                        Phone:
-                                      </div>
-                                      <div>+1234 55 66 777</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-pet'
-                                    style={{
-                                      display:
-                                        activeTab === 'Pet' ? 'block' : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Name:
-                                      </div>
-                                      <div>Boby</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Breed:
-                                      </div>
-                                      <div>Golden</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Species:
-                                      </div>
-                                      <div>Dog</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Gender:
-                                      </div>
-                                      <div>Male</div>
-                                    </div>
-                                  </div>
-                                  <div
-                                    id='Admin-DashBoard-Vacancies'
-                                    className='Admin-DashBoard-tabcontent-services'
-                                    style={{
-                                      display:
-                                        activeTab === 'Services'
-                                          ? 'block'
-                                          : 'none',
-                                    }}
-                                  >
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Services:
-                                      </div>
-                                      <div>
-                                        Vaccination( $60 ), X Ray( $60 )
-                                      </div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        Start time:
-                                      </div>
-                                      <div>13h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        End time:
-                                      </div>
-                                      <div>15h30</div>
-                                    </div>
-                                    <div className='Admin-DashBoard-form-group'>
-                                      <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                        veterinarian name:
-                                      </div>
-                                      <div>John</div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
                 <div className='Admin-DashBoard-Pagination'>
                   <Stack spacing={2}>
