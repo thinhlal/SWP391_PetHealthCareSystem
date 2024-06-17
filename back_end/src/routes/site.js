@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const siteController = require('../app/controllers/SiteController');
-const MiddlewareController = require('../app/controllers/MiddlewareController')
+const MiddlewareController = require('../app/controllers/MiddlewareController');
 
 //Sign Up
 router.post('/signup', siteController.signUp);

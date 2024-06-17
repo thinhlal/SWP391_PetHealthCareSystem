@@ -5,10 +5,10 @@
 // const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'your_jwt_refresh_secret_key';
 
 class BookingController {
-    // [GET] /
-    index(req, res, next) {
-        res.send('Welcome to the BookingPage!');
-    }
+  // [GET] /
+  index(req, res, next) {
+    res.send('Welcome to the BookingPage!');
+  }
 }
 
 module.exports = new BookingController();

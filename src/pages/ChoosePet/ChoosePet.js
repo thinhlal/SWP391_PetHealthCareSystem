@@ -30,7 +30,7 @@ function ChoosePet() {
     setPets([...pets, pet]);
   };
 
-  const handleSelectPet = (id) => {
+  const handleSelectPet = id => {
     setSelectedPetId(id);
   };
 
@@ -113,7 +113,12 @@ function ChoosePet() {
             </div>
           ))}
         </div>
-        <button className='select-service-pet' onClick={handleBooking}>Booking</button>
+        <button
+          className='select-service-pet'
+          onClick={handleBooking}
+        >
+          Booking
+        </button>
         <AddPetModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}

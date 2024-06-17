@@ -25,19 +25,18 @@ function Sidebar() {
           <div className='sidebar-list-tittle-text'>Categories</div>
         </div>
         <a href='manage-booking'>
-        <div className='sidebar-list-item'>
-          <div className='sidebar-list-item-text'>Booking List</div>
-        </div>
+          <div className='sidebar-list-item'>
+            <div className='sidebar-list-item-text'>Booking List</div>
+          </div>
         </a>
         <a href='manage-cages'>
-        <div className='sidebar-list-item'>
-          <div className='sidebar-list-item-text'>Cages</div>
-        </div>
+          <div className='sidebar-list-item'>
+            <div className='sidebar-list-item-text'>Cages</div>
+          </div>
         </a>
       </div>
     </div>
   );
 }
-
 
 export default Sidebar;

@@ -15,9 +15,9 @@ app.use(cors());
 db.connect();
 
 app.use(
-    express.urlencoded({
-        extended: true,
-    }),
+  express.urlencoded({
+    extended: true,
+  }),
 );
 
 app.use(express.json());
@@ -27,5 +27,5 @@ app.use(cookieParser());
 route(app);
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

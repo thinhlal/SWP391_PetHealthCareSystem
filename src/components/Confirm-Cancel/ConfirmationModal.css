@@ -81,26 +81,25 @@
   margin-right: 20px;
 }
 
-.confirm-header{
+.confirm-header {
   font-family: Roboto, sans-serif;
-  color:#113179;
+  color: #113179;
   font-size: 30px;
-  font-weight: 600;
-  margin-bottom:20px;
+  font-weight: 500;
+  margin-bottom: 20px;
   text-align: left;
 }
 
-.message-confirm_cancel{
+.message-confirm_cancel {
   font-family: Roboto, sans-serif;
-  color:black;;
+  color: black;
   font-size: 18px;
   font-weight: 500;
   text-align: left;
   margin-bottom: 60px;
-
 }
 
-.button-confirm_cancel{
+.button-confirm_cancel {
   text-align: right;
-  margin-top:20px;
+  margin-top: 20px;
 }

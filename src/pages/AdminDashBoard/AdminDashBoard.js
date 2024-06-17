@@ -67,13 +67,22 @@ function AdminDashBoard() {
               </div>
               <div className='Admin-DashBoard-Navigate-Text-Rest'>
                 <a href='/admin-account'>
-                  <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'> Account </div>
+                  <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
+                    {' '}
+                    Account{' '}
+                  </div>
                 </a>
                 <a href='/admin-dashboard'>
-                  <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'> Booking </div>
+                  <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
+                    {' '}
+                    Booking{' '}
+                  </div>
                 </a>
                 <a href='/admin-services'>
-                  <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'> Services </div>
+                  <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
+                    {' '}
+                    Services{' '}
+                  </div>
                 </a>
               </div>
             </div>
