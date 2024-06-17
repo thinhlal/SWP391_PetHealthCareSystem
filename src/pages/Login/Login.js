@@ -1,27 +1,33 @@
 import './Login.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 // image
 import catImage from '../../assets/images/img_Login/left_picture_cat.png';
 import logo from '../../assets/images/img_Login/logo.png';
 import googleLogo from '../../assets/images/img_Login/google.svg';
-import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
+  const { logIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/login', formData);
-      localStorage.setItem('token', response.data.token)
+      const response = await axios.post(
+        'http://localhost:5000/login',
+        formData,
+      );
+      logIn(response.data.user);
+      localStorage.setItem('token', response.data.token);
       setError('');
       navigate('/');
     } catch (error) {
@@ -57,7 +63,7 @@ function Login() {
                       Welcome to Pet Health Care
                     </p>
                   </div>
-                  <form onSubmit={handleSubmit} >
+                  <form onSubmit={handleSubmit}>
                     <div className='form-send-login'>
                       <div className='input-user'>
                         <input
@@ -82,9 +88,12 @@ function Login() {
                           required
                         />
                       </div>
-                      {error && <div className="error-message">{error}</div>}
+                      {error && <div className='error-message'>{error}</div>}
 
-                      <button type='submit' className='sign-in-button'>
+                      <button
+                        type='submit'
+                        className='sign-in-button'
+                      >
                         Sign in
                       </button>
                     </div>
@@ -105,7 +114,10 @@ function Login() {
                   </button>
                   <div className='new-user-create'>
                     <span className='text-new-user'>New user? </span>
-                    <Link to='/signup' className='text-create-account'>
+                    <Link
+                      to='/signup'
+                      className='text-create-account'
+                    >
                       Create Account
                     </Link>
                   </div>

@@ -207,7 +207,7 @@ body {
   opacity: 0.6;
 }
 
-.create-account-page .error-message{
+.create-account-page .error-message {
   color: red;
   text-wrap: wrap;
   font-size: 14px;
@@ -215,7 +215,7 @@ body {
   display: inline-block;
 }
 
-.create-account-page .success-message{
+.create-account-page .success-message {
   color: green;
   text-wrap: wrap;
   font-size: 16px;

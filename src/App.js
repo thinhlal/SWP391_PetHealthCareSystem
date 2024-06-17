@@ -1,5 +1,6 @@
 // import { Routes, Route, Link } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import Booking from './pages/Booking/Booking.js';
 import Home from './pages/Home/Home.js';
 import SignUp from './pages/SignUp/SignUp.js';
@@ -20,82 +21,84 @@ import ProfilePet from './pages/ProfilePet/ProfilePet.js';
 import ChoosePet from './pages/ChoosePet/ChoosePet.js';
 function App() {
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={<Home />}
-      />
-      <Route
-        path='/login'
-        element={<Login />}
-      />
-      <Route
-        path='/signup'
-        element={<SignUp />}
-      />
-      <Route
-        path='/services'
-        element={<Services />}
-      />
-      <Route
-        path='/veterinarian-info'
-        element={<VeterinarianInfo />}
-      />
-      <Route
-        path='/your-pet'
-        element={<YourPet />}
-      />
-      <Route
-        path='/your-booking'
-        element={<YourBooking />}
-      />
-      <Route
-        path='/booking'
-        element={<Booking />}
-      />
-      <Route
-        path='/choose'
-        element={<ChoosePet />}
-      />
-      <Route
-        path='/pet-profile'
-        element={<ProfilePet />}
-      />
+    <AuthProvider>
+      <Routes>
+        <Route
+          path='/'
+          element={<Home />}
+        />
+        <Route
+          path='/login'
+          element={<Login />}
+        />
+        <Route
+          path='/signup'
+          element={<SignUp />}
+        />
+        <Route
+          path='/services'
+          element={<Services />}
+        />
+        <Route
+          path='/veterinarian-info'
+          element={<VeterinarianInfo />}
+        />
+        <Route
+          path='/your-pet'
+          element={<YourPet />}
+        />
+        <Route
+          path='/your-booking'
+          element={<YourBooking />}
+        />
+        <Route
+          path='/booking'
+          element={<Booking />}
+        />
+        <Route
+          path='/choose'
+          element={<ChoosePet />}
+        />
+        <Route
+          path='/pet-profile'
+          element={<ProfilePet />}
+        />
 
-      <Route
-        path='/manage-booking'
-        element={<ManageListBooking />}
-      />
-      <Route
-        path='/manage-cages'
-        element={<ManageCages />}
-      />
-      <Route
-        path='/work-schedule'
-        element={<WorkSchedule />}
-      />
-      <Route
-        path='/sick-pet'
-        element={<ManageSickPet />}
-      />
-      <Route
-        path='/pet-exam-record'
-        element={<PetExamRecord />}
-      />
+        <Route
+          path='/manage-booking'
+          element={<ManageListBooking />}
+        />
+        <Route
+          path='/manage-cages'
+          element={<ManageCages />}
+        />
+        <Route
+          path='/work-schedule'
+          element={<WorkSchedule />}
+        />
+        <Route
+          path='/sick-pet'
+          element={<ManageSickPet />}
+        />
+        <Route
+          path='/pet-exam-record'
+          element={<PetExamRecord />}
+        />
 
-      <Route
-        path='/admin-account'
-        element={<AdminAccount />}
-      />
-      <Route
-        path='/admin-dashboard'
-        element={<AdminDashBoard />}
-      />
-      <Route
-        path='/admin-services'
-        element={<AdminServices />}
-      />
-    </Routes>
+        <Route
+          path='/admin-account'
+          element={<AdminAccount />}
+        />
+        <Route
+          path='/admin-dashboard'
+          element={<AdminDashBoard />}
+        />
+        <Route
+          path='/admin-services'
+          element={<AdminServices />}
+        />
+      </Routes>
+    </AuthProvider>
   );
 }
 

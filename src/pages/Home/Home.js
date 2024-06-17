@@ -1,6 +1,8 @@
 import './Home.css';
-import Slider from '../../components/Slider/Slider.js';
+import { useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 // Components
+import Slider from '../../components/Slider/Slider.js';
 import Footer from '../../components/User/Footer/Footer.js';
 // Images
 import logo_navigate from '../../assets/images/img_Home/logo.png';
@@ -14,11 +16,11 @@ import dogBackground from '../../assets/images/img_Home/dogBackground.png';
 import why_we_are from '../../assets/images/img_Home/dog_About.png';
 import checked_Icon from '../../assets/images/img_Home/checked.png';
 import vote_star from '../../assets/images/img_Home/star.png';
-import { useEffect } from 'react';
 
 const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
 
 function Home() {
+  const { user, logOut } = useContext(AuthContext);
   useEffect(() => {
     const elements = document.querySelectorAll('.lazy-load');
 
@@ -50,25 +52,38 @@ function Home() {
               <div className='pethealthcare-gmail'>
                 pethealthcare@gmail.com | +91 012345678
               </div>
-              <div className='header_form'>
-                <div className='sign-in'>
-                <a
+              {user ? (
+                <div className='header_form'>
+                  <div className='sign-in'>
+                    <div className='text-wrapper-3'>Hello</div>
+                  </div>
+                  <div
+                    className='sign-in'
+                    onClick={logOut}
+                  >
+                    <div className='text-wrapper-3'>Log Out</div>
+                  </div>
+                </div>
+              ) : (
+                <div className='header_form'>
+                  <div className='sign-in'>
+                    <a
                       href='login'
                       className='text-wrapper-3'
                     >
                       Log in
                     </a>
-                  
+                  </div>
+                  <div className='sign-up'>
+                    <a
+                      href='sign-up'
+                      className='text-wrapper-4'
+                    >
+                      Sign up
+                    </a>
+                  </div>
                 </div>
-                <div className='sign-up'>
-                  <a
-                    href='sign-up'
-                    className='text-wrapper-4'
-                  >
-                    Sign up
-                  </a>
-                </div>
-              </div>
+              )}
             </div>
           </div>
           <Slider images={images}></Slider>

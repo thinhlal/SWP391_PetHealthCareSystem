@@ -15,12 +15,12 @@ function SignUp() {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const newErrors = {};
 
@@ -42,10 +42,11 @@ function SignUp() {
     }
 
     try {
-      await axios.post('http://localhost:5000/signup', {
-        username: formData.username,
-        password: formData.password,
-      })
+      await axios
+        .post('http://localhost:5000/signup', {
+          username: formData.username,
+          password: formData.password,
+        })
         .then(response => {
           setErrors({});
           setSuccessMessage('Registration successful!');
@@ -53,12 +54,11 @@ function SignUp() {
             username: '',
             password: '',
             confirmPassword: '',
-          })
+          });
         })
         .catch(error => {
           setErrors({ server: error.response.data.message });
-        })
-
+        });
     } catch (error) {
       if (error.response) {
         setErrors({ server: error.response.data.message });
@@ -98,7 +98,7 @@ function SignUp() {
                   />
                 </div>
                 {errors.username && (
-                  <div className="error-message">{errors.username}</div>
+                  <div className='error-message'>{errors.username}</div>
                 )}
                 <div className='form_SignUp_Input'>
                   <input
@@ -112,7 +112,7 @@ function SignUp() {
                   />
                 </div>
                 {errors.password && (
-                  <div className="error-message">{errors.password}</div>
+                  <div className='error-message'>{errors.password}</div>
                 )}
                 <div className='form_SignUp_Input'>
                   <input
@@ -127,36 +127,39 @@ function SignUp() {
                 </div>
               </div>
               {errors.confirmPassword && (
-                <div className="error-message">{errors.confirmPassword}</div>
+                <div className='error-message'>{errors.confirmPassword}</div>
               )}
               {errors.server && (
-                <div className="error-message">{errors.server}</div>
+                <div className='error-message'>{errors.server}</div>
               )}
               <div className='form_SignUp_Btn_Wrapper'>
-                <button type='submit' className='form_SignUp_Btn'>
+                <button
+                  type='submit'
+                  className='form_SignUp_Btn'
+                >
                   <div className='form_SignUp_Btn-Text'>Sign up</div>
                 </button>
               </div>
             </form>
-            {successMessage && <div className="success-message">{successMessage}</div>}
+            {successMessage && (
+              <div className='success-message'>{successMessage}</div>
+            )}
             <div className='form_SignUp_Regulation'>
               <span className='form_SignUp_Regulation_Span'>
                 By clicking sign up, you agree to our
               </span>
-              <span
-                className='form_SignUp_Regulation_Link'
-              >
+              <span className='form_SignUp_Regulation_Link'>
                 &nbsp;Terms of Service
               </span>
               <span className='form_SignUp_Regulation_Span'> and </span>
-              <span
-                className='form_SignUp_Regulation_Link'
-              >
+              <span className='form_SignUp_Regulation_Link'>
                 Privacy Policy
               </span>
             </div>
             <div className='form_SignUp_HadAcc'>
-              <div className='text-wrapper-4'>Already have a account?&nbsp;</div>
+              <div className='text-wrapper-4'>
+                Already have a account?&nbsp;
+              </div>
               <Link
                 to='/login'
                 className='form_SignUp_HadAcc_SignIn'

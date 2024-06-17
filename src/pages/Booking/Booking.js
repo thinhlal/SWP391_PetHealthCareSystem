@@ -173,7 +173,7 @@ const Booking = () => {
           minute: '2-digit',
           hour12: false,
         }),
-        petID: selectedPet?.petID // Include the PetID in booking data
+        petID: selectedPet?.petID, // Include the PetID in booking data
       };
       console.log('Booking Data:', bookingData);
       // Xử lý gửi dữ liệu booking lên server tại đây

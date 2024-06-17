@@ -64,13 +64,22 @@ function AdminServices() {
                 </div>
                 <div className='Admin-Services-Navigate-Text-Rest'>
                   <a href='/admin-account'>
-                    <div className='Admin-Services-Navigate-Text-Rest-Menu'> Account </div>
+                    <div className='Admin-Services-Navigate-Text-Rest-Menu'>
+                      {' '}
+                      Account{' '}
+                    </div>
                   </a>
                   <a href='/admin-dashboard'>
-                    <div className='Admin-Services-Navigate-Text-Rest-Menu'> Booking </div>
+                    <div className='Admin-Services-Navigate-Text-Rest-Menu'>
+                      {' '}
+                      Booking{' '}
+                    </div>
                   </a>
                   <a href='/admin-services'>
-                    <div className='Admin-Services-Navigate-Text-Rest-Menu'> Services </div>
+                    <div className='Admin-Services-Navigate-Text-Rest-Menu'>
+                      {' '}
+                      Services{' '}
+                    </div>
                   </a>
                 </div>
               </div>
@@ -93,11 +102,11 @@ function AdminServices() {
                       d='M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z'
                     />
                   </svg>
-                  <span className='Admin-Services-Navigate-Logout-Text' >Logout</span>
+                  <span className='Admin-Services-Navigate-Logout-Text'>
+                    Logout
+                  </span>
                 </div>
               </a>
-
-
             </div>
 
             <div className='Admin-Services-Main col-md-10'>
@@ -390,7 +399,6 @@ function AdminServices() {
                     </div>
                   </div>
 
-
                   <div className='Admin-Services-Main-Table-Content-Row-Wrapper'>
                     <div className='Admin-Services-Main-Table-Content-Row '>
                       {' '}
@@ -522,19 +530,23 @@ function AdminServices() {
                                     <div className='Admin-Services-modal-title'>
                                       Status
                                     </div>
-                                    <div className='Admin-Services-modal-radio' >
-                                      <div className='Admin-Services-modal-radio-text' >
-                                        <input type='radio' name='status' />
+                                    <div className='Admin-Services-modal-radio'>
+                                      <div className='Admin-Services-modal-radio-text'>
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Enable </label>
                                       </div>
                                       <div>
-                                        <input type='radio' name='status' />
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Disable </label>
                                       </div>
                                     </div>
                                   </div>
-
-
                                 </div>
                               </div>
                               <div className='modal-footer'>
@@ -556,7 +568,6 @@ function AdminServices() {
                           </div>
                         </div>
                       </span>
-
                     </div>
                   </div>
 
@@ -691,19 +702,23 @@ function AdminServices() {
                                     <div className='Admin-Services-modal-title'>
                                       Status
                                     </div>
-                                    <div className='Admin-Services-modal-radio' >
-                                      <div className='Admin-Services-modal-radio-text' >
-                                        <input type='radio' name='status' />
+                                    <div className='Admin-Services-modal-radio'>
+                                      <div className='Admin-Services-modal-radio-text'>
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Enable </label>
                                       </div>
                                       <div>
-                                        <input type='radio' name='status' />
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Disable </label>
                                       </div>
                                     </div>
                                   </div>
-
-
                                 </div>
                               </div>
                               <div className='modal-footer'>
@@ -725,7 +740,6 @@ function AdminServices() {
                           </div>
                         </div>
                       </span>
-
                     </div>
                   </div>
 
@@ -860,19 +874,23 @@ function AdminServices() {
                                     <div className='Admin-Services-modal-title'>
                                       Status
                                     </div>
-                                    <div className='Admin-Services-modal-radio' >
-                                      <div className='Admin-Services-modal-radio-text' >
-                                        <input type='radio' name='status' />
+                                    <div className='Admin-Services-modal-radio'>
+                                      <div className='Admin-Services-modal-radio-text'>
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Enable </label>
                                       </div>
                                       <div>
-                                        <input type='radio' name='status' />
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Disable </label>
                                       </div>
                                     </div>
                                   </div>
-
-
                                 </div>
                               </div>
                               <div className='modal-footer'>
@@ -894,7 +912,6 @@ function AdminServices() {
                           </div>
                         </div>
                       </span>
-
                     </div>
                   </div>
 
@@ -1029,19 +1046,23 @@ function AdminServices() {
                                     <div className='Admin-Services-modal-title'>
                                       Status
                                     </div>
-                                    <div className='Admin-Services-modal-radio' >
-                                      <div className='Admin-Services-modal-radio-text' >
-                                        <input type='radio' name='status' />
+                                    <div className='Admin-Services-modal-radio'>
+                                      <div className='Admin-Services-modal-radio-text'>
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Enable </label>
                                       </div>
                                       <div>
-                                        <input type='radio' name='status' />
+                                        <input
+                                          type='radio'
+                                          name='status'
+                                        />
                                         <label> Disable </label>
                                       </div>
                                     </div>
                                   </div>
-
-
                                 </div>
                               </div>
                               <div className='modal-footer'>
@@ -1063,10 +1084,8 @@ function AdminServices() {
                           </div>
                         </div>
                       </span>
-
                     </div>
                   </div>
-
 
                   <div className='Admin-Services-Pagination'>
                     <Stack spacing={2}>

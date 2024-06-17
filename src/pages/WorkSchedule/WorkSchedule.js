@@ -3,7 +3,6 @@ import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
 import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
 
-
 function WorkSchedule() {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -301,7 +300,7 @@ function WorkSchedule() {
     setShowModal(true);
   };
 
-  const cancelBooking = (id) => {
+  const cancelBooking = id => {
     setSchedules({
       ...schedules,
       [selectedDate]: {
@@ -322,7 +321,7 @@ function WorkSchedule() {
     e.preventDefault();
     if (status !== 'Canceled') {
       setModalMessage('Are you sure you want to receive this pet?');
-      setModalAction(() => () => window.location.href = 'pet-exam-record');
+      setModalAction(() => () => (window.location.href = 'pet-exam-record'));
       setShowModal(true);
     }
   };
