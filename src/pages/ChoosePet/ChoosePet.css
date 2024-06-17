@@ -89,6 +89,13 @@
 .main-choose-pet .name-pet-card {
   font-size: 18px;
   color: #706969;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.pet-id-card {
+  color: #268e2b;
+  font-weight: 600;
 }
 
 .main-choose-pet .add-more-pet {
