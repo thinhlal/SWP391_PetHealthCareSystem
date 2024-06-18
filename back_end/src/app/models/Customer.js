@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
-const slugify = require('slug');
 const Schema = mongoose.Schema;
 
-const Account = new Schema(
+const CustomerSchema = new Schema(
   {
+    id: {
+      type: String,
+      required: true,
+      maxlength: 8,
+      unique: true,
+    },
     username: {
       type: String,
       required: true,
@@ -19,14 +24,12 @@ const Account = new Schema(
       type: String,
       required: true,
       maxlength: 25,
+      default: 'Customer',
     },
     isAdmin: {
       type: Boolean,
       required: true,
-    },
-    slug: {
-      type: String,
-      unique: true,
+      default: false,
     },
   },
   {
@@ -34,11 +37,4 @@ const Account = new Schema(
   },
 );
 
-Account.pre('save', function (next) {
-  if (this.isModified('username') || this.isNew) {
-    this.slug = slugify(this.username, { lower: true, strict: true });
-  }
-  next();
-});
-
-module.exports = mongoose.model('Account', Account);
+module.exports = mongoose.model('Customer', CustomerSchema);

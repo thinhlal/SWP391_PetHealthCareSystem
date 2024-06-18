@@ -1,4 +1,4 @@
-const Account = require('../models/Account.js');
+const Customer = require('../models/Customer.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const redisClient = require('../../config/redis/redisClient.js');
@@ -15,7 +15,7 @@ class SiteController {
   async signUp(req, res, next) {
     try {
       let { username, password } = req.body;
-      const existAccount = await Account.findOne({ username });
+      const existAccount = await Customer.findOne({ username });
       if (existAccount) {
         return res
           .status(409)
@@ -27,16 +27,31 @@ class SiteController {
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-      const newAccount = new Account({
+      let id;
+      while (true) {
+        try {
+          const lastCustomer = await Customer.findOne().sort({ id: -1 });
+          if (lastCustomer) {
+            const lastID = parseInt(lastCustomer.id.substring(2));
+            id = 'CS' + (lastID + 1).toString().padStart(6, '0');;
+          } else {
+            id = 'CS000000';
+          }
+          break;
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
+      const newAccount = new Customer({
+        id: id,
         username,
         password: hashedPassword,
-        role: 'User',
-        isAdmin: false,
       });
 
       const savedAccount = await newAccount.save();
 
-      res.status(201).json({ message: 'User registered successfully' });
+      res.status(201).json({ message: 'Customer registered successfully' });
     } catch (error) {
       console.error('Signup Error:', error);
       res.status(500).json({ message: 'Internal Server Error' });
@@ -48,8 +63,7 @@ class SiteController {
     const { username, password } = req.body;
 
     try {
-      const account = await Account.findOne({ username });
-
+      const account = await Customer.findOne({ username });
       if (!account) {
         return res.status(401).json({ message: 'Wrong username or password' });
       }

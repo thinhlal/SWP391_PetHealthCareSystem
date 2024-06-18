@@ -76,7 +76,7 @@ function Home() {
                   </div>
                   <div className='sign-up'>
                     <a
-                      href='sign-up'
+                      href='signup'
                       className='text-wrapper-4'
                     >
                       Sign up
