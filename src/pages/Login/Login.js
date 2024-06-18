@@ -23,7 +23,7 @@ function Login() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:5000/login',
+        `${process.env.REACT_APP_API_URL}/login`,
         formData,
       );
       logIn(response.data.user);
