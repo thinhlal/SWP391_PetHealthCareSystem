@@ -1,16 +1,22 @@
+//Css
 import './AdminAccount.css';
+//React
 import React, { useState, useEffect, useRef } from 'react';
+//Boostrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min'; // Thêm dòng này
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
+//Img
 import logo_pet_health_care from '../../assets/images/img_AdminAccount/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
+//Mui
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import Switch from '@mui/joy/Switch';
 import { blue, green } from '@mui/material/colors';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 function AdminAccount() {
   const [randomValue, setRandomValue] = useState();
@@ -18,7 +24,6 @@ function AdminAccount() {
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
-  const [selectedStatus, setSelectedStatus] = useState('');
   const [currentAccount, setCurrentAccount] = useState(null);
   const [accountData, setAccountData] = useState([
     {
@@ -34,7 +39,7 @@ function AdminAccount() {
     {
       id: 2,
       account_id: 'A00002',
-      status: 'Disable',
+      status: 'Enable',
       user_name: 'ronaldo123',
       name: 'Ronal Đỗ',
       email: 'thichpen12@gmail.com',
@@ -44,7 +49,7 @@ function AdminAccount() {
     {
       id: 3,
       account_id: 'A00003',
-      status: 'Disable',
+      status: 'Enable',
       user_name: 'messi123',
       name: 'Pessi',
       email: 'thichvuotrau2@gmail.com',
@@ -64,7 +69,7 @@ function AdminAccount() {
     {
       id: 5,
       account_id: 'A00005',
-      status: 'Disable',
+      status: 'Enable',
       user_name: 'john123',
       name: 'John',
       email: 'johnydog143@gmail.com',
@@ -81,13 +86,12 @@ function AdminAccount() {
     email: '',
     phoneNum: '',
     role: 'Customer',
-    status: 'Enable', 
   });
 
   const [errors, setErrors] = useState({});
-  const modalRef = useRef(null); 
+  const modalRef = useRef(null);
 
-  const handleDateChange = event => {
+  const handleDateChange = (event) => {
     const randomNum = Math.floor(Math.random() * 100000) + 1;
     setRandomValue(randomNum);
     const randomPercent = Math.floor(Math.random() * 10) + 1;
@@ -101,32 +105,27 @@ function AdminAccount() {
     setSelectedDate(formattedDate);
   }, []);
 
-  const handleRoleFilterChange = event => {
+  const handleRoleFilterChange = (event) => {
     setRoleFilter(event.target.value);
   };
 
-  const handleStatusChange = e => {
-    setSelectedStatus(e.target.value);
-  };
-
   const handleSaveChanges = () => {
-    const updatedAccountData = accountData.map(account => {
+    const updatedAccountData = accountData.map((account) => {
       if (account.id === currentAccount.id) {
-        return { ...account, status: selectedStatus };
+        return { ...account };
       }
       return account;
     });
     setAccountData(updatedAccountData);
   };
 
-  const openEditModal = account => {
+  const openEditModal = (account) => {
     setCurrentAccount(account);
-    setSelectedStatus(account.status);
   };
 
-  const handleNewAccountChange = e => {
+  const handleNewAccountChange = (e) => {
     const { name, value } = e.target;
-    setNewAccount(prevState => ({
+    setNewAccount((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -152,6 +151,7 @@ function AdminAccount() {
       ...newAccount,
       id: newId,
       account_id: `A0000${newId}`,
+      status: 'Enable',
     };
     setAccountData([...accountData, newAccountData]);
     setNewAccount({
@@ -162,7 +162,6 @@ function AdminAccount() {
       email: '',
       phoneNum: '',
       role: 'Customer',
-      status: 'Enable', 
     });
     setErrors({});
     const modal = bootstrap.Modal.getInstance(modalRef.current);
@@ -171,7 +170,20 @@ function AdminAccount() {
     }
   };
 
-  const filteredAccountData = accountData.filter(account => {
+  const handleStatusChange = (id) => {
+    const updatedAccountData = accountData.map((account) => {
+      if (account.id === id) {
+        return {
+          ...account,
+          status: account.status === 'Enable' ? 'Disable' : 'Enable',
+        };
+      }
+      return account;
+    });
+    setAccountData(updatedAccountData);
+  };
+
+  const filteredAccountData = accountData.filter((account) => {
     const matchesRole = roleFilter === 'All' || account.role === roleFilter;
     const matchesSearch =
       search === '' ||
@@ -432,14 +444,11 @@ function AdminAccount() {
                       type='text'
                       placeholder='Search Name'
                       className='Admin-Account-Main-Search-Input'
-                      onChange={e => setSearch(e.target.value)}
+                      onChange={(e) => setSearch(e.target.value)}
                     />
                     <button className='Admin-Account-Main-Search-Button'>
                       {' '}
-                      <img
-                        src={icon_search}
-                        alt=''
-                      />{' '}
+                      <img src={icon_search} alt='' />{' '}
                     </button>
                   </div>
                   <div className='Admin-Account-Select-Role'>
@@ -511,7 +520,11 @@ function AdminAccount() {
                                 onChange={handleNewAccountChange}
                                 placeholder='Username'
                               />
-                              {errors.user_name && <div className="Admin-Account-Error">{errors.user_name}</div>}
+                              {errors.user_name && (
+                                <div className='Admin-Account-Error'>
+                                  {errors.user_name}
+                                </div>
+                              )}
                             </div>
 
                             <div className='Admin-Account-modal-add-account'>
@@ -531,7 +544,11 @@ function AdminAccount() {
                                 onChange={handleNewAccountChange}
                                 placeholder='Password'
                               />
-                              {errors.password && <div className="Admin-Account-Error">{errors.password}</div>}
+                              {errors.password && (
+                                <div className='Admin-Account-Error'>
+                                  {errors.password}
+                                </div>
+                              )}
                               <div className='Admin-Account-input-confirm'>
                                 <label className='Admin-Account-modal-add'>
                                   {' '}
@@ -545,7 +562,11 @@ function AdminAccount() {
                                   onChange={handleNewAccountChange}
                                   placeholder='Confirm password'
                                 />
-                                {errors.confirmPassword && <div className="Admin-Account-Error">{errors.confirmPassword}</div>}
+                                {errors.confirmPassword && (
+                                  <div className='Admin-Account-Error'>
+                                    {errors.confirmPassword}
+                                  </div>
+                                )}
                               </div>
                             </div>
 
@@ -565,7 +586,11 @@ function AdminAccount() {
                                 onChange={handleNewAccountChange}
                                 placeholder='Name'
                               />
-                              {errors.name && <div className="Admin-Account-Error">{errors.name}</div>}
+                              {errors.name && (
+                                <div className='Admin-Account-Error'>
+                                  {errors.name}
+                                </div>
+                              )}
                             </div>
 
                             <div className='Admin-Account-modal-add-account'>
@@ -585,7 +610,11 @@ function AdminAccount() {
                                 onChange={handleNewAccountChange}
                                 placeholder='Email'
                               />
-                              {errors.email && <div className="Admin-Account-Error">{errors.email}</div>}
+                              {errors.email && (
+                                <div className='Admin-Account-Error'>
+                                  {errors.email}
+                                </div>
+                              )}
                             </div>
 
                             <div className='Admin-Account-modal-add-account'>
@@ -604,7 +633,11 @@ function AdminAccount() {
                                 onChange={handleNewAccountChange}
                                 placeholder='Phone Number'
                               />
-                              {errors.phoneNum && <div className="Admin-Account-Error">{errors.phoneNum}</div>}
+                              {errors.phoneNum && (
+                                <div className='Admin-Account-Error'>
+                                  {errors.phoneNum}
+                                </div>
+                              )}
                             </div>
 
                             <div className='Admin-Account-modal-add-account'>
@@ -666,17 +699,13 @@ function AdminAccount() {
                     {' '}
                     Role{' '}
                   </div>
-                  <div className='Admin-Account-Main-Table-Header-Title'>
-                    {' '}
-                    Status{' '}
-                  </div>
                   <div className='Admin-Account-Main-Table-Header-Title-Btn'>
                     {' '}
                     Action{' '}
                   </div>
                 </div>
 
-                {filteredAccountData.map(item => (
+                {filteredAccountData.map((item) => (
                   <div
                     className='Admin-Account-Main-Table-Content-Row-Wrapper'
                     key={item.id}
@@ -692,10 +721,6 @@ function AdminAccount() {
                     <div className='Admin-Account-Main-Table-Content-Row'>
                       {' '}
                       {item.role}{' '}
-                    </div>
-                    <div className='Admin-Account-Main-Table-Content-Row'>
-                      {' '}
-                      {item.status}{' '}
                     </div>
                     <div className='Admin-Account-Main-Table-Content-Row'>
                       <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
@@ -822,36 +847,6 @@ function AdminAccount() {
                                     <option>Admin</option>
                                   </select>
                                 </div>
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title'>
-                                    {' '}
-                                    Status{' '}
-                                  </div>
-                                  <div className='Admin-Account-modal-title-radio'>
-                                    <div className='Admin-Account-modal-title-radio-Enable'>
-                                      <input
-                                        type='radio'
-                                        name='status'
-                                        value='Enable'
-                                        onChange={handleStatusChange}
-                                        checked={selectedStatus === 'Enable'}
-                                        className='Admin-Account-modal-radio'
-                                      />
-                                      <label> Enable </label>
-                                    </div>
-                                    <div>
-                                      <input
-                                        type='radio'
-                                        name='status'
-                                        value='Disable'
-                                        onChange={handleStatusChange}
-                                        checked={selectedStatus === 'Disable'}
-                                        className='Admin-Account-modal-radio'
-                                      />
-                                      <label> Disable </label>
-                                    </div>
-                                  </div>
-                                </div>
                               </div>
                               <div className='modal-footer'>
                                 <button
@@ -967,6 +962,21 @@ function AdminAccount() {
                             </div>
                           </div>
                         </div>
+                      </span>
+                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
+                        <Switch
+                          checked={item.status === 'Enable'}
+                          onChange={() => handleStatusChange(item.id)}
+                          color={item.status === 'Enable' ? 'success' : 'neutral'}
+                          variant={item.status === 'Enable' ? 'solid' : 'outlined'}
+                          slotProps={{
+                            endDecorator: {
+                              sx: {
+                                minWidth: 24,
+                              },
+                            },
+                          }}
+                        />
                       </span>
                     </div>
                   </div>
