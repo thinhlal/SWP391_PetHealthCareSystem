@@ -363,6 +363,9 @@
 
 .Admin-Account-Main-Table-Content-Row {
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
   border-left: 1px solid #eae8f1;
   padding: 0 0 0 10px;
   margin: 0;
@@ -373,9 +376,13 @@
 }
 
 .Admin-Account-Main-Table-Content-Btn {
-  width: 50%;
   border: none;
   background-color: white;
+}
+
+.Admin-Account-Main-Table-Content-Btn_Wrapper {
+  justify-content: center;
+  display: flex;
 }
 
 .Admin-Account-modal-title {
@@ -448,6 +455,7 @@
   font-size: 15px;
   color: #000000;
 }
+
 .Admin-Account-modal-more {
   font-weight: 700px;
   display: flex;
