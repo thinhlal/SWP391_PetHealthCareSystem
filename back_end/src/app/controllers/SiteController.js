@@ -49,7 +49,7 @@ class SiteController {
         password: hashedPassword,
       });
 
-      const savedAccount = await newAccount.save();
+      await newAccount.save();
 
       res.status(201).json({ message: 'Account registered successfully' });
     } catch (error) {
