@@ -2,6 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../utils/axiosInstance';
 
 export const AuthContext = createContext();
 
@@ -22,15 +23,26 @@ export const AuthProvider = ({ children }) => {
         setUser(userData);
     };
 
-    const logOut = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-        navigate('/');
-        setUser(null);
+    const logOut = async () => {
+        try {
+            await axiosInstance.post(
+                `${process.env.REACT_APP_API_URL}/logout`,
+                {},
+                {
+                    withCredentials: true,
+                });
+        } catch (error) {
+            console.error('Failed to log out:', error);
+        } finally {
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            setUser(null);
+            navigate('/');
+        }
     };
 
     if (loading) {
-        return; 
+        return;
     }
 
     return (
