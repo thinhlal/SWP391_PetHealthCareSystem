@@ -1,32 +1,51 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Booking = new Schema(
+const BookingSchema = new Schema(
     {
+        id: {
+            type: String,
+            required: true,
+            maxlength: 8,
+            unique: true,
+        },
         customerID: {
             type: String,
             required: true,
             ref: 'Customer',
         },
-        password: {
+        petID: {
             type: String,
             required: true,
-            maxlength: 255,
+            ref: 'Pet',
         },
-        role: {
+        dateBook: {
+            type: Date,
+            required: true,
+        },
+        startTime: {
             type: String,
             required: true,
-            maxlength: 25,
-            default: 'Customer',
         },
-        isAdmin: {
+        endTime: {
+            type: String,
+            required: true,
+        },
+        totalPrice: {
+            type: Number,
+            default: 0,
+        },
+        dateCancelBook: {
+            type: Date,
+            default: null,
+        },
+        isCancel: {
             type: Boolean,
-            required: true,
-            default: false,
+            default: false
         },
-        slug: {
-            type: String,
-            unique: true,
+        isCheckIn: {
+            type: Boolean,
+            default: false
         },
     },
     {
@@ -34,3 +53,4 @@ const Booking = new Schema(
     },
 )
 
+module.exports = mongoose.model('Booking', BookingSchema);

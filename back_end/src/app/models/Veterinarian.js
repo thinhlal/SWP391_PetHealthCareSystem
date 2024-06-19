@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const PetSchema = new Schema(
+const DoctorSchema = new Schema(
     {
         id: {
             type: String,
@@ -9,9 +9,11 @@ const PetSchema = new Schema(
             maxlength: 8,
             unique: true,
         },
-        customerID: {
+        account_id: {
             type: String,
             required: true,
+            maxlength: 8,
+            unique: true,
             ref: 'Account',
         },
         name: {
@@ -19,28 +21,16 @@ const PetSchema = new Schema(
             required: true,
             maxlength: 50,
         },
-        birthday: {
-            type: Date,
-            required: true
+        phone: {
+            type: Number,
         },
-        petType: {
+        email: {
             type: String,
-            enum: ['dog', 'cat'],
-            required: true
-        },
-        breed: {
-            type: String,
-            required: true
-        },
-        gender: {
-            type: String,
-            enum: ['Male', 'Female'],
-            required: true
         },
     },
     {
         timestamps: true,
     },
-);
+)
 
-module.exports = mongoose.model('Pet', PetSchema);
+module.exports = mongoose.model('Doctor', DoctorSchema);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CustomerSchema = new Schema(
+const AccountSchema = new Schema(
   {
     id: {
       type: String,
@@ -24,11 +24,11 @@ const CustomerSchema = new Schema(
       type: String,
       required: true,
       maxlength: 25,
+      enum: ['Customer', 'Veterinarian', 'Staff', 'Admin'],
       default: 'Customer',
     },
     isAdmin: {
       type: Boolean,
-      required: true,
       default: false,
     },
   },
@@ -37,4 +37,4 @@ const CustomerSchema = new Schema(
   },
 );
 
-module.exports = mongoose.model('Customer', CustomerSchema);
+module.exports = mongoose.model('Account', AccountSchema);

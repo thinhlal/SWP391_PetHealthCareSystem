@@ -1,4 +1,4 @@
-const Customer = require('../models/Customer.js');
+const Account = require('../models/Account.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const redisClient = require('../../config/redis/redisClient.js');
@@ -15,7 +15,7 @@ class SiteController {
   async signUp(req, res, next) {
     try {
       let { username, password } = req.body;
-      const existAccount = await Customer.findOne({ username });
+      const existAccount = await Account.findOne({ username });
       if (existAccount) {
         return res
           .status(409)
@@ -30,7 +30,7 @@ class SiteController {
       let id;
       while (true) {
         try {
-          const lastCustomer = await Customer.findOne().sort({ id: -1 });
+          const lastCustomer = await Account.findOne().sort({ id: -1 });
           if (lastCustomer) {
             const lastID = parseInt(lastCustomer.id.substring(2));
             id = 'CS' + (lastID + 1).toString().padStart(6, '0');;
@@ -43,7 +43,7 @@ class SiteController {
         }
       }
 
-      const newAccount = new Customer({
+      const newAccount = new Account({
         id: id,
         username,
         password: hashedPassword,
@@ -51,7 +51,7 @@ class SiteController {
 
       const savedAccount = await newAccount.save();
 
-      res.status(201).json({ message: 'Customer registered successfully' });
+      res.status(201).json({ message: 'Account registered successfully' });
     } catch (error) {
       console.error('Signup Error:', error);
       res.status(500).json({ message: 'Internal Server Error' });
@@ -63,7 +63,7 @@ class SiteController {
     const { username, password } = req.body;
 
     try {
-      const account = await Customer.findOne({ username });
+      const account = await Account.findOne({ username });
       if (!account) {
         return res.status(401).json({ message: 'Wrong username or password' });
       }
