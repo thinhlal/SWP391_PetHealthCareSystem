@@ -19,7 +19,7 @@ const PetSchema = new Schema(
             required: true,
             maxlength: 50,
         },
-        birthday: {
+        birthday: { 
             type: Date,
             required: true
         },
