@@ -8,8 +8,12 @@ const route = require('./routes');
 const db = require('./config/db');
 const port = process.env.PORT;
 
-//multiple start different domain
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Connect to DB
 db.connect();

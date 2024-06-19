@@ -19,7 +19,6 @@ const ServiceBookingVetSchema = new Schema(
         },
         vetID: {
             type: String,
-            required: true,
             ref: 'Doctor',
         },
     },

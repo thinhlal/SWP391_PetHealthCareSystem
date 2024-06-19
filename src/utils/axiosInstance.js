@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(response => response, async error => {
             }
         }
 
-        // Xử lý lỗi 403 - Refresh token không hợp lệ hoặc đã hết hạn
+        // Xử lý lỗi 403 - token không hợp lệ
         if (error.response.status === 403) {
             const authContext = useContext(AuthContext);
             authContext.logOut();

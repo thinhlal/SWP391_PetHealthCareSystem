@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     useEffect(() => {
         const userData = localStorage.getItem('user');
-        console.log(userData);
         if (userData) {
             setUser(JSON.parse(userData));
         }

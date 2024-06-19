@@ -4,9 +4,9 @@ import Footer from '../../components/User/Footer/Footer.js';
 import Header from '../../components/User/Header/Header.js';
 import red from '../../assets/images/img_Booking/red_square.png';
 import green from '../../assets/images/img_Booking/green_square.png';
-import { useLocation } from 'react-router-dom'; // Import useLocation to get state
+import { useLocation } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosInstance.js';
 
-// Giả sử dữ liệu bác sĩ
 const doctorsData = [
   {
     id: 'DOC001',
@@ -48,17 +48,23 @@ const doctorsData = [
       },
     ],
   },
-  // Thêm các bác sĩ khác nếu cần
 ];
 
 const Booking = () => {
-  const location = useLocation(); // Use useLocation to get the state
-  const { selectedPet } = location.state || {}; // Destructure selectedPet from state
+  const location = useLocation();
+  const { selectedPet } = location.state || {};
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [availableSlots, setAvailableSlots] = useState([]);
   const [isDayOff, setIsDayOff] = useState(false);
-  const [selectedSlot, setSelectedSlot] = useState(null); // State để lưu ô giờ đã chọn
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    payment: 'paypal',
+    service: 'service1',
+  });
 
   useEffect(() => {
     if (!selectedPet) {
@@ -79,9 +85,8 @@ const Booking = () => {
   };
 
   const handleSlotClick = slot => {
-    // Hàm xử lý khi click vào ô giờ
     if (!slot.isBooked) {
-      setSelectedSlot(slot); // Lưu ô giờ đã chọn vào state
+      setSelectedSlot(slot);
     }
   };
 
@@ -158,7 +163,7 @@ const Booking = () => {
     return slots;
   };
 
-  const handleBookingSubmit = () => {
+  const handleBookingSubmit = async () => {
     if (selectedSlot && selectedDate) {
       const bookingData = {
         doctorId: selectedDoctor,
@@ -173,13 +178,28 @@ const Booking = () => {
           minute: '2-digit',
           hour12: false,
         }),
-        petID: selectedPet?.petID, // Include the PetID in booking data
+        petID: selectedPet?.petID,
+        ...userInfo,
       };
       console.log('Booking Data:', bookingData);
-      // Xử lý gửi dữ liệu booking lên server tại đây
+      try {
+        const response = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/booking`, bookingData);
+        console.log('Booking Data:', response.data);
+      } catch (error) {
+        console.error('Error creating booking:', error);
+        alert('Error creating booking');
+      }
     } else {
       alert('Please select a slot to book.');
     }
+  };
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setUserInfo(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -199,6 +219,9 @@ const Booking = () => {
                 <input
                   type='text'
                   className='name_input'
+                  name='name'
+                  value={userInfo.name}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className='patient_Input'>
@@ -206,6 +229,9 @@ const Booking = () => {
                 <input
                   type='text'
                   className='name_input'
+                  name='phone'
+                  value={userInfo.phone}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -214,8 +240,11 @@ const Booking = () => {
               <div className='patient_Input'>
                 <div className='select_Name'>E-Mail</div>
                 <input
-                  type='text'
+                  type='email'
                   className='name_input'
+                  name='email'
+                  value={userInfo.email}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className='patient_Input'>
@@ -236,9 +265,10 @@ const Booking = () => {
                   <select
                     name='payment'
                     className='select_Info'
+                    value={userInfo.payment}
+                    onChange={handleInputChange}
                     required
                   >
-                    <option value='momo'>Momo</option>
                     <option value='paypal'>Paypal</option>
                   </select>
                 </div>
@@ -249,6 +279,8 @@ const Booking = () => {
                   <select
                     name='service'
                     className='select_Info'
+                    value={userInfo.service}
+                    onChange={handleInputChange}
                     required
                   >
                     <option value='service1'>Service 1</option>
@@ -323,8 +355,8 @@ const Booking = () => {
               availableSlots.map((slot, index) => (
                 <div
                   key={index}
-                  className={`element-button ${slot.isBooked ? 'element-button-red' : selectedSlot === slot ? 'element-button-selected' : 'element-button-green'}`} // Thêm class để thay đổi màu sắc ô đã chọn
-                  onClick={() => handleSlotClick(slot)} // click để chọn ô giờ
+                  className={`element-button ${slot.isBooked ? 'element-button-red' : selectedSlot === slot ? 'element-button-selected' : 'element-button-green'}`}
+                  onClick={() => handleSlotClick(slot)}
                 >
                   <div className='booking-select_time'>
                     {slot.startTime.toLocaleTimeString('vi-VN', {
