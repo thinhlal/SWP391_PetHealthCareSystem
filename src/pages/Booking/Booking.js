@@ -58,13 +58,26 @@ const Booking = () => {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [isDayOff, setIsDayOff] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [services, setServices] = useState([]);
+  const [errorMessageBreed, setErrorMessageBreed] = useState('');
+  const [errorMessageType, setErrorMessageType] = useState('');
+  const [errorMessageGender, setErrorMessageGender] = useState('');
+  const [errorMessageImage, setErrorMessageImage] = useState('');
   const [userInfo, setUserInfo] = useState({
     name: '',
     phone: '',
     email: '',
-    payment: 'paypal',
-    service: 'service1',
+    service: '',
   });
+
+  const getAllServices = async () => {
+    try {
+      const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/services`);
+      setServices(response.data);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    }
+  };
 
   useEffect(() => {
     if (!selectedPet) {
@@ -202,6 +215,10 @@ const Booking = () => {
     }));
   };
 
+  const handleFocus = () => {
+    getAllServices();
+  };
+
   return (
     <div className='booking-container container-fluid'>
       <div className='div row'>
@@ -281,10 +298,15 @@ const Booking = () => {
                     className='select_Info'
                     value={userInfo.service}
                     onChange={handleInputChange}
+                    onFocus={handleFocus}
                     required
                   >
-                    <option value='service1'>Service 1</option>
-                    <option value='service2'>Service 2</option>
+                    <option>Choose Service:</option>
+                    {services.map((service, index) => (
+                      <option key={index} value={service.id}>
+                        {service.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

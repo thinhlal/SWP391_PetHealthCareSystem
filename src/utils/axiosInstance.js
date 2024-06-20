@@ -25,8 +25,12 @@ axiosInstance.interceptors.response.use(response => response, async error => {
         // Xử lý lỗi 401 - Access token hết hạn
         if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
+            let deviceIdentifier = localStorage.getItem('deviceIdentifier');
             try {
-                const res = await axios.post(`${process.env.REACT_APP_API_URL}/refresh`, {}, { withCredentials: true });
+                const res = await axios.post(`${process.env.REACT_APP_API_URL}/refresh`,
+                    { deviceIdentifier },
+                    { withCredentials: true }
+                );
                 localStorage.setItem('token', res.data.accessToken);
                 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`;
                 originalRequest.headers['Authorization'] = `Bearer ${res.data.accessToken}`;

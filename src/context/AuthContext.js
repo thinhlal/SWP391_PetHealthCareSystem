@@ -25,9 +25,10 @@ export const AuthProvider = ({ children }) => {
 
     const logOut = async () => {
         try {
+            let deviceIdentifier = localStorage.getItem('deviceIdentifier');
             await axiosInstance.post(
                 `${process.env.REACT_APP_API_URL}/logout`,
-                {},
+                {deviceIdentifier},
                 {
                     withCredentials: true,
                 });

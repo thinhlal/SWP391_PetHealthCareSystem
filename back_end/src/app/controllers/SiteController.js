@@ -2,6 +2,7 @@ const Account = require('../models/Account.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const redisClient = require('../../config/redis/redisClient.js');
+const { v4: uuidv4 } = require('uuid');
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
@@ -60,7 +61,11 @@ class SiteController {
 
   // [POST] /login
   async logIn(req, res, next) {
-    const { username, password } = req.body;
+    const { username, password } = req.body.formData;
+    let deviceIdentifier = req.body.deviceIdentifier;
+    if (!deviceIdentifier) {
+      return res.status(400).json({ message: 'Device identifier is required' });
+    }
 
     try {
       const account = await Account.findOne({ username });
@@ -85,7 +90,8 @@ class SiteController {
         { expiresIn: '7d' },
       );
 
-      redisClient.set(username, refreshToken, 'EX', 7 * 24 * 60 * 60);
+      const redisKey = `refreshToken:${username}:${deviceIdentifier}`;
+      await redisClient.set(redisKey, refreshToken, 'EX', 7 * 24 * 60 * 60);
 
       res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
@@ -95,7 +101,7 @@ class SiteController {
 
       const user = account.toObject();
       delete user.password;
-      res.json({ message: 'Login successful', user, token });
+      res.json({ message: 'Login successful', user, token});
     } catch (error) {
       console.error('Login Error:', error);
       res.status(500).json({ message: 'Internal Server Error' });
@@ -105,6 +111,10 @@ class SiteController {
   // [POST] /refresh
   async requestRefreshToken(req, res, next) {
     const refreshToken = req.cookies.refreshToken;
+    const { deviceIdentifier } = req.body;
+    if (!deviceIdentifier) {
+      return res.status(400).json({ message: 'Device identifier is required' });
+    }
     if (!refreshToken) {
       return res.status(401).json({ message: 'You are not authenticated' });
     }
@@ -115,7 +125,8 @@ class SiteController {
         }
         const username = account.username.toString();
 
-        const result = await redisClient.get(username);
+        const redisKey = `refreshToken:${username}:${deviceIdentifier}`;
+        const result = await redisClient.get(redisKey);
 
         if (result !== refreshToken) {
           console.error('Refresh token does not match');
@@ -135,7 +146,7 @@ class SiteController {
           { expiresIn: '7d' },
         );
         await redisClient.set(
-          username,
+          redisKey,
           newRefreshToken,
           'EX',
           7 * 24 * 60 * 60,
@@ -157,6 +168,7 @@ class SiteController {
   async logOut(req, res, next) {
     try {
       const refreshToken = req.cookies.refreshToken;
+      const { deviceIdentifier } = req.body;
       jwt.verify(refreshToken, JWT_REFRESH_SECRET, async (err, account) => {
         if (err) {
           console.error('JWT verify error:', err);
@@ -164,7 +176,8 @@ class SiteController {
         }
 
         const username = account.username.toString();
-        const response = await redisClient.del(username);
+        const redisKey = `refreshToken:${username}:${deviceIdentifier}`;
+        const response = await redisClient.del(redisKey);
         if (response !== 1) {
           console.error('Redis del error');
           return res.status(500).json({ message: 'Logout failed' });
