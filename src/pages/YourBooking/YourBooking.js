@@ -7,6 +7,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 // Images
 import Sidebar from '../../components/User/Sidebar/Sidebar.js';
+// component 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import React, { useState, useEffect } from 'react';
+import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 
 const bookings = [
   {
@@ -45,6 +50,23 @@ const bookings = [
 ];
 
 function YourBooking() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <AnimationComponent />;
+  }
+  
   return (
     <div className='container-your-booking'>
       <div className='row-your-booking'>

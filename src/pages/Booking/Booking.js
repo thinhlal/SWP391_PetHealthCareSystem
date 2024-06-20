@@ -6,6 +6,10 @@ import red from '../../assets/images/img_Booking/red_square.png';
 import green from '../../assets/images/img_Booking/green_square.png';
 import { useLocation } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance.js';
+// AOS
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 
 const doctorsData = [
   {
@@ -69,6 +73,17 @@ const Booking = () => {
     email: '',
     service: '',
   });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const getAllServices = async () => {
     try {
@@ -218,6 +233,9 @@ const Booking = () => {
   const handleFocus = () => {
     getAllServices();
   };
+  if (loading) {
+    return <AnimationComponent />;
+  }
 
   return (
     <div className='booking-container container-fluid'>

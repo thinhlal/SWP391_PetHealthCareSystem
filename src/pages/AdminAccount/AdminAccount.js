@@ -722,7 +722,7 @@ function AdminAccount() {
                       {' '}
                       {item.role}{' '}
                     </div>
-                    <div className='Admin-Account-Main-Table-Content-Row'>
+                    <div className='Admin-Account-Main-Table-Content-Row-Action'>
                       <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
                         <button
                           type='button'
