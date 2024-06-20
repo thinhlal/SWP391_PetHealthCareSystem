@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProfilePet.css';
 // component
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
 import pet_img1 from '../../assets/images/img_YourPet/c2dc9a5328014cead97d6268b688a16e.jpg';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 
 function ProfilePet() {
   const initialPetData = {
@@ -39,6 +42,17 @@ function ProfilePet() {
     otherConditions: '',
     notes: '',
   });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -130,6 +144,10 @@ function ProfilePet() {
       medicalInfo: prevData.medicalInfo.filter((_, i) => i !== index),
     }));
   };
+
+  if (loading) {
+    return <AnimationComponent />;
+  }
 
   return (
     <div className='main-container-pet-profile'>
