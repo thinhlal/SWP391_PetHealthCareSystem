@@ -1,7 +1,7 @@
 //Css
 import './AdminAccount.css';
 //React
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 //Boostrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -19,12 +19,12 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 function AdminAccount() {
-  const [randomValue, setRandomValue] = useState();
-  const [randomPercent, setRandomPercent] = useState();
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
   const [currentAccount, setCurrentAccount] = useState(null);
+  const [filteredRevenueData, setFilteredRevenueData] = useState(null);
+  const [yesterdayRevenueData, setYesterdayRevenueData] = useState(null);
   const [accountData, setAccountData] = useState([
     {
       id: 1,
@@ -78,6 +78,34 @@ function AdminAccount() {
     },
   ]);
 
+  const dailyRevenueData = useMemo(() => [
+    {
+      id: 1,
+      date: '2024-06-21',
+      money: 1200
+    },
+    {
+      id: 2,
+      date: '2024-06-22',
+      money: 1500
+    },
+    {
+      id: 3,
+      date: '2024-06-23',
+      money: 1600
+    },
+    {
+      id: 4,
+      date: '2024-06-24',
+      money: 1200
+    },
+    {
+      id: 5,
+      date: '2024-06-25',
+      money: 1800
+    },
+  ], []);
+
   const [newAccount, setNewAccount] = useState({
     user_name: '',
     password: '',
@@ -92,10 +120,6 @@ function AdminAccount() {
   const modalRef = useRef(null);
 
   const handleDateChange = event => {
-    const randomNum = Math.floor(Math.random() * 100000) + 1;
-    setRandomValue(randomNum);
-    const randomPercent = Math.floor(Math.random() * 10) + 1;
-    setRandomPercent(randomPercent);
     setSelectedDate(event.target.value);
   };
 
@@ -104,6 +128,21 @@ function AdminAccount() {
     const formattedDate = today.toISOString().substr(0, 10);
     setSelectedDate(formattedDate);
   }, []);
+
+  useEffect(() => {
+    if (selectedDate) {
+      const filteredData = dailyRevenueData.find(
+        (daily) => daily.date === selectedDate
+      );
+      setFilteredRevenueData(filteredData);
+
+      const yesterday = new Date(new Date(selectedDate).setDate(new Date(selectedDate).getDate() - 1)).toISOString().substr(0, 10);
+      const yesterdayData = dailyRevenueData.find(
+        (daily) => daily.date === yesterday
+      );
+      setYesterdayRevenueData(yesterdayData);
+    }
+  }, [selectedDate, dailyRevenueData]);
 
   const handleRoleFilterChange = event => {
     setRoleFilter(event.target.value);
@@ -192,6 +231,14 @@ function AdminAccount() {
       account.user_name.toLowerCase().includes(search.toLowerCase());
     return matchesRole && matchesSearch;
   });
+
+  const calculatePercentChange = () => {
+    if (filteredRevenueData && yesterdayRevenueData) {
+      const change = ((filteredRevenueData.money - yesterdayRevenueData.money) / yesterdayRevenueData.money) * 100;
+      return change.toFixed(2);
+    }
+    return null;
+  };
 
   return (
     <div className='Admin-Account container-fluid'>
@@ -371,64 +418,66 @@ function AdminAccount() {
               />
             </div>
 
-            <div className='Admin-Account-Main-Header row'>
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'>
-                  {' '}
-                  Daily income{' '}
+            {filteredRevenueData && (
+              <div className='Admin-Account-Main-Header row'>
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'>
+                    {' '}
+                    Daily income{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    ${filteredRevenueData.money}{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    {calculatePercentChange()}% to the previous day{' '}
+                  </div>
                 </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over day{' '}
-                </div>
-              </div>
 
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'>
-                  {' '}
-                  Weekly income{' '}
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'>
+                    {' '}
+                    Weekly income{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    $0000{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    6% day over week{' '}
+                  </div>
                 </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over week{' '}
-                </div>
-              </div>
 
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'>
-                  {' '}
-                  Monthly income{' '}
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'>
+                    {' '}
+                    Monthly income{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    $0000{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    3% day over month{' '}
+                  </div>
                 </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over month{' '}
-                </div>
-              </div>
 
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'> Total </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over day{' '}
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'> Total </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    $0000{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    10% day over day{' '}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className='Admin-Account-Main-Table-Wrapper'>
               <div className='Admin-Account-Main-Table'>
