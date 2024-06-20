@@ -18,11 +18,9 @@ class SiteController {
       let { username, password } = req.body;
       const existAccount = await Account.findOne({ username });
       if (existAccount) {
-        return res
-          .status(409)
-          .json({
-            message: 'User already exists. Please choose a different username.',
-          });
+        return res.status(409).json({
+          message: 'User already exists. Please choose a different username.',
+        });
       }
 
       const saltRounds = 10;
@@ -34,13 +32,13 @@ class SiteController {
           const lastCustomer = await Account.findOne().sort({ id: -1 });
           if (lastCustomer) {
             const lastID = parseInt(lastCustomer.id.substring(2));
-            id = 'CS' + (lastID + 1).toString().padStart(6, '0');;
+            id = 'CS' + (lastID + 1).toString().padStart(6, '0');
           } else {
             id = 'CS000000';
           }
           break;
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       }
 
@@ -101,7 +99,7 @@ class SiteController {
 
       const user = account.toObject();
       delete user.password;
-      res.json({ message: 'Login successful', user, token});
+      res.json({ message: 'Login successful', user, token });
     } catch (error) {
       console.error('Login Error:', error);
       res.status(500).json({ message: 'Internal Server Error' });

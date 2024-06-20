@@ -25,7 +25,7 @@ function AdminDashBoard() {
       customer_id: 'C00001',
       pet_id: 'P00001',
       price: '$200',
-      date: '17/6/2024'
+      date: '17/6/2024',
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ function AdminDashBoard() {
       customer_id: 'C00002',
       pet_id: 'P00002',
       price: '$150',
-      date: '17/6/2024'
+      date: '17/6/2024',
     },
     {
       id: 3,
@@ -41,7 +41,7 @@ function AdminDashBoard() {
       customer_id: 'C00003',
       pet_id: 'P00003',
       price: '$240',
-      date: '17/6/2024'
+      date: '17/6/2024',
     },
     {
       id: 4,
@@ -49,7 +49,7 @@ function AdminDashBoard() {
       customer_id: 'C00004',
       pet_id: 'P00004',
       price: '$100',
-      date: '17/6/2024'
+      date: '17/6/2024',
     },
     {
       id: 5,
@@ -57,7 +57,7 @@ function AdminDashBoard() {
       customer_id: 'C00005',
       pet_id: 'P00005',
       price: '$90',
-      date: '17/6/2024'
+      date: '17/6/2024',
     },
   ];
 
@@ -355,16 +355,17 @@ function AdminDashBoard() {
                   </div>
                 </div>
                 {searchBookingData.map(item => (
-                  <div className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'
-                      key={item.id}
+                  <div
+                    className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'
+                    key={item.id}
                   >
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       {' '}
-                      {item.booking_id} {' '}
+                      {item.booking_id}{' '}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       {' '}
-                      {item.customer_id} {' '}
+                      {item.customer_id}{' '}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       {' '}
@@ -470,7 +471,9 @@ function AdminDashBoard() {
                                       className='Admin-DashBoard-tabcontent-pet'
                                       style={{
                                         display:
-                                          activeTab === 'Pet' ? 'block' : 'none',
+                                          activeTab === 'Pet'
+                                            ? 'block'
+                                            : 'none',
                                       }}
                                     >
                                       <div className='Admin-DashBoard-form-group'>
@@ -553,10 +556,7 @@ function AdminDashBoard() {
                       </div>
                     </div>
                   </div>
-
-
                 ))}
-
 
                 <div className='Admin-DashBoard-Pagination'>
                   <Stack spacing={2}>

@@ -24,7 +24,7 @@ function AdminServices() {
       services_name: 'Vaccinations',
       describe: 'Services Description',
       price: '$40',
-      status: 'Enable'
+      status: 'Enable',
     },
     {
       id: 2,
@@ -32,7 +32,7 @@ function AdminServices() {
       services_name: 'Deworm',
       describe: 'Services Description',
       price: '$10',
-      status: 'Enable'
+      status: 'Enable',
     },
     {
       id: 3,
@@ -40,7 +40,7 @@ function AdminServices() {
       services_name: 'Surgery',
       describe: 'Services Description',
       price: '$70',
-      status: 'Enable'
+      status: 'Enable',
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ function AdminServices() {
       services_name: 'Groom',
       describe: 'Services Description',
       price: '$20',
-      status: 'Enable'
+      status: 'Enable',
     },
     {
       id: 5,
@@ -56,10 +56,9 @@ function AdminServices() {
       services_name: 'Bathe',
       describe: 'Services Description',
       price: '$10',
-      status: 'Disable'
+      status: 'Disable',
     },
   ];
-
 
   const searchServicesData = servicesData.filter(services => {
     const matchesSearch =
@@ -67,7 +66,6 @@ function AdminServices() {
       services.services_name.toLowerCase().includes(search.toLowerCase());
     return matchesSearch;
   });
-
 
   return (
     <div className='Admin-Services container-fluid'>
@@ -456,10 +454,11 @@ function AdminServices() {
                     </div>
                   </div>
 
-
                   {searchServicesData.map(item => (
-
-                    <div className='Admin-Services-Main-Table-Content-Row-Wrapper' key={item.id} >
+                    <div
+                      className='Admin-Services-Main-Table-Content-Row-Wrapper'
+                      key={item.id}
+                    >
                       <div className='Admin-Services-Main-Table-Content-Row '>
                         {' '}
                         {item.services_id}{' '}
@@ -630,9 +629,7 @@ function AdminServices() {
                         </span>
                       </div>
                     </div>
-
                   ))}
-
 
                   <div className='Admin-Services-Pagination'>
                     <Stack spacing={2}>

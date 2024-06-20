@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import './Booking.css';
 import Footer from '../../components/User/Footer/Footer.js';
 import Header from '../../components/User/Header/Header.js';
@@ -13,7 +15,7 @@ import AnimationComponent from '../../components/Animation/AnimationComponent.js
 
 const doctorsData = [
   {
-    id: 'DOC001',
+    id: 'DC000001',
     name: 'Daria Andaloro',
     workingHours: [
       {
@@ -33,7 +35,7 @@ const doctorsData = [
     ],
   },
   {
-    id: 'DOC002',
+    id: 'DC000002',
     name: 'Michael Brian',
     workingHours: [
       {
@@ -56,6 +58,8 @@ const doctorsData = [
 
 const Booking = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const { selectedPet } = location.state || {};
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -63,15 +67,17 @@ const Booking = () => {
   const [isDayOff, setIsDayOff] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [services, setServices] = useState([]);
-  const [errorMessageBreed, setErrorMessageBreed] = useState('');
-  const [errorMessageType, setErrorMessageType] = useState('');
-  const [errorMessageGender, setErrorMessageGender] = useState('');
-  const [errorMessageImage, setErrorMessageImage] = useState('');
+  const [errorMessageName, setErrorMessageName] = useState('');
+  const [errorMessagePhone, setErrorMessagePhone] = useState('');
+  const [errorMessageEmail, setErrorMessageEmail] = useState('');
+  const [errorMessageServices, setErrorMessageServices] = useState('');
+  const [errorMessageDate, setErrorMessageDate] = useState('');
+  const [errorMessageChooseSlot, setErrorMessageChooseSlot] = useState('');
   const [userInfo, setUserInfo] = useState({
     name: '',
     phone: '',
     email: '',
-    service: '',
+    serviceID: '',
   });
   const [loading, setLoading] = useState(true);
 
@@ -87,7 +93,9 @@ const Booking = () => {
 
   const getAllServices = async () => {
     try {
-      const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/services`);
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/services`,
+      );
       setServices(response.data);
     } catch (error) {
       console.error('Error fetching services:', error);
@@ -110,11 +118,13 @@ const Booking = () => {
     const newDate = e.target.value;
     setSelectedDate(newDate);
     updateAvailableSlots(selectedDoctor, newDate);
+    setErrorMessageDate('');
   };
 
   const handleSlotClick = slot => {
     if (!slot.isBooked) {
       setSelectedSlot(slot);
+      setErrorMessageChooseSlot('');
     }
   };
 
@@ -191,11 +201,46 @@ const Booking = () => {
     return slots;
   };
 
+  const validateFields = () => {
+    let valid = true;
+    if (!userInfo.name) {
+      setErrorMessageName('Name is required');
+      valid = false;
+    } else {
+      setErrorMessageName('');
+    }
+    if (!userInfo.phone) {
+      setErrorMessagePhone('Phone is required');
+      valid = false;
+    } else {
+      setErrorMessagePhone('');
+    }
+    if (!userInfo.email) {
+      setErrorMessageEmail('Email is required');
+      valid = false;
+    } else {
+      setErrorMessageEmail('');
+    }
+    if (!userInfo.serviceID) {
+      setErrorMessageServices('Service is required');
+      valid = false;
+    } else {
+      setErrorMessageServices('');
+    }
+    return valid;
+  };
+
   const handleBookingSubmit = async () => {
+    if (!validateFields()) {
+      return;
+    }
+    if (!selectedDate) {
+      return setErrorMessageDate('Choose date to book!!');
+    }
     if (selectedSlot && selectedDate) {
       const bookingData = {
-        doctorId: selectedDoctor,
-        date: selectedDate,
+        doctorID: selectedDoctor,
+        dateBook: selectedDate,
         startTime: selectedSlot.startTime.toLocaleTimeString('vi-VN', {
           hour: '2-digit',
           minute: '2-digit',
@@ -207,32 +252,56 @@ const Booking = () => {
           hour12: false,
         }),
         petID: selectedPet?.petID,
+        customerID: user.id,
         ...userInfo,
       };
-      console.log('Booking Data:', bookingData);
+
       try {
-        const response = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/booking`, bookingData);
-        console.log('Booking Data:', response.data);
+        const response = await axiosInstance.post(
+          `${process.env.REACT_APP_API_URL}/booking`,
+          bookingData,
+        );
+        console.log(response);
+        navigate('/');
       } catch (error) {
         console.error('Error creating booking:', error);
         alert('Error creating booking');
       }
     } else {
-      alert('Please select a slot to book.');
+      setErrorMessageChooseSlot('Please choose slot to book!!!');
     }
   };
 
   const handleInputChange = e => {
     const { name, value } = e.target;
+    console.log(name, value);
     setUserInfo(prevState => ({
       ...prevState,
       [name]: value,
     }));
+    console.log(userInfo);
+    switch (name) {
+      case 'name':
+        setErrorMessageName('');
+        break;
+      case 'phone':
+        setErrorMessagePhone('');
+        break;
+      case 'email':
+        setErrorMessageEmail('');
+        break;
+      case 'service':
+        setErrorMessageServices('');
+        break;
+      default:
+        break;
+    }
   };
 
   const handleFocus = () => {
     getAllServices();
   };
+
   if (loading) {
     return <AnimationComponent />;
   }
@@ -258,6 +327,9 @@ const Booking = () => {
                   value={userInfo.name}
                   onChange={handleInputChange}
                 />
+                {errorMessageName && (
+                  <div className='error-message'>{errorMessageName}</div>
+                )}
               </div>
               <div className='patient_Input'>
                 <div className='select_Name'>Phone</div>
@@ -268,6 +340,9 @@ const Booking = () => {
                   value={userInfo.phone}
                   onChange={handleInputChange}
                 />
+                {errorMessagePhone && (
+                  <div className='error-message'>{errorMessagePhone}</div>
+                )}
               </div>
             </div>
 
@@ -281,6 +356,9 @@ const Booking = () => {
                   value={userInfo.email}
                   onChange={handleInputChange}
                 />
+                {errorMessageEmail && (
+                  <div className='error-message'>{errorMessageEmail}</div>
+                )}
               </div>
               <div className='patient_Input'>
                 <div className='select_Name'>PetID</div>
@@ -294,39 +372,31 @@ const Booking = () => {
             </div>
 
             <div className='select-booking_info'>
-              <div className='select_Payment'>
-                <div className='select_Name'>Payment</div>
-                <div className='select_Booking'>
-                  <select
-                    name='payment'
-                    className='select_Info'
-                    value={userInfo.payment}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    <option value='paypal'>Paypal</option>
-                  </select>
-                </div>
-              </div>
               <div className='select_Service'>
                 <div className='select_Name'>Services</div>
                 <div className='select_Booking'>
                   <select
-                    name='service'
+                    name='serviceID'
                     className='select_Info'
-                    value={userInfo.service}
+                    value={userInfo.serviceID}
                     onChange={handleInputChange}
                     onFocus={handleFocus}
                     required
                   >
-                    <option>Choose Service:</option>
+                    <option value=''>Choose Service:</option>
                     {services.map((service, index) => (
-                      <option key={index} value={service.id}>
-                        {service.name}
+                      <option
+                        key={index}
+                        value={service.id}
+                      >
+                        {`${service.name} - Price: ${service.price}`}
                       </option>
                     ))}
                   </select>
                 </div>
+                {errorMessageServices && (
+                  <div className='error-message'>{errorMessageServices}</div>
+                )}
               </div>
             </div>
             <div className='select-booking_info'>
@@ -339,6 +409,9 @@ const Booking = () => {
                   onChange={handleDateChange}
                   placeholder='Select a date'
                 />
+                {errorMessageDate && (
+                  <div className='error-message'>{errorMessageDate}</div>
+                )}
               </div>
               <div className='select_Doctors'>
                 <div className='select_Name'>Doctors</div>
@@ -382,37 +455,44 @@ const Booking = () => {
             </div>
           </div>
 
-          <div className='booking-menu'>
-            {isDayOff ? (
-              <div className='day-off-message'>
-                The selected doctor is off on this day.
-              </div>
-            ) : availableSlots.length === 0 ? (
-              <div className='no-slots-message'>
-                No available slots for this date.
-              </div>
-            ) : (
-              availableSlots.map((slot, index) => (
-                <div
-                  key={index}
-                  className={`element-button ${slot.isBooked ? 'element-button-red' : selectedSlot === slot ? 'element-button-selected' : 'element-button-green'}`}
-                  onClick={() => handleSlotClick(slot)}
-                >
-                  <div className='booking-select_time'>
-                    {slot.startTime.toLocaleTimeString('vi-VN', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: false,
-                    })}{' '}
-                    -{' '}
-                    {slot.endTime.toLocaleTimeString('vi-VN', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: false,
-                    })}
-                  </div>
+          <div className='booking-menu-wrapper'>
+            <div className='booking-menu'>
+              {isDayOff ? (
+                <div className='day-off-message'>
+                  The selected doctor is off on this day.
                 </div>
-              ))
+              ) : availableSlots.length === 0 ? (
+                <div className='no-slots-message'>
+                  No available slots for this date.
+                </div>
+              ) : (
+                availableSlots.map((slot, index) => (
+                  <div
+                    key={index}
+                    className={`element-button ${slot.isBooked ? 'element-button-red' : selectedSlot === slot ? 'element-button-selected' : 'element-button-green'}`}
+                    onClick={() => handleSlotClick(slot)}
+                  >
+                    <div className='booking-select_time'>
+                      {slot.startTime.toLocaleTimeString('vi-VN', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false,
+                      })}{' '}
+                      -{' '}
+                      {slot.endTime.toLocaleTimeString('vi-VN', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false,
+                      })}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+            {errorMessageChooseSlot && (
+              <div className='error-message error-message-choose'>
+                {errorMessageChooseSlot}
+              </div>
             )}
           </div>
           <div className='booking-pay-money'>

@@ -33,7 +33,7 @@ function Login() {
         { formData, deviceIdentifier },
         {
           withCredentials: true,
-        }
+        },
       );
       localStorage.setItem('token', response.data.token);
       logIn(response.data.user);

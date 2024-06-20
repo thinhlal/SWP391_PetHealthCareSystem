@@ -57,7 +57,9 @@ function Header() {
                 src={userAccount}
                 alt=''
               />
-              <div className='main-header-user-account-name'>Hi {user.username}</div>
+              <div className='main-header-user-account-name'>
+                Hi {user.username}
+              </div>
               <div className='main-header-user-account_menu'>
                 <div className='main-header-user-account_menu-item'>
                   Your Bookings
@@ -65,7 +67,10 @@ function Header() {
                 <div className='main-header-user-account_menu-item'>
                   View Your Pet
                 </div>
-                <div onClick={logOut} className='main-header-user-account_menu-item'>
+                <div
+                  onClick={logOut}
+                  className='main-header-user-account_menu-item'
+                >
                   Log out
                 </div>
               </div>

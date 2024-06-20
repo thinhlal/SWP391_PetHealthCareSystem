@@ -3,12 +3,17 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const PublicRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
-    if (user) {
-        return <Navigate to="/" replace />;
-    }
+  const { user } = useContext(AuthContext);
+  if (user) {
+    return (
+      <Navigate
+        to='/'
+        replace
+      />
+    );
+  }
 
-    return children;
+  return children;
 };
 
 export default PublicRoute;

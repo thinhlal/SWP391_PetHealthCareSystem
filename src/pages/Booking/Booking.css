@@ -75,10 +75,9 @@ body {
 }
 
 .select-booking_info {
-  margin-top: 20px;
+  height: 70px;
+  margin-top: 10px;
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .booking-container .patient_Input {
@@ -87,10 +86,6 @@ body {
 
 .booking-container .patient_Input:first-child {
   margin: 0 80px 0 0;
-}
-
-.booking-container .select_Payment {
-  margin-right: 80px;
 }
 
 .booking-container .select_Date {
@@ -123,10 +118,8 @@ body {
 }
 
 .booking-container .select_Booking {
-  display: flex;
   width: 270px;
   height: 32px;
-  align-items: center;
   border-radius: 8px;
 }
 
@@ -155,7 +148,7 @@ body {
 }
 
 .booking-container .available-tittle {
-  padding: 40px 0 20px 0;
+  padding: 20px 0 20px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,9 +184,19 @@ body {
   border-radius: 8px;
 }
 
-.booked-status {
+.booking-container .booked-status {
   font-size: 16px;
   font-family: Roboto, sans-serif;
+}
+
+.booking-container .booking-menu-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.booking-container .error-message-choose {
+  margin-top: 20px;
 }
 
 .booking-container .booking-menu {
@@ -352,4 +355,14 @@ body {
   letter-spacing: 0;
   line-height: 24px;
   white-space: nowrap;
+}
+
+.booking-container .error-message {
+  color: red;
+  height: 20px; /* Reserve space for the error message */
+  font-size: 12px;
+  margin-top: 5px;
+  font-family: Roboto, sans-serif;
+}
+.booking-container .patient_Input {
 }

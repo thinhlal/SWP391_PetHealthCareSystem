@@ -60,7 +60,10 @@ a {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-20px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s ease;
 }
 
 .dropdown-menu-login.visible {
@@ -224,8 +227,8 @@ a {
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
   transition:
-  background-color 0.3s,
-  color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+    background-color 0.3s,
+    color 0.3s; /* Thêm transition để hiệu ứng mượt mà */
 }
 
 .main .list-header-navigate-booking-btn-link {

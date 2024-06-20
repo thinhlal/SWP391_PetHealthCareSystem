@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 // Images
 import Sidebar from '../../components/User/Sidebar/Sidebar.js';
-// component 
+// component
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import React, { useState, useEffect } from 'react';
@@ -50,7 +50,6 @@ const bookings = [
 ];
 
 function YourBooking() {
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -66,7 +65,7 @@ function YourBooking() {
   if (loading) {
     return <AnimationComponent />;
   }
-  
+
   return (
     <div className='container-your-booking'>
       <div className='row-your-booking'>

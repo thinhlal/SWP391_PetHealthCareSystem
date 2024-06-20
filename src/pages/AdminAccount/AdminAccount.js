@@ -91,7 +91,7 @@ function AdminAccount() {
   const [errors, setErrors] = useState({});
   const modalRef = useRef(null);
 
-  const handleDateChange = (event) => {
+  const handleDateChange = event => {
     const randomNum = Math.floor(Math.random() * 100000) + 1;
     setRandomValue(randomNum);
     const randomPercent = Math.floor(Math.random() * 10) + 1;
@@ -105,12 +105,12 @@ function AdminAccount() {
     setSelectedDate(formattedDate);
   }, []);
 
-  const handleRoleFilterChange = (event) => {
+  const handleRoleFilterChange = event => {
     setRoleFilter(event.target.value);
   };
 
   const handleSaveChanges = () => {
-    const updatedAccountData = accountData.map((account) => {
+    const updatedAccountData = accountData.map(account => {
       if (account.id === currentAccount.id) {
         return { ...account };
       }
@@ -119,13 +119,13 @@ function AdminAccount() {
     setAccountData(updatedAccountData);
   };
 
-  const openEditModal = (account) => {
+  const openEditModal = account => {
     setCurrentAccount(account);
   };
 
-  const handleNewAccountChange = (e) => {
+  const handleNewAccountChange = e => {
     const { name, value } = e.target;
-    setNewAccount((prevState) => ({
+    setNewAccount(prevState => ({
       ...prevState,
       [name]: value,
     }));
@@ -135,8 +135,10 @@ function AdminAccount() {
     const newErrors = {};
     if (!newAccount.user_name) newErrors.user_name = 'User name is required';
     if (!newAccount.password) newErrors.password = 'Password is required';
-    if (!newAccount.confirmPassword) newErrors.confirmPassword = 'Confirm password is required';
-    if (newAccount.password !== newAccount.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!newAccount.confirmPassword)
+      newErrors.confirmPassword = 'Confirm password is required';
+    if (newAccount.password !== newAccount.confirmPassword)
+      newErrors.confirmPassword = 'Passwords do not match';
     if (!newAccount.name) newErrors.name = 'Name is required';
     if (!newAccount.email) newErrors.email = 'Email is required';
     if (!newAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
@@ -170,8 +172,8 @@ function AdminAccount() {
     }
   };
 
-  const handleStatusChange = (id) => {
-    const updatedAccountData = accountData.map((account) => {
+  const handleStatusChange = id => {
+    const updatedAccountData = accountData.map(account => {
       if (account.id === id) {
         return {
           ...account,
@@ -183,7 +185,7 @@ function AdminAccount() {
     setAccountData(updatedAccountData);
   };
 
-  const filteredAccountData = accountData.filter((account) => {
+  const filteredAccountData = accountData.filter(account => {
     const matchesRole = roleFilter === 'All' || account.role === roleFilter;
     const matchesSearch =
       search === '' ||
@@ -444,11 +446,14 @@ function AdminAccount() {
                       type='text'
                       placeholder='Search Name'
                       className='Admin-Account-Main-Search-Input'
-                      onChange={(e) => setSearch(e.target.value)}
+                      onChange={e => setSearch(e.target.value)}
                     />
                     <button className='Admin-Account-Main-Search-Button'>
                       {' '}
-                      <img src={icon_search} alt='' />{' '}
+                      <img
+                        src={icon_search}
+                        alt=''
+                      />{' '}
                     </button>
                   </div>
                   <div className='Admin-Account-Select-Role'>
@@ -705,7 +710,7 @@ function AdminAccount() {
                   </div>
                 </div>
 
-                {filteredAccountData.map((item) => (
+                {filteredAccountData.map(item => (
                   <div
                     className='Admin-Account-Main-Table-Content-Row-Wrapper'
                     key={item.id}
@@ -967,8 +972,12 @@ function AdminAccount() {
                         <Switch
                           checked={item.status === 'Enable'}
                           onChange={() => handleStatusChange(item.id)}
-                          color={item.status === 'Enable' ? 'success' : 'neutral'}
-                          variant={item.status === 'Enable' ? 'solid' : 'outlined'}
+                          color={
+                            item.status === 'Enable' ? 'success' : 'neutral'
+                          }
+                          variant={
+                            item.status === 'Enable' ? 'solid' : 'outlined'
+                          }
                           slotProps={{
                             endDecorator: {
                               sx: {
