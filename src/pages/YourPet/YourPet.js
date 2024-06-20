@@ -1,5 +1,5 @@
 import './YourPet.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/User/Header/Header.js';
 import Footer from '../../components/User/Footer/Footer.js';
 // Bootstrap CSS
@@ -12,6 +12,9 @@ import pet_img2 from '../../assets/images/img_YourPet/30c8eac7d84112a145ab7b06ce
 import pet_img3 from '../../assets/images/img_YourPet/f86eb143541c5a58b7132ab54d6d1f12.jpg';
 import Sidebar from '../../components/User/Sidebar/Sidebar.js';
 import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 
 function YourPet() {
   const [pets, setPets] = useState([
@@ -20,6 +23,17 @@ function YourPet() {
     { id: 3, name: 'Lala', image: pet_img3 },
   ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const addPet = pet => {
     setPets([...pets, pet]);
@@ -43,6 +57,10 @@ function YourPet() {
       </div>
     </a>
   );
+
+  if (loading) {
+    return <AnimationComponent />;
+  }
 
   return (
     <div className='container-fluid your-pet'>
