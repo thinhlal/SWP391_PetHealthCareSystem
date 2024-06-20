@@ -11,24 +11,115 @@ function ManageCages() {
   const [ownerOption, setOwnerOption] = useState('');
   const [petSearchResults, setPetSearchResults] = useState([]);
   const [ownerSearchResults, setOwnerSearchResults] = useState([]);
-  const [petInfo, setPetInfo] = useState({ species: 'Dog', breed: 'Golden Retriever', gender: 'Male' });
+  const [petInfo, setPetInfo] = useState({
+    species: 'Dog',
+    breed: 'Golden Retriever',
+    gender: 'Male',
+  });
   const [ownerInfo, setOwnerInfo] = useState({});
   const [services, setServices] = useState([{ service: 'X-quang', date: '' }]);
   const [availableVets] = useState([
-    { id: 1, name: 'Dr. John', availableSlots: ['2024-06-01T06:00', '2024-06-02T06:00', '2024-06-03T06:00'] },
-    { id: 2, name: 'Dr. Jane', availableSlots: ['2024-06-01T06:00', '2024-06-02T06:00', '2024-06-03T06:00'] },
-    { id: 3, name: 'Dr. Emily', availableSlots: ['2024-06-01T06:00', '2024-06-02T06:00', '2024-06-03T06:00'] },
+    {
+      id: 1,
+      name: 'Dr. John',
+      availableSlots: [
+        '2024-06-01T06:00',
+        '2024-06-02T06:00',
+        '2024-06-03T06:00',
+      ],
+    },
+    {
+      id: 2,
+      name: 'Dr. Jane',
+      availableSlots: [
+        '2024-06-01T06:00',
+        '2024-06-02T06:00',
+        '2024-06-03T06:00',
+      ],
+    },
+    {
+      id: 3,
+      name: 'Dr. Emily',
+      availableSlots: [
+        '2024-06-01T06:00',
+        '2024-06-02T06:00',
+        '2024-06-03T06:00',
+      ],
+    },
   ]);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedVet, setSelectedVet] = useState('Dr. John');
   const [activeTab, setActiveTab] = useState('Profile');
   const [cageData, setCageData] = useState([
-    { id: 'CG111111', name: 'A01', description: 'Large Cage', status: 'Using', petStatus: 'Not Recover', petDetails: { name: 'Boby', breed: 'Golden', species: 'Dog', gender: 'Male', inCage: 'Good', services: 'X-quang', dateTime: '10:00 AM | 2024-06-02', doctor: 'Johny', cageNumber: 'A01', admissionTime: '15:00 AM | 2024-10-02', ownerName: 'Liza Doe', email: 'support@gmail.com', phone: '+1234 55 66 777' } },
-    { id: 'CG222222', name: 'A02', description: 'Large Cage', status: 'Using', petStatus: 'Not Recover', petDetails: { name: 'Boby', breed: 'Golden', species: 'Dog', gender: 'Male', inCage: 'Good', services: 'X-quang', dateTime: '10:00 AM | 2024-06-02', doctor: 'Johny', cageNumber: 'A01', admissionTime: '15:00 AM | 2024-10-02', ownerName: 'Liza Doe', email: 'support@gmail.com', phone: '+1234 55 66 777' } },
-    { id: 'CG333333', name: 'A03', description: 'Large Cage', status: 'Empty', petStatus: 'Not Recover', petDetails: {} },
-    { id: 'CG444444', name: 'A04', description: 'Large Cage', status: 'Empty', petStatus: 'Not Recover', petDetails: {} },
-    { id: 'CG555555', name: 'A05', description: 'Large Cage', status: 'Empty', petStatus: 'Not Recover', petDetails: {} },
+    {
+      id: 'CG111111',
+      name: 'A01',
+      description: 'Large Cage',
+      status: 'Using',
+      petStatus: 'Not Recover',
+      petDetails: {
+        name: 'Boby',
+        breed: 'Golden',
+        species: 'Dog',
+        gender: 'Male',
+        inCage: 'Good',
+        services: 'X-quang',
+        dateTime: '10:00 AM | 2024-06-02',
+        doctor: 'Johny',
+        cageNumber: 'A01',
+        admissionTime: '15:00 AM | 2024-10-02',
+        ownerName: 'Liza Doe',
+        email: 'support@gmail.com',
+        phone: '+1234 55 66 777',
+      },
+    },
+    {
+      id: 'CG222222',
+      name: 'A02',
+      description: 'Large Cage',
+      status: 'Using',
+      petStatus: 'Not Recover',
+      petDetails: {
+        name: 'Boby',
+        breed: 'Golden',
+        species: 'Dog',
+        gender: 'Male',
+        inCage: 'Good',
+        services: 'X-quang',
+        dateTime: '10:00 AM | 2024-06-02',
+        doctor: 'Johny',
+        cageNumber: 'A01',
+        admissionTime: '15:00 AM | 2024-10-02',
+        ownerName: 'Liza Doe',
+        email: 'support@gmail.com',
+        phone: '+1234 55 66 777',
+      },
+    },
+    {
+      id: 'CG333333',
+      name: 'A03',
+      description: 'Large Cage',
+      status: 'Empty',
+      petStatus: 'Not Recover',
+      petDetails: {},
+    },
+    {
+      id: 'CG444444',
+      name: 'A04',
+      description: 'Large Cage',
+      status: 'Empty',
+      petStatus: 'Not Recover',
+      petDetails: {},
+    },
+    {
+      id: 'CG555555',
+      name: 'A05',
+      description: 'Large Cage',
+      status: 'Empty',
+      petStatus: 'Not Recover',
+      petDetails: {},
+    },
   ]);
   const [selectedCage, setSelectedCage] = useState(null);
   const [statusFilter, setStatusFilter] = useState('All');
@@ -151,7 +242,11 @@ function ManageCages() {
     const updatedCageData = cageData.map(cage => {
       if (cage.id === cageId) {
         const updatedStatus = newPetStatus === 'Recover' ? 'Empty' : 'Using';
-        const updatedCage = { ...cage, status: updatedStatus, petStatus: newPetStatus };
+        const updatedCage = {
+          ...cage,
+          status: updatedStatus,
+          petStatus: newPetStatus,
+        };
         if (updatedStatus === 'Empty') {
           updatedCage.petDetails = {};
         }
@@ -173,7 +268,9 @@ function ManageCages() {
 
   useEffect(() => {
     if (selectedDate && selectedTime) {
-      const availableVet = availableVets.find(vet => vet.availableSlots.includes(`${selectedDate}T${selectedTime}`));
+      const availableVet = availableVets.find(vet =>
+        vet.availableSlots.includes(`${selectedDate}T${selectedTime}`),
+      );
       if (availableVet) {
         setSelectedVet(availableVet.name);
       } else {
@@ -238,7 +335,11 @@ function ManageCages() {
                   className='booking-btn-add'
                   data-bs-toggle='modal'
                   data-bs-target='#exampleModal'
-                  onClick={() => setSelectedCage(cageData.find(cage => cage.status === 'Empty'))}
+                  onClick={() =>
+                    setSelectedCage(
+                      cageData.find(cage => cage.status === 'Empty'),
+                    )
+                  }
                 >
                   Add Pet
                 </button>
@@ -358,7 +459,9 @@ function ManageCages() {
                               >
                                 {petInfo.species === 'Dog' ? (
                                   <>
-                                    <option value='Golden Retriever'>Golden Retriever</option>
+                                    <option value='Golden Retriever'>
+                                      Golden Retriever
+                                    </option>
                                     <option value='Labrador'>Labrador</option>
                                     <option value='Poodle'>Poodle</option>
                                   </>
@@ -366,7 +469,9 @@ function ManageCages() {
                                   <>
                                     <option value='Persian'>Persian</option>
                                     <option value='Siamese'>Siamese</option>
-                                    <option value='Maine Coon'>Maine Coon</option>
+                                    <option value='Maine Coon'>
+                                      Maine Coon
+                                    </option>
                                   </>
                                 )}
                               </select>
@@ -651,7 +756,7 @@ function ManageCages() {
                         </button>
                       )}
                     </div>
-                    
+
                     <div
                       className='modal fade'
                       id={`more_info_${cage.id}`}
@@ -715,7 +820,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-customer'
                                       name='name'
-                                      value={selectedCage?.petDetails.ownerName || ''}
+                                      value={
+                                        selectedCage?.petDetails.ownerName || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -728,7 +835,9 @@ function ManageCages() {
                                       type='email'
                                       className='edit-customer'
                                       name='email'
-                                      value={selectedCage?.petDetails.email || ''}
+                                      value={
+                                        selectedCage?.petDetails.email || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -741,7 +850,9 @@ function ManageCages() {
                                       type='tel'
                                       className='edit-customer'
                                       name='phone'
-                                      value={selectedCage?.petDetails.phone || ''}
+                                      value={
+                                        selectedCage?.petDetails.phone || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -766,7 +877,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='name'
-                                      value={selectedCage?.petDetails.name || ''}
+                                      value={
+                                        selectedCage?.petDetails.name || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -779,7 +892,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='breed'
-                                      value={selectedCage?.petDetails.breed || ''}
+                                      value={
+                                        selectedCage?.petDetails.breed || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -792,7 +907,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='species'
-                                      value={selectedCage?.petDetails.species || ''}
+                                      value={
+                                        selectedCage?.petDetails.species || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -805,7 +922,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='gender'
-                                      value={selectedCage?.petDetails.gender || ''}
+                                      value={
+                                        selectedCage?.petDetails.gender || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -818,7 +937,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='in-cage'
-                                      value={selectedCage?.petDetails.inCage || ''}
+                                      value={
+                                        selectedCage?.petDetails.inCage || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -843,7 +964,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='services'
-                                      value={selectedCage?.petDetails.services || ''}
+                                      value={
+                                        selectedCage?.petDetails.services || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -856,7 +979,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='dateTime'
-                                      value={selectedCage?.petDetails.dateTime || ''}
+                                      value={
+                                        selectedCage?.petDetails.dateTime || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -869,7 +994,9 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='doctor'
-                                      value={selectedCage?.petDetails.doctor || ''}
+                                      value={
+                                        selectedCage?.petDetails.doctor || ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -882,7 +1009,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='cageNumber'
-                                      value={selectedCage?.petDetails.cageNumber || ''}
+                                      value={
+                                        selectedCage?.petDetails.cageNumber ||
+                                        ''
+                                      }
                                       readOnly
                                     />
                                   </div>
@@ -895,7 +1025,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='admissionTime'
-                                      value={selectedCage?.petDetails.admissionTime || ''}
+                                      value={
+                                        selectedCage?.petDetails
+                                          .admissionTime || ''
+                                      }
                                       readOnly
                                     />
                                   </div>

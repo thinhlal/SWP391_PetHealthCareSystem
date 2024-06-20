@@ -371,6 +371,16 @@
   margin: 0;
 }
 
+.Admin-Account-Main-Table-Content-Row-Action {
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 10px;
+  margin: 0;
+}
+
 .Admin-Account-Main-Table-Content-Row-Btn {
   display: flex;
 }

@@ -57,7 +57,7 @@ function SignUp() {
             confirmPassword: '',
           });
           setTimeout(() => {
-            navigate('/login'); 
+            navigate('/login');
           }, 500);
         })
         .catch(error => {

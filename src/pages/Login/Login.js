@@ -1,6 +1,7 @@
 import './Login.css';
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 // image
@@ -21,16 +22,21 @@ function Login() {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    let deviceIdentifier = localStorage.getItem('deviceIdentifier');
+    if (!deviceIdentifier) {
+      deviceIdentifier = uuidv4();
+      localStorage.setItem('deviceIdentifier', deviceIdentifier);
+    }
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/login`,
-        formData,
+        { formData, deviceIdentifier },
         {
           withCredentials: true,
-        }
+        },
       );
-      logIn(response.data.user);
       localStorage.setItem('token', response.data.token);
+      logIn(response.data.user);
       setError('');
       navigate('/');
     } catch (error) {
