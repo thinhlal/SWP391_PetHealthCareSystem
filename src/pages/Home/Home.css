@@ -87,6 +87,20 @@ a {
   color: #ffffff;
 }
 
+.menu-item-login:first-child:hover {
+  background-color: #e18213;
+  color: #ffffff;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.menu-item-login:last-child:hover {
+  background-color: #e18213;
+  color: #ffffff;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 .main {
   padding: 0 !important;
   margin: 0 !important;

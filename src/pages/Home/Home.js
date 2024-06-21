@@ -82,11 +82,17 @@ function Home() {
                       />
                       &nbsp;{user.username}
                     </div>
-                    <div className='menu-item-login'>
-                      <a href='/your-pet'>Your Pet</a>
+                    <div
+                      className='menu-item-login'
+                      onClick={() => window.location.href='/your-pet'}
+                    >
+                      Your Pet
                     </div>
-                    <div className='menu-item-login'>
-                      <a href='/your-booking'>Your Booking</a>
+                    <div
+                      className='menu-item-login'
+                      onClick={() => window.location.href='/your-booking'}
+                    >
+                      Your Booking
                     </div>
                     <div
                       className='menu-item-login'
