@@ -1,15 +1,15 @@
-//Css
+// CSS
 import './AdminAccount.css';
-//React
+// React
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-//Boostrap
+// Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
-//Img
+// Img
 import logo_pet_health_care from '../../assets/images/img_AdminAccount/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
-//Mui
+// MUI
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -116,6 +116,14 @@ function AdminAccount() {
     role: 'Customer',
   });
 
+  const [editAccount, setEditAccount] = useState({
+    id: '',
+    name: '',
+    email: '',
+    phoneNum: '',
+    role: '',
+  });
+
   const [errors, setErrors] = useState({});
   const modalRef = useRef(null);
 
@@ -148,18 +156,58 @@ function AdminAccount() {
     setRoleFilter(event.target.value);
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validatePassword = (password) => {
+    const re = /^.{6,}$/;
+    return re.test(String(password));
+  }
+
+  const validatePhone = (phone) => {
+    const re = /^[0-9]{10}$/;
+    return re.test(String(phone));
+  };
+
   const handleSaveChanges = () => {
+    const newErrors = {};
+    if (!editAccount.email) newErrors.email = 'Email is required';
+    else if (!validateEmail(editAccount.email)) newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
+    if (!editAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
+    else if (!validatePhone(editAccount.phoneNum)) newErrors.phoneNum = 'Invalid phone number format';
+    if (!editAccount.password) newErrors.password = 'Password is required';
+    else if (!validatePassword(editAccount.password)) newErrors.password = 'The minimum length is 6 characters';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     const updatedAccountData = accountData.map(account => {
-      if (account.id === currentAccount.id) {
-        return { ...account };
+      if (account.id === editAccount.id) {
+        return { ...account, ...editAccount };
       }
       return account;
     });
     setAccountData(updatedAccountData);
+    setErrors({});
+    const modal = bootstrap.Modal.getInstance(document.getElementById(`exampleModalEdit-${editAccount.id}`));
+    if (modal) {
+      modal.hide();
+    }
   };
 
-  const openEditModal = account => {
-    setCurrentAccount(account);
+  const openEditModal = (account) => {
+    setCurrentAccount(account); // Set currentAccount to the selected account
+    setEditAccount({
+      id: account.id,
+      name: account.name,
+      email: account.email,
+      phoneNum: account.phoneNum,
+      role: account.role,
+    });
   };
 
   const handleNewAccountChange = e => {
@@ -170,17 +218,28 @@ function AdminAccount() {
     }));
   };
 
+  const handleEditAccountChange = e => {
+    const { name, value } = e.target;
+    setEditAccount(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const handleAddAccount = () => {
     const newErrors = {};
     if (!newAccount.user_name) newErrors.user_name = 'User name is required';
     if (!newAccount.password) newErrors.password = 'Password is required';
+    else if (!validatePassword(newAccount.password)) newErrors.password = 'The minimum length is 6 characters';
     if (!newAccount.confirmPassword)
       newErrors.confirmPassword = 'Confirm password is required';
     if (newAccount.password !== newAccount.confirmPassword)
       newErrors.confirmPassword = 'Passwords do not match';
     if (!newAccount.name) newErrors.name = 'Name is required';
     if (!newAccount.email) newErrors.email = 'Email is required';
+    else if (!validateEmail(newAccount.email)) newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
     if (!newAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
+    else if (!validatePhone(newAccount.phoneNum)) newErrors.phoneNum = 'Invalid phone number format';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -831,7 +890,10 @@ function AdminAccount() {
                                   </label>
                                   <input
                                     className='Admin-Account-input'
-                                    placeholder='Username/Email'
+                                    name='name'
+                                    value={editAccount.name}
+                                    onChange={handleEditAccountChange}
+                                    placeholder='Name'
                                   />
                                 </div>
                                 <div className='Admin-Account-modal-update'>
@@ -853,8 +915,16 @@ function AdminAccount() {
                                   <input
                                     className='Admin-Account-input'
                                     type='email'
-                                    placeholder='Example@gmail.com'
+                                    name='email'
+                                    value={editAccount.email}
+                                    onChange={handleEditAccountChange}
+                                    placeholder='Email'
                                   />
+                                  {errors.email && (
+                                    <div className='Admin-Account-Error'>
+                                      {errors.email}
+                                    </div>
+                                  )}
                                 </div>
                                 <div className='Admin-Account-modal-update'>
                                   <div className='Admin-Account-modal-title'>
@@ -874,8 +944,16 @@ function AdminAccount() {
                                   </label>
                                   <input
                                     className='Admin-Account-input'
+                                    name='phoneNum'
+                                    value={editAccount.phoneNum}
+                                    onChange={handleEditAccountChange}
                                     placeholder='Phone number'
                                   />
+                                  {errors.phoneNum && (
+                                    <div className='Admin-Account-Error'>
+                                      {errors.phoneNum}
+                                    </div>
+                                  )}
                                 </div>
 
                                 <div className='Admin-Account-modal-update'>
@@ -894,7 +972,12 @@ function AdminAccount() {
                                     {' '}
                                     New role:{' '}
                                   </label>
-                                  <select className='Admin-Account-input-role'>
+                                  <select
+                                    className='Admin-Account-input-role'
+                                    name='role'
+                                    value={editAccount.role}
+                                    onChange={handleEditAccountChange}
+                                  >
                                     <option>Customer</option>
                                     <option>Veterinarian</option>
                                     <option>Staff</option>
