@@ -1,4 +1,3 @@
-// CSS
 import './AdminAccount.css';
 // React
 import React, { useState, useEffect, useRef, useMemo } from 'react';
@@ -33,7 +32,7 @@ function AdminAccount() {
       user_name: 'leslie123',
       name: 'Leslie',
       email: 'leslie14@gmail.com',
-      phoneNum: '0888888888',
+      phoneNum: '1234567891',
       role: 'Veterinarian',
     },
     {
@@ -43,7 +42,7 @@ function AdminAccount() {
       user_name: 'ronaldo123',
       name: 'Ronal Đỗ',
       email: 'thichpen12@gmail.com',
-      phoneNum: '0777777777',
+      phoneNum: '1234567892',
       role: 'Staff',
     },
     {
@@ -53,7 +52,7 @@ function AdminAccount() {
       user_name: 'messi123',
       name: 'Pessi',
       email: 'thichvuotrau2@gmail.com',
-      phoneNum: '0101010100',
+      phoneNum: '1234567893',
       role: 'Customer',
     },
     {
@@ -63,7 +62,7 @@ function AdminAccount() {
       user_name: 'victoria123',
       name: 'Victoria',
       email: 'victoriasecret13@gmail.com',
-      phoneNum: '0778774546',
+      phoneNum: '1234567894',
       role: 'Customer',
     },
     {
@@ -73,7 +72,7 @@ function AdminAccount() {
       user_name: 'john123',
       name: 'John',
       email: 'johnydog143@gmail.com',
-      phoneNum: '0777123454',
+      phoneNum: '1234567895',
       role: 'Admin',
     },
   ]);
@@ -173,12 +172,11 @@ function AdminAccount() {
 
   const handleSaveChanges = () => {
     const newErrors = {};
+    if (!editAccount.name) newErrors.name = 'Name is required';
     if (!editAccount.email) newErrors.email = 'Email is required';
     else if (!validateEmail(editAccount.email)) newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
     if (!editAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
     else if (!validatePhone(editAccount.phoneNum)) newErrors.phoneNum = 'Invalid phone number format';
-    if (!editAccount.password) newErrors.password = 'Password is required';
-    else if (!validatePassword(editAccount.password)) newErrors.password = 'The minimum length is 6 characters';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -200,7 +198,7 @@ function AdminAccount() {
   };
 
   const openEditModal = (account) => {
-    setCurrentAccount(account); // Set currentAccount to the selected account
+    setCurrentAccount(account);
     setEditAccount({
       id: account.id,
       name: account.name,
@@ -895,6 +893,11 @@ function AdminAccount() {
                                     onChange={handleEditAccountChange}
                                     placeholder='Name'
                                   />
+                                  {errors.name && (
+                                    <div className='Admin-Account-Error'>
+                                      {errors.name}
+                                    </div>
+                                  )}
                                 </div>
                                 <div className='Admin-Account-modal-update'>
                                   <div className='Admin-Account-modal-title'>
