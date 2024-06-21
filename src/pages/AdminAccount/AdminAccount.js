@@ -1,15 +1,15 @@
-//Css
+// CSS
 import './AdminAccount.css';
-//React
-import React, { useState, useEffect, useRef } from 'react';
-//Boostrap
+// React
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+// Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
-//Img
+// Img
 import logo_pet_health_care from '../../assets/images/img_AdminAccount/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
-//Mui
+// MUI
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -19,12 +19,12 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
 function AdminAccount() {
-  const [randomValue, setRandomValue] = useState();
-  const [randomPercent, setRandomPercent] = useState();
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
   const [currentAccount, setCurrentAccount] = useState(null);
+  const [filteredRevenueData, setFilteredRevenueData] = useState(null);
+  const [yesterdayRevenueData, setYesterdayRevenueData] = useState(null);
   const [accountData, setAccountData] = useState([
     {
       id: 1,
@@ -78,6 +78,34 @@ function AdminAccount() {
     },
   ]);
 
+  const dailyRevenueData = useMemo(() => [
+    {
+      id: 1,
+      date: '2024-06-21',
+      money: 1200
+    },
+    {
+      id: 2,
+      date: '2024-06-22',
+      money: 1500
+    },
+    {
+      id: 3,
+      date: '2024-06-23',
+      money: 1600
+    },
+    {
+      id: 4,
+      date: '2024-06-24',
+      money: 1200
+    },
+    {
+      id: 5,
+      date: '2024-06-25',
+      money: 1800
+    },
+  ], []);
+
   const [newAccount, setNewAccount] = useState({
     user_name: '',
     password: '',
@@ -88,14 +116,18 @@ function AdminAccount() {
     role: 'Customer',
   });
 
+  const [editAccount, setEditAccount] = useState({
+    id: '',
+    name: '',
+    email: '',
+    phoneNum: '',
+    role: '',
+  });
+
   const [errors, setErrors] = useState({});
   const modalRef = useRef(null);
 
   const handleDateChange = event => {
-    const randomNum = Math.floor(Math.random() * 100000) + 1;
-    setRandomValue(randomNum);
-    const randomPercent = Math.floor(Math.random() * 10) + 1;
-    setRandomPercent(randomPercent);
     setSelectedDate(event.target.value);
   };
 
@@ -105,22 +137,77 @@ function AdminAccount() {
     setSelectedDate(formattedDate);
   }, []);
 
+  useEffect(() => {
+    if (selectedDate) {
+      const filteredData = dailyRevenueData.find(
+        (daily) => daily.date === selectedDate
+      );
+      setFilteredRevenueData(filteredData);
+
+      const yesterday = new Date(new Date(selectedDate).setDate(new Date(selectedDate).getDate() - 1)).toISOString().substr(0, 10);
+      const yesterdayData = dailyRevenueData.find(
+        (daily) => daily.date === yesterday
+      );
+      setYesterdayRevenueData(yesterdayData);
+    }
+  }, [selectedDate, dailyRevenueData]);
+
   const handleRoleFilterChange = event => {
     setRoleFilter(event.target.value);
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+  };
+
+  const validatePassword = (password) => {
+    const re = /^.{6,}$/;
+    return re.test(String(password));
+  }
+
+  const validatePhone = (phone) => {
+    const re = /^[0-9]{10}$/;
+    return re.test(String(phone));
+  };
+
   const handleSaveChanges = () => {
+    const newErrors = {};
+    if (!editAccount.email) newErrors.email = 'Email is required';
+    else if (!validateEmail(editAccount.email)) newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
+    if (!editAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
+    else if (!validatePhone(editAccount.phoneNum)) newErrors.phoneNum = 'Invalid phone number format';
+    if (!editAccount.password) newErrors.password = 'Password is required';
+    else if (!validatePassword(editAccount.password)) newErrors.password = 'The minimum length is 6 characters';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     const updatedAccountData = accountData.map(account => {
-      if (account.id === currentAccount.id) {
-        return { ...account };
+      if (account.id === editAccount.id) {
+        return { ...account, ...editAccount };
       }
       return account;
     });
     setAccountData(updatedAccountData);
+    setErrors({});
+    const modal = bootstrap.Modal.getInstance(document.getElementById(`exampleModalEdit-${editAccount.id}`));
+    if (modal) {
+      modal.hide();
+    }
   };
 
-  const openEditModal = account => {
-    setCurrentAccount(account);
+  const openEditModal = (account) => {
+    setCurrentAccount(account); // Set currentAccount to the selected account
+    setEditAccount({
+      id: account.id,
+      name: account.name,
+      email: account.email,
+      phoneNum: account.phoneNum,
+      role: account.role,
+    });
   };
 
   const handleNewAccountChange = e => {
@@ -131,17 +218,28 @@ function AdminAccount() {
     }));
   };
 
+  const handleEditAccountChange = e => {
+    const { name, value } = e.target;
+    setEditAccount(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const handleAddAccount = () => {
     const newErrors = {};
     if (!newAccount.user_name) newErrors.user_name = 'User name is required';
     if (!newAccount.password) newErrors.password = 'Password is required';
+    else if (!validatePassword(newAccount.password)) newErrors.password = 'The minimum length is 6 characters';
     if (!newAccount.confirmPassword)
       newErrors.confirmPassword = 'Confirm password is required';
     if (newAccount.password !== newAccount.confirmPassword)
       newErrors.confirmPassword = 'Passwords do not match';
     if (!newAccount.name) newErrors.name = 'Name is required';
     if (!newAccount.email) newErrors.email = 'Email is required';
+    else if (!validateEmail(newAccount.email)) newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
     if (!newAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
+    else if (!validatePhone(newAccount.phoneNum)) newErrors.phoneNum = 'Invalid phone number format';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -192,6 +290,14 @@ function AdminAccount() {
       account.user_name.toLowerCase().includes(search.toLowerCase());
     return matchesRole && matchesSearch;
   });
+
+  const calculatePercentChange = () => {
+    if (filteredRevenueData && yesterdayRevenueData) {
+      const change = ((filteredRevenueData.money - yesterdayRevenueData.money) / yesterdayRevenueData.money) * 100;
+      return change.toFixed(2);
+    }
+    return null;
+  };
 
   return (
     <div className='Admin-Account container-fluid'>
@@ -371,64 +477,66 @@ function AdminAccount() {
               />
             </div>
 
-            <div className='Admin-Account-Main-Header row'>
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'>
-                  {' '}
-                  Daily income{' '}
+            {filteredRevenueData && (
+              <div className='Admin-Account-Main-Header row'>
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'>
+                    {' '}
+                    Daily income{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    ${filteredRevenueData.money}{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    {calculatePercentChange()}% to the previous day{' '}
+                  </div>
                 </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over day{' '}
-                </div>
-              </div>
 
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'>
-                  {' '}
-                  Weekly income{' '}
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'>
+                    {' '}
+                    Weekly income{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    $0000{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    6% day over week{' '}
+                  </div>
                 </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over week{' '}
-                </div>
-              </div>
 
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'>
-                  {' '}
-                  Monthly income{' '}
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'>
+                    {' '}
+                    Monthly income{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    $0000{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    3% day over month{' '}
+                  </div>
                 </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over month{' '}
-                </div>
-              </div>
 
-              <div className='Admin-Account-Main-Header-Income col-md-3'>
-                <div className='Admin-Account-Main-Header-Note'> Total </div>
-                <div className='Admin-Account-Main-Header-Money'>
-                  {' '}
-                  ${randomValue}{' '}
-                </div>
-                <div className='Admin-Account-Main-Header-Percent'>
-                  {' '}
-                  +{randomPercent}% day over day{' '}
+                <div className='Admin-Account-Main-Header-Income col-md-3'>
+                  <div className='Admin-Account-Main-Header-Note'> Total </div>
+                  <div className='Admin-Account-Main-Header-Money'>
+                    {' '}
+                    $0000{' '}
+                  </div>
+                  <div className='Admin-Account-Main-Header-Percent'>
+                    {' '}
+                    10% day over day{' '}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             <div className='Admin-Account-Main-Table-Wrapper'>
               <div className='Admin-Account-Main-Table'>
@@ -782,7 +890,10 @@ function AdminAccount() {
                                   </label>
                                   <input
                                     className='Admin-Account-input'
-                                    placeholder='Username/Email'
+                                    name='name'
+                                    value={editAccount.name}
+                                    onChange={handleEditAccountChange}
+                                    placeholder='Name'
                                   />
                                 </div>
                                 <div className='Admin-Account-modal-update'>
@@ -804,8 +915,16 @@ function AdminAccount() {
                                   <input
                                     className='Admin-Account-input'
                                     type='email'
-                                    placeholder='Example@gmail.com'
+                                    name='email'
+                                    value={editAccount.email}
+                                    onChange={handleEditAccountChange}
+                                    placeholder='Email'
                                   />
+                                  {errors.email && (
+                                    <div className='Admin-Account-Error'>
+                                      {errors.email}
+                                    </div>
+                                  )}
                                 </div>
                                 <div className='Admin-Account-modal-update'>
                                   <div className='Admin-Account-modal-title'>
@@ -825,8 +944,16 @@ function AdminAccount() {
                                   </label>
                                   <input
                                     className='Admin-Account-input'
+                                    name='phoneNum'
+                                    value={editAccount.phoneNum}
+                                    onChange={handleEditAccountChange}
                                     placeholder='Phone number'
                                   />
+                                  {errors.phoneNum && (
+                                    <div className='Admin-Account-Error'>
+                                      {errors.phoneNum}
+                                    </div>
+                                  )}
                                 </div>
 
                                 <div className='Admin-Account-modal-update'>
@@ -845,7 +972,12 @@ function AdminAccount() {
                                     {' '}
                                     New role:{' '}
                                   </label>
-                                  <select className='Admin-Account-input-role'>
+                                  <select
+                                    className='Admin-Account-input-role'
+                                    name='role'
+                                    value={editAccount.role}
+                                    onChange={handleEditAccountChange}
+                                  >
                                     <option>Customer</option>
                                     <option>Veterinarian</option>
                                     <option>Staff</option>
