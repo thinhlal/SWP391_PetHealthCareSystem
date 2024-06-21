@@ -5,7 +5,6 @@ class BookingController {
   // POST /
   async index(req, res, next) {
     const bookingInfo = req.body;
-    console.log(bookingInfo);
     try {
       let idBooking;
       while (true) {
@@ -40,11 +39,12 @@ class BookingController {
       }
       const saveServiceBookingVet = new ServiceBookingVet({
         id: idServiceBookingVet,
+        bookingID: idBooking,
         ...bookingInfo,
       });
       const saveBooking = new Booking({ id: idBooking, ...bookingInfo });
-      await saveServiceBookingVet.save();
       await saveBooking.save();
+      await saveServiceBookingVet.save();
       res.status(201).json({ message: 'Booking successfully created' });
     } catch (error) {
       res.status(500).json({ message: 'Error creating booking', error });

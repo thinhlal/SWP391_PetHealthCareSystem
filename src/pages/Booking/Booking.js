@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './Booking.css';
 import Footer from '../../components/User/Footer/Footer.js';
@@ -58,7 +58,7 @@ const doctorsData = [
 
 const Booking = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { selectedPet } = location.state || {};
   const [selectedDoctor, setSelectedDoctor] = useState('');
@@ -252,6 +252,7 @@ const Booking = () => {
           hour12: false,
         }),
         petID: selectedPet?.petID,
+        amount: 80,
         customerID: user.id,
         ...userInfo,
       };
@@ -261,10 +262,13 @@ const Booking = () => {
           `${process.env.REACT_APP_API_URL}/booking`,
           bookingData,
         );
-        console.log(response);
-        navigate('/');
+        console.log(response.data);
+        const orderResponse = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/paypal/create-order`, {
+          amount: bookingData.amount
+        });
+
+        window.location.href = orderResponse.data.url;
       } catch (error) {
-        console.error('Error creating booking:', error);
         alert('Error creating booking');
       }
     } else {
@@ -274,12 +278,10 @@ const Booking = () => {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    console.log(name, value);
     setUserInfo(prevState => ({
       ...prevState,
       [name]: value,
     }));
-    console.log(userInfo);
     switch (name) {
       case 'name':
         setErrorMessageName('');
