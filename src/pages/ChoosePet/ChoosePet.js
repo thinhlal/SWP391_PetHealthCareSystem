@@ -109,7 +109,7 @@ function ChoosePet() {
                 alt={pet.name}
               />
               <div className='name-pet-card'>{pet.name}</div>
-              <div className='pet-id-card'>PetID:&nbsp;{pet.petID}</div>
+              <div className='choose-pet-id-card'>PetID:&nbsp;{pet.petID}</div>
             </div>
           ))}
         </div>

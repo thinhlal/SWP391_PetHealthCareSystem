@@ -67,7 +67,7 @@ function YourBooking() {
   }
 
   return (
-    <div className='container-your-booking'>
+    <div className='main-container-your-booking-page'>
       <div className='row-your-booking'>
         <Header></Header>
         <div className='main-tittle-your-booking'>

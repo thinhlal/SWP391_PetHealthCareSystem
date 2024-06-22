@@ -617,7 +617,7 @@ function ManageListBooking() {
                     className='main-content-header-search-input'
                   />
                 </div>
-                <div className='main-content-header-filter-date'>
+                <div className='booking-page-main-content-header-filter-date'>
                   <input
                     type='date'
                     value={filterDate}

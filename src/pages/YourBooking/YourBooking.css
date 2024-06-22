@@ -20,41 +20,41 @@ a {
   width: 100%;
 }
 
-.container-your-booking {
+.main-container-your-booking-page {
   width: 100%;
 }
 
-.status-booking {
+.main-container-your-booking-page .status-booking {
   font-weight: bold;
   margin-left: 10px;
 }
 
-.status-pending {
+.main-container-your-booking-page .status-pending {
   color: red;
 }
 
-.status-completed {
+.main-container-your-booking-page .status-completed {
   color: green;
 }
 
-.row-your-booking {
+.main-container-your-booking-page .row-your-booking {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.main-tittle-your-booking {
+.main-container-your-booking-page .main-tittle-your-booking {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 100px 0px;
 }
 
-.overlap-group-booking {
+.main-container-your-booking-page .overlap-group-booking {
   background-color: #ffffff;
 }
 
-.text-tittle-your-booking {
+.main-container-your-booking-page .text-tittle-your-booking {
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #425bb3;
@@ -64,14 +64,14 @@ a {
   line-height: 60%;
 }
 
-.overlap-booking {
+.main-container-your-booking-page .overlap-booking {
   display: flex;
 }
-.main-content-booking {
+.main-container-your-booking-page .main-content-booking {
   width: 100%;
 }
 
-.your-Pet-Header-booking {
+.main-container-your-booking-page .your-Pet-Header-booking {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,11 +81,11 @@ a {
   height: 84px;
 }
 
-.search-pet-booking {
+.main-container-your-booking-page .search-pet-booking {
   padding-left: 20px;
 }
 
-.search-pet-txt-booking {
+.main-container-your-booking-page .search-pet-txt-booking {
   font-size: 18px;
   margin: 10px 0;
   letter-spacing: 0;
@@ -94,14 +94,14 @@ a {
   white-space: nowrap;
 }
 
-.search-pet-input-booking {
+.main-container-your-booking-page .search-pet-input-booking {
   position: relative;
   display: flex;
   margin-bottom: 10px;
   align-items: center;
   justify-content: center;
 }
-.search-pet-input-icons-booking {
+.main-container-your-booking-page .search-pet-input-icons-booking {
   background-color: #ffffff;
   line-height: 33px;
   text-align: center;
@@ -111,11 +111,11 @@ a {
   border-bottom-right-radius: 10px;
 }
 
-.search-pet-input-icons-booking:hover {
+.main-container-your-booking-page .search-pet-input-icons-booking:hover {
   cursor: pointer;
 }
 
-.search-pet-input-booking input[type='text'] {
+.main-container-your-booking-page .search-pet-input-booking input[type='text'] {
   height: 35px;
   width: 300px;
   outline: none;
@@ -129,27 +129,27 @@ a {
   border-bottom-left-radius: 10px;
 }
 
-.detail-information-booking {
+.main-container-your-booking-page .detail-information-booking {
   font-family: Roboto, sans-serif;
 }
 
-.info-detail-booking {
+.main-container-your-booking-page .info-detail-booking {
   width: 100%;
   margin: 10px 0;
   padding: 0 15px;
 }
 
-.mini-title-detail-booking {
+.main-container-your-booking-page .mini-title-detail-booking {
   font-weight: 600;
 }
 
-.detail-booking-confirm-booking {
+.main-container-your-booking-page .detail-booking-confirm-booking {
   width: 100%;
   border: 1px solid #d5d2d2;
   border-radius: 10px;
 }
 
-.card-detail-booking-confirm-booking {
+.main-container-your-booking-page .card-detail-booking-confirm-booking {
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -160,7 +160,7 @@ a {
   margin-bottom: 15px;
 }
 
-.card-ID-booking {
+.main-container-your-booking-page .card-ID-booking {
   display: flex;
   flex-direction: column;
   gap: 35px;
@@ -168,7 +168,7 @@ a {
   font-size: 16px;
 }
 
-.detail-number-ID {
+.main-container-your-booking-page .detail-number-ID {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
@@ -176,47 +176,47 @@ a {
 }
 
 /* status of booking */
-.status-booking-1 {
+.main-container-your-booking-page .status-booking-1 {
   font-weight: 400;
   color: #d24441;
 }
 
-.status-booking-2 {
+.main-container-your-booking-page .status-booking-2 {
   font-weight: 400;
   color: #45a049;
 }
 
-.status-booking-3 {
+.main-container-your-booking-page .status-booking-3 {
   font-weight: 400;
   color: #45a049;
 }
 
-.card-body-content-booking .col-booking {
+.main-container-your-booking-page .card-body-content-booking .col-booking {
   margin-bottom: 10px;
 }
 
-.text-card-body-content-booking {
+.main-container-your-booking-page .text-card-body-content-booking {
   display: flex;
   justify-content: space-between;
   line-height: 1.5;
 }
 
-.card-title-detail-booking:first-child {
+.main-container-your-booking-page .card-title-detail-booking:first-child {
   border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0;
 }
 
-.card-title-detail-booking {
+.main-container-your-booking-page .card-title-detail-booking {
   background-color: #fff;
 }
 
-.price-cancel-rate-booking {
+.main-container-your-booking-page .price-cancel-rate-booking {
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 10px; /* Khoảng cách giữa các cột nếu cần */
 }
 
-.total-price-booking {
+.main-container-your-booking-page .total-price-booking {
   display: flex;
   grid-column: 1 / 2;
   font-weight: 600;
@@ -224,7 +224,7 @@ a {
 }
 
 /* button cancel */
-.cancel-booking-button-1 {
+.main-container-your-booking-page .cancel-booking-button-1 {
   color: #ffffff;
   background-color: #e18213;
   border-radius: 8px;
@@ -235,14 +235,14 @@ a {
   text-decoration: none;
 }
 
-.cancel-booking-button-1:hover {
+.main-container-your-booking-page .cancel-booking-button-1:hover {
   color: #ffffff;
   background-color: #182155;
   border-radius: 8px;
   text-decoration: none;
 }
 
-.cancel-booking-button-2 {
+.main-container-your-booking-page .cancel-booking-button-2 {
   color: #ffffff;
   background-color: #cccc;
   border-radius: 8px;
@@ -253,14 +253,14 @@ a {
   text-decoration: none;
 }
 
-.cancel-booking-button-2:hover {
+.main-container-your-booking-page .cancel-booking-button-2:hover {
   color: #ffffff;
   background-color: #182155;
   border-radius: 8px;
   text-decoration: none;
 }
 
-.cancel-booking-button-3 {
+.main-container-your-booking-page .cancel-booking-button-3 {
   color: #ffffff;
   background-color: #cccc;
   border-radius: 8px;
@@ -271,7 +271,7 @@ a {
   text-decoration: none;
 }
 
-.cancel-booking-button-3:hover {
+.main-container-your-booking-page .cancel-booking-button-3:hover {
   color: #ffffff;
   background-color: #182155;
   border-radius: 8px;
@@ -279,7 +279,7 @@ a {
 }
 
 /* button feedback */
-.feedback-rate-booking {
+.main-container-your-booking-page .feedback-rate-booking {
   color: #ffffff;
   background-color: #e18213;
   border-radius: 8px;
@@ -291,14 +291,14 @@ a {
   border: none;
 }
 
-.feedback-rate-booking:hover {
+.main-container-your-booking-page .feedback-rate-booking:hover {
   color: #ffffff;
   background-color: #182155;
   border-radius: 8px;
   text-decoration: none;
 }
 
-.add-pet_pagination {
+.main-container-your-booking-page .add-pet_pagination {
   padding: 50px 0;
   display: flex;
   align-items: center;
@@ -308,13 +308,13 @@ a {
 
 /* modal rating css */
 
-.modal-body {
+.main-container-your-booking-page .modal-body {
   margin: 0;
   padding: 0;
   width: 100%;
 }
 
-.rating-container {
+.main-container-your-booking-page .rating-container {
   background-color: #e9e4f0;
   padding: 20px;
   text-align: center;
@@ -323,29 +323,29 @@ a {
   font-family: Roboto, sans-serif;
 }
 
-.rating-container h2 {
+.main-container-your-booking-page .rating-container h2 {
   margin-top: 0;
 }
 
-.title-rate {
+.main-container-your-booking-page .title-rate {
   margin: 10px;
 }
 
-.main-title-rate {
+.main-container-your-booking-page .main-title-rate {
   font-size: 20px;
   color: #898484;
   display: flex;
   justify-content: center;
 }
 
-.modal-title {
+.main-container-your-booking-page .modal-title {
   font-family: Roboto, sans-serif;
   font-weight: 600;
   text-align: center;
   flex: 1 1;
 }
 
-textarea {
+.main-container-your-booking-page textarea {
   width: calc(100% - 20px);
   padding: 10px;
   margin: 10px 0;
@@ -356,12 +356,12 @@ textarea {
   font-weight: 400; /* Font weight chữ bình thường */
 }
 
-textarea::placeholder {
+.main-container-your-booking-page textarea::placeholder {
   color: #cccc; /* Màu chữ của placeholder */
   font-weight: 200; /* Font weight chữ của placeholder */
 }
 
-.rating-button {
+.main-container-your-booking-page .rating-button {
   background-color: #4a00e0;
   color: white;
   border: none;
@@ -372,11 +372,11 @@ textarea::placeholder {
   width: calc(100% - 20px);
 }
 
-.rating-button:hover {
+.main-container-your-booking-page .rating-button:hover {
   background-color: #45a049;
 }
 
-.button-secondary {
+.main-container-your-booking-page .button-secondary {
   font-size: 16px;
   font-weight: 100;
   border: none;
@@ -384,16 +384,16 @@ textarea::placeholder {
   color: #4a00e0;
 }
 
-.maybe-later {
+.main-container-your-booking-page .maybe-later {
   color: #888;
   cursor: pointer;
 }
 
-.maybe-later:hover {
+.main-container-your-booking-page .maybe-later:hover {
   text-decoration: underline;
 }
 
-.rating {
+.main-container-your-booking-page .rating {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
@@ -401,11 +401,11 @@ textarea::placeholder {
   width: 100%;
 }
 
-.rating > input {
+.main-container-your-booking-page .rating > input {
   display: none;
 }
 
-.rating > label {
+.main-container-your-booking-page .rating > label {
   position: relative;
   width: 1em;
   font-size: 40px;
@@ -425,26 +425,26 @@ textarea::placeholder {
   cursor: pointer;
 }
 
-.rating > label::before {
+.main-container-your-booking-page .rating > label::before {
   content: '\2605';
   position: absolute;
   opacity: 0;
 }
 
-.rating > label:hover::before,
+.main-container-your-booking-page .rating > label:hover::before,
 .rating > label:hover ~ label::before {
   opacity: 1 !important;
 }
 
-.rating > input:checked ~ label::before {
+.main-container-your-booking-page .rating > input:checked ~ label::before {
   opacity: 1;
 }
 
-.rating:hover > input:checked ~ label::before {
+.main-container-your-booking-page .rating:hover > input:checked ~ label::before {
   opacity: 0.4;
 }
 
-.modal-footer {
+.main-container-your-booking-page .modal-footer {
   font-family: Roboto, sans-serif;
   display: flex;
   justify-content: center;
