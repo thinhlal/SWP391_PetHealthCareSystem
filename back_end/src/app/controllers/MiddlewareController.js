@@ -1,23 +1,22 @@
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
 const MiddlewareController = {
   verifyToken: (req, res, next) => {
-    const token = req.headers.token;
+    const token = req.headers.authorization;
     if (token) {
       // Bearer token...
       const accessToken = token.split(' ')[1];
       jwt.verify(accessToken, JWT_SECRET, (err, user) => {
         if (err) {
-          res.status(403).json('Token is not valid');
+          return res.status(401).json('Token expired');
         }
         req.user = user;
         next();
       });
     } else {
-      res.status(401).json('You are not authenticated');
+      return res.status(403).json('You are not authenticated');
     }
   },
 

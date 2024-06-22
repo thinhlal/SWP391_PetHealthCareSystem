@@ -22,6 +22,7 @@ import VeterinarianInfo from './pages/VeterinarianInfo/VeterinarianInfo.js';
 import AdminServices from './pages/AdminServices/AdminServices.js';
 import ProfilePet from './pages/ProfilePet/ProfilePet.js';
 import ChoosePet from './pages/ChoosePet/ChoosePet.js';
+import Payment from './pages/Payment/Payment.js';
 function App() {
   return (
     <AuthProvider>
@@ -89,6 +90,10 @@ function App() {
               <ProfilePet />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path='/payment-success'
+          element={<Payment />}
         />
 
         <Route

@@ -4,7 +4,7 @@ import axios from 'axios';
 //images
 import jonas from '../../assets/images/img_SignUp/background.png';
 import logo from '../../assets/images/img_SignUp/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ function SignUp() {
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -55,6 +56,9 @@ function SignUp() {
             password: '',
             confirmPassword: '',
           });
+          setTimeout(() => {
+            navigate('/login');
+          }, 500);
         })
         .catch(error => {
           setErrors({ server: error.response.data.message });

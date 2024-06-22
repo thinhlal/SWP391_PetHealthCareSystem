@@ -1,13 +1,9 @@
 import './ManageCages.css';
-// Component
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
-// Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-// Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-// images
 import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 
 function ManageCages() {
@@ -15,40 +11,45 @@ function ManageCages() {
   const [ownerOption, setOwnerOption] = useState('');
   const [petSearchResults, setPetSearchResults] = useState([]);
   const [ownerSearchResults, setOwnerSearchResults] = useState([]);
-  const [petInfo, setPetInfo] = useState({});
+  const [petInfo, setPetInfo] = useState({
+    species: 'Dog',
+    breed: 'Golden Retriever',
+    gender: 'Male',
+  });
   const [ownerInfo, setOwnerInfo] = useState({});
-  const [services, setServices] = useState([{ service: '', date: '' }]);
-  const [availableVets, setAvailableVets] = useState([
+  const [services, setServices] = useState([{ service: 'X-quang', date: '' }]);
+  const [availableVets] = useState([
     {
       id: 1,
-      name: 'Dr. Nguyễn Văn A',
+      name: 'Dr. John',
       availableSlots: [
-        '2024-06-01T08:00',
-        '2024-06-01T09:00',
-        '2024-06-01T10:00',
+        '2024-06-01T06:00',
+        '2024-06-02T06:00',
+        '2024-06-03T06:00',
       ],
     },
     {
       id: 2,
-      name: 'Dr. Trần Thị B',
+      name: 'Dr. Jane',
       availableSlots: [
-        '2024-06-01T11:00',
-        '2024-06-01T13:00',
-        '2024-06-01T15:00',
+        '2024-06-01T06:00',
+        '2024-06-02T06:00',
+        '2024-06-03T06:00',
       ],
     },
     {
       id: 3,
-      name: 'Dr. Lê Văn C',
+      name: 'Dr. Emily',
       availableSlots: [
-        '2024-06-01T08:30',
-        '2024-06-01T09:30',
-        '2024-06-01T10:30',
+        '2024-06-01T06:00',
+        '2024-06-02T06:00',
+        '2024-06-03T06:00',
       ],
     },
   ]);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [selectedVet, setSelectedVet] = useState('Dr. John');
   const [activeTab, setActiveTab] = useState('Profile');
   const [cageData, setCageData] = useState([
     {
@@ -68,6 +69,9 @@ function ManageCages() {
         doctor: 'Johny',
         cageNumber: 'A01',
         admissionTime: '15:00 AM | 2024-10-02',
+        ownerName: 'Liza Doe',
+        email: 'support@gmail.com',
+        phone: '+1234 55 66 777',
       },
     },
     {
@@ -87,6 +91,9 @@ function ManageCages() {
         doctor: 'Johny',
         cageNumber: 'A01',
         admissionTime: '15:00 AM | 2024-10-02',
+        ownerName: 'Liza Doe',
+        email: 'support@gmail.com',
+        phone: '+1234 55 66 777',
       },
     },
     {
@@ -171,7 +178,7 @@ function ManageCages() {
   };
 
   const addService = () => {
-    setServices([...services, { service: '', date: '' }]);
+    setServices([...services, { service: 'X-quang', date: '' }]);
   };
 
   const handleSubmit = event => {
@@ -182,12 +189,34 @@ function ManageCages() {
       services,
       reasonForAdmission: document.getElementById('reasonForAdmission').value,
       currentCondition: document.getElementById('currentCondition').value,
-      cageNumber: document.getElementById('cageNumber').value,
+      cageNumber: selectedCage.name,
       admissionTime: document.getElementById('admissionTime').value,
-      veterinarian: document.getElementById('veterinarian').value,
+      veterinarian: selectedVet,
     };
-    console.log(formData);
-    // Close modal on form submit
+
+    const updatedCageData = cageData.map(cage => {
+      if (cage.id === selectedCage.id) {
+        return {
+          ...cage,
+          status: 'Using',
+          petDetails: {
+            ...formData.petInfo,
+            inCage: formData.currentCondition,
+            services: services.map(service => service.service).join(', '),
+            dateTime: `${selectedTime} | ${selectedDate}`,
+            doctor: formData.veterinarian,
+            cageNumber: formData.cageNumber,
+            admissionTime: formData.admissionTime,
+            ownerName: formData.ownerInfo.name,
+            email: formData.ownerInfo.email,
+            phone: formData.ownerInfo.phone,
+          },
+        };
+      }
+      return cage;
+    });
+
+    setCageData(updatedCageData);
     document.querySelector('#exampleModal .btn-close').click();
   };
 
@@ -196,40 +225,12 @@ function ManageCages() {
     setOwnerOption('');
     setPetSearchResults([]);
     setOwnerSearchResults([]);
-    setPetInfo({});
+    setPetInfo({ species: 'Dog', breed: 'Golden Retriever', gender: 'Male' });
     setOwnerInfo({});
-    setServices([{ service: '', date: '' }]);
-    setAvailableVets([
-      {
-        id: 1,
-        name: 'Dr. Nguyễn Văn A',
-        availableSlots: [
-          '2024-06-01T08:00',
-          '2024-06-01T09:00',
-          '2024-06-01T10:00',
-        ],
-      },
-      {
-        id: 2,
-        name: 'Dr. Trần Thị B',
-        availableSlots: [
-          '2024-06-01T11:00',
-          '2024-06-01T13:00',
-          '2024-06-01T15:00',
-        ],
-      },
-      {
-        id: 3,
-        name: 'Dr. Lê Văn C',
-        availableSlots: [
-          '2024-06-01T08:30',
-          '2024-06-01T09:30',
-          '2024-06-01T10:30',
-        ],
-      },
-    ]);
+    setServices([{ service: 'X-quang', date: '' }]);
     setSelectedDate('');
     setSelectedTime('');
+    setSelectedVet('Dr. John');
     document.getElementById('addPetForm').reset();
   };
 
@@ -264,6 +265,19 @@ function ManageCages() {
     if (statusFilter === 'All') return true;
     return cage.status === statusFilter;
   });
+
+  useEffect(() => {
+    if (selectedDate && selectedTime) {
+      const availableVet = availableVets.find(vet =>
+        vet.availableSlots.includes(`${selectedDate}T${selectedTime}`),
+      );
+      if (availableVet) {
+        setSelectedVet(availableVet.name);
+      } else {
+        setSelectedVet('');
+      }
+    }
+  }, [selectedDate, selectedTime, availableVets]);
 
   return (
     <div className='manage-cages container-fluid'>
@@ -321,7 +335,11 @@ function ManageCages() {
                   className='booking-btn-add'
                   data-bs-toggle='modal'
                   data-bs-target='#exampleModal'
-                  disabled
+                  onClick={() =>
+                    setSelectedCage(
+                      cageData.find(cage => cage.status === 'Empty'),
+                    )
+                  }
                 >
                   Add Pet
                 </button>
@@ -354,7 +372,7 @@ function ManageCages() {
 
                         <div className='modal-body'>
                           <div className='modal-body-section'>
-                            <label>Type:</label>
+                            <label>Pet:</label>
                             <input
                               type='radio'
                               name='petOption'
@@ -417,8 +435,7 @@ function ManageCages() {
                                 }
                               />
                               <label>Species:</label>
-                              <input
-                                type='text'
+                              <select
                                 value={petInfo.species || ''}
                                 onChange={e =>
                                   setPetInfo({
@@ -426,10 +443,12 @@ function ManageCages() {
                                     species: e.target.value,
                                   })
                                 }
-                              />
+                              >
+                                <option value='Dog'>Dog</option>
+                                <option value='Cat'>Cat</option>
+                              </select>
                               <label>Breed:</label>
-                              <input
-                                type='text'
+                              <select
                                 value={petInfo.breed || ''}
                                 onChange={e =>
                                   setPetInfo({
@@ -437,21 +456,27 @@ function ManageCages() {
                                     breed: e.target.value,
                                   })
                                 }
-                              />
-                              <label>Age:</label>
-                              <input
-                                type='number'
-                                value={petInfo.age || ''}
-                                onChange={e =>
-                                  setPetInfo({
-                                    ...petInfo,
-                                    age: e.target.value,
-                                  })
-                                }
-                              />
+                              >
+                                {petInfo.species === 'Dog' ? (
+                                  <>
+                                    <option value='Golden Retriever'>
+                                      Golden Retriever
+                                    </option>
+                                    <option value='Labrador'>Labrador</option>
+                                    <option value='Poodle'>Poodle</option>
+                                  </>
+                                ) : (
+                                  <>
+                                    <option value='Persian'>Persian</option>
+                                    <option value='Siamese'>Siamese</option>
+                                    <option value='Maine Coon'>
+                                      Maine Coon
+                                    </option>
+                                  </>
+                                )}
+                              </select>
                               <label>Gender:</label>
-                              <input
-                                type='text'
+                              <select
                                 value={petInfo.gender || ''}
                                 onChange={e =>
                                   setPetInfo({
@@ -459,7 +484,10 @@ function ManageCages() {
                                     gender: e.target.value,
                                   })
                                 }
-                              />
+                              >
+                                <option value='Male'>Male</option>
+                                <option value='Female'>Female</option>
+                              </select>
                             </div>
                           )}
 
@@ -497,7 +525,7 @@ function ManageCages() {
                                 type='button'
                                 onClick={handleSearchOwner}
                               >
-                                Tìm
+                                Search
                               </button>
                               <select onChange={handleOwnerSelect}>
                                 {ownerSearchResults.map(owner => (
@@ -526,14 +554,14 @@ function ManageCages() {
                                   })
                                 }
                               />
-                              <label>Address:</label>
+                              <label>Email:</label>
                               <input
                                 type='text'
-                                value={ownerInfo.address || ''}
+                                value={ownerInfo.email || ''}
                                 onChange={e =>
                                   setOwnerInfo({
                                     ...ownerInfo,
-                                    address: e.target.value,
+                                    email: e.target.value,
                                   })
                                 }
                               />
@@ -548,21 +576,18 @@ function ManageCages() {
                                   })
                                 }
                               />
+                              <label>Reason for Admission:</label>
+                              <input
+                                type='text'
+                                id='reasonForAdmission'
+                              />
+                              <label>Current Condition:</label>
+                              <input
+                                type='text'
+                                id='currentCondition'
+                              />
                             </div>
                           )}
-
-                          <div className='modal-body-section'>
-                            <label>Reason for Admission:</label>
-                            <input
-                              type='text'
-                              id='reasonForAdmission'
-                            />
-                            <label>Current Condition:</label>
-                            <input
-                              type='text'
-                              id='currentCondition'
-                            />
-                          </div>
 
                           <div className='modal-body-section'>
                             <label>Services used:</label>
@@ -629,7 +654,11 @@ function ManageCages() {
 
                           <div className='modal-body-section'>
                             <label>Veterinarian:</label>
-                            <select id='veterinarian'>
+                            <select
+                              id='veterinarian'
+                              value={selectedVet}
+                              onChange={e => setSelectedVet(e.target.value)}
+                            >
                               {availableVets
                                 .filter(vet =>
                                   vet.availableSlots.includes(
@@ -652,6 +681,8 @@ function ManageCages() {
                             <input
                               type='text'
                               id='cageNumber'
+                              value={selectedCage ? selectedCage.name : ''}
+                              readOnly
                             />
                             <label>Admission Time:</label>
                             <input
@@ -713,16 +744,19 @@ function ManageCages() {
                       {cage.status}
                     </div>
                     <div className='content-list-body-value-button'>
-                      <button
-                        type='button'
-                        className={`btn ${cage.status === 'Empty' ? 'btn-secondary' : 'btn-primary'}`}
-                        data-bs-toggle='modal'
-                        data-bs-target={`#more_info_${cage.id}`}
-                        disabled={cage.status === 'Empty'}
-                      >
-                        More Details
-                      </button>
+                      {cage.status !== 'Empty' && (
+                        <button
+                          type='button'
+                          className='btn btn-primary'
+                          data-bs-toggle='modal'
+                          data-bs-target={`#more_info_${cage.id}`}
+                          onClick={() => setSelectedCage(cage)}
+                        >
+                          More Details
+                        </button>
+                      )}
                     </div>
+
                     <div
                       className='modal fade'
                       id={`more_info_${cage.id}`}
@@ -786,7 +820,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-customer'
                                       name='name'
-                                      defaultValue='Liza Doe'
+                                      value={
+                                        selectedCage?.petDetails.ownerName || ''
+                                      }
+                                      readOnly
                                     />
                                   </div>
 
@@ -798,7 +835,10 @@ function ManageCages() {
                                       type='email'
                                       className='edit-customer'
                                       name='email'
-                                      defaultValue='support@gmail.com'
+                                      value={
+                                        selectedCage?.petDetails.email || ''
+                                      }
+                                      readOnly
                                     />
                                   </div>
 
@@ -810,7 +850,10 @@ function ManageCages() {
                                       type='tel'
                                       className='edit-customer'
                                       name='phone'
-                                      defaultValue='+1234 55 66 777'
+                                      value={
+                                        selectedCage?.petDetails.phone || ''
+                                      }
+                                      readOnly
                                     />
                                   </div>
                                 </form>
@@ -834,7 +877,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='name'
-                                      defaultValue={cage.petDetails.name || ''}
+                                      value={
+                                        selectedCage?.petDetails.name || ''
+                                      }
+                                      readOnly
                                     />
                                   </div>
 
@@ -846,7 +892,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='breed'
-                                      defaultValue={cage.petDetails.breed || ''}
+                                      value={
+                                        selectedCage?.petDetails.breed || ''
+                                      }
+                                      readOnly
                                     />
                                   </div>
 
@@ -858,9 +907,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='species'
-                                      defaultValue={
-                                        cage.petDetails.species || ''
+                                      value={
+                                        selectedCage?.petDetails.species || ''
                                       }
+                                      readOnly
                                     />
                                   </div>
 
@@ -872,9 +922,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='gender'
-                                      defaultValue={
-                                        cage.petDetails.gender || ''
+                                      value={
+                                        selectedCage?.petDetails.gender || ''
                                       }
+                                      readOnly
                                     />
                                   </div>
 
@@ -886,9 +937,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='in-cage'
-                                      defaultValue={
-                                        cage.petDetails.inCage || ''
+                                      value={
+                                        selectedCage?.petDetails.inCage || ''
                                       }
+                                      readOnly
                                     />
                                   </div>
                                 </form>
@@ -912,23 +964,25 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='services'
-                                      defaultValue={
-                                        cage.petDetails.services || ''
+                                      value={
+                                        selectedCage?.petDetails.services || ''
                                       }
+                                      readOnly
                                     />
                                   </div>
 
                                   <div className='form-group'>
                                     <div className='sub-title-profile-pet'>
-                                      Date and Time:
+                                      Service Date:
                                     </div>
                                     <input
                                       type='text'
                                       className='edit-pet'
                                       name='dateTime'
-                                      defaultValue={
-                                        cage.petDetails.dateTime || ''
+                                      value={
+                                        selectedCage?.petDetails.dateTime || ''
                                       }
+                                      readOnly
                                     />
                                   </div>
 
@@ -940,9 +994,10 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='doctor'
-                                      defaultValue={
-                                        cage.petDetails.doctor || ''
+                                      value={
+                                        selectedCage?.petDetails.doctor || ''
                                       }
+                                      readOnly
                                     />
                                   </div>
 
@@ -954,9 +1009,11 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='cageNumber'
-                                      defaultValue={
-                                        cage.petDetails.cageNumber || ''
+                                      value={
+                                        selectedCage?.petDetails.cageNumber ||
+                                        ''
                                       }
+                                      readOnly
                                     />
                                   </div>
 
@@ -968,9 +1025,11 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='admissionTime'
-                                      defaultValue={
-                                        cage.petDetails.admissionTime || ''
+                                      value={
+                                        selectedCage?.petDetails
+                                          .admissionTime || ''
                                       }
+                                      readOnly
                                     />
                                   </div>
                                 </form>
@@ -1003,6 +1062,7 @@ function ManageCages() {
                           className='btn btn-secondary'
                           data-bs-toggle='modal'
                           data-bs-target='#exampleModal'
+                          onClick={() => setSelectedCage(cage)}
                         >
                           Add Pet
                         </button>

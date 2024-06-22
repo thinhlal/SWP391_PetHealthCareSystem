@@ -1,5 +1,5 @@
 import './Home.css';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 // Components
 import Slider from '../../components/Slider/Slider.js';
@@ -16,11 +16,18 @@ import dogBackground from '../../assets/images/img_Home/dogBackground.png';
 import why_we_are from '../../assets/images/img_Home/dog_About.png';
 import checked_Icon from '../../assets/images/img_Home/checked.png';
 import vote_star from '../../assets/images/img_Home/star.png';
+import userIcon from '../../assets/images/img_Home/userlogincam.png'; // Add this line
 
 const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
 
 function Home() {
   const { user, logOut } = useContext(AuthContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   useEffect(() => {
     const elements = document.querySelectorAll('.lazy-load');
 
@@ -53,18 +60,46 @@ function Home() {
                 pethealthcare@gmail.com | +91 012345678
               </div>
               {user ? (
-                <div className='header_form'>
-                  <div className='welcome_user'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" className="bi bi-person" viewBox="0 0 16 16">
-                      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-                    </svg>
-                    <div className='text-wrapper-3'>Hello {user.username}</div>
+                <div className='header_form_login'>
+                  <div
+                    className='user-icon-login'
+                    onClick={toggleMenu}
+                  >
+                    <img
+                      src={userIcon}
+                      alt='User Avatar'
+                      className='avatar-login'
+                    />
                   </div>
                   <div
-                    className='sign-in'
-                    onClick={logOut}
+                    className={`dropdown-menu-login ${isMenuOpen ? 'visible' : ''}`}
                   >
-                    <div className='text-wrapper-3'>Log Out</div>
+                    <div className='menu-item-login'>
+                      <img
+                        src={require('../../assets/images/img_Home/people.png')}
+                        alt='User Icon'
+                        style={{ width: '20px' }}
+                      />
+                      &nbsp;{user.username}
+                    </div>
+                    <div
+                      className='menu-item-login'
+                      onClick={() => window.location.href='/your-pet'}
+                    >
+                      Your Pet
+                    </div>
+                    <div
+                      className='menu-item-login'
+                      onClick={() => window.location.href='/your-booking'}
+                    >
+                      Your Booking
+                    </div>
+                    <div
+                      className='menu-item-login'
+                      onClick={logOut}
+                    >
+                      Log Out
+                    </div>
                   </div>
                 </div>
               ) : (

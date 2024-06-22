@@ -1,0 +1,12 @@
+:root {
+  --font-cormorant-garamond: 'Cormorant Garamond', serif;
+  --font-libre-franklin: 'Libre Franklin', sans-serif;
+}
+
+body {
+  font-family: var(--font-libre-franklin);
+}
+
+.h1 {
+  font-family: var(--font-cormorant-garamond);
+}

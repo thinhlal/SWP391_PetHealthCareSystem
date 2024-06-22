@@ -1,33 +1,36 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AccountSchema = new Schema(
+const WorkingSchema = new Schema(
   {
     id: {
+      type: Number,
+      unique: true,
+    },
+    vet_ID: {
       type: String,
       required: true,
       maxlength: 8,
       unique: true,
+      ref: 'Doctor',
     },
-    username: {
+    date: {
+      type: Date,
+      required: true,
+    },
+    isFulltime: {
+      type: Boolean,
+      default: false,
+    },
+    startTime: {
       type: String,
       required: true,
-      maxlength: 255,
-      unique: true,
     },
-    password: {
+    endTime: {
       type: String,
       required: true,
-      maxlength: 255,
     },
-    role: {
-      type: String,
-      required: true,
-      maxlength: 25,
-      enum: ['Customer', 'Veterinarian', 'Staff', 'Admin'],
-      default: 'Customer',
-    },
-    isAdmin: {
+    isOff: {
       type: Boolean,
       default: false,
     },
@@ -37,4 +40,4 @@ const AccountSchema = new Schema(
   },
 );
 
-module.exports = mongoose.model('Account', AccountSchema);
+module.exports = mongoose.model('WorkingHour', WorkingSchema);

@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const MiddlewareController = require('../app/controllers/MiddlewareController');
 
-const bookingController = require('../app/controllers/BookingController');
+const serviceController = require('../app/controllers/ServiceController.js');
 
-router.post('/', MiddlewareController.verifyToken, bookingController.index);
+router.get(
+  '/',
+  MiddlewareController.verifyToken,
+  serviceController.getAllServices,
+);
 
 module.exports = router;

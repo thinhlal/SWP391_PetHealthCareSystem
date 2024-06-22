@@ -220,7 +220,6 @@
   justify-content: center;
   width: 300px;
   height: 35px;
-  margin-top: 5px;
 }
 
 .Admin-Account-Main-Search-Input {
@@ -252,6 +251,8 @@
 
 .Admin-Account-Main-Filter {
   display: flex;
+  align-items: center;
+  margin-bottom: 8px;
   justify-content: space-between;
   font-family: Roboto, sans-serif;
 }
@@ -261,7 +262,6 @@
   font-weight: 600;
   line-height: 10px;
   margin-right: 40%;
-  margin-top: 10px;
 }
 
 .Admin-Account-Select-Filter {
@@ -276,7 +276,6 @@
   color: #fff;
   width: 100px;
   border-radius: 10px;
-  margin-bottom: 10px;
 }
 
 .Admin-Account-add-pet-btn:hover {
@@ -364,6 +363,19 @@
 
 .Admin-Account-Main-Table-Content-Row {
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 10px;
+  margin: 0;
+}
+
+.Admin-Account-Main-Table-Content-Row-Action {
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
   border-left: 1px solid #eae8f1;
   padding: 0 0 0 10px;
   margin: 0;
@@ -374,9 +386,13 @@
 }
 
 .Admin-Account-Main-Table-Content-Btn {
-  width: 50%;
   border: none;
   background-color: white;
+}
+
+.Admin-Account-Main-Table-Content-Btn_Wrapper {
+  justify-content: center;
+  display: flex;
 }
 
 .Admin-Account-modal-title {
@@ -398,6 +414,10 @@
 
 .Admin-Account-modal-title-radio-Enable {
   padding-right: 20px;
+}
+
+.Admin-Account-modal-radio {
+  margin-right: 8px;
 }
 
 .Admin-Account-modal-initials {
@@ -445,6 +465,7 @@
   font-size: 15px;
   color: #000000;
 }
+
 .Admin-Account-modal-more {
   font-weight: 700px;
   display: flex;
@@ -479,4 +500,10 @@
   align-items: center;
   justify-content: center;
   padding: 20px 0 10px 0;
+}
+
+.Admin-Account-Error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 0.25em;
 }

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AccountSchema = new Schema(
+const ServiceSchema = new Schema(
   {
     id: {
       type: String,
@@ -9,27 +9,23 @@ const AccountSchema = new Schema(
       maxlength: 8,
       unique: true,
     },
-    username: {
+    name: {
+      type: String,
+      required: true,
+      maxlength: 50,
+    },
+    description: {
       type: String,
       required: true,
       maxlength: 255,
-      unique: true,
     },
-    password: {
-      type: String,
+    price: {
+      type: Number,
       required: true,
-      maxlength: 255,
     },
-    role: {
-      type: String,
-      required: true,
-      maxlength: 25,
-      enum: ['Customer', 'Veterinarian', 'Staff', 'Admin'],
-      default: 'Customer',
-    },
-    isAdmin: {
+    status: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   {
@@ -37,4 +33,4 @@ const AccountSchema = new Schema(
   },
 );
 
-module.exports = mongoose.model('Account', AccountSchema);
+module.exports = mongoose.model('Service', ServiceSchema);
