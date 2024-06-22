@@ -53,11 +53,19 @@ function App() {
         />
         <Route
           path='/your-pet'
-          element={<YourPet />}
+          element={
+            <ProtectedRoute>
+              <YourPet />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/your-booking'
-          element={<YourBooking />}
+          element={
+            <ProtectedRoute>
+              <YourBooking />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/booking'
@@ -77,7 +85,11 @@ function App() {
         />
         <Route
           path='/pet-profile'
-          element={<ProfilePet />}
+          element={
+            <ProtectedRoute>
+              <ProfilePet />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/payment-success'

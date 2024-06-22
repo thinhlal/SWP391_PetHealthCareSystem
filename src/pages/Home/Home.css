@@ -357,6 +357,24 @@ a {
   white-space: nowrap;
 }
 
+.main .welcome_user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  height: 50px;
+  padding: 0 10px;
+  background-color: #002169;
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s;
+}
+
+.main .welcome_user:hover {
+  background-color: #e18213;
+  cursor: pointer;
+}
+
 .main .home-slider-emergency {
   padding: 0;
   margin: 0;
