@@ -47,7 +47,7 @@ class BookingController {
       await saveServiceBookingVet.save();
       res.status(201).json({ message: 'Booking successfully created' });
     } catch (error) {
-      res.status(500).json({ message: 'Error creating booking', error });
+      res.status(500).json({ message: 'Error creating ', error });
     }
   }
 }

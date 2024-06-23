@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AddPetModal.css';
+import axios from 'axios';
 
 const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
   const [newPet, setNewPet] = useState({
@@ -68,10 +69,31 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     setErrorMessageImage('');
   };
 
+  const savePetToDb = () => {
+    
+    axios
+      .post('http://localhost:5000/savepet', {
+        name : newPet.name,
+        birthday : newPet.age,
+        breed : newPet.breed,
+        type : newPet.type,
+        gender : newPet.gender,
+        image : newPet.image
+      });
+      // .then((response) => {
+      //   console.log(response.data);
+      // })
+      // .catch((error) => {
+      //   // Handle the error
+      //   console.error('Error:', error);
+      // });
+  }
+
   const addPet = () => {
     if (!validateFields()) {
       return;
     }
+    savePetToDb();
     const pet = { id: Date.now(), ...newPet };
     onAddPet(pet);
     onClose();

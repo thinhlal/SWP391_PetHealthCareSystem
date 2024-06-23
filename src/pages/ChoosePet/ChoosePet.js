@@ -30,7 +30,7 @@ function ChoosePet() {
     setPets([...pets, pet]);
   };
 
-  const handleSelectPet = id => {
+  const handleSelectPet = (id) => {
     setSelectedPetId(id);
   };
 
@@ -94,6 +94,7 @@ function ChoosePet() {
           <div
             className='choose-pet-card add-more-pet'
             onClick={() => setIsModalOpen(true)}
+            // onClick={() => addPetToDb()}
           >
             <div className='add-icon'>+</div>
             <div>Add Pet</div>
