@@ -6,22 +6,15 @@ import Footer from '../../components/User/Footer/Footer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-// Images
-import pet_img1 from '../../assets/images/img_YourPet/c2dc9a5328014cead97d6268b688a16e.jpg';
-import pet_img2 from '../../assets/images/img_YourPet/30c8eac7d84112a145ab7b06ce9e6eb1.jpg';
-import pet_img3 from '../../assets/images/img_YourPet/f86eb143541c5a58b7132ab54d6d1f12.jpg';
 import Sidebar from '../../components/User/Sidebar/Sidebar.js';
 import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
+import axiosInstance from '../../utils/axiosInstance.js';
 
 function YourPet() {
-  const [pets, setPets] = useState([
-    { id: 1, name: 'KiKi', image: pet_img1 },
-    { id: 2, name: 'MiMi', image: pet_img2 },
-    { id: 3, name: 'Lala', image: pet_img3 },
-  ]);
+  const [pets, setPets] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -34,6 +27,19 @@ function YourPet() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/pet`);
+        setPets(response.data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      }
+    };
+
+    fetchPets();
+  }, [])
 
   const addPet = pet => {
     setPets([...pets, pet]);

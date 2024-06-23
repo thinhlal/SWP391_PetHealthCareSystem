@@ -37,6 +37,9 @@ const PetSchema = new Schema(
       enum: ['MALE', 'FEMALE'],
       required: true,
     },
+    image: {
+      type: String,
+    },
   },
   {
     timestamps: true,

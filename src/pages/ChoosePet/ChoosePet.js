@@ -13,18 +13,15 @@ import Footer from '../../components/User/Footer/Footer';
 import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js'; // Import component animation
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import axiosInstance from '../../utils/axiosInstance.js';
 
 function ChoosePet() {
-  const [pets, setPets] = useState([
-    { id: 1, name: 'KiKi', image: image_pet_1, petID: '000001' },
-    { id: 2, name: 'MiMi', image: image_pet_2, petID: '000002' },
-    { id: 3, name: 'Lala', image: image_pet_3, petID: '000003' },
-  ]);
+  const [pets, setPets] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPetId, setSelectedPetId] = useState(null);
   const petContainerRef = useRef(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const addPet = pet => {
     setPets([...pets, pet]);
@@ -65,13 +62,25 @@ function ChoosePet() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
 
-    // Giả lập thời gian tải trang
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Thời gian giả lập tải trang (2 giây)
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/pet`);
+        setPets(response.data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      }
+    };
+
+    fetchPets();
+  }, [])
 
   if (loading) {
     return <AnimationComponent />;
@@ -94,15 +103,14 @@ function ChoosePet() {
           <div
             className='choose-pet-card add-more-pet'
             onClick={() => setIsModalOpen(true)}
-            // onClick={() => addPetToDb()}
           >
             <div className='add-icon'>+</div>
             <div>Add Pet</div>
           </div>
-          {pets.map(pet => (
+          {pets.map((pet, index) => (
             <div
               className={`choose-pet-card ${selectedPetId === pet.id ? 'selected' : ''}`}
-              key={pet.id}
+              key={index}
               onClick={() => handleSelectPet(pet.id)}
             >
               <img
@@ -110,7 +118,7 @@ function ChoosePet() {
                 alt={pet.name}
               />
               <div className='name-pet-card'>{pet.name}</div>
-              <div className='choose-pet-id-card'>PetID:&nbsp;{pet.petID}</div>
+              <div className='choose-pet-id-card'>PetID:&nbsp;{pet.id}</div>
             </div>
           ))}
         </div>

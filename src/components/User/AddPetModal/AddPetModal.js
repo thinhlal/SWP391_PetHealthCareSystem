@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
 import './AddPetModal.css';
-import axios from 'axios';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
+import axiosInstance from '../../../utils/axiosInstance';
 
 const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
+  const { user } = useContext(AuthContext);
   const [newPet, setNewPet] = useState({
     name: '',
     age: '',
@@ -69,33 +71,21 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     setErrorMessageImage('');
   };
 
-  const savePetToDb = () => {
-    
-    axios
-      .post('http://localhost:5000/savepet', {
-        name : newPet.name,
-        birthday : newPet.age,
-        breed : newPet.breed,
-        type : newPet.type,
-        gender : newPet.gender,
-        image : newPet.image
-      });
-      // .then((response) => {
-      //   console.log(response.data);
-      // })
-      // .catch((error) => {
-      //   // Handle the error
-      //   console.error('Error:', error);
-      // });
-  }
-
-  const addPet = () => {
+  const addPet = async () => {
     if (!validateFields()) {
       return;
     }
-    savePetToDb();
-    const pet = { id: Date.now(), ...newPet };
-    onAddPet(pet);
+    const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/pet/add`, {
+      customerID: user.id,
+      name: newPet.name,
+      birthday: newPet.age,
+      breed: newPet.breed,
+      type: newPet.type,
+      gender: newPet.gender,
+      //image: newPet.image
+    });
+    const id = res.data.petID;
+    onAddPet({ id, ...newPet});
     onClose();
     setNewPet({
       name: '',

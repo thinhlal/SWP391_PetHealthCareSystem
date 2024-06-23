@@ -18,8 +18,5 @@ router.post('/logout', MiddlewareController.verifyToken, siteController.logOut);
 
 //Home
 router.get('/', siteController.index);
-const petController = require('../app/controllers/PetController');
 
-//Save pet
-router.post('/savepet', petController.savePet);
 module.exports = router;
