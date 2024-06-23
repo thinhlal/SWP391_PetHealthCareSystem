@@ -17,7 +17,7 @@ function ChoosePet() {
   const [pets, setPets] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPetId, setSelectedPetId] = useState(null);
+  const [petID, setSelectedPetId] = useState(null);
   const petContainerRef = useRef(null);
   const navigate = useNavigate();
 
@@ -39,9 +39,8 @@ function ChoosePet() {
   };
 
   const handleBooking = () => {
-    if (selectedPetId !== null) {
-      const selectedPet = pets.find(pet => pet.id === selectedPetId);
-      navigate('/booking', { state: { selectedPet } });
+    if (petID !== null) {
+      navigate('/booking', { state: { petID } });
     } else {
       alert('Please select a pet first.');
     }
@@ -114,7 +113,7 @@ function ChoosePet() {
           ) : (
             pets.map((pet, index) => (
               <div
-                className={`choose-pet-card ${selectedPetId === pet.id ? 'selected' : ''}`}
+                className={`choose-pet-card ${petID === pet.id ? 'selected' : ''}`}
                 key={index}
                 onClick={() => handleSelectPet(pet.id)}
               >

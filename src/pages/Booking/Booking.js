@@ -60,7 +60,7 @@ const Booking = () => {
   const location = useLocation();
   //const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const { selectedPet } = location.state || {};
+  const { petID } = location.state || {};
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [availableSlots, setAvailableSlots] = useState([]);
@@ -80,7 +80,6 @@ const Booking = () => {
     serviceID: '',
   });
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     AOS.init({ duration: 1000 });
 
@@ -103,10 +102,10 @@ const Booking = () => {
   };
 
   useEffect(() => {
-    if (!selectedPet) {
+    if (!petID) {
       alert('No pet selected. Please go back and select a pet.');
     }
-  }, [selectedPet]);
+  }, [petID]);
 
   const handleDoctorChange = e => {
     const newDoctorId = e.target.value;
@@ -251,7 +250,7 @@ const Booking = () => {
           minute: '2-digit',
           hour12: false,
         }),
-        petID: selectedPet?.petID,
+        petID,
         amount: 80,
         customerID: user.id,
         ...userInfo,
@@ -370,7 +369,7 @@ const Booking = () => {
                 <input
                   type='text'
                   className='name_input'
-                  value={selectedPet?.petID || ''}
+                  value={petID || ''}
                   readOnly
                 />
               </div>
