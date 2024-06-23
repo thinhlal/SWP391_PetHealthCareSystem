@@ -9,6 +9,10 @@ router.post(
   MiddlewareController.verifyToken,
   ManageBookingsController.add,
 );
-router.post('/', MiddlewareController.verifyToken, ManageBookingsController.index);
+router.post(
+  '/',
+  MiddlewareController.verifyToken,
+  ManageBookingsController.index,
+);
 
 module.exports = router;

@@ -261,10 +261,10 @@ const Booking = () => {
           `${process.env.REACT_APP_API_URL}/booking`,
           bookingData,
         );
-        console.log(response.data);
         const orderResponse = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/paypal/create-order`,
           {
+            bookingID: response.data.bookingID,
             amount: bookingData.amount,
           },
         );

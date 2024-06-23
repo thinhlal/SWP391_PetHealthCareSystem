@@ -36,7 +36,7 @@ function YourPet() {
         const customerID = user.id;
         const response = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/pet`,
-          { customerID }
+          { customerID },
         );
         setPets(response.data);
       } catch (error) {
@@ -121,7 +121,10 @@ function YourPet() {
 
             <div className='detail-information'>
               {pets.length === 0 ? (
-                <div className='no-pet-available'>Currently, there are no pets available in the list. Please add pet to see !!!</div>
+                <div className='no-pet-available'>
+                  Currently, there are no pets available in the list. Please add
+                  pet to see !!!
+                </div>
               ) : (
                 pets.map((pet, index) => (
                   <PetProfileCard

@@ -1,4 +1,3 @@
-// import { Routes, Route, Link } from 'react-router-dom'
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import PublicRoute from './components/HandleRoutes/PublicRoute.js';

@@ -61,10 +61,16 @@ function Header() {
                 Hi {user.username}
               </div>
               <div className='main-header-user-account_menu'>
-                <a href='your-booking' className='main-header-user-account_menu-item'>
+                <a
+                  href='your-booking'
+                  className='main-header-user-account_menu-item'
+                >
                   Your Bookings
                 </a>
-                <a href='your-pet' className='main-header-user-account_menu-item'>
+                <a
+                  href='your-pet'
+                  className='main-header-user-account_menu-item'
+                >
                   View Your Pet
                 </a>
                 <div

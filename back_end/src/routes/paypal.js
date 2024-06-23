@@ -9,6 +9,7 @@ router.post(
   MiddlewareController.verifyToken,
   PaymentController.createOrder,
 );
+router.post('/paypal-success-getData', PaymentController.getData);
 router.get('/paypal-success', PaymentController.captureOrder);
 router.get('/paypal-cancel', PaymentController.paymentCancel);
 router.post('/', MiddlewareController.verifyToken, PaymentController.index);

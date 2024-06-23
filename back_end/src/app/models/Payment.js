@@ -17,6 +17,9 @@ const PaymentSchema = new Schema(
     date: {
       type: Date,
     },
+    totalPrice: {
+      type: Number,
+    },
     isSuccess: {
       type: Boolean,
       default: false,

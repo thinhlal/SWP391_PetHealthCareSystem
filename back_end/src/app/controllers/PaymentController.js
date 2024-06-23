@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { getIo } = require('../../config/socket/socket');
+const Payment = require('../models/Payment.js');
 const { getAccessToken, PAYPAL_API } = require('../../config/paypal/paypal');
 
 class PaymentController {
@@ -19,6 +19,7 @@ class PaymentController {
               currency_code: 'USD',
               value: req.body.amount,
             },
+            custom_id: req.body.bookingID,
           },
         ],
         application_context: {
@@ -57,16 +58,36 @@ class PaymentController {
           },
         },
       );
-
-      const io = getIo();
-      io.emit('payment-success', {
-        id: response.data.id,
-        status: response.data.status,
-        amount:
+      let idPayment;
+      while (true) {
+        try {
+          const lastPayment = await Payment.findOne().sort({ id: -1 });
+          if (lastPayment) {
+            const lastID = parseInt(lastPayment.id.substring(2));
+            idPayment = 'PA' + (lastID + 1).toString().padStart(6, '0');
+          } else {
+            idPayment = 'PA000000';
+          }
+          break;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      const bookingID =
+        response.data.purchase_units[0].payments.captures[0].custom_id;
+      const data = {
+        id: idPayment,
+        bookingID: bookingID,
+        isSuccess: response.data.status === 'COMPLETED' ? true : false,
+        date: new Date(),
+        totalPrice:
           response.data.purchase_units[0].payments.captures[0].amount.value,
-      });
-
-      res.redirect('http://localhost:3000/payment-success');
+      };
+      const payment = new Payment(data);
+      await payment.save();
+      res.redirect(
+        `http://localhost:3000/payment-success?bookingID=${bookingID}`,
+      );
     } catch (error) {
       console.error(
         'Error capturing order:',
@@ -79,6 +100,17 @@ class PaymentController {
   async paymentCancel(req, res) {
     console.log('Da huy booking');
     res.send('Payment cancelled');
+  }
+
+  //POST /paypal-success-getData
+  async getData(req, res) {
+    const bookingID = req.body.bookingID;
+    try {
+      const paymentData = await Payment.findOne({ bookingID });
+      res.json(paymentData);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching services', error });
+    }
   }
 }
 

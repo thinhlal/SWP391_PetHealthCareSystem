@@ -45,7 +45,13 @@ class BookingController {
       const saveBooking = new Booking({ id: idBooking, ...bookingInfo });
       await saveBooking.save();
       await saveServiceBookingVet.save();
-      res.status(201).json({ message: 'Booking successfully created' });
+      console.log(idBooking);
+      res
+        .status(201)
+        .json({
+          message: 'Booking successfully created',
+          bookingID: idBooking,
+        });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ', error });
     }
