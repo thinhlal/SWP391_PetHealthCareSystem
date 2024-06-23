@@ -31,7 +31,9 @@ function YourPet() {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/pet`);
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/pet`,
+        );
         setPets(response.data);
       } catch (error) {
         console.error('Error fetching pets:', error);
@@ -39,7 +41,7 @@ function YourPet() {
     };
 
     fetchPets();
-  }, [])
+  }, []);
 
   const addPet = pet => {
     setPets([...pets, pet]);

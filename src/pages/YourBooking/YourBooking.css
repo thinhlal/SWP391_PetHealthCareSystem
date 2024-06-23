@@ -440,7 +440,10 @@ a {
   opacity: 1;
 }
 
-.main-container-your-booking-page .rating:hover > input:checked ~ label::before {
+.main-container-your-booking-page
+  .rating:hover
+  > input:checked
+  ~ label::before {
   opacity: 0.4;
 }
 

@@ -2,17 +2,13 @@ import './ChoosePet.css';
 import React, { useState, useEffect, useRef } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-// image
-import image_pet_1 from '../../assets/images/img_ChoosePet/pexels-wildlittlethingsphoto-2253275.jpg';
-import image_pet_2 from '../../assets/images/img_ChoosePet/pexels-ingewallu-177809.jpg';
-import image_pet_3 from '../../assets/images/img_ChoosePet/pexels-svetozar-milashevich-99573-1490908.jpg';
 
 // components
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
 import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
-import AnimationComponent from '../../components/Animation/AnimationComponent.js'; // Import component animation
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import AnimationComponent from '../../components/Animation/AnimationComponent.js';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance.js';
 
 function ChoosePet() {
@@ -27,7 +23,7 @@ function ChoosePet() {
     setPets([...pets, pet]);
   };
 
-  const handleSelectPet = (id) => {
+  const handleSelectPet = id => {
     setSelectedPetId(id);
   };
 
@@ -72,7 +68,9 @@ function ChoosePet() {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/pet`);
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/pet`,
+        );
         setPets(response.data);
       } catch (error) {
         console.error('Error fetching pets:', error);
@@ -80,7 +78,7 @@ function ChoosePet() {
     };
 
     fetchPets();
-  }, [])
+  }, []);
 
   if (loading) {
     return <AnimationComponent />;

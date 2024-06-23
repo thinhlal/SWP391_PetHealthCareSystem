@@ -75,17 +75,20 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     if (!validateFields()) {
       return;
     }
-    const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/pet/add`, {
-      customerID: user.id,
-      name: newPet.name,
-      birthday: newPet.age,
-      breed: newPet.breed,
-      type: newPet.type,
-      gender: newPet.gender,
-      //image: newPet.image
-    });
+    const res = await axiosInstance.post(
+      `${process.env.REACT_APP_API_URL}/pet/add`,
+      {
+        customerID: user.id,
+        name: newPet.name,
+        birthday: newPet.age,
+        breed: newPet.breed,
+        type: newPet.type,
+        gender: newPet.gender,
+        //image: newPet.image
+      },
+    );
     const id = res.data.petID;
-    onAddPet({ id, ...newPet});
+    onAddPet({ id, ...newPet });
     onClose();
     setNewPet({
       name: '',

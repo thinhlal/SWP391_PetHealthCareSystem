@@ -263,9 +263,12 @@ const Booking = () => {
           bookingData,
         );
         console.log(response.data);
-        const orderResponse = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/paypal/create-order`, {
-          amount: bookingData.amount
-        });
+        const orderResponse = await axiosInstance.post(
+          `${process.env.REACT_APP_API_URL}/paypal/create-order`,
+          {
+            amount: bookingData.amount,
+          },
+        );
 
         window.location.href = orderResponse.data.url;
       } catch (error) {

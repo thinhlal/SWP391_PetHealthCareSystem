@@ -45,26 +45,26 @@
   margin-left: 150px;
   font-size: 16px;
 }
-.main-content-header-choose-day-work{
+.main-content-header-choose-day-work {
   padding-left: 80%;
 }
-.bt-choose-time-work{
+.bt-choose-time-work {
   background-color: #e18213;
-    width: 144px;
-    height: 35px;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
-    color: white;
-    font-size: 13px;
-    font-family: Roboto, sans-serif;
+  width: 144px;
+  height: 35px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  color: white;
+  font-size: 13px;
+  font-family: Roboto, sans-serif;
 }
-.bt-choose-time-work:hover{
+.bt-choose-time-work:hover {
   background-color: #002169;
   cursor: pointer;
 }

@@ -84,13 +84,13 @@ function Home() {
                     </div>
                     <div
                       className='menu-item-login'
-                      onClick={() => window.location.href='/your-pet'}
+                      onClick={() => (window.location.href = '/your-pet')}
                     >
                       Your Pet
                     </div>
                     <div
                       className='menu-item-login'
-                      onClick={() => window.location.href='/your-booking'}
+                      onClick={() => (window.location.href = '/your-booking')}
                     >
                       Your Booking
                     </div>

@@ -77,33 +77,36 @@ function AdminAccount() {
     },
   ]);
 
-  const dailyRevenueData = useMemo(() => [
-    {
-      id: 1,
-      date: '2024-06-21',
-      money: 1200
-    },
-    {
-      id: 2,
-      date: '2024-06-22',
-      money: 1500
-    },
-    {
-      id: 3,
-      date: '2024-06-23',
-      money: 1600
-    },
-    {
-      id: 4,
-      date: '2024-06-24',
-      money: 1200
-    },
-    {
-      id: 5,
-      date: '2024-06-25',
-      money: 1800
-    },
-  ], []);
+  const dailyRevenueData = useMemo(
+    () => [
+      {
+        id: 1,
+        date: '2024-06-21',
+        money: 1200,
+      },
+      {
+        id: 2,
+        date: '2024-06-22',
+        money: 1500,
+      },
+      {
+        id: 3,
+        date: '2024-06-23',
+        money: 1600,
+      },
+      {
+        id: 4,
+        date: '2024-06-24',
+        money: 1200,
+      },
+      {
+        id: 5,
+        date: '2024-06-25',
+        money: 1800,
+      },
+    ],
+    [],
+  );
 
   const [newAccount, setNewAccount] = useState({
     user_name: '',
@@ -139,13 +142,17 @@ function AdminAccount() {
   useEffect(() => {
     if (selectedDate) {
       const filteredData = dailyRevenueData.find(
-        (daily) => daily.date === selectedDate
+        daily => daily.date === selectedDate,
       );
       setFilteredRevenueData(filteredData);
 
-      const yesterday = new Date(new Date(selectedDate).setDate(new Date(selectedDate).getDate() - 1)).toISOString().substr(0, 10);
+      const yesterday = new Date(
+        new Date(selectedDate).setDate(new Date(selectedDate).getDate() - 1),
+      )
+        .toISOString()
+        .substr(0, 10);
       const yesterdayData = dailyRevenueData.find(
-        (daily) => daily.date === yesterday
+        daily => daily.date === yesterday,
       );
       setYesterdayRevenueData(yesterdayData);
     }
@@ -155,17 +162,17 @@ function AdminAccount() {
     setRoleFilter(event.target.value);
   };
 
-  const validateEmail = (email) => {
+  const validateEmail = email => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
   };
 
-  const validatePassword = (password) => {
+  const validatePassword = password => {
     const re = /^.{6,}$/;
     return re.test(String(password));
-  }
+  };
 
-  const validatePhone = (phone) => {
+  const validatePhone = phone => {
     const re = /^[0-9]{10}$/;
     return re.test(String(phone));
   };
@@ -174,9 +181,11 @@ function AdminAccount() {
     const newErrors = {};
     if (!editAccount.name) newErrors.name = 'Name is required';
     if (!editAccount.email) newErrors.email = 'Email is required';
-    else if (!validateEmail(editAccount.email)) newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
+    else if (!validateEmail(editAccount.email))
+      newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
     if (!editAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
-    else if (!validatePhone(editAccount.phoneNum)) newErrors.phoneNum = 'Invalid phone number format';
+    else if (!validatePhone(editAccount.phoneNum))
+      newErrors.phoneNum = 'Invalid phone number format';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -191,13 +200,15 @@ function AdminAccount() {
     });
     setAccountData(updatedAccountData);
     setErrors({});
-    const modal = bootstrap.Modal.getInstance(document.getElementById(`exampleModalEdit-${editAccount.id}`));
+    const modal = bootstrap.Modal.getInstance(
+      document.getElementById(`exampleModalEdit-${editAccount.id}`),
+    );
     if (modal) {
       modal.hide();
     }
   };
 
-  const openEditModal = (account) => {
+  const openEditModal = account => {
     setCurrentAccount(account);
     setEditAccount({
       id: account.id,
@@ -228,16 +239,19 @@ function AdminAccount() {
     const newErrors = {};
     if (!newAccount.user_name) newErrors.user_name = 'User name is required';
     if (!newAccount.password) newErrors.password = 'Password is required';
-    else if (!validatePassword(newAccount.password)) newErrors.password = 'The minimum length is 6 characters';
+    else if (!validatePassword(newAccount.password))
+      newErrors.password = 'The minimum length is 6 characters';
     if (!newAccount.confirmPassword)
       newErrors.confirmPassword = 'Confirm password is required';
     if (newAccount.password !== newAccount.confirmPassword)
       newErrors.confirmPassword = 'Passwords do not match';
     if (!newAccount.name) newErrors.name = 'Name is required';
     if (!newAccount.email) newErrors.email = 'Email is required';
-    else if (!validateEmail(newAccount.email)) newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
+    else if (!validateEmail(newAccount.email))
+      newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
     if (!newAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
-    else if (!validatePhone(newAccount.phoneNum)) newErrors.phoneNum = 'Invalid phone number format';
+    else if (!validatePhone(newAccount.phoneNum))
+      newErrors.phoneNum = 'Invalid phone number format';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -291,7 +305,10 @@ function AdminAccount() {
 
   const calculatePercentChange = () => {
     if (filteredRevenueData && yesterdayRevenueData) {
-      const change = ((filteredRevenueData.money - yesterdayRevenueData.money) / yesterdayRevenueData.money) * 100;
+      const change =
+        ((filteredRevenueData.money - yesterdayRevenueData.money) /
+          yesterdayRevenueData.money) *
+        100;
       return change.toFixed(2);
     }
     return null;
@@ -497,10 +514,7 @@ function AdminAccount() {
                     {' '}
                     Weekly income{' '}
                   </div>
-                  <div className='Admin-Account-Main-Header-Money'>
-                    {' '}
-                    $0000{' '}
-                  </div>
+                  <div className='Admin-Account-Main-Header-Money'> $0000 </div>
                   <div className='Admin-Account-Main-Header-Percent'>
                     {' '}
                     6% day over week{' '}
@@ -512,10 +526,7 @@ function AdminAccount() {
                     {' '}
                     Monthly income{' '}
                   </div>
-                  <div className='Admin-Account-Main-Header-Money'>
-                    {' '}
-                    $0000{' '}
-                  </div>
+                  <div className='Admin-Account-Main-Header-Money'> $0000 </div>
                   <div className='Admin-Account-Main-Header-Percent'>
                     {' '}
                     3% day over month{' '}
@@ -524,10 +535,7 @@ function AdminAccount() {
 
                 <div className='Admin-Account-Main-Header-Income col-md-3'>
                   <div className='Admin-Account-Main-Header-Note'> Total </div>
-                  <div className='Admin-Account-Main-Header-Money'>
-                    {' '}
-                    $0000{' '}
-                  </div>
+                  <div className='Admin-Account-Main-Header-Money'> $0000 </div>
                   <div className='Admin-Account-Main-Header-Percent'>
                     {' '}
                     10% day over day{' '}

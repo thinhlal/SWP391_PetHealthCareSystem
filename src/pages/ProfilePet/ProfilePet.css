@@ -28,7 +28,9 @@
   position: relative;
 }
 
-.main-container-pet-profile .container-pet-profile .sub-title-info-pet-line::after {
+.main-container-pet-profile
+  .container-pet-profile
+  .sub-title-info-pet-line::after {
   content: '';
   display: block;
   width: 100%;
@@ -157,7 +159,9 @@
   background-color: #28a745;
 }
 
-.main-container-pet-profile .container-pet-profile .add-button-vaccination:hover,
+.main-container-pet-profile
+  .container-pet-profile
+  .add-button-vaccination:hover,
 .delete-button-vaccination:hover,
 .delete-button-medical:hover,
 .view-button-medical:hover {
@@ -165,7 +169,9 @@
   transform: scale(1.05);
 }
 
-.main-container-pet-profile .container-pet-profile .delete-button-vaccination:hover,
+.main-container-pet-profile
+  .container-pet-profile
+  .delete-button-vaccination:hover,
 .delete-button-medical:hover {
   background-color: #c82333;
 }

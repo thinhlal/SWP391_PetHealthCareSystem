@@ -485,14 +485,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #F56E64;
+  background-color: #f56e64;
   transition: 0.4s;
   border-radius: 34px;
 }
 
 .Admin-Services .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 14px;
   width: 14px;
   left: 3px;
@@ -503,7 +503,7 @@
 }
 
 input:checked + .slider {
-  background-color: #007F00;
+  background-color: #007f00;
 }
 
 input:checked + .slider:before {
@@ -519,7 +519,7 @@ input:checked + .slider:before {
   color: red;
 } */
 
-.Admin-Services .modal-content{
+.Admin-Services .modal-content {
   color: #000000;
 }
 
