@@ -1,5 +1,5 @@
 import './ChoosePet.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -10,8 +10,10 @@ import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance.js';
+import { AuthContext } from '../../context/AuthContext.js';
 
 function ChoosePet() {
+  const { user } = useContext(AuthContext);
   const [pets, setPets] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,8 +70,10 @@ function ChoosePet() {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await axiosInstance.get(
+        const customerID = user.id;
+        const response = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/pet`,
+          { customerID }
         );
         setPets(response.data);
       } catch (error) {
@@ -78,7 +82,7 @@ function ChoosePet() {
     };
 
     fetchPets();
-  }, []);
+  }, [user]);
 
   if (loading) {
     return <AnimationComponent />;
@@ -105,20 +109,24 @@ function ChoosePet() {
             <div className='add-icon'>+</div>
             <div>Add Pet</div>
           </div>
-          {pets.map((pet, index) => (
-            <div
-              className={`choose-pet-card ${selectedPetId === pet.id ? 'selected' : ''}`}
-              key={index}
-              onClick={() => handleSelectPet(pet.id)}
-            >
-              <img
-                src={pet.image}
-                alt={pet.name}
-              />
-              <div className='name-pet-card'>{pet.name}</div>
-              <div className='choose-pet-id-card'>PetID:&nbsp;{pet.id}</div>
-            </div>
-          ))}
+          {pets.length === 0 ? (
+            <div className='no-pet'>Currently, there are no pets available in the list. Please add pet to see</div>
+          ) : (
+            pets.map((pet, index) => (
+              <div
+                className={`choose-pet-card ${selectedPetId === pet.id ? 'selected' : ''}`}
+                key={index}
+                onClick={() => handleSelectPet(pet.id)}
+              >
+                <img
+                  src={pet.image}
+                  alt={pet.name}
+                />
+                <div className='name-pet-card'>{pet.name}</div>
+                <div className='choose-pet-id-card'>PetID:&nbsp;{pet.id}</div>
+              </div>
+            ))
+          )}
         </div>
         <button
           className='select-service-pet'

@@ -1,5 +1,5 @@
 import './YourPet.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Header from '../../components/User/Header/Header.js';
 import Footer from '../../components/User/Footer/Footer.js';
 // Bootstrap CSS
@@ -12,8 +12,10 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import axiosInstance from '../../utils/axiosInstance.js';
+import { AuthContext } from '../../context/AuthContext.js';
 
 function YourPet() {
+  const { user } = useContext(AuthContext);
   const [pets, setPets] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -31,8 +33,10 @@ function YourPet() {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await axiosInstance.get(
+        const customerID = user.id;
+        const response = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/pet`,
+          { customerID }
         );
         setPets(response.data);
       } catch (error) {
@@ -41,7 +45,7 @@ function YourPet() {
     };
 
     fetchPets();
-  }, []);
+  }, [user]);
 
   const addPet = pet => {
     setPets([...pets, pet]);
@@ -116,13 +120,17 @@ function YourPet() {
             </div>
 
             <div className='detail-information'>
-              {pets.map((pet, index) => (
-                <PetProfileCard
-                  key={index}
-                  imgSrc={pet.image}
-                  name={pet.name}
-                />
-              ))}
+              {pets.length === 0 ? (
+                <div className='no-pet-available'>Currently, there are no pets available in the list. Please add pet to see !!!</div>
+              ) : (
+                pets.map((pet, index) => (
+                  <PetProfileCard
+                    key={index}
+                    imgSrc={pet.image}
+                    name={pet.name}
+                  />
+                ))
+              )}
             </div>
             <AddPetModal
               isOpen={isModalOpen}

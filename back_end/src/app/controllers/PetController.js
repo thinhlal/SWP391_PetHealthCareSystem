@@ -3,8 +3,9 @@ const Pet = require('../models/Pet.js');
 class PetController {
   // GET /
   async index(req, res, next) {
+    const {customerID} = req.body
     try {
-      const allPets = await Pet.find();
+      const allPets = await Pet.find({customerID});
       res.status(200).json(allPets);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching services', error });

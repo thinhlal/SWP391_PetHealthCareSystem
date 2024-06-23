@@ -16,7 +16,7 @@ import dogBackground from '../../assets/images/img_Home/dogBackground.png';
 import why_we_are from '../../assets/images/img_Home/dog_About.png';
 import checked_Icon from '../../assets/images/img_Home/checked.png';
 import vote_star from '../../assets/images/img_Home/star.png';
-import userIcon from '../../assets/images/img_Home/userlogincam.png'; // Add this line
+import userIcon from '../../assets/images/img_Home/userlogincam.png';
 
 const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
 

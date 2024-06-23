@@ -61,12 +61,12 @@ function Header() {
                 Hi {user.username}
               </div>
               <div className='main-header-user-account_menu'>
-                <div className='main-header-user-account_menu-item'>
+                <a href='your-booking' className='main-header-user-account_menu-item'>
                   Your Bookings
-                </div>
-                <div className='main-header-user-account_menu-item'>
+                </a>
+                <a href='your-pet' className='main-header-user-account_menu-item'>
                   View Your Pet
-                </div>
+                </a>
                 <div
                   onClick={logOut}
                   className='main-header-user-account_menu-item'
