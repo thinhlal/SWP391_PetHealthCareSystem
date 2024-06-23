@@ -684,13 +684,13 @@ function AdminServices() {
                                                                                 value={editService.services_name}
                                                                                 onChange={handleEditInputChange}
                                                                                 placeholder='Name'
-                                                                            />
-                                                                            {editServiceErrors.services_name && (
+                                                                            />                                                                         
+                                                                        </div>
+                                                                        {editServiceErrors.services_name && (
                                                                                 <p className='error-message'>
                                                                                     {editServiceErrors.services_name}
                                                                                 </p>
                                                                             )}
-                                                                        </div>
                                                                     </div>
                                                                     <div className='Admin-Services-modal-update-name'>
                                                                         <div className='Admin-Services-modal-title'>
@@ -713,12 +713,13 @@ function AdminServices() {
                                                                                 onChange={handleEditInputChange}
                                                                                 placeholder='Description'
                                                                             />
-                                                                            {editServiceErrors.describe && (
+                                                                           
+                                                                        </div>
+                                                                        {editServiceErrors.describe && (
                                                                                 <p className='error-message'>
                                                                                     {editServiceErrors.describe}
                                                                                 </p>
                                                                             )}
-                                                                        </div>
                                                                     </div>
                                                                     <div className='Admin-Services-modal-update-name'>
                                                                         <div className='Admin-Services-modal-title'>
@@ -744,17 +745,18 @@ function AdminServices() {
                                                                                 onChange={handleEditInputChange}
                                                                                 placeholder='Price'
                                                                             />
-                                                                            {editServiceErrors.price && (
+                                                                           
+                                                                        </div>
+                                                                        {editServiceErrors.price && (
                                                                                 <p className='error-message'>
                                                                                     {editServiceErrors.price}
                                                                                 </p>
                                                                             )}
-                                                                        </div>
                                                                         <div>
-                                                                            <div className='Admin-Services-modal-title'>
+                                                                            {/* <div className='Admin-Services-modal-title'>
                                                                                 Status
-                                                                            </div>
-                                                                            <div className='Admin-Services-modal-radio'>
+                                                                            </div> */}
+                                                                            {/* <div className='Admin-Services-modal-radio'>
                                                                                 <div className='Admin-Services-modal-radio-text'>
                                                                                     <input
                                                                                         type='radio'
@@ -775,7 +777,7 @@ function AdminServices() {
                                                                                     />
                                                                                     <label> Disable </label>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div> */}
                                                                         </div>
                                                                     </div>
                                                                 </div>

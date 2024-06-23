@@ -464,7 +464,7 @@
 }
 
 /* Toggle Switch */
-.switch {
+.Admin-Services .switch {
   position: relative;
   display: inline-block;
   width: 34px;
@@ -472,25 +472,25 @@
   margin-top: 12px;
 }
 
-.switch input {
+.Admin-Services .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.slider {
+.Admin-Services .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #F56E64;
   transition: 0.4s;
   border-radius: 34px;
 }
 
-.slider:before {
+.Admin-Services .slider:before {
   position: absolute;
   content: "";
   height: 14px;
@@ -503,7 +503,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: #007F00;
 }
 
 input:checked + .slider:before {
@@ -511,19 +511,19 @@ input:checked + .slider:before {
 }
 
 /* Row color based on status */
-.row-enable {
+/* .row-enable {
   color: green;
 }
 
 .row-disable {
   color: red;
-}
+} */
 
-.modal-content{
+.Admin-Services .modal-content{
   color: #000000;
 }
 
-.error-message {
+.Admin-Services .error-message {
   color: red;
   font-family: Roboto, sans-serif;
 }

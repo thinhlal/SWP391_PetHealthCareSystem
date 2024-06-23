@@ -2,7 +2,7 @@
   background-color: #f0f4f8;
 }
 
-.container-pet-profile {
+.main-container-pet-profile .container-pet-profile {
   font-family: Roboto, sans-serif;
   display: flex;
   justify-content: center;
@@ -12,23 +12,23 @@
   margin-top: 50px;
 }
 
-.sub-title-info-pet {
+.main-container-pet-profile .container-pet-profile .sub-title-info-pet {
   font-weight: 600;
   color: #002169;
 }
 
-.ID-pet-profile {
+.main-container-pet-profile .container-pet-profile .ID-pet-profile {
   color: #218838;
 }
 
-.sub-title-info-pet-line {
+.main-container-pet-profile .container-pet-profile .sub-title-info-pet-line {
   font-weight: 600;
   color: #002169;
   margin-bottom: 10px;
   position: relative;
 }
 
-.sub-title-info-pet-line::after {
+.main-container-pet-profile .container-pet-profile .sub-title-info-pet-line::after {
   content: '';
   display: block;
   width: 100%;
@@ -39,7 +39,7 @@
   left: 0;
 }
 
-.sidebar-pet-profile {
+.main-container-pet-profile .container-pet-profile .sidebar-pet-profile {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,30 +54,30 @@
   font-size: 18px;
 }
 
-.pet-avatar img {
+.main-container-pet-profile .container-pet-profile .pet-avatar img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   margin-bottom: 10px;
 }
 
-.pet-parent,
+.main-container-pet-profile .container-pet-profile .pet-parent,
 .status {
   text-align: center;
   margin-bottom: 10px;
 }
 
-.status-active {
+.main-container-pet-profile .container-pet-profile .status-active {
   color: green;
   font-weight: bold;
 }
 
-.pet-id-info {
+.main-container-pet-profile .container-pet-profile .pet-id-info {
   font-size: 12px;
   color: #555;
 }
 
-.main-content-pet {
+.main-container-pet-profile .container-pet-profile .main-content-pet {
   display: flex;
   gap: 30px;
   font-size: 18px;
@@ -86,7 +86,7 @@
   line-height: 1.8;
 }
 
-.pet-info,
+.main-container-pet-profile .container-pet-profile .pet-info,
 .vaccination-info,
 .medical-info {
   background: white;
@@ -97,19 +97,19 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.main-edit-button-pet-info,
+.main-container-pet-profile .container-pet-profile .main-edit-button-pet-info,
 .main-edit-button-medical {
   display: flex;
   justify-content: flex-end;
 }
 
-.main-add-button-vaccination,
+.main-container-pet-profile .container-pet-profile .main-add-button-vaccination,
 .main-add-button-medical {
   display: flex;
   justify-content: flex-end;
 }
 
-.edit-button-pet-info,
+.main-container-pet-profile .container-pet-profile .edit-button-pet-info,
 .edit-button-medical {
   background-color: #007bff;
   color: white;
@@ -124,13 +124,13 @@
     transform 0.3s ease;
 }
 
-.edit-button-pet-info:hover,
+.main-container-pet-profile .container-pet-profile .edit-button-pet-info:hover,
 .edit-button-medical:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
 
-.add-button-vaccination,
+.main-container-pet-profile .container-pet-profile .add-button-vaccination,
 .delete-button-vaccination,
 .delete-button-medical,
 .view-button-medical {
@@ -147,17 +147,17 @@
     transform 0.3s ease;
 }
 
-.delete-button-vaccination,
+.main-container-pet-profile .container-pet-profile .delete-button-vaccination,
 .delete-button-medical {
   background-color: #dc3545;
   white-space: nowrap;
 }
 
-.view-button-medical {
+.main-container-pet-profile .container-pet-profile .view-button-medical {
   background-color: #28a745;
 }
 
-.add-button-vaccination:hover,
+.main-container-pet-profile .container-pet-profile .add-button-vaccination:hover,
 .delete-button-vaccination:hover,
 .delete-button-medical:hover,
 .view-button-medical:hover {
@@ -165,43 +165,43 @@
   transform: scale(1.05);
 }
 
-.delete-button-vaccination:hover,
+.main-container-pet-profile .container-pet-profile .delete-button-vaccination:hover,
 .delete-button-medical:hover {
   background-color: #c82333;
 }
 
-.view-button-medical:hover {
+.main-container-pet-profile .container-pet-profile .view-button-medical:hover {
   background-color: #218838;
 }
 
-.pet-details h1 {
+.main-container-pet-profile .container-pet-profile .pet-details h1 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.pet-details p {
+.main-container-pet-profile .container-pet-profile .pet-details p {
   margin: 5px 0;
 }
 
-.vaccination-info h2,
+.main-container-pet-profile .container-pet-profile .vaccination-info h2,
 .medical-info h2 {
   font-size: 20px;
   margin-bottom: 10px;
 }
 
-table {
+.main-container-pet-profile .container-pet-profile table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-table,
+.main-container-pet-profile .container-pet-profile table,
 th,
 td {
   border: 1px solid #ddd;
 }
 
-th,
+.main-container-pet-profile .container-pet-profile th,
 td {
   padding: 10px;
   text-align: left;
@@ -210,25 +210,25 @@ td {
   max-width: 150px;
 }
 
-th {
+.main-container-pet-profile .container-pet-profile th {
   background-color: #f8f8f8;
 }
 
-.edit-form,
+.main-container-pet-profile .container-pet-profile .edit-form,
 .add-vaccination-form,
 .edit-medical-form {
   display: block;
   margin-top: 20px;
 }
 
-.edit-form label,
+.main-container-pet-profile .container-pet-profile .edit-form label,
 .add-vaccination-form label,
 .edit-medical-form label {
   display: block;
   margin-bottom: 10px;
 }
 
-.edit-form input,
+.main-container-pet-profile .container-pet-profile .edit-form input,
 .add-vaccination-form input,
 .edit-medical-form input,
 .edit-medical-form select,
@@ -242,13 +242,13 @@ th {
   border-radius: 4px;
 }
 
-.select-pet-type {
+.main-container-pet-profile .container-pet-profile .select-pet-type {
   display: block;
   margin-bottom: 10px;
   color: #333;
 }
 
-.select-pet-type select {
+.main-container-pet-profile .container-pet-profile .select-pet-type select {
   display: block;
   width: 100%;
   padding: 8px;
@@ -261,7 +261,7 @@ th {
   font-family: Roboto, sans-serif;
 }
 
-.save-button {
+.main-container-pet-profile .container-pet-profile .save-button {
   background-color: #007bff;
   color: white;
   padding: 5px 22px;
@@ -275,11 +275,11 @@ th {
     transform 0.3s ease;
 }
 
-.save-button:hover {
+.main-container-pet-profile .container-pet-profile .save-button:hover {
   background-color: #45a049;
 }
 
-.close-button {
+.main-container-pet-profile .container-pet-profile .close-button {
   background-color: #cccc;
   color: white;
   padding: 5px 22px;
@@ -294,6 +294,6 @@ th {
     transform 0.3s ease;
 }
 
-.close-button:hover {
+.main-container-pet-profile .container-pet-profile .close-button:hover {
   background-color: #45a049;
 }
