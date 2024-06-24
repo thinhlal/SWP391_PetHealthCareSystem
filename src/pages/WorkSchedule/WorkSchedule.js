@@ -15,8 +15,14 @@ function WorkSchedule() {
     selectedTimeWork: '',
   });
   const availableTimeWork = [
-    { startTime: '08:00', endTime: '12:00' },
-    { startTime: '13:00', endTime: '17:00' },
+    { startTime: '08:00', endTime: '09:00' },
+    { startTime: '09:00', endTime: '10:00' },
+    { startTime: '11:00', endTime: '12:00' },
+    { startTime: '12:00', endTime: '13:00' },
+    { startTime: '13:00', endTime: '14:00' },
+    { startTime: '14:00', endTime: '15:00' },
+    { startTime: '15:00', endTime: '16:00' },
+    { startTime: '16:00', endTime: '17  :00' },
 
     // thêm các khung giờ khác tại đây
   ];
@@ -52,8 +58,8 @@ function WorkSchedule() {
 
     const newTimeWork = {
       day: selectedDate,
-      startTime: selectedTimeWork.startTime,
-      endTime: selectedTimeWork.endTime,
+      startTime: selectedStartTime.startTime,
+      endTime: selectedEndTime.endTime,
     };
 
     setTimeWork([...allTimeWork, newTimeWork]);
@@ -63,16 +69,23 @@ function WorkSchedule() {
 
   const resetForm = () => {
     setSelectedDate('');
-    setSelectedTimeWork({});
+    setSelectedStartTime({});
+    setSelectedEndTime({});
     setErrors({});
   };
-  const handleTimeSlotChange = event => {
-    const [startTime, endTime] = event.target.value.split('-');
-    setSelectedTimeWork({ startTime, endTime });
+  const handleStartTimeChange = event => {
+    const [startTime] = event.target.value.split('-');
+    setSelectedStartTime({ startTime });
     setErrors(prev => ({ ...prev, selectedTimeWork: '' }));
   };
-  const [selectedTimeWork, setSelectedTimeWork] = useState({});
+  const [selectedStartTime, setSelectedStartTime] = useState({});
 
+  const handleEndTimeChange = event => {
+    const [endTime] = event.target.value.split('-');
+    setSelectedEndTime({ endTime });
+    setErrors(prev => ({ ...prev, selectedTimeWork: '' }));
+  };
+  const [selectedEndTime, setSelectedEndTime] = useState({});
   const dataSchedules = {
     //ngày 17-6
     '2023-06-17': {
@@ -354,9 +367,9 @@ function WorkSchedule() {
     setSelectedVet(firstVetId || '');
   };
 
-  const handleVetChange = e => {
-    setSelectedVet(e.target.value);
-  };
+  // const handleVetChange = e => {
+  //   setSelectedVet(e.target.value);
+  // };
 
   // Handle receive click
   const handleReceiveClick = (e, status) => {
@@ -373,12 +386,12 @@ function WorkSchedule() {
       ? schedules[selectedDate][selectedVet]
       : { vetName: '', appointments: [] };
 
-  const vetOptions = schedules[selectedDate]
-    ? Object.keys(schedules[selectedDate]).map(vetId => ({
-        vetId,
-        vetName: schedules[selectedDate][vetId]?.vetName,
-      }))
-    : [];
+  // const vetOptions = schedules[selectedDate]
+  //   ? Object.keys(schedules[selectedDate]).map(vetId => ({
+  //       vetId,
+  //       vetName: schedules[selectedDate][vetId]?.vetName,
+  //     }))
+  //   : [];
 
   return (
     <div>
@@ -391,7 +404,7 @@ function WorkSchedule() {
           <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
           <p className='vet-name'>Vet. {selectedSchedule.vetName}</p>
         </div>
-        <div className='vet-select'>
+        {/* <div className='vet-select'>
           Select Veterinarian:
           <select
             value={selectedVet}
@@ -406,7 +419,7 @@ function WorkSchedule() {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
       </div>
       <div>
         <div className='date-work'>
@@ -475,19 +488,42 @@ function WorkSchedule() {
                           )}
                         </div>
                         <div className='modal-body-section-doctor-date'>
-                          <label>Choose Time Work:</label>
+                          <label>Choose Time Start Work:</label>
                           <select
-                            value={`${selectedTimeWork.startTime}-${selectedTimeWork.endTime}`}
-                            onChange={e => handleTimeSlotChange(e)}
+                            value={`${selectedStartTime.startTime}`}
+                            onChange={e => handleStartTimeChange(e)}
                             required
                           >
                             <option value=''>Select Time Slot</option>
                             {availableTimeWork.map((slot, index) => (
                               <option
                                 key={index}
-                                value={`${slot.startTime}-${slot.endTime}`}
-                              >{`${slot.startTime} - ${slot.endTime}`}</option>
+                                value={`${slot.startTime}`}
+                              >{`${slot.startTime}`}</option>
                             ))}
+                            
+                          </select>
+                          {errors.selectedTimeWork && (
+                            <span className='error'>
+                              {errors.selectedTimeWork}
+                            </span>
+                          )}
+                        </div>
+                        <div className='modal-body-section-doctor-date'>
+                          <label>Choose Time End Work:</label>
+                          <select
+                            value={`${selectedEndTime.endTime}`}
+                            onChange={e => handleEndTimeChange(e)}
+                            required
+                          >
+                            <option value=''>Select Time Slot</option>
+                            {availableTimeWork.map((slot, index) => (
+                              <option
+                                key={index}
+                                value={`${slot.endTime}`}
+                              >{`${slot.endTime}`}</option>
+                            ))}
+                            
                           </select>
                           {errors.selectedTimeWork && (
                             <span className='error'>
