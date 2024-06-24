@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import axiosInstance from '../../../utils/axiosInstance';
 import { storage } from '../../../config/firebase'; // Import the storage from your firebaseConfig.js
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
   const { user } = useContext(AuthContext);

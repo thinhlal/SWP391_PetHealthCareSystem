@@ -37,35 +37,49 @@ const Payment = () => {
   };
 
   return (
-    <div className="payment-main-container">
+    <div className='payment-main-container'>
       {data ? (
         <div className='payment-sub-container'>
           <div className='payment-main-title'>
-            <img src={acceptImage} alt="Success" className="payment-success-image" />
+            <img
+              src={acceptImage}
+              alt='Success'
+              className='payment-success-image'
+            />
             <h1 className='payment-sub-title'>Payment Successful</h1>
-            <p className='payment-sub-title-content'>Your payment has been processed successfully.</p>
+            <p className='payment-sub-title-content'>
+              Your payment has been processed successfully.
+            </p>
           </div>
-          <div className="payment-main-details">
+          <div className='payment-main-details'>
             <div className='payment-sub-details'>
               <div className='payment-booking-content'>
-                <div className='payment-booking-content-title'>BookingID:&nbsp; </div>
+                <div className='payment-booking-content-title'>
+                  BookingID:&nbsp;{' '}
+                </div>
                 <div>{data.id}</div>
               </div>
               <div className='payment-total-content'>
-                <div className='payment-booking-content-title'>Total Amount:&nbsp; </div>
+                <div className='payment-booking-content-title'>
+                  Total Amount:&nbsp;{' '}
+                </div>
                 <div>${data.totalPrice}</div>
               </div>
               <div className='payment-date-content'>
-                <div className='payment-booking-content-title'>Date:&nbsp; </div>
+                <div className='payment-booking-content-title'>
+                  Date:&nbsp;{' '}
+                </div>
                 <div>{formatDate(data.date)}</div>
               </div>
               <div className='payment-services-content'>
-                <div className='payment-booking-content-title'>Services:&nbsp; </div>
+                <div className='payment-booking-content-title'>
+                  Services:&nbsp;{' '}
+                </div>
                 <div>Visa ending in 1234</div>
               </div>
             </div>
           </div>
-          <div className="button-payment-container">
+          <div className='button-payment-container'>
             <Link to='/your-booking'>View Order History</Link>
             <Link to='/'>Return to Homepage</Link>
           </div>

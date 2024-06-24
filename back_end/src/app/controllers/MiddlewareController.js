@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/Account')
+const User = require('../models/Account');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -21,10 +21,10 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-const checkRole = (roles) => async (req, res, next) => {
+const checkRole = roles => async (req, res, next) => {
   try {
     const id = req.body.idToCheckRole;
-    const user = await User.findOne({id});
+    const user = await User.findOne({ id });
     if (!user) {
       return res.status(404).send('User not found');
     }

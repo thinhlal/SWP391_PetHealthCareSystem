@@ -71,7 +71,8 @@ const Booking = () => {
   const [errorMessageServices, setErrorMessageServices] = useState('');
   const [errorMessageDate, setErrorMessageDate] = useState('');
   const [errorMessageChooseSlot, setErrorMessageChooseSlot] = useState('');
-  const [errorMessagePaymentMethod, setErrorMessagePaymentMethod] = useState('');
+  const [errorMessagePaymentMethod, setErrorMessagePaymentMethod] =
+    useState('');
   const [userInfo, setUserInfo] = useState({
     name: '',
     phone: '',
@@ -97,7 +98,7 @@ const Booking = () => {
         `${process.env.REACT_APP_API_URL}/services`,
         {
           idToCheckRole: user.id,
-        }
+        },
       );
       setServices(response.data);
     } catch (error) {
@@ -111,23 +112,23 @@ const Booking = () => {
     }
   }, [petID]);
 
-  const handleDoctorChange = (e) => {
+  const handleDoctorChange = e => {
     const newDoctorId = e.target.value;
     setSelectedDoctor(newDoctorId);
     updateAvailableSlots(newDoctorId, selectedDate);
   };
 
-  const handleDateChange = (e) => {
+  const handleDateChange = e => {
     const newDate = e.target.value;
     setSelectedDate(newDate);
     updateAvailableSlots(selectedDoctor, newDate);
     setErrorMessageDate('');
   };
-  const handlePaymentChange = (event) => {
+  const handlePaymentChange = event => {
     setPaymentMethod(event.target.value);
     setErrorMessagePaymentMethod('');
   };
-  const handleSlotClick = (slot) => {
+  const handleSlotClick = slot => {
     if (!slot.isBooked) {
       setSelectedSlot(slot);
       setErrorMessageChooseSlot('');
@@ -137,8 +138,8 @@ const Booking = () => {
   const updateAvailableSlots = (doctorId, date) => {
     if (date) {
       if (doctorId) {
-        const doctor = doctorsData.find((doc) => doc.id === doctorId);
-        const workingDay = doctor.workingHours.find((wh) => wh.date === date);
+        const doctor = doctorsData.find(doc => doc.id === doctorId);
+        const workingDay = doctor.workingHours.find(wh => wh.date === date);
         if (workingDay) {
           if (workingDay.isOff) {
             setIsDayOff(true);
@@ -180,7 +181,7 @@ const Booking = () => {
     return slots;
   };
 
-  const generateSlots = (workingDay) => {
+  const generateSlots = workingDay => {
     const slots = [];
     const start = new Date(`1970-01-01T${workingDay.startTime}:00`);
     const end = new Date(`1970-01-01T${workingDay.endTime}:00`);
@@ -193,9 +194,9 @@ const Booking = () => {
       const next = new Date(current.getTime() + 60 * 60 * 1000);
 
       const isBooked = workingDay.bookings.some(
-        (booking) =>
+        booking =>
           new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
-          next <= new Date(`1970-01-01T${booking.endTime}:00`)
+          next <= new Date(`1970-01-01T${booking.endTime}:00`),
       );
 
       slots.push({
@@ -276,7 +277,7 @@ const Booking = () => {
           {
             bookingData,
             idToCheckRole: user.id,
-          }
+          },
         );
         if (paymentMethod === 'paypal') {
           const orderResponse = await axiosInstance.post(
@@ -284,11 +285,11 @@ const Booking = () => {
             {
               bookingID: response.data.bookingID,
               amount: bookingData.totalPrice,
-            }
+            },
           );
           window.location.href = orderResponse.data.url;
         } else {
-          navigate(`/payment-success?bookingID=${response.data.bookingID}`)
+          navigate(`/payment-success?bookingID=${response.data.bookingID}`);
         }
       } catch (error) {
         alert('Error creating booking');
@@ -298,9 +299,9 @@ const Booking = () => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
-    setUserInfo((prevState) => ({
+    setUserInfo(prevState => ({
       ...prevState,
       [name]: value,
     }));
@@ -324,7 +325,9 @@ const Booking = () => {
   };
 
   const handleAddService = () => {
-    const selectedService = services.find(service => service.id === userInfo.serviceID);
+    const selectedService = services.find(
+      service => service.id === userInfo.serviceID,
+    );
     if (!selectedService) {
       setErrorMessageServices('Please select a valid service.');
       return;
@@ -334,7 +337,10 @@ const Booking = () => {
     setErrorMessageServices('');
   };
 
-  const totalAmount = selectedServices.reduce((acc, service) => acc + service.price, 0);
+  const totalAmount = selectedServices.reduce(
+    (acc, service) => acc + service.price,
+    0,
+  );
 
   if (loading) {
     return <AnimationComponent />;
@@ -419,7 +425,10 @@ const Booking = () => {
                   >
                     <option value=''>Choose Service:</option>
                     {services.map((service, index) => (
-                      <option key={index} value={service.id}>
+                      <option
+                        key={index}
+                        value={service.id}
+                      >
                         {`${service.name} - Price: ${service.price}`}
                       </option>
                     ))}
@@ -469,8 +478,11 @@ const Booking = () => {
                     onChange={handleDoctorChange}
                   >
                     <option value=''>Select a doctor</option>
-                    {doctorsData.map((doctor) => (
-                      <option key={doctor.id} value={doctor.id}>
+                    {doctorsData.map(doctor => (
+                      <option
+                        key={doctor.id}
+                        value={doctor.id}
+                      >
                         {doctor.name}
                       </option>
                     ))}
@@ -507,11 +519,19 @@ const Booking = () => {
             <div className='available-tittle-text'>Available slots:</div>
             <div className='booked-slot'>
               <div className='booked-status'>Booked</div>
-              <img className='square' src={red} alt='Booked' />
+              <img
+                className='square'
+                src={red}
+                alt='Booked'
+              />
             </div>
             <div className='available-slot'>
               <div className='booked-status'>Available</div>
-              <img className='square' src={green} alt='Available' />
+              <img
+                className='square'
+                src={green}
+                alt='Available'
+              />
             </div>
           </div>
 
@@ -529,12 +549,13 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${slot.isBooked
-                      ? 'element-button-red'
-                      : selectedSlot === slot
-                        ? 'element-button-selected'
-                        : 'element-button-green'
-                      }`}
+                    className={`element-button ${
+                      slot.isBooked
+                        ? 'element-button-red'
+                        : selectedSlot === slot
+                          ? 'element-button-selected'
+                          : 'element-button-green'
+                    }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>

@@ -40,12 +40,12 @@ function Login() {
       setError('');
       if (response.data.user.role === 'Admin') {
         navigate('/admin-dashboard');
-      }else if(response.data.user.role === 'Staff'){
+      } else if (response.data.user.role === 'Staff') {
         navigate('/manage-booking');
-      }else if(response.data.user.role === 'Veterinarian'){
+      } else if (response.data.user.role === 'Veterinarian') {
         navigate('/work-schedule');
-      }else{
-        navigate('/')
+      } else {
+        navigate('/');
       }
     } catch (error) {
       if (error.response) {

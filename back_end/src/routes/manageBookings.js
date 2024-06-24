@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { verifyToken, checkRole } = require('../app/controllers/MiddlewareController');
+const {
+  verifyToken,
+  checkRole,
+} = require('../app/controllers/MiddlewareController');
 const ManageBookingsController = require('../app/controllers/ManageBookingsController');
 
 router.post(

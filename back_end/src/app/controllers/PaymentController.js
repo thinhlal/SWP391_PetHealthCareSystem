@@ -63,7 +63,7 @@ class PaymentController {
       const paymentUpdate = await Payment.findOneAndUpdate(
         { bookingID: bookingID },
         { isSuccess: true },
-        { new: true, runValidators: true }
+        { new: true, runValidators: true },
       );
       console.log(paymentUpdate);
       if (!paymentUpdate) {

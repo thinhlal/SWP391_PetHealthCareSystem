@@ -8,7 +8,9 @@ class PetController {
       const allPets = await Pet.find({ customerID });
       res.status(200).json(allPets);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching pets', error: error.message });
+      res
+        .status(500)
+        .json({ message: 'Error fetching pets', error: error.message });
     }
   }
 

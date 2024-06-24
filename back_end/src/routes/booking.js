@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { verifyToken, checkRole } = require('../app/controllers/MiddlewareController');
+const {
+  verifyToken,
+  checkRole,
+} = require('../app/controllers/MiddlewareController');
 
 const bookingController = require('../app/controllers/BookingController');
 

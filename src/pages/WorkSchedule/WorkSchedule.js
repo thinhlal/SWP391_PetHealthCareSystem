@@ -367,8 +367,6 @@ function WorkSchedule() {
     setSelectedVet(firstVetId || '');
   };
 
- 
-
   // Handle receive click
   const handleReceiveClick = (e, status) => {
     e.preventDefault();
@@ -384,7 +382,6 @@ function WorkSchedule() {
       ? schedules[selectedDate][selectedVet]
       : { vetName: '', appointments: [] };
 
-
   return (
     <div>
       <Header />
@@ -394,14 +391,15 @@ function WorkSchedule() {
         </div>
         <div className='vet-container'>
           <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
-          <p className='vet-name'>Veterinarian Name: {selectedSchedule.vetName}</p>
+          <p className='vet-name'>
+            Veterinarian Name: {selectedSchedule.vetName}
+          </p>
         </div>
-        
       </div>
       <div>
         <div className='date-work'>
           Date's work schedule:{' '}
-          <input 
+          <input
             type='date'
             name='date'
             value={selectedDate}
@@ -448,7 +446,8 @@ function WorkSchedule() {
                       <div>
                         <div className='modal-body-section-doctor-date'>
                           <label>Choose Date:</label>
-                          <input className='ip-date-work'
+                          <input
+                            className='ip-date-work'
                             type='date'
                             value={selectedDate}
                             onChange={e => {
@@ -466,7 +465,8 @@ function WorkSchedule() {
                         </div>
                         <div className='modal-body-section-doctor-date'>
                           <label>Choose Time Start Work:</label>
-                          <select className='sl-date-work'
+                          <select
+                            className='sl-date-work'
                             value={`${selectedStartTime.startTime}`}
                             onChange={e => handleStartTimeChange(e)}
                             required
@@ -478,7 +478,6 @@ function WorkSchedule() {
                                 value={`${slot.startTime}`}
                               >{`${slot.startTime}`}</option>
                             ))}
-                            
                           </select>
                           {errors.selectedTimeWork && (
                             <span className='error'>
@@ -488,7 +487,8 @@ function WorkSchedule() {
                         </div>
                         <div className='modal-body-section-doctor-date'>
                           <label>Choose Time End Work:</label>
-                          <select className='sl-date-work'
+                          <select
+                            className='sl-date-work'
                             value={`${selectedEndTime.endTime}`}
                             onChange={e => handleEndTimeChange(e)}
                             required
@@ -500,7 +500,6 @@ function WorkSchedule() {
                                 value={`${slot.endTime}`}
                               >{`${slot.endTime}`}</option>
                             ))}
-                            
                           </select>
                           {errors.selectedTimeWork && (
                             <span className='error'>

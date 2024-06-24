@@ -22,7 +22,10 @@ class BookingController {
           console.log(error);
         }
       }
-      const saveBooking = new Booking({ id: idBooking, ...bookingInfo.bookingData });
+      const saveBooking = new Booking({
+        id: idBooking,
+        ...bookingInfo.bookingData,
+      });
       await saveBooking.save();
 
       const services = bookingInfo.bookingData.services;
@@ -31,7 +34,8 @@ class BookingController {
         const service = services[i];
         while (true) {
           try {
-            const lastServiceBookingVet = await ServiceBookingVet.findOne().sort({ id: -1 });
+            const lastServiceBookingVet =
+              await ServiceBookingVet.findOne().sort({ id: -1 });
             if (lastServiceBookingVet) {
               idServiceBookingVet = parseInt(lastServiceBookingVet.id) + 1;
             } else {
@@ -66,24 +70,20 @@ class BookingController {
           console.log(error);
         }
       }
-      console.log(bookingInfo.bookingData.paymentMethod.toUpperCase());
       const createPayment = {
         id: idPayment,
         bookingID: idBooking,
         isSuccess: false,
         date: new Date(),
-        totalPrice:
-          bookingInfo.bookingData.totalPrice,
+        totalPrice: bookingInfo.bookingData.totalPrice,
         paymentMethod: bookingInfo.bookingData.paymentMethod.toUpperCase(),
       };
       const payment = new Payment(createPayment);
       await payment.save();
-      res
-        .status(201)
-        .json({
-          message: 'Booking successfully created',
-          bookingID: idBooking,
-        });
+      res.status(201).json({
+        message: 'Booking successfully created',
+        bookingID: idBooking,
+      });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ', error });
     }
