@@ -2,6 +2,8 @@ import './AddPetModal.css';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import axiosInstance from '../../../utils/axiosInstance';
+import { storage } from '../../../config/firebase'; // Import the storage from your firebaseConfig.js
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
   const { user } = useContext(AuthContext);
@@ -14,6 +16,7 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     image: '',
   });
   const [imagePreview, setImagePreview] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [errorMessageName, setErrorMessageName] = useState('');
   const [errorMessageAge, setErrorMessageAge] = useState('');
   const [errorMessageBreed, setErrorMessageBreed] = useState('');
@@ -53,7 +56,7 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     } else {
       setErrorMessageGender('');
     }
-    if (!newPet.image) {
+    if (!imageFile) {
       setErrorMessageImage('Image is required');
       valid = false;
     } else {
@@ -75,6 +78,14 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     if (!validateFields()) {
       return;
     }
+
+    // Upload image to Firebase
+    const imageRef = ref(storage, `pets/${user.id}/${imageFile.name}`);
+    await uploadBytes(imageRef, imageFile);
+    const imageUrl = await getDownloadURL(imageRef);
+    console.log(imageUrl);
+
+    // Post new pet data with image URL
     const res = await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/pet/add`,
       {
@@ -84,11 +95,12 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
         breed: newPet.breed,
         type: newPet.type,
         gender: newPet.gender,
-        //image: newPet.image
+        image: imageUrl,
       },
     );
+
     const id = res.data.petID;
-    onAddPet({ id, ...newPet });
+    onAddPet({ id, ...newPet, image: imageUrl });
     onClose();
     setNewPet({
       name: '',
@@ -130,10 +142,10 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
   const handleImageChange = e => {
     const file = e.target.files[0];
     if (file) {
+      setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
-        setNewPet({ ...newPet, image: reader.result });
         setErrorMessageImage('');
       };
       reader.readAsDataURL(file);
