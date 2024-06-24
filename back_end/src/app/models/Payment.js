@@ -24,6 +24,11 @@ const PaymentSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    paymentMethod: {
+      type: String,
+      require: true,
+      enum: ['PAYPAL', 'COUNTER'],
+    },
   },
   {
     timestamps: true,

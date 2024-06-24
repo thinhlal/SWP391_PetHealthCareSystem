@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { AuthContext } from '../../context/AuthContext';
 import './Booking.css';
@@ -57,6 +57,7 @@ const doctorsData = [
 const Booking = () => {
   const location = useLocation();
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const { petID } = location.state || {};
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -70,14 +71,15 @@ const Booking = () => {
   const [errorMessageServices, setErrorMessageServices] = useState('');
   const [errorMessageDate, setErrorMessageDate] = useState('');
   const [errorMessageChooseSlot, setErrorMessageChooseSlot] = useState('');
+  const [errorMessagePaymentMethod, setErrorMessagePaymentMethod] = useState('');
   const [userInfo, setUserInfo] = useState({
     name: '',
     phone: '',
     email: '',
-    serviceID: '',
   });
   const [loading, setLoading] = useState(true);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -121,7 +123,10 @@ const Booking = () => {
     updateAvailableSlots(selectedDoctor, newDate);
     setErrorMessageDate('');
   };
-
+  const handlePaymentChange = (event) => {
+    setPaymentMethod(event.target.value);
+    setErrorMessagePaymentMethod('');
+  };
   const handleSlotClick = (slot) => {
     if (!slot.isBooked) {
       setSelectedSlot(slot);
@@ -222,11 +227,17 @@ const Booking = () => {
     } else {
       setErrorMessageEmail('');
     }
-    if (!userInfo.serviceID) {
+    if (selectedServices.length === 0) {
       setErrorMessageServices('Service is required');
       valid = false;
     } else {
       setErrorMessageServices('');
+    }
+    if (paymentMethod === '') {
+      setErrorMessagePaymentMethod('Payment is required');
+      valid = false;
+    } else {
+      setErrorMessagePaymentMethod('');
     }
     return valid;
   };
@@ -253,11 +264,12 @@ const Booking = () => {
           hour12: false,
         }),
         petID,
-        amount: 80,
+        paymentMethod: paymentMethod,
+        services: selectedServices,
+        totalPrice: totalAmount,
         customerID: user.id,
         ...userInfo,
       };
-
       try {
         const response = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/booking`,
@@ -266,15 +278,18 @@ const Booking = () => {
             idToCheckRole: user.id,
           }
         );
-        const orderResponse = await axiosInstance.post(
-          `${process.env.REACT_APP_API_URL}/paypal/create-order`,
-          {
-            bookingID: response.data.bookingID,
-            amount: bookingData.amount,
-          }
-        );
-
-        window.location.href = orderResponse.data.url;
+        if (paymentMethod === 'paypal') {
+          const orderResponse = await axiosInstance.post(
+            `${process.env.REACT_APP_API_URL}/paypal/create-order`,
+            {
+              bookingID: response.data.bookingID,
+              amount: bookingData.totalPrice,
+            }
+          );
+          window.location.href = orderResponse.data.url;
+        } else {
+          navigate(`/payment-success?bookingID=${response.data.bookingID}`)
+        }
       } catch (error) {
         alert('Error creating booking');
       }
@@ -299,9 +314,6 @@ const Booking = () => {
       case 'email':
         setErrorMessageEmail('');
         break;
-      case 'service':
-        setErrorMessageServices('');
-        break;
       default:
         break;
     }
@@ -319,7 +331,6 @@ const Booking = () => {
     }
 
     setSelectedServices([...selectedServices, selectedService]);
-    setUserInfo({ ...userInfo, serviceID: '' });
     setErrorMessageServices('');
   };
 
@@ -419,6 +430,20 @@ const Booking = () => {
                   <div className='error-message'>{errorMessageServices}</div>
                 )}
               </div>
+
+              <div className='selected-services'>
+                <h3>Selected Services:</h3>
+                {selectedServices.length > 0 ? (
+                  selectedServices.map((service, index) => (
+                    <div key={index}>
+                      {service.name} - Price: {service.price}
+                    </div>
+                  ))
+                ) : (
+                  <p>No services selected.</p>
+                )}
+                <h3>Total Amount: {totalAmount}</h3>
+              </div>
             </div>
 
             <div className='select-booking_info'>
@@ -453,6 +478,30 @@ const Booking = () => {
                 </div>
               </div>
             </div>
+
+            <div className='select-booking_info'>
+              <div>
+                <div className='select_Payment'>
+                  <div className='select_Name'>Payment</div>
+                  <div className='select_Booking'>
+                    <select
+                      name='paymentMethod'
+                      className='select_Info'
+                      onChange={handlePaymentChange}
+                    >
+                      <option value=''>Select a payment method</option>
+                      <option value='paypal'>PayPal</option>
+                      <option value='counter'>Pay at Counter</option>
+                    </select>
+                  </div>
+                </div>
+                {errorMessagePaymentMethod && (
+                  <div className='error-message error-message-choose'>
+                    {errorMessagePaymentMethod}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
           <div className='available-tittle'>
             <div className='available-tittle-text'>Available slots:</div>
@@ -481,10 +530,10 @@ const Booking = () => {
                   <div
                     key={index}
                     className={`element-button ${slot.isBooked
-                        ? 'element-button-red'
-                        : selectedSlot === slot
-                          ? 'element-button-selected'
-                          : 'element-button-green'
+                      ? 'element-button-red'
+                      : selectedSlot === slot
+                        ? 'element-button-selected'
+                        : 'element-button-green'
                       }`}
                     onClick={() => handleSlotClick(slot)}
                   >
@@ -512,24 +561,10 @@ const Booking = () => {
             )}
           </div>
 
-          <div className='selected-services'>
-            <h3>Selected Services:</h3>
-            {selectedServices.length > 0 ? (
-              selectedServices.map((service, index) => (
-                <div key={index}>
-                  {service.name} - Price: {service.price}
-                </div>
-              ))
-            ) : (
-              <p>No services selected.</p>
-            )}
-            <h3>Total Amount: {totalAmount}</h3>
-          </div>
-
           <div className='booking-pay-money'>
             <div className='booking-pay-money-desc'>
               <div className='booking-pay-money-text'>PAYABLE AMOUNT : $</div>
-              <div className='booking-pay-money-price'>50</div>
+              <div className='booking-pay-money-price'>{totalAmount}</div>
             </div>
           </div>
 

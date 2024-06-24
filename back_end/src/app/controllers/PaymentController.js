@@ -58,33 +58,18 @@ class PaymentController {
           },
         },
       );
-      let idPayment;
-      while (true) {
-        try {
-          const lastPayment = await Payment.findOne().sort({ id: -1 });
-          if (lastPayment) {
-            const lastID = parseInt(lastPayment.id.substring(2));
-            idPayment = 'PA' + (lastID + 1).toString().padStart(6, '0');
-          } else {
-            idPayment = 'PA000000';
-          }
-          break;
-        } catch (error) {
-          console.log(error);
-        }
-      }
       const bookingID =
         response.data.purchase_units[0].payments.captures[0].custom_id;
-      const data = {
-        id: idPayment,
-        bookingID: bookingID,
-        isSuccess: response.data.status === 'COMPLETED' ? true : false,
-        date: new Date(),
-        totalPrice:
-          response.data.purchase_units[0].payments.captures[0].amount.value,
-      };
-      const payment = new Payment(data);
-      await payment.save();
+      const paymentUpdate = await Payment.findOneAndUpdate(
+        { bookingID: bookingID },
+        { isSuccess: true },
+        { new: true, runValidators: true }
+      );
+      console.log(paymentUpdate);
+      if (!paymentUpdate) {
+        return res.status(404).json({ message: 'Payment not found' });
+      }
+
       res.redirect(
         `http://localhost:3000/payment-success?bookingID=${bookingID}`,
       );

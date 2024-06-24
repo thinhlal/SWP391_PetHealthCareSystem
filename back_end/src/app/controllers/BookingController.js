@@ -1,4 +1,6 @@
+const { response } = require('express');
 const Booking = require('../models/Booking.js');
+const Payment = require('../models/Payment.js');
 const ServiceBookingVet = require('../models/ServiceBookingVet.js');
 
 class BookingController {
@@ -21,31 +23,62 @@ class BookingController {
           console.log(error);
         }
       }
+      const saveBooking = new Booking({ id: idBooking, ...bookingInfo.bookingData });
+      await saveBooking.save();
+
+      const services = bookingInfo.bookingData.services;
       let idServiceBookingVet;
+      for (let i = 0; i < services.length; i++) {
+        const service = services[i];
+        while (true) {
+          try {
+            const lastServiceBookingVet = await ServiceBookingVet.findOne().sort({ id: -1 });
+            if (lastServiceBookingVet) {
+              idServiceBookingVet = parseInt(lastServiceBookingVet.id) + 1;
+            } else {
+              idServiceBookingVet = 0;
+            }
+            break;
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        const saveServiceBookingVet = new ServiceBookingVet({
+          id: idServiceBookingVet,
+          bookingID: idBooking,
+          serviceID: service.id,
+          doctorID: bookingInfo.bookingData.doctorID,
+        });
+        await saveServiceBookingVet.save();
+      }
+
+      let idPayment;
       while (true) {
         try {
-          const lastServiceBookingVet = await ServiceBookingVet.findOne().sort({
-            id: -1,
-          });
-          if (lastServiceBookingVet) {
-            idServiceBookingVet = parseInt(lastServiceBookingVet.id) + 1;
+          const lastPayment = await Payment.findOne().sort({ id: -1 });
+          if (lastPayment) {
+            const lastID = parseInt(lastPayment.id.substring(2));
+            idPayment = 'PA' + (lastID + 1).toString().padStart(6, '0');
           } else {
-            idServiceBookingVet = 0;
+            idPayment = 'PA000000';
           }
           break;
         } catch (error) {
           console.log(error);
         }
       }
-      const saveServiceBookingVet = new ServiceBookingVet({
-        id: idServiceBookingVet,
+      console.log(bookingInfo.bookingData.paymentMethod.toUpperCase());
+      const createPayment = {
+        id: idPayment,
         bookingID: idBooking,
-        ...bookingInfo,
-      });
-      const saveBooking = new Booking({ id: idBooking, ...bookingInfo });
-      await saveBooking.save();
-      await saveServiceBookingVet.save();
-      console.log(idBooking);
+        isSuccess: false,
+        date: new Date(),
+        totalPrice:
+          bookingInfo.bookingData.totalPrice,
+        paymentMethod: bookingInfo.bookingData.paymentMethod.toUpperCase(),
+      };
+      const payment = new Payment(createPayment);
+      await payment.save();
       res
         .status(201)
         .json({
