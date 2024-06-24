@@ -15,7 +15,7 @@ class PetController {
   // POST /add
   async add(req, res, next) {
     try {
-      let { customerID, name, birthday, breed, type, gender } = req.body;
+      let { customerID, name, birthday, breed, type, gender, image } = req.body;
       let id;
       while (true) {
         try {
@@ -40,6 +40,7 @@ class PetController {
         petType: type.toUpperCase(),
         breed: breed,
         gender: gender.toUpperCase(),
+        image: image,
       });
       await newPet.save();
       res.status(201).json({ message: 'Save successfully', petID: id });
