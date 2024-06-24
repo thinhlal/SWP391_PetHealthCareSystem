@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import axiosInstance from '../../utils/axiosInstance.js';
 import { AuthContext } from '../../context/AuthContext';
 import './Booking.css';
 import Footer from '../../components/User/Footer/Footer.js';
 import Header from '../../components/User/Header/Header.js';
 import red from '../../assets/images/img_Booking/red_square.png';
 import green from '../../assets/images/img_Booking/green_square.png';
-import { useLocation } from 'react-router-dom';
-import axiosInstance from '../../utils/axiosInstance.js';
-// AOS
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
@@ -58,7 +56,6 @@ const doctorsData = [
 
 const Booking = () => {
   const location = useLocation();
-  //const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { petID } = location.state || {};
   const [selectedDoctor, setSelectedDoctor] = useState('');
@@ -80,6 +77,8 @@ const Booking = () => {
     serviceID: '',
   });
   const [loading, setLoading] = useState(true);
+  const [selectedServices, setSelectedServices] = useState([]);
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
 
@@ -95,7 +94,7 @@ const Booking = () => {
       const response = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/services`,
         {
-          idToCheckRole: user.id
+          idToCheckRole: user.id,
         }
       );
       setServices(response.data);
@@ -110,20 +109,20 @@ const Booking = () => {
     }
   }, [petID]);
 
-  const handleDoctorChange = e => {
+  const handleDoctorChange = (e) => {
     const newDoctorId = e.target.value;
     setSelectedDoctor(newDoctorId);
     updateAvailableSlots(newDoctorId, selectedDate);
   };
 
-  const handleDateChange = e => {
+  const handleDateChange = (e) => {
     const newDate = e.target.value;
     setSelectedDate(newDate);
     updateAvailableSlots(selectedDoctor, newDate);
     setErrorMessageDate('');
   };
 
-  const handleSlotClick = slot => {
+  const handleSlotClick = (slot) => {
     if (!slot.isBooked) {
       setSelectedSlot(slot);
       setErrorMessageChooseSlot('');
@@ -133,8 +132,8 @@ const Booking = () => {
   const updateAvailableSlots = (doctorId, date) => {
     if (date) {
       if (doctorId) {
-        const doctor = doctorsData.find(doc => doc.id === doctorId);
-        const workingDay = doctor.workingHours.find(wh => wh.date === date);
+        const doctor = doctorsData.find((doc) => doc.id === doctorId);
+        const workingDay = doctor.workingHours.find((wh) => wh.date === date);
         if (workingDay) {
           if (workingDay.isOff) {
             setIsDayOff(true);
@@ -176,7 +175,7 @@ const Booking = () => {
     return slots;
   };
 
-  const generateSlots = workingDay => {
+  const generateSlots = (workingDay) => {
     const slots = [];
     const start = new Date(`1970-01-01T${workingDay.startTime}:00`);
     const end = new Date(`1970-01-01T${workingDay.endTime}:00`);
@@ -189,9 +188,9 @@ const Booking = () => {
       const next = new Date(current.getTime() + 60 * 60 * 1000);
 
       const isBooked = workingDay.bookings.some(
-        booking =>
+        (booking) =>
           new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
-          next <= new Date(`1970-01-01T${booking.endTime}:00`),
+          next <= new Date(`1970-01-01T${booking.endTime}:00`)
       );
 
       slots.push({
@@ -272,7 +271,7 @@ const Booking = () => {
           {
             bookingID: response.data.bookingID,
             amount: bookingData.amount,
-          },
+          }
         );
 
         window.location.href = orderResponse.data.url;
@@ -284,9 +283,9 @@ const Booking = () => {
     }
   };
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo(prevState => ({
+    setUserInfo((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -311,6 +310,20 @@ const Booking = () => {
   const handleFocus = () => {
     getAllServices();
   };
+
+  const handleAddService = () => {
+    const selectedService = services.find(service => service.id === userInfo.serviceID);
+    if (!selectedService) {
+      setErrorMessageServices('Please select a valid service.');
+      return;
+    }
+
+    setSelectedServices([...selectedServices, selectedService]);
+    setUserInfo({ ...userInfo, serviceID: '' });
+    setErrorMessageServices('');
+  };
+
+  const totalAmount = selectedServices.reduce((acc, service) => acc + service.price, 0);
 
   if (loading) {
     return <AnimationComponent />;
@@ -384,7 +397,7 @@ const Booking = () => {
             <div className='select-booking_info'>
               <div className='select_Service'>
                 <div className='select_Name'>Services</div>
-                <div className='select_Booking'>
+                <div className='select_Booking-Select'>
                   <select
                     name='serviceID'
                     className='select_Info'
@@ -395,20 +408,19 @@ const Booking = () => {
                   >
                     <option value=''>Choose Service:</option>
                     {services.map((service, index) => (
-                      <option
-                        key={index}
-                        value={service.id}
-                      >
+                      <option key={index} value={service.id}>
                         {`${service.name} - Price: ${service.price}`}
                       </option>
                     ))}
                   </select>
+                  <button onClick={handleAddService}>Add Service</button>
                 </div>
                 {errorMessageServices && (
                   <div className='error-message'>{errorMessageServices}</div>
                 )}
               </div>
             </div>
+
             <div className='select-booking_info'>
               <div className='select_Date'>
                 <div className='select_Name'>Date</div>
@@ -432,11 +444,8 @@ const Booking = () => {
                     onChange={handleDoctorChange}
                   >
                     <option value=''>Select a doctor</option>
-                    {doctorsData.map(doctor => (
-                      <option
-                        key={doctor.id}
-                        value={doctor.id}
-                      >
+                    {doctorsData.map((doctor) => (
+                      <option key={doctor.id} value={doctor.id}>
                         {doctor.name}
                       </option>
                     ))}
@@ -449,19 +458,11 @@ const Booking = () => {
             <div className='available-tittle-text'>Available slots:</div>
             <div className='booked-slot'>
               <div className='booked-status'>Booked</div>
-              <img
-                className='square'
-                src={red}
-                alt='Booked'
-              />
+              <img className='square' src={red} alt='Booked' />
             </div>
             <div className='available-slot'>
               <div className='booked-status'>Available</div>
-              <img
-                className='square'
-                src={green}
-                alt='Available'
-              />
+              <img className='square' src={green} alt='Available' />
             </div>
           </div>
 
@@ -479,7 +480,12 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${slot.isBooked ? 'element-button-red' : selectedSlot === slot ? 'element-button-selected' : 'element-button-green'}`}
+                    className={`element-button ${slot.isBooked
+                        ? 'element-button-red'
+                        : selectedSlot === slot
+                          ? 'element-button-selected'
+                          : 'element-button-green'
+                      }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>
@@ -505,12 +511,28 @@ const Booking = () => {
               </div>
             )}
           </div>
+
+          <div className='selected-services'>
+            <h3>Selected Services:</h3>
+            {selectedServices.length > 0 ? (
+              selectedServices.map((service, index) => (
+                <div key={index}>
+                  {service.name} - Price: {service.price}
+                </div>
+              ))
+            ) : (
+              <p>No services selected.</p>
+            )}
+            <h3>Total Amount: {totalAmount}</h3>
+          </div>
+
           <div className='booking-pay-money'>
             <div className='booking-pay-money-desc'>
               <div className='booking-pay-money-text'>PAYABLE AMOUNT : $</div>
               <div className='booking-pay-money-price'>50</div>
             </div>
           </div>
+
           <button
             className='CONFIRM-BOOK'
             type='submit'

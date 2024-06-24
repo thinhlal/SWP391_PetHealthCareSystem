@@ -116,11 +116,32 @@ body {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
-
+.booking-container .select_Service{
+  width: 400px;
+}
 .booking-container .select_Booking {
+  display: flex;
+  align-items: center;
   width: 270px;
+  justify-content: center;
   height: 32px;
   border-radius: 8px;
+}
+
+.booking-container .select_Booking-Select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.booking-container .select_Booking button{
+  border: none;
+  background-color: #ccc;
+  width: 150px;
+  height: 100%;
+  margin-left: 50px;
 }
 
 .booking-container .select_Info {
