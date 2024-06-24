@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const siteController = require('../app/controllers/SiteController');
-const MiddlewareController = require('../app/controllers/MiddlewareController');
+const { verifyToken } = require('../app/controllers/MiddlewareController');
 
 //Sign Up
 router.post('/signup', siteController.signUp);
@@ -14,7 +14,7 @@ router.post('/login', siteController.logIn);
 router.post('/refresh', siteController.requestRefreshToken);
 
 //Log Out
-router.post('/logout', MiddlewareController.verifyToken, siteController.logOut);
+router.post('/logout', verifyToken, siteController.logOut);
 
 //Home
 router.get('/', siteController.index);

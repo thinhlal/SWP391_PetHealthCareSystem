@@ -1,6 +1,6 @@
 import './AdminAccount.css';
 // React
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -16,8 +16,10 @@ import Switch from '@mui/joy/Switch';
 import { blue, green } from '@mui/material/colors';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { AuthContext } from '../../context/AuthContext';
 
 function AdminAccount() {
+  const { logOut } = useContext(AuthContext);
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
@@ -383,7 +385,7 @@ function AdminAccount() {
               </div>
             </div>
 
-            <a href='/'>
+            <div onClick={logOut}>
               <div className='Admin-Account-Navigate-Logout'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -404,7 +406,7 @@ function AdminAccount() {
                 </svg>
                 <span>Logout</span>
               </div>
-            </a>
+            </div>
           </div>
 
           <div className='Admin-Account-Main col-md-10'>

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const MiddlewareController = require('../app/controllers/MiddlewareController');
+const { verifyToken, checkRole } = require('../app/controllers/MiddlewareController');
 
 const petController = require('../app/controllers/PetController');
 
-router.post('/add', MiddlewareController.verifyToken, petController.add);
-router.post('/', MiddlewareController.verifyToken, petController.index);
+router.post('/add', verifyToken, checkRole(['Customer']), petController.add);
+router.post('/', verifyToken, checkRole(['Customer']), petController.index);
 
 module.exports = router;

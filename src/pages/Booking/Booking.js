@@ -92,8 +92,11 @@ const Booking = () => {
 
   const getAllServices = async () => {
     try {
-      const response = await axiosInstance.get(
+      const response = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/services`,
+        {
+          idToCheckRole: user.id
+        }
       );
       setServices(response.data);
     } catch (error) {
@@ -259,7 +262,10 @@ const Booking = () => {
       try {
         const response = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/booking`,
-          bookingData,
+          {
+            bookingData,
+            idToCheckRole: user.id,
+          }
         );
         const orderResponse = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/paypal/create-order`,

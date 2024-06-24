@@ -38,7 +38,15 @@ function Login() {
       localStorage.setItem('token', response.data.token);
       logIn(response.data.user);
       setError('');
-      navigate('/');
+      if (response.data.user.role === 'Admin') {
+        navigate('/admin-dashboard');
+      }else if(response.data.user.role === 'Staff'){
+        navigate('/manage-booking');
+      }else if(response.data.user.role === 'Veterinarian'){
+        navigate('/work-schedule');
+      }else{
+        navigate('/')
+      }
     } catch (error) {
       if (error.response) {
         setError(error.response.data.message);

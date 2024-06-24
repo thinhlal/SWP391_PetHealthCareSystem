@@ -1,7 +1,7 @@
 //css
 import './AdminDashBoard.css';
 //React
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 //import React, { useState, useEffect, useRef } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,7 +13,9 @@ import Stack from '@mui/material/Stack';
 //images
 import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg';
 import logo_pet_health_care from '../../assets/images/img_AdminDashBoard/logo_pethealthcare.png';
+import { AuthContext } from '../../context/AuthContext';
 function AdminDashBoard() {
+  const { logOut } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('Profile');
   const [search, setSearch] = useState('');
   const openTab = tabName => setActiveTab(tabName);
@@ -140,7 +142,7 @@ function AdminDashBoard() {
               </div>
             </div>
 
-            <a href='/'>
+            <div onClick={logOut}>
               <div className='Admin-DashBoard-Navigate-Logout'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -161,7 +163,7 @@ function AdminDashBoard() {
                 </svg>
                 <span>Logout</span>
               </div>
-            </a>
+            </div>
           </div>
 
           <div className='Admin-DashBoard-Main col-md-10'>

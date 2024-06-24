@@ -22,13 +22,22 @@ import AdminServices from './pages/AdminServices/AdminServices.js';
 import ProfilePet from './pages/ProfilePet/ProfilePet.js';
 import ChoosePet from './pages/ChoosePet/ChoosePet.js';
 import Payment from './pages/Payment/Payment.js';
+import Unauthorized from './pages/Unauthorized/Unauthorized.js';
 function App() {
   return (
     <AuthProvider>
       <Routes>
         <Route
           path='/'
-          element={<Home />}
+          element={
+            <ProtectedRoute allowedRoles={['Customer']}>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/unauthorized'
+          element={<Unauthorized />}
         />
         <Route
           path='/login'
@@ -40,7 +49,11 @@ function App() {
         />
         <Route
           path='/signup'
-          element={<SignUp />}
+          element={
+            <PublicRoute>
+              <SignUp />
+            </PublicRoute>
+          }
         />
         <Route
           path='/services'
@@ -53,7 +66,7 @@ function App() {
         <Route
           path='/your-pet'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['Customer']}>
               <YourPet />
             </ProtectedRoute>
           }
@@ -61,7 +74,7 @@ function App() {
         <Route
           path='/your-booking'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['Customer']}>
               <YourBooking />
             </ProtectedRoute>
           }
@@ -69,7 +82,7 @@ function App() {
         <Route
           path='/booking'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['Customer']}>
               <Booking />
             </ProtectedRoute>
           }
@@ -77,7 +90,7 @@ function App() {
         <Route
           path='/choose'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['Customer']}>
               <ChoosePet />
             </ProtectedRoute>
           }
@@ -85,27 +98,43 @@ function App() {
         <Route
           path='/pet-profile'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['Customer']}>
               <ProfilePet />
             </ProtectedRoute>
           }
         />
         <Route
           path='/payment-success'
-          element={<Payment />}
+          element={
+            <ProtectedRoute allowedRoles={['Customer']}>
+              <Payment />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path='/manage-booking'
-          element={<ManageListBooking />}
+          element={
+            <ProtectedRoute allowedRoles={['Employee']}>
+              <ManageListBooking />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/manage-cages'
-          element={<ManageCages />}
+          element={
+            <ProtectedRoute allowedRoles={['Employee']}>
+              <ManageCages />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/work-schedule'
-          element={<WorkSchedule />}
+          element={
+            <ProtectedRoute>
+              <WorkSchedule />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/sick-pet'
@@ -118,15 +147,27 @@ function App() {
 
         <Route
           path='/admin-account'
-          element={<AdminAccount />}
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminAccount />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/admin-dashboard'
-          element={<AdminDashBoard />}
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminDashBoard />
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/admin-services'
-          element={<AdminServices />}
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminServices />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </AuthProvider>

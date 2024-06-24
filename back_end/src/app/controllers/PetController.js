@@ -3,12 +3,12 @@ const Pet = require('../models/Pet.js');
 class PetController {
   // GET /
   async index(req, res, next) {
-    const { customerID } = req.body;
+    const customerID = req.body.customerID;
     try {
       const allPets = await Pet.find({ customerID });
       res.status(200).json(allPets);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching services', error });
+      res.status(500).json({ message: 'Error fetching pets', error: error.message });
     }
   }
 

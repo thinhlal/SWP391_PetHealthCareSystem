@@ -1,34 +1,42 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/Account')
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-const MiddlewareController = {
-  verifyToken: (req, res, next) => {
-    const token = req.headers.authorization;
-    if (token) {
-      // Bearer token...
-      const accessToken = token.split(' ')[1];
-      jwt.verify(accessToken, JWT_SECRET, (err, user) => {
-        if (err) {
-          return res.status(401).json('Token expired');
-        }
-        req.user = user;
-        next();
-      });
-    } else {
-      return res.status(403).json('You are not authenticated');
-    }
-  },
-
-  verifyTokenAndAdminAuth: (req, res, next) => {
-    MiddlewareController.verifyToken(req, res, () => {
-      if (req.user.id === req.params.id || req.user.admin) {
-        next();
-      } else {
-        res.status(403).json('You are not allowed to delete others');
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (token) {
+    // Bearer token...
+    const accessToken = token.split(' ')[1];
+    jwt.verify(accessToken, JWT_SECRET, (err, user) => {
+      if (err) {
+        return res.status(401).json('Token expired');
       }
+
+      req.user = user;
+      next();
     });
-  },
+  } else {
+    return res.status(403).json('You are not authenticated');
+  }
 };
 
-module.exports = MiddlewareController;
+const checkRole = (roles) => async (req, res, next) => {
+  try {
+    const id = req.body.idToCheckRole;
+    const user = await User.findOne({id});
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    if (!roles.includes(user.role)) {
+      return res.status(403).send('Access Denied');
+    }
+    next();
+  } catch (err) {
+    console.error('Error fetching user:', err);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+module.exports = { verifyToken, checkRole };

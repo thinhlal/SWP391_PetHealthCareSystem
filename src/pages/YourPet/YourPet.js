@@ -33,10 +33,11 @@ function YourPet() {
   useEffect(() => {
     const fetchPets = async () => {
       try {
+        const idToCheckRole = user.id;
         const customerID = user.id;
         const response = await axiosInstance.post(
-          `${process.env.REACT_APP_API_URL}/pet`,
-          { customerID },
+          `${process.env.REACT_APP_API_URL}/pet/`,
+          { idToCheckRole, customerID },
         );
         setPets(response.data);
       } catch (error) {

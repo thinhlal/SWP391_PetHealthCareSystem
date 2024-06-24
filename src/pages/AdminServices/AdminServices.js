@@ -1,5 +1,5 @@
 import './AdminServices.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Pagination from '@mui/material/Pagination';
@@ -8,8 +8,10 @@ import logo_pet_health_care from '../../assets/images/img_AdminServices/logo_pet
 import icon_search from '../../assets/images/img_AdminServices/icon_search.svg';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { blue } from '@mui/material/colors';
+import { AuthContext } from '../../context/AuthContext';
 
 function AdminServices() {
+  const { logOut } = useContext(AuthContext);
   const [search, setSearch] = useState('');
   const [currentDate, setCurrentDate] = useState('');
   const [newService, setNewService] = useState({
@@ -296,7 +298,7 @@ function AdminServices() {
                   </a>
                 </div>
               </div>
-              <a href='/'>
+              <div onClick={logOut}>
                 <div className='Admin-Services-Navigate-Logout'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -319,7 +321,7 @@ function AdminServices() {
                     Logout
                   </span>
                 </div>
-              </a>
+              </div>
             </div>
 
             <div className='Admin-Services-Main col-md-10'>
