@@ -28,9 +28,9 @@ class SiteController {
       let id;
       while (true) {
         try {
-          const lastCustomer = await Account.findOne().sort({ id: -1 });
+          const lastCustomer = await Account.findOne().sort({ accountID: -1 });
           if (lastCustomer) {
-            const lastID = parseInt(lastCustomer.id.substring(2));
+            const lastID = parseInt(lastCustomer.accountID.substring(2));
             id = 'CS' + (lastID + 1).toString().padStart(6, '0');
           } else {
             id = 'CS000000';
@@ -42,7 +42,7 @@ class SiteController {
       }
 
       const newAccount = new Account({
-        id: id,
+        accountID: id,
         username,
         password: hashedPassword,
       });

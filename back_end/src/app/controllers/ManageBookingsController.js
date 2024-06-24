@@ -10,6 +10,7 @@ class ManageBookingsController {
     }
   }
 
+  // POST /add
   async add(req, res, next) {
     //const bookingInfo = req.body;
     try {

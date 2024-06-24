@@ -3,16 +3,16 @@ const Schema = mongoose.Schema;
 
 const WorkingSchema = new Schema(
   {
-    id: {
+    workingID: {
       type: Number,
       unique: true,
     },
-    vet_ID: {
+    doctorID: {
       type: String,
       required: true,
       maxlength: 8,
       unique: true,
-      ref: 'Doctor',
+      ref: 'Account',
     },
     date: {
       type: Date,

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ServiceSchema = new Schema(
   {
-    id: {
+    serviceID: {
       type: String,
       required: true,
       maxlength: 8,

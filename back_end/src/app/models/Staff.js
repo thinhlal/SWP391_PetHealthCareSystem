@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 const StaffSchema = new Schema(
   {
-    id: {
+    staffID: {
       type: String,
       required: true,
       maxlength: 8,
       unique: true,
     },
-    account_id: {
+    accountID: {
       type: String,
       required: true,
       maxlength: 8,

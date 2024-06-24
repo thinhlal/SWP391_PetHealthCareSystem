@@ -8,6 +8,6 @@ router.post('/create-order', verifyToken, PaymentController.createOrder);
 router.post('/paypal-success-getData', PaymentController.getData);
 router.get('/paypal-success', PaymentController.captureOrder);
 router.get('/paypal-cancel', PaymentController.paymentCancel);
-router.post('/', verifyToken, PaymentController.index);
+router.post('/', PaymentController.index);
 
 module.exports = router;

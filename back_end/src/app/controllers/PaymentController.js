@@ -24,7 +24,7 @@ class PaymentController {
         ],
         application_context: {
           return_url: 'http://localhost:5000/paypal/paypal-success',
-          cancel_url: 'http://localhost:5000/paypal/paypal-cancel',
+          cancel_url: `http://localhost:5000/paypal/paypal-cancel?bookingID=${req.body.bookingID}`,
           shipping_preference: 'NO_SHIPPING',
           user_action: 'PAY_NOW',
           brand_name: 'PetHealthCare',
@@ -71,7 +71,7 @@ class PaymentController {
       }
 
       res.redirect(
-        `http://localhost:3000/payment-success?bookingID=${bookingID}`,
+        `http://localhost:3000/payment?bookingID=${bookingID}&status=success`,
       );
     } catch (error) {
       console.error(
@@ -83,18 +83,79 @@ class PaymentController {
   }
 
   async paymentCancel(req, res) {
-    console.log('Da huy booking');
-    res.send('Payment cancelled');
+    try {
+      const { bookingID } = req.query;
+
+      const updateCancelPayment = await Payment.findOneAndUpdate(
+        { bookingID: bookingID },
+        { isCancelPayment: true },
+        { new: true, runValidators: true },
+      );
+
+      if (!updateCancelPayment) {
+        return res.status(404).json({ message: 'Booking not found' });
+      }
+
+      res.redirect(
+        `http://localhost:3000/payment?bookingID=${bookingID}&status=cancel`,
+      );
+    } catch (error) {
+      console.error(
+        'Error canceling order:',
+        error.response ? error.response.data : error.message,
+      );
+      res.status(500).send(error);
+    }
   }
 
   //POST /paypal-success-getData
   async getData(req, res) {
     const bookingID = req.body.bookingID;
     try {
-      const paymentData = await Payment.findOne({ bookingID });
-      res.json(paymentData);
+      const paymentData = await Payment.aggregate([
+        { $match: { bookingID } },
+        {
+          $lookup: {
+            from: 'bookings',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'bookingDetails',
+          },
+        },
+        { $unwind: '$bookingDetails' },
+      ]);
+
+      if (!paymentData || paymentData.length === 0) {
+        return res
+          .status(404)
+          .json({ message: 'No payment data found for this bookingID' });
+      }
+
+      const services = await Payment.aggregate([
+        {
+          $lookup: {
+            from: 'bookings',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'bookingDetails',
+          },
+        },
+        { $unwind: '$bookingDetails' },
+        {
+          $lookup: {
+            from: 'services',
+            localField: 'bookingDetails.serviceID',
+            foreignField: 'serviceID',
+            as: 'serviceDetails',
+          },
+        },
+
+        { $unwind: '$serviceDetails' },
+      ]);
+      res.json(paymentData[0]);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching services', error });
+      console.error('Error fetching payment data:', error);
+      res.status(500).json({ message: 'Error fetching payment data', error });
     }
   }
 }

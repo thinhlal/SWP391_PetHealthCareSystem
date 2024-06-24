@@ -77,6 +77,7 @@ const Booking = () => {
     name: '',
     phone: '',
     email: '',
+    serviceID: '',
   });
   const [loading, setLoading] = useState(true);
   const [selectedServices, setSelectedServices] = useState([]);
@@ -97,7 +98,7 @@ const Booking = () => {
       const response = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/services`,
         {
-          idToCheckRole: user.id,
+          idToCheckRole: user.accountID,
         },
       );
       setServices(response.data);
@@ -268,15 +269,17 @@ const Booking = () => {
         paymentMethod: paymentMethod,
         services: selectedServices,
         totalPrice: totalAmount,
-        customerID: user.id,
-        ...userInfo,
+        customerID: user.accountID,
+        name: userInfo.name,
+        phone: userInfo.phone,
+        email: userInfo.email,
       };
       try {
         const response = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/booking`,
           {
             bookingData,
-            idToCheckRole: user.id,
+            idToCheckRole: user.accountID,
           },
         );
         if (paymentMethod === 'paypal') {
@@ -289,7 +292,9 @@ const Booking = () => {
           );
           window.location.href = orderResponse.data.url;
         } else {
-          navigate(`/payment-success?bookingID=${response.data.bookingID}`);
+          navigate(
+            `/payment?bookingID=${response.data.bookingID}&status=success`,
+          );
         }
       } catch (error) {
         alert('Error creating booking');
@@ -325,9 +330,9 @@ const Booking = () => {
   };
 
   const handleAddService = () => {
-    const selectedService = services.find(
-      service => service.id === userInfo.serviceID,
-    );
+    const selectedService = services.find(service => {
+      return service.serviceID === userInfo.serviceID;
+    });
     if (!selectedService) {
       setErrorMessageServices('Please select a valid service.');
       return;
@@ -427,7 +432,7 @@ const Booking = () => {
                     {services.map((service, index) => (
                       <option
                         key={index}
-                        value={service.id}
+                        value={service.serviceID}
                       >
                         {`${service.name} - Price: ${service.price}`}
                       </option>

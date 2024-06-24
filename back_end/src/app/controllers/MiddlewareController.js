@@ -23,8 +23,8 @@ const verifyToken = (req, res, next) => {
 
 const checkRole = roles => async (req, res, next) => {
   try {
-    const id = req.body.idToCheckRole;
-    const user = await User.findOne({ id });
+    const accountID = req.body.idToCheckRole;
+    const user = await User.findOne({ accountID });
     if (!user) {
       return res.status(404).send('User not found');
     }

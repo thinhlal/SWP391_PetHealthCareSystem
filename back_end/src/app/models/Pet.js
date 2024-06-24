@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PetSchema = new Schema(
   {
-    id: {
+    petID: {
       type: String,
       required: true,
       maxlength: 8,

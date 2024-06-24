@@ -69,8 +69,8 @@ function ChoosePet() {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const idToCheckRole = user.id;
-        const customerID = user.id;
+        const idToCheckRole = user.accountID;
+        const customerID = user.accountID;
         const response = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/pet`,
           { idToCheckRole, customerID },
@@ -117,16 +117,18 @@ function ChoosePet() {
           ) : (
             pets.map((pet, index) => (
               <div
-                className={`choose-pet-card ${petID === pet.id ? 'selected' : ''}`}
+                className={`choose-pet-card ${petID === pet.petID ? 'selected' : ''}`}
                 key={index}
-                onClick={() => handleSelectPet(pet.id)}
+                onClick={() => handleSelectPet(pet.petID)}
               >
                 <img
                   src={pet.image}
                   alt={pet.name}
                 />
                 <div className='name-pet-card'>{pet.name}</div>
-                <div className='choose-pet-id-card'>PetID:&nbsp;{pet.id}</div>
+                <div className='choose-pet-id-card'>
+                  PetID:&nbsp;{pet.petID}
+                </div>
               </div>
             ))
           )}

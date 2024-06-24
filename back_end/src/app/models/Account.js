@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const AccountSchema = new Schema(
   {
-    id: {
+    accountID: {
       type: String,
       required: true,
       maxlength: 8,

@@ -3,16 +3,16 @@ const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema(
   {
-    id: {
+    bookingID: {
       type: String,
       required: true,
       maxlength: 8,
       unique: true,
     },
-    customerID: {
+    accountID: {
       type: String,
       required: true,
-      ref: 'Customer',
+      ref: 'Account',
     },
     petID: {
       type: String,

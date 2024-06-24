@@ -21,9 +21,9 @@ class PetController {
       let id;
       while (true) {
         try {
-          const lastPetId = await Pet.findOne().sort({ id: -1 });
+          const lastPetId = await Pet.findOne().sort({ petID: -1 });
           if (lastPetId) {
-            const lastID = parseInt(lastPetId.id.substring(2));
+            const lastID = parseInt(lastPetId.petID.substring(2));
             id = 'PE' + (lastID + 1).toString().padStart(6, '0');
           } else {
             id = 'PE000000';
@@ -35,7 +35,7 @@ class PetController {
       }
 
       const newPet = new Pet({
-        id: id,
+        petID: id,
         customerID: customerID,
         name: name,
         birthday: birthday,

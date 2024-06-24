@@ -80,7 +80,7 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     }
 
     // Upload image to Firebase
-    const imageRef = ref(storage, `pets/${user.id}/${imageFile.name}`);
+    const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
     await uploadBytes(imageRef, imageFile);
     const imageUrl = await getDownloadURL(imageRef);
     console.log(imageUrl);
@@ -89,8 +89,8 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     const res = await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/pet/add`,
       {
-        idToCheckRole: user.id,
-        customerID: user.id,
+        idToCheckRole: user.accountID,
+        customerID: user.accountID,
         name: newPet.name,
         birthday: newPet.age,
         breed: newPet.breed,

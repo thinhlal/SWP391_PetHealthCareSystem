@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ServiceBookingVetSchema = new Schema(
   {
-    id: {
+    serviceBookingVetID: {
       type: Number,
       unique: true,
     },

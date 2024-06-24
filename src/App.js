@@ -104,7 +104,7 @@ function App() {
           }
         />
         <Route
-          path='/payment-success'
+          path='/payment'
           element={
             <ProtectedRoute allowedRoles={['Customer']}>
               <Payment />

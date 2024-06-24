@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PaymentSchema = new Schema(
   {
-    id: {
+    paymentID: {
       type: String,
       required: true,
       maxlength: 8,
@@ -12,7 +12,7 @@ const PaymentSchema = new Schema(
     bookingID: {
       type: String,
       required: true,
-      ref: 'Account',
+      ref: 'Booking',
     },
     date: {
       type: Date,
@@ -28,6 +28,10 @@ const PaymentSchema = new Schema(
       type: String,
       require: true,
       enum: ['PAYPAL', 'COUNTER'],
+    },
+    isCancelPayment: {
+      type: Boolean,
+      default: false,
     },
   },
   {

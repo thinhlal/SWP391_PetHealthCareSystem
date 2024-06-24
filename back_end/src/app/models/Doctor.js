@@ -3,13 +3,13 @@ const Schema = mongoose.Schema;
 
 const DoctorSchema = new Schema(
   {
-    id: {
+    doctorID: {
       type: String,
       required: true,
       maxlength: 8,
       unique: true,
     },
-    account_id: {
+    accountID: {
       type: String,
       required: true,
       maxlength: 8,

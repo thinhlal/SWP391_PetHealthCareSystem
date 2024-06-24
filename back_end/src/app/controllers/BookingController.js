@@ -5,14 +5,14 @@ const ServiceBookingVet = require('../models/ServiceBookingVet.js');
 class BookingController {
   // POST /
   async index(req, res, next) {
-    const bookingInfo = req.body;
+    const bookingInfo = req.body.bookingData;
     try {
       let idBooking;
       while (true) {
         try {
-          const lastBooking = await Booking.findOne().sort({ id: -1 });
+          const lastBooking = await Booking.findOne().sort({ bookingID: -1 });
           if (lastBooking) {
-            const lastID = parseInt(lastBooking.id.substring(2));
+            const lastID = parseInt(lastBooking.bookingID.substring(2));
             idBooking = 'BK' + (lastID + 1).toString().padStart(6, '0');
           } else {
             idBooking = 'BK000000';
@@ -23,21 +23,25 @@ class BookingController {
         }
       }
       const saveBooking = new Booking({
-        id: idBooking,
-        ...bookingInfo.bookingData,
+        bookingID: idBooking,
+        accountID: bookingInfo.customerID,
+        ...bookingInfo,
       });
       await saveBooking.save();
 
-      const services = bookingInfo.bookingData.services;
-      let idServiceBookingVet;
+      const services = bookingInfo.services;
       for (let i = 0; i < services.length; i++) {
+        let idServiceBookingVet;
         const service = services[i];
         while (true) {
           try {
             const lastServiceBookingVet =
-              await ServiceBookingVet.findOne().sort({ id: -1 });
+              await ServiceBookingVet.findOne().sort({
+                serviceBookingVetID: -1,
+              });
             if (lastServiceBookingVet) {
-              idServiceBookingVet = parseInt(lastServiceBookingVet.id) + 1;
+              idServiceBookingVet =
+                parseInt(lastServiceBookingVet.serviceBookingVetID) + 1;
             } else {
               idServiceBookingVet = 0;
             }
@@ -47,20 +51,20 @@ class BookingController {
           }
         }
         const saveServiceBookingVet = new ServiceBookingVet({
-          id: idServiceBookingVet,
+          serviceBookingVetID: idServiceBookingVet,
           bookingID: idBooking,
-          serviceID: service.id,
-          doctorID: bookingInfo.bookingData.doctorID,
+          serviceID: service.serviceID,
+          doctorID: bookingInfo.doctorID,
         });
         await saveServiceBookingVet.save();
       }
-
       let idPayment;
       while (true) {
         try {
-          const lastPayment = await Payment.findOne().sort({ id: -1 });
+          const lastPayment = await Payment.findOne().sort({ paymentID: -1 });
+          console.log(bookingInfo.lastPayment);
           if (lastPayment) {
-            const lastID = parseInt(lastPayment.id.substring(2));
+            const lastID = parseInt(lastPayment.paymentID.substring(2));
             idPayment = 'PA' + (lastID + 1).toString().padStart(6, '0');
           } else {
             idPayment = 'PA000000';
@@ -71,12 +75,12 @@ class BookingController {
         }
       }
       const createPayment = {
-        id: idPayment,
+        paymentID: idPayment,
         bookingID: idBooking,
         isSuccess: false,
         date: new Date(),
-        totalPrice: bookingInfo.bookingData.totalPrice,
-        paymentMethod: bookingInfo.bookingData.paymentMethod.toUpperCase(),
+        totalPrice: bookingInfo.totalPrice,
+        paymentMethod: bookingInfo.paymentMethod.toUpperCase(),
       };
       const payment = new Payment(createPayment);
       await payment.save();
