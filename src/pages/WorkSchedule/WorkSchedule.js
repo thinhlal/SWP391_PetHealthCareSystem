@@ -90,7 +90,7 @@ function WorkSchedule() {
     //ngày 17-6
     '2023-06-17': {
       '001': {
-        vetName: 'Vet. Minh',
+        vetName: 'Minh',
         appointments: [
           {
             id: 1,
@@ -131,7 +131,7 @@ function WorkSchedule() {
         ],
       },
       '002': {
-        vetName: 'Vet. Phat',
+        vetName: 'Phat',
         appointments: [
           {
             id: 1,
@@ -181,7 +181,7 @@ function WorkSchedule() {
         ],
       },
       '006': {
-        vetName: 'Vet. Tung',
+        vetName: 'Tung',
         appointments: [
           {
             id: 1,
@@ -216,7 +216,7 @@ function WorkSchedule() {
     //ngày 18-6
     '2023-06-18': {
       '004': {
-        vetName: 'Vet. Thinh',
+        vetName: 'Thinh',
         appointments: [
           {
             id: 1,
@@ -266,7 +266,7 @@ function WorkSchedule() {
         ],
       },
       '003': {
-        vetName: 'Vet. Duong',
+        vetName: 'Duong',
         appointments: [
           {
             id: 1,
@@ -307,7 +307,7 @@ function WorkSchedule() {
         ],
       },
       '005': {
-        vetName: 'Vet. Dat',
+        vetName: 'Dat',
         appointments: [
           {
             id: 1,
@@ -367,9 +367,7 @@ function WorkSchedule() {
     setSelectedVet(firstVetId || '');
   };
 
-  // const handleVetChange = e => {
-  //   setSelectedVet(e.target.value);
-  // };
+ 
 
   // Handle receive click
   const handleReceiveClick = (e, status) => {
@@ -386,12 +384,6 @@ function WorkSchedule() {
       ? schedules[selectedDate][selectedVet]
       : { vetName: '', appointments: [] };
 
-  // const vetOptions = schedules[selectedDate]
-  //   ? Object.keys(schedules[selectedDate]).map(vetId => ({
-  //       vetId,
-  //       vetName: schedules[selectedDate][vetId]?.vetName,
-  //     }))
-  //   : [];
 
   return (
     <div>
@@ -402,29 +394,14 @@ function WorkSchedule() {
         </div>
         <div className='vet-container'>
           <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
-          <p className='vet-name'>Vet. {selectedSchedule.vetName}</p>
+          <p className='vet-name'>Veterinarian Name: {selectedSchedule.vetName}</p>
         </div>
-        {/* <div className='vet-select'>
-          Select Veterinarian:
-          <select
-            value={selectedVet}
-            onChange={handleVetChange}
-          >
-            {vetOptions.map(option => (
-              <option
-                key={option.vetId}
-                value={option.vetId}
-              >
-                {option.vetName}
-              </option>
-            ))}
-          </select>
-        </div> */}
+        
       </div>
       <div>
         <div className='date-work'>
           Date's work schedule:{' '}
-          <input
+          <input 
             type='date'
             name='date'
             value={selectedDate}
@@ -471,7 +448,7 @@ function WorkSchedule() {
                       <div>
                         <div className='modal-body-section-doctor-date'>
                           <label>Choose Date:</label>
-                          <input
+                          <input className='ip-date-work'
                             type='date'
                             value={selectedDate}
                             onChange={e => {
@@ -489,7 +466,7 @@ function WorkSchedule() {
                         </div>
                         <div className='modal-body-section-doctor-date'>
                           <label>Choose Time Start Work:</label>
-                          <select
+                          <select className='sl-date-work'
                             value={`${selectedStartTime.startTime}`}
                             onChange={e => handleStartTimeChange(e)}
                             required
@@ -511,7 +488,7 @@ function WorkSchedule() {
                         </div>
                         <div className='modal-body-section-doctor-date'>
                           <label>Choose Time End Work:</label>
-                          <select
+                          <select className='sl-date-work'
                             value={`${selectedEndTime.endTime}`}
                             onChange={e => handleEndTimeChange(e)}
                             required
