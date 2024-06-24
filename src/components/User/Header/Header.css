@@ -83,6 +83,9 @@
   text-align: center;
   letter-spacing: 0;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px; /* Adjust the width as needed */
 }
 
 .main-header-user-overlap .main-header-user-account_menu {

@@ -1,12 +1,121 @@
-:root {
-  --font-cormorant-garamond: 'Cormorant Garamond', serif;
-  --font-libre-franklin: 'Libre Franklin', sans-serif;
+.payment-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgba(244, 246, 248, 0.6); /* Semi-transparent background */
+  font-family: Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
-body {
-  font-family: var(--font-libre-franklin);
+.payment-main-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  backdrop-filter: blur(10px); /* Adjust blur intensity as needed */
+  z-index: -1;
 }
 
-.h1 {
-  font-family: var(--font-cormorant-garamond);
+.payment-main-container .payment-sub-container {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  max-width: 580px; /* Increase max-width */
+  width: 100%;
+  min-height: 400px; /* Add min-height */
+}
+
+.payment-main-container .payment-main-title {
+  font-size: 20px;
+  position: relative;
+  padding-bottom: 10px; /* Add space for the underline */
+}
+
+.payment-main-container .payment-main-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background-color: #c0c5cb; /* Color of the underline */
+}
+
+.payment-main-container .payment-success-image {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.payment-main-container .payment-main-title h1 {
+  color: #2f855a;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.payment-main-container .payment-sub-title-content {
+  margin: 5px 0;
+  color: #4a5568;
+}
+
+.payment-main-container .payment-main-details {
+  margin: 50px 0;
+}
+
+.payment-main-container .payment-sub-details div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.payment-main-container .payment-booking-content-title {
+  display: flex;
+  
+  margin: 10px 0;
+}
+
+.payment-main-container .payment-booking-content,
+.payment-total-content,
+.payment-date-content,
+.payment-services-content {
+  margin: 10px 0;
+}
+
+.payment-main-container .button-payment-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.payment-main-container .button-payment-container a {
+  background-color: #1a202c;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.payment-main-container .button-payment-container a:hover {
+  background-color: #2b5896;
+}
+
+.payment-main-container .button-payment-container a:nth-child(2) {
+  background-color: transparent;
+  color: #1a202c;
+  border: 1px solid #1a202c;
+  border: none;
+}
+
+.payment-main-container .button-payment-container a:nth-child(2):hover {
+  background-color: #2b5896;
+  color: #ffffff;
 }

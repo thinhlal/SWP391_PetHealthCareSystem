@@ -52,7 +52,7 @@
 }
 .bt-choose-time-work {
   background-color: #e18213;
-  width: 144px;
+  width: 150px;
   height: 35px;
   border: none;
   border-radius: 20px;
@@ -66,6 +66,16 @@
   font-size: 13px;
   font-family: Roboto, sans-serif;
 }
+.modal-body-section-doctor-date{
+  margin-bottom: 15px;
+}
+.ip-date-work{
+  margin-left: 10px;
+}
+.sl-date-work{
+  margin-left: 10px;
+}
+
 .bt-choose-time-work:hover {
   background-color: #002169;
   cursor: pointer;
@@ -117,7 +127,7 @@
   gap: 20px;
 }
 
-tr:hovet {
+tr:hover {
   background-color: #f5f5f5;
 }
 
@@ -137,27 +147,7 @@ tr:hovet {
   font-size: 13px;
 }
 
-.click-button:hovet {
-  background-color: orange;
-}
-
-.cancel-booking-button {
-  background-color: #bb2d3b;
-  width: 90px;
-  height: 35px;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-  color: white;
-  font-size: 13px;
-}
-
-.cancel-booking-button:hovet {
+.click-button:hover {
   background-color: orange;
 }
 
