@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import './Payment.css';
+import acceptImage from '../../assets/images/img_Payment/accept.png'; // Adjust the path based on your project structure
 
 const Payment = () => {
   const [data, setData] = useState(null);
@@ -35,34 +37,35 @@ const Payment = () => {
   };
 
   return (
-    <div>
+    <div className="payment-main-container">
       {data ? (
-        <div>
-          <div>
-            <h1>Payment Successful</h1>
-            <p>Your payment has been processed successfully.</p>
+        <div className='payment-sub-container'>
+          <div className='payment-main-title'>
+            <img src={acceptImage} alt="Success" className="payment-success-image" />
+            <h1 className='payment-sub-title'>Payment Successful</h1>
+            <p className='payment-sub-title-content'>Your payment has been processed successfully.</p>
           </div>
-          <div>
-            <div>
-              <div>
-                <p>BookingID</p>
-                <p>{data.id}</p>
+          <div className="payment-main-details">
+            <div className='payment-sub-details'>
+              <div className='payment-booking-content'>
+                <div className='payment-booking-content-title'>BookingID:&nbsp; </div>
+                <div>{data.id}</div>
               </div>
-              <div>
-                <p>Total Amount</p>
-                <p>${data.totalPrice}</p>
+              <div className='payment-total-content'>
+                <div className='payment-booking-content-title'>Total Amount:&nbsp; </div>
+                <div>${data.totalPrice}</div>
               </div>
-              <div>
-                <p>Date</p>
-                <p>{formatDate(data.date)}</p>
+              <div className='payment-date-content'>
+                <div className='payment-booking-content-title'>Date:&nbsp; </div>
+                <div>{formatDate(data.date)}</div>
               </div>
-              <div>
-                <p>Services</p>
-                <p>Visa ending in 1234</p>
+              <div className='payment-services-content'>
+                <div className='payment-booking-content-title'>Services:&nbsp; </div>
+                <div>Visa ending in 1234</div>
               </div>
             </div>
           </div>
-          <div>
+          <div className="button-payment-container">
             <Link to='/your-booking'>View Order History</Link>
             <Link to='/'>Return to Homepage</Link>
           </div>
@@ -73,4 +76,5 @@ const Payment = () => {
     </div>
   );
 };
+
 export default Payment;

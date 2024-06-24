@@ -80,7 +80,11 @@ a {
   text-align: left;
   cursor: pointer;
   z-index: 10003; /* Ensure menu items are on top */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 
 .menu-item-login:hover {
   background-color: #e18213;

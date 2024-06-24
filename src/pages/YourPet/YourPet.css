@@ -113,6 +113,7 @@ a {
 
 .your-pet .main-content {
   width: 100%;
+  margin-bottom: 15%;
 }
 
 .your-pet .detail-information {
@@ -184,4 +185,6 @@ a {
 
 .your-pet .no-pet-available {
   font-size: 20px;
+  font-family: Roboto, sans-serif;
+  color: rgb(158, 38, 38);
 }
