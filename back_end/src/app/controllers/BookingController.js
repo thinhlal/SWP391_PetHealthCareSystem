@@ -54,7 +54,6 @@ class BookingController {
           serviceBookingVetID: idServiceBookingVet,
           bookingID: idBooking,
           serviceID: service.serviceID,
-          doctorID: bookingInfo.doctorID,
         });
         await saveServiceBookingVet.save();
       }

@@ -19,6 +19,11 @@ const BookingSchema = new Schema(
       required: true,
       ref: 'Pet',
     },
+    doctorID: {
+      type: String,
+      ref: 'Doctor',
+      default: null,
+    },
     name: {
       type: String,
       required: true,

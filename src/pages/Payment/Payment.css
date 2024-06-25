@@ -56,8 +56,14 @@
   margin-bottom: 10px;
 }
 
-.payment-main-container .payment-main-title h1 {
+.payment-main-container .payment-sub-title-success {
   color: #2f855a;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.payment-main-container .payment-sub-title-cancel{
+  color: red;
   margin-bottom: 25px;
   font-weight: 600;
 }

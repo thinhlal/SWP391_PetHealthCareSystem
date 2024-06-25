@@ -151,27 +151,25 @@ body {
 .booking-container .selected-services {
   font-family: Roboto, sans-serif;
   width: 270px;
-  border: 1px solid #c1c1c1; 
-  border-top-left-radius: 10px; 
+  border: 1px solid #c1c1c1;
+  border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  padding: 10px; 
-  max-height: 400px; 
-  overflow-y: auto; 
+  padding: 10px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .booking-container .selected-services .service-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 0; 
+  padding: 5px 0;
 }
 
 .booking-container .selected-services .total-selected-services {
-  margin-top: 10px; 
-  font-weight: bold; 
+  margin-top: 10px;
+  font-weight: bold;
 }
-
-
 
 .booking-container .select_Info {
   border: 1px solid #c1c1c1;
@@ -223,6 +221,13 @@ body {
 
 .booking-container .square {
   height: 24px;
+  object-fit: cover;
+}
+
+.booking-container .square-notWorking {
+  margin: 0 0 0 5px;
+  height: 13px;
+  width: 13px;
   object-fit: cover;
 }
 
@@ -287,6 +292,19 @@ body {
   gap: 8px;
   padding: 10px 15px;
   background-color: #0ac074;
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+
+.booking-container .element-button-gray {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background-color: gray;
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }

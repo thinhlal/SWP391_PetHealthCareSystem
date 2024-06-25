@@ -65,7 +65,7 @@ class PaymentController {
         { isSuccess: true },
         { new: true, runValidators: true },
       );
-      
+
       if (!paymentUpdate) {
         return res.status(404).json({ message: 'Payment not found' });
       }
@@ -88,7 +88,10 @@ class PaymentController {
 
       const updateCancelPayment = await Payment.findOneAndUpdate(
         { bookingID: bookingID },
-        { isCancelPayment: true },
+        {
+          isCancelPayment: true,
+          isSuccess: false,
+        },
         { new: true, runValidators: true },
       );
 
@@ -122,37 +125,33 @@ class PaymentController {
             as: 'bookingDetails',
           },
         },
-        { $unwind: '$bookingDetails' },
-      ]);
-
-      if (!paymentData || paymentData.length === 0) {
-        return res
-          .status(404)
-          .json({ message: 'No payment data found for this bookingID' });
-      }
-
-      const services = await Payment.aggregate([
         {
           $lookup: {
-            from: 'bookings',
+            from: 'servicebookingvets',
             localField: 'bookingID',
             foreignField: 'bookingID',
-            as: 'bookingDetails',
+            as: 'serviceBookingVetsDetails',
           },
         },
-        { $unwind: '$bookingDetails' },
         {
           $lookup: {
             from: 'services',
-            localField: 'bookingDetails.serviceID',
+            localField: 'serviceBookingVetsDetails.serviceID',
             foreignField: 'serviceID',
             as: 'serviceDetails',
           },
         },
+        {
+          $lookup: {
+            from: 'doctors',
+            localField: 'bookingDetails.doctorID',
+            foreignField: 'doctorID',
+            as: 'doctorsDetails',
+          },
+        },
 
-        { $unwind: '$serviceDetails' },
       ]);
-      res.json(paymentData[0]);
+      res.status(200).json({ paymentData });
     } catch (error) {
       console.error('Error fetching payment data:', error);
       res.status(500).json({ message: 'Error fetching payment data', error });

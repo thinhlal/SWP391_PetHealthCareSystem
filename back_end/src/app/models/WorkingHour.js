@@ -11,8 +11,7 @@ const WorkingSchema = new Schema(
       type: String,
       required: true,
       maxlength: 8,
-      unique: true,
-      ref: 'Account',
+      ref: 'Doctor',
     },
     date: {
       type: Date,

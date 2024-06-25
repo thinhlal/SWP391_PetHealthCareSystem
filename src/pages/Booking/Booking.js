@@ -7,58 +7,60 @@ import Footer from '../../components/User/Footer/Footer.js';
 import Header from '../../components/User/Header/Header.js';
 import red from '../../assets/images/img_Booking/red_square.png';
 import green from '../../assets/images/img_Booking/green_square.png';
+import gray from '../../assets/images/img_Booking/gray-color-solid-background-1920x1080.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 
-const doctorsData = [
-  {
-    id: 'DC000001',
-    name: 'Daria Andaloro',
-    workingHours: [
-      {
-        date: '2024-06-01',
-        startTime: '08:00',
-        endTime: '17:00',
-        isOff: false,
-        bookings: [
-          { startTime: '09:00', endTime: '10:00' },
-          { startTime: '10:00', endTime: '11:00' },
-        ],
-      },
-      {
-        date: '2024-06-02',
-        isOff: true,
-      },
-    ],
-  },
-  {
-    id: 'DC000002',
-    name: 'Michael Brian',
-    workingHours: [
-      {
-        date: '2024-06-01',
-        startTime: '08:00',
-        endTime: '17:00',
-        isOff: false,
-        bookings: [],
-      },
-      {
-        date: '2024-06-02',
-        startTime: '08:00',
-        endTime: '12:00',
-        isOff: false,
-        bookings: [],
-      },
-    ],
-  },
-];
+// const doctorsData = [
+//   {
+//     id: 'DC000001',
+//     name: 'Daria Andaloro',
+//     workingHours: [
+//       {
+//         date: '2024-06-01',
+//         startTime: '08:00',
+//         endTime: '17:00',
+//         isOff: false,
+//         bookings: [
+//           { startTime: '09:00', endTime: '10:00' },
+//           { startTime: '10:00', endTime: '11:00' },
+//         ],
+//       },
+//       {
+//         date: '2024-06-02',
+//         isOff: true,
+//       },
+//     ],
+//   },
+//   {
+//     id: 'DC000002',
+//     name: 'Michael Brian',
+//     workingHours: [
+//       {
+//         date: '2024-06-01',
+//         startTime: '08:00',
+//         endTime: '17:00',
+//         isOff: false,
+//         bookings: [],
+//       },
+//       {
+//         date: '2024-06-02',
+//         startTime: '08:00',
+//         endTime: '12:00',
+//         isOff: false,
+//         bookings: [],
+//       },
+//     ],
+//   },
+// ];
 
 const Booking = () => {
   const location = useLocation();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { petID } = location.state || {};
+  const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [availableSlots, setAvailableSlots] = useState([]);
@@ -107,6 +109,20 @@ const Booking = () => {
     }
   };
 
+  const getAllDoctors = async () => {
+    try {
+      const response = await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/doctor`,
+        {
+          idToCheckRole: user.accountID,
+        },
+      );
+      setDoctors(response.data);
+    } catch (error) {
+      console.error('Error fetching services:', error);
+    }
+  };
+
   useEffect(() => {
     if (!petID) {
       alert('No pet selected. Please go back and select a pet.');
@@ -136,19 +152,14 @@ const Booking = () => {
     }
   };
 
-  const updateAvailableSlots = (doctorId, date) => {
+  const updateAvailableSlots = (doctorID, date) => {
     if (date) {
-      if (doctorId) {
-        const doctor = doctorsData.find(doc => doc.id === doctorId);
-        const workingDay = doctor.workingHours.find(wh => wh.date === date);
+      if (doctorID) {
+        const doctor = doctors.find(doc => doc.doctorID === doctorID);
+        const workingDay = doctor.workingHoursDetails.find(wh => wh.date.split('T')[0] === date);
         if (workingDay) {
-          if (workingDay.isOff) {
-            setIsDayOff(true);
-            setAvailableSlots([]);
-          } else {
-            setIsDayOff(false);
-            setAvailableSlots(generateSlots(workingDay));
-          }
+          setIsDayOff(workingDay.isOff);
+          setAvailableSlots(generateSlots(doctor, date));
         } else {
           setIsDayOff(false);
           setAvailableSlots([]);
@@ -167,47 +178,54 @@ const Booking = () => {
     const start = new Date('1970-01-01T08:00:00');
     const end = new Date('1970-01-01T17:00:00');
 
-    for (
-      let current = new Date(start);
-      current < end;
-      current = new Date(current.getTime() + 60 * 60 * 1000)
-    ) {
+    for (let current = new Date(start); current < end; current = new Date(current.getTime() + 60 * 60 * 1000)) {
       const next = new Date(current.getTime() + 60 * 60 * 1000);
       slots.push({
         startTime: new Date(current),
         endTime: new Date(next),
         isBooked: false,
+        isWithinWorkingHours: true
       });
     }
     return slots;
   };
-
-  const generateSlots = workingDay => {
+  const generateSlots = (doctor, date) => {
     const slots = [];
-    const start = new Date(`1970-01-01T${workingDay.startTime}:00`);
-    const end = new Date(`1970-01-01T${workingDay.endTime}:00`);
+    const workingDay = doctor.workingHoursDetails.find(wh => wh.date.split('T')[0] === date);
 
-    for (
-      let current = new Date(start);
-      current < end;
-      current = new Date(current.getTime() + 60 * 60 * 1000)
-    ) {
+    const start = new Date(`1970-01-01T08:00:00`);
+    const end = new Date(`1970-01-01T17:00:00`);
+
+    let workStart, workEnd;
+    if (workingDay && !workingDay.isOff) {
+      workStart = new Date(`1970-01-01T${workingDay.startTime}:00`);
+      workEnd = new Date(`1970-01-01T${workingDay.endTime}:00`);
+    } else {
+      workStart = workEnd = null;
+    }
+    for (let current = new Date(start); current < end; current = new Date(current.getTime() + 60 * 60 * 1000)) {
       const next = new Date(current.getTime() + 60 * 60 * 1000);
 
-      const isBooked = workingDay.bookings.some(
-        booking =>
-          new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
-          next <= new Date(`1970-01-01T${booking.endTime}:00`),
-      );
+      let isBooked = false;
+      let isWithinWorkingHours = workStart && workEnd && current >= workStart && next <= workEnd;
+
+      if (doctor.matchingBookings) {
+        isBooked = doctor.matchingBookings.some(
+          booking => new Date(`1970-01-01T${booking.startTime}:00`) <= current && next <= new Date(`1970-01-01T${booking.endTime}:00`)
+        );
+      }
 
       slots.push({
         startTime: new Date(current),
         endTime: new Date(next),
         isBooked,
+        isWithinWorkingHours
       });
     }
+
     return slots;
   };
+
 
   const validateFields = () => {
     let valid = true;
@@ -325,8 +343,12 @@ const Booking = () => {
     }
   };
 
-  const handleFocus = () => {
+  const handleFocusServices = () => {
     getAllServices();
+  };
+
+  const handleFocusDoctors = () => {
+    getAllDoctors();
   };
 
   const handleAddService = () => {
@@ -334,7 +356,6 @@ const Booking = () => {
       return service.serviceID === userInfo.serviceID;
     });
 
-    // Kiểm tra nếu dịch vụ đã được chọn trước đó
     const isServiceAlreadySelected = selectedServices.some(
       service => service.serviceID === userInfo.serviceID
     );
@@ -349,7 +370,6 @@ const Booking = () => {
       return;
     }
 
-    // Thêm dịch vụ vào danh sách đã chọn
     setSelectedServices([...selectedServices, selectedService]);
     setErrorMessageServices('');
   };
@@ -437,7 +457,7 @@ const Booking = () => {
                     className='select_Info'
                     value={userInfo.serviceID}
                     onChange={handleInputChange}
-                    onFocus={handleFocus}
+                    onFocus={handleFocusServices}
                     required
                   >
                     <option value=''>Choose Service:</option>
@@ -493,14 +513,15 @@ const Booking = () => {
                     name='doctors'
                     className='select_Info'
                     onChange={handleDoctorChange}
+                    onFocus={handleFocusDoctors}
                   >
-                    <option value=''>Select a doctor</option>
-                    {doctorsData.map(doctor => (
+                    <option value=''>Choose Doctor:</option>
+                    {doctors.map((doctor, index) => (
                       <option
-                        key={doctor.id}
-                        value={doctor.id}
+                        key={index}
+                        value={doctor.doctorID}
                       >
-                        {doctor.name}
+                        {`${doctor.name}`}
                       </option>
                     ))}
                   </select>
@@ -536,19 +557,15 @@ const Booking = () => {
             <div className='available-tittle-text'>Available slots:</div>
             <div className='booked-slot'>
               <div className='booked-status'>Booked</div>
-              <img
-                className='square'
-                src={red}
-                alt='Booked'
-              />
+              <img className='square' src={red} alt='Booked' />
             </div>
             <div className='available-slot'>
               <div className='booked-status'>Available</div>
-              <img
-                className='square'
-                src={green}
-                alt='Available'
-              />
+              <img className='square' src={green} alt='Available' />
+            </div>
+            <div className='available-slot'>
+              <div className='booked-status'>Not Working</div>
+              <img className='square-notWorking' src={gray} alt='Not Working' />
             </div>
           </div>
 
@@ -558,21 +575,26 @@ const Booking = () => {
                 <div className='day-off-message'>
                   The selected doctor is off on this day.
                 </div>
-              ) : availableSlots.length === 0 ? (
+              ) : availableSlots.length === 0 && !selectedDate ? (
                 <div className='no-slots-message'>
-                  No available slots for this date.
+                  Choose date to book!!!
+                </div>
+              ) : availableSlots.length === 0 && selectedDate ? (
+                <div className='no-slots-message'>
+                  Doctor not working this day!!!
                 </div>
               ) : (
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${
-                      slot.isBooked
-                        ? 'element-button-red'
-                        : selectedSlot === slot
+                    className={`element-button ${slot.isBooked
+                      ? 'element-button-red'
+                      : slot.isWithinWorkingHours
+                        ? selectedSlot === slot
                           ? 'element-button-selected'
                           : 'element-button-green'
-                    }`}
+                        : 'element-button-gray'
+                      }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>

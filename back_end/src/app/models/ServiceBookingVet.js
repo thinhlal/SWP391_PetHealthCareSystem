@@ -17,11 +17,6 @@ const ServiceBookingVetSchema = new Schema(
       required: true,
       ref: 'Service',
     },
-    doctorID: {
-      type: String,
-      ref: 'Doctor',
-      default: null,
-    },
   },
   {
     timestamps: true,

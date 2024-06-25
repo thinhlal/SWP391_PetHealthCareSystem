@@ -58,7 +58,7 @@ class SiteController {
 
   // [POST] /login
   async logIn(req, res, next) {
-    const { username, password } = req.body.formData;
+    const { username, password } = req.body;
     let deviceIdentifier = req.body.deviceIdentifier;
     if (!deviceIdentifier) {
       return res.status(400).json({ message: 'Device identifier is required' });
