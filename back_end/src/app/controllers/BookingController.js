@@ -62,7 +62,6 @@ class BookingController {
       while (true) {
         try {
           const lastPayment = await Payment.findOne().sort({ paymentID: -1 });
-          console.log(bookingInfo.lastPayment);
           if (lastPayment) {
             const lastID = parseInt(lastPayment.paymentID.substring(2));
             idPayment = 'PA' + (lastID + 1).toString().padStart(6, '0');

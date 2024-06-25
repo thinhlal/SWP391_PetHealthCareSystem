@@ -65,7 +65,7 @@ class PaymentController {
         { isSuccess: true },
         { new: true, runValidators: true },
       );
-      console.log(paymentUpdate);
+      
       if (!paymentUpdate) {
         return res.status(404).json({ message: 'Payment not found' });
       }

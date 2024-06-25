@@ -24,7 +24,7 @@ const AccountSchema = new Schema(
       type: String,
       required: true,
       maxlength: 25,
-      enum: ['Customer', 'Veterinarian', 'Staff', 'Admin'],
+      enum: ['Customer', 'Doctor', 'Staff', 'Admin'],
       default: 'Customer',
     },
     isAdmin: {
