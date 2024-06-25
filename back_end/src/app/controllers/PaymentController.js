@@ -149,7 +149,6 @@ class PaymentController {
             as: 'doctorsDetails',
           },
         },
-
       ]);
       res.status(200).json({ paymentData });
     } catch (error) {

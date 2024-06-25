@@ -156,7 +156,9 @@ const Booking = () => {
     if (date) {
       if (doctorID) {
         const doctor = doctors.find(doc => doc.doctorID === doctorID);
-        const workingDay = doctor.workingHoursDetails.find(wh => wh.date.split('T')[0] === date);
+        const workingDay = doctor.workingHoursDetails.find(
+          wh => wh.date.split('T')[0] === date,
+        );
         if (workingDay) {
           setIsDayOff(workingDay.isOff);
           setAvailableSlots(generateSlots(doctor, date));
@@ -178,20 +180,26 @@ const Booking = () => {
     const start = new Date('1970-01-01T08:00:00');
     const end = new Date('1970-01-01T17:00:00');
 
-    for (let current = new Date(start); current < end; current = new Date(current.getTime() + 60 * 60 * 1000)) {
+    for (
+      let current = new Date(start);
+      current < end;
+      current = new Date(current.getTime() + 60 * 60 * 1000)
+    ) {
       const next = new Date(current.getTime() + 60 * 60 * 1000);
       slots.push({
         startTime: new Date(current),
         endTime: new Date(next),
         isBooked: false,
-        isWithinWorkingHours: true
+        isWithinWorkingHours: true,
       });
     }
     return slots;
   };
   const generateSlots = (doctor, date) => {
     const slots = [];
-    const workingDay = doctor.workingHoursDetails.find(wh => wh.date.split('T')[0] === date);
+    const workingDay = doctor.workingHoursDetails.find(
+      wh => wh.date.split('T')[0] === date,
+    );
 
     const start = new Date(`1970-01-01T08:00:00`);
     const end = new Date(`1970-01-01T17:00:00`);
@@ -203,15 +211,22 @@ const Booking = () => {
     } else {
       workStart = workEnd = null;
     }
-    for (let current = new Date(start); current < end; current = new Date(current.getTime() + 60 * 60 * 1000)) {
+    for (
+      let current = new Date(start);
+      current < end;
+      current = new Date(current.getTime() + 60 * 60 * 1000)
+    ) {
       const next = new Date(current.getTime() + 60 * 60 * 1000);
 
       let isBooked = false;
-      let isWithinWorkingHours = workStart && workEnd && current >= workStart && next <= workEnd;
+      let isWithinWorkingHours =
+        workStart && workEnd && current >= workStart && next <= workEnd;
 
       if (doctor.matchingBookings) {
         isBooked = doctor.matchingBookings.some(
-          booking => new Date(`1970-01-01T${booking.startTime}:00`) <= current && next <= new Date(`1970-01-01T${booking.endTime}:00`)
+          booking =>
+            new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
+            next <= new Date(`1970-01-01T${booking.endTime}:00`),
         );
       }
 
@@ -219,13 +234,12 @@ const Booking = () => {
         startTime: new Date(current),
         endTime: new Date(next),
         isBooked,
-        isWithinWorkingHours
+        isWithinWorkingHours,
       });
     }
 
     return slots;
   };
-
 
   const validateFields = () => {
     let valid = true;
@@ -357,7 +371,7 @@ const Booking = () => {
     });
 
     const isServiceAlreadySelected = selectedServices.some(
-      service => service.serviceID === userInfo.serviceID
+      service => service.serviceID === userInfo.serviceID,
     );
 
     if (!selectedService) {
@@ -481,14 +495,21 @@ const Booking = () => {
                 <h3 className='title-selected-services'>Selected Services:</h3>
                 {selectedServices.length > 0 ? (
                   selectedServices.map((service, index) => (
-                    <div key={index} className='service-item'>
+                    <div
+                      key={index}
+                      className='service-item'
+                    >
                       {service.name} - Price: {service.price}
                     </div>
                   ))
                 ) : (
-                  <div className='sub-title-selected-services'>No services selected.</div>
+                  <div className='sub-title-selected-services'>
+                    No services selected.
+                  </div>
                 )}
-                <h3 className='total-selected-services'>Total Amount: {totalAmount}</h3>
+                <h3 className='total-selected-services'>
+                  Total Amount: {totalAmount}
+                </h3>
               </div>
             </div>
 
@@ -557,15 +578,27 @@ const Booking = () => {
             <div className='available-tittle-text'>Available slots:</div>
             <div className='booked-slot'>
               <div className='booked-status'>Booked</div>
-              <img className='square' src={red} alt='Booked' />
+              <img
+                className='square'
+                src={red}
+                alt='Booked'
+              />
             </div>
             <div className='available-slot'>
               <div className='booked-status'>Available</div>
-              <img className='square' src={green} alt='Available' />
+              <img
+                className='square'
+                src={green}
+                alt='Available'
+              />
             </div>
             <div className='available-slot'>
               <div className='booked-status'>Not Working</div>
-              <img className='square-notWorking' src={gray} alt='Not Working' />
+              <img
+                className='square-notWorking'
+                src={gray}
+                alt='Not Working'
+              />
             </div>
           </div>
 
@@ -576,9 +609,7 @@ const Booking = () => {
                   The selected doctor is off on this day.
                 </div>
               ) : availableSlots.length === 0 && !selectedDate ? (
-                <div className='no-slots-message'>
-                  Choose date to book!!!
-                </div>
+                <div className='no-slots-message'>Choose date to book!!!</div>
               ) : availableSlots.length === 0 && selectedDate ? (
                 <div className='no-slots-message'>
                   Doctor not working this day!!!
@@ -587,14 +618,15 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${slot.isBooked
-                      ? 'element-button-red'
-                      : slot.isWithinWorkingHours
-                        ? selectedSlot === slot
-                          ? 'element-button-selected'
-                          : 'element-button-green'
-                        : 'element-button-gray'
-                      }`}
+                    className={`element-button ${
+                      slot.isBooked
+                        ? 'element-button-red'
+                        : slot.isWithinWorkingHours
+                          ? selectedSlot === slot
+                            ? 'element-button-selected'
+                            : 'element-button-green'
+                          : 'element-button-gray'
+                    }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>

@@ -146,11 +146,20 @@ function WorkSchedule() {
     event.preventDefault();
 
     if (!selectedDates.length) {
-      setErrors(prev => ({ ...prev, selectedDates: 'Please select at least one date.' }));
+      setErrors(prev => ({
+        ...prev,
+        selectedDates: 'Please select at least one date.',
+      }));
     } else if (Object.values(shifts).length !== selectedDates.length) {
-      setErrors(prev => ({ ...prev, shifts: 'Please select a shift for each date.' }));
+      setErrors(prev => ({
+        ...prev,
+        shifts: 'Please select a shift for each date.',
+      }));
     } else if (!selectedDayOff) {
-      setErrors(prev => ({ ...prev, selectedDayOff: 'Please select a day off.' }));
+      setErrors(prev => ({
+        ...prev,
+        selectedDayOff: 'Please select a day off.',
+      }));
     } else {
       const newTimeWork = selectedDates.map(date => ({
         date,
@@ -171,7 +180,7 @@ function WorkSchedule() {
     setErrors({});
   };
 
-  const handleDateChangeModal = (dates) => {
+  const handleDateChangeModal = dates => {
     setSelectedDates(dates);
     setErrors(prev => ({ ...prev, selectedDates: '' }));
   };
@@ -226,10 +235,16 @@ function WorkSchedule() {
             aria-hidden='true'
           >
             <div className='modal-dialog'>
-              <form id='chooseTimeWork' onSubmit={handleSubmit}>
+              <form
+                id='chooseTimeWork'
+                onSubmit={handleSubmit}
+              >
                 <div className='modal-content'>
                   <div className='modal-header'>
-                    <h1 className='modal-title fs-5' id='exampleModalLabel'>
+                    <h1
+                      className='modal-title fs-5'
+                      id='exampleModalLabel'
+                    >
                       Choose Time Work
                     </h1>
                     <button
@@ -256,19 +271,28 @@ function WorkSchedule() {
                         )}
                       </div>
                       {selectedDates.map(date => (
-                        <div key={date} className='modal-body-section-doctor-date'>
+                        <div
+                          key={date}
+                          className='modal-body-section-doctor-date'
+                        >
                           <label>{`Choose Shift for ${date}:`}</label>
                           <select
                             className='sl-date-work'
                             value={shifts[date] || ''}
-                            onChange={e => handleShiftChange(date, e.target.value)}
+                            onChange={e =>
+                              handleShiftChange(date, e.target.value)
+                            }
                             required
                           >
                             <option value=''>Select Shift</option>
-                            <option value='Morning'>Morning: 8:00 - 16:00</option>
-                            <option value='Evening'>Evening: 15:00 - 22:00</option>
+                            <option value='Morning'>
+                              Morning: 8:00 - 16:00
+                            </option>
+                            <option value='Evening'>
+                              Evening: 15:00 - 22:00
+                            </option>
                             <option value='Both'>Both</option>
-                            </select>
+                          </select>
                           {errors.shifts && (
                             <span className='error'>{errors.shifts}</span>
                           )}
@@ -306,7 +330,10 @@ function WorkSchedule() {
                     >
                       Close
                     </button>
-                    <button type='submit' className='btn btn-success'>
+                    <button
+                      type='submit'
+                      className='btn btn-success'
+                    >
                       Choose
                     </button>
                   </div>
@@ -315,7 +342,10 @@ function WorkSchedule() {
             </div>
           </div>
         </div>
-        <div className='table-schedule' id='tables'>
+        <div
+          className='table-schedule'
+          id='tables'
+        >
           <form className='form_table-schedule'>
             <table className='table_table-schedule'>
               <thead className='head_table-schedule'>
@@ -339,7 +369,9 @@ function WorkSchedule() {
                     <td className='td_table-schedule'>{row.gender}</td>
                     <td className='td_table-schedule'>{row.registerHour}</td>
                     <td className='td_table-schedule'>{row.petOwner}</td>
-                    <td className={`td_table-schedule doctor-status-${row.status.toLowerCase()}`}>
+                    <td
+                      className={`td_table-schedule doctor-status-${row.status.toLowerCase()}`}
+                    >
                       {row.status}
                     </td>
                     <td className='td_table-schedule'>
@@ -349,7 +381,8 @@ function WorkSchedule() {
                           className={`click-button ${row.status === 'Canceled' ? 'gray-button' : ''}`}
                           onClick={e => handleReceiveClick(e, row.status)}
                           style={{
-                            pointerEvents: row.status === 'Canceled' ? 'none' : 'auto',
+                            pointerEvents:
+                              row.status === 'Canceled' ? 'none' : 'auto',
                           }}
                         >
                           Receive

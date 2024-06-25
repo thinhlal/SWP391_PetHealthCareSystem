@@ -52,7 +52,9 @@ const Payment = () => {
                   alt='Success'
                   className='payment-success-image'
                 />
-                <h1 className='payment-sub-title-success'>Payment Successful</h1>
+                <h1 className='payment-sub-title-success'>
+                  Payment Successful
+                </h1>
               </div>
             ) : (
               <div>
