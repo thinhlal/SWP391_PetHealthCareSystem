@@ -2,92 +2,19 @@ import React, { useState } from 'react';
 import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
 import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
+import DatePicker from 'react-multi-date-picker';
+import 'react-multi-date-picker/styles/colors/green.css';
 
 function WorkSchedule() {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [modalAction, setModalAction] = useState(() => () => {});
-  const handleSubmit = event => {
-    event.preventDefault();
-  };
-  const [errors, setErrors] = useState({
-    selectedDate: '',
-    selectedTimeWork: '',
-  });
-  const availableTimeWork = [
-    { startTime: '08:00', endTime: '09:00' },
-    { startTime: '09:00', endTime: '10:00' },
-    { startTime: '11:00', endTime: '12:00' },
-    { startTime: '12:00', endTime: '13:00' },
-    { startTime: '13:00', endTime: '14:00' },
-    { startTime: '14:00', endTime: '15:00' },
-    { startTime: '15:00', endTime: '16:00' },
-    { startTime: '16:00', endTime: '17  :00' },
-
-    // thêm các khung giờ khác tại đây
-  ];
-  const [allTimeWork, setTimeWork] = useState([
-    {
-      day: '2024-06-17',
-      startTime: '9:00',
-      endTime: '10:00',
-    },
-    {
-      day: '2024-06-02',
-      startTime: '10:00',
-      endTime: '11:00',
-    },
-    {
-      day: '2024-06-02',
-      startTime: '11:00',
-      endTime: '12:00',
-    },
-    {
-      day: '2024-06-03',
-      startTime: '12:00',
-      endTime: '13:00',
-    },
-    {
-      day: '2024-06-03',
-      startTime: '13:00',
-      endTime: '14:00',
-    },
-  ]);
-  const handleChooseTimeWork = event => {
-    event.preventDefault();
-
-    const newTimeWork = {
-      day: selectedDate,
-      startTime: selectedStartTime.startTime,
-      endTime: selectedEndTime.endTime,
-    };
-
-    setTimeWork([...allTimeWork, newTimeWork]);
-    resetForm();
-    document.querySelector('#exampleModal .btn-close').click();
-  };
-
-  const resetForm = () => {
-    setSelectedDate('');
-    setSelectedStartTime({});
-    setSelectedEndTime({});
-    setErrors({});
-  };
-  const handleStartTimeChange = event => {
-    const [startTime] = event.target.value.split('-');
-    setSelectedStartTime({ startTime });
-    setErrors(prev => ({ ...prev, selectedTimeWork: '' }));
-  };
-  const [selectedStartTime, setSelectedStartTime] = useState({});
-
-  const handleEndTimeChange = event => {
-    const [endTime] = event.target.value.split('-');
-    setSelectedEndTime({ endTime });
-    setErrors(prev => ({ ...prev, selectedTimeWork: '' }));
-  };
-  const [selectedEndTime, setSelectedEndTime] = useState({});
+  const [errors, setErrors] = useState({});
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [shifts, setShifts] = useState({});
+  const [selectedDayOff, setSelectedDayOff] = useState('');
+  const [allTimeWork, setTimeWork] = useState([]);
   const dataSchedules = {
-    //ngày 17-6
     '2023-06-17': {
       '001': {
         vetName: 'Minh',
@@ -130,90 +57,7 @@ function WorkSchedule() {
           },
         ],
       },
-      '002': {
-        vetName: 'Phat',
-        appointments: [
-          {
-            id: 1,
-            petId: 'PET03',
-            petType: 'Cat',
-            gender: 'Male',
-            registerHour: '10:00 - 11:00',
-            petOwner: 'Vini',
-            status: 'Pending',
-          },
-          {
-            id: 2,
-            petId: 'PET04',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '13:00 - 14:00',
-            petOwner: 'De Bruyne',
-            status: 'Pending',
-          },
-          {
-            id: 3,
-            petId: 'PET07',
-            petType: 'Dog',
-            gender: 'Female',
-            registerHour: '14:00 - 15:00',
-            petOwner: 'Saka',
-            status: 'Pending',
-          },
-          {
-            id: 4,
-            petId: 'PET10',
-            petType: 'Dog',
-            gender: 'Female',
-            registerHour: '15:00 - 16:00',
-            petOwner: 'Bruno',
-            status: 'Pending',
-          },
-          {
-            id: 5,
-            petId: 'PET12',
-            petType: 'Cat',
-            gender: 'Female',
-            registerHour: '17:00 - 18:00',
-            petOwner: 'Felix',
-            status: 'Pending',
-          },
-        ],
-      },
-      '006': {
-        vetName: 'Tung',
-        appointments: [
-          {
-            id: 1,
-            petId: 'PET09',
-            petType: 'Cat',
-            gender: 'Male',
-            registerHour: '9:00 - 10:00',
-            petOwner: 'Mount',
-            status: 'Pending',
-          },
-          {
-            id: 2,
-            petId: 'PET11',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '10:00 - 11:00',
-            petOwner: 'Havertz',
-            status: 'Pending',
-          },
-          {
-            id: 3,
-            petId: 'PET13',
-            petType: 'Cat',
-            gender: 'Female',
-            registerHour: '13:00 - 14:00',
-            petOwner: 'Reus',
-            status: 'Pending',
-          },
-        ],
-      },
     },
-    //ngày 18-6
     '2023-06-18': {
       '004': {
         vetName: 'Thinh',
@@ -265,91 +109,8 @@ function WorkSchedule() {
           },
         ],
       },
-      '003': {
-        vetName: 'Duong',
-        appointments: [
-          {
-            id: 1,
-            petId: 'PET03',
-            petType: 'Cat',
-            gender: 'Male',
-            registerHour: '10:00 - 11:00',
-            petOwner: 'Vini',
-            status: 'Pending',
-          },
-          {
-            id: 2,
-            petId: 'PET04',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '13:00 - 14:00',
-            petOwner: 'De Bruyne',
-            status: 'Pending',
-          },
-          {
-            id: 3,
-            petId: 'PET07',
-            petType: 'Dog',
-            gender: 'Female',
-            registerHour: '14:00 - 15:00',
-            petOwner: 'Saka',
-            status: 'Pending',
-          },
-          {
-            id: 4,
-            petId: 'PET10',
-            petType: 'Dog',
-            gender: 'Female',
-            registerHour: '15:00 - 16:00',
-            petOwner: 'Bruno',
-            status: 'Pending',
-          },
-        ],
-      },
-      '005': {
-        vetName: 'Dat',
-        appointments: [
-          {
-            id: 1,
-            petId: 'PET08',
-            petType: 'Cat',
-            gender: 'Male',
-            registerHour: '9:00 - 10:00',
-            petOwner: 'Mount',
-            status: 'Pending',
-          },
-          {
-            id: 2,
-            petId: 'PET09',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '10:00 - 11:00',
-            petOwner: 'Havertz',
-            status: 'Pending',
-          },
-          {
-            id: 3,
-            petId: 'PET11',
-            petType: 'Cat',
-            gender: 'Female',
-            registerHour: '13:00 - 14:00',
-            petOwner: 'Reus',
-            status: 'Pending',
-          },
-          {
-            id: 4,
-            petId: 'PET14',
-            petType: 'Cat',
-            gender: 'Male',
-            registerHour: '14:00 - 15:00',
-            petOwner: 'Lukaku',
-            status: 'Pending',
-          },
-        ],
-      },
     },
   };
-
   const [schedules, setSchedules] = useState(dataSchedules);
   const [selectedDate, setSelectedDate] = useState('2023-06-17');
   const [selectedVet, setSelectedVet] = useState('001');
@@ -367,7 +128,6 @@ function WorkSchedule() {
     setSelectedVet(firstVetId || '');
   };
 
-  // Handle receive click
   const handleReceiveClick = (e, status) => {
     e.preventDefault();
     if (status !== 'Canceled') {
@@ -382,12 +142,56 @@ function WorkSchedule() {
       ? schedules[selectedDate][selectedVet]
       : { vetName: '', appointments: [] };
 
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    if (!selectedDates.length) {
+      setErrors(prev => ({ ...prev, selectedDates: 'Please select at least one date.' }));
+    } else if (Object.values(shifts).length !== selectedDates.length) {
+      setErrors(prev => ({ ...prev, shifts: 'Please select a shift for each date.' }));
+    } else if (!selectedDayOff) {
+      setErrors(prev => ({ ...prev, selectedDayOff: 'Please select a day off.' }));
+    } else {
+      const newTimeWork = selectedDates.map(date => ({
+        date,
+        shift: shifts[date],
+        dayOff: selectedDayOff,
+      }));
+
+      setTimeWork([...allTimeWork, ...newTimeWork]);
+      resetForm();
+      document.querySelector('#exampleModal .btn-close').click();
+    }
+  };
+
+  const resetForm = () => {
+    setSelectedDates([]);
+    setShifts({});
+    setSelectedDayOff('');
+    setErrors({});
+  };
+
+  const handleDateChangeModal = (dates) => {
+    setSelectedDates(dates);
+    setErrors(prev => ({ ...prev, selectedDates: '' }));
+  };
+
+  const handleShiftChange = (date, shift) => {
+    setShifts(prev => ({ ...prev, [date]: shift }));
+    setErrors(prev => ({ ...prev, shifts: '' }));
+  };
+
+  const handleDayOffChange = event => {
+    setSelectedDayOff(event.target.value);
+    setErrors(prev => ({ ...prev, selectedDayOff: '' }));
+  };
+
   return (
     <div>
       <Header />
       <div>
         <div>
-          <p className='tittle'> Today's Work Schedule</p>
+          <p className='tittle'>Today's Work Schedule</p>
         </div>
         <div className='vet-container'>
           <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
@@ -422,16 +226,10 @@ function WorkSchedule() {
             aria-hidden='true'
           >
             <div className='modal-dialog'>
-              <form
-                id='chooseTimeWork'
-                onSubmit={handleSubmit}
-              >
+              <form id='chooseTimeWork' onSubmit={handleSubmit}>
                 <div className='modal-content'>
                   <div className='modal-header'>
-                    <h1
-                      className='modal-title fs-5'
-                      id='exampleModalLabel'
-                    >
+                    <h1 className='modal-title fs-5' id='exampleModalLabel'>
                       Choose Time Work
                     </h1>
                     <button
@@ -443,70 +241,59 @@ function WorkSchedule() {
                   </div>
                   <div className='modal-body'>
                     <div className='modal-body-section-wrapper'>
-                      <div>
-                        <div className='modal-body-section-doctor-date'>
-                          <label>Choose Date:</label>
-                          <input
-                            className='ip-date-work'
-                            type='date'
-                            value={selectedDate}
-                            onChange={e => {
-                              setSelectedDate(e.target.value);
-                              setErrors(prev => ({
-                                ...prev,
-                                selectedDate: '',
-                              }));
-                            }}
-                            required
-                          />
-                          {errors.selectedDate && (
-                            <span className='error'>{errors.selectedDate}</span>
-                          )}
-                        </div>
-                        <div className='modal-body-section-doctor-date'>
-                          <label>Choose Time Start Work:</label>
+                      <div className='modal-body-section-doctor-date'>
+                        <label>Choose Dates:</label>
+                        <DatePicker
+                          multiple
+                          value={selectedDates}
+                          onChange={handleDateChangeModal}
+                          format='YYYY/MM/DD'
+                          className='ip-date-work'
+                          style={{ color: 'green' }}
+                        />
+                        {errors.selectedDates && (
+                          <span className='error'>{errors.selectedDates}</span>
+                        )}
+                      </div>
+                      {selectedDates.map(date => (
+                        <div key={date} className='modal-body-section-doctor-date'>
+                          <label>{`Choose Shift for ${date}:`}</label>
                           <select
                             className='sl-date-work'
-                            value={`${selectedStartTime.startTime}`}
-                            onChange={e => handleStartTimeChange(e)}
+                            value={shifts[date] || ''}
+                            onChange={e => handleShiftChange(date, e.target.value)}
                             required
                           >
-                            <option value=''>Select Time Slot</option>
-                            {availableTimeWork.map((slot, index) => (
-                              <option
-                                key={index}
-                                value={`${slot.startTime}`}
-                              >{`${slot.startTime}`}</option>
-                            ))}
-                          </select>
-                          {errors.selectedTimeWork && (
-                            <span className='error'>
-                              {errors.selectedTimeWork}
-                            </span>
+                            <option value=''>Select Shift</option>
+                            <option value='Morning'>Morning: 8:00 - 16:00</option>
+                            <option value='Evening'>Evening: 15:00 - 22:00</option>
+                            <option value='Both'>Both</option>
+                            </select>
+                          {errors.shifts && (
+                            <span className='error'>{errors.shifts}</span>
                           )}
                         </div>
-                        <div className='modal-body-section-doctor-date'>
-                          <label>Choose Time End Work:</label>
-                          <select
-                            className='sl-date-work'
-                            value={`${selectedEndTime.endTime}`}
-                            onChange={e => handleEndTimeChange(e)}
-                            required
-                          >
-                            <option value=''>Select Time Slot</option>
-                            {availableTimeWork.map((slot, index) => (
-                              <option
-                                key={index}
-                                value={`${slot.endTime}`}
-                              >{`${slot.endTime}`}</option>
-                            ))}
-                          </select>
-                          {errors.selectedTimeWork && (
-                            <span className='error'>
-                              {errors.selectedTimeWork}
-                            </span>
-                          )}
-                        </div>
+                      ))}
+                      <div className='modal-body-section-doctor-date'>
+                        <label>Choose Day Off:</label>
+                        <select
+                          className='sl-date-work'
+                          value={selectedDayOff}
+                          onChange={handleDayOffChange}
+                          required
+                        >
+                          <option value=''>Select Day Off</option>
+                          <option value='Monday'>Monday</option>
+                          <option value='Tuesday'>Tuesday</option>
+                          <option value='Wednesday'>Wednesday</option>
+                          <option value='Thursday'>Thursday</option>
+                          <option value='Friday'>Friday</option>
+                          <option value='Saturday'>Saturday</option>
+                          <option value='Sunday'>Sunday</option>
+                        </select>
+                        {errors.selectedDayOff && (
+                          <span className='error'>{errors.selectedDayOff}</span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -519,11 +306,7 @@ function WorkSchedule() {
                     >
                       Close
                     </button>
-                    <button
-                      type='submit'
-                      className='btn btn-success'
-                      onClick={e => handleChooseTimeWork(e)}
-                    >
+                    <button type='submit' className='btn btn-success'>
                       Choose
                     </button>
                   </div>
@@ -532,10 +315,7 @@ function WorkSchedule() {
             </div>
           </div>
         </div>
-        <div
-          className='table-schedule'
-          id='tables'
-        >
+        <div className='table-schedule' id='tables'>
           <form className='form_table-schedule'>
             <table className='table_table-schedule'>
               <thead className='head_table-schedule'>
@@ -559,9 +339,7 @@ function WorkSchedule() {
                     <td className='td_table-schedule'>{row.gender}</td>
                     <td className='td_table-schedule'>{row.registerHour}</td>
                     <td className='td_table-schedule'>{row.petOwner}</td>
-                    <td
-                      className={`td_table-schedule doctor-status-${row.status.toLowerCase()}`}
-                    >
+                    <td className={`td_table-schedule doctor-status-${row.status.toLowerCase()}`}>
                       {row.status}
                     </td>
                     <td className='td_table-schedule'>
@@ -571,8 +349,7 @@ function WorkSchedule() {
                           className={`click-button ${row.status === 'Canceled' ? 'gray-button' : ''}`}
                           onClick={e => handleReceiveClick(e, row.status)}
                           style={{
-                            pointerEvents:
-                              row.status === 'Canceled' ? 'none' : 'auto',
+                            pointerEvents: row.status === 'Canceled' ? 'none' : 'auto',
                           }}
                         >
                           Receive
@@ -587,8 +364,7 @@ function WorkSchedule() {
         </div>
       </div>
       <p className='final-petExam'>
-        ----------Today's working hour start at 9:00 a.m and end at 18:00
-        p.m----------
+        --Today's working hour start at 9:00 a.m and end at 18:00 p.m--
       </p>
       <ConfirmationModal
         show={showModal}

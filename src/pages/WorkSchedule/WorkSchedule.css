@@ -51,8 +51,8 @@
   padding-left: 80%;
 }
 .bt-choose-time-work {
-  background-color: #e18213;
-  width: 150px;
+  background-color: #113179;
+  width: 151px;
   height: 35px;
   border: none;
   border-radius: 20px;
@@ -77,7 +77,7 @@
 }
 
 .bt-choose-time-work:hover {
-  background-color: #002169;
+  background-color: orange;
   cursor: pointer;
 }
 .form_table-schedule {
