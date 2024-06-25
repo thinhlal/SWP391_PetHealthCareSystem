@@ -139,16 +139,39 @@ body {
 
 .booking-container .select_Booking-Select button {
   border: none;
+  font-family: Roboto, sans-serif;
   background-color: #ccc;
   width: 150px;
   height: 100%;
   margin-left: 8px;
   border-radius: 8px;
+  font-size: 15px;
 }
 
 .booking-container .selected-services {
+  font-family: Roboto, sans-serif;
   width: 270px;
+  border: 1px solid #c1c1c1; 
+  border-top-left-radius: 10px; 
+  border-bottom-left-radius: 10px;
+  padding: 10px; 
+  max-height: 400px; 
+  overflow-y: auto; 
 }
+
+.booking-container .selected-services .service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0; 
+}
+
+.booking-container .selected-services .total-selected-services {
+  margin-top: 10px; 
+  font-weight: bold; 
+}
+
+
 
 .booking-container .select_Info {
   border: 1px solid #c1c1c1;

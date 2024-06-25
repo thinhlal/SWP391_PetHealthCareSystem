@@ -333,11 +333,23 @@ const Booking = () => {
     const selectedService = services.find(service => {
       return service.serviceID === userInfo.serviceID;
     });
+
+    // Kiểm tra nếu dịch vụ đã được chọn trước đó
+    const isServiceAlreadySelected = selectedServices.some(
+      service => service.serviceID === userInfo.serviceID
+    );
+
     if (!selectedService) {
       setErrorMessageServices('Please select a valid service.');
       return;
     }
 
+    if (isServiceAlreadySelected) {
+      setErrorMessageServices('This service has already been selected.');
+      return;
+    }
+
+    // Thêm dịch vụ vào danh sách đã chọn
     setSelectedServices([...selectedServices, selectedService]);
     setErrorMessageServices('');
   };
@@ -446,17 +458,17 @@ const Booking = () => {
               </div>
 
               <div className='selected-services'>
-                <h3>Selected Services:</h3>
+                <h3 className='title-selected-services'>Selected Services:</h3>
                 {selectedServices.length > 0 ? (
                   selectedServices.map((service, index) => (
-                    <div key={index}>
+                    <div key={index} className='service-item'>
                       {service.name} - Price: {service.price}
                     </div>
                   ))
                 ) : (
-                  <p>No services selected.</p>
+                  <div className='sub-title-selected-services'>No services selected.</div>
                 )}
-                <h3>Total Amount: {totalAmount}</h3>
+                <h3 className='total-selected-services'>Total Amount: {totalAmount}</h3>
               </div>
             </div>
 
