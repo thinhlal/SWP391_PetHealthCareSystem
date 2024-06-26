@@ -9,7 +9,7 @@ const PetSchema = new Schema(
       maxlength: 8,
       unique: true,
     },
-    customerID: {
+    accountID: {
       type: String,
       required: true,
       ref: 'Account',

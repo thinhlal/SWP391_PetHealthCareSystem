@@ -1,11 +1,11 @@
 const Pet = require('../models/Pet.js');
 
 class PetController {
-  // GET /
-  async index(req, res, next) {
-    const customerID = req.body.customerID;
+  // GET /getAllPets/:accountID
+  async getAllPets(req, res, next) {
+    const { accountID } = req.params;
     try {
-      const allPets = await Pet.find({ customerID });
+      const allPets = await Pet.find({ accountID });
       res.status(200).json(allPets);
     } catch (error) {
       res
@@ -17,7 +17,7 @@ class PetController {
   // POST /add
   async add(req, res, next) {
     try {
-      let { customerID, name, birthday, breed, type, gender, image } = req.body;
+      let { accountID, name, birthday, breed, type, gender, image } = req.body;
       let id;
       while (true) {
         try {
@@ -36,7 +36,7 @@ class PetController {
 
       const newPet = new Pet({
         petID: id,
-        customerID: customerID,
+        accountID: accountID,
         name: name,
         birthday: birthday,
         petType: type.toUpperCase(),

@@ -97,11 +97,8 @@ const Booking = () => {
 
   const getAllServices = async () => {
     try {
-      const response = await axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/services`,
-        {
-          idToCheckRole: user.accountID,
-        },
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/services/getAllServices`,
       );
       setServices(response.data);
     } catch (error) {
@@ -111,11 +108,8 @@ const Booking = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/doctor`,
-        {
-          idToCheckRole: user.accountID,
-        },
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/doctor/getAllDoctors`
       );
       setDoctors(response.data);
     } catch (error) {
@@ -618,15 +612,14 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${
-                      slot.isBooked
+                    className={`element-button ${slot.isBooked
                         ? 'element-button-red'
                         : slot.isWithinWorkingHours
                           ? selectedSlot === slot
                             ? 'element-button-selected'
                             : 'element-button-green'
                           : 'element-button-gray'
-                    }`}
+                      }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>

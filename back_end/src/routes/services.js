@@ -2,15 +2,13 @@ const express = require('express');
 const router = express.Router();
 const {
   verifyToken,
-  checkRole,
 } = require('../app/controllers/MiddlewareController');
 
 const serviceController = require('../app/controllers/ServiceController.js');
 
-router.post(
-  '/',
+router.get(
+  '/getAllServices',
   verifyToken,
-  checkRole(['Customer']),
   serviceController.getAllServices,
 );
 

@@ -10,47 +10,51 @@ import Sidebar from '../../components/User/Sidebar/Sidebar.js';
 // component
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { AuthContext } from '../../context/AuthContext.js';
 
-const bookings = [
-  {
-    id: 'OD45345345435',
-    status: 'Pending',
-    date: '29 nov 2024',
-    time: '10:00 - 11:00',
-    petName: 'ABC',
-    petType: 'Dog',
-    doctor: 'Alex',
-    services: 'Periodic health check-ups for dogs',
-    price: '70$',
-  },
-  {
-    id: 'OD45345345436',
-    status: 'Pending',
-    date: '10 nov 2024',
-    time: '12:00 - 13:00',
-    petName: 'DEF',
-    petType: 'Cat',
-    doctor: 'John',
-    services: 'Vaccination',
-    price: '50$',
-  },
-  {
-    id: 'OD45345345437',
-    status: 'Completed booking',
-    date: '20 nov 2024',
-    time: '15:00 - 16:00',
-    petName: 'GHI',
-    petType: 'Dog',
-    doctor: 'Alex',
-    services: 'Grooming',
-    price: '45$',
-  },
-];
+// const bookings = [
+//   {
+//     id: 'OD45345345435',
+//     status: 'Pending',
+//     date: '29 nov 2024',
+//     time: '10:00 - 11:00',
+//     petName: 'ABC',
+//     petType: 'Dog',
+//     doctor: 'Alex',
+//     services: 'Periodic health check-ups for dogs',
+//     price: '70$',
+//   },
+//   {
+//     id: 'OD45345345436',
+//     status: 'Pending',
+//     date: '10 nov 2024',
+//     time: '12:00 - 13:00',
+//     petName: 'DEF',
+//     petType: 'Cat',
+//     doctor: 'John',
+//     services: 'Vaccination',
+//     price: '50$',
+//   },
+//   {
+//     id: 'OD45345345437',
+//     status: 'Completed booking',
+//     date: '20 nov 2024',
+//     time: '15:00 - 16:00',
+//     petName: 'GHI',
+//     petType: 'Dog',
+//     doctor: 'Alex',
+//     services: 'Grooming',
+//     price: '45$',
+//   },
+// ];
 
 function YourBooking() {
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
+  const [yourBookings, setYourBookings] = useState([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -61,6 +65,19 @@ function YourBooking() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const fetchAllBookings = async () => {
+      try {
+        const dataBookings = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`);
+        setYourBookings(dataBookings);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchAllBookings();
+  }, [user.accountID])
 
   if (loading) {
     return <AnimationComponent />;
@@ -106,7 +123,7 @@ function YourBooking() {
             </div>
 
             <div className='detail-information-booking'>
-              {bookings.map((booking, index) => (
+              {yourBookings.map((booking, index) => (
                 <div
                   key={index}
                   className='info-detail-booking'
@@ -117,11 +134,10 @@ function YourBooking() {
                         <div className='detail-number-ID'>
                           ID: {booking.id}
                           <div
-                            className={`status-booking ${
-                              booking.status === 'Pending'
-                                ? 'status-pending'
-                                : 'status-completed'
-                            }`}
+                            className={`status-booking ${booking.status === 'Pending'
+                              ? 'status-pending'
+                              : 'status-completed'
+                              }`}
                           >
                             Status: {booking.status}
                           </div>

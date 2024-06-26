@@ -90,6 +90,18 @@ class BookingController {
       res.status(500).json({ message: 'Error creating ', error });
     }
   }
+
+  // GET /getAllBookings
+  async getAllBookings(req, res, next) {
+    const { accountID } = req.params;
+    console.log(accountID);
+    try {
+      const allBookings = await Booking.find({ accountID });
+      res.status(201).json({ allBookings });
+    } catch (error) {
+      res.status(500).json({ message: 'Error when get booking ', error });
+    }
+  }
 }
 
 module.exports = new BookingController();
