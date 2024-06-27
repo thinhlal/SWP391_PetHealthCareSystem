@@ -141,6 +141,12 @@ function AdminDashBoard() {
                     Services{' '}
                   </div>
                 </a>
+                <a href='/admin-cages'>
+                  <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
+                    {' '}
+                    Cages{' '}
+                  </div>
+                </a>
               </div>
             </div>
 

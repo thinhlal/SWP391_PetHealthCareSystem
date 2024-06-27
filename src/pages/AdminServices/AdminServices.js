@@ -298,6 +298,11 @@ function AdminServices() {
                       Services
                     </div>
                   </a>
+                  <a href='/admin-cages'>
+                    <div className='Admin-Services-Navigate-Text-Rest-Menu'>
+                      Cages
+                    </div>
+                  </a>
                 </div>
               </div>
               <div onClick={logOut}>
