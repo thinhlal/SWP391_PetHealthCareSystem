@@ -190,11 +190,6 @@ function WorkSchedule() {
     setErrors(prev => ({ ...prev, shifts: '' }));
   };
 
-  const handleDayOffChange = event => {
-    setSelectedDayOff(event.target.value);
-    setErrors(prev => ({ ...prev, selectedDayOff: '' }));
-  };
-
   return (
     <div>
       <Header />
@@ -262,7 +257,7 @@ function WorkSchedule() {
                           multiple
                           value={selectedDates}
                           onChange={handleDateChangeModal}
-                          format='YYYY/MM/DD'
+                          format='MM/DD'
                           className='ip-date-work'
                           style={{ color: 'green' }}
                         />
@@ -275,7 +270,7 @@ function WorkSchedule() {
                           key={date}
                           className='modal-body-section-doctor-date'
                         >
-                          <label>{`Choose Shift for ${date}:`}</label>
+                          <label>{`Choose for ${date}:`}</label>
                           <select
                             className='sl-date-work'
                             value={shifts[date] || ''}
@@ -286,39 +281,19 @@ function WorkSchedule() {
                           >
                             <option value=''>Select Shift</option>
                             <option value='Morning'>
-                              Morning: 8:00 - 16:00
+                              Morning: 7:00 - 15:00
                             </option>
                             <option value='Evening'>
-                              Evening: 15:00 - 22:00
+                              Evening: 14:00 - 22:00
                             </option>
                             <option value='Both'>Both</option>
+                            <option>Leave(1 day each week)</option>
                           </select>
                           {errors.shifts && (
                             <span className='error'>{errors.shifts}</span>
                           )}
                         </div>
                       ))}
-                      <div className='modal-body-section-doctor-date'>
-                        <label>Choose Day Off:</label>
-                        <select
-                          className='sl-date-work'
-                          value={selectedDayOff}
-                          onChange={handleDayOffChange}
-                          required
-                        >
-                          <option value=''>Select Day Off</option>
-                          <option value='Monday'>Monday</option>
-                          <option value='Tuesday'>Tuesday</option>
-                          <option value='Wednesday'>Wednesday</option>
-                          <option value='Thursday'>Thursday</option>
-                          <option value='Friday'>Friday</option>
-                          <option value='Saturday'>Saturday</option>
-                          <option value='Sunday'>Sunday</option>
-                        </select>
-                        {errors.selectedDayOff && (
-                          <span className='error'>{errors.selectedDayOff}</span>
-                        )}
-                      </div>
                     </div>
                   </div>
                   <div className='modal-footer'>
@@ -397,7 +372,7 @@ function WorkSchedule() {
         </div>
       </div>
       <p className='final-petExam'>
-        --Today's working hour start at 9:00 a.m and end at 18:00 p.m--
+        --Today's working hour start at 7:00 a.m and end at 22:00 p.m--
       </p>
       <ConfirmationModal
         show={showModal}
