@@ -457,3 +457,10 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+.no-bookings-message {
+  color: red;
+  font-size: 18px;
+  text-align: center;
+  margin: 60px 0;
+}
