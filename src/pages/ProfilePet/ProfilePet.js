@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import './ProfilePet.css';
 // component
 import Header from '../../components/User/Header/Header';
@@ -7,6 +8,7 @@ import pet_img1 from '../../assets/images/img_YourPet/c2dc9a5328014cead97d6268b6
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
+import axiosInstance from '../../utils/axiosInstance.js';
 
 function ProfilePet() {
   const initialPetData = {
@@ -21,7 +23,7 @@ function ProfilePet() {
     medicalInfo: [],
     id: '012345',
   };
-
+  const location = useLocation();
   const [petData, setPetData] = useState(initialPetData);
   const [isEditing, setIsEditing] = useState(false);
   const [newPetData, setNewPetData] = useState(initialPetData);
@@ -53,6 +55,25 @@ function ProfilePet() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const params = new URLSearchParams(location.search);
+        const petID = params.get('petID');
+        console.log(petID);
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
+        );
+        console.log(response.data);
+        setPetData(response.data);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      }
+    };
+
+    fetchPets();
+  }, [location.search]);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -164,10 +185,10 @@ function ProfilePet() {
             <div className='sub-title-info-pet'>
               <strong>Pet Parent</strong>{' '}
             </div>
-            <div>{petData.petParent}</div>
+            <div>{petData.customerDetails[0].username}</div>
             <div className='sub-title-info-pet'>
               <strong>ID:&nbsp;</strong>{' '}
-              <span className='ID-pet-profile'>{petData.id}</span>
+              <span className='ID-pet-profile'>{petData.petID}</span>
             </div>
           </div>
         </div>
@@ -188,17 +209,18 @@ function ProfilePet() {
               </div>
               <div className='title-pet-profile'>
                 {' '}
-                <span className='sub-title-info-pet'>Age:</span> {petData.age}
-                &nbsp;Year old
+                <span className='sub-title-info-pet'>Birthday:</span> {petData.birthday}
+                &nbsp;
               </div>
               <div className='title-pet-profile'>
                 {' '}
-                <span className='sub-title-info-pet'>Weight: -</span>
+                <span className='sub-title-info-pet'>Gender:</span>
+                {petData.gender === 'MALE' ? <span>Male</span> : <span>Female</span>}
               </div>
               <div className='title-pet-profile'>
                 {' '}
                 <span className='sub-title-info-pet'>Type Of Pet: </span>
-                {petData.typeOfPet}
+                {petData.petType === 'DOG' ? <span>Dog</span> : <span>Cat</span>}
               </div>
             </div>
 
@@ -275,18 +297,18 @@ function ProfilePet() {
                 </tr>
               </thead>
               <tbody>
-                {petData.medicalInfo.length === 0 ? (
+                {petData.medicalReportDetails.length === 0 ? (
                   <tr>
                     <td colSpan='6'>No medical information available.</td>
                   </tr>
                 ) : (
-                  petData.medicalInfo.map((info, index) => (
+                  petData.medicalReportDetails.map((reportInfo, index) => (
                     <tr key={index}>
-                      <td>{info.microchipNumber}</td>
-                      <td>{info.petPassportNumber}</td>
-                      <td>{info.spayNeuterStatus}</td>
-                      <td>{info.otherConditions}</td>
-                      <td>{info.notes}</td>
+                      <td>{reportInfo.microchipNumber}</td>
+                      <td>{reportInfo.petPassportNumber}</td>
+                      <td>{reportInfo.spayNeuterStatus}</td>
+                      <td>{reportInfo.otherConditions}</td>
+                      <td>{reportInfo.notes}</td>
                       <td>
                         {/* <button onClick={handleMedicalEditClick} className="edit-button-medical">Edit</button> */}
                         <button
@@ -393,12 +415,12 @@ function ProfilePet() {
                 </tr>
               </thead>
               <tbody>
-                {petData.vaccinations.length === 0 ? (
+                {petData.vaccinationDetails.length === 0 ? (
                   <tr>
                     <td colSpan='6'>You didn't have any vaccination yet.</td>
                   </tr>
                 ) : (
-                  petData.vaccinations.map((vaccine, index) => (
+                  petData.vaccinationDetails.map((vaccine, index) => (
                     <tr key={index}>
                       <td>{vaccine.date}</td>
                       <td>{vaccine.age}</td>

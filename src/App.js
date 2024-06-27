@@ -115,7 +115,7 @@ function App() {
         <Route
           path='/manage-booking'
           element={
-            <ProtectedRoute allowedRoles={['Employee']}>
+            <ProtectedRoute allowedRoles={['Staff']}>
               <ManageListBooking />
             </ProtectedRoute>
           }
@@ -123,7 +123,7 @@ function App() {
         <Route
           path='/manage-cages'
           element={
-            <ProtectedRoute allowedRoles={['Employee']}>
+            <ProtectedRoute allowedRoles={['Staff']}>
               <ManageCages />
             </ProtectedRoute>
           }

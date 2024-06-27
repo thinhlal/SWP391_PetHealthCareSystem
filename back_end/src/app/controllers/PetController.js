@@ -14,6 +14,50 @@ class PetController {
     }
   }
 
+  // GET /getPetID/:petID
+  async getPetID(req, res, next) {
+    const { petID } = req.params;
+    try {
+      const pet = await Pet.aggregate([
+        { $match: { petID } },
+        {
+          $lookup: {
+            from: 'accounts',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'customerDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'vaccinationpets',
+            localField: 'petID',
+            foreignField: 'petID',
+            as: 'vaccinationPetDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'vaccinations',
+            localField: 'vaccinationPetDetails.vaccinationID',
+            foreignField: 'vaccinationID',
+            as: 'vaccinationDetails',
+          },
+        },
+        {
+          $addFields: {
+            'vaccinationPetDetails.vaccinationName': '$vaccinationDetails.name'
+          }
+        },
+      ]);
+      res.status(200).json(pet);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Error fetching pets', error: error.message });
+    }
+  }
+
   // POST /add
   async add(req, res, next) {
     try {
