@@ -457,12 +457,13 @@ const Booking = () => {
             </div>
 
             <div className='select-booking_info'>
-              <div className='select_Service'>
-                <div className='select_Name'>Services</div>
+            <div className='select_Name'>Services</div>
+            <div className='content-select-booking'>
+              <div className='select_Service'>                
                 <div className='select_Booking-Select'>
                   <select
                     name='serviceID'
-                    className='select_Info'
+                    className='select_Info-services'
                     value={userInfo.serviceID}
                     onChange={handleInputChange}
                     onFocus={handleFocusServices}
@@ -477,16 +478,21 @@ const Booking = () => {
                         {`${service.name} - Price: ${service.price}`}
                       </option>
                     ))}
-                  </select>
-                  <button onClick={handleAddService}>Add Service</button>
+                  </select>     
+                  <button onClick={handleAddService}>Add Service</button>             
                 </div>
-                {errorMessageServices && (
+                
+                {/* {errorMessageServices && (
+                  <div className='error-message'>{errorMessageServices}</div>
+                )} */}
+              </div>
+              {errorMessageServices && (
                   <div className='error-message'>{errorMessageServices}</div>
                 )}
               </div>
-
               <div className='selected-services'>
-                <h3 className='title-selected-services'>Selected Services:</h3>
+                <div className='select_Name'>Selected Services:</div>
+                <div className='content-selected-services-frame'>
                 {selectedServices.length > 0 ? (
                   selectedServices.map((service, index) => (
                     <div
@@ -504,10 +510,11 @@ const Booking = () => {
                 <h3 className='total-selected-services'>
                   Total Amount: {totalAmount}
                 </h3>
+                </div>
               </div>
             </div>
 
-            <div className='select-booking_info'>
+            <div className='select-booking_info-date-doctor'>
               <div className='select_Date'>
                 <div className='select_Name'>Date</div>
                 <input

@@ -80,6 +80,23 @@ body {
   display: flex;
 }
 
+.select_Payment {
+
+}
+
+.select-booking_info:nth-child(3) {
+  display: flex;
+  flex-direction: column; /* Sắp xếp các phần tử con theo cột */
+  align-items: flex-start; /* Canh chỉnh các phần tử con theo chiều dọc */
+  margin-bottom: 70px;
+}
+
+.select-booking_info-date-doctor {
+  height: 70px;
+  margin-top: 115px;
+  display: flex;
+}
+
 .booking-container .patient_Input {
   width: 270px;
 }
@@ -117,9 +134,15 @@ body {
   -webkit-box-orient: vertical;
 }
 .booking-container .select_Service {
+  display: flex;
   width: 270px;
   margin-right: 80px;
 }
+
+.selected-services {
+  margin-top: 20px;
+}
+
 .booking-container .select_Booking {
   display: flex;
   align-items: center;
@@ -137,36 +160,42 @@ body {
   border-radius: 8px;
 }
 
-.booking-container .select_Booking-Select button {
+.booking-container .select_Service button {
   border: none;
   font-family: Roboto, sans-serif;
   background-color: #ccc;
-  width: 150px;
+  width: 90px;
   height: 100%;
-  margin-left: 8px;
+  margin-left: 10px;
   border-radius: 8px;
   font-size: 15px;
+  white-space: nowrap;
 }
 
-.booking-container .selected-services {
+.title-selected-services {
+  font-family: Roboto, sans-serif;
+}
+
+.booking-container .content-selected-services-frame{
   font-family: Roboto, sans-serif;
   width: 270px;
   border: 1px solid #c1c1c1;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 10px;
+  height: 110px;
   max-height: 400px;
   overflow-y: auto;
 }
 
-.booking-container .selected-services .service-item {
+.booking-container .content-selected-services-frame .service-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 0;
 }
 
-.booking-container .selected-services .total-selected-services {
+.booking-container .content-selected-services-frame .total-selected-services {
   margin-top: 10px;
   font-weight: bold;
 }
@@ -187,6 +216,39 @@ body {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+
+
+.booking-container .select_Info-services {
+  border: 1px solid #c1c1c1;
+  width: 520px;  /* Tăng chiều ngang */
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  color: #000;
+  font-size: 16px;
+  border-radius: 8px;
+  letter-spacing: 0;
+  padding: 0 10px;
+  height: 32px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+
+.booking-container .content-selected-services-frame {
+  font-family: Roboto, sans-serif;
+  width: 622px;  /* Tăng chiều ngang */
+  border: 1px solid #c1c1c1;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 10px;
+  height: 110px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+
 
 .booking-container .select_Date {
   width: 270px;
@@ -433,3 +495,5 @@ body {
 }
 .booking-container .patient_Input {
 }
+
+
