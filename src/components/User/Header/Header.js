@@ -58,7 +58,7 @@ function Header() {
                 alt=''
               />
               <div className='main-header-user-account-name'>
-                Hi {user.username}
+                Hi {user.customerDetails[0].name}
               </div>
               <div className='main-header-user-account_menu'>
                 <a

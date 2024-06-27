@@ -127,12 +127,13 @@ class SiteController {
       const userToOBj = account.toObject();
       delete userToOBj.password;
       const accountID = userToOBj.accountID;
+      console.log(accountID);
 
       const userAgv = await Account.aggregate([
         { $match: { accountID } },
         {
           $lookup: {
-            from: 'Customer',
+            from: 'customers',
             localField: 'accountID',
             foreignField: 'accountID',
             as: 'customerDetails',
