@@ -1,511 +1,510 @@
 .Admin-Cages {
-    background-color: #fafafa;
-  }
-  
-  .Admin-Cages-Header {
-    border-bottom: 1px solid #eae8f1;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    height: 63px;
-  }
-  
-  .Admin-Cages-Header-Logo {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .Admin-Cages-Logo {
-    width: 190px;
-  }
-  
-  .Admin-Cages-Header-Account-Wrapper {
-    border-left: 1px solid #eae8f1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 0;
-    padding: 0;
-    font-family: Roboto, sans-serif;
-    color: white;
-  }
-  
-  .Admin-Cages-Header-Account {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .Admin-Cages-Header-Admin:hover {
-    transform: scale(1.1);
-    color: #dd6637;
-    cursor: pointer;
-  }
-  
-  .Admin-Cages-Header-Account-Text {
-    font-family: Roboto, sans-serif;
-    line-height: 25px;
-    font-size: 16px;
-    color: #000;
-  }
-  
-  .Admin-Cages-Content {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .Admin-Cages-Navigate {
-    padding: 0;
-    position: relative;
-  }
-  
-  .Admin-Cages-Navigate-Dashboard {
-    font-family: Roboto, sans-serif;
-    display: flex;
-    height: 36px;
-    align-items: center;
-    margin: 10px 10px 5px 20px;
-  }
-  
-  .Admin-Cages-Navigate-Text-Dashboard {
-    font-family: Roboto, sans-serif;
-    color: #000;
-    margin-left: 10px;
-    margin-top: 5px;
-    font-weight: 600;
-    font-size: 18px;
-  }
-  
-  .Admin-Cages-Navigate-Text {
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    letter-spacing: 1px;
-    font-size: 16px;
-    text-align: center;
-  }
-  
-  .Admin-Cages-Navigate-Logout {
-    color: #000;
-    line-height: 42px;
-    text-align: center;
-    width: 100%;
-    font-family: Roboto, sans-serif;
-    position: absolute;
-    bottom: 50px;
-  }
-  
-  .Admin-Cages-Navigate-Logout:hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
-  }
-  
-  .Admin-Cages-Navigate-Logout span {
-    margin-left: 10px;
-  }
-  
-  .Admin-Cages-Navigate-Text-Rest-Menu {
-    font-family: Roboto, sans-serif;
-    color: #000;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 50px;
-  }
-  
-  .Admin-Cages-Navigate-Text-Rest-Menu:hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
-  }
-  
-  .Admin-Cages-Main {
-    padding: 0;
-    background-color: #f1f5f9;
-    border-left: 1px solid #f9f9fa;
-  }
-  
-  .Admin-Cages-Main_Title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 3%;
-  }
-  
-  .Admin-Cages-Main_Title-Left {
-    font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Cages-Main_Title-Left-Intro {
-    color: #242f48;
-    font-weight: 600;
-    font-size: 20px;
-    text-indent: -1px;
-    line-height: 1;
-    margin-bottom: 5px;
-  }
-  
-  .Admin-Cages-Main_Title-Left-text {
-    color: #78829a;
-    font-weight: 400;
-    font-size: 12px;
-  }
-  
-  .Admin-Cages-Main_Title-Right {
-    font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Cages-title-Star {
-    color: #78829a;
-    font-size: 13px;
-  }
-  
-  .Admin-Cages-Star span {
-    font-size: 13px;
-    margin-left: 5px;
-  }
-  
-  .Admin-Cages-Main-ChooseDate {
-    display: flex;
-    align-items: center;
-    font-family: 'Montserrat', Helvetica;
-    margin: 25px 20px 0 3%;
-  }
-  
-  .Admin-Cages-Main-ChooseDate_Text {
-    margin-right: 10px;
-  }
-  
-  .Admin-Cages-Main-Header {
-    margin: 40px 0 0 0;
-    font-family: Roboto, sans-serif;
-    padding: 0;
-    justify-content: space-evenly;
-  }
-  
-  .Admin-Cages-Main-Header-Income {
-    background-color: white;
-    border-radius: 8px;
-    width: 260px;
-    border: 1px solid #eae8f1;
-    box-shadow: -2px 4px 18px #dadee8;
-  }
-  
-  .Admin-Cages-Main-Header-Note {
-    padding-top: 3%;
-    color: #696cff;
-    font-size: 15px;
-  }
-  
-  .Admin-Cages-Main-Header-Money {
-    line-height: 60px;
-    font-size: 22px;
-    font-weight: 600;
-  }
-  
-  .Admin-Cages-Main-Header-Percent {
-    padding-bottom: 3%;
-    font-size: 14px;
-    color: #828282;
-  }
-  
-  .Admin-Cages-Main-Search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    height: 35px;
-  }
-  
-  .Admin-Cages-Main-Search-Input {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 35px;
-    padding: 0 16px;
-    border: none;
-    background-color: #ecf0fa;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    color: #000000;
-    font-size: 16px;
-    line-height: 24px;
-  }
-  
-  .Admin-Cages-Main-Search-Input:focus {
-    outline: none;
-  }
-  
-  .Admin-Cages-Main-Search-Button {
-    background-color: #ecf0fa;
-    height: 100%;
-    border: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  
-  .Admin-Cages-Main-Filter {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    justify-content: space-between;
-    font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Cages-Select-Role {
-    font-family: Roboto, sans-serif;
-    font-weight: 600;
-    line-height: 10px;
-    margin-right: 40%;
-  }
-  
-  .Admin-Cages-Select-Filter {
-    margin-left: 5px;
-  }
-  
-  .Admin-Cages-add-pet-btn {
-    background-color: #e18213;
-    height: 45px;
-    outline: none;
-    border: none;
-    color: #fff;
-    width: 100px;
-    border-radius: 10px;
-  }
-  
-  .Admin-Cages-add-pet-btn:hover {
-    background-color: #002169;
-    cursor: pointer;
-  }
-  
-  .Admin-Cages-Main-Table-Wrapper {
-    margin: 50px 3%;
-    padding: 0;
-    border: 1px solid #eae8f1;
-    border-radius: 10px;
-    box-shadow: -2px 8px 18px #dadee8;
-  }
-  
-  .Admin-Cages-Main-Table {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-  
-  .Admin-Cages-Main-Table-Title {
-    color: #242f48;
-    font-family: Roboto, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 16px;
-    letter-spacing: 0.2px;
-    margin-bottom: 4px;
-  }
-  
-  .Admin-Cages-Main-Table-Title-Text {
-    font-size: 12px;
-    font-family: Roboto, sans-serif;
-    margin-bottom: 15px;
-  }
-  
-  .Admin-Cages-Main-Table-Header {
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: Roboto, sans-serif;
-    text-align: center;
-    border-bottom: 1px solid #eae8f1;
-  }
-  
-  .Admin-Cages-Main-Table-Header-Title {
-    width: 100%;
-    background-color: #f1f5f9;
-    line-height: 40px;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: left;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
-  }
-  
-  .Admin-Cages-Main-Table-Header-Title-Btn {
-    line-height: 40px;
-    width: 100%;
-    background-color: #f1f5f9;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: center;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
-  }
-  
-  .Admin-Cages-Main-Table-Header-Title-Btn:last-child {
-    border-top-right-radius: 8px;
-    border-right: 1px solid #eae8f1;
-  }
-  
-  .Admin-Cages-Main-Table-Header-Title:first-child {
-    border-top-left-radius: 8px;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Row-Wrapper {
-    display: flex;
-    line-height: 40px;
-    border-bottom: 1px solid #eae8f1;
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Row {
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-    margin: 0;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Row-Action {
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-    margin: 0;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Row-Btn {
-    display: flex;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Btn {
-    border: none;
-    background-color: white;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Btn_Wrapper {
-    justify-content: center;
-    display: flex;
-  }
-  
-  .Admin-Cages-modal-title {
-    height: 45px;
-    font-weight: 600;
-    font-size: 20px;
-    padding-top: 15px;
-  }
-  
-  .Admin-Cages-modal-title-name {
-    height: 30px;
-    font-weight: 600;
-    font-size: 20px;
-  }
-  
-  .Admin-Cages-modal-title-radio {
-    display: flex;
-  }
-  
-  .Admin-Cages-modal-title-radio-Enable {
-    padding-right: 20px;
-  }
-  
-  .Admin-Cages-modal-radio {
-    margin-right: 8px;
-  }
-  
-  .Admin-Cages-modal-initials {
-    color: #000000;
-    font-weight: 600;
-    font-size: 15px;
-    padding-right: 10px;
-  }
-  
-  .Admin-Cages-modal-add-account {
-    padding: 15px;
-  }
-  
-  .Admin-Cages-modal-add {
-    color: #000000;
-    font-weight: 500;
-    padding-right: 10px;
-  }
-  
-  .Admin-Cages-modal-update-old {
-    display: flex;
-  }
-  
-  .Admin-Cages-modal-update-new {
-    color: #000000;
-    font-weight: 600;
-    font-size: 15px;
-    padding-right: 10px;
-  }
-  
-  .Admin-Cages-modal-update {
-    margin-left: 10px;
-  }
-  
-  .Admin-Cages-modal-delete-title {
-    padding-right: 5px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #000000;
-  }
-  
-  .Admin-Cages-modal-more-title {
-    padding-right: 5px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #000000;
-  }
-  
-  .Admin-Cages-modal-more {
-    font-weight: 700px;
-    display: flex;
-    padding: 5px;
-  }
-  
-  .Admin-Cages-modal-delete {
-    display: flex;
-    padding: 5px;
-  }
-  
-  .Admin-Cages-input {
-    height: 30px;
-    margin-top: 5px;
-    line-height: 24px;
-    font-size: 16px;
-    padding-left: 5px;
-  }
-  
-  .Admin-Cages-input-confirm {
-    padding-top: 22px;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Btn :hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
-  }
-  
-  .Admin-Cages-Pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0 10px 0;
-  }
-  
-  .Admin-Cages-Error {
-    color: red;
-    font-size: 0.875em;
-    margin-top: 0.25em;
-  }
-  
+  background-color: #fafafa;
+}
+
+.Admin-Cages-Header {
+  border-bottom: 1px solid #eae8f1;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  height: 63px;
+}
+
+.Admin-Cages-Header-Logo {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Admin-Cages-Logo {
+  width: 190px;
+}
+
+.Admin-Cages-Header-Account-Wrapper {
+  border-left: 1px solid #eae8f1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+  color: white;
+}
+
+.Admin-Cages-Header-Account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.Admin-Cages-Header-Admin:hover {
+  transform: scale(1.1);
+  color: #dd6637;
+  cursor: pointer;
+}
+
+.Admin-Cages-Header-Account-Text {
+  font-family: Roboto, sans-serif;
+  line-height: 25px;
+  font-size: 16px;
+  color: #000;
+}
+
+.Admin-Cages-Content {
+  padding: 0;
+  margin: 0;
+}
+
+.Admin-Cages-Navigate {
+  padding: 0;
+  position: relative;
+}
+
+.Admin-Cages-Navigate-Dashboard {
+  font-family: Roboto, sans-serif;
+  display: flex;
+  height: 36px;
+  align-items: center;
+  margin: 10px 10px 5px 20px;
+}
+
+.Admin-Cages-Navigate-Text-Dashboard {
+  font-family: Roboto, sans-serif;
+  color: #000;
+  margin-left: 10px;
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.Admin-Cages-Navigate-Text {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.Admin-Cages-Navigate-Logout {
+  color: #000;
+  line-height: 42px;
+  text-align: center;
+  width: 100%;
+  font-family: Roboto, sans-serif;
+  position: absolute;
+  bottom: 50px;
+}
+
+.Admin-Cages-Navigate-Logout:hover {
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.Admin-Cages-Navigate-Logout span {
+  margin-left: 10px;
+}
+
+.Admin-Cages-Navigate-Text-Rest-Menu {
+  font-family: Roboto, sans-serif;
+  color: #000;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
+}
+
+.Admin-Cages-Navigate-Text-Rest-Menu:hover {
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.Admin-Cages-Main {
+  padding: 0;
+  background-color: #f1f5f9;
+  border-left: 1px solid #f9f9fa;
+}
+
+.Admin-Cages-Main_Title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 3%;
+}
+
+.Admin-Cages-Main_Title-Left {
+  font-family: Roboto, sans-serif;
+}
+
+.Admin-Cages-Main_Title-Left-Intro {
+  color: #242f48;
+  font-weight: 600;
+  font-size: 20px;
+  text-indent: -1px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.Admin-Cages-Main_Title-Left-text {
+  color: #78829a;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.Admin-Cages-Main_Title-Right {
+  font-family: Roboto, sans-serif;
+}
+
+.Admin-Cages-title-Star {
+  color: #78829a;
+  font-size: 13px;
+}
+
+.Admin-Cages-Star span {
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.Admin-Cages-Main-ChooseDate {
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', Helvetica;
+  margin: 25px 20px 0 3%;
+}
+
+.Admin-Cages-Main-ChooseDate_Text {
+  margin-right: 10px;
+}
+
+.Admin-Cages-Main-Header {
+  margin: 40px 0 0 0;
+  font-family: Roboto, sans-serif;
+  padding: 0;
+  justify-content: space-evenly;
+}
+
+.Admin-Cages-Main-Header-Income {
+  background-color: white;
+  border-radius: 8px;
+  width: 260px;
+  border: 1px solid #eae8f1;
+  box-shadow: -2px 4px 18px #dadee8;
+}
+
+.Admin-Cages-Main-Header-Note {
+  padding-top: 3%;
+  color: #696cff;
+  font-size: 15px;
+}
+
+.Admin-Cages-Main-Header-Money {
+  line-height: 60px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.Admin-Cages-Main-Header-Percent {
+  padding-bottom: 3%;
+  font-size: 14px;
+  color: #828282;
+}
+
+.Admin-Cages-Main-Search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 35px;
+}
+
+.Admin-Cages-Main-Search-Input {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 35px;
+  padding: 0 16px;
+  border: none;
+  background-color: #ecf0fa;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.Admin-Cages-Main-Search-Input:focus {
+  outline: none;
+}
+
+.Admin-Cages-Main-Search-Button {
+  background-color: #ecf0fa;
+  height: 100%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Admin-Cages-Main-Filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  justify-content: space-between;
+  font-family: Roboto, sans-serif;
+}
+
+.Admin-Cages-Select-Role {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  line-height: 10px;
+  margin-right: 40%;
+}
+
+.Admin-Cages-Select-Filter {
+  margin-left: 5px;
+}
+
+.Admin-Cages-add-pet-btn {
+  background-color: #e18213;
+  height: 45px;
+  outline: none;
+  border: none;
+  color: #fff;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.Admin-Cages-add-pet-btn:hover {
+  background-color: #002169;
+  cursor: pointer;
+}
+
+.Admin-Cages-Main-Table-Wrapper {
+  margin: 50px 3%;
+  padding: 0;
+  border: 1px solid #eae8f1;
+  border-radius: 10px;
+  box-shadow: -2px 8px 18px #dadee8;
+}
+
+.Admin-Cages-Main-Table {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.Admin-Cages-Main-Table-Title {
+  color: #242f48;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
+}
+
+.Admin-Cages-Main-Table-Title-Text {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 15px;
+}
+
+.Admin-Cages-Main-Table-Header {
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  border-bottom: 1px solid #eae8f1;
+}
+
+.Admin-Cages-Main-Table-Header-Title {
+  width: 100%;
+  background-color: #f1f5f9;
+  line-height: 40px;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: left;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
+}
+
+.Admin-Cages-Main-Table-Header-Title-Btn {
+  line-height: 40px;
+  width: 100%;
+  background-color: #f1f5f9;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: center;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
+}
+
+.Admin-Cages-Main-Table-Header-Title-Btn:last-child {
+  border-top-right-radius: 8px;
+  border-right: 1px solid #eae8f1;
+}
+
+.Admin-Cages-Main-Table-Header-Title:first-child {
+  border-top-left-radius: 8px;
+}
+
+.Admin-Cages-Main-Table-Content-Row-Wrapper {
+  display: flex;
+  line-height: 40px;
+  border-bottom: 1px solid #eae8f1;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+}
+
+.Admin-Cages-Main-Table-Content-Row {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 10px;
+  margin: 0;
+}
+
+.Admin-Cages-Main-Table-Content-Row-Action {
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 10px;
+  margin: 0;
+}
+
+.Admin-Cages-Main-Table-Content-Row-Btn {
+  display: flex;
+}
+
+.Admin-Cages-Main-Table-Content-Btn {
+  border: none;
+  background-color: white;
+}
+
+.Admin-Cages-Main-Table-Content-Btn_Wrapper {
+  justify-content: center;
+  display: flex;
+}
+
+.Admin-Cages-modal-title {
+  height: 45px;
+  font-weight: 600;
+  font-size: 20px;
+  padding-top: 15px;
+}
+
+.Admin-Cages-modal-title-name {
+  height: 30px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.Admin-Cages-modal-title-radio {
+  display: flex;
+}
+
+.Admin-Cages-modal-title-radio-Enable {
+  padding-right: 20px;
+}
+
+.Admin-Cages-modal-radio {
+  margin-right: 8px;
+}
+
+.Admin-Cages-modal-initials {
+  color: #000000;
+  font-weight: 600;
+  font-size: 15px;
+  padding-right: 10px;
+}
+
+.Admin-Cages-modal-add-account {
+  padding: 15px;
+}
+
+.Admin-Cages-modal-add {
+  color: #000000;
+  font-weight: 500;
+  padding-right: 10px;
+}
+
+.Admin-Cages-modal-update-old {
+  display: flex;
+}
+
+.Admin-Cages-modal-update-new {
+  color: #000000;
+  font-weight: 600;
+  font-size: 15px;
+  padding-right: 10px;
+}
+
+.Admin-Cages-modal-update {
+  margin-left: 10px;
+}
+
+.Admin-Cages-modal-delete-title {
+  padding-right: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #000000;
+}
+
+.Admin-Cages-modal-more-title {
+  padding-right: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #000000;
+}
+
+.Admin-Cages-modal-more {
+  font-weight: 700px;
+  display: flex;
+  padding: 5px;
+}
+
+.Admin-Cages-modal-delete {
+  display: flex;
+  padding: 5px;
+}
+
+.Admin-Cages-input {
+  height: 30px;
+  margin-top: 5px;
+  line-height: 24px;
+  font-size: 16px;
+  padding-left: 5px;
+}
+
+.Admin-Cages-input-confirm {
+  padding-top: 22px;
+}
+
+.Admin-Cages-Main-Table-Content-Btn :hover {
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.Admin-Cages-Pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 10px 0;
+}
+
+.Admin-Cages-Error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 0.25em;
+}

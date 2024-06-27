@@ -73,7 +73,7 @@ function ProfilePet() {
     setNewPetData({ ...newPetData, [name]: files[0] });
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async e => {
     e.preventDefault();
     const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
     await uploadBytes(imageRef, imageFile);
@@ -84,12 +84,12 @@ function ProfilePet() {
     try {
       await axiosInstance.patch(
         `${process.env.REACT_APP_API_URL}/pet/updatePet/${petID}`,
-        { petDataUpdate }
-      )
+        { petDataUpdate },
+      );
       const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
       );
-      setPetData(response.data[0])
+      setPetData(response.data[0]);
     } catch (error) {
       console.error('Error updating pet data:', error);
     }
@@ -134,7 +134,8 @@ function ProfilePet() {
             </div>
             <div className='pet-details-profile'>
               <div className='title-pet-profile'>
-                <span className='sub-title-info-pet'>Name:&nbsp;</span> {petData.name}
+                <span className='sub-title-info-pet'>Name:&nbsp;</span>{' '}
+                {petData.name}
               </div>
               <div className='title-pet-profile'>
                 <span className='sub-title-info-pet'>Birthday:&nbsp;</span>
@@ -142,11 +143,19 @@ function ProfilePet() {
               </div>
               <div className='title-pet-profile'>
                 <span className='sub-title-info-pet'>Gender:&nbsp;</span>
-                {petData.gender === 'MALE' ? <span>Male</span> : <span>Female</span>}
+                {petData.gender === 'MALE' ? (
+                  <span>Male</span>
+                ) : (
+                  <span>Female</span>
+                )}
               </div>
               <div className='title-pet-profile'>
                 <span className='sub-title-info-pet'>Type Of Pet:&nbsp;</span>
-                {petData.petType === 'DOG' ? <span>Dog</span> : <span>Cat</span>}
+                {petData.petType === 'DOG' ? (
+                  <span>Dog</span>
+                ) : (
+                  <span>Cat</span>
+                )}
               </div>
             </div>
 
@@ -179,8 +188,7 @@ function ProfilePet() {
                     type='file'
                     name='image'
                     onChange={handleFileChange}
-                  >
-                  </input>
+                  ></input>
                 </label>
                 <button
                   type='submit'
@@ -201,8 +209,7 @@ function ProfilePet() {
 
           <div className='medical-info'>
             <div className='sub-title-info-pet-line'>My Medical Info</div>
-            <div className='main-add-button-medical'>
-            </div>
+            <div className='main-add-button-medical'></div>
             <table>
               <thead>
                 <tr>

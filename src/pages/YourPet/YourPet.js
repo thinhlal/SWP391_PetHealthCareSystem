@@ -75,9 +75,9 @@ function YourPet() {
     </div>
   );
 
-  const handleClickPet = (petID) => {
+  const handleClickPet = petID => {
     navigate(`/pet-profile?petID=${petID}`);
-  }
+  };
 
   if (loading) {
     return <AnimationComponent />;

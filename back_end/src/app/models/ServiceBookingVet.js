@@ -7,6 +7,11 @@ const ServiceBookingVetSchema = new Schema(
       type: Number,
       unique: true,
     },
+    doctorID: {
+      type: String,
+      default: '',
+      ref: 'Doctor',
+    },
     bookingID: {
       type: String,
       required: true,

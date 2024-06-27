@@ -29,7 +29,7 @@ function Home() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = event => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setIsMenuOpen(false);
     }

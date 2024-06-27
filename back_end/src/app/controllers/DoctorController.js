@@ -1,10 +1,9 @@
 const Doctor = require('../models/Doctor.js');
 
 class DoctorController {
-
   // POST /
   async index(req, res, next) {
-    res.send('test')
+    res.send('test');
   }
 
   // GET /getAllDoctors

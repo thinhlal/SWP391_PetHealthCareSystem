@@ -1,7 +1,7 @@
 const Booking = require('../models/Booking.js');
 const ServiceBookingVet = require('../models/ServiceBookingVet.js');
 
-class ManageBookingsController {
+class AdminController {
   // POST /
   async index(req, res, next) {
     try {
@@ -20,4 +20,4 @@ class ManageBookingsController {
   }
 }
 
-module.exports = new ManageBookingsController();
+module.exports = new AdminController();

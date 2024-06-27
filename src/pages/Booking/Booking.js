@@ -12,49 +12,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 
-// const doctorsData = [
-//   {
-//     id: 'DC000001',
-//     name: 'Daria Andaloro',
-//     workingHours: [
-//       {
-//         date: '2024-06-01',
-//         startTime: '08:00',
-//         endTime: '17:00',
-//         isOff: false,
-//         bookings: [
-//           { startTime: '09:00', endTime: '10:00' },
-//           { startTime: '10:00', endTime: '11:00' },
-//         ],
-//       },
-//       {
-//         date: '2024-06-02',
-//         isOff: true,
-//       },
-//     ],
-//   },
-//   {
-//     id: 'DC000002',
-//     name: 'Michael Brian',
-//     workingHours: [
-//       {
-//         date: '2024-06-01',
-//         startTime: '08:00',
-//         endTime: '17:00',
-//         isOff: false,
-//         bookings: [],
-//       },
-//       {
-//         date: '2024-06-02',
-//         startTime: '08:00',
-//         endTime: '12:00',
-//         isOff: false,
-//         bookings: [],
-//       },
-//     ],
-//   },
-// ];
-
 const Booking = () => {
   const location = useLocation();
   const { user } = useContext(AuthContext);
@@ -98,7 +55,7 @@ const Booking = () => {
   const getAllServices = async () => {
     try {
       const response = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/services/getAllServices`,
+        `${process.env.REACT_APP_API_URL}/service/getAllServices`,
       );
       setServices(response.data);
     } catch (error) {
@@ -109,7 +66,7 @@ const Booking = () => {
   const getAllDoctors = async () => {
     try {
       const response = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/doctor/getAllDoctors`
+        `${process.env.REACT_APP_API_URL}/doctor/getAllDoctors`,
       );
       setDoctors(response.data);
     } catch (error) {
@@ -135,10 +92,12 @@ const Booking = () => {
     updateAvailableSlots(selectedDoctor, newDate);
     setErrorMessageDate('');
   };
+
   const handlePaymentChange = event => {
     setPaymentMethod(event.target.value);
     setErrorMessagePaymentMethod('');
   };
+
   const handleSlotClick = slot => {
     if (!slot.isBooked) {
       setSelectedSlot(slot);
@@ -457,59 +416,55 @@ const Booking = () => {
             </div>
 
             <div className='select-booking_info'>
-            <div className='select_Name'>Services</div>
-            <div className='content-select-booking'>
-              <div className='select_Service'>                
-                <div className='select_Booking-Select'>
-                  <select
-                    name='serviceID'
-                    className='select_Info-services'
-                    value={userInfo.serviceID}
-                    onChange={handleInputChange}
-                    onFocus={handleFocusServices}
-                    required
-                  >
-                    <option value=''>Choose Service:</option>
-                    {services.map((service, index) => (
-                      <option
-                        key={index}
-                        value={service.serviceID}
-                      >
-                        {`${service.name} - Price: ${service.price}`}
-                      </option>
-                    ))}
-                  </select>     
-                  <button onClick={handleAddService}>Add Service</button>             
+              <div className='select_Name'>Services</div>
+              <div className='content-select-booking'>
+                <div className='select_Service'>
+                  <div className='select_Booking-Select'>
+                    <select
+                      name='serviceID'
+                      className='select_Info-services'
+                      value={userInfo.serviceID}
+                      onChange={handleInputChange}
+                      onFocus={handleFocusServices}
+                      required
+                    >
+                      <option value=''>Choose Service:</option>
+                      {services.map((service, index) => (
+                        <option
+                          key={index}
+                          value={service.serviceID}
+                        >
+                          {`${service.name} - Price: ${service.price}`}
+                        </option>
+                      ))}
+                    </select>
+                    <button onClick={handleAddService}>Add Service</button>
+                  </div>
                 </div>
-                
-                {/* {errorMessageServices && (
-                  <div className='error-message'>{errorMessageServices}</div>
-                )} */}
-              </div>
-              {errorMessageServices && (
+                {errorMessageServices && (
                   <div className='error-message'>{errorMessageServices}</div>
                 )}
               </div>
               <div className='selected-services'>
                 <div className='select_Name'>Selected Services:</div>
                 <div className='content-selected-services-frame'>
-                {selectedServices.length > 0 ? (
-                  selectedServices.map((service, index) => (
-                    <div
-                      key={index}
-                      className='service-item'
-                    >
-                      {service.name} - Price: {service.price}
+                  {selectedServices.length > 0 ? (
+                    selectedServices.map((service, index) => (
+                      <div
+                        key={index}
+                        className='service-item'
+                      >
+                        {service.name} - Price: {service.price}
+                      </div>
+                    ))
+                  ) : (
+                    <div className='sub-title-selected-services'>
+                      No services selected.
                     </div>
-                  ))
-                ) : (
-                  <div className='sub-title-selected-services'>
-                    No services selected.
-                  </div>
-                )}
-                <h3 className='total-selected-services'>
-                  Total Amount: {totalAmount}
-                </h3>
+                  )}
+                  <h3 className='total-selected-services'>
+                    Total Amount: {totalAmount}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -619,14 +574,15 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${slot.isBooked
+                    className={`element-button ${
+                      slot.isBooked
                         ? 'element-button-red'
                         : slot.isWithinWorkingHours
                           ? selectedSlot === slot
                             ? 'element-button-selected'
                             : 'element-button-green'
                           : 'element-button-gray'
-                      }`}
+                    }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>

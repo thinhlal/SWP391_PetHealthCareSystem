@@ -375,12 +375,14 @@
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* ManageListBooking.css */
-
-.status-waiting {
-  color: rgb(243, 111, 10);
+.manage-booking-list .status-waiting {
+  color: #007bff;
 }
 
-.status-checked-in {
+.manage-booking-list .status-checked-in {
   color: rgb(20, 205, 20);
+}
+
+.manage-booking-list .status-cancel {
+  color: red;
 }

@@ -91,8 +91,8 @@ class BookingController {
     }
   }
 
-  // GET /getAllBookings
-  async getAllBookings(req, res, next) {
+  // GET /getAllBookingsID/:accountID
+  async getAllBookingsID(req, res, next) {
     const { accountID } = req.params;
     try {
       const allBookings = await Booking.aggregate([
@@ -127,6 +127,65 @@ class BookingController {
             localField: 'serviceID',
             foreignField: 'servicebookingvetsDetails.serviceID',
             as: 'servicesDetails',
+          },
+        },
+      ]);
+      res.status(201).json({ allBookings });
+    } catch (error) {
+      res.status(500).json({ message: 'Error when get booking ', error });
+    }
+  }
+
+  // GET /getAllBookings
+  async getAllBookings(req, res, next) {
+    try {
+      const allBookings = await Booking.aggregate([
+        {
+          $lookup: {
+            from: 'accounts',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'accountDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'pets',
+            localField: 'petID',
+            foreignField: 'petID',
+            as: 'petDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'doctors',
+            localField: 'doctorID',
+            foreignField: 'doctorID',
+            as: 'doctorDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'servicebookingvets',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'servicebookingvetsDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'services',
+            localField: 'serviceID',
+            foreignField: 'servicebookingvetsDetails.serviceID',
+            as: 'servicesDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentsDetails',
           },
         },
       ]);

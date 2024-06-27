@@ -1,17 +1,19 @@
 const siteRouter = require('./site');
 const bookingRouter = require('./booking');
-const serviceRouter = require('./services');
-const paypalRoutes = require('./paypal');
-const petRoutes = require('./pet');
-const manageBookingsRouter = require('./manageBookings');
+const serviceRouter = require('./service');
+const paypalRouter = require('./paypal');
+const petRouter = require('./pet');
+const adminRouter = require('./admin');
 const doctorRouter = require('./doctor');
+const accountRouter = require('./account');
 
 function route(app) {
   app.use('/doctor', doctorRouter);
-  app.use('/manage-bookings', manageBookingsRouter);
-  app.use('/pet', petRoutes);
-  app.use('/services', serviceRouter);
-  app.use('/paypal', paypalRoutes);
+  app.use('/account', accountRouter);
+  app.use('/admin', adminRouter);
+  app.use('/pet', petRouter);
+  app.use('/service', serviceRouter);
+  app.use('/paypal', paypalRouter);
   app.use('/booking', bookingRouter);
   app.use('/', siteRouter);
 }

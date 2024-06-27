@@ -11,6 +11,8 @@ function SignUp() {
     username: '',
     password: '',
     confirmPassword: '',
+    name: '',
+    phone: '',
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
@@ -37,6 +39,14 @@ function SignUp() {
       newErrors.confirmPassword = 'Passwords do not match';
     }
 
+    if (formData.name.length < 1) {
+      newErrors.name = 'Name must not be blank';
+    }
+
+    if (formData.phone.length < 8) {
+      newErrors.phone = 'Phone must be at least 8 number';
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -47,6 +57,8 @@ function SignUp() {
         .post('http://localhost:5000/signup', {
           username: formData.username,
           password: formData.password,
+          name: formData.name,
+          phone: formData.phone,
         })
         .then(response => {
           setErrors({});
@@ -55,6 +67,8 @@ function SignUp() {
             username: '',
             password: '',
             confirmPassword: '',
+            name: '',
+            phone: '',
           });
           setTimeout(() => {
             navigate('/login');
@@ -75,11 +89,13 @@ function SignUp() {
     <div className='create-account-page'>
       <div className='overlap-img'>
         <div className='frame'>
-          <img
-            className='create-account_img'
-            src={jonas}
-            alt=''
-          />
+          <div className='frame-div-img'>
+            <img
+              className='create-account_img'
+              src={jonas}
+              alt=''
+            />
+          </div>
           <div className='create-account_content'>
             <div className='create-account_logo'>
               <img
@@ -129,10 +145,38 @@ function SignUp() {
                     required
                   />
                 </div>
+                {errors.confirmPassword && (
+                  <div className='error-message'>{errors.confirmPassword}</div>
+                )}
+                <div className='form_SignUp_Input'>
+                  <input
+                    className='form_SignUp_Input-Text'
+                    placeholder='Name'
+                    type='text'
+                    name='name'
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                {errors.name && (
+                  <div className='error-message'>{errors.name}</div>
+                )}
+                <div className='form_SignUp_Input'>
+                  <input
+                    className='form_SignUp_Input-Text'
+                    placeholder='Phone'
+                    type='text'
+                    name='phone'
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                {errors.phone && (
+                  <div className='error-message'>{errors.phone}</div>
+                )}
               </div>
-              {errors.confirmPassword && (
-                <div className='error-message'>{errors.confirmPassword}</div>
-              )}
               {errors.server && (
                 <div className='error-message'>{errors.server}</div>
               )}

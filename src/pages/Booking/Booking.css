@@ -81,7 +81,6 @@ body {
 }
 
 .select_Payment {
-
 }
 
 .select-booking_info:nth-child(3) {
@@ -176,18 +175,6 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-.booking-container .content-selected-services-frame{
-  font-family: Roboto, sans-serif;
-  width: 270px;
-  border: 1px solid #c1c1c1;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding: 10px;
-  height: 110px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
 .booking-container .content-selected-services-frame .service-item {
   display: flex;
   justify-content: space-between;
@@ -217,10 +204,9 @@ body {
   -webkit-box-orient: vertical;
 }
 
-
 .booking-container .select_Info-services {
   border: 1px solid #c1c1c1;
-  width: 520px;  /* Tăng chiều ngang */
+  width: 520px;
   font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #000;
@@ -235,20 +221,16 @@ body {
   -webkit-box-orient: vertical;
 }
 
-
 .booking-container .content-selected-services-frame {
   font-family: Roboto, sans-serif;
-  width: 622px;  /* Tăng chiều ngang */
+  width: 622px;
   border: 1px solid #c1c1c1;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding: 10px;
-  height: 110px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  height: 140px;
   max-height: 400px;
   overflow-y: auto;
 }
-
-
 
 .booking-container .select_Date {
   width: 270px;
@@ -377,7 +359,7 @@ body {
   justify-content: center;
   gap: 8px;
   padding: 10px 15px;
-  background-color: #4345a5; /* Màu vàng nhạt cho ô đã chọn */
+  background-color: #4345a5;
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
   border: 2px solid #e631d6;
@@ -487,13 +469,13 @@ body {
 }
 
 .booking-container .error-message {
+  display: flex;
+  align-items: center;
   color: red;
-  height: 20px; /* Reserve space for the error message */
+  height: 16px;
   font-size: 12px;
   margin-top: 5px;
   font-family: Roboto, sans-serif;
 }
 .booking-container .patient_Input {
 }
-
-

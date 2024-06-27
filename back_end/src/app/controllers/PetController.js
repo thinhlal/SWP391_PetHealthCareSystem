@@ -1,7 +1,6 @@
 const Pet = require('../models/Pet.js');
 
 class PetController {
-
   // GET /updatePetPatch/:petID
   async updatePetPatch(req, res, next) {
     const { petID } = req.params;
@@ -68,15 +67,29 @@ class PetController {
                   from: 'vaccinations',
                   let: { vaccinationID: '$vaccinationID' },
                   pipeline: [
-                    { $match: { $expr: { $eq: ['$vaccinationID', '$$vaccinationID'] } } },
-                    { $project: { name: 1, quantity: 1, status: 1, nextDate: 1, notes: 1 } },
+                    {
+                      $match: {
+                        $expr: { $eq: ['$vaccinationID', '$$vaccinationID'] },
+                      },
+                    },
+                    {
+                      $project: {
+                        name: 1,
+                        quantity: 1,
+                        status: 1,
+                        nextDate: 1,
+                        notes: 1,
+                      },
+                    },
                   ],
                   as: 'vaccinationDetails',
                 },
               },
               {
                 $addFields: {
-                  vaccinationDetails: { $arrayElemAt: ['$vaccinationDetails', 0] },
+                  vaccinationDetails: {
+                    $arrayElemAt: ['$vaccinationDetails', 0],
+                  },
                 },
               },
             ],
@@ -89,6 +102,37 @@ class PetController {
       res
         .status(500)
         .json({ message: 'Error fetching pets', error: error.message });
+    }
+  }
+
+  // GET /searchPet/:petIDOrName
+  async petIDOrName(req, res, next) {
+    const { petIDOrName } = req.params;
+    try {
+      const listPets = await Pet.find({
+        $or: [
+          { petID: { $regex: petIDOrName, $options: 'i' } },
+          { name: { $regex: petIDOrName, $options: 'i' } },
+        ],
+      });
+      res.status(200).json(listPets);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Error searchID or Name pets', error: error.message });
+    }
+  }
+
+  // GET /searchPet/:accountID
+  async searchPetWithAccountID(req, res, next) {
+    const { accountID } = req.params;
+    try {
+      const listPets = await Pet.find({ accountID });
+      res.status(200).json(listPets);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Error searchID or Name pets', error: error.message });
     }
   }
 

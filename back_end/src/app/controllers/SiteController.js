@@ -2,6 +2,7 @@ const Account = require('../models/Account.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const redisClient = require('../../config/redis/redisClient.js');
+const Customer = require('../models/Customer.js');
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
@@ -14,7 +15,8 @@ class SiteController {
   // [POST] /signup
   async signUp(req, res, next) {
     try {
-      let { username, password } = req.body;
+      let { username, password, name, phone } = req.body;
+
       const existAccount = await Account.findOne({ username });
       if (existAccount) {
         return res.status(409).json({
@@ -25,15 +27,15 @@ class SiteController {
       const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-      let id;
+      let idAccount;
       while (true) {
         try {
-          const lastCustomer = await Account.findOne().sort({ accountID: -1 });
-          if (lastCustomer) {
-            const lastID = parseInt(lastCustomer.accountID.substring(2));
-            id = 'CS' + (lastID + 1).toString().padStart(6, '0');
+          const lastAccountID = await Account.findOne().sort({ accountID: -1 });
+          if (lastAccountID) {
+            const lastID = parseInt(lastAccountID.accountID.substring(2));
+            idAccount = 'AC' + (lastID + 1).toString().padStart(6, '0');
           } else {
-            id = 'CS000000';
+            idAccount = 'AC000000';
           }
           break;
         } catch (error) {
@@ -42,11 +44,36 @@ class SiteController {
       }
 
       const newAccount = new Account({
-        accountID: id,
+        accountID: idAccount,
         username,
         password: hashedPassword,
       });
 
+      let idCustomer;
+      while (true) {
+        try {
+          const lastCustomerID = await Customer.findOne().sort({
+            customerID: -1,
+          });
+          if (lastCustomerID) {
+            const lastID = parseInt(lastCustomerID.customerID.substring(2));
+            idCustomer = 'CS' + (lastID + 1).toString().padStart(6, '0');
+          } else {
+            idCustomer = 'CS000000';
+          }
+          break;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      const newCustomer = new Customer({
+        customerID: idCustomer,
+        accountID: idAccount,
+        name,
+        phone,
+      });
+      await newCustomer.save();
       await newAccount.save();
 
       res.status(201).json({ message: 'Account registered successfully' });
@@ -94,10 +121,26 @@ class SiteController {
         httpOnly: true,
         secure: false,
         sameSite: 'strict',
+        maxAge: 7 * 60 * 60 * 1000,
       });
 
-      const user = account.toObject();
-      delete user.password;
+      const userToOBj = account.toObject();
+      delete userToOBj.password;
+      const accountID = userToOBj.accountID;
+
+      const userAgv = await Account.aggregate([
+        { $match: { accountID } },
+        {
+          $lookup: {
+            from: 'Customer',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'customerDetails',
+          },
+        },
+      ]);
+      const user = userAgv[0];
+
       res.json({ message: 'Login successful', user, token });
     } catch (error) {
       console.error('Login Error:', error);
@@ -152,6 +195,7 @@ class SiteController {
           httpOnly: true,
           secure: false,
           sameSite: 'strict',
+          maxAge: 7 * 60 * 60 * 1000,
         });
         res.status(200).json({ accessToken: newAccessToken });
       });

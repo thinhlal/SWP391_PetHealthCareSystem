@@ -33,37 +33,52 @@ function YourBooking() {
   useEffect(() => {
     const fetchAllBookings = async () => {
       try {
-        const dataBookings = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`);
-        const sortDataBookings = dataBookings.data.allBookings.sort((a, b) => a.dateBook.localeCompare(b.dateBook))
-        const sortTimeBookings = sortDataBookings.sort((a, b) => b.startTime.localeCompare(a.startTime))
+        const dataBookings = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
+        );
+        const sortDataBookings = dataBookings.data.allBookings.sort((a, b) =>
+          a.dateBook.localeCompare(b.dateBook),
+        );
+        const sortTimeBookings = sortDataBookings.sort((a, b) =>
+          b.startTime.localeCompare(a.startTime),
+        );
         setYourBookings(sortTimeBookings);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     fetchAllBookings();
-  }, [user.accountID])
+  }, [user.accountID]);
 
-  const handleCancelBooking = async (bookingID) => {
+  const handleCancelBooking = async bookingID => {
     try {
-      await axiosInstance.post(`${process.env.REACT_APP_API_URL}/booking/cancelBooking`, { bookingID });
-      const dataBookings = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`);
-      const sortDataBookings = dataBookings.data.allBookings.sort((a, b) => a.dateBook.localeCompare(b.dateBook))
-      const sortTimeBookings = sortDataBookings.sort((a, b) => b.startTime.localeCompare(a.startTime))
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/booking/cancelBooking`,
+        { bookingID },
+      );
+      const dataBookings = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
+      );
+      const sortDataBookings = dataBookings.data.allBookings.sort((a, b) =>
+        a.dateBook.localeCompare(b.dateBook),
+      );
+      const sortTimeBookings = sortDataBookings.sort((a, b) =>
+        b.startTime.localeCompare(a.startTime),
+      );
       setYourBookings(sortTimeBookings);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   if (loading) {
     return <AnimationComponent />;
   }
 
-  const formatService = (data) => {
+  const formatService = data => {
     return data.map(service => service.name);
-  }
+  };
 
   return (
     <div className='main-container-your-booking-page'>
@@ -116,15 +131,22 @@ function YourBooking() {
                         <div className='detail-number-ID'>
                           ID: {booking.bookingID}
                           <div
-                            className={`status-booking ${booking.isCancel === true
-                              ? 'status-cancel'
-                              : booking.isCheckIn ? 'status-completed' : 'status-pending'
-                              }`}
+                            className={`status-booking ${
+                              booking.isCancel === true
+                                ? 'status-cancel'
+                                : booking.isCheckIn
+                                  ? 'status-completed'
+                                  : 'status-pending'
+                            }`}
                           >
-                            Status: {booking.isCancel === true
-                              ? <span>Cancel</span>
-                              : booking.isCheckIn ? <span>Completed</span> : <span>Pending</span>
-                            }
+                            Status:{' '}
+                            {booking.isCancel === true ? (
+                              <span>Cancel</span>
+                            ) : booking.isCheckIn ? (
+                              <span>Completed</span>
+                            ) : (
+                              <span>Pending</span>
+                            )}
                           </div>
                         </div>
                         <div className='card-body-content-booking'>
@@ -169,7 +191,9 @@ function YourBooking() {
                                 Services:
                               </div>{' '}
                               <br />
-                              {formatService(booking.servicesDetails).join(', ')}
+                              {formatService(booking.servicesDetails).join(
+                                ', ',
+                              )}
                             </div>
                           </div>
                         </div>
@@ -181,9 +205,12 @@ function YourBooking() {
                               {booking.totalPrice}
                             </div>
                           </div>
-                          {booking.isCheckIn === false && booking.isCancel === false ? (
+                          {booking.isCheckIn === false &&
+                          booking.isCancel === false ? (
                             <div
-                              onClick={() => handleCancelBooking(booking.bookingID)}
+                              onClick={() =>
+                                handleCancelBooking(booking.bookingID)
+                              }
                               className='cancel-booking-button-1'
                             >
                               <div className='text-sign-in-button-booking'>

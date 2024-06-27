@@ -19,11 +19,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 780px;
 }
 
 .create-account-page .frame {
-  max-width: 1300px;
+  max-width: 1400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,15 +32,17 @@ body {
   box-shadow: 0px 4px 4px #00000040;
 }
 
+.create-account-page .frame-div-img {
+}
+
 .create-account-page .create-account_img {
+  width: 100%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   object-fit: cover;
-  width: 650px;
 }
 
 .create-account_content {
-  height: 530px;
 }
 
 .create-account-page .create-account_logo {
@@ -50,9 +52,7 @@ body {
 }
 
 .create-account-page .create-account_logo img {
-  width: 245px;
-  height: 50px;
-  object-fit: cover;
+  height: 60px;
 }
 
 .create-account-page .create-account_tittle {
