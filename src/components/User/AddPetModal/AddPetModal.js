@@ -79,13 +79,10 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
       return;
     }
 
-    // Upload image to Firebase
     const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
     await uploadBytes(imageRef, imageFile);
     const imageUrl = await getDownloadURL(imageRef);
-    console.log(imageUrl);
 
-    // Post new pet data with image URL
     const res = await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/pet/add`,
       {

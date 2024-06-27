@@ -1,6 +1,27 @@
 const Pet = require('../models/Pet.js');
 
 class PetController {
+
+  // GET /updatePetPatch/:petID
+  async updatePetPatch(req, res, next) {
+    const { petID } = req.params;
+    const { petDataUpdate } = req.body;
+    try {
+      const updatedPet = await Pet.findOneAndUpdate({ petID }, petDataUpdate, {
+        new: true,
+      });
+      if (!updatedPet) {
+        return res.status(404).json({ message: 'Pet not found' });
+      }
+
+      res.status(200).json(updatedPet);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Error fetching pets', error: error.message });
+    }
+  }
+
   // GET /getAllPets/:accountID
   async getAllPets(req, res, next) {
     const { accountID } = req.params;
@@ -22,6 +43,14 @@ class PetController {
         { $match: { petID } },
         {
           $lookup: {
+            from: 'medicalreports',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'medicalReportDetails',
+          },
+        },
+        {
+          $lookup: {
             from: 'accounts',
             localField: 'accountID',
             foreignField: 'accountID',
@@ -31,23 +60,28 @@ class PetController {
         {
           $lookup: {
             from: 'vaccinationpets',
-            localField: 'petID',
-            foreignField: 'petID',
+            let: { petID: '$petID' },
+            pipeline: [
+              { $match: { $expr: { $eq: ['$petID', '$$petID'] } } },
+              {
+                $lookup: {
+                  from: 'vaccinations',
+                  let: { vaccinationID: '$vaccinationID' },
+                  pipeline: [
+                    { $match: { $expr: { $eq: ['$vaccinationID', '$$vaccinationID'] } } },
+                    { $project: { name: 1, quantity: 1, status: 1, nextDate: 1, notes: 1 } },
+                  ],
+                  as: 'vaccinationDetails',
+                },
+              },
+              {
+                $addFields: {
+                  vaccinationDetails: { $arrayElemAt: ['$vaccinationDetails', 0] },
+                },
+              },
+            ],
             as: 'vaccinationPetDetails',
           },
-        },
-        {
-          $lookup: {
-            from: 'vaccinations',
-            localField: 'vaccinationPetDetails.vaccinationID',
-            foreignField: 'vaccinationID',
-            as: 'vaccinationDetails',
-          },
-        },
-        {
-          $addFields: {
-            'vaccinationPetDetails.vaccinationName': '$vaccinationDetails.name'
-          }
         },
       ]);
       res.status(200).json(pet);

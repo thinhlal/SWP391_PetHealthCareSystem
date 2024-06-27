@@ -21,6 +21,10 @@ const VaccinationSchema = new Schema(
             require: true,
             default: true,
         },
+        nextDate:{
+            type: Number,
+            require: true,
+        },
     },
     {
         timestamps: true,

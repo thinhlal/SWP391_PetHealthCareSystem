@@ -1,49 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import './ProfilePet.css';
 // component
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
-import pet_img1 from '../../assets/images/img_YourPet/c2dc9a5328014cead97d6268b688a16e.jpg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import axiosInstance from '../../utils/axiosInstance.js';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '../../config/firebase.js';
+import { AuthContext } from '../../context/AuthContext.js';
 
 function ProfilePet() {
-  const initialPetData = {
-    name: 'KiKi',
-    age: '3',
-    typeOfPet: 'Dog',
-    petParent: 'Minh',
-    status: 'Active',
-    lastVaccination: '',
-    nextVaccination: '',
-    vaccinations: [],
-    medicalInfo: [],
-    id: '012345',
-  };
+  const { user } = useContext(AuthContext);
   const location = useLocation();
-  const [petData, setPetData] = useState(initialPetData);
+  const [petData, setPetData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [newPetData, setNewPetData] = useState(initialPetData);
-  const [isAddingVaccination, setIsAddingVaccination] = useState(false);
-  const [newVaccination, setNewVaccination] = useState({
-    date: '',
-    age: '',
-    vaccine: '',
-    nextDate: '',
-    label: '',
+  const [imageFile, setImageFile] = useState(null);
+  const [newPetData, setNewPetData] = useState({
+    name: '',
+    birthday: '',
+    image: '',
   });
 
-  const [isEditingMedical, setIsEditingMedical] = useState(false);
-  const [newMedicalInfo, setNewMedicalInfo] = useState({
-    microchipNumber: '',
-    petPassportNumber: '',
-    spayNeuterStatus: 'No',
-    otherConditions: '',
-    notes: '',
-  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,12 +41,11 @@ function ProfilePet() {
       try {
         const params = new URLSearchParams(location.search);
         const petID = params.get('petID');
-        console.log(petID);
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
         );
-        console.log(response.data);
-        setPetData(response.data);
+        console.log(response.data[0]);
+        setPetData(response.data[0]);
       } catch (error) {
         console.error('Error fetching pets:', error);
       }
@@ -83,87 +62,38 @@ function ProfilePet() {
     setIsEditing(false);
   };
 
-  const handleMedicalEditClick = () => {
-    setIsEditingMedical(true);
-  };
-
-  const handleMedicalCloseClick = () => {
-    setIsEditingMedical(false);
-  };
-
   const handleInputChange = e => {
     const { name, value } = e.target;
     setNewPetData({ ...newPetData, [name]: value });
   };
 
-  const handleMedicalInputChange = e => {
-    const { name, value } = e.target;
-    setNewMedicalInfo({ ...newMedicalInfo, [name]: value });
+  const handleFileChange = e => {
+    const { name, files } = e.target;
+    setImageFile(files[0]);
+    setNewPetData({ ...newPetData, [name]: files[0] });
   };
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setPetData(newPetData);
+    const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
+    await uploadBytes(imageRef, imageFile);
+    const imageUrl = await getDownloadURL(imageRef);
+    const petDataUpdate = { ...newPetData, image: imageUrl };
+    const params = new URLSearchParams(location.search);
+    const petID = params.get('petID');
+    try {
+      await axiosInstance.patch(
+        `${process.env.REACT_APP_API_URL}/pet/updatePet/${petID}`,
+        { petDataUpdate }
+      )
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
+      );
+      setPetData(response.data[0])
+    } catch (error) {
+      console.error('Error updating pet data:', error);
+    }
     setIsEditing(false);
-  };
-
-  const handleMedicalFormSubmit = e => {
-    e.preventDefault();
-    setPetData(prevData => ({
-      ...prevData,
-      medicalInfo: [...prevData.medicalInfo, newMedicalInfo],
-    }));
-    setNewMedicalInfo({
-      microchipNumber: '',
-      petPassportNumber: '',
-      spayNeuterStatus: 'No',
-      otherConditions: '',
-      notes: '',
-    });
-    setIsEditingMedical(false);
-  };
-
-  const handleAddVaccinationClick = () => {
-    setIsAddingVaccination(true);
-  };
-
-  const handleCloseAddVaccinationClick = () => {
-    setIsAddingVaccination(false);
-  };
-
-  const handleVaccinationInputChange = e => {
-    const { name, value } = e.target;
-    setNewVaccination({ ...newVaccination, [name]: value });
-  };
-
-  const handleVaccinationFormSubmit = e => {
-    e.preventDefault();
-    setPetData(prevData => ({
-      ...prevData,
-      vaccinations: [...prevData.vaccinations, newVaccination],
-    }));
-    setIsAddingVaccination(false);
-    setNewVaccination({
-      date: '',
-      age: '',
-      vaccine: '',
-      nextDate: '',
-      label: '',
-    });
-  };
-
-  const handleDeleteVaccination = index => {
-    setPetData(prevData => ({
-      ...prevData,
-      vaccinations: prevData.vaccinations.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleDeleteMedicalInfo = index => {
-    setPetData(prevData => ({
-      ...prevData,
-      medicalInfo: prevData.medicalInfo.filter((_, i) => i !== index),
-    }));
   };
 
   if (loading) {
@@ -177,7 +107,7 @@ function ProfilePet() {
         <div className='sidebar-pet-profile'>
           <div className='pet-avatar'>
             <img
-              src={pet_img1}
+              src={petData.image}
               alt='Pet Avatar'
             />
           </div>
@@ -204,22 +134,18 @@ function ProfilePet() {
             </div>
             <div className='pet-details-profile'>
               <div className='title-pet-profile'>
-                {' '}
-                <span className='sub-title-info-pet'>Name:</span> {petData.name}
+                <span className='sub-title-info-pet'>Name:&nbsp;</span> {petData.name}
               </div>
               <div className='title-pet-profile'>
-                {' '}
-                <span className='sub-title-info-pet'>Birthday:</span> {petData.birthday}
-                &nbsp;
+                <span className='sub-title-info-pet'>Birthday:&nbsp;</span>
+                {petData.birthday.split('T')[0]}
               </div>
               <div className='title-pet-profile'>
-                {' '}
-                <span className='sub-title-info-pet'>Gender:</span>
+                <span className='sub-title-info-pet'>Gender:&nbsp;</span>
                 {petData.gender === 'MALE' ? <span>Male</span> : <span>Female</span>}
               </div>
               <div className='title-pet-profile'>
-                {' '}
-                <span className='sub-title-info-pet'>Type Of Pet: </span>
+                <span className='sub-title-info-pet'>Type Of Pet:&nbsp;</span>
                 {petData.petType === 'DOG' ? <span>Dog</span> : <span>Cat</span>}
               </div>
             </div>
@@ -239,24 +165,22 @@ function ProfilePet() {
                   />
                 </label>
                 <label>
-                  Age:
+                  BirthDay:
                   <input
-                    type='text'
-                    name='age'
-                    value={newPetData.age}
+                    type='date'
+                    name='birthday'
+                    value={newPetData.birthday}
                     onChange={handleInputChange}
                   />
                 </label>
                 <label className='select-pet-type'>
-                  Type Of Pet:
-                  <select
-                    name='typeOfPet'
-                    value={newPetData.typeOfPet}
-                    onChange={handleInputChange}
+                  Image:
+                  <input
+                    type='file'
+                    name='image'
+                    onChange={handleFileChange}
                   >
-                    <option value='Dog'>Dog</option>
-                    <option value='Cat'>Cat</option>
-                  </select>
+                  </input>
                 </label>
                 <button
                   type='submit'
@@ -278,22 +202,15 @@ function ProfilePet() {
           <div className='medical-info'>
             <div className='sub-title-info-pet-line'>My Medical Info</div>
             <div className='main-add-button-medical'>
-              <button
-                onClick={handleMedicalEditClick}
-                className='edit-button-medical'
-              >
-                Add
-              </button>
             </div>
             <table>
               <thead>
                 <tr>
-                  <th>Microchip Number</th>
-                  <th>Pet Passport Number</th>
-                  <th>Spay / Neuter Status</th>
-                  <th>Other Conditions</th>
+                  <th>Medical ReportID</th>
+                  <th>Diagnosis</th>
+                  <th>Treatment</th>
+                  <th>Prescription</th>
                   <th>Notes</th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -304,208 +221,46 @@ function ProfilePet() {
                 ) : (
                   petData.medicalReportDetails.map((reportInfo, index) => (
                     <tr key={index}>
-                      <td>{reportInfo.microchipNumber}</td>
-                      <td>{reportInfo.petPassportNumber}</td>
-                      <td>{reportInfo.spayNeuterStatus}</td>
-                      <td>{reportInfo.otherConditions}</td>
+                      <td>{reportInfo.medicalReportID}</td>
+                      <td>{reportInfo.diagnosis}</td>
+                      <td>{reportInfo.treatment}</td>
+                      <td>{reportInfo.prescription}</td>
                       <td>{reportInfo.notes}</td>
-                      <td>
-                        {/* <button onClick={handleMedicalEditClick} className="edit-button-medical">Edit</button> */}
-                        <button
-                          onClick={() => handleDeleteMedicalInfo(index)}
-                          className='delete-button-medical'
-                        >
-                          Delete
-                        </button>
-                        <button className='view-button-medical'>View</button>
-                      </td>
                     </tr>
                   ))
                 )}
               </tbody>
             </table>
-
-            {isEditingMedical && (
-              <form
-                onSubmit={handleMedicalFormSubmit}
-                className='edit-medical-form'
-              >
-                <label>
-                  Microchip Number:
-                  <input
-                    type='text'
-                    name='microchipNumber'
-                    value={newMedicalInfo.microchipNumber}
-                    onChange={handleMedicalInputChange}
-                  />
-                </label>
-                <label>
-                  Pet Passport Number:
-                  <input
-                    type='text'
-                    name='petPassportNumber'
-                    value={newMedicalInfo.petPassportNumber}
-                    onChange={handleMedicalInputChange}
-                  />
-                </label>
-                <label>
-                  Spay / Neuter Status:
-                  <select
-                    name='spayNeuterStatus'
-                    value={newMedicalInfo.spayNeuterStatus}
-                    onChange={handleMedicalInputChange}
-                  >
-                    <option value='Yes'>Yes</option>
-                    <option value='No'>No</option>
-                  </select>
-                </label>
-                <label>
-                  Other Conditions:
-                  <input
-                    type='text'
-                    name='otherConditions'
-                    value={newMedicalInfo.otherConditions}
-                    onChange={handleMedicalInputChange}
-                  />
-                </label>
-                <label>
-                  Notes:
-                  <textarea
-                    name='notes'
-                    value={newMedicalInfo.notes}
-                    onChange={handleMedicalInputChange}
-                  />
-                </label>
-                <button
-                  type='submit'
-                  className='save-button'
-                >
-                  Save
-                </button>
-                <button
-                  type='button'
-                  onClick={handleMedicalCloseClick}
-                  className='close-button'
-                >
-                  Close
-                </button>
-              </form>
-            )}
           </div>
 
           <div className='vaccination-info'>
             <div className='sub-title-info-pet-line'>My Vaccination Info</div>
-            <div className='main-add-button-vaccination'>
-              <button
-                onClick={handleAddVaccinationClick}
-                className='add-button-vaccination'
-              >
-                Add
-              </button>
-            </div>
             <table>
               <thead>
                 <tr>
-                  <th>Vaccination Date</th>
-                  <th>Age</th>
+                  <th>Date Given</th>
                   <th>Vaccines</th>
                   <th>Next Vaccination Date</th>
-                  <th>Vaccination Label</th>
-                  <th>Actions</th>
+                  <th>Vaccination Notes</th>
                 </tr>
               </thead>
               <tbody>
-                {petData.vaccinationDetails.length === 0 ? (
+                {petData.vaccinationPetDetails.length === 0 ? (
                   <tr>
                     <td colSpan='6'>You didn't have any vaccination yet.</td>
                   </tr>
                 ) : (
-                  petData.vaccinationDetails.map((vaccine, index) => (
+                  petData.vaccinationPetDetails.map((vaccine, index) => (
                     <tr key={index}>
-                      <td>{vaccine.date}</td>
-                      <td>{vaccine.age}</td>
-                      <td>{vaccine.vaccine}</td>
-                      <td>{vaccine.nextDate}</td>
-                      <td>{vaccine.label}</td>
-                      <td>
-                        <button
-                          onClick={() => handleDeleteVaccination(index)}
-                          className='delete-button-vaccination'
-                        >
-                          Delete
-                        </button>
-                      </td>
+                      <td>{`${vaccine.dateGiven.split('T')[0]} ${vaccine.dateGiven.split('T')[1].split('.')[0]}`}</td>
+                      <td>{vaccine.vaccinationDetails.name}</td>
+                      <td>{`${parseInt(vaccine.dateGiven.split('-')[0]) + vaccine.vaccinationDetails.nextDate}`}</td>
+                      <td>{vaccine.vaccinationDetails.notes}</td>
                     </tr>
                   ))
                 )}
               </tbody>
             </table>
-
-            {isAddingVaccination && (
-              <form
-                onSubmit={handleVaccinationFormSubmit}
-                className='add-vaccination-form'
-              >
-                <label>
-                  Date:
-                  <input
-                    type='date'
-                    name='date'
-                    value={newVaccination.date}
-                    onChange={handleVaccinationInputChange}
-                  />
-                </label>
-                <label>
-                  Age:
-                  <input
-                    type='text'
-                    name='age'
-                    value={newVaccination.age}
-                    onChange={handleVaccinationInputChange}
-                  />
-                </label>
-                <label>
-                  Vaccine:
-                  <input
-                    type='text'
-                    name='vaccine'
-                    value={newVaccination.vaccine}
-                    onChange={handleVaccinationInputChange}
-                  />
-                </label>
-                <label>
-                  Next Date:
-                  <input
-                    type='date'
-                    name='nextDate'
-                    value={newVaccination.nextDate}
-                    onChange={handleVaccinationInputChange}
-                  />
-                </label>
-                <label>
-                  Label:
-                  <input
-                    type='text'
-                    name='label'
-                    value={newVaccination.label}
-                    onChange={handleVaccinationInputChange}
-                  />
-                </label>
-                <button
-                  type='submit'
-                  className='save-button'
-                >
-                  Save
-                </button>
-                <button
-                  type='button'
-                  onClick={handleCloseAddVaccinationClick}
-                  className='close-button'
-                >
-                  Close
-                </button>
-              </form>
-            )}
           </div>
         </div>
       </div>
