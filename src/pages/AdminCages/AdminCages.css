@@ -371,6 +371,7 @@
     padding: 0 0 0 10px;
     margin: 0;
   }
+
   
   .Admin-Cages-Main-Table-Content-Row-Action {
     width: 100%;
@@ -380,10 +381,6 @@
     border-left: 1px solid #eae8f1;
     padding: 0 0 0 10px;
     margin: 0;
-  }
-  
-  .Admin-Cages-Main-Table-Content-Row-Btn {
-    display: flex;
   }
   
   .Admin-Cages-Main-Table-Content-Btn {
