@@ -17,6 +17,14 @@
   color: #002169;
 }
 
+.customer-name-title {
+  margin-bottom: 15px;
+}
+
+.pet-details-profile {
+  margin-top: 25px;
+}
+
 .main-container-pet-profile .container-pet-profile .ID-pet-profile {
   color: #218838;
 }
@@ -25,6 +33,7 @@
   font-weight: 600;
   color: #002169;
   position: relative;
+  font-size: 18px;
 }
 
 .main-container-pet-profile
@@ -33,7 +42,7 @@
   content: '';
   display: block;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: #ddd;
   position: absolute;
   bottom: -5px;
@@ -47,17 +56,17 @@
   background: white;
   border-radius: 8px;
   padding: 20px;
-  margin-right: 20px;
+  margin-right: 60px;
   width: 250px;
-  height: 295px;
+  height: 325px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   line-height: 2;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .main-container-pet-profile .container-pet-profile .pet-avatar img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   margin-bottom: 10px;
 }
@@ -80,8 +89,9 @@
 
 .main-container-pet-profile .container-pet-profile .main-content-pet {
   display: flex;
-  gap: 30px;
-  font-size: 18px;
+  width: 920px;
+  gap: 40px;
+  font-size: 16px;
   flex-direction: column;
   align-items: center;
   line-height: 1.8;
@@ -94,9 +104,21 @@
   border-radius: 8px;
   padding: 20px;
   width: 100%;
-  max-width: 800px;
+  /* max-width: 800px; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.vaccines-column {
+  width: 500px; 
+  max-width: 300px; 
+}
+
+.vaccines-column,
+.vaccines-column + td {
+  word-wrap: break-word; 
+  word-break: break-word; 
+}
+
 
 .main-container-pet-profile .container-pet-profile .main-edit-button-pet-info,
 .main-edit-button-medical {
@@ -197,7 +219,7 @@
 .main-container-pet-profile .container-pet-profile table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .main-container-pet-profile .container-pet-profile table,
@@ -212,7 +234,7 @@ td {
   text-align: left;
   word-wrap: break-word;
   word-break: break-word;
-  max-width: 200px;
+  max-width: 260px;
 }
 
 .main-container-pet-profile .container-pet-profile th {
@@ -240,7 +262,7 @@ td {
 .edit-medical-form textarea {
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 5px;
   margin-top: 5px;
   margin-bottom: 10px;
   border: 1px solid #ccc;

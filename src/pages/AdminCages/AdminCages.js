@@ -4,75 +4,90 @@ import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
 // Img
 import logo_pet_health_care from '../../assets/images/img_AdminCages/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminCages/icon_search.svg';
 // MUI
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import Switch from '@mui/joy/Switch';
-import { blue, green } from '@mui/material/colors';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+
+// import Switch from '@mui/joy/Switch';
+import { blue } from '@mui/material/colors';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import Switch from '@mui/joy/Switch';
+
 import { AuthContext } from '../../context/AuthContext';
 
 function AdminCages() {
   const { logOut } = useContext(AuthContext);
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
-  const [roleFilter, setRoleFilter] = useState('All');
-  const [currentAccount, setCurrentAccount] = useState(null);
+  const [statusFilter, setStatusFilter] = useState('All');
   const [filteredRevenueData, setFilteredRevenueData] = useState(null);
   const [yesterdayRevenueData, setYesterdayRevenueData] = useState(null);
-  const [accountData, setAccountData] = useState([
+  const [cageData, setCageData] = useState([
     {
       id: 1,
+      cage_number_id: 'C00001',
+      name: 'Cage1',
+      descrtiption: 'Cage1 description',
       account_id: 'A00001',
-      status: 'Disable',
+      status: 'Using',
+      condition: 'Enable',
       user_name: 'leslie123',
-      name: 'Leslie',
       email: 'leslie14@gmail.com',
       phoneNum: '1234567891',
       role: 'Veterinarian',
     },
     {
       id: 2,
+      cage_number_id: 'C00002',
+      name: 'Cage2',
+      descrtiption: 'Cage2 description',
       account_id: 'A00002',
-      status: 'Enable',
+      status: 'Empty',
+      condition: 'Disable',
       user_name: 'ronaldo123',
-      name: 'Ronal Đỗ',
       email: 'thichpen12@gmail.com',
       phoneNum: '1234567892',
       role: 'Staff',
     },
     {
       id: 3,
+      cage_number_id: 'C00003',
+      name: 'Cage3',
+      descrtiption: 'Cage3 description',
       account_id: 'A00003',
-      status: 'Enable',
+      status: 'Empty',
+      condition: 'Disable',
       user_name: 'messi123',
-      name: 'Pessi',
       email: 'thichvuotrau2@gmail.com',
       phoneNum: '1234567893',
       role: 'Customer',
     },
     {
       id: 4,
+      cage_number_id: 'C00004',
+      name: 'Cage4',
+      descrtiption: 'Cage4 description',
       account_id: 'A00004',
-      status: 'Disable',
+      status: 'Using',
+      condition: 'Enable',
       user_name: 'victoria123',
-      name: 'Victoria',
       email: 'victoriasecret13@gmail.com',
       phoneNum: '1234567894',
       role: 'Customer',
     },
     {
       id: 5,
+      cage_number_id: 'C00005',
+      name: 'Cage5',
+      descrtiption: 'Cage5 description',
+      condition: 'Enable',
       account_id: 'A00005',
-      status: 'Enable',
+      status: 'Using',
       user_name: 'john123',
-      name: 'John',
       email: 'johnydog143@gmail.com',
       phoneNum: '1234567895',
       role: 'Admin',
@@ -110,25 +125,48 @@ function AdminCages() {
     [],
   );
 
-  const [newAccount, setNewAccount] = useState({
-    user_name: '',
-    password: '',
-    confirmPassword: '',
+
+
+  const [newCage, setNewCage] = useState({
     name: '',
-    email: '',
-    phoneNum: '',
-    role: 'Customer',
+    descrtiption: '',
+    condition: '',
+    status: 'Empty',
   });
 
-  const [editAccount, setEditAccount] = useState({
-    id: '',
-    name: '',
-    email: '',
-    phoneNum: '',
-    role: '',
-  });
+  const handleNewCageChange = e => {
+    const { name, value } = e.target;
+    setNewCage(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-  const [errors, setErrors] = useState({});
+  const handleAddCage = () => {
+    const newId = cageData.length + 1;
+    const newCageData = {
+      ...newCage,
+      id: newId,
+      cage_number_id: `P0000${newId}`,
+      status: 'Empty',
+    };
+    setCageData([...cageData, newCageData]);
+    setNewCage({
+      name: '',
+      descrtiption: '',
+      status: 'Empty',
+    });
+  };
+
+  // const [editAccount, setEditAccount] = useState({
+  //   id: '',
+  //   name: '',
+  //   email: '',
+  //   phoneNum: '',
+  //   role: '',
+  // });
+
+  // const [errors, setErrors] = useState({});
   const modalRef = useRef(null);
 
   const handleDateChange = event => {
@@ -160,149 +198,38 @@ function AdminCages() {
     }
   }, [selectedDate, dailyRevenueData]);
 
-  const handleRoleFilterChange = event => {
-    setRoleFilter(event.target.value);
+  const handlestatusFilterChange = event => {
+    setStatusFilter(event.target.value);
   };
 
-  const validateEmail = email => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  };
 
-  const validatePassword = password => {
-    const re = /^.{6,}$/;
-    return re.test(String(password));
-  };
+  // const handleEditAccountChange = e => {
+  //   const { name, value } = e.target;
+  //   setEditAccount(prevState => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const validatePhone = phone => {
-    const re = /^[0-9]{10}$/;
-    return re.test(String(phone));
-  };
 
-  const handleSaveChanges = () => {
-    const newErrors = {};
-    if (!editAccount.name) newErrors.name = 'Name is required';
-    if (!editAccount.email) newErrors.email = 'Email is required';
-    else if (!validateEmail(editAccount.email))
-      newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
-    if (!editAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
-    else if (!validatePhone(editAccount.phoneNum))
-      newErrors.phoneNum = 'Invalid phone number format';
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    const updatedAccountData = accountData.map(account => {
-      if (account.id === editAccount.id) {
-        return { ...account, ...editAccount };
-      }
-      return account;
-    });
-    setAccountData(updatedAccountData);
-    setErrors({});
-    const modal = bootstrap.Modal.getInstance(
-      document.getElementById(`exampleModalEdit-${editAccount.id}`),
-    );
-    if (modal) {
-      modal.hide();
-    }
-  };
-
-  const openEditModal = account => {
-    setCurrentAccount(account);
-    setEditAccount({
-      id: account.id,
-      name: account.name,
-      email: account.email,
-      phoneNum: account.phoneNum,
-      role: account.role,
-    });
-  };
-
-  const handleNewAccountChange = e => {
-    const { name, value } = e.target;
-    setNewAccount(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleEditAccountChange = e => {
-    const { name, value } = e.target;
-    setEditAccount(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleAddAccount = () => {
-    const newErrors = {};
-    if (!newAccount.user_name) newErrors.user_name = 'User name is required';
-    if (!newAccount.password) newErrors.password = 'Password is required';
-    else if (!validatePassword(newAccount.password))
-      newErrors.password = 'The minimum length is 6 characters';
-    if (!newAccount.confirmPassword)
-      newErrors.confirmPassword = 'Confirm password is required';
-    if (newAccount.password !== newAccount.confirmPassword)
-      newErrors.confirmPassword = 'Passwords do not match';
-    if (!newAccount.name) newErrors.name = 'Name is required';
-    if (!newAccount.email) newErrors.email = 'Email is required';
-    else if (!validateEmail(newAccount.email))
-      newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
-    if (!newAccount.phoneNum) newErrors.phoneNum = 'Phone number is required';
-    else if (!validatePhone(newAccount.phoneNum))
-      newErrors.phoneNum = 'Invalid phone number format';
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    const newId = accountData.length + 1;
-    const newAccountData = {
-      ...newAccount,
-      id: newId,
-      account_id: `A0000${newId}`,
-      status: 'Enable',
-    };
-    setAccountData([...accountData, newAccountData]);
-    setNewAccount({
-      user_name: '',
-      password: '',
-      confirmPassword: '',
-      name: '',
-      email: '',
-      phoneNum: '',
-      role: 'Customer',
-    });
-    setErrors({});
-    const modal = bootstrap.Modal.getInstance(modalRef.current);
-    if (modal) {
-      modal.hide();
-    }
-  };
 
   const handleStatusChange = id => {
-    const updatedAccountData = accountData.map(account => {
-      if (account.id === id) {
+    const updatedcageData = cageData.map(cage => {
+      if (cage.id === id) {
         return {
-          ...account,
-          status: account.status === 'Enable' ? 'Disable' : 'Enable',
+          ...cage,
+          condition: cage.condition === 'Enable' ? 'Disable' : 'Enable',
         };
       }
-      return account;
+      return cage;
     });
-    setAccountData(updatedAccountData);
+    setCageData(updatedcageData);
   };
 
-  const filteredAccountData = accountData.filter(account => {
-    const matchesRole = roleFilter === 'All' || account.role === roleFilter;
-    const matchesSearch =
-      search === '' ||
-      account.user_name.toLowerCase().includes(search.toLowerCase());
-    return matchesRole && matchesSearch;
+  const filteredcageData = cageData.filter(cage => {
+    const matchesStatus = statusFilter === 'All' || cage.status === statusFilter;
+    const matchesSearch = search === '' || cage.cage_number_id.toLowerCase().includes(search.toLowerCase());
+    return matchesStatus && matchesSearch;
   });
 
   const calculatePercentChange = () => {
@@ -558,17 +485,17 @@ function AdminCages() {
               <div className='Admin-Cages-Main-Table'>
                 <div className='Admin-Cages-Main-Table-Title'>
                   {' '}
-                  Account List{' '}
+                  Cage List{' '}
                 </div>
                 <div className='Admin-Cages-Main-Table-Title-Text'>
                   {' '}
-                  Account Information{' '}
+                  Cages Information{' '}
                 </div>
                 <div className='Admin-Cages-Main-Filter'>
                   <div className='Admin-Cages-Main-Search'>
                     <input
                       type='text'
-                      placeholder='Search Name'
+                      placeholder='Search Cage ID'
                       className='Admin-Cages-Main-Search-Input'
                       onChange={e => setSearch(e.target.value)}
                     />
@@ -582,18 +509,16 @@ function AdminCages() {
                   </div>
                   <div className='Admin-Cages-Select-Role'>
                     <FilterAltIcon sx={{ fontSize: 20 }} />
-                    Select role:
+                    Select status:
                     <select
                       className='Admin-Cages-Select-Filter'
                       name='role'
-                      onChange={handleRoleFilterChange}
-                      value={roleFilter}
+                      onChange={handlestatusFilterChange}
+                      value={statusFilter}
                     >
                       <option>All</option>
-                      <option>Customer</option>
-                      <option>Veterinarian</option>
-                      <option>Staff</option>
-                      <option>Admin</option>
+                      <option>Using</option>
+                      <option>Empty</option>
                     </select>
                   </div>
 
@@ -604,7 +529,7 @@ function AdminCages() {
                       data-bs-toggle='modal'
                       data-bs-target='#Admin-Cages-exampleModal'
                     >
-                      Add Account
+                      Add Cage
                     </button>
 
                     <div
@@ -623,7 +548,7 @@ function AdminCages() {
                               id='exampleModalLabelEdit'
                             >
                               {' '}
-                              Add Account{' '}
+                              Add Cage{' '}
                             </h1>
                             <button
                               type='button'
@@ -636,160 +561,40 @@ function AdminCages() {
                             <div className='Admin-Cages-modal-add-account'>
                               <div className='Admin-Cages-modal-title-name'>
                                 {' '}
-                                User name{' '}
-                              </div>
-                              <label className='Admin-Cages-modal-add'>
-                                {' '}
-                                User name:{' '}
-                              </label>
-                              <input
-                                className='Admin-Cages-input'
-                                name='user_name'
-                                value={newAccount.user_name}
-                                onChange={handleNewAccountChange}
-                                placeholder='Username'
-                              />
-                              {errors.user_name && (
-                                <div className='Admin-Cages-Error'>
-                                  {errors.user_name}
-                                </div>
-                              )}
-                            </div>
-
-                            <div className='Admin-Cages-modal-add-account'>
-                              <div className='Admin-Cages-modal-title-name'>
-                                {' '}
-                                Password{' '}
-                              </div>
-                              <label className='Admin-Cages-modal-add'>
-                                {' '}
-                                Password:{' '}
-                              </label>
-                              <input
-                                className='Admin-Cages-input'
-                                type='password'
-                                name='password'
-                                value={newAccount.password}
-                                onChange={handleNewAccountChange}
-                                placeholder='Password'
-                              />
-                              {errors.password && (
-                                <div className='Admin-Cages-Error'>
-                                  {errors.password}
-                                </div>
-                              )}
-                              <div className='Admin-Cages-input-confirm'>
-                                <label className='Admin-Cages-modal-add'>
-                                  {' '}
-                                  Confirm password:{' '}
-                                </label>
-                                <input
-                                  className='Admin-Cages-input'
-                                  type='password'
-                                  name='confirmPassword'
-                                  value={newAccount.confirmPassword}
-                                  onChange={handleNewAccountChange}
-                                  placeholder='Confirm password'
-                                />
-                                {errors.confirmPassword && (
-                                  <div className='Admin-Cages-Error'>
-                                    {errors.confirmPassword}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-
-                            <div className='Admin-Cages-modal-add-account'>
-                              <div className='Admin-Cages-modal-title-name'>
-                                {' '}
                                 Name{' '}
                               </div>
                               <label className='Admin-Cages-modal-add'>
                                 {' '}
-                                Name:{' '}
+                                Cage name:{' '}
                               </label>
                               <input
                                 className='Admin-Cages-input'
-                                name='name'
-                                value={newAccount.name}
-                                onChange={handleNewAccountChange}
+                                name='cage_name'
+                                value={newCage.cage_name}
+                                onChange={handleNewCageChange}
                                 placeholder='Name'
                               />
-                              {errors.name && (
-                                <div className='Admin-Cages-Error'>
-                                  {errors.name}
-                                </div>
-                              )}
                             </div>
 
                             <div className='Admin-Cages-modal-add-account'>
                               <div className='Admin-Cages-modal-title-name'>
                                 {' '}
-                                Email{' '}
+                                Description{' '}
                               </div>
                               <label className='Admin-Cages-modal-add'>
                                 {' '}
-                                Email:{' '}
+                                Description:{' '}
                               </label>
                               <input
                                 className='Admin-Cages-input'
-                                type='email'
-                                name='email'
-                                value={newAccount.email}
-                                onChange={handleNewAccountChange}
-                                placeholder='Email'
+                                name='cage_description'
+                                value={newCage.cage_description}
+                                onChange={handleNewCageChange}
+                                placeholder='Descrtiption'
                               />
-                              {errors.email && (
-                                <div className='Admin-Cages-Error'>
-                                  {errors.email}
-                                </div>
-                              )}
+
                             </div>
 
-                            <div className='Admin-Cages-modal-add-account'>
-                              <div className='Admin-Cages-modal-title-name'>
-                                {' '}
-                                Phone Number{' '}
-                              </div>
-                              <label className='Admin-Cages-modal-add'>
-                                {' '}
-                                Phone Number:{' '}
-                              </label>
-                              <input
-                                className='Admin-Cages-input'
-                                name='phoneNum'
-                                value={newAccount.phoneNum}
-                                onChange={handleNewAccountChange}
-                                placeholder='Phone Number'
-                              />
-                              {errors.phoneNum && (
-                                <div className='Admin-Cages-Error'>
-                                  {errors.phoneNum}
-                                </div>
-                              )}
-                            </div>
-
-                            <div className='Admin-Cages-modal-add-account'>
-                              <div className='Admin-Cages-modal-title-name'>
-                                {' '}
-                                Role{' '}
-                              </div>
-                              <label className='Admin-Cages-modal-add'>
-                                {' '}
-                                Role:{' '}
-                              </label>
-                              <select
-                                className='Admin-Cages-input-role'
-                                name='role'
-                                value={newAccount.role}
-                                onChange={handleNewAccountChange}
-                              >
-                                <option>Customer</option>
-                                <option>Veterinarian</option>
-                                <option>Staff</option>
-                                <option>Admin</option>
-                              </select>
-                            </div>
                           </div>
                           <div className='modal-footer'>
                             <button
@@ -803,7 +608,7 @@ function AdminCages() {
                             <button
                               type='button'
                               className='btn btn-success'
-                              onClick={handleAddAccount}
+                              onClick={handleAddCage}
                             >
                               {' '}
                               Add{' '}
@@ -818,15 +623,19 @@ function AdminCages() {
                 <div className='Admin-Cages-Main-Table-Header'>
                   <div className='Admin-Cages-Main-Table-Header-Title'>
                     {' '}
-                    Account ID{' '}
+                    Cage number ID{' '}
                   </div>
                   <div className='Admin-Cages-Main-Table-Header-Title'>
                     {' '}
-                    User name{' '}
+                    Name{' '}
                   </div>
                   <div className='Admin-Cages-Main-Table-Header-Title'>
                     {' '}
-                    Role{' '}
+                    Description{' '}
+                  </div>
+                  <div className='Admin-Cages-Main-Table-Header-Title'>
+                    {' '}
+                    Status{' '}
                   </div>
                   <div className='Admin-Cages-Main-Table-Header-Title-Btn'>
                     {' '}
@@ -834,302 +643,43 @@ function AdminCages() {
                   </div>
                 </div>
 
-                {filteredAccountData.map(item => (
+                {filteredcageData.map(item => (
                   <div
                     className='Admin-Cages-Main-Table-Content-Row-Wrapper'
                     key={item.id}
                   >
                     <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
-                      {item.account_id}{' '}
+                      {item.cage_number_id}{' '}
                     </div>
                     <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
-                      {item.user_name}{' '}
+                      {item.name}{' '}
                     </div>
                     <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
-                      {item.role}{' '}
+                      {item.descrtiption}{' '}
+                    </div>
+                    <div className='Admin-Cages-Main-Table-Content-Row'>
+                      {' '}
+                      {item.status}{' '}
                     </div>
                     <div className='Admin-Cages-Main-Table-Content-Row-Action'>
+                      {' '}
                       <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
-                        <button
-                          type='button'
-                          className='Admin-Cages-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#exampleModalEdit-${item.id}`}
-                          onClick={() => openEditModal(item)}
-                        >
+                        <button className='Admin-Cages-Main-Table-Content-Btn' >
                           <BorderColorOutlinedIcon sx={{ color: blue[400] }} />
                         </button>
-                        {/* Modal Edit */}
-                        <div
-                          className='modal fade'
-                          id={`exampleModalEdit-${item.id}`}
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelEdit'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelEdit'
-                                >
-                                  {' '}
-                                  Update Information{' '}
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Cages-modal-update'>
-                                  <div className='Admin-Cages-modal-title-name'>
-                                    {' '}
-                                    Name{' '}
-                                  </div>
-                                  <div className='Admin-Cages-modal-update-old'>
-                                    <div className='Admin-Cages-modal-initials'>
-                                      {' '}
-                                      Old name:{' '}
-                                    </div>
-                                    {currentAccount?.name}
-                                  </div>
-                                  <label className='Admin-Cages-modal-update-new'>
-                                    {' '}
-                                    New name:{' '}
-                                  </label>
-                                  <input
-                                    className='Admin-Cages-input'
-                                    name='name'
-                                    value={editAccount.name}
-                                    onChange={handleEditAccountChange}
-                                    placeholder='Name'
-                                  />
-                                  {errors.name && (
-                                    <div className='Admin-Cages-Error'>
-                                      {errors.name}
-                                    </div>
-                                  )}
-                                </div>
-                                <div className='Admin-Cages-modal-update'>
-                                  <div className='Admin-Cages-modal-title'>
-                                    {' '}
-                                    Email{' '}
-                                  </div>
-                                  <div className='Admin-Cages-modal-update-old'>
-                                    <div className='Admin-Cages-modal-initials'>
-                                      {' '}
-                                      Old email:{' '}
-                                    </div>
-                                    {currentAccount?.email}
-                                  </div>
-                                  <label className='Admin-Cages-modal-update-new'>
-                                    {' '}
-                                    New email:{' '}
-                                  </label>
-                                  <input
-                                    className='Admin-Cages-input'
-                                    type='email'
-                                    name='email'
-                                    value={editAccount.email}
-                                    onChange={handleEditAccountChange}
-                                    placeholder='Email'
-                                  />
-                                  {errors.email && (
-                                    <div className='Admin-Cages-Error'>
-                                      {errors.email}
-                                    </div>
-                                  )}
-                                </div>
-                                <div className='Admin-Cages-modal-update'>
-                                  <div className='Admin-Cages-modal-title'>
-                                    {' '}
-                                    Phone{' '}
-                                  </div>
-                                  <div className='Admin-Cages-modal-update-old'>
-                                    <div className='Admin-Cages-modal-initials'>
-                                      {' '}
-                                      Old phone number:{' '}
-                                    </div>
-                                    {currentAccount?.phoneNum}
-                                  </div>
-                                  <label className='Admin-Cages-modal-update-new'>
-                                    {' '}
-                                    New phone number:{' '}
-                                  </label>
-                                  <input
-                                    className='Admin-Cages-input'
-                                    name='phoneNum'
-                                    value={editAccount.phoneNum}
-                                    onChange={handleEditAccountChange}
-                                    placeholder='Phone number'
-                                  />
-                                  {errors.phoneNum && (
-                                    <div className='Admin-Cages-Error'>
-                                      {errors.phoneNum}
-                                    </div>
-                                  )}
-                                </div>
-
-                                <div className='Admin-Cages-modal-update'>
-                                  <div className='Admin-Cages-modal-title'>
-                                    {' '}
-                                    Role{' '}
-                                  </div>
-                                  <div className='Admin-Cages-modal-update-old'>
-                                    <div className='Admin-Cages-modal-initials'>
-                                      {' '}
-                                      Old role:{' '}
-                                    </div>
-                                    {currentAccount?.role}
-                                  </div>
-                                  <label className='Admin-Cages-modal-initials'>
-                                    {' '}
-                                    New role:{' '}
-                                  </label>
-                                  <select
-                                    className='Admin-Cages-input-role'
-                                    name='role'
-                                    value={editAccount.role}
-                                    onChange={handleEditAccountChange}
-                                  >
-                                    <option>Customer</option>
-                                    <option>Veterinarian</option>
-                                    <option>Staff</option>
-                                    <option>Admin</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  {' '}
-                                  Close{' '}
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                  onClick={handleSaveChanges}
-                                >
-                                  {' '}
-                                  Save changes{' '}
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-
-                      <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
-                        <button
-                          type='button'
-                          className='Admin-Cages-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#exampleModalMore-${item.id}`}
-                        >
-                          <MoreVertOutlinedIcon sx={{ color: green[400] }} />
-                        </button>
-                        {/* Modal More */}
-                        <div
-                          className='modal fade'
-                          id={`exampleModalMore-${item.id}`}
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelMore'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelMore'
-                                >
-                                  {' '}
-                                  Account Information{' '}
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Cages-modal-more'>
-                                  <div className='Admin-Cages-modal-more-title'>
-                                    {' '}
-                                    Account ID:{' '}
-                                  </div>
-                                  {item.account_id}
-                                </div>
-                                <div className='Admin-Cages-modal-more'>
-                                  <div className='Admin-Cages-modal-more-title'>
-                                    {' '}
-                                    Name:{' '}
-                                  </div>
-                                  {item.name}
-                                </div>
-                                <div className='Admin-Cages-modal-more'>
-                                  <div className='Admin-Cages-modal-more-title'>
-                                    {' '}
-                                    User name:{' '}
-                                  </div>
-                                  {item.user_name}
-                                </div>
-                                <div className='Admin-Cages-modal-more'>
-                                  <div className='Admin-Cages-modal-more-title'>
-                                    {' '}
-                                    Email:{' '}
-                                  </div>
-                                  {item.email}
-                                </div>
-                                <div className='Admin-Cages-modal-more'>
-                                  <div className='Admin-Cages-modal-more-title'>
-                                    {' '}
-                                    Phone number:{' '}
-                                  </div>
-                                  {item.phoneNum}
-                                </div>
-                                <div className='Admin-Cages-modal-more'>
-                                  <div className='Admin-Cages-modal-more-title'>
-                                    {' '}
-                                    Role:{' '}
-                                  </div>
-                                  {item.role}
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  {' '}
-                                  Close{' '}
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </span>
                       <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
                         <Switch
-                          checked={item.status === 'Enable'}
+                          checked={item.condition === 'Enable'}
                           onChange={() => handleStatusChange(item.id)}
                           color={
-                            item.status === 'Enable' ? 'success' : 'neutral'
+                            item.condition === 'Enable' ? 'success' : 'neutral'
                           }
                           variant={
-                            item.status === 'Enable' ? 'solid' : 'outlined'
+                            item.condition === 'Enable' ? 'solid' : 'outlined'
                           }
                           slotProps={{
                             endDecorator: {
@@ -1140,6 +690,8 @@ function AdminCages() {
                           }}
                         />
                       </span>
+
+                      {' '}
                     </div>
                   </div>
                 ))}
