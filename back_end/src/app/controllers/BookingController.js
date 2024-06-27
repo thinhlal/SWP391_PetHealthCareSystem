@@ -94,10 +94,61 @@ class BookingController {
   // GET /getAllBookings
   async getAllBookings(req, res, next) {
     const { accountID } = req.params;
-    console.log(accountID);
     try {
-      const allBookings = await Booking.find({ accountID });
+      const allBookings = await Booking.aggregate([
+        { $match: { accountID } },
+        {
+          $lookup: {
+            from: 'pets',
+            localField: 'petID',
+            foreignField: 'petID',
+            as: 'petDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'doctors',
+            localField: 'doctorID',
+            foreignField: 'doctorID',
+            as: 'doctorDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'servicebookingvets',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'servicebookingvetsDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'services',
+            localField: 'serviceID',
+            foreignField: 'servicebookingvetsDetails.serviceID',
+            as: 'servicesDetails',
+          },
+        },
+      ]);
       res.status(201).json({ allBookings });
+    } catch (error) {
+      res.status(500).json({ message: 'Error when get booking ', error });
+    }
+  }
+
+  // POST /cancelBooking
+  async cancelBooking(req, res, next) {
+    const { bookingID } = req.body;
+    try {
+      const booking = await Booking.findOneAndUpdate(
+        { bookingID: bookingID },
+        {
+          isCancel: true,
+          dateCancelBook: new Date(),
+        },
+        { new: true, runValidators: true },
+      );
+      res.status(201).json({ booking });
     } catch (error) {
       res.status(500).json({ message: 'Error when get booking ', error });
     }

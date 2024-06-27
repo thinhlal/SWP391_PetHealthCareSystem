@@ -15,42 +15,6 @@ import AnimationComponent from '../../components/Animation/AnimationComponent.js
 import axiosInstance from '../../utils/axiosInstance.js';
 import { AuthContext } from '../../context/AuthContext.js';
 
-// const bookings = [
-//   {
-//     id: 'OD45345345435',
-//     status: 'Pending',
-//     date: '29 nov 2024',
-//     time: '10:00 - 11:00',
-//     petName: 'ABC',
-//     petType: 'Dog',
-//     doctor: 'Alex',
-//     services: 'Periodic health check-ups for dogs',
-//     price: '70$',
-//   },
-//   {
-//     id: 'OD45345345436',
-//     status: 'Pending',
-//     date: '10 nov 2024',
-//     time: '12:00 - 13:00',
-//     petName: 'DEF',
-//     petType: 'Cat',
-//     doctor: 'John',
-//     services: 'Vaccination',
-//     price: '50$',
-//   },
-//   {
-//     id: 'OD45345345437',
-//     status: 'Completed booking',
-//     date: '20 nov 2024',
-//     time: '15:00 - 16:00',
-//     petName: 'GHI',
-//     petType: 'Dog',
-//     doctor: 'Alex',
-//     services: 'Grooming',
-//     price: '45$',
-//   },
-// ];
-
 function YourBooking() {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
@@ -70,7 +34,9 @@ function YourBooking() {
     const fetchAllBookings = async () => {
       try {
         const dataBookings = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`);
-        setYourBookings(dataBookings);
+        const sortDataBookings = dataBookings.data.allBookings.sort((a, b) => a.dateBook.localeCompare(b.dateBook))
+        const sortTimeBookings = sortDataBookings.sort((a, b) => b.startTime.localeCompare(a.startTime))
+        setYourBookings(sortTimeBookings);
       } catch (error) {
         console.log(error);
       }
@@ -79,8 +45,24 @@ function YourBooking() {
     fetchAllBookings();
   }, [user.accountID])
 
+  const handleCancelBooking = async (bookingID) => {
+    try {
+      await axiosInstance.post(`${process.env.REACT_APP_API_URL}/booking/cancelBooking`, { bookingID });
+      const dataBookings = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`);
+      const sortDataBookings = dataBookings.data.allBookings.sort((a, b) => a.dateBook.localeCompare(b.dateBook))
+      const sortTimeBookings = sortDataBookings.sort((a, b) => b.startTime.localeCompare(a.startTime))
+      setYourBookings(sortTimeBookings);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   if (loading) {
     return <AnimationComponent />;
+  }
+
+  const formatService = (data) => {
+    return data.map(service => service.name);
   }
 
   return (
@@ -132,14 +114,17 @@ function YourBooking() {
                     <div className='card-detail-booking-confirm-booking'>
                       <div className='card-ID-booking'>
                         <div className='detail-number-ID'>
-                          ID: {booking.id}
+                          ID: {booking.bookingID}
                           <div
-                            className={`status-booking ${booking.status === 'Pending'
-                              ? 'status-pending'
-                              : 'status-completed'
+                            className={`status-booking ${booking.isCancel === true
+                              ? 'status-cancel'
+                              : booking.isCheckIn ? 'status-completed' : 'status-pending'
                               }`}
                           >
-                            Status: {booking.status}
+                            Status: {booking.isCancel === true
+                              ? <span>Cancel</span>
+                              : booking.isCheckIn ? <span>Completed</span> : <span>Pending</span>
+                            }
                           </div>
                         </div>
                         <div className='card-body-content-booking'>
@@ -149,42 +134,42 @@ function YourBooking() {
                                 Date Booking:
                               </div>{' '}
                               <br />
-                              {booking.date}
+                              {booking.dateBook.split('T')[0]}
                             </div>
                             <div className='col-booking'>
                               <div className='mini-title-detail-booking'>
                                 Time:
                               </div>{' '}
                               <br />
-                              {booking.time}
+                              {`${booking.startTime} - ${booking.endTime}`}
                             </div>
                             <div className='col-booking'>
                               <div className='mini-title-detail-booking'>
                                 Pet Name:
                               </div>{' '}
                               <br />
-                              {booking.petName}
+                              {booking.petDetails[0].name}
                             </div>
                             <div className='col-booking'>
                               <div className='mini-title-detail-booking'>
                                 Pet Type:
                               </div>{' '}
                               <br />
-                              {booking.petType}
+                              {booking.petDetails[0].petType}
                             </div>
                             <div className='col-booking'>
                               <div className='mini-title-detail-booking'>
                                 Selected Doctor:
                               </div>{' '}
                               <br />
-                              {booking.doctor}
+                              {booking.doctorDetails[0].name}
                             </div>
                             <div className='col-booking'>
                               <div className='mini-title-detail-booking'>
                                 Services:
                               </div>{' '}
                               <br />
-                              {booking.services}
+                              {formatService(booking.servicesDetails).join(', ')}
                             </div>
                           </div>
                         </div>
@@ -193,18 +178,18 @@ function YourBooking() {
                           <div className='total-price-booking'>
                             Total Price:&nbsp;
                             <div className='detail-price-booking'>
-                              {booking.price}
+                              {booking.totalPrice}
                             </div>
                           </div>
-                          {booking.status === 'Pending' ? (
-                            <a
-                              href='/'
+                          {booking.isCheckIn === false && booking.isCancel === false ? (
+                            <div
+                              onClick={() => handleCancelBooking(booking.bookingID)}
                               className='cancel-booking-button-1'
                             >
                               <div className='text-sign-in-button-booking'>
                                 Cancel Booking
                               </div>
-                            </a>
+                            </div>
                           ) : (
                             <button
                               type='button'
