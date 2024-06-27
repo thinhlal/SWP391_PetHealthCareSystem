@@ -6,7 +6,9 @@ const {
 
 const petController = require('../app/controllers/PetController');
 
-router.post('/add', verifyToken, petController.add);
+router.patch('/updatePet/:petID', verifyToken, petController.updatePetPatch);
 router.get('/getAllPets/:accountID', verifyToken, petController.getAllPets);
+router.get('/getPetID/:petID', verifyToken, petController.getPetID);
+router.post('/add', verifyToken, petController.add);
 
 module.exports = router;

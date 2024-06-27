@@ -24,7 +24,6 @@
 .main-container-pet-profile .container-pet-profile .sub-title-info-pet-line {
   font-weight: 600;
   color: #002169;
-  margin-bottom: 10px;
   position: relative;
 }
 
@@ -213,7 +212,7 @@ td {
   text-align: left;
   word-wrap: break-word;
   word-break: break-word;
-  max-width: 150px;
+  max-width: 200px;
 }
 
 .main-container-pet-profile .container-pet-profile th {

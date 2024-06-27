@@ -13,9 +13,11 @@ import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { AuthContext } from '../../context/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
 
 function YourPet() {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [pets, setPets] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -49,9 +51,9 @@ function YourPet() {
     setPets([...pets, pet]);
   };
 
-  const PetProfileCard = ({ imgSrc, name }) => (
-    <a
-      href='/pet-profile'
+  const PetProfileCard = ({ imgSrc, name, petID }) => (
+    <div
+      onClick={() => handleClickPet(petID)}
       className='profile-card-link'
     >
       <div className='profile-card-pet'>
@@ -62,11 +64,20 @@ function YourPet() {
           />
         </div>
         <div className='profile-info-pet'>
-          <h2>{name}</h2>
+          <span>ID: </span>
+          <div>{petID}</div>
+        </div>
+        <div className='profile-info-pet'>
+          <span>Name: </span>
+          <div>{name}</div>
         </div>
       </div>
-    </a>
+    </div>
   );
+
+  const handleClickPet = (petID) => {
+    navigate(`/pet-profile?petID=${petID}`);
+  }
 
   if (loading) {
     return <AnimationComponent />;
@@ -129,6 +140,7 @@ function YourPet() {
                     key={index}
                     imgSrc={pet.image}
                     name={pet.name}
+                    petID={pet.petID}
                   />
                 ))
               )}
