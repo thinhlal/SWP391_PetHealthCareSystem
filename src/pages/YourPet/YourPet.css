@@ -132,6 +132,7 @@ a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 20px;
+  cursor: pointer;
   font-family: Roboto, sans-serif;
   transition:
     transform 0.3s ease,
@@ -153,9 +154,7 @@ a {
   transform-style: preserve-3d;
 }
 
-.profile-card-pet:hover .profile-pet-image img {
-  transform: rotateY(180deg);
-}
+
 
 .your-pet .profile-pet-image img {
   width: 100px;
