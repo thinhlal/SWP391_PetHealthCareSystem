@@ -21,22 +21,4 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-const checkRole = roles => async (req, res, next) => {
-  try {
-    const accountID = req.body.idToCheckRole;
-    const user = await User.findOne({ accountID });
-    if (!user) {
-      return res.status(404).send('User not found');
-    }
-
-    if (!roles.includes(user.role)) {
-      return res.status(403).send('Access Denied');
-    }
-    next();
-  } catch (err) {
-    console.error('Error fetching user:', err);
-    res.status(500).send('Internal Server Error');
-  }
-};
-
-module.exports = { verifyToken, checkRole };
+module.exports = { verifyToken };

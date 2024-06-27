@@ -1,5 +1,5 @@
 import './Home.css';
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 // Components
 import Slider from '../../components/Slider/Slider.js';
@@ -23,9 +23,16 @@ const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
 function Home() {
   const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -50,6 +57,13 @@ function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className='main container-fluid'>
       <div className='overlap row'>
@@ -72,6 +86,7 @@ function Home() {
                     />
                   </div>
                   <div
+                    ref={menuRef}
                     className={`dropdown-menu-login ${isMenuOpen ? 'visible' : ''}`}
                   >
                     <div className='menu-item-login'>

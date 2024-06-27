@@ -168,7 +168,8 @@ a {
   margin-top: 10px;
 }
 
-.your-pet .profile-info-pet h2 {
+.your-pet .profile-info-pet div {
+  display: inline-block;
   margin: 10px 0;
   font-size: 24px;
   color: #333;

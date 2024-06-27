@@ -1,8 +1,14 @@
 const Doctor = require('../models/Doctor.js');
 
 class DoctorController {
-  // GET /
+
+  // POST /
   async index(req, res, next) {
+    res.send('test')
+  }
+
+  // GET /getAllDoctors
+  async getAllDoctors(req, res, next) {
     try {
       const allDoctors = await Doctor.aggregate([
         {

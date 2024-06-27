@@ -89,8 +89,7 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     const res = await axiosInstance.post(
       `${process.env.REACT_APP_API_URL}/pet/add`,
       {
-        idToCheckRole: user.accountID,
-        customerID: user.accountID,
+        accountID: user.accountID,
         name: newPet.name,
         birthday: newPet.age,
         breed: newPet.breed,
@@ -100,8 +99,8 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
       },
     );
 
-    const id = res.data.petID;
-    onAddPet({ id, ...newPet, image: imageUrl });
+    const petID = res.data.petID;
+    onAddPet({ petID, ...newPet, image: imageUrl });
     onClose();
     setNewPet({
       name: '',

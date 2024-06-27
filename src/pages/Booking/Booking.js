@@ -97,11 +97,8 @@ const Booking = () => {
 
   const getAllServices = async () => {
     try {
-      const response = await axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/services`,
-        {
-          idToCheckRole: user.accountID,
-        },
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/services/getAllServices`,
       );
       setServices(response.data);
     } catch (error) {
@@ -111,11 +108,8 @@ const Booking = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/doctor`,
-        {
-          idToCheckRole: user.accountID,
-        },
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/doctor/getAllDoctors`
       );
       setDoctors(response.data);
     } catch (error) {
@@ -463,12 +457,13 @@ const Booking = () => {
             </div>
 
             <div className='select-booking_info'>
-              <div className='select_Service'>
-                <div className='select_Name'>Services</div>
+            <div className='select_Name'>Services</div>
+            <div className='content-select-booking'>
+              <div className='select_Service'>                
                 <div className='select_Booking-Select'>
                   <select
                     name='serviceID'
-                    className='select_Info'
+                    className='select_Info-services'
                     value={userInfo.serviceID}
                     onChange={handleInputChange}
                     onFocus={handleFocusServices}
@@ -483,16 +478,21 @@ const Booking = () => {
                         {`${service.name} - Price: ${service.price}`}
                       </option>
                     ))}
-                  </select>
-                  <button onClick={handleAddService}>Add Service</button>
+                  </select>     
+                  <button onClick={handleAddService}>Add Service</button>             
                 </div>
-                {errorMessageServices && (
+                
+                {/* {errorMessageServices && (
+                  <div className='error-message'>{errorMessageServices}</div>
+                )} */}
+              </div>
+              {errorMessageServices && (
                   <div className='error-message'>{errorMessageServices}</div>
                 )}
               </div>
-
               <div className='selected-services'>
-                <h3 className='title-selected-services'>Selected Services:</h3>
+                <div className='select_Name'>Selected Services:</div>
+                <div className='content-selected-services-frame'>
                 {selectedServices.length > 0 ? (
                   selectedServices.map((service, index) => (
                     <div
@@ -510,10 +510,11 @@ const Booking = () => {
                 <h3 className='total-selected-services'>
                   Total Amount: {totalAmount}
                 </h3>
+                </div>
               </div>
             </div>
 
-            <div className='select-booking_info'>
+            <div className='select-booking_info-date-doctor'>
               <div className='select_Date'>
                 <div className='select_Name'>Date</div>
                 <input
@@ -618,15 +619,14 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${
-                      slot.isBooked
+                    className={`element-button ${slot.isBooked
                         ? 'element-button-red'
                         : slot.isWithinWorkingHours
                           ? selectedSlot === slot
                             ? 'element-button-selected'
                             : 'element-button-green'
                           : 'element-button-gray'
-                    }`}
+                      }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>
