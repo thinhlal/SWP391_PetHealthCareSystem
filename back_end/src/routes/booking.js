@@ -7,6 +7,7 @@ const {
 const bookingController = require('../app/controllers/BookingController');
 
 router.get('/getAllBookings/:accountID', verifyToken, bookingController.getAllBookings);
+router.post('/cancelBooking', verifyToken, bookingController.cancelBooking);
 router.post('/', verifyToken, bookingController.index);
 
 module.exports = router;

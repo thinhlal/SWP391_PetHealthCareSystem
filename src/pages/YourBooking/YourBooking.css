@@ -30,6 +30,10 @@ a {
 }
 
 .main-container-your-booking-page .status-pending {
+  color: blue;
+}
+
+.main-container-your-booking-page .status-cancel {
   color: red;
 }
 

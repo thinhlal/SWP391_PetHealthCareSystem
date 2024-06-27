@@ -1,4 +1,4 @@
-import './AdminAccount.css';
+import './AdminCages.css';
 // React
 import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
 // Bootstrap
@@ -6,8 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
 // Img
-import logo_pet_health_care from '../../assets/images/img_AdminAccount/logo_pethealthcare.png';
-import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
+import logo_pet_health_care from '../../assets/images/img_AdminCages/logo_pethealthcare.png';
+import icon_search from '../../assets/images/img_AdminCages/icon_search.svg';
 // MUI
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
@@ -18,7 +18,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { AuthContext } from '../../context/AuthContext';
 
-function AdminAccount() {
+function AdminCages() {
   const { logOut } = useContext(AuthContext);
   const [selectedDate, setSelectedDate] = useState('');
   const [search, setSearch] = useState('');
@@ -317,18 +317,18 @@ function AdminAccount() {
   };
 
   return (
-    <div className='Admin-Account container-fluid'>
+    <div className='Admin-Cages container-fluid'>
       <div className='row'>
-        <div className='Admin-Account-Header row'>
-          <div className='Admin-Account-Header-Logo col-md-2'>
+        <div className='Admin-Cages-Header row'>
+          <div className='Admin-Cages-Header-Logo col-md-2'>
             <img
-              className='Admin-Account-Logo'
+              className='Admin-Cages-Logo'
               src={logo_pet_health_care}
               alt='logo-pet'
             />
           </div>
-          <div className='Admin-Account-Header-Account-Wrapper col-md-10'>
-            <div className='Admin-Account-Header-Account'>
+          <div className='Admin-Cages-Header-Account-Wrapper col-md-10'>
+            <div className='Admin-Cages-Header-Account'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='20'
@@ -339,15 +339,15 @@ function AdminAccount() {
               >
                 <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z' />
               </svg>
-              <div className='Admin-Account-Header-Account-Text'> Hi Admin</div>
+              <div className='Admin-Cages-Header-Account-Text'> Hi Admin</div>
             </div>
           </div>
         </div>
 
-        <div className='Admin-Account-Content row'>
-          <div className='Admin-Account-Navigate col-md-2'>
-            <div className='Admin-Account-Navigate-Text'>
-              <div className='Admin-Account-Navigate-Dashboard'>
+        <div className='Admin-Cages-Content row'>
+          <div className='Admin-Cages-Navigate col-md-2'>
+            <div className='Admin-Cages-Navigate-Text'>
+              <div className='Admin-Cages-Navigate-Dashboard'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='20'
@@ -359,33 +359,33 @@ function AdminAccount() {
                   <path d='M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z' />
                 </svg>
                 <a href='/admin-dashboard'>
-                  <div className='Admin-Account-Navigate-Text-Dashboard'>
+                  <div className='Admin-Cages-Navigate-Text-Dashboard'>
                     {' '}
                     DashBoard{' '}
                   </div>
                 </a>
               </div>
-              <div className='Admin-Account-Navigate-Text-Rest'>
+              <div className='Admin-Cages-Navigate-Text-Rest'>
                 <a href='/admin-dashboard'>
-                  <div className='Admin-Account-Navigate-Text-Rest-Menu'>
+                  <div className='Admin-Cages-Navigate-Text-Rest-Menu'>
                     {' '}
                     Booking{' '}
                   </div>
                 </a>
-                <a href='/admin-account'>
-                  <div className='Admin-Account-Navigate-Text-Rest-Menu'>
+                <a href='/Admin-Cages'>
+                  <div className='Admin-Cages-Navigate-Text-Rest-Menu'>
                     {' '}
                     Account{' '}
                   </div>
                 </a>
                 <a href='/admin-services'>
-                  <div className='Admin-Account-Navigate-Text-Rest-Menu'>
+                  <div className='Admin-Cages-Navigate-Text-Rest-Menu'>
                     {' '}
                     Services{' '}
                   </div>
                 </a>
                 <a href='/admin-cages'>
-                  <div className='Admin-Account-Navigate-Text-Rest-Menu'>
+                  <div className='Admin-Cages-Navigate-Text-Rest-Menu'>
                     {' '}
                     Cages{' '}
                   </div>
@@ -394,7 +394,7 @@ function AdminAccount() {
             </div>
 
             <div onClick={logOut}>
-              <div className='Admin-Account-Navigate-Logout'>
+              <div className='Admin-Cages-Navigate-Logout'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   width='20'
@@ -417,24 +417,24 @@ function AdminAccount() {
             </div>
           </div>
 
-          <div className='Admin-Account-Main col-md-10'>
-            <div className='Admin-Account-Main_Title'>
-              <div className='Admin-Account-Main_Title-Left'>
-                <h2 className='Admin-Account-Main_Title-Left-Intro'>
+          <div className='Admin-Cages-Main col-md-10'>
+            <div className='Admin-Cages-Main_Title'>
+              <div className='Admin-Cages-Main_Title-Left'>
+                <h2 className='Admin-Cages-Main_Title-Left-Intro'>
                   {' '}
                   Hi, welcome back!{' '}
                 </h2>
-                <p className='Admin-Account-Main_Title-Left-text'>
+                <p className='Admin-Cages-Main_Title-Left-text'>
                   {' '}
                   Sales monitoring dashboard template.{' '}
                 </p>
               </div>
-              <div className='Admin-Account-Main_Title-Right'>
-                <label className='Admin-Account-title-Star'>
+              <div className='Admin-Cages-Main_Title-Right'>
+                <label className='Admin-Cages-title-Star'>
                   {' '}
                   Customer Ratings{' '}
                 </label>
-                <div className='Admin-Account-Star'>
+                <div className='Admin-Cages-Star'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='12'
@@ -490,8 +490,8 @@ function AdminAccount() {
               </div>
             </div>
 
-            <div className='Admin-Account-Main-ChooseDate'>
-              <div className='Admin-Account-Main-ChooseDate_Text'>
+            <div className='Admin-Cages-Main-ChooseDate'>
+              <div className='Admin-Cages-Main-ChooseDate_Text'>
                 {' '}
                 Choose Date:{' '}
               </div>
@@ -503,50 +503,50 @@ function AdminAccount() {
             </div>
 
             {filteredRevenueData && (
-              <div className='Admin-Account-Main-Header row'>
-                <div className='Admin-Account-Main-Header-Income col-md-3'>
-                  <div className='Admin-Account-Main-Header-Note'>
+              <div className='Admin-Cages-Main-Header row'>
+                <div className='Admin-Cages-Main-Header-Income col-md-3'>
+                  <div className='Admin-Cages-Main-Header-Note'>
                     {' '}
                     Daily income{' '}
                   </div>
-                  <div className='Admin-Account-Main-Header-Money'>
+                  <div className='Admin-Cages-Main-Header-Money'>
                     {' '}
                     ${filteredRevenueData.money}{' '}
                   </div>
-                  <div className='Admin-Account-Main-Header-Percent'>
+                  <div className='Admin-Cages-Main-Header-Percent'>
                     {' '}
                     {calculatePercentChange()}% to the previous day{' '}
                   </div>
                 </div>
 
-                <div className='Admin-Account-Main-Header-Income col-md-3'>
-                  <div className='Admin-Account-Main-Header-Note'>
+                <div className='Admin-Cages-Main-Header-Income col-md-3'>
+                  <div className='Admin-Cages-Main-Header-Note'>
                     {' '}
                     Weekly income{' '}
                   </div>
-                  <div className='Admin-Account-Main-Header-Money'> $0000 </div>
-                  <div className='Admin-Account-Main-Header-Percent'>
+                  <div className='Admin-Cages-Main-Header-Money'> $0000 </div>
+                  <div className='Admin-Cages-Main-Header-Percent'>
                     {' '}
                     6% day over week{' '}
                   </div>
                 </div>
 
-                <div className='Admin-Account-Main-Header-Income col-md-3'>
-                  <div className='Admin-Account-Main-Header-Note'>
+                <div className='Admin-Cages-Main-Header-Income col-md-3'>
+                  <div className='Admin-Cages-Main-Header-Note'>
                     {' '}
                     Monthly income{' '}
                   </div>
-                  <div className='Admin-Account-Main-Header-Money'> $0000 </div>
-                  <div className='Admin-Account-Main-Header-Percent'>
+                  <div className='Admin-Cages-Main-Header-Money'> $0000 </div>
+                  <div className='Admin-Cages-Main-Header-Percent'>
                     {' '}
                     3% day over month{' '}
                   </div>
                 </div>
 
-                <div className='Admin-Account-Main-Header-Income col-md-3'>
-                  <div className='Admin-Account-Main-Header-Note'> Total </div>
-                  <div className='Admin-Account-Main-Header-Money'> $0000 </div>
-                  <div className='Admin-Account-Main-Header-Percent'>
+                <div className='Admin-Cages-Main-Header-Income col-md-3'>
+                  <div className='Admin-Cages-Main-Header-Note'> Total </div>
+                  <div className='Admin-Cages-Main-Header-Money'> $0000 </div>
+                  <div className='Admin-Cages-Main-Header-Percent'>
                     {' '}
                     10% day over day{' '}
                   </div>
@@ -554,25 +554,25 @@ function AdminAccount() {
               </div>
             )}
 
-            <div className='Admin-Account-Main-Table-Wrapper'>
-              <div className='Admin-Account-Main-Table'>
-                <div className='Admin-Account-Main-Table-Title'>
+            <div className='Admin-Cages-Main-Table-Wrapper'>
+              <div className='Admin-Cages-Main-Table'>
+                <div className='Admin-Cages-Main-Table-Title'>
                   {' '}
                   Account List{' '}
                 </div>
-                <div className='Admin-Account-Main-Table-Title-Text'>
+                <div className='Admin-Cages-Main-Table-Title-Text'>
                   {' '}
                   Account Information{' '}
                 </div>
-                <div className='Admin-Account-Main-Filter'>
-                  <div className='Admin-Account-Main-Search'>
+                <div className='Admin-Cages-Main-Filter'>
+                  <div className='Admin-Cages-Main-Search'>
                     <input
                       type='text'
                       placeholder='Search Name'
-                      className='Admin-Account-Main-Search-Input'
+                      className='Admin-Cages-Main-Search-Input'
                       onChange={e => setSearch(e.target.value)}
                     />
-                    <button className='Admin-Account-Main-Search-Button'>
+                    <button className='Admin-Cages-Main-Search-Button'>
                       {' '}
                       <img
                         src={icon_search}
@@ -580,11 +580,11 @@ function AdminAccount() {
                       />{' '}
                     </button>
                   </div>
-                  <div className='Admin-Account-Select-Role'>
+                  <div className='Admin-Cages-Select-Role'>
                     <FilterAltIcon sx={{ fontSize: 20 }} />
                     Select role:
                     <select
-                      className='Admin-Account-Select-Filter'
+                      className='Admin-Cages-Select-Filter'
                       name='role'
                       onChange={handleRoleFilterChange}
                       value={roleFilter}
@@ -597,19 +597,19 @@ function AdminAccount() {
                     </select>
                   </div>
 
-                  <div className='Admin-Account-Add-Account'>
+                  <div className='Admin-Cages-Add-Cages'>
                     <button
                       type='button'
-                      className='Admin-Account-add-pet-btn'
+                      className='Admin-Cages-add-pet-btn'
                       data-bs-toggle='modal'
-                      data-bs-target='#Admin-Account-exampleModal'
+                      data-bs-target='#Admin-Cages-exampleModal'
                     >
                       Add Account
                     </button>
 
                     <div
                       className='modal fade'
-                      id='Admin-Account-exampleModal'
+                      id='Admin-Cages-exampleModal'
                       tabIndex='-1'
                       aria-labelledby='exampleModalLabelEdit'
                       aria-hidden='true'
@@ -633,40 +633,40 @@ function AdminAccount() {
                             ></button>
                           </div>
                           <div className='modal-body'>
-                            <div className='Admin-Account-modal-add-account'>
-                              <div className='Admin-Account-modal-title-name'>
+                            <div className='Admin-Cages-modal-add-account'>
+                              <div className='Admin-Cages-modal-title-name'>
                                 {' '}
                                 User name{' '}
                               </div>
-                              <label className='Admin-Account-modal-add'>
+                              <label className='Admin-Cages-modal-add'>
                                 {' '}
                                 User name:{' '}
                               </label>
                               <input
-                                className='Admin-Account-input'
+                                className='Admin-Cages-input'
                                 name='user_name'
                                 value={newAccount.user_name}
                                 onChange={handleNewAccountChange}
                                 placeholder='Username'
                               />
                               {errors.user_name && (
-                                <div className='Admin-Account-Error'>
+                                <div className='Admin-Cages-Error'>
                                   {errors.user_name}
                                 </div>
                               )}
                             </div>
 
-                            <div className='Admin-Account-modal-add-account'>
-                              <div className='Admin-Account-modal-title-name'>
+                            <div className='Admin-Cages-modal-add-account'>
+                              <div className='Admin-Cages-modal-title-name'>
                                 {' '}
                                 Password{' '}
                               </div>
-                              <label className='Admin-Account-modal-add'>
+                              <label className='Admin-Cages-modal-add'>
                                 {' '}
                                 Password:{' '}
                               </label>
                               <input
-                                className='Admin-Account-input'
+                                className='Admin-Cages-input'
                                 type='password'
                                 name='password'
                                 value={newAccount.password}
@@ -674,17 +674,17 @@ function AdminAccount() {
                                 placeholder='Password'
                               />
                               {errors.password && (
-                                <div className='Admin-Account-Error'>
+                                <div className='Admin-Cages-Error'>
                                   {errors.password}
                                 </div>
                               )}
-                              <div className='Admin-Account-input-confirm'>
-                                <label className='Admin-Account-modal-add'>
+                              <div className='Admin-Cages-input-confirm'>
+                                <label className='Admin-Cages-modal-add'>
                                   {' '}
                                   Confirm password:{' '}
                                 </label>
                                 <input
-                                  className='Admin-Account-input'
+                                  className='Admin-Cages-input'
                                   type='password'
                                   name='confirmPassword'
                                   value={newAccount.confirmPassword}
@@ -692,47 +692,47 @@ function AdminAccount() {
                                   placeholder='Confirm password'
                                 />
                                 {errors.confirmPassword && (
-                                  <div className='Admin-Account-Error'>
+                                  <div className='Admin-Cages-Error'>
                                     {errors.confirmPassword}
                                   </div>
                                 )}
                               </div>
                             </div>
 
-                            <div className='Admin-Account-modal-add-account'>
-                              <div className='Admin-Account-modal-title-name'>
+                            <div className='Admin-Cages-modal-add-account'>
+                              <div className='Admin-Cages-modal-title-name'>
                                 {' '}
                                 Name{' '}
                               </div>
-                              <label className='Admin-Account-modal-add'>
+                              <label className='Admin-Cages-modal-add'>
                                 {' '}
                                 Name:{' '}
                               </label>
                               <input
-                                className='Admin-Account-input'
+                                className='Admin-Cages-input'
                                 name='name'
                                 value={newAccount.name}
                                 onChange={handleNewAccountChange}
                                 placeholder='Name'
                               />
                               {errors.name && (
-                                <div className='Admin-Account-Error'>
+                                <div className='Admin-Cages-Error'>
                                   {errors.name}
                                 </div>
                               )}
                             </div>
 
-                            <div className='Admin-Account-modal-add-account'>
-                              <div className='Admin-Account-modal-title-name'>
+                            <div className='Admin-Cages-modal-add-account'>
+                              <div className='Admin-Cages-modal-title-name'>
                                 {' '}
                                 Email{' '}
                               </div>
-                              <label className='Admin-Account-modal-add'>
+                              <label className='Admin-Cages-modal-add'>
                                 {' '}
                                 Email:{' '}
                               </label>
                               <input
-                                className='Admin-Account-input'
+                                className='Admin-Cages-input'
                                 type='email'
                                 name='email'
                                 value={newAccount.email}
@@ -740,46 +740,46 @@ function AdminAccount() {
                                 placeholder='Email'
                               />
                               {errors.email && (
-                                <div className='Admin-Account-Error'>
+                                <div className='Admin-Cages-Error'>
                                   {errors.email}
                                 </div>
                               )}
                             </div>
 
-                            <div className='Admin-Account-modal-add-account'>
-                              <div className='Admin-Account-modal-title-name'>
+                            <div className='Admin-Cages-modal-add-account'>
+                              <div className='Admin-Cages-modal-title-name'>
                                 {' '}
                                 Phone Number{' '}
                               </div>
-                              <label className='Admin-Account-modal-add'>
+                              <label className='Admin-Cages-modal-add'>
                                 {' '}
                                 Phone Number:{' '}
                               </label>
                               <input
-                                className='Admin-Account-input'
+                                className='Admin-Cages-input'
                                 name='phoneNum'
                                 value={newAccount.phoneNum}
                                 onChange={handleNewAccountChange}
                                 placeholder='Phone Number'
                               />
                               {errors.phoneNum && (
-                                <div className='Admin-Account-Error'>
+                                <div className='Admin-Cages-Error'>
                                   {errors.phoneNum}
                                 </div>
                               )}
                             </div>
 
-                            <div className='Admin-Account-modal-add-account'>
-                              <div className='Admin-Account-modal-title-name'>
+                            <div className='Admin-Cages-modal-add-account'>
+                              <div className='Admin-Cages-modal-title-name'>
                                 {' '}
                                 Role{' '}
                               </div>
-                              <label className='Admin-Account-modal-add'>
+                              <label className='Admin-Cages-modal-add'>
                                 {' '}
                                 Role:{' '}
                               </label>
                               <select
-                                className='Admin-Account-input-role'
+                                className='Admin-Cages-input-role'
                                 name='role'
                                 value={newAccount.role}
                                 onChange={handleNewAccountChange}
@@ -815,20 +815,20 @@ function AdminAccount() {
                   </div>
                 </div>
 
-                <div className='Admin-Account-Main-Table-Header'>
-                  <div className='Admin-Account-Main-Table-Header-Title'>
+                <div className='Admin-Cages-Main-Table-Header'>
+                  <div className='Admin-Cages-Main-Table-Header-Title'>
                     {' '}
                     Account ID{' '}
                   </div>
-                  <div className='Admin-Account-Main-Table-Header-Title'>
+                  <div className='Admin-Cages-Main-Table-Header-Title'>
                     {' '}
                     User name{' '}
                   </div>
-                  <div className='Admin-Account-Main-Table-Header-Title'>
+                  <div className='Admin-Cages-Main-Table-Header-Title'>
                     {' '}
                     Role{' '}
                   </div>
-                  <div className='Admin-Account-Main-Table-Header-Title-Btn'>
+                  <div className='Admin-Cages-Main-Table-Header-Title-Btn'>
                     {' '}
                     Action{' '}
                   </div>
@@ -836,26 +836,26 @@ function AdminAccount() {
 
                 {filteredAccountData.map(item => (
                   <div
-                    className='Admin-Account-Main-Table-Content-Row-Wrapper'
+                    className='Admin-Cages-Main-Table-Content-Row-Wrapper'
                     key={item.id}
                   >
-                    <div className='Admin-Account-Main-Table-Content-Row'>
+                    <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
                       {item.account_id}{' '}
                     </div>
-                    <div className='Admin-Account-Main-Table-Content-Row'>
+                    <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
                       {item.user_name}{' '}
                     </div>
-                    <div className='Admin-Account-Main-Table-Content-Row'>
+                    <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
                       {item.role}{' '}
                     </div>
-                    <div className='Admin-Account-Main-Table-Content-Row-Action'>
-                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
+                    <div className='Admin-Cages-Main-Table-Content-Row-Action'>
+                      <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
                         <button
                           type='button'
-                          className='Admin-Account-Main-Table-Content-Btn'
+                          className='Admin-Cages-Main-Table-Content-Btn'
                           data-bs-toggle='modal'
                           data-bs-target={`#exampleModalEdit-${item.id}`}
                           onClick={() => openEditModal(item)}
@@ -888,53 +888,53 @@ function AdminAccount() {
                                 ></button>
                               </div>
                               <div className='modal-body'>
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title-name'>
+                                <div className='Admin-Cages-modal-update'>
+                                  <div className='Admin-Cages-modal-title-name'>
                                     {' '}
                                     Name{' '}
                                   </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
+                                  <div className='Admin-Cages-modal-update-old'>
+                                    <div className='Admin-Cages-modal-initials'>
                                       {' '}
                                       Old name:{' '}
                                     </div>
                                     {currentAccount?.name}
                                   </div>
-                                  <label className='Admin-Account-modal-update-new'>
+                                  <label className='Admin-Cages-modal-update-new'>
                                     {' '}
                                     New name:{' '}
                                   </label>
                                   <input
-                                    className='Admin-Account-input'
+                                    className='Admin-Cages-input'
                                     name='name'
                                     value={editAccount.name}
                                     onChange={handleEditAccountChange}
                                     placeholder='Name'
                                   />
                                   {errors.name && (
-                                    <div className='Admin-Account-Error'>
+                                    <div className='Admin-Cages-Error'>
                                       {errors.name}
                                     </div>
                                   )}
                                 </div>
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title'>
+                                <div className='Admin-Cages-modal-update'>
+                                  <div className='Admin-Cages-modal-title'>
                                     {' '}
                                     Email{' '}
                                   </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
+                                  <div className='Admin-Cages-modal-update-old'>
+                                    <div className='Admin-Cages-modal-initials'>
                                       {' '}
                                       Old email:{' '}
                                     </div>
                                     {currentAccount?.email}
                                   </div>
-                                  <label className='Admin-Account-modal-update-new'>
+                                  <label className='Admin-Cages-modal-update-new'>
                                     {' '}
                                     New email:{' '}
                                   </label>
                                   <input
-                                    className='Admin-Account-input'
+                                    className='Admin-Cages-input'
                                     type='email'
                                     name='email'
                                     value={editAccount.email}
@@ -942,59 +942,59 @@ function AdminAccount() {
                                     placeholder='Email'
                                   />
                                   {errors.email && (
-                                    <div className='Admin-Account-Error'>
+                                    <div className='Admin-Cages-Error'>
                                       {errors.email}
                                     </div>
                                   )}
                                 </div>
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title'>
+                                <div className='Admin-Cages-modal-update'>
+                                  <div className='Admin-Cages-modal-title'>
                                     {' '}
                                     Phone{' '}
                                   </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
+                                  <div className='Admin-Cages-modal-update-old'>
+                                    <div className='Admin-Cages-modal-initials'>
                                       {' '}
                                       Old phone number:{' '}
                                     </div>
                                     {currentAccount?.phoneNum}
                                   </div>
-                                  <label className='Admin-Account-modal-update-new'>
+                                  <label className='Admin-Cages-modal-update-new'>
                                     {' '}
                                     New phone number:{' '}
                                   </label>
                                   <input
-                                    className='Admin-Account-input'
+                                    className='Admin-Cages-input'
                                     name='phoneNum'
                                     value={editAccount.phoneNum}
                                     onChange={handleEditAccountChange}
                                     placeholder='Phone number'
                                   />
                                   {errors.phoneNum && (
-                                    <div className='Admin-Account-Error'>
+                                    <div className='Admin-Cages-Error'>
                                       {errors.phoneNum}
                                     </div>
                                   )}
                                 </div>
 
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title'>
+                                <div className='Admin-Cages-modal-update'>
+                                  <div className='Admin-Cages-modal-title'>
                                     {' '}
                                     Role{' '}
                                   </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
+                                  <div className='Admin-Cages-modal-update-old'>
+                                    <div className='Admin-Cages-modal-initials'>
                                       {' '}
                                       Old role:{' '}
                                     </div>
                                     {currentAccount?.role}
                                   </div>
-                                  <label className='Admin-Account-modal-initials'>
+                                  <label className='Admin-Cages-modal-initials'>
                                     {' '}
                                     New role:{' '}
                                   </label>
                                   <select
-                                    className='Admin-Account-input-role'
+                                    className='Admin-Cages-input-role'
                                     name='role'
                                     value={editAccount.role}
                                     onChange={handleEditAccountChange}
@@ -1029,10 +1029,10 @@ function AdminAccount() {
                         </div>
                       </span>
 
-                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
+                      <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
                         <button
                           type='button'
-                          className='Admin-Account-Main-Table-Content-Btn'
+                          className='Admin-Cages-Main-Table-Content-Btn'
                           data-bs-toggle='modal'
                           data-bs-target={`#exampleModalMore-${item.id}`}
                         >
@@ -1064,43 +1064,43 @@ function AdminAccount() {
                                 ></button>
                               </div>
                               <div className='modal-body'>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
+                                <div className='Admin-Cages-modal-more'>
+                                  <div className='Admin-Cages-modal-more-title'>
                                     {' '}
                                     Account ID:{' '}
                                   </div>
                                   {item.account_id}
                                 </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
+                                <div className='Admin-Cages-modal-more'>
+                                  <div className='Admin-Cages-modal-more-title'>
                                     {' '}
                                     Name:{' '}
                                   </div>
                                   {item.name}
                                 </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
+                                <div className='Admin-Cages-modal-more'>
+                                  <div className='Admin-Cages-modal-more-title'>
                                     {' '}
                                     User name:{' '}
                                   </div>
                                   {item.user_name}
                                 </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
+                                <div className='Admin-Cages-modal-more'>
+                                  <div className='Admin-Cages-modal-more-title'>
                                     {' '}
                                     Email:{' '}
                                   </div>
                                   {item.email}
                                 </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
+                                <div className='Admin-Cages-modal-more'>
+                                  <div className='Admin-Cages-modal-more-title'>
                                     {' '}
                                     Phone number:{' '}
                                   </div>
                                   {item.phoneNum}
                                 </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
+                                <div className='Admin-Cages-modal-more'>
+                                  <div className='Admin-Cages-modal-more-title'>
                                     {' '}
                                     Role:{' '}
                                   </div>
@@ -1121,7 +1121,7 @@ function AdminAccount() {
                           </div>
                         </div>
                       </span>
-                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
+                      <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
                         <Switch
                           checked={item.status === 'Enable'}
                           onChange={() => handleStatusChange(item.id)}
@@ -1144,7 +1144,7 @@ function AdminAccount() {
                   </div>
                 ))}
 
-                <div className='Admin-Account-Pagination'>
+                <div className='Admin-Cages-Pagination'>
                   <Stack spacing={2}>
                     <Pagination count={10} />
                   </Stack>
@@ -1158,4 +1158,4 @@ function AdminAccount() {
   );
 }
 
-export default AdminAccount;
+export default AdminCages;
