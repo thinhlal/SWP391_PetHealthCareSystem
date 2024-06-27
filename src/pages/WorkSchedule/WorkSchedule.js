@@ -190,11 +190,6 @@ function WorkSchedule() {
     setErrors(prev => ({ ...prev, shifts: '' }));
   };
 
-  const handleDayOffChange = event => {
-    setSelectedDayOff(event.target.value);
-    setErrors(prev => ({ ...prev, selectedDayOff: '' }));
-  };
-
   return (
     <div>
       <Header />
@@ -275,7 +270,7 @@ function WorkSchedule() {
                           key={date}
                           className='modal-body-section-doctor-date'
                         >
-                          <label>{`Choose Shift for ${date}:`}</label>
+                          <label>{`Choose for ${date}:`}</label>
                           <select
                             className='sl-date-work'
                             value={shifts[date] || ''}
@@ -286,10 +281,10 @@ function WorkSchedule() {
                           >
                             <option value=''>Select Shift</option>
                             <option value='Morning'>
-                              Morning: 8:00 - 16:00
+                              Morning: 7:00 - 15:00
                             </option>
                             <option value='Evening'>
-                              Evening: 15:00 - 22:00
+                              Evening: 14:00 - 22:00
                             </option>
                             <option value='Both'>Both</option>
                             <option>Leave(1 day each week)</option>
@@ -377,7 +372,7 @@ function WorkSchedule() {
         </div>
       </div>
       <p className='final-petExam'>
-        --Today's working hour start at 9:00 a.m and end at 18:00 p.m--
+        --Today's working hour start at 7:00 a.m and end at 22:00 p.m--
       </p>
       <ConfirmationModal
         show={showModal}
