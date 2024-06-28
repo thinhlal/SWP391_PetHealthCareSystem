@@ -1,55 +1,18 @@
 import './ManageCages.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import search_icon from '../../assets/images/img_ManageBookings/search.svg';
+import axiosInstance from '../../utils/axiosInstance';
 
 function ManageCages() {
-  const [petOption, setPetOption] = useState('');
-  const [ownerOption, setOwnerOption] = useState('');
-  const [petSearchResults, setPetSearchResults] = useState([]);
-  const [ownerSearchResults, setOwnerSearchResults] = useState([]);
-  const [petInfo, setPetInfo] = useState({
-    species: 'Dog',
-    breed: 'Golden Retriever',
-    gender: 'Male',
-  });
-  const [ownerInfo, setOwnerInfo] = useState({});
-  const [services, setServices] = useState([{ service: 'X-quang', date: '' }]);
-  const [availableVets] = useState([
-    {
-      id: 1,
-      name: 'Dr. John',
-      availableSlots: [
-        '2024-06-01T06:00',
-        '2024-06-02T06:00',
-        '2024-06-03T06:00',
-      ],
-    },
-    {
-      id: 2,
-      name: 'Dr. Jane',
-      availableSlots: [
-        '2024-06-01T06:00',
-        '2024-06-02T06:00',
-        '2024-06-03T06:00',
-      ],
-    },
-    {
-      id: 3,
-      name: 'Dr. Emily',
-      availableSlots: [
-        '2024-06-01T06:00',
-        '2024-06-02T06:00',
-        '2024-06-03T06:00',
-      ],
-    },
-  ]);
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
-  const [selectedVet, setSelectedVet] = useState('Dr. John');
+  const [searchBookingIDValue, setSearchBookingValue] = useState('');
+  const [bookingSearchResult, setBookingSearchResult] = useState({});
+  const [paymentUpdatePrice, setPaymentUpdatePrice] = useState({});
+  const [allDoctorsWorkingHours, setAllDoctorsWorkingHours] = useState([]);
+  const [chosenDoctor, setChosenDoctor] = useState('');
   const [activeTab, setActiveTab] = useState('Profile');
   const [cageData, setCageData] = useState([
     {
@@ -123,75 +86,79 @@ function ManageCages() {
   ]);
   const [selectedCage, setSelectedCage] = useState(null);
   const [statusFilter, setStatusFilter] = useState('All');
+  const [errors, setErrors] = useState({
+    accountOption: '',
+    chosenDoctor: '',
+    petName: '',
+    petType: '',
+    petBreed: '',
+    petGender: '',
+    petBirthday: '',
+    ownerName: '',
+    ownerPhone: '',
+    ownerEmail: '',
+    accountSelect: '',
+    petSelect: '',
+    searchValueAccount: '',
+    searchValuePet: '',
+  });
 
-  const availableServices = [
-    { id: 1, name: 'X-quang' },
-    { id: 2, name: 'Siêu âm' },
-    { id: 3, name: 'Khám tổng quát' },
-    { id: 4, name: 'Tiêm chủng' },
-  ];
+  const handleSearchBooking = async () => {
+    if (searchBookingIDValue === '') {
+      return;
+    }
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/booking/getBookingID/${searchBookingIDValue}`,
+      );
+      if (response.data.length !== 0) {
+        setPaymentUpdatePrice(response.data[0].paymentDetails[0])
+        setBookingSearchResult(response.data[0]);
+      } else {
+        setPaymentUpdatePrice({});
+        setBookingSearchResult({});
+      }
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+    }
+  }
 
-  const handlePetOptionChange = event => {
-    setPetOption(event.target.value);
+  const handleGetAllDoctors = async () => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/doctor/getAllDoctors`,
+      );
+      setAllDoctorsWorkingHours(response.data);
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+    }
   };
 
-  const handleOwnerOptionChange = event => {
-    setOwnerOption(event.target.value);
+  const payUpdateByPaymentID = async (paymentID) => {
+    try {
+      const response = await axiosInstance.patch(
+        `${process.env.REACT_APP_API_URL}/payment/updatePaymentByID`,
+        { paymentID }
+      );
+      setPaymentUpdatePrice(response.data);
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+    }
   };
 
-  const handleSearchPet = () => {
-    const query = document.getElementById('searchPetInput').value;
-    fetch(`/searchPet?query=${query}`)
-      .then(response => response.json())
-      .then(data => setPetSearchResults(data))
-      .catch(error => console.error('Error:', error));
-  };
-
-  const handlePetSelect = event => {
-    const petID = event.target.value;
-    fetch(`/getPetInfo?petID=${petID}`)
-      .then(response => response.json())
-      .then(data => setPetInfo(data))
-      .catch(error => console.error('Error:', error));
-  };
-
-  const handleSearchOwner = () => {
-    const query = document.getElementById('searchOwnerInput').value;
-    fetch(`/searchOwner?query=${query}`)
-      .then(response => response.json())
-      .then(data => setOwnerSearchResults(data))
-      .catch(error => console.error('Error:', error));
-  };
-
-  const handleOwnerSelect = event => {
-    const ownerID = event.target.value;
-    fetch(`/getOwnerInfo?ownerID=${ownerID}`)
-      .then(response => response.json())
-      .then(data => setOwnerInfo(data))
-      .catch(error => console.error('Error:', error));
-  };
-
-  const handleServiceChange = (index, field, value) => {
-    const newServices = [...services];
-    newServices[index][field] = value;
-    setServices(newServices);
-  };
-
-  const addService = () => {
-    setServices([...services, { service: 'X-quang', date: '' }]);
+  const handleDoctorChange = event => {
+    setChosenDoctor(event.target.value);
+    setErrors(prev => ({ ...prev, chosenDoctor: '' }));
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     const formData = {
-      petInfo,
-      ownerInfo,
-      services,
       reasonForAdmission: document.getElementById('reasonForAdmission').value,
       currentCondition: document.getElementById('currentCondition').value,
       cageNumber: selectedCage.name,
+      doctorID: chosenDoctor,
       admissionTime: document.getElementById('admissionTime').value,
-      veterinarian: selectedVet,
     };
 
     const updatedCageData = cageData.map(cage => {
@@ -202,14 +169,12 @@ function ManageCages() {
           petDetails: {
             ...formData.petInfo,
             inCage: formData.currentCondition,
-            services: services.map(service => service.service).join(', '),
-            dateTime: `${selectedTime} | ${selectedDate}`,
             doctor: formData.veterinarian,
             cageNumber: formData.cageNumber,
             admissionTime: formData.admissionTime,
-            ownerName: formData.ownerInfo.name,
-            email: formData.ownerInfo.email,
-            phone: formData.ownerInfo.phone,
+            ownerName: formData.accountInfo.name,
+            email: formData.accountInfo.email,
+            phone: formData.accountInfo.phone,
           },
         };
       }
@@ -221,16 +186,8 @@ function ManageCages() {
   };
 
   const resetForm = () => {
-    setPetOption('');
-    setOwnerOption('');
-    setPetSearchResults([]);
-    setOwnerSearchResults([]);
-    setPetInfo({ species: 'Dog', breed: 'Golden Retriever', gender: 'Male' });
-    setOwnerInfo({});
-    setServices([{ service: 'X-quang', date: '' }]);
-    setSelectedDate('');
-    setSelectedTime('');
-    setSelectedVet('Dr. John');
+    setChosenDoctor('');
+    setErrors({});
     document.getElementById('addPetForm').reset();
   };
 
@@ -265,19 +222,6 @@ function ManageCages() {
     if (statusFilter === 'All') return true;
     return cage.status === statusFilter;
   });
-
-  useEffect(() => {
-    if (selectedDate && selectedTime) {
-      const availableVet = availableVets.find(vet =>
-        vet.availableSlots.includes(`${selectedDate}T${selectedTime}`),
-      );
-      if (availableVet) {
-        setSelectedVet(availableVet.name);
-      } else {
-        setSelectedVet('');
-      }
-    }
-  }, [selectedDate, selectedTime, availableVets]);
 
   return (
     <div className='manage-cages container-fluid'>
@@ -327,19 +271,13 @@ function ManageCages() {
                   </select>
                 </div>
               </div>
-
-              {/* add pet button */}
               <div className='main-content-header-add-booking'>
                 <button
                   type='button'
                   className='booking-btn-add'
                   data-bs-toggle='modal'
                   data-bs-target='#exampleModal'
-                  onClick={() =>
-                    setSelectedCage(
-                      cageData.find(cage => cage.status === 'Empty'),
-                    )
-                  }
+                  onClick={handleGetAllDoctors}
                 >
                   Add Pet
                 </button>
@@ -360,335 +298,120 @@ function ManageCages() {
                             className='modal-title fs-5'
                             id='exampleModalLabel'
                           >
-                            Add Pet
+                            Add Booking
                           </h1>
                           <button
                             type='button'
+                            onClick={resetForm}
                             className='btn-close'
                             data-bs-dismiss='modal'
                             aria-label='Close'
                           ></button>
                         </div>
-
                         <div className='modal-body'>
-                          <div className='modal-body-section'>
-                            <label>Pet:</label>
-                            <input
-                              type='radio'
-                              name='petOption'
-                              value='hasPetID'
-                              checked={petOption === 'hasPetID'}
-                              onChange={handlePetOptionChange}
-                            />{' '}
-                            <span>Has Pet ID</span>
-                            <input
-                              type='radio'
-                              name='petOption'
-                              value='noPetID'
-                              checked={petOption === 'noPetID'}
-                              onChange={handlePetOptionChange}
-                            />{' '}
-                            <span>Not Has Pet ID</span>
-                          </div>
-
-                          {petOption === 'hasPetID' && (
-                            <div
-                              id='searchPetSection'
-                              className='modal-body-section'
-                            >
-                              <label>Search Pet ID:</label>
-                              <input
-                                type='text'
-                                id='searchPetInput'
-                              />
-                              <button
-                                type='button'
-                                onClick={handleSearchPet}
-                              >
-                                Search
-                              </button>
-                              <select onChange={handlePetSelect}>
-                                {petSearchResults.map(pet => (
-                                  <option
-                                    key={pet.petID}
-                                    value={pet.petID}
-                                  >{`${pet.petID} - ${pet.name}`}</option>
-                                ))}
-                              </select>
-                            </div>
-                          )}
-
-                          {petOption === 'noPetID' && (
-                            <div
-                              id='newPetSection'
-                              className='modal-body-section'
-                            >
-                              <label>Pet Name:</label>
-                              <input
-                                type='text'
-                                value={petInfo.name || ''}
-                                onChange={e =>
-                                  setPetInfo({
-                                    ...petInfo,
-                                    name: e.target.value,
-                                  })
-                                }
-                              />
-                              <label>Species:</label>
-                              <select
-                                value={petInfo.species || ''}
-                                onChange={e =>
-                                  setPetInfo({
-                                    ...petInfo,
-                                    species: e.target.value,
-                                  })
-                                }
-                              >
-                                <option value='Dog'>Dog</option>
-                                <option value='Cat'>Cat</option>
-                              </select>
-                              <label>Breed:</label>
-                              <select
-                                value={petInfo.breed || ''}
-                                onChange={e =>
-                                  setPetInfo({
-                                    ...petInfo,
-                                    breed: e.target.value,
-                                  })
-                                }
-                              >
-                                {petInfo.species === 'Dog' ? (
-                                  <>
-                                    <option value='Golden Retriever'>
-                                      Golden Retriever
-                                    </option>
-                                    <option value='Labrador'>Labrador</option>
-                                    <option value='Poodle'>Poodle</option>
-                                  </>
-                                ) : (
-                                  <>
-                                    <option value='Persian'>Persian</option>
-                                    <option value='Siamese'>Siamese</option>
-                                    <option value='Maine Coon'>
-                                      Maine Coon
-                                    </option>
-                                  </>
-                                )}
-                              </select>
-                              <label>Gender:</label>
-                              <select
-                                value={petInfo.gender || ''}
-                                onChange={e =>
-                                  setPetInfo({
-                                    ...petInfo,
-                                    gender: e.target.value,
-                                  })
-                                }
-                              >
-                                <option value='Male'>Male</option>
-                                <option value='Female'>Female</option>
-                              </select>
-                            </div>
-                          )}
-
-                          <div className='modal-body-section'>
-                            <label>Customer:</label>
-                            <input
-                              type='radio'
-                              name='ownerOption'
-                              value='hasOwnerID'
-                              checked={ownerOption === 'hasOwnerID'}
-                              onChange={handleOwnerOptionChange}
-                            />
-                            <span>Have CustomerID</span>
-                            <input
-                              type='radio'
-                              name='ownerOption'
-                              value='noOwnerID'
-                              checked={ownerOption === 'noOwnerID'}
-                              onChange={handleOwnerOptionChange}
-                            />
-                            <span>Not Have CustomerID</span>
-                          </div>
-
-                          {ownerOption === 'hasOwnerID' && (
-                            <div
-                              id='searchOwnerSection'
-                              className='modal-body-section'
-                            >
-                              <label>Search Customer:</label>
-                              <input
-                                type='text'
-                                id='searchOwnerInput'
-                              />
-                              <button
-                                type='button'
-                                onClick={handleSearchOwner}
-                              >
-                                Search
-                              </button>
-                              <select onChange={handleOwnerSelect}>
-                                {ownerSearchResults.map(owner => (
-                                  <option
-                                    key={owner.ownerID}
-                                    value={owner.ownerID}
-                                  >{`${owner.ownerID} - ${owner.name}`}</option>
-                                ))}
-                              </select>
-                            </div>
-                          )}
-
-                          {ownerOption === 'noOwnerID' && (
-                            <div
-                              id='newOwnerSection'
-                              className='modal-body-section'
-                            >
-                              <label>Owner Name:</label>
-                              <input
-                                type='text'
-                                value={ownerInfo.name || ''}
-                                onChange={e =>
-                                  setOwnerInfo({
-                                    ...ownerInfo,
-                                    name: e.target.value,
-                                  })
-                                }
-                              />
-                              <label>Email:</label>
-                              <input
-                                type='text'
-                                value={ownerInfo.email || ''}
-                                onChange={e =>
-                                  setOwnerInfo({
-                                    ...ownerInfo,
-                                    email: e.target.value,
-                                  })
-                                }
-                              />
-                              <label>Phone Number:</label>
-                              <input
-                                type='text'
-                                value={ownerInfo.phone || ''}
-                                onChange={e =>
-                                  setOwnerInfo({
-                                    ...ownerInfo,
-                                    phone: e.target.value,
-                                  })
-                                }
-                              />
-                              <label>Reason for Admission:</label>
-                              <input
-                                type='text'
-                                id='reasonForAdmission'
-                              />
-                              <label>Current Condition:</label>
-                              <input
-                                type='text'
-                                id='currentCondition'
-                              />
-                            </div>
-                          )}
-
-                          <div className='modal-body-section'>
-                            <label>Services used:</label>
-                            {services.map((service, index) => (
-                              <div
-                                key={index}
-                                className='service'
-                              >
-                                <label>Service:</label>
-                                <select
-                                  value={service.service}
-                                  onChange={e =>
-                                    handleServiceChange(
-                                      index,
-                                      'service',
-                                      e.target.value,
-                                    )
-                                  }
-                                >
-                                  {availableServices.map(availableService => (
-                                    <option
-                                      key={availableService.id}
-                                      value={availableService.name}
-                                    >
-                                      {availableService.name}
-                                    </option>
-                                  ))}
-                                </select>
-                                <label>Service Date:</label>
-                                <input
-                                  type='date'
-                                  value={service.date}
-                                  onChange={e =>
-                                    handleServiceChange(
-                                      index,
-                                      'date',
-                                      e.target.value,
-                                    )
-                                  }
-                                />
-                              </div>
-                            ))}
-                            <button
-                              type='button'
-                              onClick={addService}
-                            >
-                              Add service
-                            </button>
-                          </div>
-
-                          <div className='modal-body-section'>
-                            <label>Choose Date And Time:</label>
-                            <input
-                              type='date'
-                              value={selectedDate}
-                              onChange={e => setSelectedDate(e.target.value)}
-                            />
-                            <input
-                              type='time'
-                              value={selectedTime}
-                              onChange={e => setSelectedTime(e.target.value)}
-                            />
-                          </div>
-
-                          <div className='modal-body-section'>
-                            <label>Veterinarian:</label>
-                            <select
-                              id='veterinarian'
-                              value={selectedVet}
-                              onChange={e => setSelectedVet(e.target.value)}
-                            >
-                              {availableVets
-                                .filter(vet =>
-                                  vet.availableSlots.includes(
-                                    `${selectedDate}T${selectedTime}`,
-                                  ),
-                                )
-                                .map(vet => (
-                                  <option
-                                    key={vet.id}
-                                    value={vet.name}
-                                  >
-                                    {vet.name}
-                                  </option>
-                                ))}
-                            </select>
-                          </div>
-
-                          <div className='modal-body-section'>
-                            <label>Cage Number:</label>
+                          <div className='search-owner-option-section'>
+                            <label>Search BookingID:</label>
                             <input
                               type='text'
-                              id='cageNumber'
-                              value={selectedCage ? selectedCage.name : ''}
-                              readOnly
+                              id='searchBookingID'
+                              value={searchBookingIDValue}
+                              onChange={e =>
+                                setSearchBookingValue(e.target.value)
+                              }
                             />
-                            <label>Admission Time:</label>
-                            <input
-                              type='datetime-local'
-                              id='admissionTime'
-                            />
+                            <div onClick={handleSearchBooking}>
+                              Search
+                            </div>
+                            {errors.searchBookingIDValue && (
+                              <span className='error'>
+                                {errors.searchBookingIDValue}
+                              </span>
+                            )}
+                          </div>
+                          <div className='search-owner-option-section'>
+                            {Object.keys(bookingSearchResult).length > 0
+                              ? bookingSearchResult.paymentDetails[0].isCancelPayment ?
+                                <div>Cancel payment</div>
+                                : bookingSearchResult.isCancel ?
+                                  <div>Cancel Booking</div>
+                                  :
+                                  <div>
+                                    <div>
+                                      <div>
+                                        <span>Name:&nbsp;</span>
+                                        <span>{bookingSearchResult.name}</span>
+                                      </div>
+                                      <div>
+                                        <span>Phone:&nbsp;</span>
+                                        <span>{bookingSearchResult.phone}</span>
+                                      </div>
+                                      <div>
+                                        <span>Email:&nbsp;</span>
+                                        <span>{bookingSearchResult.email}</span>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div>
+                                        <span>Payment Status:&nbsp;</span>
+                                        <span>
+                                          {paymentUpdatePrice.isSuccess
+                                            ?
+                                            <div>Already paid</div>
+                                            :
+                                            <span>Not paid</span>}
+                                        </span>
+                                      </div>
+                                      {paymentUpdatePrice.isSuccess ? <div></div> :
+                                        <div>
+                                          <span>TotalPrice:&nbsp;</span>
+                                          <span>{paymentUpdatePrice.totalPrice}</span>
+                                          <div onClick={() => payUpdateByPaymentID(paymentUpdatePrice.paymentID)}>Pay</div>
+                                        </div>}
+                                    </div>
+                                  </div>
+                              :
+                              <div>No Data Found</div>}
+                          </div>
+                          <div className='modal-body-section-wrapper'>
+                            <div>
+                              <div className='modal-body-section-doctor-date'>
+                                <label>Doctor:</label>
+                                <div id='veterinarian'>
+                                  {allDoctorsWorkingHours
+                                    ? (allDoctorsWorkingHours.map((doctor, index) => {
+                                      return (
+                                        <div
+                                          key={doctor.doctorID}
+                                          className='choose-Doctor-wrapper'
+                                        >
+                                          <input
+                                            type='radio'
+                                            id={`doctor-${index}`}
+                                            name='doctor'
+                                            value={doctor.doctorID}
+                                            onChange={e =>
+                                              handleDoctorChange(e)
+                                            }
+                                          />
+                                          <label htmlFor={`doctor-${index}`}>
+                                            {doctor.name}
+                                          </label>
+                                        </div>
+                                      );
+                                    })
+                                    ) : (
+                                      <div className='choose-Doctor-Not-Found'>
+                                        No available doctors
+                                      </div>
+                                    )}
+                                </div>
+                                {errors.chosenDoctor && (
+                                  <span className='error'>
+                                    {errors.chosenDoctor}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div className='modal-footer'>
@@ -955,36 +678,7 @@ function ManageCages() {
                                     activeTab === 'More' ? 'flex' : 'none',
                                 }}
                               >
-                                <form className='pet-profile-form'>
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Services:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='services'
-                                      value={
-                                        selectedCage?.petDetails.services || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Service Date:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='dateTime'
-                                      value={
-                                        selectedCage?.petDetails.dateTime || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
+                                <form className='pet-profile-form'>s
 
                                   <div className='form-group'>
                                     <div className='sub-title-profile-pet'>
@@ -1149,7 +843,7 @@ function ManageCages() {
                                     value='NotRecover'
                                     defaultChecked={
                                       selectedCage?.petStatus ===
-                                        'NotRecover' || !selectedCage?.id
+                                      'NotRecover' || !selectedCage?.id
                                     }
                                   />
                                   <div className='modal-body-update-status-empty-text'>
@@ -1261,8 +955,8 @@ function ManageCages() {
             </ul>
           </nav>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

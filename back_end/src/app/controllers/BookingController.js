@@ -220,6 +220,51 @@ class BookingController {
       res.status(500).json({ message: 'Error when get booking ', error });
     }
   }
+
+  // GET /getBookingDataByID
+  async getBookingDataByID(req, res, next) {
+    const { bookingID } = req.params;
+    try {
+      const bookingData = await Booking.aggregate([
+        { $match: { bookingID } },
+        {
+          $lookup: {
+            from: 'accounts',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'accountDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'pets',
+            localField: 'petID',
+            foreignField: 'petID',
+            as: 'petDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'customers',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'customerDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+      ]);
+      res.status(200).json(bookingData);
+    } catch (error) {
+      res.status(500).json({ message: 'Error when get booking ', error });
+    }
+  }
 }
 
 module.exports = new BookingController();

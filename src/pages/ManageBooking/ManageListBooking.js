@@ -9,10 +9,10 @@ import axiosInstance from '../../utils/axiosInstance';
 
 function ManageListBooking() {
   const [allServices, setAllServices] = useState([]);
+  const [allDoctorsWorkingHours, setAllDoctorsWorkingHours] = useState([]);
   const [searchPetValue, setSearchPetValue] = useState('');
   const [searchCustomerValue, setSearchCustomerValue] = useState('');
   const [accountOption, setAccountOption] = useState('');
-  const [allDoctorsWorkingHours, setAllDoctorsWorkingHours] = useState([]);
   const [petSearchResults, setPetSearchResults] = useState([]);
   const [accountSearchResults, setAccountSearchResults] = useState([]);
   const availableTimeSlots = [
@@ -195,8 +195,8 @@ function ManageListBooking() {
   const resetForm = () => {
     setChosenDoctor('')
     setAccountOption('');
-    setAccountInfo('');
-    setPetInfo('');
+    setAccountInfo({});
+    setPetInfo({});
     setSearchCustomerValue('');
     setSearchPetValue('');
     setPetSearchResults([]);

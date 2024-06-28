@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const { verifyToken } = require('../app/controllers/MiddlewareController');
-const PaymentController = require('../app/controllers/PaymentController');
+const PaypalController = require('../app/controllers/PaypalController');
 
-router.post('/create-order', verifyToken, PaymentController.createOrder);
-router.post('/paypal-success-getData', PaymentController.getData);
-router.get('/paypal-success', PaymentController.captureOrder);
-router.get('/paypal-cancel', PaymentController.paymentCancel);
-router.post('/', PaymentController.index);
+router.post('/create-order', verifyToken, PaypalController.createOrder);
+router.post('/paypal-success-getData', PaypalController.getData);
+router.get('/paypal-success', PaypalController.captureOrder);
+router.get('/paypal-cancel', PaypalController.paymentCancel);
+router.post('/', PaypalController.index);
 
 module.exports = router;
