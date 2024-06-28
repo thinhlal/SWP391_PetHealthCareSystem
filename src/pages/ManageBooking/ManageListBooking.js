@@ -193,6 +193,7 @@ function ManageListBooking() {
   };
 
   const resetForm = () => {
+    setChosenDoctor('')
     setAccountOption('');
     setAccountInfo('');
     setPetInfo('');
@@ -237,16 +238,19 @@ function ManageListBooking() {
     setErrors(prev => ({ ...prev, chosenDoctor: '' }));
   };
 
-  const handleSave = bookingID => {
-    setAllBookings(
-      allBookings.map(booking => {
-        if (booking.bookingID === bookingID) {
-          return { ...booking, doctor: chosenDoctor };
-        } else {
-          return booking;
-        }
-      }),
-    );
+  const handleSave = async bookingID => {
+    try {
+      console.log(chosenDoctor);
+      await axiosInstance.patch(`${process.env.REACT_APP_API_URL}/manageBooking/updateBookingDoctors`,
+        { bookingID, chosenDoctor }
+      )
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
+      );
+      setAllBookings(response.data.allBookings);
+    } catch (error) {
+      console.error('error Update Manage Booking: ' + error)
+    }
     setChosenDoctor('');
   };
 
@@ -301,10 +305,11 @@ function ManageListBooking() {
     return re.test(String(email).toLowerCase());
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     if (!validateForm()) return;
+
     if (accountOption === 'hasOwnerID') {
       const newBookingHasCustomer = {
         day: selectedDate,
@@ -316,8 +321,17 @@ function ManageListBooking() {
         ),
         service: services.map(service => service.service),
       };
-      console.log(newBookingHasCustomer);
-      //Done
+      try {
+        await axiosInstance.post(`${process.env.REACT_APP_API_URL}/manageBooking/addHaveCustomer`,
+          newBookingHasCustomer
+        )
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
+        );
+        setAllBookings(response.data.allBookings);
+      } catch (error) {
+        console.error('error Add Manage Booking: ' + error)
+      }
     } else {
       const newBookingAndNewCustomer = {
         day: selectedDate,
@@ -331,14 +345,23 @@ function ManageListBooking() {
         service: services.map(service => service.service),
       };
       console.log(newBookingAndNewCustomer);
+      try {
+        await axiosInstance.post(`${process.env.REACT_APP_API_URL}/manageBooking/addNotHaveCustomer`,
+          newBookingAndNewCustomer
+        )
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
+        );
+        setAllBookings(response.data.allBookings);
+      } catch (error) {
+        console.error('error Add Manage Booking: ' + error)
+      }
     }
 
-    // setAllBookings([...allBookings, newBooking]);
-    // resetForm();
-    // document.querySelector('#exampleModal .btn-close').click();
+    resetForm();
+    document.querySelector('#exampleModal .btn-close').click();
   };
 
-  // Hàm rút gọn thông tin dịch vụ
   function truncateText(text) {
     const items = text.split(',');
     if (items.length > 1) {
@@ -347,14 +370,13 @@ function ManageListBooking() {
     return text;
   }
 
-  // Xử lý thay đổi ngày lọc
   const handleFilterDateChange = event => {
     setFilterDate(event.target.value);
   };
 
   const filteredBookings = filterDate
-    ? allBookings.filter(booking => booking.dateBook === filterDate)
-    : allBookings;
+    ? allBookings.filter(booking => booking.dateBook.split('T')[0] === filterDate).sort((a, b) => b.startTime.localeCompare(a.startTime))
+    : allBookings
 
   const handleConfirmPayment = bookingID => {
     setAllBookings(
@@ -567,7 +589,7 @@ function ManageListBooking() {
 
                             {accountOption === 'noOwnerID' && (
                               <div id='newOwnerSection'>
-                                <div className=''>
+                                <div>
                                   <div className='modal-body-section'>
                                     <label>Name:</label>
                                     <input
@@ -999,7 +1021,7 @@ function ManageListBooking() {
                 <div className='main-content-list-title-text'>Payment</div>{' '}
               </div>
               <div className='main-content-list-body-wrapper'>
-                {filteredBookings &&
+                {filteredBookings.length !== 0 ?
                   filteredBookings.map(booking => (
                     <div
                       className='content-list-body-info'
@@ -1027,19 +1049,19 @@ function ManageListBooking() {
                             .join(', ')}
                       </div>
                       <div className='content-list-body-value'>
-                        {booking.doctorDetails[0].name ? (
-                          booking.doctorDetails[0].name
-                        ) : (
-                          <button
-                            type='button'
-                            className='btn btn-primary'
-                            data-bs-toggle='modal'
-                            data-bs-target={`#chooseDoctorModal-${booking.bookingID}`}
-                            onClick={getAllDoctors}
-                          >
-                            Choose
-                          </button>
-                        )}
+                        {booking.doctorDetails.length !== 0
+                          ? booking.doctorDetails[0].name
+                          : (
+                            <button
+                              type='button'
+                              className='btn btn-primary'
+                              data-bs-toggle='modal'
+                              data-bs-target={`#chooseDoctorModal-${booking.bookingID}`}
+                              onClick={getAllDoctors}
+                            >
+                              Choose
+                            </button>
+                          )}
                       </div>
 
                       <div
@@ -1394,7 +1416,7 @@ function ManageListBooking() {
                                           .isCancelPayment ? (
                                           <span>Cancelled</span>
                                         ) : booking.paymentsDetails[0]
-                                            .isSuccess === false ? (
+                                          .isSuccess === false ? (
                                           <span>Not paid</span>
                                         ) : (
                                           <span>Already paid</span>
@@ -1440,7 +1462,8 @@ function ManageListBooking() {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )
+                  ) : <div>No Bookings This Day</div>}
               </div>
             </div>
           </div>

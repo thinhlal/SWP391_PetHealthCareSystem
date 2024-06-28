@@ -3,7 +3,7 @@ const Payment = require('../models/Payment.js');
 const ServiceBookingVet = require('../models/ServiceBookingVet.js');
 
 class BookingController {
-  // POST /
+  // POST /(add)
   async index(req, res, next) {
     const bookingInfo = req.body.bookingData;
     try {

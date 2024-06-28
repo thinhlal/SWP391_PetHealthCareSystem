@@ -6,8 +6,10 @@ const petRouter = require('./pet');
 const adminRouter = require('./admin');
 const doctorRouter = require('./doctor');
 const accountRouter = require('./account');
+const manageBookingRouter = require('./manageBooking');
 
 function route(app) {
+  app.use('/manageBooking', manageBookingRouter);
   app.use('/doctor', doctorRouter);
   app.use('/account', accountRouter);
   app.use('/admin', adminRouter);

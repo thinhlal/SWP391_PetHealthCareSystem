@@ -19,6 +19,7 @@ const Payment = () => {
           `${process.env.REACT_APP_API_URL}/paypal/paypal-success-getData`,
           { bookingID },
         );
+        console.log(response.data.paymentData);
         setData(response.data.paymentData);
         setStatus(status);
       } catch (error) {
@@ -106,7 +107,7 @@ const Payment = () => {
                 <div className='payment-booking-content-title'>
                   Doctor:&nbsp;{' '}
                 </div>
-                <div>{data[0].doctorsDetails[0].name}</div>
+                <div>{data[0].doctorsDetails.length === 0 ? 'Not choose doctors' : data[0].doctorsDetails[0].name}</div>
               </div>
               <div className='payment-services-content'>
                 <div className='payment-booking-content-title'>
