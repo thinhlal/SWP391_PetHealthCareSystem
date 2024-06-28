@@ -110,16 +110,15 @@
 }
 
 .vaccines-column {
-  width: 500px; 
-  max-width: 300px; 
+  width: 500px;
+  max-width: 300px;
 }
 
 .vaccines-column,
 .vaccines-column + td {
-  word-wrap: break-word; 
-  word-break: break-word; 
+  word-wrap: break-word;
+  word-break: break-word;
 }
-
 
 .main-container-pet-profile .container-pet-profile .main-edit-button-pet-info,
 .main-edit-button-medical {

@@ -116,7 +116,9 @@ function ProfilePet() {
             <div className='sub-title-info-pet'>
               <strong>Pet Parent</strong>{' '}
             </div>
-            <div className='customer-name-title'>{petData.customerDetails[0].username}</div>
+            <div className='customer-name-title'>
+              {petData.customerDetails[0].username}
+            </div>
             <div className='sub-title-info-pet'>
               <strong>ID:&nbsp;</strong>{' '}
               <span className='ID-pet-profile'>{petData.petID}</span>
@@ -239,31 +241,69 @@ function ProfilePet() {
                       <td>{reportInfo.notes}</td>
                       <td>
                         <button
-                          type="button"
-                          className="btn btn-primary"
-                          data-bs-toggle="modal"
+                          type='button'
+                          className='btn btn-primary'
+                          data-bs-toggle='modal'
                           data-bs-target={`#staticBackdropMedical-${index}`}
                         >
                           View
                         </button>
 
                         {/* Modal */}
-                        <div className="modal fade" id={`staticBackdropMedical-${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                          <div className="modal-dialog">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h5 className="modal-title" id="staticBackdropLabel">Medical Report Details</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div
+                          className='modal fade'
+                          id={`staticBackdropMedical-${index}`}
+                          data-bs-backdrop='static'
+                          data-bs-keyboard='false'
+                          tabIndex='-1'
+                          aria-labelledby='staticBackdropLabel'
+                          aria-hidden='true'
+                        >
+                          <div className='modal-dialog'>
+                            <div className='modal-content'>
+                              <div className='modal-header'>
+                                <h5
+                                  className='modal-title'
+                                  id='staticBackdropLabel'
+                                >
+                                  Medical Report Details
+                                </h5>
+                                <button
+                                  type='button'
+                                  className='btn-close'
+                                  data-bs-dismiss='modal'
+                                  aria-label='Close'
+                                ></button>
                               </div>
-                              <div className="modal-body">
-                                <p><strong>Medical ReportID:</strong> {reportInfo.medicalReportID}</p>
-                                <p><strong>Diagnosis:</strong> {reportInfo.diagnosis}</p>
-                                <p><strong>Treatment:</strong> {reportInfo.treatment}</p>
-                                <p><strong>Prescription:</strong> {reportInfo.prescription}</p>
-                                <p><strong>Notes:</strong> {reportInfo.notes}</p>
+                              <div className='modal-body'>
+                                <p>
+                                  <strong>Medical ReportID:</strong>{' '}
+                                  {reportInfo.medicalReportID}
+                                </p>
+                                <p>
+                                  <strong>Diagnosis:</strong>{' '}
+                                  {reportInfo.diagnosis}
+                                </p>
+                                <p>
+                                  <strong>Treatment:</strong>{' '}
+                                  {reportInfo.treatment}
+                                </p>
+                                <p>
+                                  <strong>Prescription:</strong>{' '}
+                                  {reportInfo.prescription}
+                                </p>
+                                <p>
+                                  <strong>Notes:</strong> {reportInfo.notes}
+                                </p>
                               </div>
-                              <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <div className='modal-footer'>
+                                <button
+                                  type='button'
+                                  className='btn btn-secondary'
+                                  data-bs-dismiss='modal'
+                                >
+                                  Close
+                                </button>
                               </div>
                             </div>
                           </div>
@@ -302,30 +342,66 @@ function ProfilePet() {
                       <td>{vaccine.vaccinationDetails.notes}</td>
                       <td>
                         <button
-                          type="button"
-                          className="btn btn-primary"
-                          data-bs-toggle="modal"
+                          type='button'
+                          className='btn btn-primary'
+                          data-bs-toggle='modal'
                           data-bs-target={`#staticBackdropVaccine-${index}`}
                         >
                           View
                         </button>
 
                         {/* Modal */}
-                        <div className="modal fade" id={`staticBackdropVaccine-${index}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                          <div className="modal-dialog">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h5 className="modal-title" id="staticBackdropLabel">Vaccination Details</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div
+                          className='modal fade'
+                          id={`staticBackdropVaccine-${index}`}
+                          data-bs-backdrop='static'
+                          data-bs-keyboard='false'
+                          tabIndex='-1'
+                          aria-labelledby='staticBackdropLabel'
+                          aria-hidden='true'
+                        >
+                          <div className='modal-dialog'>
+                            <div className='modal-content'>
+                              <div className='modal-header'>
+                                <h5
+                                  className='modal-title'
+                                  id='staticBackdropLabel'
+                                >
+                                  Vaccination Details
+                                </h5>
+                                <button
+                                  type='button'
+                                  className='btn-close'
+                                  data-bs-dismiss='modal'
+                                  aria-label='Close'
+                                ></button>
                               </div>
-                              <div className="modal-body">
-                                <p><strong>Date Given:</strong> {`${vaccine.dateGiven.split('T')[0]} ${vaccine.dateGiven.split('T')[1].split('.')[0]}`}</p>
-                                <p><strong>Vaccines:</strong> {vaccine.vaccinationDetails.name}</p>
-                                <p><strong>Next Vaccination Date:</strong> {`${parseInt(vaccine.dateGiven.split('-')[0]) + vaccine.vaccinationDetails.nextDate}`}</p>
-                                <p><strong>Vaccination Notes:</strong> {vaccine.vaccinationDetails.notes}</p>
+                              <div className='modal-body'>
+                                <p>
+                                  <strong>Date Given:</strong>{' '}
+                                  {`${vaccine.dateGiven.split('T')[0]} ${vaccine.dateGiven.split('T')[1].split('.')[0]}`}
+                                </p>
+                                <p>
+                                  <strong>Vaccines:</strong>{' '}
+                                  {vaccine.vaccinationDetails.name}
+                                </p>
+                                <p>
+                                  <strong>Next Vaccination Date:</strong>{' '}
+                                  {`${parseInt(vaccine.dateGiven.split('-')[0]) + vaccine.vaccinationDetails.nextDate}`}
+                                </p>
+                                <p>
+                                  <strong>Vaccination Notes:</strong>{' '}
+                                  {vaccine.vaccinationDetails.notes}
+                                </p>
                               </div>
-                              <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <div className='modal-footer'>
+                                <button
+                                  type='button'
+                                  className='btn btn-secondary'
+                                  data-bs-dismiss='modal'
+                                >
+                                  Close
+                                </button>
                               </div>
                             </div>
                           </div>

@@ -13,7 +13,6 @@ const DoctorSchema = new Schema(
       type: String,
       required: true,
       maxlength: 8,
-      unique: true,
       ref: 'Account',
     },
     name: {

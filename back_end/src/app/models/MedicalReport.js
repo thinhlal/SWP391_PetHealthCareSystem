@@ -11,14 +11,12 @@ const MedicalReportSchema = new Schema(
       type: String,
       required: true,
       maxlength: 8,
-      unique: true,
       ref: 'Account',
     },
     bookingID: {
       type: String,
       required: true,
       maxlength: 8,
-      unique: true,
       ref: 'Booking',
     },
     diagnosis: {

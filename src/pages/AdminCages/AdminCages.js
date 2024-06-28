@@ -125,8 +125,6 @@ function AdminCages() {
     [],
   );
 
-
-
   const [newCage, setNewCage] = useState({
     name: '',
     descrtiption: '',
@@ -202,7 +200,6 @@ function AdminCages() {
     setStatusFilter(event.target.value);
   };
 
-
   // const handleEditAccountChange = e => {
   //   const { name, value } = e.target;
   //   setEditAccount(prevState => ({
@@ -210,8 +207,6 @@ function AdminCages() {
   //     [name]: value,
   //   }));
   // };
-
-
 
   const handleStatusChange = id => {
     const updatedcageData = cageData.map(cage => {
@@ -227,8 +222,11 @@ function AdminCages() {
   };
 
   const filteredcageData = cageData.filter(cage => {
-    const matchesStatus = statusFilter === 'All' || cage.status === statusFilter;
-    const matchesSearch = search === '' || cage.cage_number_id.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus =
+      statusFilter === 'All' || cage.status === statusFilter;
+    const matchesSearch =
+      search === '' ||
+      cage.cage_number_id.toLowerCase().includes(search.toLowerCase());
     return matchesStatus && matchesSearch;
   });
 
@@ -483,10 +481,7 @@ function AdminCages() {
 
             <div className='Admin-Cages-Main-Table-Wrapper'>
               <div className='Admin-Cages-Main-Table'>
-                <div className='Admin-Cages-Main-Table-Title'>
-                  {' '}
-                  Cage List{' '}
-                </div>
+                <div className='Admin-Cages-Main-Table-Title'> Cage List </div>
                 <div className='Admin-Cages-Main-Table-Title-Text'>
                   {' '}
                   Cages Information{' '}
@@ -592,9 +587,7 @@ function AdminCages() {
                                 onChange={handleNewCageChange}
                                 placeholder='Descrtiption'
                               />
-
                             </div>
-
                           </div>
                           <div className='modal-footer'>
                             <button
@@ -667,7 +660,7 @@ function AdminCages() {
                     <div className='Admin-Cages-Main-Table-Content-Row-Action'>
                       {' '}
                       <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
-                        <button className='Admin-Cages-Main-Table-Content-Btn' >
+                        <button className='Admin-Cages-Main-Table-Content-Btn'>
                           <BorderColorOutlinedIcon sx={{ color: blue[400] }} />
                         </button>
                       </span>
@@ -689,9 +682,7 @@ function AdminCages() {
                             },
                           }}
                         />
-                      </span>
-
-                      {' '}
+                      </span>{' '}
                     </div>
                   </div>
                 ))}

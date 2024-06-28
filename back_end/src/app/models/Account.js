@@ -13,7 +13,6 @@ const AccountSchema = new Schema(
       type: String,
       required: true,
       maxlength: 255,
-      unique: true,
     },
     password: {
       type: String,
