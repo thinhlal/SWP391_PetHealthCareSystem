@@ -48,6 +48,7 @@ class SiteController {
         username,
         password: hashedPassword,
       });
+      await newAccount.save();
 
       let idCustomer;
       while (true) {
@@ -74,7 +75,6 @@ class SiteController {
         phone,
       });
       await newCustomer.save();
-      await newAccount.save();
 
       res.status(201).json({ message: 'Account registered successfully' });
     } catch (error) {
@@ -141,7 +141,6 @@ class SiteController {
         },
       ]);
       const user = userAgv[0];
-
       res.json({ message: 'Login successful', user, token });
     } catch (error) {
       console.error('Login Error:', error);
