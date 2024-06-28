@@ -120,171 +120,181 @@ function YourBooking() {
             </div>
 
             <div className='detail-information-booking'>
-              {yourBookings.map((booking, index) => (
-                <div
-                  key={index}
-                  className='info-detail-booking'
-                >
-                  <div className='detail-booking-confirm-booking'>
-                    <div className='card-detail-booking-confirm-booking'>
-                      <div className='card-ID-booking'>
-                        <div className='detail-number-ID'>
-                          ID: {booking.bookingID}
-                          <div
-                            className={`status-booking ${
-                              booking.isCancel === true
-                                ? 'status-cancel'
-                                : booking.isCheckIn
-                                  ? 'status-completed'
-                                  : 'status-pending'
-                            }`}
-                          >
-                            Status:{' '}
-                            {booking.isCancel === true ? (
-                              <span>Cancel</span>
-                            ) : booking.isCheckIn ? (
-                              <span>Completed</span>
-                            ) : (
-                              <span>Pending</span>
-                            )}
-                          </div>
-                        </div>
-                        <div className='card-body-content-booking'>
-                          <div className='text-card-body-content-booking'>
-                            <div className='col-booking'>
-                              <div className='mini-title-detail-booking'>
-                                Date Booking:
-                              </div>{' '}
-                              <br />
-                              {booking.dateBook.split('T')[0]}
-                            </div>
-                            <div className='col-booking'>
-                              <div className='mini-title-detail-booking'>
-                                Time:
-                              </div>{' '}
-                              <br />
-                              {`${booking.startTime} - ${booking.endTime}`}
-                            </div>
-                            <div className='col-booking'>
-                              <div className='mini-title-detail-booking'>
-                                Pet Name:
-                              </div>{' '}
-                              <br />
-                              {booking.petDetails[0].name}
-                            </div>
-                            <div className='col-booking'>
-                              <div className='mini-title-detail-booking'>
-                                Pet Type:
-                              </div>{' '}
-                              <br />
-                              {booking.petDetails[0].petType}
-                            </div>
-                            <div className='col-booking'>
-                              <div className='mini-title-detail-booking'>
-                                Selected Doctor:
-                              </div>{' '}
-                              <br />
-                              {booking.doctorDetails[0].name}
-                            </div>
-                            <div className='col-booking'>
-                              <div className='mini-title-detail-booking'>
-                                Services:
-                              </div>{' '}
-                              <br />
-                              {formatService(booking.servicesDetails).join(
-                                ', ',
+              {yourBookings.length === 0 ? (
+                <div className='no-bookings-message'>
+                  You don't have any appointments at the moment.
+                </div>
+              ) : (
+                yourBookings.map((booking, index) => (
+                  <div
+                    key={index}
+                    className='info-detail-booking'
+                  >
+                    <div className='detail-booking-confirm-booking'>
+                      <div className='card-detail-booking-confirm-booking'>
+                        <div className='card-ID-booking'>
+                          <div className='detail-number-ID'>
+                            ID: {booking.bookingID}
+                            <div
+                              className={`status-booking ${
+                                booking.isCancel === true
+                                  ? 'status-cancel'
+                                  : booking.isCheckIn
+                                    ? 'status-completed'
+                                    : 'status-pending'
+                              }`}
+                            >
+                              Status:{' '}
+                              {booking.isCancel === true ? (
+                                <span>Cancel</span>
+                              ) : booking.isCheckIn ? (
+                                <span>Completed</span>
+                              ) : (
+                                <span>Pending</span>
                               )}
                             </div>
                           </div>
-                        </div>
-
-                        <div className='price-cancel-rate-booking'>
-                          <div className='total-price-booking'>
-                            Total Price:&nbsp;
-                            <div className='detail-price-booking'>
-                              {booking.totalPrice}
+                          <div className='card-body-content-booking'>
+                            <div className='text-card-body-content-booking'>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Date Booking:
+                                </div>{' '}
+                                <br />
+                                {booking.dateBook.split('T')[0]}
+                              </div>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Time:
+                                </div>{' '}
+                                <br />
+                                {`${booking.startTime} - ${booking.endTime}`}
+                              </div>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Pet Name:
+                                </div>{' '}
+                                <br />
+                                {booking.petDetails[0].name}
+                              </div>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Pet Type:
+                                </div>{' '}
+                                <br />
+                                {booking.petDetails[0].petType}
+                              </div>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Selected Doctor:
+                                </div>{' '}
+                                <br />
+                                {booking.doctorDetails[0].name}
+                              </div>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Services:
+                                </div>{' '}
+                                <br />
+                                {formatService(booking.servicesDetails).join(
+                                  ', ',
+                                )}
+                              </div>
                             </div>
                           </div>
-                          {booking.isCheckIn === false &&
-                          booking.isCancel === false ? (
-                            <div
-                              onClick={() =>
-                                handleCancelBooking(booking.bookingID)
-                              }
-                              className='cancel-booking-button-1'
-                            >
-                              <div className='text-sign-in-button-booking'>
-                                Cancel Booking
+
+                          <div className='price-cancel-rate-booking'>
+                            <div className='total-price-booking'>
+                              Total Price:&nbsp;
+                              <div className='detail-price-booking'>
+                                {booking.totalPrice}
                               </div>
                             </div>
-                          ) : (
-                            <button
-                              type='button'
-                              className='btn btn-primary feedback-rate-booking'
-                              data-bs-toggle='modal'
-                              data-bs-target='#newModal'
-                            >
-                              <div className='text-feedback-rate-booking'>
-                                Feedback
+                            {booking.isCheckIn === false &&
+                            booking.isCancel === false ? (
+                              <div
+                                onClick={() =>
+                                  handleCancelBooking(booking.bookingID)
+                                }
+                                className='cancel-booking-button-1'
+                              >
+                                <div className='text-sign-in-button-booking'>
+                                  Cancel Booking
+                                </div>
                               </div>
-                            </button>
-                          )}
+                            ) : (
+                              <button
+                                type='button'
+                                className='btn btn-primary feedback-rate-booking'
+                                data-bs-toggle='modal'
+                                data-bs-target='#newModal'
+                              >
+                                <div className='text-feedback-rate-booking'>
+                                  Feedback
+                                </div>
+                              </button>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
+
               {/* pagination */}
-              <div className='add-pet_pagination'>
-                <nav aria-label='...'>
-                  <ul className='pagination'>
-                    <li className='page-item disabled'>
-                      <a
-                        className='page-link'
-                        href='#123'
+              
+              {yourBookings.length > 0 && (
+                <div className='add-pet_pagination'>
+                  <nav aria-label='...'>
+                    <ul className='pagination'>
+                      <li className='page-item disabled'>
+                        <a
+                          className='page-link'
+                          href='#123'
+                        >
+                          Previous
+                        </a>
+                      </li>
+                      <li className='page-item'>
+                        <a
+                          className='page-link'
+                          href='#123'
+                        >
+                          1
+                        </a>
+                      </li>
+                      <li
+                        className='page-item active'
+                        aria-current='page'
                       >
-                        Previous
-                      </a>
-                    </li>
-                    <li className='page-item'>
-                      <a
-                        className='page-link'
-                        href='#123'
-                      >
-                        1
-                      </a>
-                    </li>
-                    <li
-                      className='page-item active'
-                      aria-current='page'
-                    >
-                      <a
-                        className='page-link'
-                        href='123'
-                      >
-                        2
-                      </a>
-                    </li>
-                    <li className='page-item'>
-                      <a
-                        className='page-link'
-                        href='#123'
-                      >
-                        3
-                      </a>
-                    </li>
-                    <li className='page-item'>
-                      <a
-                        className='page-link'
-                        href='123'
-                      >
-                        Next
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+                        <a
+                          className='page-link'
+                          href='123'
+                        >
+                          2
+                        </a>
+                      </li>
+                      <li className='page-item'>
+                        <a
+                          className='page-link'
+                          href='#123'
+                        >
+                          3
+                        </a>
+                      </li>
+                      <li className='page-item'>
+                        <a
+                          className='page-link'
+                          href='123'
+                        >
+                          Next
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              )}
             </div>
 
             <div
