@@ -234,8 +234,6 @@
 .manage-booking-list .choose-Doctor-wrapper {
   display: flex;
   align-items: center;
-  height: 25px;
-  margin: 10px 0;
 }
 
 .manage-booking-list .choose-Doctor-wrapper input {
