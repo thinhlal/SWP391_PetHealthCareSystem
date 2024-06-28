@@ -129,6 +129,14 @@ class BookingController {
             as: 'servicesDetails',
           },
         },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentsDetails',
+          },
+        },
       ]);
       res.status(201).json({ allBookings });
     } catch (error) {

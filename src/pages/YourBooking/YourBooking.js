@@ -136,22 +136,40 @@ function YourBooking() {
                           <div className='detail-number-ID'>
                             ID: {booking.bookingID}
                             <div
-                              className={`status-booking ${
-                                booking.isCancel === true
-                                  ? 'status-cancel'
-                                  : booking.isCheckIn
-                                    ? 'status-completed'
-                                    : 'status-pending'
-                              }`}
+                              className={`status-booking
+                              ${booking.paymentsDetails[0].paymentMethod === 'COUNTER' ? (
+                                  'status-pending'
+                                ) :
+                                  booking.paymentsDetails[0].isCancelPayment ? (
+                                    'status-cancel'
+                                  ) : booking.paymentsDetails[0].isSuccess ? (
+                                    booking.isCancel ? (
+                                      'status-cancel'
+                                    ) : booking.isCheckIn ? (
+                                      'status-completed'
+                                    ) : (
+                                      'status-pending'
+                                    )
+                                  ) : null
+                                }
+                                }`}
                             >
                               Status:{' '}
-                              {booking.isCancel === true ? (
-                                <span>Cancel</span>
-                              ) : booking.isCheckIn ? (
-                                <span>Completed</span>
-                              ) : (
-                                <span>Pending</span>
-                              )}
+                              {booking.paymentsDetails[0].paymentMethod === 'COUNTER' ? (
+                                <span>Pay when checkIn</span>
+                              ) :
+                                booking.paymentsDetails[0].isCancelPayment ? (
+                                  <span>Cancelled Payment</span>
+                                ) : booking.paymentsDetails[0].isSuccess ? (
+                                  booking.isCancel ? (
+                                    <span>Cancelled Booking</span>
+                                  ) : booking.isCheckIn ? (
+                                    <span>Completed</span>
+                                  ) : (
+                                    <span>Pending</span>
+                                  )
+                                ) : null
+                              }
                             </div>
                           </div>
                           <div className='card-body-content-booking'>
@@ -186,7 +204,7 @@ function YourBooking() {
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
-                                  Selected Doctor:
+                                  Doctor:
                                 </div>{' '}
                                 <br />
                                 {booking.doctorDetails[0].name}
@@ -200,6 +218,13 @@ function YourBooking() {
                                   ', ',
                                 )}
                               </div>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Payment:
+                                </div>{' '}
+                                <br />
+                                {booking.paymentsDetails[0].paymentMethod}
+                              </div>
                             </div>
                           </div>
 
@@ -210,30 +235,31 @@ function YourBooking() {
                                 {booking.totalPrice}
                               </div>
                             </div>
-                            {booking.isCheckIn === false &&
-                            booking.isCancel === false ? (
-                              <div
-                                onClick={() =>
-                                  handleCancelBooking(booking.bookingID)
-                                }
-                                className='cancel-booking-button-1'
-                              >
-                                <div className='text-sign-in-button-booking'>
-                                  Cancel Booking
+                            {booking.paymentsDetails[0].isCancelPayment ? null :
+                              !booking.isCheckIn &&
+                                !booking.isCancel ? (
+                                <div
+                                  onClick={() =>
+                                    handleCancelBooking(booking.bookingID)
+                                  }
+                                  className='cancel-booking-button-1'
+                                >
+                                  <div className='text-sign-in-button-booking'>
+                                    Cancel Booking
+                                  </div>
                                 </div>
-                              </div>
-                            ) : (
-                              <button
-                                type='button'
-                                className='btn btn-primary feedback-rate-booking'
-                                data-bs-toggle='modal'
-                                data-bs-target='#newModal'
-                              >
-                                <div className='text-feedback-rate-booking'>
-                                  Feedback
-                                </div>
-                              </button>
-                            )}
+                              ) : (
+                                <button
+                                  type='button'
+                                  className='btn btn-primary feedback-rate-booking'
+                                  data-bs-toggle='modal'
+                                  data-bs-target='#newModal'
+                                >
+                                  <div className='text-feedback-rate-booking'>
+                                    Feedback
+                                  </div>
+                                </button>
+                              )}
                           </div>
                         </div>
                       </div>

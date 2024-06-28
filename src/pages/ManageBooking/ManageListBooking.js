@@ -306,7 +306,7 @@ function ManageListBooking() {
 
     if (!validateForm()) return;
     if (accountOption === 'hasOwnerID') {
-      const newBooking = {
+      const newBookingHasCustomer = {
         day: selectedDate,
         startTime: selectedTimeSlot.startTime,
         endTime: selectedTimeSlot.endTime,
@@ -316,10 +316,10 @@ function ManageListBooking() {
         ),
         service: services.map(service => service.service),
       };
-      console.log(newBooking);
+      console.log(newBookingHasCustomer);
       //Done
     } else {
-      const newBooking = {
+      const newBookingAndNewCustomer = {
         day: selectedDate,
         startTime: selectedTimeSlot.startTime,
         endTime: selectedTimeSlot.endTime,
@@ -330,7 +330,7 @@ function ManageListBooking() {
         ),
         service: services.map(service => service.service),
       };
-      console.log(newBooking);
+      console.log(newBookingAndNewCustomer);
     }
 
     // setAllBookings([...allBookings, newBooking]);

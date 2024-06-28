@@ -240,6 +240,7 @@ a {
 }
 
 .main-container-your-booking-page .cancel-booking-button-1:hover {
+  cursor: pointer;
   color: #ffffff;
   background-color: #182155;
   border-radius: 8px;
