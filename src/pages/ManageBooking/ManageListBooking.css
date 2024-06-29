@@ -169,12 +169,21 @@
   height: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
   font-family: Roboto, sans-serif;
+  padding-left: 10px;
   font-size: 16px;
 }
+
+.manage-booking-list .content-list-body-value .text-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px; 
+}
+
 
 .manage-booking-list .content-list-body-value:hover {
   opacity: 0.6;

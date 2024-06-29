@@ -17,7 +17,10 @@ function Services() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({
+      duration: 1000,
+      once: true, 
+    });
 
     // Giả lập thời gian tải trang
     const timer = setTimeout(() => {

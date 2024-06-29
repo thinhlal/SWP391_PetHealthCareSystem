@@ -1,3 +1,21 @@
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
 .all-services {
   box-sizing: border-box;
   overflow: hidden;
@@ -85,19 +103,25 @@
 }
 
 /* image cat */
-.all-services .picture-services-cat {
-  width: 100%;
-  height: 800px;
-  display: flex;
-}
-
 .all-services .avatar-cat {
   width: 100%;
-  height: 700px;
+  max-width: 1000px; 
+  height: 700px; 
   border-radius: 0px 1000px 1000px 0px;
   background-color: #f7f7f7;
   overflow: hidden;
+  position: relative;
 }
+
+.all-services .photo-frame-img-service {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute; 
+  top: 0;
+  left: 0;
+}
+
 
 .all-services .photo-frame-img-service {
   object-fit: cover;
@@ -152,6 +176,7 @@
   top: 0;
   left: 0;
   object-fit: cover;
+  animation: swing 2s infinite ease-in-out; /* Thêm animation vào phần tử */
 }
 
 .all-services .text-wrapper-cat {
@@ -225,19 +250,25 @@
 }
 
 /* image dog */
-.all-services .picture-services-dog {
-  width: 100%;
-  height: 800px;
-}
-
 .all-services .avatar-dog {
   width: 100%;
-  height: 700px;
+  max-width: 1000px; /* Đặt giới hạn chiều rộng tối đa để đảm bảo tỷ lệ */
+  height: 700px; /* Chiều cao cố định */
   border-radius: 1000px 0px 0px 1000px;
-  position: relative;
   background-color: #f7f7f7;
   overflow: hidden;
+  position: relative;
 }
+
+.all-services .photo-frame-img-service {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute; /* Đảm bảo ảnh lấp đầy phần tử cha */
+  top: 0;
+  left: 0;
+}
+
 
 .all-services .content-services-dog {
   width: 100%;

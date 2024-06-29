@@ -498,16 +498,39 @@ a {
   border-radius: 50px;
 }
 
-.main .service_Info_Detail-img {
-  width: 100%;
-  height: 250px;
-  background-image: url(../../assets/images/img_Home/service_dog.png);
+.service_Info_Detail-img-pet-1 {
+  background-image: url('../../assets/images/img_Home/service_dog.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-start-start-radius: 50px;
-  border-start-end-radius: 50px;
+  width: 100%;
+  height: 250px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
 }
+
+.service_Info_Detail-img-pet-2 {
+  background-image: url('../../assets/images/img_Home/servicesPet2.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 250px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+.service_Info_Detail-img-pet-3 {
+  background-image: url('../../assets/images/img_Home/servicesPet3.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 250px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
 
 .main .service_Info_Detail-text {
   font-size: 18px;

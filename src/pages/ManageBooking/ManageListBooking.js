@@ -1040,13 +1040,17 @@ function ManageListBooking() {
                         {booking.endTime}
                       </div>
                       <div className='content-list-body-value'>
+                      <div className='text-content'>
                         {truncateText(booking.name)}
                       </div>
+                      </div>
                       <div className='content-list-body-value'>
+                      <div className='text-content'>
                         {booking.servicesDetails &&
                           booking.servicesDetails
                             .map(service => service.name)
                             .join(', ')}
+                      </div>
                       </div>
                       <div className='content-list-body-value'>
                         {booking.doctorDetails.length !== 0

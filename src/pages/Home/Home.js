@@ -239,7 +239,7 @@ function Home() {
           />
           <div className='service-detail-wrapper'>
             <div className='service_Info_Detail'>
-              <div className='service_Info_Detail-img'></div>
+              <div className='service_Info_Detail-img service_Info_Detail-img-pet-1'></div>
               <div className='service_Info_Detail-text'>
                 Sign up for a time-specific medical examination for your pet.
               </div>
@@ -255,7 +255,7 @@ function Home() {
               </div>
             </div>
             <div className='service_Info_Detail'>
-              <div className='service_Info_Detail-img'></div>
+              <div className='service_Info_Detail-img service_Info_Detail-img-pet-2'></div>
               <div className='service_Info_Detail-text'>
                 Provide medical examination and treatment services with a team
                 of professional and experienced doctors
@@ -272,7 +272,7 @@ function Home() {
               </div>
             </div>
             <div className='service_Info_Detail'>
-              <div className='service_Info_Detail-img'></div>
+              <div className='service_Info_Detail-img service_Info_Detail-img-pet-3'></div>
               <div className='service_Info_Detail-text'>
                 Sign up for a time-specific medical examination for your pet.
               </div>
