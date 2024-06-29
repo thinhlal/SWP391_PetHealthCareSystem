@@ -95,7 +95,7 @@ function Home() {
                         alt='User Icon'
                         style={{ width: '20px' }}
                       />
-                      &nbsp;{user.customerDetails[0].name}
+                      &nbsp;{user && user.customerDetails[0].name}
                     </div>
                     <div
                       className='menu-item-login'
