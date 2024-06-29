@@ -1,5 +1,5 @@
 import './ManageCages.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,99 +12,36 @@ function ManageCages() {
   const [bookingSearchResult, setBookingSearchResult] = useState({});
   const [paymentUpdatePrice, setPaymentUpdatePrice] = useState({});
   const [allDoctorsWorkingHours, setAllDoctorsWorkingHours] = useState([]);
+  const [reasonForAdmission, setReasonForAdmission] = useState('');
+  const [dischargeDate, setDischargeDate] = useState('');
   const [chosenDoctor, setChosenDoctor] = useState('');
   const [activeTab, setActiveTab] = useState('Profile');
-  const [cageData, setCageData] = useState([
-    {
-      id: 'CG111111',
-      name: 'A01',
-      description: 'Large Cage',
-      status: 'Using',
-      petStatus: 'Not Recover',
-      petDetails: {
-        name: 'Boby',
-        breed: 'Golden',
-        species: 'Dog',
-        gender: 'Male',
-        inCage: 'Good',
-        services: 'X-quang',
-        dateTime: '10:00 AM | 2024-06-02',
-        doctor: 'Johny',
-        cageNumber: 'A01',
-        admissionTime: '15:00 AM | 2024-10-02',
-        ownerName: 'Liza Doe',
-        email: 'support@gmail.com',
-        phone: '+1234 55 66 777',
-      },
-    },
-    {
-      id: 'CG222222',
-      name: 'A02',
-      description: 'Large Cage',
-      status: 'Using',
-      petStatus: 'Not Recover',
-      petDetails: {
-        name: 'Boby',
-        breed: 'Golden',
-        species: 'Dog',
-        gender: 'Male',
-        inCage: 'Good',
-        services: 'X-quang',
-        dateTime: '10:00 AM | 2024-06-02',
-        doctor: 'Johny',
-        cageNumber: 'A01',
-        admissionTime: '15:00 AM | 2024-10-02',
-        ownerName: 'Liza Doe',
-        email: 'support@gmail.com',
-        phone: '+1234 55 66 777',
-      },
-    },
-    {
-      id: 'CG333333',
-      name: 'A03',
-      description: 'Large Cage',
-      status: 'Empty',
-      petStatus: 'Not Recover',
-      petDetails: {},
-    },
-    {
-      id: 'CG444444',
-      name: 'A04',
-      description: 'Large Cage',
-      status: 'Empty',
-      petStatus: 'Not Recover',
-      petDetails: {},
-    },
-    {
-      id: 'CG555555',
-      name: 'A05',
-      description: 'Large Cage',
-      status: 'Empty',
-      petStatus: 'Not Recover',
-      petDetails: {},
-    },
-  ]);
+  const [cageData, setCageData] = useState([]);
   const [selectedCage, setSelectedCage] = useState(null);
   const [statusFilter, setStatusFilter] = useState('All');
   const [errors, setErrors] = useState({
-    accountOption: '',
     chosenDoctor: '',
-    petName: '',
-    petType: '',
-    petBreed: '',
-    petGender: '',
-    petBirthday: '',
-    ownerName: '',
-    ownerPhone: '',
-    ownerEmail: '',
-    accountSelect: '',
-    petSelect: '',
-    searchValueAccount: '',
-    searchValuePet: '',
+    bookingResult: ''
   });
+
+  useEffect(() => {
+    const handleGetAllCages = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/cage/getAllCages`,
+        );
+        console.log(response.data);
+        setCageData(response.data);
+      } catch (error) {
+        console.error('Error fetching cages:', error);
+      }
+    };
+    handleGetAllCages();
+  }, [])
 
   const handleSearchBooking = async () => {
     if (searchBookingIDValue === '') {
+      setBookingSearchResult({});
       return;
     }
     try {
@@ -112,6 +49,7 @@ function ManageCages() {
         `${process.env.REACT_APP_API_URL}/booking/getBookingID/${searchBookingIDValue}`,
       );
       if (response.data.length !== 0) {
+        setErrors(prev => ({ ...prev, bookingResult: '' }));
         setPaymentUpdatePrice(response.data[0].paymentDetails[0])
         setBookingSearchResult(response.data[0]);
       } else {
@@ -151,18 +89,30 @@ function ManageCages() {
     setErrors(prev => ({ ...prev, chosenDoctor: '' }));
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!chosenDoctor)
+      newErrors.chosenDoctor = 'Choose doctor to care';
+    if (Object.keys(bookingSearchResult).length === 0);
+    newErrors.bookingResult = 'Search valid bookingID';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
+    if (!validateForm()) return;
     const formData = {
-      reasonForAdmission: document.getElementById('reasonForAdmission').value,
-      currentCondition: document.getElementById('currentCondition').value,
+      reasonForAdmission: reasonForAdmission,
       cageNumber: selectedCage.name,
       doctorID: chosenDoctor,
-      admissionTime: document.getElementById('admissionTime').value,
+      admissionTime: new Date(),
     };
 
     const updatedCageData = cageData.map(cage => {
-      if (cage.id === selectedCage.id) {
+      if (cage.cageID === selectedCage.id) {
         return {
           ...cage,
           status: 'Using',
@@ -197,7 +147,7 @@ function ManageCages() {
 
   const handleUpdateStatus = (cageId, newCageStatus, newPetStatus) => {
     const updatedCageData = cageData.map(cage => {
-      if (cage.id === cageId) {
+      if (cage.cageID === cageId) {
         const updatedStatus = newPetStatus === 'Recover' ? 'Empty' : 'Using';
         const updatedCage = {
           ...cage,
@@ -220,7 +170,8 @@ function ManageCages() {
 
   const filteredCageData = cageData.filter(cage => {
     if (statusFilter === 'All') return true;
-    return cage.status === statusFilter;
+    const status = cage.isEmpty ? 'Empty' : 'Using'
+    return status === statusFilter;
   });
 
   return (
@@ -315,16 +266,19 @@ function ManageCages() {
                               type='text'
                               id='searchBookingID'
                               value={searchBookingIDValue}
-                              onChange={e =>
+                              onChange={e => {
                                 setSearchBookingValue(e.target.value)
+                                setErrors(prev => ({ ...prev, bookingResult: '' }));
                               }
+                              }
+                              required
                             />
                             <div onClick={handleSearchBooking}>
                               Search
                             </div>
-                            {errors.searchBookingIDValue && (
+                            {errors.bookingResult && (
                               <span className='error'>
-                                {errors.searchBookingIDValue}
+                                {errors.bookingResult}
                               </span>
                             )}
                           </div>
@@ -413,6 +367,33 @@ function ManageCages() {
                               </div>
                             </div>
                           </div>
+                          <div className='search-owner-option-section'>
+                            <label>Reason for admission:</label>
+                            <input
+                              type='text'
+                              id='reasonForAdmission'
+                              value={reasonForAdmission}
+                              onChange={e => {
+                                setReasonForAdmission(e.target.value)
+                              }
+                              }
+                              required
+                            />
+                          </div>
+                          <div className='search-owner-option-section'>
+                            <label>Discharge date:</label>
+                            <input
+                              type='date'
+                              id='dischargeDate'
+                              value={dischargeDate}
+                              min={new Date().toISOString().split('T')[0]}
+                              onChange={e => {
+                                setDischargeDate(e.target.value)
+                              }
+                              }
+                              required
+                            />
+                          </div>
                         </div>
                         <div className='modal-footer'>
                           <button
@@ -453,26 +434,26 @@ function ManageCages() {
               {filteredCageData.map(cage => (
                 <div
                   className='main-content-list-body-wrapper'
-                  key={cage.id}
+                  key={cage.cageID}
                 >
                   <div className='content-list-body-info'>
-                    <div className='content-list-body-value'>{cage.id}</div>
+                    <div className='content-list-body-value'>{cage.cageID}</div>
                     <div className='content-list-body-value'>{cage.name}</div>
                     <div className='content-list-body-value'>
                       {cage.description}
                     </div>
                     <div
-                      className={`content-list-body-value ${cage.status === 'Using' ? 'status-using' : 'status-empty'}`}
+                      className={`content-list-body-value ${cage.isEmpty === false ? 'status-using' : 'status-empty'}`}
                     >
-                      {cage.status}
+                      {cage.isEmpty ? <span>Empty</span> : <span>Using</span>}
                     </div>
                     <div className='content-list-body-value-button'>
-                      {cage.status !== 'Empty' && (
+                      {!cage.isEmpty && (
                         <button
                           type='button'
                           className='btn btn-primary'
                           data-bs-toggle='modal'
-                          data-bs-target={`#more_info_${cage.id}`}
+                          data-bs-target={`#more_info_${cage.cageID}`}
                           onClick={() => setSelectedCage(cage)}
                         >
                           More Details
@@ -482,7 +463,7 @@ function ManageCages() {
 
                     <div
                       className='modal fade'
-                      id={`more_info_${cage.id}`}
+                      id={`more_info_${cage.cageID}`}
                       aria-labelledby='exampleModalLabel'
                       aria-hidden='true'
                     >
@@ -525,7 +506,6 @@ function ManageCages() {
                                 </button>
                               </div>
 
-                              {/* profile customer */}
                               <div
                                 id='profile-customer'
                                 className='tabcontent-customer'
@@ -544,7 +524,7 @@ function ManageCages() {
                                       className='edit-customer'
                                       name='name'
                                       value={
-                                        selectedCage?.petDetails.ownerName || ''
+                                        selectedCage?.customerDetails[0]?.name || ''
                                       }
                                       readOnly
                                     />
@@ -559,7 +539,7 @@ function ManageCages() {
                                       className='edit-customer'
                                       name='email'
                                       value={
-                                        selectedCage?.petDetails.email || ''
+                                        selectedCage?.customerDetails[0]?.email || ''
                                       }
                                       readOnly
                                     />
@@ -574,7 +554,7 @@ function ManageCages() {
                                       className='edit-customer'
                                       name='phone'
                                       value={
-                                        selectedCage?.petDetails.phone || ''
+                                        selectedCage?.customerDetails[0]?.phone || ''
                                       }
                                       readOnly
                                     />
@@ -582,7 +562,6 @@ function ManageCages() {
                                 </form>
                               </div>
 
-                              {/* pet profile */}
                               <div
                                 id='Vacancies'
                                 className='tabcontent-pet'
@@ -601,7 +580,7 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='name'
                                       value={
-                                        selectedCage?.petDetails.name || ''
+                                        selectedCage?.petDetails[0]?.name || ''
                                       }
                                       readOnly
                                     />
@@ -616,7 +595,7 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='breed'
                                       value={
-                                        selectedCage?.petDetails.breed || ''
+                                        selectedCage?.petDetails[0]?.breed || ''
                                       }
                                       readOnly
                                     />
@@ -624,14 +603,14 @@ function ManageCages() {
 
                                   <div className='form-group'>
                                     <div className='sub-title-profile-pet'>
-                                      Species:
+                                      Birthday:
                                     </div>
                                     <input
                                       type='text'
                                       className='edit-pet'
                                       name='species'
                                       value={
-                                        selectedCage?.petDetails.species || ''
+                                        selectedCage?.petDetails[0]?.birthday.split('T')[0] || ''
                                       }
                                       readOnly
                                     />
@@ -646,7 +625,7 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='gender'
                                       value={
-                                        selectedCage?.petDetails.gender || ''
+                                        selectedCage?.petDetails[0]?.gender.toLowerCase() || ''
                                       }
                                       readOnly
                                     />
@@ -654,14 +633,14 @@ function ManageCages() {
 
                                   <div className='form-group'>
                                     <div className='sub-title-profile-pet'>
-                                      In cage:
+                                      Pet type:
                                     </div>
                                     <input
                                       type='text'
                                       className='edit-pet'
                                       name='in-cage'
                                       value={
-                                        selectedCage?.petDetails.inCage || ''
+                                        selectedCage?.petDetails[0]?.petType.toLowerCase() || ''
                                       }
                                       readOnly
                                     />
@@ -669,7 +648,6 @@ function ManageCages() {
                                 </form>
                               </div>
 
-                              {/* more */}
                               <div
                                 id='More'
                                 className='tabcontent-pet-more'
@@ -678,8 +656,7 @@ function ManageCages() {
                                     activeTab === 'More' ? 'flex' : 'none',
                                 }}
                               >
-                                <form className='pet-profile-form'>s
-
+                                <form className='pet-profile-form'>
                                   <div className='form-group'>
                                     <div className='sub-title-profile-pet'>
                                       Doctor:
@@ -689,7 +666,7 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='doctor'
                                       value={
-                                        selectedCage?.petDetails.doctor || ''
+                                        selectedCage?.doctorDetailCage[0]?.name || ''
                                       }
                                       readOnly
                                     />
@@ -704,13 +681,12 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='cageNumber'
                                       value={
-                                        selectedCage?.petDetails.cageNumber ||
+                                        selectedCage?.cageID ||
                                         ''
                                       }
                                       readOnly
                                     />
                                   </div>
-
                                   <div className='form-group'>
                                     <div className='sub-title-profile-pet'>
                                       Admission Time:
@@ -720,8 +696,21 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='admissionTime'
                                       value={
-                                        selectedCage?.petDetails
-                                          .admissionTime || ''
+                                        selectedCage?.cageDiseaseDetails[0].startDate.split('T')[0] || ''
+                                      }
+                                      readOnly
+                                    />
+                                  </div>
+                                  <div className='form-group'>
+                                    <div className='sub-title-profile-pet'>
+                                      Reason for admission:
+                                    </div>
+                                    <input
+                                      type='text'
+                                      className='edit-pet'
+                                      name='admissionTime'
+                                      value={
+                                        selectedCage?.cageDiseaseDetails[0].reasonForAdmission || ''
                                       }
                                       readOnly
                                     />
@@ -766,7 +755,7 @@ function ManageCages() {
                           type='button'
                           className='btn btn-primary'
                           data-bs-toggle='modal'
-                          data-bs-target={`#update_status_${cage.id}`}
+                          data-bs-target={`#update_status_${cage.cageID}`}
                           onClick={() => setSelectedCage(cage)}
                         >
                           Update
@@ -775,7 +764,7 @@ function ManageCages() {
                     </div>
                     <div
                       className='modal fade'
-                      id={`update_status_${cage.id}`}
+                      id={`update_status_${cage.cageID}`}
                       aria-labelledby='exampleModalLabel'
                       aria-hidden='true'
                     >
@@ -790,7 +779,7 @@ function ManageCages() {
                             );
                             document
                               .querySelector(
-                                `#update_status_${cage.id} .btn-close`,
+                                `#update_status_${cage.cageID} .btn-close`,
                               )
                               .click();
                           }}

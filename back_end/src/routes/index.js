@@ -8,8 +8,10 @@ const doctorRouter = require('./doctor');
 const accountRouter = require('./account');
 const manageBookingRouter = require('./manageBooking');
 const paymentRouter = require('./payment');
+const cageRouter = require('./cage');
 
 function route(app) {
+  app.use('/cage', cageRouter);
   app.use('/payment', paymentRouter);
   app.use('/manageBooking', manageBookingRouter);
   app.use('/doctor', doctorRouter);
