@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
+
 // Img
 import logo_pet_health_care from '../../assets/images/img_AdminCages/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminCages/icon_search.svg';
@@ -26,12 +28,13 @@ function AdminCages() {
   const [statusFilter, setStatusFilter] = useState('All');
   const [filteredRevenueData, setFilteredRevenueData] = useState(null);
   const [yesterdayRevenueData, setYesterdayRevenueData] = useState(null);
+  const [errors, setErrors] = useState({});
   const [cageData, setCageData] = useState([
     {
       id: 1,
       cage_number_id: 'C00001',
       name: 'Cage1',
-      descrtiption: 'Cage1 description',
+      description: 'Cage1 description',
       account_id: 'A00001',
       status: 'Using',
       condition: 'Enable',
@@ -44,7 +47,7 @@ function AdminCages() {
       id: 2,
       cage_number_id: 'C00002',
       name: 'Cage2',
-      descrtiption: 'Cage2 description',
+      description: 'Cage2 description',
       account_id: 'A00002',
       status: 'Empty',
       condition: 'Disable',
@@ -57,7 +60,7 @@ function AdminCages() {
       id: 3,
       cage_number_id: 'C00003',
       name: 'Cage3',
-      descrtiption: 'Cage3 description',
+      description: 'Cage3 description',
       account_id: 'A00003',
       status: 'Empty',
       condition: 'Disable',
@@ -70,7 +73,7 @@ function AdminCages() {
       id: 4,
       cage_number_id: 'C00004',
       name: 'Cage4',
-      descrtiption: 'Cage4 description',
+      description: 'Cage4 description',
       account_id: 'A00004',
       status: 'Using',
       condition: 'Enable',
@@ -83,7 +86,7 @@ function AdminCages() {
       id: 5,
       cage_number_id: 'C00005',
       name: 'Cage5',
-      descrtiption: 'Cage5 description',
+      description: 'Cage5 description',
       condition: 'Enable',
       account_id: 'A00005',
       status: 'Using',
@@ -127,8 +130,8 @@ function AdminCages() {
 
   const [newCage, setNewCage] = useState({
     name: '',
-    descrtiption: '',
-    condition: '',
+    description: '',
+    condition: 'Enable',
     status: 'Empty',
   });
 
@@ -141,30 +144,37 @@ function AdminCages() {
   };
 
   const handleAddCage = () => {
+    const newErrors = {};
+    if (!newCage.name) newErrors.name = 'Name is required';
+    if (!newCage.description) newErrors.description = 'Description is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
     const newId = cageData.length + 1;
     const newCageData = {
       ...newCage,
       id: newId,
-      cage_number_id: `P0000${newId}`,
-      status: 'Empty',
+      cage_number_id: `C0000${newId}`,
+      condition: 'Enable',
     };
     setCageData([...cageData, newCageData]);
     setNewCage({
       name: '',
-      descrtiption: '',
+      description: '',
+      condition: 'Enable',
       status: 'Empty',
     });
+    setErrors({});
+    const modal = bootstrap.Modal.getInstance(modalRef.current);
+    if (modal) {
+      modal.hide();
+    }
   };
 
-  // const [editAccount, setEditAccount] = useState({
-  //   id: '',
-  //   name: '',
-  //   email: '',
-  //   phoneNum: '',
-  //   role: '',
-  // });
 
-  // const [errors, setErrors] = useState({});
+
   const modalRef = useRef(null);
 
   const handleDateChange = event => {
@@ -199,14 +209,6 @@ function AdminCages() {
   const handlestatusFilterChange = event => {
     setStatusFilter(event.target.value);
   };
-
-  // const handleEditAccountChange = e => {
-  //   const { name, value } = e.target;
-  //   setEditAccount(prevState => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
 
   const handleStatusChange = id => {
     const updatedcageData = cageData.map(cage => {
@@ -562,13 +564,17 @@ function AdminCages() {
                                 {' '}
                                 Cage name:{' '}
                               </label>
-                              <input
-                                className='Admin-Cages-input'
-                                name='cage_name'
-                                value={newCage.cage_name}
+                              <input className='Admin-Cages-input'
+                                name='name'
+                                value={newCage.name}
                                 onChange={handleNewCageChange}
-                                placeholder='Name'
-                              />
+                                placeholder='Name' />
+                              {errors.name && (
+                                <div className='Admin-Cages-Error'>
+                                  {errors.name}
+                                </div>
+                              )}
+
                             </div>
 
                             <div className='Admin-Cages-modal-add-account'>
@@ -582,11 +588,16 @@ function AdminCages() {
                               </label>
                               <input
                                 className='Admin-Cages-input'
-                                name='cage_description'
-                                value={newCage.cage_description}
+                                name='description'
+                                value={newCage.description}
                                 onChange={handleNewCageChange}
-                                placeholder='Descrtiption'
+                                placeholder='Description'
                               />
+                              {errors.description && (
+                                <div className='Admin-Cages-Error'>
+                                  {errors.description}
+                                </div>
+                              )}
                             </div>
                           </div>
                           <div className='modal-footer'>
@@ -601,8 +612,7 @@ function AdminCages() {
                             <button
                               type='button'
                               className='btn btn-success'
-                              onClick={handleAddCage}
-                            >
+                              onClick={handleAddCage}                            >
                               {' '}
                               Add{' '}
                             </button>
@@ -651,7 +661,7 @@ function AdminCages() {
                     </div>
                     <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
-                      {item.descrtiption}{' '}
+                      {item.description}{' '}
                     </div>
                     <div className='Admin-Cages-Main-Table-Content-Row'>
                       {' '}
