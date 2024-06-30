@@ -6,4 +6,6 @@ const serviceController = require('../app/controllers/ServiceController.js');
 
 router.get('/getAllServices', verifyToken, serviceController.getAllServices);
 
+router.post('/addService', verifyToken, serviceController.addService);
+
 module.exports = router;

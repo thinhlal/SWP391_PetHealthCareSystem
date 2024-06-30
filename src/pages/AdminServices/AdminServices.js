@@ -9,6 +9,7 @@ import icon_search from '../../assets/images/img_AdminServices/icon_search.svg';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { blue } from '@mui/material/colors';
 import { AuthContext } from '../../context/AuthContext';
+import axiosInstance from '../../utils/axiosInstance';
 
 function AdminServices() {
   const { logOut } = useContext(AuthContext);
@@ -141,6 +142,7 @@ function AdminServices() {
       price: validateInput('price', newService.price),
     };
 
+
     if (
       Object.values(newErrors).every(error => error === '') &&
       newService.services_name &&
@@ -162,6 +164,17 @@ function AdminServices() {
       });
       setAddServiceErrors({ services_name: '', describe: '', price: '' });
 
+      
+      const res = axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/service/addService`,
+        {
+          status: 'Enable',
+          services_id: newId,
+          serviceName: newService.services_name,
+          describe: newService.describe,
+          price: newService.price,
+        },
+      );
       // Close the modal
       modalCloseButtonRef.current.click();
     } else {
