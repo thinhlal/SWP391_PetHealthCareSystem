@@ -24,6 +24,8 @@ import ProfilePet from './pages/ProfilePet/ProfilePet.js';
 import ChoosePet from './pages/ChoosePet/ChoosePet.js';
 import Payment from './pages/Payment/Payment.js';
 import Unauthorized from './pages/Unauthorized/Unauthorized.js';
+import UserProfile from './pages/UserProfile/UserProfile.js';
+import ChangeUserPassword from './pages/ChangeUserPassWord/ChangeUserPassWord.js';
 function App() {
   return (
     <AuthProvider>
@@ -175,6 +177,30 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={['Admin']}>
               <AdminCages />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/user-profile'
+          element={
+            <ProtectedRoute >
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/user-profile'
+          element={
+            <ProtectedRoute >
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/change-user-password'
+          element={
+            <ProtectedRoute >
+              <ChangeUserPassword />
             </ProtectedRoute>
           }
         />
