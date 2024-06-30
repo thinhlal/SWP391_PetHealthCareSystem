@@ -16,80 +16,49 @@ function AdminServices() {
   const [search, setSearch] = useState('');
   const [currentDate, setCurrentDate] = useState('');
   const [newService, setNewService] = useState({
-    services_name: '',
-    describe: '',
-    price: '$',
-    status: 'Enable',
+    name: '',
+    description: '',
+    price: '',
   });
   const [editService, setEditService] = useState({
-    id: null,
-    services_id: '',
-    services_name: '',
-    describe: '',
+    serviceID: '',
+    name: '',
+    description: '',
     price: '',
     status: '',
   });
   const [originalEditService, setOriginalEditService] = useState({
-    services_name: '',
-    describe: '',
+    name: '',
+    description: '',
     price: '',
   });
   const [addServiceErrors, setAddServiceErrors] = useState({
-    services_name: '',
-    describe: '',
+    name: '',
+    description: '',
     price: '',
   });
   const [editServiceErrors, setEditServiceErrors] = useState({
-    services_name: '',
-    describe: '',
+    name: '',
+    description: '',
     price: '',
   });
 
-  const [servicesData, setServicesData] = useState([
-    {
-      id: 1,
-      services_id: 'S00001',
-      services_name: 'Vaccinations',
-      describe: 'Services Description',
-      price: '$40',
-      status: 'Enable',
-    },
-    {
-      id: 2,
-      services_id: 'S00002',
-      services_name: 'Deworm',
-      describe: 'Services Description',
-      price: '$10',
-      status: 'Enable',
-    },
-    {
-      id: 3,
-      services_id: 'S00003',
-      services_name: 'Surgery',
-      describe: 'Services Description',
-      price: '$70',
-      status: 'Enable',
-    },
-    {
-      id: 4,
-      services_id: 'S00004',
-      services_name: 'Groom',
-      describe: 'Services Description',
-      price: '$20',
-      status: 'Enable',
-    },
-    {
-      id: 5,
-      services_id: 'S00005',
-      services_name: 'Bathe',
-      describe: 'Services Description',
-      price: '$10',
-      status: 'Disable',
-    },
-  ]);
+  const [servicesData, setServicesData] = useState([]);
 
   const modalCloseButtonRef = useRef(null);
   const modalEditCloseButtonRef = useRef(null);
+
+  useEffect(() => {
+    const getAllServices = async () => {
+      try {
+        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
+        setServicesData(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    getAllServices();
+  }, []);
 
   useEffect(() => {
     const today = new Date();
@@ -99,7 +68,7 @@ function AdminServices() {
 
   const validateInput = (name, value) => {
     let error = '';
-    if (name === 'services_name' || name === 'describe') {
+    if (name === 'name' || name === 'description') {
       if (!value) {
         error = 'Please enter your information';
       } else {
@@ -112,9 +81,9 @@ function AdminServices() {
       if (!value || value === '$') {
         error = 'Please enter your information';
       } else {
-        const regex = /^\$\d+$/;
+        const regex = /^\d+$/;
         if (!regex.test(value)) {
-          error = 'Price must start with "$" and be followed by numbers';
+          error = 'Price must be a number';
         }
       }
     }
@@ -135,108 +104,97 @@ function AdminServices() {
     setEditService({ ...editService, [name]: value });
   };
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     const newErrors = {
-      services_name: validateInput('services_name', newService.services_name),
-      describe: validateInput('describe', newService.describe),
+      name: validateInput('name', newService.name),
+      description: validateInput('description', newService.description),
       price: validateInput('price', newService.price),
     };
 
-
     if (
       Object.values(newErrors).every(error => error === '') &&
-      newService.services_name &&
-      newService.describe &&
-      newService.price !== '$'
+      newService.name &&
+      newService.description
     ) {
-      const newId = `S0000${servicesData.length + 1}`;
-      const newServiceData = {
-        ...newService,
-        id: servicesData.length + 1,
-        services_id: newId,
-      };
-      setServicesData([...servicesData, newServiceData]);
-      setNewService({
-        services_name: '',
-        describe: '',
-        price: '$',
-        status: 'Enable',
-      });
-      setAddServiceErrors({ services_name: '', describe: '', price: '' });
-
-      
-      const res = axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/service/addService`,
-        {
-          status: 'Enable',
-          services_id: newId,
-          serviceName: newService.services_name,
-          describe: newService.describe,
-          price: newService.price,
-        },
-      );
+      try {
+        await axiosInstance.post(
+          `${process.env.REACT_APP_API_URL}/service/addService`,
+          {
+            serviceName: newService.name,
+            description: newService.description,
+            price: newService.price,
+          },
+        );
+        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
+        setServicesData(response.data)
+      } catch (error) {
+        console.error(error);
+      }
+      setAddServiceErrors({ name: '', description: '', price: '' });
       // Close the modal
-      modalCloseButtonRef.current.click();
+      document.querySelector('#addServiceModal .btn-close').click();
     } else {
       setAddServiceErrors(newErrors);
     }
   };
 
-  const handleUpdateFormSubmit = () => {
+  const handleUpdateFormSubmit = async () => {
     const newErrors = {
-      services_name: validateInput('services_name', editService.services_name),
-      describe: validateInput('describe', editService.describe),
+      name: validateInput('name', editService.name),
+      description: validateInput('description', editService.description),
       price: validateInput('price', editService.price),
     };
 
     if (
       Object.values(newErrors).every(error => error === '') &&
-      editService.services_name &&
-      editService.describe &&
-      editService.price !== '$'
+      editService.name &&
+      editService.description
     ) {
-      const updatedServices = servicesData.map(service => {
-        if (service.id === editService.id) {
-          return editService;
-        }
-        return service;
-      });
-      setServicesData(updatedServices);
+      try {
+        await axiosInstance.post(
+          `${process.env.REACT_APP_API_URL}/service/updateServiceInfo`,
+          editService,
+        );
+        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
+        setServicesData(response.data)
+      } catch (error) {
+        console.error(error);
+      }
       setEditService({
-        id: null,
-        services_id: '',
-        services_name: '',
-        describe: '',
+        serviceID: '',
+        name: '',
+        description: '',
         price: '',
         status: '',
       });
-      setEditServiceErrors({ services_name: '', describe: '', price: '' });
+      setEditServiceErrors({ name: '', description: '', price: '' });
 
-      // Close the modal
-      modalEditCloseButtonRef.current.click();
+      document.querySelector('#addServiceModal .btn-close').click();
     } else {
       setEditServiceErrors(newErrors);
     }
   };
 
-  const handleToggleStatus = id => {
-    const updatedServices = servicesData.map(service => {
-      if (service.id === id) {
-        service.status = service.status === 'Enable' ? 'Disable' : 'Enable';
-        if (editService.id === id) {
-          setEditService({ ...editService, status: service.status });
-        }
-      }
-      return service;
-    });
-    setServicesData(updatedServices);
+  const handleToggleStatus = async service => {
+    try {
+      await axiosInstance.patch(
+        `${process.env.REACT_APP_API_URL}/service/updateServiceStatus`,
+        {
+          service
+        },
+      );
+      const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
+      setServicesData(response.data)
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleEditClick = service => {
     setEditService(service);
     setOriginalEditService({
-      services_name: service.services_name,
-      describe: service.describe,
+      name: service.name,
+      description: service.description,
       price: service.price,
     });
   };
@@ -244,7 +202,7 @@ function AdminServices() {
   const searchServicesData = servicesData.filter(services => {
     const matchesSearch =
       search === '' ||
-      services.services_name.toLowerCase().includes(search.toLowerCase());
+      services.name.toLowerCase().includes(search.toLowerCase());
     return matchesSearch;
   });
 
@@ -516,6 +474,7 @@ function AdminServices() {
                         tabIndex='-1'
                         aria-labelledby='addServiceModalLabel'
                         aria-hidden='true'
+                        ref={modalCloseButtonRef}
                       >
                         <div className='modal-dialog'>
                           <div className='modal-content'>
@@ -531,7 +490,6 @@ function AdminServices() {
                                 className='btn-close'
                                 data-bs-dismiss='modal'
                                 aria-label='Close'
-                                ref={modalCloseButtonRef}
                               ></button>
                             </div>
                             <div className='modal-body'>
@@ -544,14 +502,14 @@ function AdminServices() {
                                 </label>
                                 <input
                                   className='Admin-Services-input'
-                                  name='services_name'
-                                  value={newService.services_name}
+                                  name='name'
+                                  value={newService.name}
                                   onChange={handleInputChange}
                                   placeholder='Services'
                                 />
-                                {addServiceErrors.services_name && (
+                                {addServiceErrors.name && (
                                   <p className='error-message'>
-                                    {addServiceErrors.services_name}
+                                    {addServiceErrors.name}
                                   </p>
                                 )}
                               </div>
@@ -564,14 +522,14 @@ function AdminServices() {
                                 </label>
                                 <input
                                   className='Admin-Services-input'
-                                  name='describe'
-                                  value={newService.describe}
+                                  name='description'
+                                  value={newService.description}
                                   onChange={handleInputChange}
                                   placeholder='Description'
                                 />
-                                {addServiceErrors.describe && (
+                                {addServiceErrors.description && (
                                   <p className='error-message'>
-                                    {addServiceErrors.describe}
+                                    {addServiceErrors.description}
                                   </p>
                                 )}
                               </div>
@@ -641,17 +599,17 @@ function AdminServices() {
 
                   {searchServicesData.map(item => (
                     <div
-                      className={`Admin-Services-Main-Table-Content-Row-Wrapper ${item.status === 'Enable' ? 'row-enable' : 'row-disable'}`}
-                      key={item.id}
+                      className={`Admin-Services-Main-Table-Content-Row-Wrapper ${item.status ? 'row-enable' : 'row-disable'}`}
+                      key={item.serviceID}
                     >
                       <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item.services_id}
+                        {item?.serviceID}
                       </div>
                       <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item.services_name}
+                        {item?.name}
                       </div>
                       <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item.describe}
+                        {item?.description}
                       </div>
                       <div className='Admin-Services-Main-Table-Content-Row'>
                         {item.price}
@@ -660,8 +618,8 @@ function AdminServices() {
                         <label className='switch'>
                           <input
                             type='checkbox'
-                            checked={item.status === 'Enable'}
-                            onChange={() => handleToggleStatus(item.id)}
+                            checked={item.status}
+                            onChange={() => handleToggleStatus(item)}
                           />
                           <span className='slider round'></span>
                         </label>
@@ -672,7 +630,7 @@ function AdminServices() {
                             type='button'
                             className='Admin-Services-Main-Table-Content-Btn'
                             data-bs-toggle='modal'
-                            data-bs-target={`#editServiceModal${item.id}`}
+                            data-bs-target={`#editServiceModal${item.serviceID}`}
                             onClick={() => handleEditClick(item)}
                           >
                             <BorderColorOutlinedIcon
@@ -681,29 +639,28 @@ function AdminServices() {
                               }}
                             />
                           </button>
-
                           <div
                             className='modal fade'
-                            id={`editServiceModal${item.id}`}
+                            id={`editServiceModal${item.serviceID}`}
                             tabIndex='-1'
-                            aria-labelledby={`editServiceModalLabel${item.id}`}
+                            aria-labelledby={`editServiceModalLabel${item.serviceID}`}
                             aria-hidden='true'
+                            ref={modalEditCloseButtonRef}
                           >
                             <div className='modal-dialog'>
                               <div className='modal-content'>
                                 <div className='modal-header'>
                                   <h1
                                     className='modal-title fs-5'
-                                    id={`editServiceModalLabel${item.id}`}
+                                    id={`editServiceModalLabel${item.serviceID}`}
                                   >
-                                    Update Information
+                                    Edit Service
                                   </h1>
                                   <button
                                     type='button'
                                     className='btn-close'
                                     data-bs-dismiss='modal'
                                     aria-label='Close'
-                                    ref={modalEditCloseButtonRef}
                                   ></button>
                                 </div>
                                 <div className='modal-body'>
@@ -715,7 +672,7 @@ function AdminServices() {
                                       <div className='Admin-Services-modal-update-title'>
                                         Old name:
                                       </div>
-                                      {originalEditService.services_name}
+                                      {originalEditService?.name}
                                     </div>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
@@ -723,15 +680,15 @@ function AdminServices() {
                                       </div>
                                       <input
                                         className='Admin-Services-input'
-                                        name='services_name'
-                                        value={editService.services_name}
+                                        name='name'
+                                        value={editService?.name}
                                         onChange={handleEditInputChange}
                                         placeholder='Name'
                                       />
                                     </div>
-                                    {editServiceErrors.services_name && (
+                                    {editServiceErrors.name && (
                                       <p className='error-message'>
-                                        {editServiceErrors.services_name}
+                                        {editServiceErrors.name}
                                       </p>
                                     )}
                                   </div>
@@ -743,7 +700,7 @@ function AdminServices() {
                                       <div className='Admin-Services-modal-update-title'>
                                         Old Description:
                                       </div>
-                                      {originalEditService.describe}
+                                      {originalEditService.description}
                                     </div>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
@@ -751,15 +708,15 @@ function AdminServices() {
                                       </div>
                                       <input
                                         className='Admin-Services-input'
-                                        name='describe'
-                                        value={editService.describe}
+                                        name='description'
+                                        value={editService?.description}
                                         onChange={handleEditInputChange}
                                         placeholder='Description'
                                       />
                                     </div>
-                                    {editServiceErrors.describe && (
+                                    {editServiceErrors.description && (
                                       <p className='error-message'>
-                                        {editServiceErrors.describe}
+                                        {editServiceErrors.description}
                                       </p>
                                     )}
                                   </div>
@@ -773,7 +730,7 @@ function AdminServices() {
                                         <div className='Admin-Services-modal-update-title'>
                                           Old price:
                                         </div>
-                                        {originalEditService.price}
+                                        {originalEditService?.price}
                                       </div>
                                     </div>
                                     <div className='Admin-Services-modal-update'>
@@ -783,7 +740,7 @@ function AdminServices() {
                                       <input
                                         className='Admin-Services-input-phone'
                                         name='price'
-                                        value={editService.price}
+                                        value={editService?.price}
                                         onChange={handleEditInputChange}
                                         placeholder='Price'
                                       />
@@ -793,33 +750,6 @@ function AdminServices() {
                                         {editServiceErrors.price}
                                       </p>
                                     )}
-                                    <div>
-                                      {/* <div className='Admin-Services-modal-title'>
-                                                                                Status
-                                                                            </div> */}
-                                      {/* <div className='Admin-Services-modal-radio'>
-                                                                                <div className='Admin-Services-modal-radio-text'>
-                                                                                    <input
-                                                                                        type='radio'
-                                                                                        name='status'
-                                                                                        value='Enable'
-                                                                                        checked={editService.status === 'Enable'}
-                                                                                        onChange={handleEditInputChange}
-                                                                                    />
-                                                                                    <label> Enable </label>
-                                                                                </div>
-                                                                                <div>
-                                                                                    <input
-                                                                                        type='radio'
-                                                                                        name='status'
-                                                                                        value='Disable'
-                                                                                        checked={editService.status === 'Disable'}
-                                                                                        onChange={handleEditInputChange}
-                                                                                    />
-                                                                                    <label> Disable </label>
-                                                                                </div>
-                                                                            </div> */}
-                                    </div>
                                   </div>
                                 </div>
                                 <div className='modal-footer'>
@@ -845,7 +775,6 @@ function AdminServices() {
                       </div>
                     </div>
                   ))}
-
                   <div className='Admin-Services-Pagination'>
                     <Stack spacing={2}>
                       <Pagination count={10} />
