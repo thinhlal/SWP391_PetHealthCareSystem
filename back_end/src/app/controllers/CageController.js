@@ -1,9 +1,11 @@
 const Booking = require('../models/Booking.js');
 const Cage = require('../models/Cage.js');
-const ServiceBookingVet = require('../models/ServiceBookingVet.js');
+const Pet = require('../models/Pet.js');
+const CageDisease = require('../models/CageDisease.js');
+const DiseaseInfo = require('../models/DiseaseInfo.js');
 
 class AdminController {
-    // Get /getAllCages
+    // GET /getAllCages
     async getAllCages(req, res, next) {
         try {
             const allCages = await Cage.aggregate([
@@ -14,6 +16,21 @@ class AdminController {
                         foreignField: 'cageID',
                         as: 'cageDiseaseDetails',
                     },
+                },
+                {
+                    $set: {
+                        cageDiseaseDetails: {
+                            $sortArray: {
+                                input: "$cageDiseaseDetails",
+                                sortBy: { startDate: -1 }
+                            }
+                        }
+                    }
+                },
+                {
+                    $set: {
+                        cageDiseaseDetails: { $arrayElemAt: ["$cageDiseaseDetails", 0] }
+                    }
                 },
                 {
                     $lookup: {
@@ -57,7 +74,7 @@ class AdminController {
                 },
                 {
                     $project: {
-                        'accountDetails' : 0
+                        'accountDetails': 0
                     },
                 },
             ]);
@@ -67,6 +84,138 @@ class AdminController {
             res
                 .status(500)
                 .json({ message: 'Error fetching doctor', error: error.message });
+        }
+    }
+
+    // POST /updateCageInfo
+    async updateCageInfo(req, res, next) {
+        const { cageDiseaseID, petCondition, statusPet, textPetInfo } = req.body
+        try {
+            let idDiseaseInfo;
+            while (true) {
+                try {
+                    const lastBooking = await DiseaseInfo.findOne().sort({ diseaseInfoID: -1 });
+                    if (lastBooking) {
+                        const lastID = parseInt(lastBooking.diseaseInfoID);
+                        idDiseaseInfo = lastID + 1;
+                    } else {
+                        idDiseaseInfo = 0;
+                    }
+                    break;
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            const diseaseInfo = new DiseaseInfo({
+                diseaseInfoID: idDiseaseInfo,
+                cageDiseaseID: cageDiseaseID,
+                date: new Date(),
+                notes: textPetInfo,
+                status: petCondition,
+            });
+            await diseaseInfo.save();
+            if (statusPet === 'Recover') {
+                await CageDisease.findOneAndUpdate({ cageDiseaseID }, {
+                    dischargeDate: new Date(),
+                    isRecover: true,
+                });
+
+                const cageDisease = await CageDisease.aggregate([
+                    { $match: { cageDiseaseID } },
+                    {
+                        $lookup: {
+                            from: 'pets',
+                            localField: 'petID',
+                            foreignField: 'petID',
+                            as: 'petDetails',
+                        },
+                    },
+                ]);
+                const petID = cageDisease[0].petDetails[0].petID;
+                await Pet.findOneAndUpdate({ petID }, {
+                    status: true,
+                });
+
+                const cageID = cageDisease[0].cageID;
+                await Cage.findOneAndUpdate({ cageID }, {
+                    isEmpty: true,
+                });
+            }
+            res.status(204).send();
+        } catch (error) {
+            console.log(error);
+            res
+                .status(500)
+                .json({ message: 'Error fetching cage', error: error.message });
+        }
+    }
+
+    // POST /addPetToCage
+    async addPetToCage(req, res, next) {
+        const { formData } = req.body
+        console.log(formData);
+        try {
+            let idCageDisease;
+            while (true) {
+                try {
+                    const lastCageDisease = await CageDisease.findOne().sort({ cageDiseaseID: -1 });
+                    if (lastCageDisease) {
+                        const lastID = parseInt(lastCageDisease.cageDiseaseID.substring(2));
+                        idCageDisease = 'CD' + (lastID + 1).toString().padStart(6, '0');
+                    } else {
+                        idCageDisease = 'CD000000';
+                    }
+                    break;
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            const pet = await Booking.aggregate([
+                { $match: { bookingID: formData.bookingID } },
+                {
+                    $lookup: {
+                        from: 'bookings',
+                        localField: 'bookingID',
+                        foreignField: 'bookingID',
+                        as: 'bookingDetails',
+                    },
+                },
+                {
+                    $lookup: {
+                        from: 'pets',
+                        localField: 'bookingDetails.petID',
+                        foreignField: 'petID',
+                        as: 'petDetails',
+                    },
+                },
+            ])
+            
+            await Pet.findOneAndUpdate({ petID: pet[0].petDetails[0].petID }, {
+                status: false,
+            })
+
+            await Cage.findOneAndUpdate({ cageID: formData.cageID }, {
+                isEmpty: false,
+            })
+
+            const cageDisease = new CageDisease({
+                cageID: formData.cageID,
+                petID: pet[0].petDetails[0].petID,
+                bookingID: formData.bookingID,
+                cageDiseaseID: idCageDisease,
+                doctorID: formData.doctorID,
+                startDate: new Date(),
+                reasonForAdmission: formData.reasonForAdmission,
+            });
+
+            await cageDisease.save();
+            res.status(204).send();
+        } catch (error) {
+            console.log(error);
+            res
+                .status(500)
+                .json({ message: 'Error fetching cage', error: error.message });
         }
     }
 }

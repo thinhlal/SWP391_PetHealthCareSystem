@@ -6,14 +6,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import axiosInstance from '../../utils/axiosInstance';
+import { Slider } from '@mui/material';
 
 function ManageCages() {
   const [searchBookingIDValue, setSearchBookingValue] = useState('');
   const [bookingSearchResult, setBookingSearchResult] = useState({});
   const [paymentUpdatePrice, setPaymentUpdatePrice] = useState({});
+  const [sliderValue, setSliderValue] = useState(1);
+  const [petCondition, setPetCondition] = useState('NotRecover');
+  const [petInfoStatus, setPetInfoStatus] = useState('');
   const [allDoctorsWorkingHours, setAllDoctorsWorkingHours] = useState([]);
   const [reasonForAdmission, setReasonForAdmission] = useState('');
-  const [dischargeDate, setDischargeDate] = useState('');
   const [chosenDoctor, setChosenDoctor] = useState('');
   const [activeTab, setActiveTab] = useState('Profile');
   const [cageData, setCageData] = useState([]);
@@ -94,48 +97,46 @@ function ManageCages() {
 
     if (!chosenDoctor)
       newErrors.chosenDoctor = 'Choose doctor to care';
-    if (Object.keys(bookingSearchResult).length === 0);
-    newErrors.bookingResult = 'Search valid bookingID';
-
+    if (Object.keys(bookingSearchResult).length === 0)
+      newErrors.bookingResult = 'Search valid bookingID';
+    if (bookingSearchResult?.paymentDetails[0]?.isCancelPayment)
+      newErrors.cancelPayment = 'Your payment is cancelled. Can not add pet to cages!!!';
+    if (bookingSearchResult.isCancel)
+      newErrors.cancelBooking = 'Your booking is cancelled. Can not add pet to cages!!!';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     if (!validateForm()) return;
     const formData = {
+      bookingID: searchBookingIDValue,
       reasonForAdmission: reasonForAdmission,
-      cageNumber: selectedCage.name,
+      cageID: selectedCage.cageID,
       doctorID: chosenDoctor,
-      admissionTime: new Date(),
     };
+    try {
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/cage/addPetToCage`,
+        { formData }
+      );
 
-    const updatedCageData = cageData.map(cage => {
-      if (cage.cageID === selectedCage.id) {
-        return {
-          ...cage,
-          status: 'Using',
-          petDetails: {
-            ...formData.petInfo,
-            inCage: formData.currentCondition,
-            doctor: formData.veterinarian,
-            cageNumber: formData.cageNumber,
-            admissionTime: formData.admissionTime,
-            ownerName: formData.accountInfo.name,
-            email: formData.accountInfo.email,
-            phone: formData.accountInfo.phone,
-          },
-        };
-      }
-      return cage;
-    });
-
-    setCageData(updatedCageData);
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/cage/getAllCages`,
+      );
+      setCageData(response.data);
+    } catch (error) {
+      console.error('Error fetching cage:', error);
+    }
+    resetForm();
     document.querySelector('#exampleModal .btn-close').click();
   };
 
   const resetForm = () => {
+    setBookingSearchResult([])
+    setSearchBookingValue('')
+    setReasonForAdmission('')
     setChosenDoctor('');
     setErrors({});
     document.getElementById('addPetForm').reset();
@@ -145,28 +146,81 @@ function ManageCages() {
     setActiveTab(tabName);
   };
 
-  const handleUpdateStatus = (cageId, newCageStatus, newPetStatus) => {
-    const updatedCageData = cageData.map(cage => {
-      if (cage.cageID === cageId) {
-        const updatedStatus = newPetStatus === 'Recover' ? 'Empty' : 'Using';
-        const updatedCage = {
-          ...cage,
-          status: updatedStatus,
-          petStatus: newPetStatus,
-        };
-        if (updatedStatus === 'Empty') {
-          updatedCage.petDetails = {};
+  const resetFormUpdate = () => {
+    setPetCondition('NotRecover');
+    setSliderValue(1);
+    setPetInfoStatus('');
+  };
+
+  const handleSubmitUpdate = async (e, cage) => {
+    e.preventDefault();
+    const infoPetUpdate = e.target['update-info-of-pet'].value;
+    try {
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/cage/updateCageInfo`,
+        {
+          cageDiseaseID: cage.cageDiseaseDetails.cageDiseaseID,
+          statusPet: petCondition,
+          petCondition: sliderValue,
+          textPetInfo: infoPetUpdate,
         }
-        return updatedCage;
-      }
-      return cage;
-    });
-    setCageData(updatedCageData);
+      );
+
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/cage/getAllCages`,
+      );
+      setCageData(response.data);
+    } catch (error) {
+      console.error('Error fetching cage:', error);
+    }
+
+    resetFormUpdate();
+    document.querySelector(`#update_status_${cage.cageID} .btn-close`).click();
   };
 
   const handleStatusFilterChange = event => {
     setStatusFilter(event.target.value);
   };
+
+  const handleSliderChange = (event, newValue) => {
+    if (typeof newValue === 'number') {
+      setSliderValue(newValue);
+      if (newValue === 5) {
+        setPetCondition('Recover');
+      } else {
+        setPetCondition('NotRecover');
+      }
+    }
+  };
+
+  const handleRadioChange = (event) => {
+    setPetCondition(event.target.value);
+  };
+
+  useEffect(() => {
+    if (petCondition === 'Recover') {
+      setSliderValue(5);
+    } else {
+      setSliderValue(1);
+    }
+  }, [petCondition]);
+
+  function petStatus(value) {
+    switch (value) {
+      case 1:
+        return "Critical";
+      case 2:
+        return "Severe";
+      case 3:
+        return "Moderate";
+      case 4:
+        return "Mild";
+      case 5:
+        return "Healthy";
+      default:
+        return "";
+    }
+  }
 
   const filteredCageData = cageData.filter(cage => {
     if (statusFilter === 'All') return true;
@@ -223,15 +277,6 @@ function ManageCages() {
                 </div>
               </div>
               <div className='main-content-header-add-booking'>
-                <button
-                  type='button'
-                  className='booking-btn-add'
-                  data-bs-toggle='modal'
-                  data-bs-target='#exampleModal'
-                  onClick={handleGetAllDoctors}
-                >
-                  Add Pet
-                </button>
                 <div
                   className='modal fade'
                   id='exampleModal'
@@ -249,7 +294,7 @@ function ManageCages() {
                             className='modal-title fs-5'
                             id='exampleModalLabel'
                           >
-                            Add Booking
+                            Add Pet To Cage
                           </h1>
                           <button
                             type='button'
@@ -261,6 +306,14 @@ function ManageCages() {
                         </div>
                         <div className='modal-body'>
                           <div className='search-owner-option-section'>
+                            <label>Cage ID:</label>
+                            <div>{selectedCage?.cageID}</div>
+                          </div>
+                          <div className='search-owner-option-section'>
+                            <label>Cage name:</label>
+                            <div>{selectedCage?.name}</div>
+                          </div>
+                          <div className='search-owner-option-section'>
                             <label>Search BookingID:</label>
                             <input
                               type='text'
@@ -268,7 +321,7 @@ function ManageCages() {
                               value={searchBookingIDValue}
                               onChange={e => {
                                 setSearchBookingValue(e.target.value)
-                                setErrors(prev => ({ ...prev, bookingResult: '' }));
+                                setErrors(prev => ({ ...prev, bookingResult: '', cancelPayment: '', cancelBooking: '' }));
                               }
                               }
                               required
@@ -380,20 +433,17 @@ function ManageCages() {
                               required
                             />
                           </div>
-                          <div className='search-owner-option-section'>
-                            <label>Discharge date:</label>
-                            <input
-                              type='date'
-                              id='dischargeDate'
-                              value={dischargeDate}
-                              min={new Date().toISOString().split('T')[0]}
-                              onChange={e => {
-                                setDischargeDate(e.target.value)
-                              }
-                              }
-                              required
-                            />
-                          </div>
+                          
+                          {errors.cancelPayment && (
+                              <span className='error'>
+                                {errors.cancelPayment}
+                              </span>
+                            )}
+                            {errors.cancelBooking && (
+                              <span className='error'>
+                                {errors.cancelBooking}
+                              </span>
+                            )}
                         </div>
                         <div className='modal-footer'>
                           <button
@@ -696,7 +746,7 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='admissionTime'
                                       value={
-                                        selectedCage?.cageDiseaseDetails[0].startDate.split('T')[0] || ''
+                                        selectedCage?.cageDiseaseDetails?.startDate.split('T')[0] || ''
                                       }
                                       readOnly
                                     />
@@ -710,7 +760,7 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='admissionTime'
                                       value={
-                                        selectedCage?.cageDiseaseDetails[0].reasonForAdmission || ''
+                                        selectedCage?.cageDiseaseDetails?.reasonForAdmission || ''
                                       }
                                       readOnly
                                     />
@@ -739,18 +789,20 @@ function ManageCages() {
                       </div>
                     </div>
                     <div className='content-list-body-value-button'>
-                      {cage.status === 'Empty' && (
+                      {cage.isEmpty ? (
                         <button
                           type='button'
                           className='btn btn-secondary'
                           data-bs-toggle='modal'
                           data-bs-target='#exampleModal'
-                          onClick={() => setSelectedCage(cage)}
+                          onClick={() => {
+                            handleGetAllDoctors();
+                            setSelectedCage(cage);
+                          }}
                         >
                           Add Pet
                         </button>
-                      )}
-                      {cage.status === 'Using' && (
+                      ) : (
                         <button
                           type='button'
                           className='btn btn-primary'
@@ -770,19 +822,7 @@ function ManageCages() {
                     >
                       <div className='modal-dialog'>
                         <form
-                          onSubmit={e => {
-                            e.preventDefault();
-                            handleUpdateStatus(
-                              selectedCage.id,
-                              e.target['status-of-cage'].value,
-                              e.target['status-of-pet'].value,
-                            );
-                            document
-                              .querySelector(
-                                `#update_status_${cage.cageID} .btn-close`,
-                              )
-                              .click();
-                          }}
+                          onSubmit={(e) => handleSubmitUpdate(e, cage)}
                         >
                           <div className='modal-content'>
                             <div className='modal-header'>
@@ -802,26 +842,6 @@ function ManageCages() {
                             <div className='modal-body'>
                               <div className='modal-body-update-status'>
                                 <div className='modal-body-update-status-title'>
-                                  Status of Cage:
-                                </div>
-                                <div className='modal-body-update-status-using'>
-                                  <input
-                                    type='radio'
-                                    id='using'
-                                    name='status-of-cage'
-                                    value='Using'
-                                    defaultChecked={
-                                      selectedCage?.status === 'Using' ||
-                                      !selectedCage?.id
-                                    }
-                                  />
-                                  <div className='modal-body-update-status-using-text'>
-                                    Using
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='modal-body-update-status'>
-                                <div className='modal-body-update-status-title'>
                                   Status of pet:
                                 </div>
                                 <div className='modal-body-update-status-empty'>
@@ -830,10 +850,8 @@ function ManageCages() {
                                     id='NotRecover'
                                     name='status-of-pet'
                                     value='NotRecover'
-                                    defaultChecked={
-                                      selectedCage?.petStatus ===
-                                      'NotRecover' || !selectedCage?.id
-                                    }
+                                    checked={petCondition === 'NotRecover'}
+                                    onChange={handleRadioChange}
                                   />
                                   <div className='modal-body-update-status-empty-text'>
                                     Not Recover
@@ -845,14 +863,35 @@ function ManageCages() {
                                     id='Recover'
                                     name='status-of-pet'
                                     value='Recover'
-                                    defaultChecked={
-                                      selectedCage?.petStatus === 'Recover'
-                                    }
+                                    checked={petCondition === 'Recover'}
+                                    onChange={handleRadioChange}
                                   />
                                   <div className='modal-body-update-status-using-text'>
                                     Recover
                                   </div>
                                 </div>
+                              </div>
+                              <div className='modal-body-update-text'>
+                                <div className='modal-body-update-text-title'>
+                                  Pet Condition:
+                                </div>
+                                <Slider
+                                  aria-label="Pet Health Status"
+                                  value={sliderValue}
+                                  onChange={handleSliderChange}
+                                  getAriaValueText={petStatus}
+                                  valueLabelDisplay="auto"
+                                  step={1}
+                                  marks={[
+                                    { value: 1, label: "Critical" },
+                                    { value: 2, label: "Mild" },
+                                    { value: 3, label: "Moderate" },
+                                    { value: 4, label: "Severe" },
+                                    { value: 5, label: "Healthy" }
+                                  ]}
+                                  min={1}
+                                  max={5}
+                                />
                               </div>
                               <div className='modal-body-update-text'>
                                 <div className='modal-body-update-text-title'>
@@ -864,6 +903,9 @@ function ManageCages() {
                                       className='form-control'
                                       rows='3'
                                       name='update-info-of-pet'
+                                      value={petInfoStatus}
+                                      onChange={(e) => setPetInfoStatus(e.target.value)}
+                                      required
                                     ></textarea>
                                   </div>
                                 </div>
@@ -874,6 +916,7 @@ function ManageCages() {
                                 type='button'
                                 className='btn btn-secondary'
                                 data-bs-dismiss='modal'
+                                onClick={resetFormUpdate}
                               >
                                 Close
                               </button>
