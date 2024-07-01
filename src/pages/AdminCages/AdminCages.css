@@ -171,50 +171,6 @@
   margin-left: 5px;
 }
 
-.Admin-Cages-Main-ChooseDate {
-  display: flex;
-  align-items: center;
-  font-family: 'Montserrat', Helvetica;
-  margin: 25px 20px 0 3%;
-}
-
-.Admin-Cages-Main-ChooseDate_Text {
-  margin-right: 10px;
-}
-
-.Admin-Cages-Main-Header {
-  margin: 40px 0 0 0;
-  font-family: Roboto, sans-serif;
-  padding: 0;
-  justify-content: space-evenly;
-}
-
-.Admin-Cages-Main-Header-Income {
-  background-color: white;
-  border-radius: 8px;
-  width: 260px;
-  border: 1px solid #eae8f1;
-  box-shadow: -2px 4px 18px #dadee8;
-}
-
-.Admin-Cages-Main-Header-Note {
-  padding-top: 3%;
-  color: #696cff;
-  font-size: 15px;
-}
-
-.Admin-Cages-Main-Header-Money {
-  line-height: 60px;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.Admin-Cages-Main-Header-Percent {
-  padding-bottom: 3%;
-  font-size: 14px;
-  color: #828282;
-}
-
 .Admin-Cages-Main-Search {
   display: flex;
   align-items: center;

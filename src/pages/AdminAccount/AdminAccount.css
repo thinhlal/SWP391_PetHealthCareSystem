@@ -171,50 +171,6 @@
   margin-left: 5px;
 }
 
-.Admin-Account-Main-ChooseDate {
-  display: flex;
-  align-items: center;
-  font-family: 'Montserrat', Helvetica;
-  margin: 25px 20px 0 3%;
-}
-
-.Admin-Account-Main-ChooseDate_Text {
-  margin-right: 10px;
-}
-
-.Admin-Account-Main-Header {
-  margin: 40px 0 0 0;
-  font-family: Roboto, sans-serif;
-  padding: 0;
-  justify-content: space-evenly;
-}
-
-.Admin-Account-Main-Header-Income {
-  background-color: white;
-  border-radius: 8px;
-  width: 260px;
-  border: 1px solid #eae8f1;
-  box-shadow: -2px 4px 18px #dadee8;
-}
-
-.Admin-Account-Main-Header-Note {
-  padding-top: 3%;
-  color: #696cff;
-  font-size: 15px;
-}
-
-.Admin-Account-Main-Header-Money {
-  line-height: 60px;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.Admin-Account-Main-Header-Percent {
-  padding-bottom: 3%;
-  font-size: 14px;
-  color: #828282;
-}
-
 .Admin-Account-Main-Search {
   display: flex;
   align-items: center;
