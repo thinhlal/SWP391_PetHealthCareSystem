@@ -187,6 +187,9 @@ function AdminDashBoard() {
                     Total Price
                   </div>
                   <div className='Admin-DashBoard-Main-Table-Header-Title '>
+                    Status
+                  </div>
+                  <div className='Admin-DashBoard-Main-Table-Header-Title '>
                     Date
                   </div>
                   <div className='Admin-DashBoard-Main-Table-Header-Title-Btn '>
@@ -209,6 +212,9 @@ function AdminDashBoard() {
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       {item.totalPrice}
+                    </div>
+                    <div className='Admin-DashBoard-Main-Table-Content-Row '>
+                      {item.status}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       {item.dateBook.split('T')[0]}
