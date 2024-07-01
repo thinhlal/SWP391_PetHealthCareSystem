@@ -192,7 +192,6 @@ function AdminCages() {
 
   const modalRef = useRef(null);
 
-
   const handlestatusFilterChange = event => {
     setStatusFilter(event.target.value);
   };

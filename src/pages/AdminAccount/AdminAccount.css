@@ -72,59 +72,6 @@
   margin: 10px 10px 5px 20px;
 }
 
-.Admin-Account-Navigate-Text-Dashboard {
-  font-family: Roboto, sans-serif;
-  color: #000;
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.Admin-Account-Navigate-Text {
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 16px;
-  text-align: center;
-}
-
-.Admin-Account-Navigate-Logout {
-  color: #000;
-  line-height: 42px;
-  text-align: center;
-  width: 100%;
-  font-family: Roboto, sans-serif;
-  position: absolute;
-  bottom: 50px;
-}
-
-.Admin-Account-Navigate-Logout:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
-}
-
-.Admin-Account-Navigate-Logout span {
-  margin-left: 10px;
-}
-
-.Admin-Account-Navigate-Text-Rest-Menu {
-  font-family: Roboto, sans-serif;
-  color: #000;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 50px;
-}
-
-.Admin-Account-Navigate-Text-Rest-Menu:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
-}
-
 .Admin-Account-Main {
   padding: 0;
   background-color: #f1f5f9;

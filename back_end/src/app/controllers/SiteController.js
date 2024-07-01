@@ -47,6 +47,7 @@ class SiteController {
         accountID: idAccount,
         username,
         password: hashedPassword,
+        status: true,
       });
       await newAccount.save();
 
@@ -101,6 +102,10 @@ class SiteController {
 
       if (!isMatch) {
         return res.status(401).json({ message: 'Wrong username or password' });
+      }
+
+      if (!account.status) {
+        return res.status(401).json({ message: 'Account not valid' });
       }
 
       const token = jwt.sign(

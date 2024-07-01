@@ -17,7 +17,7 @@ import { AuthContext } from '../../context/AuthContext';
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
 function AdminDashBoard() {
-  const { logOut } = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('Profile');
   const [search, setSearch] = useState('');
   const openTab = tabName => setActiveTab(tabName);
@@ -26,16 +26,19 @@ function AdminDashBoard() {
   useEffect(() => {
     const fetchBooking = async () => {
       try {
-        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/admin/getAllBookings`)
-        console.log(response.data)
-        const sortDate = response.data.sort((a,b) => b.bookingID.localeCompare(a.bookingID));
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/admin/getAllBookings`,
+        );
+        const sortDate = response.data.sort((a, b) =>
+          b.bookingID.localeCompare(a.bookingID),
+        );
         setBookingData(sortDate);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
     fetchBooking();
-  }, [])
+  }, []);
 
   const searchBookingData = bookingData.filter(booking => {
     const matchesSearch =
@@ -44,11 +47,11 @@ function AdminDashBoard() {
     return matchesSearch;
   });
 
-  const servicePrice = (services) => {
+  const servicePrice = services => {
     return services.map(service => {
-      return `${service.name}($${service.price})`
-    })
-  }
+      return `${service.name}($${service.price})`;
+    });
+  };
 
   return (
     <div className='Admin-DashBoard container-fluid'>
@@ -74,7 +77,7 @@ function AdminDashBoard() {
                 <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z' />
               </svg>
               <div className='admin-DashBoard-Header-Account-Text'>
-                Hi Admin
+                Hi {user.adminDetails[0].name}
               </div>
             </div>
           </div>
@@ -291,8 +294,7 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
                                           Email:
                                         </div>
-                                        <div>{item?.email}
-                                        </div>
+                                        <div>{item?.email}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
@@ -327,13 +329,21 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Type:
                                         </div>
-                                        <div>{item?.petDetails[0]?.petType}</div>
+                                        <div>
+                                          {item?.petDetails[0]?.petType}
+                                        </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           BirthDay:
                                         </div>
-                                        <div>{item?.petDetails[0]?.birthday.split('T')[0]}</div>
+                                        <div>
+                                          {
+                                            item?.petDetails[0]?.birthday.split(
+                                              'T',
+                                            )[0]
+                                          }
+                                        </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
@@ -357,7 +367,9 @@ function AdminDashBoard() {
                                           Services:
                                         </div>
                                         <div>
-                                          {servicePrice(item?.servicesInBooking).join(', ')}
+                                          {servicePrice(
+                                            item?.servicesInBooking,
+                                          ).join(', ')}
                                         </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
@@ -376,7 +388,9 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Doctor:
                                         </div>
-                                        <div>{item?.doctorDetails[0].name}</div>
+                                        <div>
+                                          {item?.doctorDetails[0]?.name}
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
