@@ -144,14 +144,16 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={['Doctor']}>
               <ManageSickPet />
-            </ProtectedRoute>}
+            </ProtectedRoute>
+          }
         />
         <Route
           path='/pet-exam-record'
           element={
             <ProtectedRoute allowedRoles={['Doctor']}>
               <PetExamRecord />
-            </ProtectedRoute>}
+            </ProtectedRoute>
+          }
         />
 
         <Route
@@ -189,7 +191,7 @@ function App() {
         <Route
           path='/user-profile'
           element={
-            <ProtectedRoute >
+            <ProtectedRoute>
               <UserProfile />
             </ProtectedRoute>
           }
@@ -197,7 +199,7 @@ function App() {
         <Route
           path='/user-profile'
           element={
-            <ProtectedRoute >
+            <ProtectedRoute>
               <UserProfile />
             </ProtectedRoute>
           }
@@ -205,13 +207,13 @@ function App() {
         <Route
           path='/change-user-password'
           element={
-            <ProtectedRoute >
+            <ProtectedRoute>
               <ChangeUserPassword />
             </ProtectedRoute>
           }
         />
       </Routes>
-    </AuthProvider >
+    </AuthProvider>
   );
 }
 

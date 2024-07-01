@@ -51,12 +51,14 @@ function AdminServices() {
   useEffect(() => {
     const getAllServices = async () => {
       try {
-        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
-        setServicesData(response.data)
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/service/getAllServices`,
+        );
+        setServicesData(response.data);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
+    };
     getAllServices();
   }, []);
 
@@ -125,8 +127,10 @@ function AdminServices() {
             price: newService.price,
           },
         );
-        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
-        setServicesData(response.data)
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/service/getAllServices`,
+        );
+        setServicesData(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -155,8 +159,10 @@ function AdminServices() {
           `${process.env.REACT_APP_API_URL}/service/updateServiceInfo`,
           editService,
         );
-        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
-        setServicesData(response.data)
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/service/getAllServices`,
+        );
+        setServicesData(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -180,11 +186,13 @@ function AdminServices() {
       await axiosInstance.patch(
         `${process.env.REACT_APP_API_URL}/service/updateServiceStatus`,
         {
-          service
+          service,
         },
       );
-      const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/service/getAllServices`);
-      setServicesData(response.data)
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/service/getAllServices`,
+      );
+      setServicesData(response.data);
     } catch (error) {
       console.error(error);
     }

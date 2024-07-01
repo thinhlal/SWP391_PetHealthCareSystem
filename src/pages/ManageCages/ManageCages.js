@@ -24,7 +24,7 @@ function ManageCages() {
   const [statusFilter, setStatusFilter] = useState('All');
   const [errors, setErrors] = useState({
     chosenDoctor: '',
-    bookingResult: ''
+    bookingResult: '',
   });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function ManageCages() {
       }
     };
     handleGetAllCages();
-  }, [])
+  }, []);
 
   const handleSearchBooking = async () => {
     if (searchBookingIDValue === '') {
@@ -53,7 +53,7 @@ function ManageCages() {
       );
       if (response.data.length !== 0) {
         setErrors(prev => ({ ...prev, bookingResult: '' }));
-        setPaymentUpdatePrice(response.data[0].paymentDetails[0])
+        setPaymentUpdatePrice(response.data[0].paymentDetails[0]);
         setBookingSearchResult(response.data[0]);
       } else {
         setPaymentUpdatePrice({});
@@ -62,7 +62,7 @@ function ManageCages() {
     } catch (error) {
       console.error('Error fetching doctors:', error);
     }
-  }
+  };
 
   const handleGetAllDoctors = async () => {
     try {
@@ -75,11 +75,11 @@ function ManageCages() {
     }
   };
 
-  const payUpdateByPaymentID = async (paymentID) => {
+  const payUpdateByPaymentID = async paymentID => {
     try {
       const response = await axiosInstance.patch(
         `${process.env.REACT_APP_API_URL}/payment/updatePaymentByID`,
-        { paymentID }
+        { paymentID },
       );
       setPaymentUpdatePrice(response.data);
     } catch (error) {
@@ -95,14 +95,15 @@ function ManageCages() {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!chosenDoctor)
-      newErrors.chosenDoctor = 'Choose doctor to care';
+    if (!chosenDoctor) newErrors.chosenDoctor = 'Choose doctor to care';
     if (Object.keys(bookingSearchResult).length === 0)
       newErrors.bookingResult = 'Search valid bookingID';
     if (bookingSearchResult?.paymentDetails[0]?.isCancelPayment)
-      newErrors.cancelPayment = 'Your payment is cancelled. Can not add pet to cages!!!';
+      newErrors.cancelPayment =
+        'Your payment is cancelled. Can not add pet to cages!!!';
     if (bookingSearchResult.isCancel)
-      newErrors.cancelBooking = 'Your booking is cancelled. Can not add pet to cages!!!';
+      newErrors.cancelBooking =
+        'Your booking is cancelled. Can not add pet to cages!!!';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -119,7 +120,7 @@ function ManageCages() {
     try {
       await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/cage/addPetToCage`,
-        { formData }
+        { formData },
       );
 
       const response = await axiosInstance.get(
@@ -134,9 +135,9 @@ function ManageCages() {
   };
 
   const resetForm = () => {
-    setBookingSearchResult([])
-    setSearchBookingValue('')
-    setReasonForAdmission('')
+    setBookingSearchResult([]);
+    setSearchBookingValue('');
+    setReasonForAdmission('');
     setChosenDoctor('');
     setErrors({});
     document.getElementById('addPetForm').reset();
@@ -163,7 +164,7 @@ function ManageCages() {
           statusPet: petCondition,
           petCondition: sliderValue,
           textPetInfo: infoPetUpdate,
-        }
+        },
       );
 
       const response = await axiosInstance.get(
@@ -193,7 +194,7 @@ function ManageCages() {
     }
   };
 
-  const handleRadioChange = (event) => {
+  const handleRadioChange = event => {
     setPetCondition(event.target.value);
   };
 
@@ -208,23 +209,23 @@ function ManageCages() {
   function petStatus(value) {
     switch (value) {
       case 1:
-        return "Critical";
+        return 'Critical';
       case 2:
-        return "Severe";
+        return 'Severe';
       case 3:
-        return "Moderate";
+        return 'Moderate';
       case 4:
-        return "Mild";
+        return 'Mild';
       case 5:
-        return "Healthy";
+        return 'Healthy';
       default:
-        return "";
+        return '';
     }
   }
 
   const filteredCageData = cageData.filter(cage => {
     if (statusFilter === 'All') return true;
-    const status = cage.isEmpty ? 'Empty' : 'Using'
+    const status = cage.isEmpty ? 'Empty' : 'Using';
     return status === statusFilter;
   });
 
@@ -320,15 +321,17 @@ function ManageCages() {
                               id='searchBookingID'
                               value={searchBookingIDValue}
                               onChange={e => {
-                                setSearchBookingValue(e.target.value)
-                                setErrors(prev => ({ ...prev, bookingResult: '', cancelPayment: '', cancelBooking: '' }));
-                              }
-                              }
+                                setSearchBookingValue(e.target.value);
+                                setErrors(prev => ({
+                                  ...prev,
+                                  bookingResult: '',
+                                  cancelPayment: '',
+                                  cancelBooking: '',
+                                }));
+                              }}
                               required
                             />
-                            <div onClick={handleSearchBooking}>
-                              Search
-                            </div>
+                            <div onClick={handleSearchBooking}>Search</div>
                             {errors.bookingResult && (
                               <span className='error'>
                                 {errors.bookingResult}
@@ -336,81 +339,99 @@ function ManageCages() {
                             )}
                           </div>
                           <div className='search-owner-option-section'>
-                            {Object.keys(bookingSearchResult).length > 0
-                              ? bookingSearchResult.paymentDetails[0].isCancelPayment ?
+                            {Object.keys(bookingSearchResult).length > 0 ? (
+                              bookingSearchResult.paymentDetails[0]
+                                .isCancelPayment ? (
                                 <div>Cancel payment</div>
-                                : bookingSearchResult.isCancel ?
-                                  <div>Cancel Booking</div>
-                                  :
+                              ) : bookingSearchResult.isCancel ? (
+                                <div>Cancel Booking</div>
+                              ) : (
+                                <div>
                                   <div>
                                     <div>
-                                      <div>
-                                        <span>Name:&nbsp;</span>
-                                        <span>{bookingSearchResult.name}</span>
-                                      </div>
-                                      <div>
-                                        <span>Phone:&nbsp;</span>
-                                        <span>{bookingSearchResult.phone}</span>
-                                      </div>
-                                      <div>
-                                        <span>Email:&nbsp;</span>
-                                        <span>{bookingSearchResult.email}</span>
-                                      </div>
+                                      <span>Name:&nbsp;</span>
+                                      <span>{bookingSearchResult.name}</span>
                                     </div>
                                     <div>
-                                      <div>
-                                        <span>Payment Status:&nbsp;</span>
-                                        <span>
-                                          {paymentUpdatePrice.isSuccess
-                                            ?
-                                            <div>Already paid</div>
-                                            :
-                                            <span>Not paid</span>}
-                                        </span>
-                                      </div>
-                                      {paymentUpdatePrice.isSuccess ? <div></div> :
-                                        <div>
-                                          <span>TotalPrice:&nbsp;</span>
-                                          <span>{paymentUpdatePrice.totalPrice}</span>
-                                          <div onClick={() => payUpdateByPaymentID(paymentUpdatePrice.paymentID)}>Pay</div>
-                                        </div>}
+                                      <span>Phone:&nbsp;</span>
+                                      <span>{bookingSearchResult.phone}</span>
+                                    </div>
+                                    <div>
+                                      <span>Email:&nbsp;</span>
+                                      <span>{bookingSearchResult.email}</span>
                                     </div>
                                   </div>
-                              :
-                              <div>No Data Found</div>}
+                                  <div>
+                                    <div>
+                                      <span>Payment Status:&nbsp;</span>
+                                      <span>
+                                        {paymentUpdatePrice.isSuccess ? (
+                                          <div>Already paid</div>
+                                        ) : (
+                                          <span>Not paid</span>
+                                        )}
+                                      </span>
+                                    </div>
+                                    {paymentUpdatePrice.isSuccess ? (
+                                      <div></div>
+                                    ) : (
+                                      <div>
+                                        <span>TotalPrice:&nbsp;</span>
+                                        <span>
+                                          {paymentUpdatePrice.totalPrice}
+                                        </span>
+                                        <div
+                                          onClick={() =>
+                                            payUpdateByPaymentID(
+                                              paymentUpdatePrice.paymentID,
+                                            )
+                                          }
+                                        >
+                                          Pay
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              )
+                            ) : (
+                              <div>No Data Found</div>
+                            )}
                           </div>
                           <div className='modal-body-section-wrapper'>
                             <div>
                               <div className='modal-body-section-doctor-date'>
                                 <label>Doctor:</label>
                                 <div id='veterinarian'>
-                                  {allDoctorsWorkingHours
-                                    ? (allDoctorsWorkingHours.map((doctor, index) => {
-                                      return (
-                                        <div
-                                          key={doctor.doctorID}
-                                          className='choose-Doctor-wrapper'
-                                        >
-                                          <input
-                                            type='radio'
-                                            id={`doctor-${index}`}
-                                            name='doctor'
-                                            value={doctor.doctorID}
-                                            onChange={e =>
-                                              handleDoctorChange(e)
-                                            }
-                                          />
-                                          <label htmlFor={`doctor-${index}`}>
-                                            {doctor.name}
-                                          </label>
-                                        </div>
-                                      );
-                                    })
-                                    ) : (
-                                      <div className='choose-Doctor-Not-Found'>
-                                        No available doctors
-                                      </div>
-                                    )}
+                                  {allDoctorsWorkingHours ? (
+                                    allDoctorsWorkingHours.map(
+                                      (doctor, index) => {
+                                        return (
+                                          <div
+                                            key={doctor.doctorID}
+                                            className='choose-Doctor-wrapper'
+                                          >
+                                            <input
+                                              type='radio'
+                                              id={`doctor-${index}`}
+                                              name='doctor'
+                                              value={doctor.doctorID}
+                                              onChange={e =>
+                                                handleDoctorChange(e)
+                                              }
+                                            />
+                                            <label htmlFor={`doctor-${index}`}>
+                                              {doctor.name}
+                                            </label>
+                                          </div>
+                                        );
+                                      },
+                                    )
+                                  ) : (
+                                    <div className='choose-Doctor-Not-Found'>
+                                      No available doctors
+                                    </div>
+                                  )}
                                 </div>
                                 {errors.chosenDoctor && (
                                   <span className='error'>
@@ -427,23 +448,22 @@ function ManageCages() {
                               id='reasonForAdmission'
                               value={reasonForAdmission}
                               onChange={e => {
-                                setReasonForAdmission(e.target.value)
-                              }
-                              }
+                                setReasonForAdmission(e.target.value);
+                              }}
                               required
                             />
                           </div>
-                          
+
                           {errors.cancelPayment && (
-                              <span className='error'>
-                                {errors.cancelPayment}
-                              </span>
-                            )}
-                            {errors.cancelBooking && (
-                              <span className='error'>
-                                {errors.cancelBooking}
-                              </span>
-                            )}
+                            <span className='error'>
+                              {errors.cancelPayment}
+                            </span>
+                          )}
+                          {errors.cancelBooking && (
+                            <span className='error'>
+                              {errors.cancelBooking}
+                            </span>
+                          )}
                         </div>
                         <div className='modal-footer'>
                           <button
@@ -574,7 +594,8 @@ function ManageCages() {
                                       className='edit-customer'
                                       name='name'
                                       value={
-                                        selectedCage?.customerDetails[0]?.name || ''
+                                        selectedCage?.customerDetails[0]
+                                          ?.name || ''
                                       }
                                       readOnly
                                     />
@@ -589,7 +610,8 @@ function ManageCages() {
                                       className='edit-customer'
                                       name='email'
                                       value={
-                                        selectedCage?.customerDetails[0]?.email || ''
+                                        selectedCage?.customerDetails[0]
+                                          ?.email || ''
                                       }
                                       readOnly
                                     />
@@ -604,7 +626,8 @@ function ManageCages() {
                                       className='edit-customer'
                                       name='phone'
                                       value={
-                                        selectedCage?.customerDetails[0]?.phone || ''
+                                        selectedCage?.customerDetails[0]
+                                          ?.phone || ''
                                       }
                                       readOnly
                                     />
@@ -660,7 +683,9 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='species'
                                       value={
-                                        selectedCage?.petDetails[0]?.birthday.split('T')[0] || ''
+                                        selectedCage?.petDetails[0]?.birthday.split(
+                                          'T',
+                                        )[0] || ''
                                       }
                                       readOnly
                                     />
@@ -675,7 +700,8 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='gender'
                                       value={
-                                        selectedCage?.petDetails[0]?.gender.toLowerCase() || ''
+                                        selectedCage?.petDetails[0]?.gender.toLowerCase() ||
+                                        ''
                                       }
                                       readOnly
                                     />
@@ -690,7 +716,8 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='in-cage'
                                       value={
-                                        selectedCage?.petDetails[0]?.petType.toLowerCase() || ''
+                                        selectedCage?.petDetails[0]?.petType.toLowerCase() ||
+                                        ''
                                       }
                                       readOnly
                                     />
@@ -716,7 +743,8 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='doctor'
                                       value={
-                                        selectedCage?.doctorDetailCage[0]?.name || ''
+                                        selectedCage?.doctorDetailCage[0]
+                                          ?.name || ''
                                       }
                                       readOnly
                                     />
@@ -730,10 +758,7 @@ function ManageCages() {
                                       type='text'
                                       className='edit-pet'
                                       name='cageNumber'
-                                      value={
-                                        selectedCage?.cageID ||
-                                        ''
-                                      }
+                                      value={selectedCage?.cageID || ''}
                                       readOnly
                                     />
                                   </div>
@@ -746,7 +771,9 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='admissionTime'
                                       value={
-                                        selectedCage?.cageDiseaseDetails?.startDate.split('T')[0] || ''
+                                        selectedCage?.cageDiseaseDetails?.startDate.split(
+                                          'T',
+                                        )[0] || ''
                                       }
                                       readOnly
                                     />
@@ -760,7 +787,8 @@ function ManageCages() {
                                       className='edit-pet'
                                       name='admissionTime'
                                       value={
-                                        selectedCage?.cageDiseaseDetails?.reasonForAdmission || ''
+                                        selectedCage?.cageDiseaseDetails
+                                          ?.reasonForAdmission || ''
                                       }
                                       readOnly
                                     />
@@ -821,9 +849,7 @@ function ManageCages() {
                       aria-hidden='true'
                     >
                       <div className='modal-dialog'>
-                        <form
-                          onSubmit={(e) => handleSubmitUpdate(e, cage)}
-                        >
+                        <form onSubmit={e => handleSubmitUpdate(e, cage)}>
                           <div className='modal-content'>
                             <div className='modal-header'>
                               <h1
@@ -876,18 +902,18 @@ function ManageCages() {
                                   Pet Condition:
                                 </div>
                                 <Slider
-                                  aria-label="Pet Health Status"
+                                  aria-label='Pet Health Status'
                                   value={sliderValue}
                                   onChange={handleSliderChange}
                                   getAriaValueText={petStatus}
-                                  valueLabelDisplay="auto"
+                                  valueLabelDisplay='auto'
                                   step={1}
                                   marks={[
-                                    { value: 1, label: "Critical" },
-                                    { value: 2, label: "Mild" },
-                                    { value: 3, label: "Moderate" },
-                                    { value: 4, label: "Severe" },
-                                    { value: 5, label: "Healthy" }
+                                    { value: 1, label: 'Critical' },
+                                    { value: 2, label: 'Mild' },
+                                    { value: 3, label: 'Moderate' },
+                                    { value: 4, label: 'Severe' },
+                                    { value: 5, label: 'Healthy' },
                                   ]}
                                   min={1}
                                   max={5}
@@ -904,7 +930,9 @@ function ManageCages() {
                                       rows='3'
                                       name='update-info-of-pet'
                                       value={petInfoStatus}
-                                      onChange={(e) => setPetInfoStatus(e.target.value)}
+                                      onChange={e =>
+                                        setPetInfoStatus(e.target.value)
+                                      }
                                       required
                                     ></textarea>
                                   </div>
@@ -987,8 +1015,8 @@ function ManageCages() {
             </ul>
           </nav>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
 

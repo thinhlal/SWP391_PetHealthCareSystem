@@ -89,7 +89,10 @@ function Home() {
                     ref={menuRef}
                     className={`dropdown-menu-login ${isMenuOpen ? 'visible' : ''}`}
                   >
-                    <div className='menu-item-login' onClick={() => (window.location.href = '/user-profile')}>
+                    <div
+                      className='menu-item-login'
+                      onClick={() => (window.location.href = '/user-profile')}
+                    >
                       <img
                         src={require('../../assets/images/img_Home/people.png')}
                         alt='User Icon'

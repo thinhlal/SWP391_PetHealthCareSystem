@@ -163,21 +163,21 @@ a {
 
 .your-pet .profile-info-pet {
   display: flex;
-  flex-direction: row; 
-  align-items: center; 
-  justify-content: center; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
-  gap: 5px; 
+  gap: 5px;
 }
 
 .your-pet .profile-info-pet div {
-  text-align: left; 
+  text-align: left;
   display: inline-block;
 }
 
 .your-pet .profile-info-pet span {
   font-weight: bold;
-  text-align: left; 
+  text-align: left;
   display: inline-block;
   color: #425bb3;
 }

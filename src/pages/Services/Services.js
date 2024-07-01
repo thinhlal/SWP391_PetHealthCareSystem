@@ -19,7 +19,7 @@ function Services() {
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: true, 
+      once: true,
     });
 
     // Giả lập thời gian tải trang

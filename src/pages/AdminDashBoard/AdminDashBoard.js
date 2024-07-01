@@ -129,7 +129,6 @@ function AdminDashBoard() {
                 </a>
                 <a href='/admin-account'>
                   <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
-
                     Account
                   </div>
                 </a>
@@ -171,7 +170,7 @@ function AdminDashBoard() {
           </div>
 
           <div className='Admin-DashBoard-Main col-md-10'>
-            <Statistic/>
+            <Statistic />
 
             <div className='Admin-DashBoard-Main-Table-Wrapper'>
               <div className='Admin-DashBoard-Main-Table'>

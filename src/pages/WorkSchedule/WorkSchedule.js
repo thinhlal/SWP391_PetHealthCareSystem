@@ -22,8 +22,8 @@ function WorkSchedule() {
     { startTime: '14:00', endTime: '15:00' },
     { startTime: '15:00', endTime: '16:00' },
     { startTime: '16:00', endTime: '17:00' },
-  ]
-  
+  ];
+
   const dataSchedules = {
     '2023-06-17': {
       '001': {
@@ -165,7 +165,7 @@ function WorkSchedule() {
         ...prev,
         shifts: 'Please select a shift for each date.',
       }));
-    }  else {
+    } else {
       const newTimeWork = selectedDates.map(date => ({
         date,
         shift: shifts[date],
@@ -284,12 +284,11 @@ function WorkSchedule() {
                           >
                             <option value=''>Start Time</option>
                             {availableTimeSlots.map((slot, index) => (
-                                    <option
-                                      key={index}
-                                      value={`${slot.startTime}`}
-                                    >{`${slot.startTime}`}</option>
-                                  ))}
-                            
+                              <option
+                                key={index}
+                                value={`${slot.startTime}`}
+                              >{`${slot.startTime}`}</option>
+                            ))}
                           </select>
                           <select
                             className='sl-date-work'
@@ -297,14 +296,16 @@ function WorkSchedule() {
                             onChange={e =>
                               handleShiftChange(date, e.target.value)
                             }
-                            required>
+                            required
+                          >
                             <option value=''>End Time</option>
-                          {availableTimeSlots.map((slot, index) => (
-                            <option
-                              key={index}
-                              value={`${slot.endTime}`}
-                            >{`${slot.endTime}`}</option>
-                          ))}</select>
+                            {availableTimeSlots.map((slot, index) => (
+                              <option
+                                key={index}
+                                value={`${slot.endTime}`}
+                              >{`${slot.endTime}`}</option>
+                            ))}
+                          </select>
                           {errors.shifts && (
                             <span className='error'>{errors.shifts}</span>
                           )}

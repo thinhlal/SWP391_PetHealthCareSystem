@@ -36,7 +36,7 @@ class ServiceController {
         description: description,
         price: price,
       });
-      
+
       await newService.save();
       res.status(204).send();
     } catch (error) {
@@ -49,9 +49,12 @@ class ServiceController {
     const { service } = req.body;
     console.log(service);
     try {
-      await Service.findOneAndUpdate({ serviceID: service.serviceID }, {
-        status: service.status ? false : true,
-      });
+      await Service.findOneAndUpdate(
+        { serviceID: service.serviceID },
+        {
+          status: service.status ? false : true,
+        },
+      );
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: 'Error fetching services', error });
@@ -62,11 +65,14 @@ class ServiceController {
   async updateServiceInfo(req, res, next) {
     const { serviceID, name, description, price } = req.body;
     try {
-      await Service.findOneAndUpdate({ serviceID }, {
-        name,
-        description,
-        price,
-      });
+      await Service.findOneAndUpdate(
+        { serviceID },
+        {
+          name,
+          description,
+          price,
+        },
+      );
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: 'Error update services', error });

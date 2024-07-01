@@ -190,7 +190,8 @@ function AdminCages() {
   const handleSaveChanges = () => {
     const newErrors = {};
     if (!editCage.name) newErrors.name = 'Name is required';
-    if (!editCage.description) newErrors.description = 'Description is required';
+    if (!editCage.description)
+      newErrors.description = 'Description is required';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -205,7 +206,9 @@ function AdminCages() {
     });
     setCageData(updatedCageData);
     setErrors({});
-    const modal = bootstrap.Modal.getInstance(document.getElementById(`exampleModalEdit-${editCage.id}`));
+    const modal = bootstrap.Modal.getInstance(
+      document.getElementById(`exampleModalEdit-${editCage.id}`),
+    );
     if (modal) {
       modal.hide();
     }
@@ -281,7 +284,7 @@ function AdminCages() {
       const change =
         ((filteredRevenueData.money - yesterdayRevenueData.money) /
           yesterdayRevenueData.money) *
-         100;
+        100;
       return change.toFixed(2);
     }
     return null;
@@ -608,17 +611,18 @@ function AdminCages() {
                                 {' '}
                                 Cage name:{' '}
                               </label>
-                              <input className='Admin-Cages-input'
+                              <input
+                                className='Admin-Cages-input'
                                 name='name'
                                 value={newCage.name}
                                 onChange={handleNewCageChange}
-                                placeholder='Name' />
+                                placeholder='Name'
+                              />
                               {errors.name && (
                                 <div className='Admin-Cages-Error'>
                                   {errors.name}
                                 </div>
                               )}
-
                             </div>
 
                             <div className='Admin-Cages-modal-add-account'>
@@ -656,7 +660,8 @@ function AdminCages() {
                             <button
                               type='button'
                               className='btn btn-success'
-                              onClick={handleAddCage}                            >
+                              onClick={handleAddCage}
+                            >
                               {' '}
                               Add{' '}
                             </button>

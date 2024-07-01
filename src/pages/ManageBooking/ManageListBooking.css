@@ -181,9 +181,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 500px; 
+  max-width: 500px;
 }
-
 
 .manage-booking-list .content-list-body-value:hover {
   opacity: 0.6;

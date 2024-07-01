@@ -4,7 +4,11 @@ const { verifyToken } = require('../app/controllers/MiddlewareController');
 
 const bookingController = require('../app/controllers/BookingController');
 
-router.get('/getBookingID/:bookingID', verifyToken, bookingController.getBookingDataByID);
+router.get(
+  '/getBookingID/:bookingID',
+  verifyToken,
+  bookingController.getBookingDataByID,
+);
 router.get(
   '/getAllBookings/:accountID',
   verifyToken,

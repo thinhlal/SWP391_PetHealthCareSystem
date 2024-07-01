@@ -25,7 +25,9 @@ function Header() {
                 src={userAccount}
                 alt=''
               />
-              <div className='main-header-user-account-name'>Hi {user?.doctorDetails[0]?.name}</div>
+              <div className='main-header-user-account-name'>
+                Hi {user?.doctorDetails[0]?.name}
+              </div>
               <div className='main-header-user-account_menu'>
                 <a
                   className='forward'
@@ -38,7 +40,10 @@ function Header() {
                 <div className='main-header-user-account_menu-item'>
                   Settings
                 </div>
-                <div className='main-header-user-account_menu-item' onClick={logOut}>
+                <div
+                  className='main-header-user-account_menu-item'
+                  onClick={logOut}
+                >
                   Log out
                 </div>
               </div>

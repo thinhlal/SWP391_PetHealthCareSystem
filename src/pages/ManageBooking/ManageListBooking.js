@@ -193,7 +193,7 @@ function ManageListBooking() {
   };
 
   const resetForm = () => {
-    setChosenDoctor('')
+    setChosenDoctor('');
     setAccountOption('');
     setAccountInfo({});
     setPetInfo({});
@@ -241,15 +241,16 @@ function ManageListBooking() {
   const handleSave = async bookingID => {
     try {
       console.log(chosenDoctor);
-      await axiosInstance.patch(`${process.env.REACT_APP_API_URL}/manageBooking/updateBookingDoctors`,
-        { bookingID, chosenDoctor }
-      )
+      await axiosInstance.patch(
+        `${process.env.REACT_APP_API_URL}/manageBooking/updateBookingDoctors`,
+        { bookingID, chosenDoctor },
+      );
       const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
       );
       setAllBookings(response.data.allBookings);
     } catch (error) {
-      console.error('error Update Manage Booking: ' + error)
+      console.error('error Update Manage Booking: ' + error);
     }
     setChosenDoctor('');
   };
@@ -322,15 +323,16 @@ function ManageListBooking() {
         service: services.map(service => service.service),
       };
       try {
-        await axiosInstance.post(`${process.env.REACT_APP_API_URL}/manageBooking/addHaveCustomer`,
-          newBookingHasCustomer
-        )
+        await axiosInstance.post(
+          `${process.env.REACT_APP_API_URL}/manageBooking/addHaveCustomer`,
+          newBookingHasCustomer,
+        );
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
         );
         setAllBookings(response.data.allBookings);
       } catch (error) {
-        console.error('error Add Manage Booking: ' + error)
+        console.error('error Add Manage Booking: ' + error);
       }
     } else {
       const newBookingAndNewCustomer = {
@@ -346,15 +348,16 @@ function ManageListBooking() {
       };
       console.log(newBookingAndNewCustomer);
       try {
-        await axiosInstance.post(`${process.env.REACT_APP_API_URL}/manageBooking/addNotHaveCustomer`,
-          newBookingAndNewCustomer
-        )
+        await axiosInstance.post(
+          `${process.env.REACT_APP_API_URL}/manageBooking/addNotHaveCustomer`,
+          newBookingAndNewCustomer,
+        );
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
         );
         setAllBookings(response.data.allBookings);
       } catch (error) {
-        console.error('error Add Manage Booking: ' + error)
+        console.error('error Add Manage Booking: ' + error);
       }
     }
 
@@ -375,8 +378,10 @@ function ManageListBooking() {
   };
 
   const filteredBookings = filterDate
-    ? allBookings.filter(booking => booking.dateBook.split('T')[0] === filterDate).sort((a, b) => b.startTime.localeCompare(a.startTime))
-    : allBookings
+    ? allBookings
+        .filter(booking => booking.dateBook.split('T')[0] === filterDate)
+        .sort((a, b) => b.startTime.localeCompare(a.startTime))
+    : allBookings;
 
   const handleConfirmPayment = bookingID => {
     setAllBookings(
@@ -1021,7 +1026,7 @@ function ManageListBooking() {
                 <div className='main-content-list-title-text'>Payment</div>{' '}
               </div>
               <div className='main-content-list-body-wrapper'>
-                {filteredBookings.length !== 0 ?
+                {filteredBookings.length !== 0 ? (
                   filteredBookings.map(booking => (
                     <div
                       className='content-list-body-info'
@@ -1040,32 +1045,32 @@ function ManageListBooking() {
                         {booking.endTime}
                       </div>
                       <div className='content-list-body-value'>
-                      <div className='text-content'>
-                        {truncateText(booking.name)}
-                      </div>
-                      </div>
-                      <div className='content-list-body-value'>
-                      <div className='text-content'>
-                        {booking.servicesDetails &&
-                          booking.servicesDetails
-                            .map(service => service.name)
-                            .join(', ')}
-                      </div>
+                        <div className='text-content'>
+                          {truncateText(booking.name)}
+                        </div>
                       </div>
                       <div className='content-list-body-value'>
-                        {booking.doctorDetails.length !== 0
-                          ? booking.doctorDetails[0].name
-                          : (
-                            <button
-                              type='button'
-                              className='btn btn-primary'
-                              data-bs-toggle='modal'
-                              data-bs-target={`#chooseDoctorModal-${booking.bookingID}`}
-                              onClick={getAllDoctors}
-                            >
-                              Choose
-                            </button>
-                          )}
+                        <div className='text-content'>
+                          {booking.servicesDetails &&
+                            booking.servicesDetails
+                              .map(service => service.name)
+                              .join(', ')}
+                        </div>
+                      </div>
+                      <div className='content-list-body-value'>
+                        {booking.doctorDetails.length !== 0 ? (
+                          booking.doctorDetails[0].name
+                        ) : (
+                          <button
+                            type='button'
+                            className='btn btn-primary'
+                            data-bs-toggle='modal'
+                            data-bs-target={`#chooseDoctorModal-${booking.bookingID}`}
+                            onClick={getAllDoctors}
+                          >
+                            Choose
+                          </button>
+                        )}
                       </div>
 
                       <div
@@ -1420,7 +1425,7 @@ function ManageListBooking() {
                                           .isCancelPayment ? (
                                           <span>Cancelled</span>
                                         ) : booking.paymentsDetails[0]
-                                          .isSuccess === false ? (
+                                            .isSuccess === false ? (
                                           <span>Not paid</span>
                                         ) : (
                                           <span>Already paid</span>
@@ -1466,8 +1471,10 @@ function ManageListBooking() {
                         </div>
                       </div>
                     </div>
-                  )
-                  ) : <div>No Bookings This Day</div>}
+                  ))
+                ) : (
+                  <div>No Bookings This Day</div>
+                )}
               </div>
             </div>
           </div>

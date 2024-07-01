@@ -105,8 +105,8 @@
 /* image cat */
 .all-services .avatar-cat {
   width: 100%;
-  max-width: 1000px; 
-  height: 700px; 
+  max-width: 1000px;
+  height: 700px;
   border-radius: 0px 1000px 1000px 0px;
   background-color: #f7f7f7;
   overflow: hidden;
@@ -117,11 +117,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute; 
+  position: absolute;
   top: 0;
   left: 0;
 }
-
 
 .all-services .photo-frame-img-service {
   object-fit: cover;
@@ -268,7 +267,6 @@
   top: 0;
   left: 0;
 }
-
 
 .all-services .content-services-dog {
   width: 100%;
