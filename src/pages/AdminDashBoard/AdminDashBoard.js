@@ -28,7 +28,7 @@ function AdminDashBoard() {
       try {
         const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/admin/getAllBookings`)
         console.log(response.data)
-        const sortDate = response.data.sort((a,b) => b.bookingID.localeCompare(a.bookingID));
+        const sortDate = response.data.sort((a, b) => b.bookingID.localeCompare(a.bookingID));
         setBookingData(sortDate);
       } catch (error) {
         console.log(error)
@@ -214,7 +214,38 @@ function AdminDashBoard() {
                       {item.totalPrice}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {item.status}
+                      <div
+                        className={`Admin-DashBoard-Table-status-booking
+                              ${item.paymentsDetails[0].paymentMethod ===
+                            'COUNTER'
+                            ? 'Admin-DashBoard-Table-status-waiting'
+                            : item.paymentsDetails[0].isCancelPayment
+                              ? 'Admin-DashBoard-Table-status-cancel'
+                              : item.paymentsDetails[0].isSuccess
+                                ? item.isCancel
+                                  ? 'Admin-DashBoard-Table-status-cancel'
+                                  : item.isCheckIn
+                                    ? 'Admin-DashBoard-Table-status-done'
+                                    : 'Admin-DashBoard-Table-status-waiting'
+                                : null
+                          }
+                                }`}
+                      >
+                        {item.paymentsDetails[0].paymentMethod ===
+                          'COUNTER' ? (
+                          <span>Pay when checkIn</span>
+                        ) : item.paymentsDetails[0].isCancelPayment ? (
+                          <span>Cancelled Payment</span>
+                        ) : item.paymentsDetails[0].isSuccess ? (
+                          item.isCancel ? (
+                            <span>Cancelled Booking</span>
+                          ) : item.isCheckIn ? (
+                            <span>Done</span>
+                          ) : (
+                            <span>Waiting</span>
+                          )
+                        ) : null}
+                      </div>
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       {item.dateBook.split('T')[0]}

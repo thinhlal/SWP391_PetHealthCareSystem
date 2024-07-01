@@ -254,6 +254,22 @@
   margin: 0;
 }
 
+.Admin-DashBoard-Table-status-booking{
+  font-weight: bold;
+} 
+
+.Admin-DashBoard-Table-status-waiting {
+  color: blue;
+}
+
+.Admin-DashBoard-Table-status-cancel {
+  color: red;
+}
+
+.Admin-DashBoard-Table-status-done {
+  color: green;
+}
+
 .Admin-DashBoard-Table-Detail {
   width: 105%;
 }
