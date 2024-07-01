@@ -12,8 +12,18 @@ function WorkSchedule() {
   const [errors, setErrors] = useState({});
   const [selectedDates, setSelectedDates] = useState([]);
   const [shifts, setShifts] = useState({});
-  const [selectedDayOff, setSelectedDayOff] = useState('');
   const [allTimeWork, setTimeWork] = useState([]);
+  const availableTimeSlots = [
+    { startTime: '08:00', endTime: '09:00' },
+    { startTime: '09:00', endTime: '10:00' },
+    { startTime: '10:00', endTime: '11:00' },
+    { startTime: '11:00', endTime: '12:00' },
+    { startTime: '13:00', endTime: '14:00' },
+    { startTime: '14:00', endTime: '15:00' },
+    { startTime: '15:00', endTime: '16:00' },
+    { startTime: '16:00', endTime: '17:00' },
+  ]
+  
   const dataSchedules = {
     '2023-06-17': {
       '001': {
@@ -155,16 +165,10 @@ function WorkSchedule() {
         ...prev,
         shifts: 'Please select a shift for each date.',
       }));
-    } else if (!selectedDayOff) {
-      setErrors(prev => ({
-        ...prev,
-        selectedDayOff: 'Please select a day off.',
-      }));
-    } else {
+    }  else {
       const newTimeWork = selectedDates.map(date => ({
         date,
         shift: shifts[date],
-        dayOff: selectedDayOff,
       }));
 
       setTimeWork([...allTimeWork, ...newTimeWork]);
@@ -176,7 +180,6 @@ function WorkSchedule() {
   const resetForm = () => {
     setSelectedDates([]);
     setShifts({});
-    setSelectedDayOff('');
     setErrors({});
   };
 
@@ -257,7 +260,7 @@ function WorkSchedule() {
                           multiple
                           value={selectedDates}
                           onChange={handleDateChangeModal}
-                          format='MM/DD'
+                          format='YYYY/MM/DD'
                           className='ip-date-work'
                           style={{ color: 'green' }}
                         />
@@ -270,7 +273,7 @@ function WorkSchedule() {
                           key={date}
                           className='modal-body-section-doctor-date'
                         >
-                          <label>{`Choose for ${date}:`}</label>
+                          <label>{`Choose Shift for ${date}:`}</label>
                           <select
                             className='sl-date-work'
                             value={shifts[date] || ''}
@@ -279,16 +282,29 @@ function WorkSchedule() {
                             }
                             required
                           >
-                            <option value=''>Select Shift</option>
-                            <option value='Morning'>
-                              Morning: 7:00 - 15:00
-                            </option>
-                            <option value='Evening'>
-                              Evening: 14:00 - 22:00
-                            </option>
-                            <option value='Both'>Both</option>
-                            <option>Leave(1 day each week)</option>
+                            <option value=''>Start Time</option>
+                            {availableTimeSlots.map((slot, index) => (
+                                    <option
+                                      key={index}
+                                      value={`${slot.startTime}`}
+                                    >{`${slot.startTime}`}</option>
+                                  ))}
+                            
                           </select>
+                          <select
+                            className='sl-date-work'
+                            value={shifts[date] || ''}
+                            onChange={e =>
+                              handleShiftChange(date, e.target.value)
+                            }
+                            required>
+                            <option value=''>End Time</option>
+                          {availableTimeSlots.map((slot, index) => (
+                            <option
+                              key={index}
+                              value={`${slot.endTime}`}
+                            >{`${slot.endTime}`}</option>
+                          ))}</select>
                           {errors.shifts && (
                             <span className='error'>{errors.shifts}</span>
                           )}
@@ -372,7 +388,7 @@ function WorkSchedule() {
         </div>
       </div>
       <p className='final-petExam'>
-        --Today's working hour start at 7:00 a.m and end at 22:00 p.m--
+        --Today's working hour start at 9:00 a.m and end at 18:00 p.m--
       </p>
       <ConfirmationModal
         show={showModal}
