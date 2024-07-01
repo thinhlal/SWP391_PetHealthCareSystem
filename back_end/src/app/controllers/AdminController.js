@@ -385,7 +385,7 @@ class AdminController {
     }
   }
 
-  // GET /updateAccount
+  // PATCH /updateAccount
   async updateAccount(req, res, next) {
     const account = req.body;
     try {
@@ -395,6 +395,53 @@ class AdminController {
           status: account.status ? false : true,
         },
       );
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: 'Error when get accounts', error });
+    }
+  }
+
+  // POST /updateAccountInfo
+  async updateAccountInfo(req, res, next) {
+    const { accountID, name, email, phone, role } = req.body;
+    try {
+      if (role === 'Customer') {
+        await Customer.findOneAndUpdate(
+          { accountID },
+          {
+            name: name,
+            email: email,
+            phone: phone,
+          },
+        );
+      } else if (role === 'Staff') {
+        await Staff.findOneAndUpdate(
+          { accountID },
+          {
+            name: name,
+            email: email,
+            phone: phone,
+          },
+        );
+      } else if (role === 'Doctor') {
+        await Doctor.findOneAndUpdate(
+          { accountID },
+          {
+            name: name,
+            email: email,
+            phone: phone,
+          },
+        );
+      } else if (role === 'Admin') {
+        await Admin.findOneAndUpdate(
+          { accountID },
+          {
+            name: name,
+            email: email,
+            phone: phone,
+          },
+        );
+      }
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: 'Error when get accounts', error });

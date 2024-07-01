@@ -84,7 +84,7 @@ function AdminAccount() {
     return re.test(String(phone));
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     const newErrors = {};
     if (!editAccount.name) newErrors.name = 'Name is required';
     if (!editAccount.email) newErrors.email = 'Email is required';
@@ -99,16 +99,19 @@ function AdminAccount() {
       return;
     }
 
-    const updatedAccountData = accountData.map(account => {
-      if (account.id === editAccount.id) {
-        return { ...account, ...editAccount };
-      }
-      return account;
-    });
-    setAccountData(updatedAccountData);
+    await axiosInstance.post(`${process.env.REACT_APP_API_URL}/admin/updateAccountInfo`,
+      editAccount
+    )
+    const response = await axiosInstance.get(
+      `${process.env.REACT_APP_API_URL}/admin/getAllAccounts`,
+    );
+    const sortDate = response.data.sort((a, b) =>
+      b.accountID.localeCompare(a.accountID),
+    );
+    setAccountData(sortDate);
     setErrors({});
     const modal = bootstrap.Modal.getInstance(
-      document.getElementById(`exampleModalEdit-${editAccount.id}`),
+      document.getElementById(`exampleModalEdit-${editAccount.accountID}`),
     );
     if (modal) {
       modal.hide();
@@ -117,40 +120,40 @@ function AdminAccount() {
 
   const openEditModal = account => {
     if (account.role === 'Customer') {
-      setCurrentAccount({ ...account.customerDetails[0], role: account.role });
+      setCurrentAccount({ ...account?.customerDetails[0], role: account?.role });
       setEditAccount({
-        accountID: account.customerDetails[0].accountID,
-        name: account.customerDetails[0].name,
-        email: account.customerDetails[0].email,
-        phone: account.customerDetails[0].phone,
-        role: account.role,
+        accountID: account?.customerDetails[0]?.accountID,
+        name: account?.customerDetails[0]?.name,
+        email: account?.customerDetails[0]?.email,
+        phone: account?.customerDetails[0]?.phone,
+        role: account?.role,
       });
     } else if (account.role === 'Staff') {
-      setCurrentAccount({ ...account.staffDetails[0], role: account.role });
+      setCurrentAccount({ ...account?.staffDetails[0], role: account?.role });
       setEditAccount({
-        accountID: account.staffDetails[0].accountID,
-        name: account.staffDetails[0].name,
-        email: account.staffDetails[0].email,
-        phone: account.staffDetails[0].phone,
-        role: account.role,
+        accountID: account?.staffDetails[0]?.accountID,
+        name: account?.staffDetails[0]?.name,
+        email: account?.staffDetails[0]?.email,
+        phone: account?.staffDetails[0]?.phone,
+        role: account?.role,
       });
     } else if (account.role === 'Doctor') {
-      setCurrentAccount({ ...account.doctorDetails[0], role: account.role });
+      setCurrentAccount({ ...account?.doctorDetails[0], role: account?.role });
       setEditAccount({
-        accountID: account.doctorDetails[0].accountID,
-        name: account.doctorDetails[0].name,
-        email: account.doctorDetails[0].email,
-        phone: account.doctorDetails[0].phone,
-        role: account.role,
+        accountID: account?.doctorDetails[0]?.accountID,
+        name: account?.doctorDetails[0]?.name,
+        email: account?.doctorDetails[0]?.email,
+        phone: account?.doctorDetails[0]?.phone,
+        role: account?.role,
       });
     } else if (account.role === 'Admin') {
-      setCurrentAccount({ ...account.adminDetails[0], role: account.role });
+      setCurrentAccount({ ...account?.adminDetails[0], role: account?.role });
       setEditAccount({
-        accountID: account.adminDetails[0].accountID,
-        name: account.adminDetails[0].name,
-        email: account.adminDetails[0].email,
-        phone: account.adminDetails[0].phone,
-        role: account.role,
+        accountID: account?.adminDetails[0]?.accountID,
+        name: account?.adminDetails[0]?.name,
+        email: account?.adminDetails[0]?.email,
+        phone: account?.adminDetails[0]?.phone,
+        role: account?.role,
       });
     }
   };
@@ -690,43 +693,24 @@ function AdminAccount() {
                                   <div className='Admin-Account-modal-title'>
                                     Role
                                   </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
-                                      Old role:
-                                    </div>
-                                    {currentAccount?.role}
-                                  </div>
-                                  <label className='Admin-Account-modal-initials'>
-                                    New role:
-                                  </label>
-                                  <select
-                                    className='Admin-Account-input-role'
-                                    name='role'
-                                    value={editAccount.role}
-                                    onChange={handleEditAccountChange}
-                                  >
-                                    <option>Customer</option>
-                                    <option>Doctor</option>
-                                    <option>Staff</option>
-                                    <option>Admin</option>
-                                  </select>
+                                  {editAccount.role}
                                 </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                  onClick={handleSaveChanges}
-                                >
-                                  Save changes
-                                </button>
+                                <div className='modal-footer'>
+                                  <button
+                                    type='button'
+                                    className='btn btn-secondary'
+                                    data-bs-dismiss='modal'
+                                  >
+                                    Close
+                                  </button>
+                                  <button
+                                    type='button'
+                                    className='btn btn-success'
+                                    onClick={handleSaveChanges}
+                                  >
+                                    Save changes
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -777,13 +761,13 @@ function AdminAccount() {
                                     Name:
                                   </div>
                                   {item.role === 'Customer' ? (
-                                    item.customerDetails[0].name
-                                  ) : item.role === 'Staff' ? (
-                                    item.staffDetails[0].name
-                                  ) : item.role === 'Admin' ? (
-                                    item.adminDetails[0].name
-                                  ) : item.role === 'Doctor' ? (
-                                    item.doctorDetails[0].name
+                                    item?.customerDetails[0]?.name
+                                  ) : item?.role === 'Staff' ? (
+                                    item?.staffDetails[0]?.name
+                                  ) : item?.role === 'Admin' ? (
+                                    item?.adminDetails[0]?.name
+                                  ) : item?.role === 'Doctor' ? (
+                                    item?.doctorDetails[0]?.name
                                   ) : (
                                     <span>Nothing</span>
                                   )}
@@ -798,14 +782,14 @@ function AdminAccount() {
                                   <div className='Admin-Account-modal-more-title'>
                                     Email:
                                   </div>
-                                  {item.role === 'Customer' ? (
-                                    item.customerDetails[0].email
-                                  ) : item.role === 'Staff' ? (
-                                    item.staffDetails[0].email
-                                  ) : item.role === 'Admin' ? (
-                                    item.adminDetails[0].email
-                                  ) : item.role === 'Doctor' ? (
-                                    item.doctorDetails[0].email
+                                  {item?.role === 'Customer' ? (
+                                    item?.customerDetails[0]?.email
+                                  ) : item?.role === 'Staff' ? (
+                                    item?.staffDetails[0]?.email
+                                  ) : item?.role === 'Admin' ? (
+                                    item?.adminDetails[0]?.email
+                                  ) : item?.role === 'Doctor' ? (
+                                    item?.doctorDetails[0]?.email
                                   ) : (
                                     <span>Nothing</span>
                                   )}
@@ -814,14 +798,14 @@ function AdminAccount() {
                                   <div className='Admin-Account-modal-more-title'>
                                     Phone number:
                                   </div>
-                                  {item.role === 'Customer' ? (
-                                    item.customerDetails[0].phone
-                                  ) : item.role === 'Staff' ? (
-                                    item.staffDetails[0].phone
-                                  ) : item.role === 'Admin' ? (
-                                    item.adminDetails[0].phone
-                                  ) : item.role === 'Doctor' ? (
-                                    item.doctorDetails[0].phone
+                                  {item?.role === 'Customer' ? (
+                                    item?.customerDetails[0]?.phone
+                                  ) : item?.role === 'Staff' ? (
+                                    item?.staffDetails[0]?.phone
+                                  ) : item?.role === 'Admin' ? (
+                                    item?.adminDetails[0]?.phone
+                                  ) : item?.role === 'Doctor' ? (
+                                    item?.doctorDetails[0]?.phone
                                   ) : (
                                     <span>Nothing</span>
                                   )}
@@ -830,7 +814,7 @@ function AdminAccount() {
                                   <div className='Admin-Account-modal-more-title'>
                                     Role:
                                   </div>
-                                  {item.role}
+                                  {item?.role}
                                 </div>
                               </div>
                               <div className='modal-footer'>

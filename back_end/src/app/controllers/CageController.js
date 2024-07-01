@@ -165,7 +165,6 @@ class AdminController {
   // POST /addPetToCage
   async addPetToCage(req, res, next) {
     const { formData } = req.body;
-    console.log(formData);
     try {
       let idCageDisease;
       while (true) {

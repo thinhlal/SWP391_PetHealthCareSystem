@@ -33,7 +33,6 @@ function ManageCages() {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/cage/getAllCages`,
         );
-        console.log(response.data);
         setCageData(response.data);
       } catch (error) {
         console.error('Error fetching cages:', error);

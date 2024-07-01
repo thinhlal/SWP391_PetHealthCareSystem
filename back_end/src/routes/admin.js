@@ -5,6 +5,7 @@ const { verifyToken } = require('../app/controllers/MiddlewareController');
 const AdminController = require('../app/controllers/AdminController');
 
 router.patch('/updateAccount', verifyToken, AdminController.updateAccount);
+router.post('/updateAccountInfo', verifyToken, AdminController.updateAccountInfo);
 router.post('/addAccount', verifyToken, AdminController.addAccount);
 router.get('/getAllBookings', verifyToken, AdminController.getAllBookings);
 router.get('/getAllAccounts', verifyToken, AdminController.getAllAccounts);
