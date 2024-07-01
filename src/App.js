@@ -134,18 +134,24 @@ function App() {
         <Route
           path='/work-schedule'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute allowedRoles={['Doctor']}>
               <WorkSchedule />
             </ProtectedRoute>
           }
         />
         <Route
           path='/sick-pet'
-          element={<ManageSickPet />}
+          element={
+            <ProtectedRoute allowedRoles={['Doctor']}>
+              <ManageSickPet />
+            </ProtectedRoute>}
         />
         <Route
           path='/pet-exam-record'
-          element={<PetExamRecord />}
+          element={
+            <ProtectedRoute allowedRoles={['Doctor']}>
+              <PetExamRecord />
+            </ProtectedRoute>}
         />
 
         <Route
@@ -205,7 +211,7 @@ function App() {
           }
         />
       </Routes>
-    </AuthProvider>
+    </AuthProvider >
   );
 }
 

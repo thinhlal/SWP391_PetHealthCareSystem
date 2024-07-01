@@ -139,6 +139,30 @@ class SiteController {
             as: 'customerDetails',
           },
         },
+        {
+          $lookup: {
+            from: 'staffs',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'staffDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'doctors',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'doctorDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'admins',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'adminDetails',
+          },
+        },
       ]);
       const user = userAgv[0];
       res.json({ message: 'Login successful', user, token });

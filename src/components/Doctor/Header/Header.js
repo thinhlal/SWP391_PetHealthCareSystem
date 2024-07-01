@@ -3,7 +3,10 @@ import './Header.css';
 //img
 import logo from '../../../assets/images/Components/User/Header/logo.png';
 import userAccount from '../../../assets/images/Components/User/Header/img-7.png';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
 function Header() {
+  const { logOut, user } = useContext(AuthContext);
   return (
     <div className='main-header-doctor-overlap'>
       <div className='main-header-navigation'>
@@ -22,7 +25,7 @@ function Header() {
                 src={userAccount}
                 alt=''
               />
-              <div className='main-header-user-account-name'>Hi Employee</div>
+              <div className='main-header-user-account-name'>Hi {user?.doctorDetails[0]?.name}</div>
               <div className='main-header-user-account_menu'>
                 <a
                   className='forward'
@@ -35,7 +38,7 @@ function Header() {
                 <div className='main-header-user-account_menu-item'>
                   Settings
                 </div>
-                <div className='main-header-user-account_menu-item'>
+                <div className='main-header-user-account_menu-item' onClick={logOut}>
                   Log out
                 </div>
               </div>

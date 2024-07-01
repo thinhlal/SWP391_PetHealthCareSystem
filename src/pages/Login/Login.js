@@ -46,7 +46,7 @@ function Login() {
         navigate('/admin-dashboard');
       } else if (response.data.user.role === 'Staff') {
         navigate('/manage-booking');
-      } else if (response.data.user.role === 'Veterinarian') {
+      } else if (response.data.user.role === 'Doctor') {
         navigate('/work-schedule');
       } else {
         navigate('/');
