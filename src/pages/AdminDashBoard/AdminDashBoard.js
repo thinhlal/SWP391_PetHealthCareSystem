@@ -1,7 +1,7 @@
 //css
 import './AdminDashBoard.css';
 //React
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 //import React, { useState, useEffect, useRef } from 'react';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,61 +15,40 @@ import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg'
 import logo_pet_health_care from '../../assets/images/img_AdminDashBoard/logo_pethealthcare.png';
 import { AuthContext } from '../../context/AuthContext';
 import Statistic from '../../components/Admin/Statistics/Statistics';
+import axiosInstance from '../../utils/axiosInstance';
 function AdminDashBoard() {
   const { logOut } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('Profile');
   const [search, setSearch] = useState('');
   const openTab = tabName => setActiveTab(tabName);
+  const [bookingData, setBookingData] = useState([]);
 
-  const bookingData = [
-    {
-      id: 1,
-      booking_id: 'B00001',
-      customer_id: 'C00001',
-      pet_id: 'P00001',
-      price: '$200',
-      date: '17/6/2024',
-    },
-    {
-      id: 2,
-      booking_id: 'B00002',
-      customer_id: 'C00002',
-      pet_id: 'P00002',
-      price: '$150',
-      date: '17/6/2024',
-    },
-    {
-      id: 3,
-      booking_id: 'B00003',
-      customer_id: 'C00003',
-      pet_id: 'P00003',
-      price: '$240',
-      date: '17/6/2024',
-    },
-    {
-      id: 4,
-      booking_id: 'B00004',
-      customer_id: 'C00004',
-      pet_id: 'P00004',
-      price: '$100',
-      date: '17/6/2024',
-    },
-    {
-      id: 5,
-      booking_id: 'B00005',
-      customer_id: 'C00005',
-      pet_id: 'P00005',
-      price: '$90',
-      date: '17/6/2024',
-    },
-  ];
+  useEffect(() => {
+    const fetchBooking = async () => {
+      try {
+        const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/admin/getAllBookings`)
+        console.log(response.data)
+        const sortDate = response.data.sort((a,b) => b.bookingID.localeCompare(a.bookingID));
+        setBookingData(sortDate);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchBooking();
+  }, [])
 
   const searchBookingData = bookingData.filter(booking => {
     const matchesSearch =
       search === '' ||
-      booking.booking_id.toLowerCase().includes(search.toLowerCase());
+      booking.bookingID.toLowerCase().includes(search.toLowerCase());
     return matchesSearch;
   });
+
+  const servicePrice = (services) => {
+    return services.map(service => {
+      return `${service.name}($${service.price})`
+    })
+  }
 
   return (
     <div className='Admin-DashBoard container-fluid'>
@@ -183,7 +162,7 @@ function AdminDashBoard() {
                 <div className='Admin-DashBoard-Main-Search'>
                   <input
                     type='text'
-                    placeholder='Search Name'
+                    placeholder='Search BookingID'
                     className='Admin-DashBoard-Main-Search-Input '
                     onChange={e => setSearch(e.target.value)}
                   />
@@ -217,22 +196,22 @@ function AdminDashBoard() {
                 {searchBookingData.map(item => (
                   <div
                     className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'
-                    key={item.id}
+                    key={item.bookingID}
                   >
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {item.booking_id}
+                      {item.bookingID}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {item.customer_id}
+                      {item.customerDetails[0].customerID}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {item.pet_id}
+                      {item.petID}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {item.price}
+                      {item.totalPrice}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {item.date}
+                      {item.dateBook.split('T')[0]}
                     </div>
 
                     <div className='Admin-DashBoard-Table-Detail'>
@@ -306,19 +285,20 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
                                           Name:
                                         </div>
-                                        <div>Liza Doe</div>
+                                        <div>{item?.name}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
                                           Email:
                                         </div>
-                                        <div>support@gmail.com</div>
+                                        <div>{item?.email}
+                                        </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
                                           Phone:
                                         </div>
-                                        <div>+1234 55 66 777</div>
+                                        <div>{item?.phone}</div>
                                       </div>
                                     </div>
                                     <div
@@ -335,25 +315,31 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Name:
                                         </div>
-                                        <div>Boby</div>
+                                        <div>{item?.petDetails[0]?.name}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Breed:
                                         </div>
-                                        <div>Golden</div>
+                                        <div>{item?.petDetails[0]?.breed}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                          Species:
+                                          Type:
                                         </div>
-                                        <div>Dog</div>
+                                        <div>{item?.petDetails[0]?.petType}</div>
+                                      </div>
+                                      <div className='Admin-DashBoard-form-group'>
+                                        <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                          BirthDay:
+                                        </div>
+                                        <div>{item?.petDetails[0]?.birthday.split('T')[0]}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Gender:
                                         </div>
-                                        <div>Male</div>
+                                        <div>{item?.petDetails[0]?.gender}</div>
                                       </div>
                                     </div>
                                     <div
@@ -371,26 +357,26 @@ function AdminDashBoard() {
                                           Services:
                                         </div>
                                         <div>
-                                          Vaccination( $60 ), X Ray( $60 )
+                                          {servicePrice(item?.servicesInBooking).join(', ')}
                                         </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Start time:
                                         </div>
-                                        <div>13h30</div>
+                                        <div>{item?.startTime}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           End time:
                                         </div>
-                                        <div>15h30</div>
+                                        <div>{item?.endTime}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
-                                          veterinarian name:
+                                          Doctor:
                                         </div>
-                                        <div>John</div>
+                                        <div>{item?.doctorDetails[0].name}</div>
                                       </div>
                                     </div>
                                   </div>
