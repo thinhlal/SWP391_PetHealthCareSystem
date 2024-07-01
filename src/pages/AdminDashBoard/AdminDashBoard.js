@@ -14,6 +14,7 @@ import Stack from '@mui/material/Stack';
 import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg';
 import logo_pet_health_care from '../../assets/images/img_AdminDashBoard/logo_pethealthcare.png';
 import { AuthContext } from '../../context/AuthContext';
+import Statistic from '../../components/Admin/Statistics/Statistics';
 function AdminDashBoard() {
   const { logOut } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('Profile');
@@ -94,7 +95,6 @@ function AdminDashBoard() {
                 <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z' />
               </svg>
               <div className='admin-DashBoard-Header-Account-Text'>
-                {' '}
                 Hi Admin
               </div>
             </div>
@@ -117,34 +117,30 @@ function AdminDashBoard() {
                 </svg>
                 <a href='/admin-dashboard'>
                   <div className=' Admin-DashBoard-Navigate-Text-Dashboard'>
-                    {' '}
-                    DashBoard{' '}
+                    DashBoard
                   </div>
                 </a>
               </div>
               <div className='Admin-DashBoard-Navigate-Text-Rest'>
                 <a href='/admin-dashboard'>
                   <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
-                    {' '}
-                    Booking{' '}
+                    Booking
                   </div>
                 </a>
                 <a href='/admin-account'>
                   <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
-                    {' '}
-                    Account{' '}
+
+                    Account
                   </div>
                 </a>
                 <a href='/admin-services'>
                   <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
-                    {' '}
-                    Services{' '}
+                    Services
                   </div>
                 </a>
                 <a href='/admin-cages'>
                   <div className='Admin-DashBoard-Navigate-Text-Rest-Menu'>
-                    {' '}
-                    Cages{' '}
+                    Cages
                   </div>
                 </a>
               </div>
@@ -175,145 +171,7 @@ function AdminDashBoard() {
           </div>
 
           <div className='Admin-DashBoard-Main col-md-10'>
-            <div className='Admin-DashBoard-Main_Title'>
-              <div className='Admin-DashBoard-Main_Title-Left'>
-                <h2 className='Admin-DashBoard-Main_Title-Left-Intro'>
-                  Hi, welcome back!
-                </h2>
-                <p className='Admin-DashBoard-Main_Title-Left-text'>
-                  Sales monitoring dashboard template.
-                </p>
-              </div>
-              <div className='Admin-DashBoard-Main_Title-Right'>
-                <label className='Admin-DashBoard-title-Star'>
-                  Customer Ratings
-                </label>
-                <div className='Admin-DashBoard-Star'>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='12'
-                    height='16'
-                    fill='#fbbc0b'
-                    className='bi bi-star-fill'
-                    viewBox='0 0 16 16'
-                  >
-                    <path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z' />
-                  </svg>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='12'
-                    height='16'
-                    fill='#fbbc0b'
-                    className='bi bi-star-fill'
-                    viewBox='0 0 16 16'
-                  >
-                    <path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z' />
-                  </svg>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='12'
-                    height='16'
-                    fill='#97a3b9'
-                    className='bi bi-star-fill'
-                    viewBox='0 0 16 16'
-                  >
-                    <path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z' />
-                  </svg>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='12'
-                    height='16'
-                    fill='#97a3b9'
-                    className='bi bi-star-fill'
-                    viewBox='0 0 16 16'
-                  >
-                    <path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z' />
-                  </svg>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='12'
-                    height='16'
-                    fill='#97a3b9'
-                    className='bi bi-star-fill'
-                    viewBox='0 0 16 16'
-                  >
-                    <path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z' />
-                  </svg>
-                  <span>(14.000)</span>
-                </div>
-              </div>
-            </div>
-            <div className='Admin-DashBoard-Main-ChooseDate'>
-              <div className='Admin-DashBoard-Main-ChooseDate_Text'>
-                Choose Date:
-              </div>
-              <input
-                type='date'
-                id='Admin-DashBoard-start'
-                name='trip-start'
-                defaultValue='2022-07-22'
-                min='2018-01-01'
-                max='2026-12-31'
-              />
-            </div>
-
-            <div className='Admin-DashBoard-Main-Header row'>
-              <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-                <div className='Admin-DashBoard-Main-Header-Note'>
-                  {' '}
-                  Daily income{' '}
-                </div>
-                <div className='Admin-DashBoard-Main-Header-Money'>
-                  {' '}
-                  $5,678.90{' '}
-                </div>
-                <div className='Admin-DashBoard-Main-Header-Percent'>
-                  {' '}
-                  +20% day over day{' '}
-                </div>
-              </div>
-
-              <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-                <div className='Admin-DashBoard-Main-Header-Note'>
-                  Weekly income{' '}
-                </div>
-                <div className='Admin-DashBoard-Main-Header-Money'>
-                  {' '}
-                  $45,678.90{' '}
-                </div>
-                <div className='Admin-DashBoard-Main-Header-Percent'>
-                  {' '}
-                  +10% day over week{' '}
-                </div>
-              </div>
-
-              <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-                <div className='Admin-DashBoard-Main-Header-Note'>
-                  {' '}
-                  Monthly income{' '}
-                </div>
-                <div className='Admin-DashBoard-Main-Header-Money'>
-                  {' '}
-                  $230,678.90{' '}
-                </div>
-                <div className='Admin-DashBoard-Main-Header-Percent'>
-                  {' '}
-                  +23% day over month{' '}
-                </div>
-              </div>
-
-              <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-                <div className='Admin-DashBoard-Main-Header-Note'> Total </div>
-                <div className='Admin-DashBoard-Main-Header-Money'>
-                  {' '}
-                  $5,678.90{' '}
-                </div>
-                <div className='Admin-DashBoard-Main-Header-Percent'>
-                  {' '}
-                  +20% day over day{' '}
-                </div>
-              </div>
-            </div>
+            <Statistic/>
 
             <div className='Admin-DashBoard-Main-Table-Wrapper'>
               <div className='Admin-DashBoard-Main-Table'>
@@ -331,37 +189,30 @@ function AdminDashBoard() {
                     onChange={e => setSearch(e.target.value)}
                   />
                   <button className='Admin-DashBoard-Main-Search-Button'>
-                    {' '}
                     <img
                       src={icon_search}
                       alt=''
-                    />{' '}
+                    />
                   </button>
                 </div>
                 <div className='Admin-DashBoard-Main-Table-Header'>
                   <div className='Admin-DashBoard-Main-Table-Header-Title '>
-                    {' '}
-                    Booking ID{' '}
+                    Booking ID
                   </div>
                   <div className='Admin-DashBoard-Main-Table-Header-Title '>
-                    {' '}
-                    Customer ID{' '}
+                    Customer ID
                   </div>
                   <div className='Admin-DashBoard-Main-Table-Header-Title '>
-                    {' '}
-                    Pet ID{' '}
+                    Pet ID
                   </div>
                   <div className='Admin-DashBoard-Main-Table-Header-Title '>
-                    {' '}
-                    Total Price{' '}
+                    Total Price
                   </div>
                   <div className='Admin-DashBoard-Main-Table-Header-Title '>
-                    {' '}
-                    Date{' '}
+                    Date
                   </div>
                   <div className='Admin-DashBoard-Main-Table-Header-Title-Btn '>
-                    {' '}
-                    Details{' '}
+                    Details
                   </div>
                 </div>
                 {searchBookingData.map(item => (
@@ -370,24 +221,19 @@ function AdminDashBoard() {
                     key={item.id}
                   >
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {' '}
-                      {item.booking_id}{' '}
+                      {item.booking_id}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {' '}
-                      {item.customer_id}{' '}
+                      {item.customer_id}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {' '}
-                      {item.pet_id}{' '}
+                      {item.pet_id}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {' '}
-                      {item.price}{' '}
+                      {item.price}
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
-                      {' '}
-                      {item.date}{' '}
+                      {item.date}
                     </div>
 
                     <div className='Admin-DashBoard-Table-Detail'>
