@@ -8,14 +8,7 @@ import axiosInstance from '../../utils/axiosInstance';
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
   const [profile, setProfile] = useState({
-    customerDetails: [{}]
-  });
-
-  const [editMode, setEditMode] = useState({
-    name: false,
-    email: false,
-    phone: false,
-    birthday: false
+    customerDetails: [{}],
   });
 
   useEffect(() => {
@@ -60,10 +53,6 @@ const UserProfile = () => {
 
   const triggerFileSelectPopup = () => {
     document.querySelector('#fileInput').click();
-  };
-
-  const toggleEditMode = field => {
-    setEditMode({ ...editMode, [field]: !editMode[field] });
   };
 
   return (
@@ -156,15 +145,7 @@ const UserProfile = () => {
                           placeholder='Enter your first name'
                           value={profile?.customerDetails[0]?.name || ''}
                           onChange={handleChange}
-                          readOnly={!editMode.name}
                         />
-                        <button
-                          className='btn btn-secondary ms-2'
-                          type='button'
-                          onClick={() => toggleEditMode('name')}
-                        >
-                          {editMode.name ? 'Save' : 'Edit'}
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -181,15 +162,7 @@ const UserProfile = () => {
                         placeholder='Enter your email address'
                         value={profile?.customerDetails[0]?.email || ''}
                         onChange={handleChange}
-                        readOnly={!editMode.email}
                       />
-                      <button
-                        className='btn btn-secondary ms-2'
-                        type='button'
-                        onClick={() => toggleEditMode('email')}
-                      >
-                        {editMode.email ? 'Save' : 'Edit'}
-                      </button>
                     </div>
                   </div>
                   <div className='row gx-3 mb-3'>
@@ -206,15 +179,7 @@ const UserProfile = () => {
                           placeholder='Enter your phone number'
                           value={profile?.customerDetails[0]?.phone || ''}
                           onChange={handleChange}
-                          readOnly={!editMode.phone}
                         />
-                        <button
-                          className='btn btn-secondary ms-2'
-                          type='button'
-                          onClick={() => toggleEditMode('phone')}
-                        >
-                          {editMode.phone ? 'Save' : 'Edit'}
-                        </button>
                       </div>
                     </div>
                     <div className='col-md-6'>
@@ -230,15 +195,7 @@ const UserProfile = () => {
                           placeholder='Enter your birthday'
                           value={profile?.customerDetails[0]?.birthday || ''}
                           onChange={handleChange}
-                          readOnly={!editMode.birthday}
                         />
-                        <button
-                          className='btn btn-secondary ms-2'
-                          type='button'
-                          onClick={() => toggleEditMode('birthday')}
-                        >
-                          {editMode.birthday ? 'Save' : 'Edit'}
-                        </button>
                       </div>
                     </div>
                   </div>
