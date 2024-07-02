@@ -1,483 +1,420 @@
 .Admin-Rating {
-    background-color: #fafafa;
-  }
-  
-  .Admin-Rating-Header {
-    border-bottom: 1px solid #eae8f1;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-    height: 63px;
-  }
-  
-  .Admin-Rating-Header-Logo {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .Admin-Rating-Logo {
-    width: 190px;
-  }
-  
-  .Admin-Rating-Header-Account-Wrapper {
-    border-left: 1px solid #eae8f1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: 0;
-    padding: 0;
-    font-family: Roboto, sans-serif;
-    color: white;
-  }
-  
-  .Admin-Rating-Header-Account {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  
-  .Admin-Rating-Header-Admin:hover {
-    transform: scale(1.1);
-    color: #dd6637;
-    cursor: pointer;
-  }
-  
-  .Admin-Rating-Header-Account-Text {
-    font-family: Roboto, sans-serif;
-    line-height: 25px;
-    font-size: 16px;
-    color: #000;
-  }
-  
-  .Admin-Rating-Content {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .Admin-Rating-Navigate {
-    padding: 0;
-    position: relative;
-  }
-  
-  .Admin-Rating-Navigate-Dashboard {
-    font-family: Roboto, sans-serif;
-    display: flex;
-    height: 36px;
-    align-items: center;
-    margin: 10px 10px 5px 20px;
-  }
-  
-  .Admin-Rating-Navigate-Text-Dashboard {
-    font-family: Roboto, sans-serif;
-    color: #000;
-    margin-left: 10px;
-    margin-top: 5px;
-    font-weight: 600;
-    font-size: 18px;
-  }
-  
-  .Admin-Rating-Navigate-Text {
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    letter-spacing: 1px;
-    font-size: 16px;
-    text-align: center;
-  }
-  
-  .Admin-Rating-Navigate-Logout {
-    color: #000;
-    line-height: 42px;
-    text-align: center;
-    width: 100%;
-    font-family: Roboto, sans-serif;
-    position: absolute;
-    bottom: 50px;
-  }
-  
-  .Admin-Rating-Navigate-Logout:hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
-  }
-  
-  .Admin-Rating-Navigate-Logout span {
-    margin-left: 10px;
-  }
-  
-  .Admin-Rating-Navigate-Text-Rest-Menu {
-    font-family: Roboto, sans-serif;
-    color: #000;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 50px;
-  }
-  
-  .Admin-Rating-Navigate-Text-Rest-Menu:hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
-  }
-  
-  .Admin-Rating-Main {
-    padding: 0;
-    background-color: #f1f5f9;
-    border-left: 1px solid #f9f9fa;
-  }
-  
-  .Admin-Rating-Main_Title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 3%;
-  }
-  
-  .Admin-Rating-Main_Title-Left {
-    font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Rating-Main_Title-Left-Intro {
-    color: #242f48;
-    font-weight: 600;
-    font-size: 20px;
-    text-indent: -1px;
-    line-height: 1;
-    margin-bottom: 5px;
-  }
-  
-  .Admin-Rating-Main_Title-Left-text {
-    color: #78829a;
-    font-weight: 400;
-    font-size: 12px;
-  }
-  
-  .Admin-Rating-Main_Title-Right {
-    font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Rating-title-Star {
-    color: #78829a;
-    font-size: 13px;
-  }
-  
-  .Admin-Rating-Star span {
-    font-size: 13px;
-    margin-left: 5px;
-  }
-  
-  .Admin-Rating-Main-Search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    height: 35px;
-  }
-  
-  .Admin-Rating-Main-Search-Input {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 35px;
-    padding: 0 16px;
-    border: none;
-    background-color: #ecf0fa;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    color: #000000;
-    font-size: 16px;
-    line-height: 24px;
-  }
-  
-  .Admin-Rating-Main-Search-Input:focus {
-    outline: none;
-  }
-  
-  .Admin-Rating-Main-Search-Button {
-    background-color: #ecf0fa;
-    height: 100%;
-    border: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  
-  .Admin-Rating-Main-Filter {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    justify-content: space-between;
-    font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Rating-Select-Role {
-    font-family: Roboto, sans-serif;
-    font-weight: 600;
-    line-height: 10px;
-    margin-right: 40%;
-  }
-  
-  .Admin-Rating-Select-Filter {
-    margin-left: 5px;
-  }
-  
-  .Admin-Rating-add-pet-btn {
-    background-color: #e18213;
-    height: 45px;
-    outline: none;
-    border: none;
-    color: #fff;
-    width: 100px;
-    border-radius: 10px;
-  }
-  
-  .Admin-Rating-add-pet-btn:hover {
-    background-color: #002169;
-    cursor: pointer;
-  }
-  
-  .Admin-Rating-Main-Table-Wrapper {
-    margin: 50px 3%;
-    padding: 0;
-    border: 1px solid #eae8f1;
-    border-radius: 10px;
-    box-shadow: -2px 8px 18px #dadee8;
-  }
-  
-  .Admin-Rating-Main-Table {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-  
-  .Admin-Rating-Main-Table-Title {
-    color: #242f48;
-    font-family: Roboto, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 16px;
-    letter-spacing: 0.2px;
-    margin-bottom: 4px;
-  }
-  
-  .Admin-Rating-Main-Table-Title-Text {
-    font-size: 12px;
-    font-family: Roboto, sans-serif;
-    margin-bottom: 15px;
-  }
-  
-  .Admin-Rating-Main-Table-Header {
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: Roboto, sans-serif;
-    text-align: center;
-    border-bottom: 1px solid #eae8f1;
-  }
-  
-  .Admin-Rating-Main-Table-Header-Title {
-    width: 100%;
-    background-color: #f1f5f9;
-    line-height: 40px;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: left;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
-  }
-  
-  .Admin-Rating-Main-Table-Header-Title-Btn {
-    line-height: 40px;
-    width: 100%;
-    background-color: #f1f5f9;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: center;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
-  }
-  
-  .Admin-Rating-Main-Table-Header-Title-Btn:last-child {
-    border-top-right-radius: 8px;
-    border-right: 1px solid #eae8f1;
-  }
-  
-  .Admin-Rating-Main-Table-Header-Title:first-child {
-    border-top-left-radius: 8px;
-  }
-  
-  .Admin-Rating-Main-Table-Content-Row-Wrapper {
-    display: flex;
-    line-height: 40px;
-    border-bottom: 1px solid #eae8f1;
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
-  }
-  
-  .Admin-Rating-Main-Table-Content-Row {
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-    margin: 0;
-  }
+  background-color: #fafafa;
+}
 
-  .Admin-Rating-Main-Table-Content-Row-Action {
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-    margin: 0;
-  }
+.Admin-Rating-Header {
+  border-bottom: 1px solid #eae8f1;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  height: 63px;
+}
 
-  .Admin-Rating-Main-Table-Content-Btn_Wrapper {
-    justify-content: center;
-    display: flex;
-  }
+.Admin-Rating-Header-Logo {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .Admin-Rating-Main-Table-Content-Btn {
-    border: none;
-    background-color: white;
-  }
-  
-  .Admin-Rating-Main-Table-Content-Row-Action {
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-    margin: 0;
-  }
-  
-  .Admin-Rating-Main-Table-Content-Btn {
-    border: none;
-    background-color: white;
-  }
-  
-  .Admin-Rating-Main-Table-Content-Btn_Wrapper {
-    justify-content: center;
-    display: flex;
-  }
-  
-  .Admin-Rating-modal-title {
-    height: 45px;
-    font-weight: 600;
-    font-size: 20px;
-    padding-top: 15px;
-  }
-  
-  .Admin-Rating-modal-title-name {
-    height: 30px;
-    font-weight: 600;
-    font-size: 20px;
-  }
-  
-  .Admin-Rating-modal-title-radio {
-    display: flex;
-  }
-  
-  .Admin-Rating-modal-title-radio-Enable {
-    padding-right: 20px;
-  }
-  
-  .Admin-Rating-modal-radio {
-    margin-right: 8px;
-  }
-  
-  .Admin-Rating-modal-initials {
-    color: #000000;
-    font-weight: 600;
-    font-size: 15px;
-    padding-right: 10px;
-  }
-  
-  .Admin-Rating-modal-add-account {
-    padding: 15px;
-  }
-  
-  .Admin-Rating-modal-add {
-    color: #000000;
-    font-weight: 500;
-    padding-right: 10px;
-  }
-  
-  .Admin-Rating-modal-update-old {
-    display: flex;
-  }
-  
-  .Admin-Rating-modal-update-new {
-    color: #000000;
-    font-weight: 600;
-    font-size: 15px;
-    padding-right: 10px;
-  }
-  
-  .Admin-Rating-modal-update {
-    margin-left: 10px;
-  }
-  
-  .Admin-Rating-modal-delete-title {
-    padding-right: 5px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #000000;
-  }
-  
-  .Admin-Rating-modal-more-title {
-    padding-right: 5px;
-    font-weight: 600;
-    font-size: 15px;
-    color: #000000;
-  }
-  
-  .Admin-Rating-modal-more {
-    font-weight: 700px;
-    display: flex;
-    padding: 5px;
-  }
-  
-  .Admin-Rating-modal-delete {
-    display: flex;
-    padding: 5px;
-  }
-  
-  .Admin-Rating-input {
-    height: 30px;
-    margin-top: 5px;
-    line-height: 24px;
-    font-size: 16px;
-    padding-left: 5px;
-  }
-  
-  .Admin-Rating-input-confirm {
-    padding-top: 22px;
-  }
-  
-  .Admin-Rating-Main-Table-Content-Btn :hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
-  }
-  
-  .Admin-Rating-Pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0 10px 0;
-  }
-  
-  .Admin-Rating-Error {
-    color: red;
-    font-size: 0.875em;
-    margin-top: 0.25em;
-  }
-  
+.Admin-Rating-Logo {
+  width: 190px;
+}
+
+.Admin-Rating-Header-Account-Wrapper {
+  border-left: 1px solid #eae8f1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+  color: white;
+}
+
+.Admin-Rating-Header-Account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.Admin-Rating-Header-Admin:hover {
+  transform: scale(1.1);
+  color: #dd6637;
+  cursor: pointer;
+}
+
+.Admin-Rating-Header-Account-Text {
+  line-height: 25px;
+  font-size: 16px;
+  color: #000;
+}
+
+.Admin-Rating-Content {
+  padding: 0;
+  margin: 0;
+}
+
+.Admin-Rating-Navigate {
+  padding: 0;
+  position: relative;
+}
+
+.Admin-Rating-Navigate-Dashboard {
+  font-family: Roboto, sans-serif;
+  display: flex;
+  height: 36px;
+  align-items: center;
+  margin: 10px 10px 5px 20px;
+}
+
+.Admin-Rating-Navigate-Text-Dashboard {
+  color: #000;
+  margin-left: 10px;
+  margin-top: 5px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.Admin-Rating-Navigate-Text {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.Admin-Rating-Navigate-Logout {
+  color: #000;
+  line-height: 42px;
+  text-align: center;
+  width: 100%;
+  font-family: Roboto, sans-serif;
+  position: absolute;
+  bottom: 50px;
+}
+
+.Admin-Rating-Navigate-Logout:hover {
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.Admin-Rating-Navigate-Logout span {
+  margin-left: 10px;
+}
+
+.Admin-Rating-Navigate-Text-Rest {
+  font-family: Roboto, sans-serif;
+}
+
+.Admin-Rating-Navigate-Text-Rest-Menu {
+  color: #000;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 50px;
+}
+
+.Admin-Rating-Navigate-Text-Rest-Menu:hover {
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.Admin-Rating-Main {
+  padding: 0;
+  background-color: #f1f5f9;
+  border-left: 1px solid #f9f9fa;
+}
+
+.Admin-Rating-Main-Search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.Admin-Rating-Main-Search-Input {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 35px;
+  padding: 0 16px;
+  border: none;
+  background-color: #ecf0fa;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.Admin-Rating-Main-Search-Input:focus {
+  outline: none;
+}
+
+.Admin-Rating-Main-Search-Button {
+  background-color: #ecf0fa;
+  height: 100%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Admin-Rating-Main-Filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  justify-content: space-between;
+  font-family: Roboto, sans-serif;
+}
+
+.Admin-Rating-Main-Search-Input {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 35px;
+  padding: 0 16px;
+  border: none;
+  background-color: #ecf0fa;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.Admin-Rating-Main-Search-Input:focus {
+  outline: none;
+}
+
+.Admin-Rating-Main-Search-Button {
+  background-color: #ecf0fa;
+  height: 100%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Admin-Rating-Select-Rating {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  line-height: 10px;
+  margin-right: 40%;
+}
+
+.Admin-Rating-Select-Filter {
+  margin-left: 5px;
+}
+
+.Admin-Rating-Main-Table-Wrapper {
+  margin: 50px 3%;
+  padding: 0;
+  border: 1px solid #eae8f1;
+  border-radius: 10px;
+  box-shadow: -2px 8px 18px #dadee8;
+}
+
+.Admin-Rating-Main-Table {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.Admin-Rating-Main-Table-Title {
+  color: #242f48;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
+}
+
+.Admin-Rating-Main-Table-Title-Text {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 15px;
+}
+
+.Admin-Rating-Main-Table-Header {
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  border-bottom: 1px solid #eae8f1;
+}
+
+.Admin-Rating-Main-Table-Header-Title {
+  width: 100%;
+  background-color: #f1f5f9;
+  line-height: 40px;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: left;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
+}
+
+.Admin-Rating-Main-Table-Header-Title-Btn {
+  line-height: 40px;
+  width: 100%;
+  background-color: #f1f5f9;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: center;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
+}
+
+.Admin-Rating-Main-Table-Header-Title-Btn:last-child {
+  border-top-right-radius: 8px;
+  border-right: 1px solid #eae8f1;
+}
+
+.Admin-Rating-Main-Table-Header-Title:first-child {
+  border-top-left-radius: 8px;
+}
+
+.Admin-Rating-Main-Table-Content-Row-Wrapper {
+  display: flex;
+  line-height: 40px;
+  border-bottom: 1px solid #eae8f1;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+}
+
+.Admin-Rating-Main-Table-Content-Row {
+  width: 100%;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 8px;
+  margin: 0;
+}
+
+.Admin-Rating-Table-status-booking {
+  font-weight: bold;
+}
+
+.Admin-Rating-Table-status-waiting {
+  color: blue;
+}
+
+.Admin-Rating-Table-status-cancel {
+  color: red;
+}
+
+.Admin-Rating-Table-status-done {
+  color: green;
+}
+
+.Admin-Rating-Table-Detail {
+  width: 105%;
+}
+
+.Admin-Rating-Main-Table-Content-Btn_Wrapper {
+  border-left: 1px solid #eae8f1;
+  text-align: center;
+  width: 100%;
+  padding: 3px 0;
+  margin: 0;
+}
+
+.Admin-Rating-Main-Table-Content-Btn_Wrapper:last-child {
+  border-right: 1px solid #eae8f1;
+}
+
+.Admin-Rating-Main-Table-Content-Btn {
+  border: none;
+  width: 123px;
+  line-height: 30px;
+  border-radius: 5px;
+}
+
+.Admin-Rating-Main-Table-Content-Btn:hover {
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.Admin-Rating-Pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 10px 0;
+}
+
+.Admin-Rating-sub-title-profile-customer {
+  padding-right: 5px;
+  text-align: left;
+  color: #000000;
+  font-weight: 600;
+}
+
+.Admin-Rating-form-group {
+  display: flex;
+  justify-content: left;
+}
+
+.Admin-Rating-sub-title-profile-pet {
+  padding-right: 5px;
+  text-align: left;
+  color: #000000;
+  font-weight: 600;
+}
+
+.Admin-Rating-tab-modal-body-more-info {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.Admin-Rating-tab-modal-body-more-info button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.Admin-Rating-tab-modal-body-more-info button:hover {
+  background-color: #ddd;
+}
+
+.Admin-Rating-tab-modal-body-more-info button.active {
+  background-color: #f1f1f1;
+  border-bottom: 2px solid #004cb9;
+}
+
+.Admin-Rating-container-modal-body-more-info {
+  width: 100%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.Admin-Rating-tabcontent-customer {
+  margin-left: 20px;
+}
+
+.Admin-Rating-tabcontent-pet {
+  margin-left: 20px;
+}
+
+.Admin-Rating-tabcontent-services {
+  margin-left: 20px;
+}
