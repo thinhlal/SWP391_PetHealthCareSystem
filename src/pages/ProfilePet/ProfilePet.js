@@ -117,7 +117,7 @@ function ProfilePet() {
               <strong>Pet Parent</strong>{' '}
             </div>
             <div className='customer-name-title'>
-              {petData.customerDetails[0].username}
+              {user.customerDetails[0].name}
             </div>
             <div className='sub-title-info-pet'>
               <strong>ID:&nbsp;</strong>{' '}
