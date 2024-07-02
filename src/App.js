@@ -26,6 +26,7 @@ import Payment from './pages/Payment/Payment.js';
 import Unauthorized from './pages/Unauthorized/Unauthorized.js';
 import UserProfile from './pages/UserProfile/UserProfile.js';
 import ChangeUserPassword from './pages/ChangeUserPassWord/ChangeUserPassWord.js';
+import TimeTableWork from './pages/TimeTableWork/TimeTableWork.js'
 function App() {
   return (
     <AuthProvider>
@@ -209,6 +210,14 @@ function App() {
           element={
             <ProtectedRoute>
               <ChangeUserPassword />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path='/time-table'
+          element={
+            <ProtectedRoute>
+              <TimeTableWork />
             </ProtectedRoute>
           }
         />
