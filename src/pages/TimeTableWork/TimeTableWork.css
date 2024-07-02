@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;800&display=swap");
+
+
+.sidebar-calendar {
+  width: 160px;
+  height: 100vh;
+  background-color: #002169;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-calendar h2 {
+  margin: 1rem 0;
+}
+
+.sidebar-calendar ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar-calendar ul li {
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sidebar-calendar ul li:hover,
+.sidebar-calendar ul li.active {
+  background-color: #8592a0;
+}
+
+.calendar-doctor-container {
+  display: flex;
+  flex-grow: 1;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+.calendar-work-doctor {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 40px;
+  margin-left: 40px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.calendar-work-doctor h1 {
+  font-weight: 800;
+  width: 100%;
+  margin: 1rem 0 0;
+  margin-bottom: 20px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(81, 85, 129, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.calendar-work-doctor label {
+  margin-right: 0.5rem;
+  color: #002169;
+}
+
+.time-doctor-choose {
+  font-size: 18px;
+  color: blue;
+  margin-top: 10px;
+}
+
+.calendar-work-doctor select {
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.calendar-work-doctor .calender-work-doctor-content-select {
+  margin: 10px 0px;
+}
+
+.calendar-work-doctor .calender-work-doctor-content-select-week {
+  margin: 25px 0px;
+}
+
+.selected-week-content {
+  color: green;
+}
+
+.calendar-work-doctor ul {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  list-style: none;
+  padding: 0;
+}
+
+.calendar-work-doctor ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10rem;
+  height: 10rem;
+  margin: 0.25rem;
+  border-radius: 0.2rem;
+  padding: 1rem;
+  font-weight: 300;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  background: rgb(134 129 203 / 25%);
+  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+}
+
+
+.calendar-work-doctor ul li:hover {
+  transform: translateY(-5px); /* Dịch chuyển lên một chút khi di chuột vào */
+}
+
+.calendar-work-doctor ul li time {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1200px) {
+  .calendar-work-doctor ul li {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .calendar-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .sidebar-calendar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .calendar-work-doctor {
+    width: 100%;
+  }
+
+  .calendar-work-doctor ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-work-doctor ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calendar-work-doctor ul li {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .calendar-work-doctor ul {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .calendar-work-doctor ul li {
+    width: 100%;
+    height: auto;
+  }
+}
+
