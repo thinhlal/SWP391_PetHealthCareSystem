@@ -138,7 +138,7 @@ const ChangeUserPassword = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  {message && <div>{message}</div>}
+                  {message && <div className='error-message'>{message}</div>}
                   <button
                     className='btn btn-primary'
                     type='button'
