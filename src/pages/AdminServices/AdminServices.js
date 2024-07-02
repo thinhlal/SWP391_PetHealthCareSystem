@@ -255,7 +255,6 @@ function AdminServices() {
             <div className='Admin-Services-Main col-md-10'>
               <Statistic />
 
-
               <div className='Admin-Services-Main-Table-Wrapper'>
                 <div className='Admin-Services-Main-Table'>
                   <div className='Admin-Services-Main-Table-Title'>

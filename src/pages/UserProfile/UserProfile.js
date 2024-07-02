@@ -4,19 +4,25 @@ import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
 import { AuthContext } from '../../context/AuthContext';
 import axiosInstance from '../../utils/axiosInstance';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '../../config/firebase';
 
 const UserProfile = () => {
   const { user } = useContext(AuthContext);
   const [profile, setProfile] = useState({
     customerDetails: [{}],
   });
+  const [isEditing, setIsEditing] = useState(false);
+  const [errors, setErrors] = useState({ email: '', phone: '' });
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchAccountByID = async () => {
       if (user && user.accountID) {
         try {
-          const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/user/getUserProfile/${user.accountID}`);
-          console.log(response.data);
+          const response = await axiosInstance.get(
+            `${process.env.REACT_APP_API_URL}/user/getUserProfile/${user.accountID}`,
+          );
           setProfile(response.data);
         } catch (error) {
           console.error(error);
@@ -33,26 +39,87 @@ const UserProfile = () => {
       customerDetails: [{ ...profile.customerDetails[0], [name]: value }],
       [name]: value,
     });
+    setErrors({ ...errors, [name]: '' });
+    setMessage('');
   };
 
-  const handleSave = () => {
-    console.log('Profile saved:', profile);
-    // Add your save logic here, such as sending data to the backend
+  const handleSave = async () => {
+    let emailError = '';
+    let phoneError = '';
+
+    if (!validateEmail(profile.customerDetails[0].email)) {
+      emailError = 'Invalid email address';
+    }
+
+    if (!validatePhone(profile.customerDetails[0].phone)) {
+      phoneError = 'Invalid phone number';
+    }
+
+    if (emailError || phoneError) {
+      setErrors({ email: emailError, phone: phoneError });
+    } else {
+      try {
+        const updateSuccess = await axiosInstance.post(
+          `${process.env.REACT_APP_API_URL}/user/updateUserInfo`,
+          {
+            profile,
+          },
+        );
+        setMessage(updateSuccess.data);
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/user/getUserProfile/${user.accountID}`,
+        );
+        setProfile(response.data);
+        setErrors({ email: '', phone: '' });
+        setIsEditing(false);
+      } catch (error) {
+        console.error('Error update user info:', error);
+      }
+    }
   };
 
-  const handleImageChange = e => {
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleImageChange = async e => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfile({ ...profile, customerDetails: [{ ...profile.customerDetails[0], image: reader.result }] });
-      };
-      reader.readAsDataURL(file);
+      const storageRef = ref(storage, `profilePictures/${user.accountID}`);
+      try {
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        setProfile({
+          ...profile,
+          customerDetails: [
+            { ...profile.customerDetails[0], image: downloadURL },
+          ],
+        });
+        await axiosInstance.patch(
+          `${process.env.REACT_APP_API_URL}/user/updateImageUser`,
+          {
+            image: downloadURL,
+            customerID: user.customerDetails[0].customerID,
+          },
+        );
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
     }
   };
 
   const triggerFileSelectPopup = () => {
     document.querySelector('#fileInput').click();
+  };
+
+  const validateEmail = email => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = phone => {
+    const phoneRegex = /^[0-9]{10,15}$/;
+    return phoneRegex.test(phone);
   };
 
   return (
@@ -133,7 +200,10 @@ const UserProfile = () => {
                   </div>
                   <div className='row gx-3 mb-3'>
                     <div className='col-md-12'>
-                      <label className='small mb-1' htmlFor='inputFirstName'>
+                      <label
+                        className='small mb-1'
+                        htmlFor='inputFirstName'
+                      >
                         Name
                       </label>
                       <div className='d-flex'>
@@ -145,16 +215,22 @@ const UserProfile = () => {
                           placeholder='Enter your first name'
                           value={profile?.customerDetails[0]?.name || ''}
                           onChange={handleChange}
+                          readOnly={!isEditing}
+                          required
                         />
                       </div>
                     </div>
                   </div>
                   <div className='UserProfile-form-group mb-3'>
-                    <label className='small mb-1' htmlFor='inputEmailAddress'>
+                    <label
+                      className='small mb-1'
+                      htmlFor='inputEmailAddress'
+                    >
                       Email address
                     </label>
                     <div className='d-flex'>
                       <input
+                        required
                         className='UserProfile-form-control form-control'
                         id='inputEmailAddress'
                         name='email'
@@ -162,16 +238,24 @@ const UserProfile = () => {
                         placeholder='Enter your email address'
                         value={profile?.customerDetails[0]?.email || ''}
                         onChange={handleChange}
+                        readOnly={!isEditing}
                       />
                     </div>
+                    {errors.email && (
+                      <div className='text-danger ms-2'>{errors.email}</div>
+                    )}
                   </div>
                   <div className='row gx-3 mb-3'>
                     <div className='col-md-6'>
-                      <label className='small mb-1' htmlFor='inputPhone'>
+                      <label
+                        className='small mb-1'
+                        htmlFor='inputPhone'
+                      >
                         Phone number
                       </label>
                       <div className='d-flex'>
                         <input
+                          required
                           className='UserProfile-form-control form-control'
                           id='inputPhone'
                           name='phone'
@@ -179,32 +263,59 @@ const UserProfile = () => {
                           placeholder='Enter your phone number'
                           value={profile?.customerDetails[0]?.phone || ''}
                           onChange={handleChange}
+                          readOnly={!isEditing}
                         />
                       </div>
+                      {errors.phone && (
+                        <div className='text-danger ms-2'>{errors.phone}</div>
+                      )}
                     </div>
                     <div className='col-md-6'>
-                      <label className='small mb-1' htmlFor='inputBirthday'>
+                      <label
+                        className='small mb-1'
+                        htmlFor='inputBirthday'
+                      >
                         Birthday
                       </label>
                       <div className='d-flex'>
                         <input
+                          required
                           className='UserProfile-form-control form-control'
                           id='inputBirthday'
                           name='birthday'
                           type='date'
                           placeholder='Enter your birthday'
-                          value={profile?.customerDetails[0]?.birthday || ''}
+                          value={
+                            profile?.customerDetails[0]?.birthday?.split(
+                              'T',
+                            )[0] || ''
+                          }
                           onChange={handleChange}
+                          readOnly={!isEditing}
                         />
                       </div>
                     </div>
+                    {message !== '' && (
+                      <div className='text-success ms-2 message-success-userInfo'>
+                        {message}
+                      </div>
+                    )}
                   </div>
+                  {isEditing && (
+                    <button
+                      className='btn btn-primary me-2'
+                      type='button'
+                      onClick={handleSave}
+                    >
+                      Save changes
+                    </button>
+                  )}
                   <button
-                    className='btn btn-primary'
+                    className='btn btn-secondary'
                     type='button'
-                    onClick={handleSave}
+                    onClick={handleEdit}
                   >
-                    Save changes
+                    {isEditing ? 'Cancel' : 'Edit'}
                   </button>
                 </form>
               </div>

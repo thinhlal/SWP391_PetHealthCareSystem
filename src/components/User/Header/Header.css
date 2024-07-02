@@ -101,7 +101,9 @@
   border-radius: 5px;
   white-space: nowrap;
   border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .main-header-user-overlap .main-header-user-account::before {
@@ -145,7 +147,8 @@
   justify-content: left;
 }
 
-.main-header-user-overlap .main-header-user-account_menu-item:first-child:hover  {
+.main-header-user-overlap
+  .main-header-user-account_menu-item:first-child:hover {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: #ccc;

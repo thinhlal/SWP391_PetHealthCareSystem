@@ -22,7 +22,6 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Switch from '@mui/joy/Switch';
 
-
 function AdminCages() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
@@ -246,7 +245,7 @@ function AdminCages() {
         </div>
 
         <div className='Admin-Cages-Content row'>
-        <div className='Admin-Cages-Navigate col-md-2'>
+          <div className='Admin-Cages-Navigate col-md-2'>
             <Sidebar />
           </div>
 

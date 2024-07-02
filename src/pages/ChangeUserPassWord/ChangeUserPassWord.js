@@ -20,7 +20,7 @@ const ChangeUserPassword = () => {
       ...passwords,
       [name]: value,
     });
-    setMessage('')
+    setMessage('');
   };
 
   const handleSave = async () => {
@@ -29,16 +29,19 @@ const ChangeUserPassword = () => {
       return;
     }
     try {
-      const res = await axiosInstance.post(`${process.env.REACT_APP_API_URL}/user/changePassword`, {
-        accountID: user.accountID,
-        passwords,
-      })
+      const res = await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/user/changePassword`,
+        {
+          accountID: user.accountID,
+          passwords,
+        },
+      );
       setMessage(res.data.message);
       setPasswords({
         currentPassword: '',
         newPassword: '',
         confirmPassword: '',
-      })
+      });
     } catch (error) {
       if (error.response) {
         setMessage(error.response.data.message);
@@ -56,7 +59,7 @@ const ChangeUserPassword = () => {
       // console.log('here');
       // document.getElementById('hiddenDiv').click();
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
 
@@ -161,7 +164,11 @@ const ChangeUserPassword = () => {
                   undone. If you are sure you want to delete your account,
                   select the button below.
                 </p>
-                <div id="hiddenDiv" style={{display: 'none'}} onClick={logOut}></div>
+                <div
+                  id='hiddenDiv'
+                  style={{ display: 'none' }}
+                  onClick={logOut}
+                ></div>
                 <div
                   className='btn btn-danger-soft text-danger'
                   onClick={handleDeleteAccount}
