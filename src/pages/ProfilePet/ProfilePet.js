@@ -127,41 +127,44 @@ function ProfilePet() {
         </div>
         <div className='main-content-pet'>
           <div className='pet-info'>
-            {!isEditing && (
-              <div className='main-edit-button-pet-info'>
-                <button
-                  onClick={handleEditClick}
-                  className='edit-button-pet-info'
-                >
-                  Edit
-                </button>
+            <div className='sub-title-info-pet-line'>My Medical Info</div>
+            <div  className='main-edit-button-pet-info'>
+              <div className='pet-details-profile'>
+                <div className='title-pet-profile'>
+                  <span className='sub-title-info-pet'>Name:&nbsp;</span>{' '}
+                  {petData.name}
+                </div>
+                <div className='title-pet-profile'>
+                  <span className='sub-title-info-pet'>Birthday:&nbsp;</span>
+                  {petData.birthday.split('T')[0]}
+                </div>
+                <div className='title-pet-profile'>
+                  <span className='sub-title-info-pet'>Gender:&nbsp;</span>
+                  {petData.gender === 'MALE' ? (
+                    <span>Male</span>
+                  ) : (
+                    <span>Female</span>
+                  )}
+                </div>
+                <div className='title-pet-profile'>
+                  <span className='sub-title-info-pet'>Type Of Pet:&nbsp;</span>
+                  {petData.petType === 'DOG' ? (
+                    <span>Dog</span>
+                  ) : (
+                    <span>Cat</span>
+                  )}
+                </div>
               </div>
-            )}
-            <div className='pet-details-profile'>
-              <div className='title-pet-profile'>
-                <span className='sub-title-info-pet'>Name:&nbsp;</span>{' '}
-                {petData.name}
-              </div>
-              <div className='title-pet-profile'>
-                <span className='sub-title-info-pet'>Birthday:&nbsp;</span>
-                {petData.birthday.split('T')[0]}
-              </div>
-              <div className='title-pet-profile'>
-                <span className='sub-title-info-pet'>Gender:&nbsp;</span>
-                {petData.gender === 'MALE' ? (
-                  <span>Male</span>
-                ) : (
-                  <span>Female</span>
-                )}
-              </div>
-              <div className='title-pet-profile'>
-                <span className='sub-title-info-pet'>Type Of Pet:&nbsp;</span>
-                {petData.petType === 'DOG' ? (
-                  <span>Dog</span>
-                ) : (
-                  <span>Cat</span>
-                )}
-              </div>
+              {!isEditing && (
+                <div>
+                  <button
+                    onClick={handleEditClick}
+                    className='edit-button-pet-info'
+                  >
+                    Edit
+                  </button>
+                </div>
+              )}
             </div>
 
             {isEditing && (

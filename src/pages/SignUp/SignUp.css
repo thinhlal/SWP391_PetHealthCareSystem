@@ -19,7 +19,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 760.2px;
+  height: 100vh;
 }
 
 .create-account-page .frame {

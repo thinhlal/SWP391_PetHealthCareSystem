@@ -123,7 +123,7 @@
 .main-container-pet-profile .container-pet-profile .main-edit-button-pet-info,
 .main-edit-button-medical {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .main-container-pet-profile .container-pet-profile .main-add-button-vaccination,

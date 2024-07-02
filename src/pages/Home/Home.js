@@ -80,7 +80,9 @@ function Home() {
                     onClick={toggleMenu}
                   >
                     <img
-                      src={userIcon}
+                      src={user?.customerDetails[0]?.image
+                        ? user?.customerDetails[0]?.image
+                        : userIcon}
                       alt='User Avatar'
                       className='avatar-login'
                     />
@@ -96,7 +98,7 @@ function Home() {
                       <img
                         src={require('../../assets/images/img_Home/people.png')}
                         alt='User Icon'
-                        style={{ width: '20px' }}
+                        style={{ width: '20px', marginBottom: '-5px' }}
                       />
                       &nbsp;{user && user.customerDetails[0].name}
                     </div>
@@ -111,6 +113,13 @@ function Home() {
                       onClick={() => (window.location.href = '/your-booking')}
                     >
                       Your Booking
+                    </div>
+                    
+                    <div
+                      className='menu-item-login'
+                      onClick={() => (window.location.href = '/user-profile')}
+                    >
+                      Settings
                     </div>
                     <div
                       className='menu-item-login'

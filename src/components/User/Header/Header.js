@@ -3,7 +3,6 @@ import './Header.css';
 import { useContext } from 'react';
 //img
 import logo from '../../../assets/images/Components/User/Header/logo.png';
-import userAccount from '../../../assets/images/Components/User/Header/img-7.png';
 import { AuthContext } from '../../../context/AuthContext';
 function Header() {
   const { user, logOut } = useContext(AuthContext);
@@ -54,11 +53,11 @@ function Header() {
             <div className='main-header-user-account'>
               <img
                 className='account_icon'
-                src={userAccount}
+                src={user?.customerDetails[0]?.image}
                 alt=''
               />
               <div className='main-header-user-account-name'>
-                Hi {user.customerDetails[0].name}
+                Hi {user?.customerDetails[0]?.name}
               </div>
               <div className='main-header-user-account_menu'>
                 <a
@@ -77,7 +76,7 @@ function Header() {
                   href='user-profile'
                   className='main-header-user-account_menu-item'
                 >
-                  Your Account
+                  Settings
                 </a>
                 <div
                   onClick={logOut}

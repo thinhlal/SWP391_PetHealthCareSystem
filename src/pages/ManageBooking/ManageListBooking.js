@@ -88,6 +88,7 @@ function ManageListBooking() {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
         );
+        console.log(response.data.allBookings);
         setAllBookings(response.data.allBookings);
       } catch (error) {
         console.error('Error ManageBooking Get All: ', error);
@@ -1051,8 +1052,8 @@ function ManageListBooking() {
                       </div>
                       <div className='content-list-body-value'>
                         <div className='text-content'>
-                          {booking.servicesDetails &&
-                            booking.servicesDetails
+                          {booking.servicesInBooking &&
+                            booking.servicesInBooking
                               .map(service => service.name)
                               .join(', ')}
                         </div>
@@ -1314,8 +1315,8 @@ function ManageListBooking() {
                                         Service:&nbsp;
                                       </small>
                                       <small>
-                                        {booking.servicesDetails &&
-                                          booking.servicesDetails
+                                        {booking.servicesInBooking &&
+                                          booking.servicesInBooking
                                             .map(service => service.name)
                                             .join(', ')}
                                       </small>
@@ -1373,7 +1374,7 @@ function ManageListBooking() {
                                         Service Details
                                       </span>
                                     </div>
-                                    {booking.servicesDetails.map(
+                                    {booking.servicesInBooking.map(
                                       (service, index) => (
                                         <div
                                           key={index}

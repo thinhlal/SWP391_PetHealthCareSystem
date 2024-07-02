@@ -253,10 +253,10 @@ class BookingController {
       const allBookings = await Booking.aggregate([
         {
           $lookup: {
-            from: 'accounts',
+            from: 'customers',
             localField: 'accountID',
             foreignField: 'accountID',
-            as: 'accountDetails',
+            as: 'customerDetails',
           },
         },
         {
@@ -277,6 +277,14 @@ class BookingController {
         },
         {
           $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentsDetails',
+          },
+        },
+        {
+          $lookup: {
             from: 'servicebookingvets',
             localField: 'bookingID',
             foreignField: 'bookingID',
@@ -284,19 +292,94 @@ class BookingController {
           },
         },
         {
-          $lookup: {
-            from: 'services',
-            localField: 'serviceID',
-            foreignField: 'servicebookingvetsDetails.serviceID',
-            as: 'servicesDetails',
+          $unwind: {
+            path: '$servicebookingvetsDetails',
+            preserveNullAndEmptyArrays: true,
           },
         },
         {
           $lookup: {
-            from: 'payments',
-            localField: 'bookingID',
-            foreignField: 'bookingID',
-            as: 'paymentsDetails',
+            from: 'services',
+            localField: 'servicebookingvetsDetails.serviceID',
+            foreignField: 'serviceID',
+            as: 'servicebookingvetsDetails.servicesDetails',
+          },
+        },
+        {
+          $group: {
+            _id: '$_id',
+            bookingID: { $first: '$bookingID' },
+            accountID: { $first: '$accountID' },
+            petID: { $first: '$petID' },
+            doctorID: { $first: '$doctorID' },
+            name: { $first: '$name' },
+            phone: { $first: '$phone' },
+            email: { $first: '$email' },
+            dateBook: { $first: '$dateBook' },
+            startTime: { $first: '$startTime' },
+            endTime: { $first: '$endTime' },
+            totalPrice: { $first: '$totalPrice' },
+            dateCancelBook: { $first: '$dateCancelBook' },
+            isCancel: { $first: '$isCancel' },
+            isCheckIn: { $first: '$isCheckIn' },
+            isPrepayment: { $first: '$isPrepayment' },
+            customerDetails: { $first: '$customerDetails' },
+            petDetails: { $first: '$petDetails' },
+            doctorDetails: { $first: '$doctorDetails' },
+            servicebookingvetsDetails: { $push: '$servicebookingvetsDetails' },
+            paymentsDetails: { $first: '$paymentsDetails' },
+          },
+        },
+        {
+          $addFields: {
+            servicesInBooking: {
+              $map: {
+                input: '$servicebookingvetsDetails',
+                as: 'servicebookingvet',
+                in: {
+                  $arrayElemAt: [
+                    {
+                      $filter: {
+                        input: '$$servicebookingvet.servicesDetails',
+                        as: 'service',
+                        cond: {
+                          $eq: [
+                            '$$service.serviceID',
+                            '$$servicebookingvet.serviceID',
+                          ],
+                        },
+                      },
+                    },
+                    0,
+                  ],
+                },
+              },
+            },
+          },
+        },
+        {
+          $project: {
+            bookingID: 1,
+            accountID: 1,
+            petID: 1,
+            name: 1,
+            phone: 1,
+            email: 1,
+            dateBook: 1,
+            startTime: 1,
+            endTime: 1,
+            totalPrice: 1,
+            dateCancelBook: 1,
+            isCancel: 1,
+            isCheckIn: 1,
+            isPrepayment: 1,
+            doctorID: 1,
+            customerDetails: 1,
+            petDetails: 1,
+            doctorDetails: 1,
+            servicebookingvetsDetails: 1,
+            servicesInBooking: 1,
+            paymentsDetails: 1,
           },
         },
       ]);
