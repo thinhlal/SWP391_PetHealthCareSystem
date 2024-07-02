@@ -19,7 +19,7 @@ import { AuthContext } from '../../context/AuthContext';
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
 function AdminDashBoard() {
-  const {  user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [activeTab, setActiveTab] = useState('Profile');
   const [search, setSearch] = useState('');
   const openTab = tabName => setActiveTab(tabName);
@@ -86,7 +86,7 @@ function AdminDashBoard() {
         </div>
 
         <div className='Admin-DashBoard-Content row'>
-        <div className='Admin-DashBoard-Navigate col-md-2'>
+          <div className='Admin-DashBoard-Navigate col-md-2'>
             <Sidebar />
           </div>
 
