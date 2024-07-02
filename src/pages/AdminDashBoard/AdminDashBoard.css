@@ -250,7 +250,7 @@
 .Admin-DashBoard-Main-Table-Content-Row {
   width: 100%;
   border-left: 1px solid #eae8f1;
-  padding: 0 0 0 10px;
+  padding: 0 0 0 8px;
   margin: 0;
 }
 
@@ -278,7 +278,7 @@
   border-left: 1px solid #eae8f1;
   text-align: center;
   width: 100%;
-  padding: 0px 32px 0px 31px;
+  padding: 3px 0;
   margin: 0;
 }
 

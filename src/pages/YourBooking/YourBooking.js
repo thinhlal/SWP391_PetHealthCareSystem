@@ -190,21 +190,21 @@ function YourBooking() {
                                   Pet Name:
                                 </div>{' '}
                                 <br />
-                                {booking.petDetails[0].name}
+                                {booking?.petDetails[0]?.name}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Pet Type:
                                 </div>{' '}
                                 <br />
-                                {booking.petDetails[0].petType}
+                                {booking?.petDetails[0]?.petType}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Doctor:
                                 </div>{' '}
                                 <br />
-                                {booking.doctorDetails[0].name}
+                                {booking?.doctorDetails[0]?.name ? booking.doctorDetails[0].name : <span>No Doctor</span>}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
