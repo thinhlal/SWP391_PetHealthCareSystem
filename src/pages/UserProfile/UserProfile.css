@@ -1,15 +1,3 @@
-/* html, body {
-  height: 100%;
-  margin: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  background-color: #f2f6fc;
-  color: #69707a;
-  font-family: Roboto, sans-serif;
-} */
 
 .main-user-profile-container {
   display: flex;

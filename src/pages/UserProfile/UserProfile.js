@@ -1,31 +1,50 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './UserProfile.css';
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
+import { AuthContext } from '../../context/AuthContext';
+import axiosInstance from '../../utils/axiosInstance';
 
 const UserProfile = () => {
+  const { user } = useContext(AuthContext);
   const [profile, setProfile] = useState({
-    username: 'username',
-    firstName: 'Valerie',
-    lastName: 'Luna',
-    orgName: 'Start Bootstrap',
-    location: 'San Francisco, CA',
-    email: 'name@example.com',
-    phone: '555-123-4567',
-    birthday: '1988-06-10',
-    profileImage: 'http://bootdey.com/img/Content/avatar/avatar1.png', // Default image
+    customerDetails: [{}]
   });
+
+  const [editMode, setEditMode] = useState({
+    name: false,
+    email: false,
+    phone: false,
+    birthday: false
+  });
+
+  useEffect(() => {
+    const fetchAccountByID = async () => {
+      if (user && user.accountID) {
+        try {
+          const response = await axiosInstance.get(`${process.env.REACT_APP_API_URL}/user/getUserProfile/${user.accountID}`);
+          console.log(response.data);
+          setProfile(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    fetchAccountByID();
+  }, [user]);
 
   const handleChange = e => {
     const { name, value } = e.target;
     setProfile({
       ...profile,
+      customerDetails: [{ ...profile.customerDetails[0], [name]: value }],
       [name]: value,
     });
   };
 
   const handleSave = () => {
     console.log('Profile saved:', profile);
+    // Add your save logic here, such as sending data to the backend
   };
 
   const handleImageChange = e => {
@@ -33,7 +52,7 @@ const UserProfile = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfile({ ...profile, profileImage: reader.result });
+        setProfile({ ...profile, customerDetails: [{ ...profile.customerDetails[0], image: reader.result }] });
       };
       reader.readAsDataURL(file);
     }
@@ -41,6 +60,10 @@ const UserProfile = () => {
 
   const triggerFileSelectPopup = () => {
     document.querySelector('#fileInput').click();
+  };
+
+  const toggleEditMode = field => {
+    setEditMode({ ...editMode, [field]: !editMode[field] });
   };
 
   return (
@@ -71,7 +94,7 @@ const UserProfile = () => {
               <div className='UserProfile-card-body card-body text-center'>
                 <img
                   className='UserProfile-img-account-profile rounded-circle mb-2'
-                  src={profile.profileImage}
+                  src={profile?.customerDetails[0]?.image}
                   alt=''
                 />
                 <div className='small font-italic text-muted mb-4'>
@@ -115,133 +138,108 @@ const UserProfile = () => {
                       name='username'
                       type='text'
                       placeholder='Enter your username'
-                      value={profile.username}
-                      onChange={handleChange}
+                      value={profile?.username || ''}
+                      readOnly
                     />
                   </div>
                   <div className='row gx-3 mb-3'>
-                    <div className='col-md-6'>
-                      <label
-                        className='small mb-1'
-                        htmlFor='inputFirstName'
-                      >
-                        First name
+                    <div className='col-md-12'>
+                      <label className='small mb-1' htmlFor='inputFirstName'>
+                        Name
                       </label>
-                      <input
-                        className='UserProfile-form-control form-control'
-                        id='inputFirstName'
-                        name='firstName'
-                        type='text'
-                        placeholder='Enter your first name'
-                        value={profile.firstName}
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div className='col-md-6'>
-                      <label
-                        className='small mb-1'
-                        htmlFor='inputLastName'
-                      >
-                        Last name
-                      </label>
-                      <input
-                        className='UserProfile-form-control form-control'
-                        id='inputLastName'
-                        name='lastName'
-                        type='text'
-                        placeholder='Enter your last name'
-                        value={profile.lastName}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </div>
-                  <div className='row gx-3 mb-3'>
-                    <div className='col-md-6'>
-                      <label
-                        className='small mb-1'
-                        htmlFor='inputOrgName'
-                      >
-                        Organization name
-                      </label>
-                      <input
-                        className='UserProfile-form-control form-control'
-                        id='inputOrgName'
-                        name='orgName'
-                        type='text'
-                        placeholder='Enter your organization name'
-                        value={profile.orgName}
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div className='col-md-6'>
-                      <label
-                        className='small mb-1'
-                        htmlFor='inputLocation'
-                      >
-                        Location
-                      </label>
-                      <input
-                        className='UserProfile-form-control form-control'
-                        id='inputLocation'
-                        name='location'
-                        type='text'
-                        placeholder='Enter your location'
-                        value={profile.location}
-                        onChange={handleChange}
-                      />
+                      <div className='d-flex'>
+                        <input
+                          className='UserProfile-form-control form-control'
+                          id='inputFirstName'
+                          name='name'
+                          type='text'
+                          placeholder='Enter your first name'
+                          value={profile?.customerDetails[0]?.name || ''}
+                          onChange={handleChange}
+                          readOnly={!editMode.name}
+                        />
+                        <button
+                          className='btn btn-secondary ms-2'
+                          type='button'
+                          onClick={() => toggleEditMode('name')}
+                        >
+                          {editMode.name ? 'Save' : 'Edit'}
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className='UserProfile-form-group mb-3'>
-                    <label
-                      className='small mb-1'
-                      htmlFor='inputEmailAddress'
-                    >
+                    <label className='small mb-1' htmlFor='inputEmailAddress'>
                       Email address
                     </label>
-                    <input
-                      className='UserProfile-form-control form-control'
-                      id='inputEmailAddress'
-                      name='email'
-                      type='email'
-                      placeholder='Enter your email address'
-                      value={profile.email}
-                      onChange={handleChange}
-                    />
+                    <div className='d-flex'>
+                      <input
+                        className='UserProfile-form-control form-control'
+                        id='inputEmailAddress'
+                        name='email'
+                        type='email'
+                        placeholder='Enter your email address'
+                        value={profile?.customerDetails[0]?.email || ''}
+                        onChange={handleChange}
+                        readOnly={!editMode.email}
+                      />
+                      <button
+                        className='btn btn-secondary ms-2'
+                        type='button'
+                        onClick={() => toggleEditMode('email')}
+                      >
+                        {editMode.email ? 'Save' : 'Edit'}
+                      </button>
+                    </div>
                   </div>
                   <div className='row gx-3 mb-3'>
                     <div className='col-md-6'>
-                      <label
-                        className='small mb-1'
-                        htmlFor='inputPhone'
-                      >
+                      <label className='small mb-1' htmlFor='inputPhone'>
                         Phone number
                       </label>
-                      <input
-                        className='UserProfile-form-control form-control'
-                        id='inputPhone'
-                        name='phone'
-                        type='tel'
-                        placeholder='Enter your phone number'
-                        value={profile.phone}
-                        onChange={handleChange}
-                      />
+                      <div className='d-flex'>
+                        <input
+                          className='UserProfile-form-control form-control'
+                          id='inputPhone'
+                          name='phone'
+                          type='tel'
+                          placeholder='Enter your phone number'
+                          value={profile?.customerDetails[0]?.phone || ''}
+                          onChange={handleChange}
+                          readOnly={!editMode.phone}
+                        />
+                        <button
+                          className='btn btn-secondary ms-2'
+                          type='button'
+                          onClick={() => toggleEditMode('phone')}
+                        >
+                          {editMode.phone ? 'Save' : 'Edit'}
+                        </button>
+                      </div>
                     </div>
                     <div className='col-md-6'>
-                      <label
-                        className='small mb-1'
-                        htmlFor='inputBirthday'
-                      >
+                      <label className='small mb-1' htmlFor='inputBirthday'>
                         Birthday
                       </label>
-                      <input
-                        className='UserProfile-form-control form-control'
-                        id='inputBirthday'
-                        name='birthday'
-                        type='date'
-                        placeholder='Enter your birthday'
-                        value={profile.birthday}
-                        onChange={handleChange}
-                      />
+                      <div className='d-flex'>
+                        <input
+                          className='UserProfile-form-control form-control'
+                          id='inputBirthday'
+                          name='birthday'
+                          type='date'
+                          placeholder='Enter your birthday'
+                          value={profile?.customerDetails[0]?.birthday || ''}
+                          onChange={handleChange}
+                          readOnly={!editMode.birthday}
+                        />
+                        <button
+                          className='btn btn-secondary ms-2'
+                          type='button'
+                          onClick={() => toggleEditMode('birthday')}
+                        >
+                          {editMode.birthday ? 'Save' : 'Edit'}
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <button
