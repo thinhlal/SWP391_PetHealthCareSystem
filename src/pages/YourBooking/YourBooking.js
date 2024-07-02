@@ -19,6 +19,10 @@ function YourBooking() {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [yourBookings, setYourBookings] = useState([]);
+  const [rating, setRating] = useState(null);
+  const [feedback, setFeedback] = useState('');
+  const [currentBookingID, setCurrentBookingID] = useState(null);
+  const [currentBookingData, setCurrentBookingData] = useState(null);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -81,6 +85,27 @@ function YourBooking() {
     return data.map(service => service.name);
   };
 
+  const handleRatingChange = e => {
+    setRating(e.target.value);
+  };
+
+  const handleFeedbackChange = e => {
+    setFeedback(e.target.value);
+  };
+
+  const handleSubmitFeedback = () => {
+    console.log('Rating:', rating);
+    console.log('Feedback:', feedback);
+    try {
+      axiosInstance.post(`${process.env.REACT_APP_API_URL}/rate/addRateStart`, {
+        rating,
+        feedback,
+        customerID: user.customerDetails[0].customerID,
+        bookingID: currentBookingID,
+      });
+    } catch (error) {}
+  };
+
   return (
     <div className='main-container-your-booking-page'>
       <div className='row-your-booking'>
@@ -138,35 +163,61 @@ function YourBooking() {
                             ID: {booking.bookingID}
                             <div
                               className={`status-booking
-                              ${booking.isCancel
+                              ${
+                                booking.isCancel
                                   ? 'status-cancel'
                                   : booking.paymentsDetails[0].isCancelPayment
                                     ? 'status-cancel'
-                                    : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'PAYPAL'
+                                    : booking.paymentsDetails[0].isSuccess &&
+                                        booking.paymentsDetails[0]
+                                          .paymentMethod === 'PAYPAL'
                                       ? 'status-pending'
-                                      : !booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'COUNTER'
+                                      : !booking.paymentsDetails[0].isSuccess &&
+                                          booking.paymentsDetails[0]
+                                            .paymentMethod === 'COUNTER'
                                         ? 'status-pending'
-                                        : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'PAYPAL' && booking.isCheckIn
+                                        : booking.paymentsDetails[0]
+                                              .isSuccess &&
+                                            booking.paymentsDetails[0]
+                                              .paymentMethod === 'PAYPAL' &&
+                                            booking.isCheckIn
                                           ? 'status-completed'
-                                          : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'COUNTER' && booking.isCheckIn
+                                          : booking.paymentsDetails[0]
+                                                .isSuccess &&
+                                              booking.paymentsDetails[0]
+                                                .paymentMethod === 'COUNTER' &&
+                                              booking.isCheckIn
                                             ? 'status-completed'
-                                            : null}
+                                            : null
+                              }
                                 }`}
                             >
                               Status:&nbsp;
-                              {booking.isCancel
-                                ? <span>Cancel Booking</span>
-                                : booking.paymentsDetails[0].isCancelPayment
-                                  ? <span>Cancel Payment</span>
-                                  : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'PAYPAL'
-                                    ? <span>Pending</span>
-                                    : !booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'COUNTER'
-                                      ? <span>Pending</span>
-                                      : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'PAYPAL' && booking.isCheckIn
-                                        ? <span>Done</span>
-                                        : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'COUNTER' && booking.isCheckIn
-                                          ? <span>Done</span>
-                                          : <span>NULL</span>}
+                              {booking.isCancel ? (
+                                <span>Cancel Booking</span>
+                              ) : booking.paymentsDetails[0].isCancelPayment ? (
+                                <span>Cancel Payment</span>
+                              ) : booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL' ? (
+                                <span>Pending</span>
+                              ) : !booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'COUNTER' ? (
+                                <span>Pending</span>
+                              ) : booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL' &&
+                                booking.isCheckIn ? (
+                                <span>Done</span>
+                              ) : booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'COUNTER' &&
+                                booking.isCheckIn ? (
+                                <span>Done</span>
+                              ) : (
+                                <span>NULL</span>
+                              )}
                             </div>
                           </div>
                           <div className='card-body-content-booking'>
@@ -204,14 +255,18 @@ function YourBooking() {
                                   Doctor:
                                 </div>{' '}
                                 <br />
-                                {booking?.doctorDetails[0]?.name ? booking.doctorDetails[0].name : <span>No Doctor</span>}
+                                {booking?.doctorDetails[0]?.name ? (
+                                  booking.doctorDetails[0].name
+                                ) : (
+                                  <span>No Doctor</span>
+                                )}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Services:
                                 </div>{' '}
                                 <br />
-                                {formatService(booking.servicesDetails).join(
+                                {formatService(booking.servicesInBooking).join(
                                   ', ',
                                 )}
                               </div>
@@ -232,58 +287,84 @@ function YourBooking() {
                                 {booking.totalPrice}
                               </div>
                             </div>
-                            {booking.isCancel
-                              ? null
-                              : booking.paymentsDetails[0].isCancelPayment
-                                ? null
-                                : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'PAYPAL'
-                                  ? <div
-                                    onClick={() =>
-                                      handleCancelBooking(booking.bookingID)
-                                    }
-                                    className='cancel-booking-button-1'
-                                  >
-                                    <div className='text-sign-in-button-booking'>
-                                      Cancel Booking
-                                    </div>
-                                  </div>
-                                  : !booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'COUNTER'
-                                    ? (
-                                      <div
-                                        onClick={() =>
-                                          handleCancelBooking(booking.bookingID)
-                                        }
-                                        className='cancel-booking-button-1'
-                                      >
-                                        <div className='text-sign-in-button-booking'>
-                                          Cancel Booking
-                                        </div>
-                                      </div>
-                                    ) : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'PAYPAL' && booking.isCheckIn
-                                      ? (
-                                        <button
-                                          type='button'
-                                          className='btn btn-primary feedback-rate-booking'
-                                          data-bs-toggle='modal'
-                                          data-bs-target='#newModal'
-                                        >
-                                          <div className='text-feedback-rate-booking'>
-                                            Feedback
-                                          </div>
-                                        </button>
-                                      ) : booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod === 'COUNTER' && booking.isCheckIn
-                                        ? (
-                                          <button
-                                            type='button'
-                                            className='btn btn-primary feedback-rate-booking'
-                                            data-bs-toggle='modal'
-                                            data-bs-target='#newModal'
-                                          >
-                                            <div className='text-feedback-rate-booking'>
-                                              Feedback
-                                            </div>
-                                          </button>
-                                        ) : null}
+                            {booking.isCancel ? null : booking
+                                .paymentsDetails[0]
+                                .isCancelPayment ? null : booking
+                                .paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL' ? (
+                              <div
+                                onClick={() =>
+                                  handleCancelBooking(booking.bookingID)
+                                }
+                                className='cancel-booking-button-1'
+                              >
+                                <div className='text-sign-in-button-booking'>
+                                  Cancel Booking
+                                </div>
+                              </div>
+                            ) : !booking.paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'COUNTER' ? (
+                              <div
+                                onClick={() =>
+                                  handleCancelBooking(booking.bookingID)
+                                }
+                                className='cancel-booking-button-1'
+                              >
+                                <div className='text-sign-in-button-booking'>
+                                  Cancel Booking
+                                </div>
+                              </div>
+                            ) : booking.paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL' &&
+                              booking.isCheckIn &&
+                              !booking.isRate ? (
+                              <button
+                                type='button'
+                                className='btn btn-primary feedback-rate-booking'
+                                data-bs-toggle='modal'
+                                data-bs-target='#newModal'
+                                onClick={() =>
+                                  setCurrentBookingID(booking.bookingID)
+                                }
+                              >
+                                <div className='text-feedback-rate-booking'>
+                                  Feedback
+                                </div>
+                              </button>
+                            ) : booking.paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'COUNTER' &&
+                              booking.isCheckIn &&
+                              !booking.isRate ? (
+                              <button
+                                type='button'
+                                className='btn btn-primary feedback-rate-booking'
+                                data-bs-toggle='modal'
+                                data-bs-target='#newModal'
+                                onClick={() =>
+                                  setCurrentBookingID(booking.bookingID)
+                                }
+                              >
+                                <div className='text-feedback-rate-booking'>
+                                  Feedback
+                                </div>
+                              </button>
+                            ) : (
+                              <button
+                                type='button'
+                                className='btn btn-primary feedback-rate-booking'
+                                data-bs-toggle='modal'
+                                data-bs-target='#yourRate'
+                                onClick={() => setCurrentBookingData(booking)}
+                              >
+                                <div className='text-feedback-rate-booking'>
+                                  Your Rate
+                                </div>
+                              </button>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -291,8 +372,6 @@ function YourBooking() {
                   </div>
                 ))
               )}
-
-              {/* pagination */}
 
               {yourBookings.length > 0 && (
                 <div className='add-pet_pagination'>
@@ -373,7 +452,7 @@ function YourBooking() {
                   <div className='modal-body'>
                     <div className='rating-container'>
                       <div className='main-title-rate'>
-                        How was quality of the call?
+                        How was the quality of the service?
                       </div>
                       <div className='rate-success'>
                         <div className='rating'>
@@ -382,6 +461,7 @@ function YourBooking() {
                             name='rating'
                             value='5'
                             id='5'
+                            onChange={handleRatingChange}
                           />
                           <label htmlFor='5'>☆</label>
                           <input
@@ -389,6 +469,7 @@ function YourBooking() {
                             name='rating'
                             value='4'
                             id='4'
+                            onChange={handleRatingChange}
                           />
                           <label htmlFor='4'>☆</label>
                           <input
@@ -396,6 +477,7 @@ function YourBooking() {
                             name='rating'
                             value='3'
                             id='3'
+                            onChange={handleRatingChange}
                           />
                           <label htmlFor='3'>☆</label>
                           <input
@@ -403,6 +485,7 @@ function YourBooking() {
                             name='rating'
                             value='2'
                             id='2'
+                            onChange={handleRatingChange}
                           />
                           <label htmlFor='2'>☆</label>
                           <input
@@ -410,13 +493,23 @@ function YourBooking() {
                             name='rating'
                             value='1'
                             id='1'
+                            onChange={handleRatingChange}
                           />
                           <label htmlFor='1'>☆</label>
                         </div>
                       </div>
 
-                      <textarea placeholder='Leave a message, if you want'></textarea>
-                      <button className='rating-button'>Rate now</button>
+                      <textarea
+                        placeholder='Leave a message, if you want'
+                        value={feedback}
+                        onChange={handleFeedbackChange}
+                      ></textarea>
+                      <button
+                        className='rating-button'
+                        onClick={handleSubmitFeedback}
+                      >
+                        Rate now
+                      </button>
                     </div>
                   </div>
                   <div className='modal-footer'>
@@ -431,11 +524,49 @@ function YourBooking() {
                 </div>
               </div>
             </div>
+
+            <div
+              className='modal fade'
+              id='yourRate'
+              tabIndex='-1'
+              aria-labelledby='newModalLabel'
+              aria-hidden='true'
+            >
+              <div className='modal-dialog'>
+                <div className='modal-content'>
+                  <div className='modal-header'>
+                    <h1
+                      className='modal-title fs-5'
+                      id='newModalLabel'
+                    >
+                      Your Rate!
+                    </h1>
+                    <button
+                      type='button'
+                      className='btn-close'
+                      data-bs-dismiss='modal'
+                      aria-label='Close'
+                    ></button>
+                  </div>
+                  <div className='modal-body'>
+                    <h1>Rating</h1>
+                    <div>
+                      Rate Star: {currentBookingData?.rateDetails[0]?.rate}
+                    </div>
+                    <div>
+                      Rate Comment:{' '}
+                      {currentBookingData?.rateDetails[0]?.comment}
+                    </div>
+                  </div>
+                  <div className='modal-footer'></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <Footer></Footer>
       </div>
-    </div >
+    </div>
   );
 }
 

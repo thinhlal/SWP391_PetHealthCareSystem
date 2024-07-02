@@ -219,34 +219,54 @@ function AdminDashBoard() {
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       <div
                         className={`Admin-DashBoard-Table-status-booking
-                              ${item.isCancel
-                            ? 'Admin-DashBoard-Table-status-cancel'
-                            : item.paymentsDetails[0].isCancelPayment
-                              ? 'Admin-DashBoard-Table-status-cancel'
-                              : item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'PAYPAL'
-                                ? 'Admin-DashBoard-Table-status-waiting'
-                                : !item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'COUNTER'
-                                  ? 'Admin-DashBoard-Table-status-waiting'
-                                  : item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'PAYPAL' && item.isCheckIn
-                                    ? 'Admin-DashBoard-Table-status-done'
-                                    : item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'COUNTER' && item.isCheckIn
-                                      ? 'Admin-DashBoard-Table-status-done'
-                                      : null
-                          }`}
+                              ${
+                                item.isCancel
+                                  ? 'Admin-DashBoard-Table-status-cancel'
+                                  : item.paymentsDetails[0].isCancelPayment
+                                    ? 'Admin-DashBoard-Table-status-cancel'
+                                    : item.paymentsDetails[0].isSuccess &&
+                                        item.paymentsDetails[0]
+                                          .paymentMethod === 'PAYPAL'
+                                      ? 'Admin-DashBoard-Table-status-waiting'
+                                      : !item.paymentsDetails[0].isSuccess &&
+                                          item.paymentsDetails[0]
+                                            .paymentMethod === 'COUNTER'
+                                        ? 'Admin-DashBoard-Table-status-waiting'
+                                        : item.paymentsDetails[0].isSuccess &&
+                                            item.paymentsDetails[0]
+                                              .paymentMethod === 'PAYPAL' &&
+                                            item.isCheckIn
+                                          ? 'Admin-DashBoard-Table-status-done'
+                                          : item.paymentsDetails[0].isSuccess &&
+                                              item.paymentsDetails[0]
+                                                .paymentMethod === 'COUNTER' &&
+                                              item.isCheckIn
+                                            ? 'Admin-DashBoard-Table-status-done'
+                                            : null
+                              }`}
                       >
-                        {item.isCancel
-                          ? <span>Cancel Booking</span>
-                          : item.paymentsDetails[0].isCancelPayment
-                            ? <span>Cancel Payment</span>
-                            : item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'PAYPAL'
-                              ? <span>Pending</span>
-                              : !item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'COUNTER'
-                                ? <span>Pending</span>
-                                : item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'PAYPAL' && item.isCheckIn
-                                  ? <span>Done</span>
-                                  : item.paymentsDetails[0].isSuccess && item.paymentsDetails[0].paymentMethod === 'COUNTER' && item.isCheckIn
-                                    ? <span>Done</span>
-                                    : <span>NULL</span>}
+                        {item.isCancel ? (
+                          <span>Cancel Booking</span>
+                        ) : item.paymentsDetails[0].isCancelPayment ? (
+                          <span>Cancel Payment</span>
+                        ) : item.paymentsDetails[0].isSuccess &&
+                          item.paymentsDetails[0].paymentMethod === 'PAYPAL' ? (
+                          <span>Pending</span>
+                        ) : !item.paymentsDetails[0].isSuccess &&
+                          item.paymentsDetails[0].paymentMethod ===
+                            'COUNTER' ? (
+                          <span>Pending</span>
+                        ) : item.paymentsDetails[0].isSuccess &&
+                          item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                          item.isCheckIn ? (
+                          <span>Done</span>
+                        ) : item.paymentsDetails[0].isSuccess &&
+                          item.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                          item.isCheckIn ? (
+                          <span>Done</span>
+                        ) : (
+                          <span>NULL</span>
+                        )}
                       </div>
                     </div>
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>

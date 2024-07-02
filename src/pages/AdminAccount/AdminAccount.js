@@ -99,9 +99,10 @@ function AdminAccount() {
       return;
     }
 
-    await axiosInstance.post(`${process.env.REACT_APP_API_URL}/admin/updateAccountInfo`,
-      editAccount
-    )
+    await axiosInstance.post(
+      `${process.env.REACT_APP_API_URL}/admin/updateAccountInfo`,
+      editAccount,
+    );
     const response = await axiosInstance.get(
       `${process.env.REACT_APP_API_URL}/admin/getAllAccounts`,
     );
@@ -120,7 +121,10 @@ function AdminAccount() {
 
   const openEditModal = account => {
     if (account.role === 'Customer') {
-      setCurrentAccount({ ...account?.customerDetails[0], role: account?.role });
+      setCurrentAccount({
+        ...account?.customerDetails[0],
+        role: account?.role,
+      });
       setEditAccount({
         accountID: account?.customerDetails[0]?.accountID,
         name: account?.customerDetails[0]?.name,

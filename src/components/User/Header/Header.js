@@ -73,6 +73,12 @@ function Header() {
                 >
                   View Your Pet
                 </a>
+                <a
+                  href='user-profile'
+                  className='main-header-user-account_menu-item'
+                >
+                  Your Account
+                </a>
                 <div
                   onClick={logOut}
                   className='main-header-user-account_menu-item'
