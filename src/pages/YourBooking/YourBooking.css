@@ -320,7 +320,6 @@ a {
 }
 
 .main-container-your-booking-page .rating-container {
-  background-color: #e9e4f0;
   padding: 20px;
   text-align: center;
   margin: 0;
@@ -338,7 +337,8 @@ a {
 
 .main-container-your-booking-page .main-title-rate {
   font-size: 20px;
-  color: #898484;
+  color: #b1aeae;
+  font-weight: 200;
   display: flex;
   justify-content: center;
 }
@@ -357,8 +357,9 @@ a {
   border-radius: 12px;
   border: 1px solid #ccc;
   resize: vertical;
-  color: #000; /* Màu chữ bình thường */
-  font-weight: 400; /* Font weight chữ bình thường */
+  color: #000;
+  font-weight: 400;
+  height: 110px;
 }
 
 .main-container-your-booking-page textarea::placeholder {
@@ -378,7 +379,7 @@ a {
 }
 
 .main-container-your-booking-page .rating-button:hover {
-  background-color: #45a049;
+  background-color: #4a00e0;
 }
 
 .main-container-your-booking-page .button-secondary {
@@ -415,18 +416,7 @@ a {
   width: 1em;
   font-size: 40px;
   font-weight: 300;
-  color: #f2994a; /* fallback for old browsers */
-  color: -webkit-linear-gradient(
-    to right,
-    #f2c94c,
-    #f2994a
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  color: linear-gradient(
-    to right,
-    #f2c94c,
-    #f2994a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  color: #7b61ff;
   cursor: pointer;
 }
 

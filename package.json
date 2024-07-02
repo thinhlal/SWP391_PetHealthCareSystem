@@ -31,7 +31,7 @@
     "js-cookie": "^3.0.5",
     "lottie-web": "^5.12.2",
     "react": "^18.3.1",
-    "react-bootstrap": "^2.10.2",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-multi-date-picker": "^4.5.2",
     "react-router-dom": "^6.23.1",

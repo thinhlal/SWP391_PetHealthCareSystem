@@ -89,6 +89,7 @@
 }
 
 .main-header-user-overlap .main-header-user-account_menu {
+  z-index: 1000;
   display: none;
   width: 130px;
   font-family: Roboto, sans-serif;
