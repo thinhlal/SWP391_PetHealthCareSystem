@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './ChangeUserPassWord.css';
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
+import { AuthContext } from '../../context/AuthContext';
+import axiosInstance from '../../utils/axiosInstance';
 
 const ChangeUserPassword = () => {
+  const { user, logOut } = useContext(AuthContext);
   const [passwords, setPasswords] = useState({
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
+  const [message, setMessage] = useState('');
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -16,14 +20,47 @@ const ChangeUserPassword = () => {
       ...passwords,
       [name]: value,
     });
+    setMessage('');
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (passwords.newPassword !== passwords.confirmPassword) {
-      alert('New password and confirm password do not match!');
+      setMessage('New password and confirm password do not match!');
       return;
     }
-    console.log('Password changed:', passwords);
+    try {
+      const res = await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/user/changePassword`,
+        {
+          accountID: user.accountID,
+          passwords,
+        },
+      );
+      setMessage(res.data.message);
+      setPasswords({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+      });
+    } catch (error) {
+      if (error.response) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage('An unexpected error occurred');
+      }
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      // await axiosInstance.post(`${process.env.REACT_APP_API_URL}/user/deleteAccount`, {
+      //   accountID: user.accountID,
+      // })
+      // console.log('here');
+      // document.getElementById('hiddenDiv').click();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -104,6 +141,7 @@ const ChangeUserPassword = () => {
                       onChange={handleChange}
                     />
                   </div>
+                  {message && <div className='error-message'>{message}</div>}
                   <button
                     className='btn btn-primary'
                     type='button'
@@ -126,12 +164,17 @@ const ChangeUserPassword = () => {
                   undone. If you are sure you want to delete your account,
                   select the button below.
                 </p>
-                <button
+                <div
+                  id='hiddenDiv'
+                  style={{ display: 'none' }}
+                  onClick={logOut}
+                ></div>
+                <div
                   className='btn btn-danger-soft text-danger'
-                  type='button'
+                  onClick={handleDeleteAccount}
                 >
                   I understand, delete my account
-                </button>
+                </div>
               </div>
             </div>
           </div>

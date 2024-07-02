@@ -1,8 +1,8 @@
-.admin-DashBoard {
+.Admin-Rating {
   background-color: #fafafa;
 }
 
-.admin-DashBoard-Header {
+.Admin-Rating-Header {
   border-bottom: 1px solid #eae8f1;
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@
   height: 63px;
 }
 
-.admin-DashBoard-Header-Logo {
+.Admin-Rating-Header-Logo {
   padding: 0;
   margin: 0;
   display: flex;
@@ -18,11 +18,11 @@
   justify-content: center;
 }
 
-.admin-DashBoard-Logo {
+.Admin-Rating-Logo {
   width: 190px;
 }
 
-.admin-DashBoard-Header-Account-Wrapper {
+.Admin-Rating-Header-Account-Wrapper {
   border-left: 1px solid #eae8f1;
   height: 100%;
   display: flex;
@@ -34,36 +34,36 @@
   color: white;
 }
 
-.admin-DashBoard-Header-Account {
+.Admin-Rating-Header-Account {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
 
-.admin-DashBoard-Header-Admin:hover {
+.Admin-Rating-Header-Admin:hover {
   transform: scale(1.1);
   color: #dd6637;
   cursor: pointer;
 }
 
-.admin-DashBoard-Header-Account-Text {
+.Admin-Rating-Header-Account-Text {
   line-height: 25px;
   font-size: 16px;
   color: #000;
 }
 
-.Admin-DashBoard-Content {
+.Admin-Rating-Content {
   padding: 0;
   margin: 0;
 }
 
-.Admin-DashBoard-Navigate {
+.Admin-Rating-Navigate {
   padding: 0;
   position: relative;
 }
 
-.Admin-DashBoard-Navigate-Dashboard {
+.Admin-Rating-Navigate-Dashboard {
   font-family: Roboto, sans-serif;
   display: flex;
   height: 36px;
@@ -71,7 +71,7 @@
   margin: 10px 10px 5px 20px;
 }
 
-.Admin-DashBoard-Navigate-Text-Dashboard {
+.Admin-Rating-Navigate-Text-Dashboard {
   color: #000;
   margin-left: 10px;
   margin-top: 5px;
@@ -79,7 +79,7 @@
   font-size: 18px;
 }
 
-.Admin-DashBoard-Navigate-Text {
+.Admin-Rating-Navigate-Text {
   font-family: Roboto, sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
@@ -87,7 +87,7 @@
   text-align: center;
 }
 
-.Admin-DashBoard-Navigate-Logout {
+.Admin-Rating-Navigate-Logout {
   color: #000;
   line-height: 42px;
   text-align: center;
@@ -97,21 +97,21 @@
   bottom: 50px;
 }
 
-.Admin-DashBoard-Navigate-Logout:hover {
+.Admin-Rating-Navigate-Logout:hover {
   color: rgb(70, 128, 255);
   cursor: pointer;
   background-color: #e3eafc;
 }
 
-.Admin-DashBoard-Navigate-Logout span {
+.Admin-Rating-Navigate-Logout span {
   margin-left: 10px;
 }
 
-.Admin-DashBoard-Navigate-Text-Rest {
+.Admin-Rating-Navigate-Text-Rest {
   font-family: Roboto, sans-serif;
 }
 
-.Admin-DashBoard-Navigate-Text-Rest-Menu {
+.Admin-Rating-Navigate-Text-Rest-Menu {
   color: #000;
   height: 42px;
   display: flex;
@@ -120,19 +120,19 @@
   padding-left: 50px;
 }
 
-.Admin-DashBoard-Navigate-Text-Rest-Menu:hover {
+.Admin-Rating-Navigate-Text-Rest-Menu:hover {
   color: rgb(70, 128, 255);
   cursor: pointer;
   background-color: #e3eafc;
 }
 
-.Admin-DashBoard-Main {
+.Admin-Rating-Main {
   padding: 0;
   background-color: #f1f5f9;
   border-left: 1px solid #f9f9fa;
 }
 
-.Admin-DashBoard-Main-Search {
+.Admin-Rating-Main-Search {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,7 +142,7 @@
   margin-bottom: 10px;
 }
 
-.Admin-DashBoard-Main-Search-Input {
+.Admin-Rating-Main-Search-Input {
   width: 100%;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -157,11 +157,11 @@
   line-height: 24px;
 }
 
-.Admin-DashBoard-Main-Search-Input:focus {
+.Admin-Rating-Main-Search-Input:focus {
   outline: none;
 }
 
-.Admin-DashBoard-Main-Search-Button {
+.Admin-Rating-Main-Search-Button {
   background-color: #ecf0fa;
   height: 100%;
   border: none;
@@ -169,7 +169,53 @@
   border-bottom-right-radius: 10px;
 }
 
-.Admin-DashBoard-Main-Table-Wrapper {
+.Admin-Rating-Main-Filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  justify-content: space-between;
+  font-family: Roboto, sans-serif;
+}
+
+.Admin-Rating-Main-Search-Input {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 35px;
+  padding: 0 16px;
+  border: none;
+  background-color: #ecf0fa;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.Admin-Rating-Main-Search-Input:focus {
+  outline: none;
+}
+
+.Admin-Rating-Main-Search-Button {
+  background-color: #ecf0fa;
+  height: 100%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Admin-Rating-Select-Rating {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  line-height: 10px;
+  margin-right: 40%;
+}
+
+.Admin-Rating-Select-Filter {
+  margin-left: 5px;
+}
+
+.Admin-Rating-Main-Table-Wrapper {
   margin: 50px 3%;
   padding: 0;
   border: 1px solid #eae8f1;
@@ -177,13 +223,13 @@
   box-shadow: -2px 8px 18px #dadee8;
 }
 
-.Admin-DashBoard-Main-Table {
+.Admin-Rating-Main-Table {
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
 }
 
-.Admin-DashBoard-Main-Table-Title {
+.Admin-Rating-Main-Table-Title {
   color: #242f48;
   font-family: Roboto, sans-serif;
   font-weight: 700;
@@ -193,13 +239,13 @@
   margin-bottom: 4px;
 }
 
-.Admin-DashBoard-Main-Table-Title-Text {
+.Admin-Rating-Main-Table-Title-Text {
   font-size: 12px;
   font-family: Roboto, sans-serif;
   margin-bottom: 15px;
 }
 
-.Admin-DashBoard-Main-Table-Header {
+.Admin-Rating-Main-Table-Header {
   display: flex;
   font-size: 16px;
   font-weight: 700;
@@ -208,7 +254,7 @@
   border-bottom: 1px solid #eae8f1;
 }
 
-.Admin-DashBoard-Main-Table-Header-Title {
+.Admin-Rating-Main-Table-Header-Title {
   width: 100%;
   background-color: #f1f5f9;
   line-height: 40px;
@@ -219,7 +265,7 @@
   border-top: 1px solid #eae8f1;
 }
 
-.Admin-DashBoard-Main-Table-Header-Title-Btn {
+.Admin-Rating-Main-Table-Header-Title-Btn {
   line-height: 40px;
   width: 100%;
   background-color: #f1f5f9;
@@ -230,16 +276,16 @@
   border-top: 1px solid #eae8f1;
 }
 
-.Admin-DashBoard-Main-Table-Header-Title-Btn:last-child {
+.Admin-Rating-Main-Table-Header-Title-Btn:last-child {
   border-top-right-radius: 8px;
   border-right: 1px solid #eae8f1;
 }
 
-.Admin-DashBoard-Main-Table-Header-Title:first-child {
+.Admin-Rating-Main-Table-Header-Title:first-child {
   border-top-left-radius: 8px;
 }
 
-.Admin-DashBoard-Main-Table-Content-Row-Wrapper {
+.Admin-Rating-Main-Table-Content-Row-Wrapper {
   display: flex;
   line-height: 40px;
   border-bottom: 1px solid #eae8f1;
@@ -247,34 +293,34 @@
   font-size: 16px;
 }
 
-.Admin-DashBoard-Main-Table-Content-Row {
+.Admin-Rating-Main-Table-Content-Row {
   width: 100%;
   border-left: 1px solid #eae8f1;
   padding: 0 0 0 8px;
   margin: 0;
 }
 
-.Admin-DashBoard-Table-status-booking {
+.Admin-Rating-Table-status-booking {
   font-weight: bold;
 }
 
-.Admin-DashBoard-Table-status-waiting {
+.Admin-Rating-Table-status-waiting {
   color: blue;
 }
 
-.Admin-DashBoard-Table-status-cancel {
+.Admin-Rating-Table-status-cancel {
   color: red;
 }
 
-.Admin-DashBoard-Table-status-done {
+.Admin-Rating-Table-status-done {
   color: green;
 }
 
-.Admin-DashBoard-Table-Detail {
+.Admin-Rating-Table-Detail {
   width: 105%;
 }
 
-.Admin-DashBoard-Main-Table-Content-Btn_Wrapper {
+.Admin-Rating-Main-Table-Content-Btn_Wrapper {
   border-left: 1px solid #eae8f1;
   text-align: center;
   width: 100%;
@@ -282,56 +328,56 @@
   margin: 0;
 }
 
-.Admin-DashBoard-Main-Table-Content-Btn_Wrapper:last-child {
+.Admin-Rating-Main-Table-Content-Btn_Wrapper:last-child {
   border-right: 1px solid #eae8f1;
 }
 
-.Admin-DashBoard-Main-Table-Content-Btn {
+.Admin-Rating-Main-Table-Content-Btn {
   border: none;
   width: 123px;
   line-height: 30px;
   border-radius: 5px;
 }
 
-.Admin-DashBoard-Main-Table-Content-Btn:hover {
+.Admin-Rating-Main-Table-Content-Btn:hover {
   color: rgb(70, 128, 255);
   cursor: pointer;
   background-color: #e3eafc;
 }
 
-.Admin-DashBoard-Pagination {
+.Admin-Rating-Pagination {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px 0 10px 0;
 }
 
-.Admin-DashBoard-sub-title-profile-customer {
+.Admin-Rating-sub-title-profile-customer {
   padding-right: 5px;
   text-align: left;
   color: #000000;
   font-weight: 600;
 }
 
-.Admin-DashBoard-form-group {
+.Admin-Rating-form-group {
   display: flex;
   justify-content: left;
 }
 
-.Admin-DashBoard-sub-title-profile-pet {
+.Admin-Rating-sub-title-profile-pet {
   padding-right: 5px;
   text-align: left;
   color: #000000;
   font-weight: 600;
 }
 
-.Admin-DashBoard-tab-modal-body-more-info {
+.Admin-Rating-tab-modal-body-more-info {
   overflow: hidden;
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
 }
 
-.Admin-DashBoard-tab-modal-body-more-info button {
+.Admin-Rating-tab-modal-body-more-info button {
   background-color: inherit;
   float: left;
   border: none;
@@ -342,16 +388,16 @@
   font-size: 17px;
 }
 
-.Admin-DashBoard-tab-modal-body-more-info button:hover {
+.Admin-Rating-tab-modal-body-more-info button:hover {
   background-color: #ddd;
 }
 
-.Admin-DashBoard-tab-modal-body-more-info button.active {
+.Admin-Rating-tab-modal-body-more-info button.active {
   background-color: #f1f1f1;
   border-bottom: 2px solid #004cb9;
 }
 
-.Admin-DashBoard-container-modal-body-more-info {
+.Admin-Rating-container-modal-body-more-info {
   width: 100%;
   margin: 50px auto;
   background-color: #fff;
@@ -361,14 +407,14 @@
   padding: 0;
 }
 
-.Admin-DashBoard-tabcontent-customer {
+.Admin-Rating-tabcontent-customer {
   margin-left: 20px;
 }
 
-.Admin-DashBoard-tabcontent-pet {
+.Admin-Rating-tabcontent-pet {
   margin-left: 20px;
 }
 
-.Admin-DashBoard-tabcontent-services {
+.Admin-Rating-tabcontent-services {
   margin-left: 20px;
 }

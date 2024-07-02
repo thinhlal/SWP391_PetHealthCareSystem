@@ -29,6 +29,14 @@ const CustomerSchema = new Schema(
       type: String,
       default: null,
     },
+    birthday: {
+      type: Date,
+      default: null,
+    },
+    image: {
+      type: String,
+      default: 'http://bootdey.com/img/Content/avatar/avatar1.png',
+    },
   },
   {
     timestamps: true,

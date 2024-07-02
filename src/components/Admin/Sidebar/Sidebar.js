@@ -40,6 +40,9 @@ function Sidebar() {
           <a href='/admin-cages'>
             <div className='Admin-Account-Navigate-Text-Rest-Menu'>Cages</div>
           </a>
+          <a href='/admin-rating'>
+            <div className='Admin-Account-Navigate-Text-Rest-Menu'>Rating</div>
+          </a>
         </div>
       </div>
 

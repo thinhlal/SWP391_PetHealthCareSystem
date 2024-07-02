@@ -21,6 +21,7 @@ import VeterinarianInfo from './pages/VeterinarianInfo/VeterinarianInfo.js';
 import AdminServices from './pages/AdminServices/AdminServices.js';
 import AdminCages from './pages/AdminCages/AdminCages.js';
 import ProfilePet from './pages/ProfilePet/ProfilePet.js';
+import AdminRating from './pages/AdminRating/AdminRating.js';
 import ChoosePet from './pages/ChoosePet/ChoosePet.js';
 import Payment from './pages/Payment/Payment.js';
 import Unauthorized from './pages/Unauthorized/Unauthorized.js';
@@ -186,6 +187,14 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={['Admin']}>
               <AdminCages />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/admin-rating'
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminRating />
             </ProtectedRoute>
           }
         />

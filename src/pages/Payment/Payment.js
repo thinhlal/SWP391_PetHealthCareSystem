@@ -19,7 +19,6 @@ const Payment = () => {
           `${process.env.REACT_APP_API_URL}/paypal/paypal-success-getData`,
           { bookingID },
         );
-        console.log(response.data.paymentData);
         setData(response.data.paymentData);
         setStatus(status);
       } catch (error) {
