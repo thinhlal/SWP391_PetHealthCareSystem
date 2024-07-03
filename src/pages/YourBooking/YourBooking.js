@@ -103,7 +103,7 @@ function YourBooking() {
         customerID: user.customerDetails[0].customerID,
         bookingID: currentBookingID,
       });
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -163,33 +163,34 @@ function YourBooking() {
                             ID: {booking.bookingID}
                             <div
                               className={`status-booking
-                              ${
-                                booking.isCancel
+                              ${booking.isCancel
                                   ? 'status-cancel'
                                   : booking.paymentsDetails[0].isCancelPayment
                                     ? 'status-cancel'
                                     : booking.paymentsDetails[0].isSuccess &&
-                                        booking.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL'
+                                      booking.paymentsDetails[0]
+                                        .paymentMethod === 'PAYPAL' &&
+                                      !booking.isCheckIn
                                       ? 'status-pending'
                                       : !booking.paymentsDetails[0].isSuccess &&
-                                          booking.paymentsDetails[0]
-                                            .paymentMethod === 'COUNTER'
+                                        booking.paymentsDetails[0]
+                                          .paymentMethod === 'COUNTER' &&
+                                        !booking.isCheckIn
                                         ? 'status-pending'
                                         : booking.paymentsDetails[0]
-                                              .isSuccess &&
-                                            booking.paymentsDetails[0]
-                                              .paymentMethod === 'PAYPAL' &&
-                                            booking.isCheckIn
+                                          .isSuccess &&
+                                          booking.paymentsDetails[0]
+                                            .paymentMethod === 'PAYPAL' &&
+                                          booking.isCheckIn
                                           ? 'status-completed'
                                           : booking.paymentsDetails[0]
-                                                .isSuccess &&
-                                              booking.paymentsDetails[0]
-                                                .paymentMethod === 'COUNTER' &&
-                                              booking.isCheckIn
+                                            .isSuccess &&
+                                            booking.paymentsDetails[0]
+                                              .paymentMethod === 'COUNTER' &&
+                                            booking.isCheckIn
                                             ? 'status-completed'
                                             : null
-                              }
+                                }
                                 }`}
                             >
                               Status:&nbsp;
@@ -199,20 +200,22 @@ function YourBooking() {
                                 <span>Cancel Payment</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL' ? (
+                                'PAYPAL' &&
+                                !booking.isCheckIn ? (
                                 <span>Pending</span>
                               ) : !booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'COUNTER' ? (
+                                'COUNTER' &&
+                                !booking.isCheckIn ? (
                                 <span>Pending</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL' &&
+                                'PAYPAL' &&
                                 booking.isCheckIn ? (
                                 <span>Done</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'COUNTER' &&
+                                'COUNTER' &&
                                 booking.isCheckIn ? (
                                 <span>Done</span>
                               ) : (
@@ -288,11 +291,11 @@ function YourBooking() {
                               </div>
                             </div>
                             {booking.isCancel ? null : booking
-                                .paymentsDetails[0]
-                                .isCancelPayment ? null : booking
+                              .paymentsDetails[0]
+                              .isCancelPayment ? null : booking
                                 .paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' ? (
+                                booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL' && booking.dateBook < new Date() ? (
                               <div
                                 onClick={() =>
                                   handleCancelBooking(booking.bookingID)
@@ -305,7 +308,7 @@ function YourBooking() {
                               </div>
                             ) : !booking.paymentsDetails[0].isSuccess &&
                               booking.paymentsDetails[0].paymentMethod ===
-                                'COUNTER' ? (
+                              'COUNTER' && booking.dateBook < new Date() ? (
                               <div
                                 onClick={() =>
                                   handleCancelBooking(booking.bookingID)
@@ -318,7 +321,7 @@ function YourBooking() {
                               </div>
                             ) : booking.paymentsDetails[0].isSuccess &&
                               booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' &&
+                              'PAYPAL' &&
                               booking.isCheckIn &&
                               !booking.isRate ? (
                               <button
@@ -336,7 +339,7 @@ function YourBooking() {
                               </button>
                             ) : booking.paymentsDetails[0].isSuccess &&
                               booking.paymentsDetails[0].paymentMethod ===
-                                'COUNTER' &&
+                              'COUNTER' &&
                               booking.isCheckIn &&
                               !booking.isRate ? (
                               <button
