@@ -53,11 +53,10 @@ const ChangeUserPassword = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      // await axiosInstance.post(`${process.env.REACT_APP_API_URL}/user/deleteAccount`, {
-      //   accountID: user.accountID,
-      // })
-      // console.log('here');
-      // document.getElementById('hiddenDiv').click();
+      await axiosInstance.post(`${process.env.REACT_APP_API_URL}/user/deleteAccount`, {
+        accountID: user.accountID,
+      })
+      document.getElementById('hiddenDiv').click();
     } catch (error) {
       console.error(error);
     }
@@ -171,10 +170,53 @@ const ChangeUserPassword = () => {
                 ></div>
                 <div
                   className='btn btn-danger-soft text-danger'
-                  onClick={handleDeleteAccount}
+                  data-bs-toggle='modal'
+                  data-bs-target='#Delete-Account-exampleModal'
                 >
                   I understand, delete my account
                 </div>
+                <div
+                  className='modal fade'
+                  id={`Delete-Account-exampleModal`}
+                  tabIndex='-1'
+                  aria-labelledby='exampleModalLabelMore'
+                  aria-hidden='true'
+                >
+                  <div className='modal-dialog'>
+                    <div className='modal-content'>
+
+                      <div className='modal-body'>
+                        <div className='change-user-password-modal-header'>
+                          Confirm Delete
+                        </div>
+                        <div>
+                          Are you sure you want to delete?
+                        </div>
+                      </div>
+                      <div className='modal-footer'>
+                        <button
+                          type='button'
+                          className='btn btn-danger'
+                          data-bs-dismiss='modal'
+                          onClick={handleDeleteAccount}
+                        >
+                          {' '}
+                          Save{' '}
+                        </button>
+                        <button
+                          type='button'
+                          className='btn btn-light'
+                          data-bs-dismiss='modal'
+                        >
+                          {' '}
+                          Cancel{' '}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
             </div>
           </div>
