@@ -23,11 +23,11 @@ const WorkingSchema = new Schema(
     },
     startTime: {
       type: String,
-      required: true,
+      default: null,
     },
     endTime: {
       type: String,
-      required: true,
+      default: null,
     },
     isOff: {
       type: Boolean,

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
 import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
+import { AuthContext } from '../../context/AuthContext.js';
 
 function WorkSchedule() {
+  const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-  const [modalAction, setModalAction] = useState(() => () => {});
-  const [selectedDate, setSelectedDate] = useState('2023-06-17');
+  const [modalAction, setModalAction] = useState(() => () => { });
+  const [selectedDate, setSelectedDate] = useState(new Date(new Date().setHours(new Date().getHours() + 7)).toISOString().split('T')[0]);
   const [selectedVet, setSelectedVet] = useState('001');
-
+  console.log(selectedDate);
   const dataSchedules = {
     '2023-06-17': {
       '001': {
@@ -144,9 +146,9 @@ function WorkSchedule() {
           <p className='tittle'>Today's Work Schedule</p>
         </div>
         <div className='vet-container'>
-          <p className='vet-id'>Veterinarian ID: {selectedVet}</p>
+          <p className='vet-id'>Veterinarian ID: {user?.doctorDetails[0]?.doctorID}</p>
           <p className='vet-name'>
-            Veterinarian Name: {selectedSchedule.vetName}
+            Veterinarian Name: {user?.doctorDetails[0]?.name}
           </p>
         </div>
       </div>

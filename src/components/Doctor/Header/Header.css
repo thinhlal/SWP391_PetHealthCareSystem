@@ -63,6 +63,7 @@
 .main-header-doctor-overlap .main-header-user-account_menu {
   display: none;
   width: 130px;
+  z-index: 1000;
   font-family: Roboto, sans-serif;
   font-weight: 600;
   position: absolute;
@@ -71,7 +72,7 @@
   color: #000;
   border-radius: 5px;
   white-space: nowrap;
-  border: 1px solid #ccc;
+  box-shadow: 0px -3px 20px 7px rgba(81, 85, 129, 0.37);
 }
 
 .main-header-doctor-overlap .main-header-user-account::before {
