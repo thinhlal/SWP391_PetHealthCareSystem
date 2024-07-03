@@ -2,27 +2,13 @@ import React, { useState } from 'react';
 import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
 import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
-import DatePicker from 'react-multi-date-picker';
-import 'react-multi-date-picker/styles/colors/green.css';
 
 function WorkSchedule() {
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [modalAction, setModalAction] = useState(() => () => {});
-  const [errors, setErrors] = useState({});
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [shifts, setShifts] = useState({});
-  const [allTimeWork, setTimeWork] = useState([]);
-  const availableTimeSlots = [
-    { startTime: '08:00', endTime: '09:00' },
-    { startTime: '09:00', endTime: '10:00' },
-    { startTime: '10:00', endTime: '11:00' },
-    { startTime: '11:00', endTime: '12:00' },
-    { startTime: '13:00', endTime: '14:00' },
-    { startTime: '14:00', endTime: '15:00' },
-    { startTime: '15:00', endTime: '16:00' },
-    { startTime: '16:00', endTime: '17:00' },
-  ];
+  const [selectedDate, setSelectedDate] = useState('2023-06-17');
+  const [selectedVet, setSelectedVet] = useState('001');
 
   const dataSchedules = {
     '2023-06-17': {
@@ -122,8 +108,6 @@ function WorkSchedule() {
     },
   };
   const [schedules, setSchedules] = useState(dataSchedules);
-  const [selectedDate, setSelectedDate] = useState('2023-06-17');
-  const [selectedVet, setSelectedVet] = useState('001');
 
   const handleDateChange = e => {
     const newDate = e.target.value;
@@ -151,47 +135,6 @@ function WorkSchedule() {
     schedules[selectedDate] && schedules[selectedDate][selectedVet]
       ? schedules[selectedDate][selectedVet]
       : { vetName: '', appointments: [] };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    if (!selectedDates.length) {
-      setErrors(prev => ({
-        ...prev,
-        selectedDates: 'Please select at least one date.',
-      }));
-    } else if (Object.values(shifts).length !== selectedDates.length) {
-      setErrors(prev => ({
-        ...prev,
-        shifts: 'Please select a shift for each date.',
-      }));
-    } else {
-      const newTimeWork = selectedDates.map(date => ({
-        date,
-        shift: shifts[date],
-      }));
-
-      setTimeWork([...allTimeWork, ...newTimeWork]);
-      resetForm();
-      document.querySelector('#exampleModal .btn-close').click();
-    }
-  };
-
-  const resetForm = () => {
-    setSelectedDates([]);
-    setShifts({});
-    setErrors({});
-  };
-
-  const handleDateChangeModal = dates => {
-    setSelectedDates(dates);
-    setErrors(prev => ({ ...prev, selectedDates: '' }));
-  };
-
-  const handleShiftChange = (date, shift) => {
-    setShifts(prev => ({ ...prev, [date]: shift }));
-    setErrors(prev => ({ ...prev, shifts: '' }));
-  };
 
   return (
     <div>
@@ -221,118 +164,10 @@ function WorkSchedule() {
           <button
             type='button'
             className='bt-choose-time-work'
-            data-bs-toggle='modal'
-            data-bs-target='#exampleModal'
+            onClick={() => (window.location.href = '/time-table')}
           >
             Choose Time Work
           </button>
-          <div
-            className='modal fade'
-            id='exampleModal'
-            aria-labelledby='exampleModalLabel'
-            aria-hidden='true'
-          >
-            <div className='modal-dialog'>
-              <form
-                id='chooseTimeWork'
-                onSubmit={handleSubmit}
-              >
-                <div className='modal-content'>
-                  <div className='modal-header'>
-                    <h1
-                      className='modal-title fs-5'
-                      id='exampleModalLabel'
-                    >
-                      Choose Time Work
-                    </h1>
-                    <button
-                      type='button'
-                      className='btn-close'
-                      data-bs-dismiss='modal'
-                      aria-label='Close'
-                    ></button>
-                  </div>
-                  <div className='modal-body'>
-                    <div className='modal-body-section-wrapper'>
-                      <div className='modal-body-section-doctor-date'>
-                        <label>Choose Dates:</label>
-                        <DatePicker
-                          multiple
-                          value={selectedDates}
-                          onChange={handleDateChangeModal}
-                          format='YYYY/MM/DD'
-                          className='ip-date-work'
-                          style={{ color: 'green' }}
-                        />
-                        {errors.selectedDates && (
-                          <span className='error'>{errors.selectedDates}</span>
-                        )}
-                      </div>
-                      {selectedDates.map(date => (
-                        <div
-                          key={date}
-                          className='modal-body-section-doctor-date'
-                        >
-                          <label>{`Choose Shift for ${date}:`}</label>
-                          <select
-                            className='sl-date-work'
-                            value={shifts[date] || ''}
-                            onChange={e =>
-                              handleShiftChange(date, e.target.value)
-                            }
-                            required
-                          >
-                            <option value=''>Start Time</option>
-                            {availableTimeSlots.map((slot, index) => (
-                              <option
-                                key={index}
-                                value={`${slot.startTime}`}
-                              >{`${slot.startTime}`}</option>
-                            ))}
-                          </select>
-                          <select
-                            className='sl-date-work'
-                            value={shifts[date] || ''}
-                            onChange={e =>
-                              handleShiftChange(date, e.target.value)
-                            }
-                            required
-                          >
-                            <option value=''>End Time</option>
-                            {availableTimeSlots.map((slot, index) => (
-                              <option
-                                key={index}
-                                value={`${slot.endTime}`}
-                              >{`${slot.endTime}`}</option>
-                            ))}
-                          </select>
-                          {errors.shifts && (
-                            <span className='error'>{errors.shifts}</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className='modal-footer'>
-                    <button
-                      type='button'
-                      onClick={resetForm}
-                      className='btn btn-secondary'
-                      data-bs-dismiss='modal'
-                    >
-                      Close
-                    </button>
-                    <button
-                      type='submit'
-                      className='btn btn-success'
-                    >
-                      Choose
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
         </div>
         <div
           className='table-schedule'

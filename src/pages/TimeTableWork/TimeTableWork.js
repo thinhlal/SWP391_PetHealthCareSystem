@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { format, startOfWeek, addDays, eachDayOfInterval, endOfMonth, eachWeekOfInterval, startOfMonth, endOfWeek, parseISO } from 'date-fns';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './TimeTableWork.css';
 
 const Calendar = () => {
@@ -12,6 +13,10 @@ const Calendar = () => {
   const [endTime, setEndTime] = useState('');
   const [schedule, setSchedule] = useState({});
   const [daySchedule, setDaySchedule] = useState({});
+  const [holidays, setHolidays] = useState({ part_time: {}, full_time: {} }); // Separate holidays for part_time and full_time
+  const [workType, setWorkType] = useState('part_time'); // Default to part_time
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleYearChange = (event) => {
     setSelectedYear(parseInt(event.target.value));
@@ -25,8 +30,9 @@ const Calendar = () => {
   };
 
   const handleWeekChange = (event) => {
-    setSelectedWeek(parseISO(event.target.value));
-    const start = startOfWeek(parseISO(event.target.value), { weekStartsOn: 1 });
+    const weekStart = parseISO(event.target.value);
+    setSelectedWeek(weekStart);
+    const start = startOfWeek(weekStart, { weekStartsOn: 1 });
     const end = addDays(start, 6);
     const days = eachDayOfInterval({ start, end });
 
@@ -42,34 +48,55 @@ const Calendar = () => {
   };
 
   const handleDayClick = (day) => {
-    if (scheduleType === 'Day') {
-      setSelectedDay(day);
-      setStartTime(schedule[format(day, 'yyyy-MM-dd')].split(' - ')[0]);
-      setEndTime(schedule[format(day, 'yyyy-MM-dd')].split(' - ')[1]);
-      // Mở modal
-      document.getElementById('timeModalButton').click();
+    setSelectedDay(day);
+    const dayKey = format(day, 'yyyy-MM-dd');
+    if (scheduleType === 'Day' && schedule[dayKey]) {
+      const [start, end] = schedule[dayKey].split(' - ');
+      setStartTime(start);
+      setEndTime(end);
     }
+    // Open modal
+    document.getElementById('timeModalButton').click();
   };
 
   const handleSave = () => {
-    const formattedDay = format(selectedDay, 'yyyy-MM-dd');
-    if (startTime && endTime && parseInt(endTime.split(':')[0]) - parseInt(startTime.split(':')[0]) >= 1) {
+    const formattedDay = selectedDay ? format(selectedDay, 'yyyy-MM-dd') : null;
+
+    if (formattedDay && startTime && endTime && parseInt(endTime.split(':')[0]) - parseInt(startTime.split(':')[0]) >= 1) {
       const updatedSchedule = { ...schedule, [formattedDay]: `${startTime} - ${endTime}` };
       setSchedule(updatedSchedule);
       setDaySchedule(updatedSchedule);
-      // Đóng modal
-      document.querySelector('#timeModal .btn-close').click();
-    } else {
-      alert("Please select valid start and end times. End time must be at least 1 hour after start time.");
     }
+
+    // Close modal
+    document.querySelector('#timeModal .btn-close').click();
+  };
+
+  const handleHolidayToggle = () => {
+    const formattedDay = selectedDay ? format(selectedDay, 'yyyy-MM-dd') : null;
+
+    if (workType === 'part_time' || workType === 'full_time') {
+      const updatedHolidays = { ...holidays };
+      if (formattedDay && updatedHolidays[workType][formattedDay]) {
+        delete updatedHolidays[workType][formattedDay];
+      } else if (formattedDay) {
+        updatedHolidays[workType][formattedDay] = formattedDay;
+      }
+      setHolidays(updatedHolidays);
+    }
+
+    // Close modal
+    document.querySelector('#timeModal .btn-close').click();
   };
 
   const handleScheduleTypeChange = (type) => {
     if (type === 'Day') {
       setSchedule(daySchedule);
+      setWorkType('part_time'); // Set to part_time
     } else if (type === 'Week') {
-      setDaySchedule(schedule); // Lưu lại lịch biểu của chế độ Day trước khi chuyển đổi
+      setDaySchedule(schedule); // Save Day schedule before switching
       setSchedule({});
+      setWorkType('full_time'); // Set to full_time
     } else if (type === 'Full Day') {
       const updatedSchedule = {};
       Object.keys(schedule).forEach(day => {
@@ -139,7 +166,11 @@ const Calendar = () => {
     return days.map(day => (
       <li key={day.toISOString()} onClick={() => handleDayClick(day)} className={scheduleType === 'Full Day' ? 'disabled' : ''}>
         <time dateTime={day.toISOString()}>{format(day, 'd')}</time> {format(day, 'EEEE')}
-        <div className='time-doctor-choose'>{schedule[format(day, 'yyyy-MM-dd')] || 'No schedule'}</div>
+        <div className='time-doctor-choose'>
+          {holidays[workType][format(day, 'yyyy-MM-dd')] === format(day, 'yyyy-MM-dd')
+            ? 'Holiday'
+            : (schedule[format(day, 'yyyy-MM-dd')] || 'No schedule')}
+        </div>
       </li>
     ));
   };
@@ -168,7 +199,11 @@ const Calendar = () => {
           >
             Full Time
           </li>
-         
+          <li
+            onClick={() => navigate(-1)} // Add back button to navigate to the previous page
+          >
+            Back
+          </li>
         </ul>
       </div>
       <div className="calendar-work-doctor">
@@ -221,24 +256,37 @@ const Calendar = () => {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
+              {scheduleType === 'Day' && (
+                <>
+                  <div className="mb-3">
+                    <label className="form-label">Start Time</label>
+                    <select className="form-control" value={startTime} onChange={handleStartTimeChange}>
+                      <option value="">Select start time</option>
+                      {generateTimeOptions(8, 16)} {/* 8:00 AM to 4:00 PM */}
+                    </select>
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">End Time</label>
+                    <select className="form-control" value={endTime} onChange={(e) => setEndTime(e.target.value)} disabled={!startTime}>
+                      <option value="">Select end time</option>
+                      {generateTimeOptions(9, 17).filter(time => !startTime || parseInt(time.props.value.split(':')[0]) > parseInt(startTime.split(':')[0]))}
+                    </select>
+                  </div>
+                </>
+              )}
               <div className="mb-3">
-                <label className="form-label">Start Time</label>
-                <select className="form-control" value={startTime} onChange={handleStartTimeChange}>
-                  <option value="">Select start time</option>
-                  {generateTimeOptions(8, 16)} {/* 8:00 AM to 4:00 PM */}
-                </select>
-              </div>
-              <div className="mb-3">
-                <label className="form-label">End Time</label>
-                <select className="form-control" value={endTime} onChange={(e) => setEndTime(e.target.value)} disabled={!startTime}>
-                  <option value="">Select end time</option>
-                  {generateTimeOptions(9, 17).filter(time => !startTime || parseInt(time.props.value.split(':')[0]) > parseInt(startTime.split(':')[0]))}
-                </select>
+                <label className="form-label">Holiday</label>
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" checked={selectedDay && holidays[workType][format(selectedDay, 'yyyy-MM-dd')] === format(selectedDay, 'yyyy-MM-dd')} onChange={handleHolidayToggle} />
+                  <label className="form-check-label">Mark as Holiday</label>
+                </div>
               </div>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary" onClick={handleSave} disabled={!startTime || !endTime}>Save changes</button>
+              {scheduleType === 'Day' && (
+                <button type="button" className="btn btn-primary" onClick={handleSave} disabled={!startTime || !endTime}>Save changes</button>
+              )}
             </div>
           </div>
         </div>
