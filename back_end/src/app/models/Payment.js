@@ -33,6 +33,14 @@ const PaymentSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    idPaymentPaypal: {
+      type: String,
+      default: null,
+    },
+    captureID: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,

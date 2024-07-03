@@ -78,6 +78,10 @@ const BookingSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    refundPrice: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

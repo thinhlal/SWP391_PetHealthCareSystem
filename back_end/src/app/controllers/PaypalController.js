@@ -1,6 +1,7 @@
 const axios = require('axios');
 const Payment = require('../models/Payment.js');
 const { getAccessToken, PAYPAL_API } = require('../../config/paypal/paypal.js');
+const Booking = require('../models/Booking.js');
 
 class PaypalController {
   async index(req, res) {
@@ -38,6 +39,11 @@ class PaypalController {
       },
     );
 
+    await Payment.findOneAndUpdate(
+      { bookingID: req.body.bookingID },
+      { idPaymentPaypal: response.data.id },
+    );
+
     res.json({
       id: response.data.id,
       url: response.data.links.find(link => link.rel === 'approve').href,
@@ -58,11 +64,16 @@ class PaypalController {
           },
         },
       );
+      const captureID = response.data.purchase_units[0].payments.captures[0].id;
       const bookingID =
         response.data.purchase_units[0].payments.captures[0].custom_id;
       const paymentUpdate = await Payment.findOneAndUpdate(
         { bookingID: bookingID },
-        { isSuccess: true },
+        {
+          isSuccess: true,
+          date: new Date(),
+          captureID: captureID,
+        },
         { new: true, runValidators: true },
       );
 
@@ -154,6 +165,56 @@ class PaypalController {
     } catch (error) {
       console.error('Error fetching payment data:', error);
       res.status(500).json({ message: 'Error fetching payment data', error });
+    }
+  }
+
+  //POST /refundPaymentBooking
+  async refundPaymentBooking(req, res) {
+    const { bookingID } = req.body;
+    try {
+      const booking = await Booking.findOne({ bookingID });
+      const payment = await Payment.findOne({ bookingID });
+      const daysBefore = (booking.dateBook - booking.dateCancelBook) / (1000 * 60 * 60 * 24);
+      let refundAmount = payment.totalPrice;
+      if (daysBefore < 3) {
+        refundAmount = 0;
+      } else if (daysBefore < 7) {
+        refundAmount = payment.totalPrice * 0.75;
+      }
+
+      if (refundAmount <= 0 || refundAmount > payment.amount) {
+        return res.status(204).send();
+      }
+
+      const accessToken = await getAccessToken();
+
+      const response = await axios.post(
+        `${process.env.PAYPAL_BASE_URL}/v2/payments/captures/${payment.captureID}/refund`,
+        {
+          amount: {
+            value: refundAmount.toFixed(2),
+            currency_code: 'USD'
+          }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      if (response.status === 201 || response.status === 200) {
+        booking.isRefund = true;
+        booking.refundPrice = refundAmount;
+        await booking.save();
+        res.send('Booking cancelled and refund processed');
+      } else {
+        res.status(500).send('Failed to process refund');
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal server error');
     }
   }
 }

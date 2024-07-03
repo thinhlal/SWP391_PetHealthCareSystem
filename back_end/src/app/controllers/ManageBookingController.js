@@ -362,6 +362,44 @@ class ManageBookingController {
       res.status(500).json({ message: 'Error creating ', error });
     }
   }
+
+  // POST /confirmCheckIn
+  async confirmCheckIn(req, res, next) {
+    const { bookingID } = req.body;
+    try {
+      await Booking.findOneAndUpdate(
+        { bookingID },
+        {
+          isCheckIn: true,
+        },
+      );
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: 'Error creating ', error });
+    }
+  }
+
+  // POST /confirmPayment
+  async confirmPayment(req, res, next) {
+    const { bookingID } = req.body;
+    try {
+      await Booking.findOneAndUpdate(
+        { bookingID },
+        {
+          isCheckIn: true,
+        },
+      );
+      await Payment.findOneAndUpdate(
+        { bookingID },
+        {
+          isSuccess: true,
+        },
+      );
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: 'Error creating ', error });
+    }
+  }
 }
 
 module.exports = new ManageBookingController();

@@ -19,6 +19,16 @@ router.post(
   verifyToken,
   manageBookingController.addBookingNotHaveCustomer,
 );
+router.post(
+  '/confirmCheckIn',
+  verifyToken,
+  manageBookingController.confirmCheckIn,
+);
+router.post(
+  '/confirmPayment',
+  verifyToken,
+  manageBookingController.confirmPayment,
+);
 router.post('/', verifyToken, manageBookingController.index);
 
 module.exports = router;
