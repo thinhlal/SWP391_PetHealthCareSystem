@@ -8,8 +8,12 @@ function WorkSchedule() {
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-  const [modalAction, setModalAction] = useState(() => () => { });
-  const [selectedDate, setSelectedDate] = useState(new Date(new Date().setHours(new Date().getHours() + 7)).toISOString().split('T')[0]);
+  const [modalAction, setModalAction] = useState(() => () => {});
+  const [selectedDate, setSelectedDate] = useState(
+    new Date(new Date().setHours(new Date().getHours() + 7))
+      .toISOString()
+      .split('T')[0],
+  );
   const [selectedVet, setSelectedVet] = useState('001');
   console.log(selectedDate);
   const dataSchedules = {
@@ -146,7 +150,9 @@ function WorkSchedule() {
           <p className='tittle'>Today's Work Schedule</p>
         </div>
         <div className='vet-container'>
-          <p className='vet-id'>Veterinarian ID: {user?.doctorDetails[0]?.doctorID}</p>
+          <p className='vet-id'>
+            Veterinarian ID: {user?.doctorDetails[0]?.doctorID}
+          </p>
           <p className='vet-name'>
             Veterinarian Name: {user?.doctorDetails[0]?.name}
           </p>

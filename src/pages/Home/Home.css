@@ -722,8 +722,8 @@ a {
 .main .text-wrapper-8 {
   font-weight: 500;
   font-weight: 500;
-  white-space: normal; 
-  word-wrap: break-word; 
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .main .text-wrapper-9 {
@@ -1049,7 +1049,3 @@ a {
   overflow: hidden;
   white-space: nowrap;
 }
-
-
-
-

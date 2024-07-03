@@ -88,7 +88,7 @@ class DoctorController {
 
   // POST /addTimeWork
   async addTimeWork(req, res, next) {
-    const { doctorID, date, startTime, endTime, isOff } = req.body
+    const { doctorID, date, startTime, endTime, isOff } = req.body;
     try {
       const workingHour = await WorkingHour.findOne({
         doctorID: doctorID,
@@ -97,23 +97,31 @@ class DoctorController {
 
       if (workingHour) {
         if (!isOff) {
-          await WorkingHour.findOneAndUpdate({ workingID: workingHour.workingID }, {
-            startTime,
-            endTime,
-            isOff: false,
-          });
+          await WorkingHour.findOneAndUpdate(
+            { workingID: workingHour.workingID },
+            {
+              startTime,
+              endTime,
+              isOff: false,
+            },
+          );
         } else {
-          await WorkingHour.findOneAndUpdate({ workingID: workingHour.workingID }, {
-            startTime: null,
-            endTime: null,
-            isOff: true,
-          });
+          await WorkingHour.findOneAndUpdate(
+            { workingID: workingHour.workingID },
+            {
+              startTime: null,
+              endTime: null,
+              isOff: true,
+            },
+          );
         }
       } else {
         let id;
         while (true) {
           try {
-            const lastWorking = await WorkingHour.findOne().sort({ workingID: -1 });
+            const lastWorking = await WorkingHour.findOne().sort({
+              workingID: -1,
+            });
             if (lastWorking) {
               id = parseInt(lastWorking.workingID) + 1;
             } else {

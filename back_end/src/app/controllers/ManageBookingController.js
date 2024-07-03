@@ -278,7 +278,7 @@ class ManageBookingController {
         totalPrice: serviceAvg[0].totalPrice,
         ...bookingInfo,
       });
-      
+
       await saveBooking.save();
 
       const services = bookingInfo.service;

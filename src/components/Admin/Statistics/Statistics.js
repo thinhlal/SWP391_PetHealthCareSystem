@@ -162,13 +162,18 @@ function Statistic() {
         <div className='Admin-DashBoard-Main-Header row'>
           <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
             <div className='Admin-DashBoard-Main-Header-Note'>Daily income</div>
-            <div className='Admin-DashBoard-Main-Header-Money'>  ${filteredRevenueData.money}</div>
+            <div className='Admin-DashBoard-Main-Header-Money'>
+              {' '}
+              ${filteredRevenueData.money}
+            </div>
             <div className='Admin-DashBoard-Main-Header-Percent'>
               {calculatePercentChange()}% to the previous day
             </div>
           </div>
           <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-            <div className='Admin-DashBoard-Main-Header-Note'>Weekly income</div>
+            <div className='Admin-DashBoard-Main-Header-Note'>
+              Weekly income
+            </div>
             <div className='Admin-DashBoard-Main-Header-Money'>$45,678.90</div>
             <div className='Admin-DashBoard-Main-Header-Percent'>
               +10% day over week
@@ -176,7 +181,9 @@ function Statistic() {
           </div>
 
           <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-            <div className='Admin-DashBoard-Main-Header-Note'>Monthly income</div>
+            <div className='Admin-DashBoard-Main-Header-Note'>
+              Monthly income
+            </div>
             <div className='Admin-DashBoard-Main-Header-Money'>$230,678.90</div>
             <div className='Admin-DashBoard-Main-Header-Percent'>
               +23% day over month

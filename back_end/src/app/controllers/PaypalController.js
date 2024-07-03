@@ -174,7 +174,8 @@ class PaypalController {
     try {
       const booking = await Booking.findOne({ bookingID });
       const payment = await Payment.findOne({ bookingID });
-      const daysBefore = (booking.dateBook - booking.dateCancelBook) / (1000 * 60 * 60 * 24);
+      const daysBefore =
+        (booking.dateBook - booking.dateCancelBook) / (1000 * 60 * 60 * 24);
       let refundAmount = payment.totalPrice;
       if (daysBefore < 3) {
         refundAmount = 0;
@@ -193,15 +194,15 @@ class PaypalController {
         {
           amount: {
             value: refundAmount.toFixed(2),
-            currency_code: 'USD'
-          }
+            currency_code: 'USD',
+          },
         },
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          }
-        }
+            'Content-Type': 'application/json',
+          },
+        },
       );
 
       if (response.status === 201 || response.status === 200) {
