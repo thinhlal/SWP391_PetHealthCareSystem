@@ -89,7 +89,6 @@ function ManageListBooking() {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
         );
-        console.log(response.data.allBookings);
         setAllBookings(response.data.allBookings);
       } catch (error) {
         console.error('Error ManageBooking Get All: ', error);
@@ -103,7 +102,6 @@ function ManageListBooking() {
       const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
       );
-      console.log(response.data.allBookings);
       setAllBookings(response.data.allBookings);
     } catch (error) {
       console.error('Error ManageBooking Get All: ', error);
@@ -254,7 +252,6 @@ function ManageListBooking() {
 
   const handleSave = async bookingID => {
     try {
-      console.log(chosenDoctor);
       await axiosInstance.patch(
         `${process.env.REACT_APP_API_URL}/manageBooking/updateBookingDoctors`,
         { bookingID, chosenDoctor },
@@ -360,7 +357,6 @@ function ManageListBooking() {
         ),
         service: services.map(service => service.service),
       };
-      console.log(newBookingAndNewCustomer);
       try {
         await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/manageBooking/addNotHaveCustomer`,
@@ -390,12 +386,15 @@ function ManageListBooking() {
   const handleFilterDateChange = event => {
     setFilterDate(event.target.value);
   };
-
   const filteredBookings = filterDate
     ? allBookings
       .filter(booking => booking.dateBook.split('T')[0] === filterDate)
-      .sort((a, b) => b.startTime.localeCompare(a.startTime))
-    : allBookings;
+      .sort((a, b) => b.bookingID.localeCompare(a.bookingID))
+      .sort((a, b) => a.startTime.localeCompare(b.startTime))
+    : allBookings
+      .sort((a, b) => b.bookingID.localeCompare(a.bookingID))
+      .sort((a, b) => a.startTime.localeCompare(b.startTime))
+      .sort((a, b) => new Date(b.dateBook) - new Date(a.dateBook))
 
   const handleConfirmPayment = async bookingID => {
     try {
@@ -1049,7 +1048,7 @@ function ManageListBooking() {
               </div>
               <div className='main-content-list-body-wrapper'>
                 {filteredBookings.length !== 0 ? (
-                  filteredBookings.map(booking => (
+                  filteredBookings.map((booking) => (
                     <div
                       className='content-list-body-info'
                       key={booking.bookingID}
@@ -1294,7 +1293,7 @@ function ManageListBooking() {
                               <div className='content-list-body-value'>
                                 <button
                                   type='button'
-                                  className='btn btn-outline-success'
+                                  className='btn btn-success'
                                   data-bs-toggle='modal'
                                   data-bs-target={`#checkIn-${booking.bookingID}`}
                                 >
@@ -1308,7 +1307,7 @@ function ManageListBooking() {
                                 <div className='content-list-body-value'>
                                   <button
                                     type='button'
-                                    className='btn btn-outline-success'
+                                    className='btn btn-success'
                                     data-bs-toggle='modal'
                                     data-bs-target={`#paymentModal-${booking.bookingID}`}
                                   >
