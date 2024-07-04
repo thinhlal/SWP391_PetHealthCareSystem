@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
 import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
 import { AuthContext } from '../../context/AuthContext.js';
+import axiosInstance from '../../utils/axiosInstance.js'; // Ensure this is configured properly
 
 function WorkSchedule() {
   const { user } = useContext(AuthContext);
@@ -14,118 +15,33 @@ function WorkSchedule() {
       .toISOString()
       .split('T')[0],
   );
-  const [selectedVet, setSelectedVet] = useState('001');
-  console.log(selectedDate);
-  const dataSchedules = {
-    '2023-06-17': {
-      '001': {
-        vetName: 'Minh',
-        appointments: [
-          {
-            id: 1,
-            petId: 'PET01',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '9:00 - 10:00',
-            petOwner: 'Ronaldo',
-            status: 'Pending',
+  const [schedules, setSchedules] = useState({});
+
+  const fetchWorkSchedule = async (doctorID, date) => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/doctor/schedules`,
+        {
+          params: {
+            doctorID,
+            date,
           },
-          {
-            id: 2,
-            petId: 'PET02',
-            petType: 'Cat',
-            gender: 'Female',
-            registerHour: '10:00 - 11:00',
-            petOwner: 'Messi',
-            status: 'Pending',
-          },
-          {
-            id: 3,
-            petId: 'PET06',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '13:00 - 14:00',
-            petOwner: 'Neymar',
-            status: 'Pending',
-          },
-          {
-            id: 4,
-            petId: 'PET08',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '15:00 - 16:00',
-            petOwner: 'Mbappe',
-            status: 'Pending',
-          },
-        ],
-      },
-    },
-    '2023-06-18': {
-      '004': {
-        vetName: 'Thinh',
-        appointments: [
-          {
-            id: 1,
-            petId: 'PET01',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '9:00 - 10:00',
-            petOwner: 'Ronaldo',
-            status: 'Pending',
-          },
-          {
-            id: 2,
-            petId: 'PET02',
-            petType: 'Cat',
-            gender: 'Female',
-            registerHour: '10:00 - 11:00',
-            petOwner: 'Messi',
-            status: 'Pending',
-          },
-          {
-            id: 3,
-            petId: 'PET06',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '13:00 - 14:00',
-            petOwner: 'Neymar',
-            status: 'Pending',
-          },
-          {
-            id: 4,
-            petId: 'PET12',
-            petType: 'Dog',
-            gender: 'Male',
-            registerHour: '15:00 - 16:00',
-            petOwner: 'Mbappe',
-            status: 'Pending',
-          },
-          {
-            id: 5,
-            petId: 'PET13',
-            petType: 'Cat',
-            gender: 'Female',
-            registerHour: '16:00 - 17:00',
-            petOwner: 'Haaland',
-            status: 'Pending',
-          },
-        ],
-      },
-    },
+        },
+      );
+      setSchedules(response.data);
+    } catch (error) {
+      console.error('Error fetching work schedule:', error);
+    }
   };
-  const [schedules, setSchedules] = useState(dataSchedules);
+
+  useEffect(() => {
+    if (user?.doctorDetails[0]?.doctorID) {
+      fetchWorkSchedule(user.doctorDetails[0].doctorID, selectedDate);
+    }
+  }, [user, selectedDate]);
 
   const handleDateChange = e => {
-    const newDate = e.target.value;
-    if (!schedules[newDate]) {
-      setSchedules(prevSchedules => ({
-        ...prevSchedules,
-        [newDate]: {},
-      }));
-    }
-    setSelectedDate(newDate);
-    const firstVetId = Object.keys(schedules[newDate] || {})[0];
-    setSelectedVet(firstVetId || '');
+    setSelectedDate(e.target.value);
   };
 
   const handleReceiveClick = (e, status) => {
@@ -136,11 +52,17 @@ function WorkSchedule() {
       setShowModal(true);
     }
   };
-
-  const selectedSchedule =
-    schedules[selectedDate] && schedules[selectedDate][selectedVet]
-      ? schedules[selectedDate][selectedVet]
-      : { vetName: '', appointments: [] };
+  console.log(schedules);
+  const sortedBookings = schedules?.matchingBookings
+    ?.filter(
+      schedule =>
+        !schedule?.isCancel && !schedule?.paymentDetails?.isCancelPayment,
+    )
+    ?.sort((a, b) => {
+      const timeA = a.startTime || '';
+      const timeB = b.startTime || '';
+      return timeA.localeCompare(timeB);
+    });
 
   return (
     <div>
@@ -185,55 +107,130 @@ function WorkSchedule() {
             <table className='table_table-schedule'>
               <thead className='head_table-schedule'>
                 <tr>
-                  <th className='th_table-schedule'>Stt</th>
+                  <th className='th_table-schedule'>BookingID</th>
                   <th className='th_table-schedule'>Pet ID</th>
                   <th className='th_table-schedule'>Pet Type</th>
                   <th className='th_table-schedule'>Gender</th>
                   <th className='th_table-schedule'>Register hour</th>
                   <th className='th_table-schedule'>Pet Owner</th>
                   <th className='th_table-schedule'>Status</th>
-                  <th className='th_table-schedule'></th>
+                  <th
+                    className='th_table-schedule'
+                    style={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {selectedSchedule.appointments.map(row => (
-                  <tr key={row.id}>
-                    <td className='td_table-schedule'>{row.id}</td>
-                    <td className='td_table-schedule'>{row.petId}</td>
-                    <td className='td_table-schedule'>{row.petType}</td>
-                    <td className='td_table-schedule'>{row.gender}</td>
-                    <td className='td_table-schedule'>{row.registerHour}</td>
-                    <td className='td_table-schedule'>{row.petOwner}</td>
-                    <td
-                      className={`td_table-schedule doctor-status-${row.status.toLowerCase()}`}
-                    >
-                      {row.status}
-                    </td>
-                    <td className='td_table-schedule'>
-                      <div className='td_table-schedule-btn-center'>
-                        <a
-                          href='pet-exam-record'
-                          className={`click-button ${row.status === 'Canceled' ? 'gray-button' : ''}`}
-                          onClick={e => handleReceiveClick(e, row.status)}
-                          style={{
-                            pointerEvents:
-                              row.status === 'Canceled' ? 'none' : 'auto',
-                          }}
+                {Object.keys(schedules).length !== 0 ? (
+                  schedules?.workingHoursDetails.length === 0 ? (
+                    <tr>
+                      <td
+                        colSpan='8'
+                        className='td_table-schedule select-timeWorking'
+                      >
+                        No working time data available. Please Select Time to
+                        Work
+                      </td>
+                    </tr>
+                  ) : schedules?.workingHoursDetails[0]?.isOff ? (
+                    <tr>
+                      <td
+                        colSpan='8'
+                        className='td_table-schedule off-day-red'
+                      >
+                        Off this day
+                      </td>
+                    </tr>
+                  ) : sortedBookings?.length ? (
+                    sortedBookings.map(schedule => (
+                      <tr key={schedule.bookingID}>
+                        <td className='td_table-schedule'>
+                          {schedule.bookingID}
+                        </td>
+                        <td className='td_table-schedule'>{schedule?.petID}</td>
+                        <td className='td_table-schedule'>
+                          {schedule?.petDetails?.petType}
+                        </td>
+                        <td className='td_table-schedule'>
+                          {schedule?.petDetails?.gender}
+                        </td>
+                        <td className='td_table-schedule'>{`${schedule?.startTime} - ${schedule?.endTime}`}</td>
+                        <td className='td_table-schedule'>
+                          {schedule?.customerDetails?.name}
+                        </td>
+                        <td
+                          className={`td_table-schedule doctor-status-${schedule?.isCheckIn ? 'done' : 'pending'}`}
                         >
-                          Receive
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                          {schedule?.isCheckIn ? (
+                            <span>Check In</span>
+                          ) : (
+                            <span>Not Check In</span>
+                          )}
+                        </td>
+                        {schedule?.isCheckIn ? (
+                          <td className='td_table-schedule'>
+                            <div className='td_table-schedule-btn-center'>
+                              <a
+                                href='pet-exam-record'
+                                className={`click-button ${schedule?.status === 'Canceled' ? 'gray-button' : ''}`}
+                                onClick={e =>
+                                  handleReceiveClick(e, schedule?.status)
+                                }
+                                style={{
+                                  pointerEvents:
+                                    schedule?.status === 'Canceled'
+                                      ? 'none'
+                                      : 'auto',
+                                }}
+                              >
+                                Receive
+                              </a>
+                            </div>
+                          </td>
+                        ) : (
+                          <td className='td_table-schedule'>
+                            <div className='td_table-schedule-btn-center'>
+                              Check In first
+                            </div>
+                          </td>
+                        )}
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan='8'
+                        className='td_table-schedule'
+                      >
+                        No booking this day
+                      </td>
+                    </tr>
+                  )
+                ) : null}
               </tbody>
             </table>
           </form>
         </div>
       </div>
-      <p className='final-petExam'>
-        --Today's working hour start at 9:00 a.m and end at 18:00 p.m--
-      </p>
+      {Object.keys(schedules).length !== 0 ? (
+        schedules?.workingHoursDetails.length !== 0 ? (
+          schedules?.workingHoursDetails[0].isOff ? (
+            <p className='off-day-red final-petExam'>Off This Day</p>
+          ) : (
+            <p className='final-petExam'>
+              --Today's working hour start at{' '}
+              {schedules?.workingHoursDetails[0]?.startTime} a.m and end at{' '}
+              {schedules?.workingHoursDetails[0]?.endTime} p.m--
+            </p>
+          )
+        ) : (
+          <p className='final-petExam select-timeWorking'>
+            No working time data available. Please Select Time to Work
+          </p>
+        )
+      ) : null}
       <ConfirmationModal
         show={showModal}
         message={modalMessage}

@@ -5,6 +5,7 @@ const { verifyToken } = require('../app/controllers/MiddlewareController');
 const doctorController = require('../app/controllers/DoctorController');
 
 router.get('/getAllDoctors', verifyToken, doctorController.getAllDoctors);
+router.get('/schedules', verifyToken, doctorController.schedules);
 router.get('/getTimeWork', verifyToken, doctorController.getTimeWork);
 router.post('/addTimeWork', verifyToken, doctorController.addTimeWork);
 

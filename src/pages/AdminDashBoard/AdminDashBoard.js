@@ -24,7 +24,7 @@ function AdminDashBoard() {
   const [search, setSearch] = useState('');
   const openTab = tabName => setActiveTab(tabName);
   const [bookingData, setBookingData] = useState([]);
-
+  const [bookingInfoModal, setBookingInfoModal] = useState({});
   useEffect(() => {
     const fetchBooking = async () => {
       try {
@@ -35,6 +35,7 @@ function AdminDashBoard() {
           b.bookingID.localeCompare(a.bookingID),
         );
         setBookingData(sortDate);
+        setBookingInfoModal(sortDate[0]);
       } catch (error) {
         console.log(error);
       }
@@ -165,11 +166,13 @@ function AdminDashBoard() {
                                     ? 'Admin-DashBoard-Table-status-cancel'
                                     : item.paymentsDetails[0].isSuccess &&
                                         item.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL'
+                                          .paymentMethod === 'PAYPAL' &&
+                                        !item.isCheckIn
                                       ? 'Admin-DashBoard-Table-status-waiting'
                                       : !item.paymentsDetails[0].isSuccess &&
                                           item.paymentsDetails[0]
-                                            .paymentMethod === 'COUNTER'
+                                            .paymentMethod === 'COUNTER' &&
+                                          !item.isCheckIn
                                         ? 'Admin-DashBoard-Table-status-waiting'
                                         : item.paymentsDetails[0].isSuccess &&
                                             item.paymentsDetails[0]
@@ -189,11 +192,12 @@ function AdminDashBoard() {
                         ) : item.paymentsDetails[0].isCancelPayment ? (
                           <span>Cancel Payment</span>
                         ) : item.paymentsDetails[0].isSuccess &&
-                          item.paymentsDetails[0].paymentMethod === 'PAYPAL' ? (
+                          item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                          !item.isCheckIn ? (
                           <span>Pending</span>
                         ) : !item.paymentsDetails[0].isSuccess &&
-                          item.paymentsDetails[0].paymentMethod ===
-                            'COUNTER' ? (
+                          item.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                          !item.isCheckIn ? (
                           <span>Pending</span>
                         ) : item.paymentsDetails[0].isSuccess &&
                           item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
@@ -220,6 +224,7 @@ function AdminDashBoard() {
                             className='Admin-DashBoard-Main-Table-Content-Btn'
                             data-bs-toggle='modal'
                             data-bs-target='#Admin-DashBoard-exampleModal'
+                            onClick={() => setBookingInfoModal(item)}
                           >
                             Details
                           </button>
@@ -283,19 +288,19 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
                                           Name:
                                         </div>
-                                        <div>{item?.name}</div>
+                                        <div>{bookingInfoModal?.name}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
                                           Email:
                                         </div>
-                                        <div>{item?.email}</div>
+                                        <div>{bookingInfoModal?.email}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-customer'>
                                           Phone:
                                         </div>
-                                        <div>{item?.phone}</div>
+                                        <div>{bookingInfoModal?.phone}</div>
                                       </div>
                                     </div>
                                     <div
@@ -312,20 +317,33 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Name:
                                         </div>
-                                        <div>{item?.petDetails[0]?.name}</div>
+                                        <div>
+                                          {
+                                            bookingInfoModal?.petDetails[0]
+                                              ?.name
+                                          }
+                                        </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Breed:
                                         </div>
-                                        <div>{item?.petDetails[0]?.breed}</div>
+                                        <div>
+                                          {
+                                            bookingInfoModal?.petDetails[0]
+                                              ?.breed
+                                          }
+                                        </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Type:
                                         </div>
                                         <div>
-                                          {item?.petDetails[0]?.petType}
+                                          {
+                                            bookingInfoModal?.petDetails[0]
+                                              ?.petType
+                                          }
                                         </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
@@ -334,7 +352,7 @@ function AdminDashBoard() {
                                         </div>
                                         <div>
                                           {
-                                            item?.petDetails[0]?.birthday.split(
+                                            bookingInfoModal?.petDetails[0]?.birthday.split(
                                               'T',
                                             )[0]
                                           }
@@ -344,7 +362,12 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Gender:
                                         </div>
-                                        <div>{item?.petDetails[0]?.gender}</div>
+                                        <div>
+                                          {
+                                            bookingInfoModal?.petDetails[0]
+                                              ?.gender
+                                          }
+                                        </div>
                                       </div>
                                     </div>
                                     <div
@@ -363,7 +386,7 @@ function AdminDashBoard() {
                                         </div>
                                         <div>
                                           {servicePrice(
-                                            item?.servicesInBooking,
+                                            bookingInfoModal?.servicesInBooking,
                                           ).join(', ')}
                                         </div>
                                       </div>
@@ -371,20 +394,23 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Start time:
                                         </div>
-                                        <div>{item?.startTime}</div>
+                                        <div>{bookingInfoModal?.startTime}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           End time:
                                         </div>
-                                        <div>{item?.endTime}</div>
+                                        <div>{bookingInfoModal?.endTime}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Doctor:
                                         </div>
                                         <div>
-                                          {item?.doctorDetails[0]?.name}
+                                          {
+                                            bookingInfoModal?.doctorDetails[0]
+                                              ?.name
+                                          }
                                         </div>
                                       </div>
                                     </div>

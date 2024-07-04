@@ -120,6 +120,14 @@
   font-size: 13px;
 }
 
+.off-day-red {
+  color: gray !important;
+}
+
+.select-timeWorking {
+  color: red !important;
+}
+
 .td_table-schedule-btn-center {
   display: flex;
   align-items: center;
