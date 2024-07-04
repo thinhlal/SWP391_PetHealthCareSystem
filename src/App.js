@@ -27,7 +27,7 @@ import Payment from './pages/Payment/Payment.js';
 import Unauthorized from './pages/Unauthorized/Unauthorized.js';
 import UserProfile from './pages/UserProfile/UserProfile.js';
 import ChangeUserPassword from './pages/ChangeUserPassWord/ChangeUserPassWord.js';
-import TimeTableWork from './pages/TimeTableWork/TimeTableWork.js'
+import TimeTableWork from './pages/TimeTableWork/TimeTableWork.js';
 import PetStatus from './pages/PetStatus/PetStatus.js';
 function App() {
   return (
@@ -223,7 +223,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path='/time-table'
           element={
             <ProtectedRoute>
@@ -231,7 +231,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path='/pet-status'
           element={
             <ProtectedRoute>

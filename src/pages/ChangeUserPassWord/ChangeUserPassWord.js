@@ -53,9 +53,12 @@ const ChangeUserPassword = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      await axiosInstance.post(`${process.env.REACT_APP_API_URL}/user/deleteAccount`, {
-        accountID: user.accountID,
-      })
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/user/deleteAccount`,
+        {
+          accountID: user.accountID,
+        },
+      );
       document.getElementById('hiddenDiv').click();
     } catch (error) {
       console.error(error);
@@ -184,14 +187,11 @@ const ChangeUserPassword = () => {
                 >
                   <div className='modal-dialog'>
                     <div className='modal-content'>
-
                       <div className='modal-body'>
                         <div className='change-user-password-modal-header'>
                           Confirm Delete
                         </div>
-                        <div>
-                          Are you sure you want to delete?
-                        </div>
+                        <div>Are you sure you want to delete?</div>
                       </div>
                       <div className='modal-footer'>
                         <button
@@ -215,8 +215,6 @@ const ChangeUserPassword = () => {
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>

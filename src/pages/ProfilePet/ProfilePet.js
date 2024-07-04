@@ -138,7 +138,7 @@ function ProfilePet() {
         <div className='main-content-pet'>
           <div className='pet-info'>
             <div className='sub-title-info-pet-line'>My Medical Info</div>
-            <div  className='main-edit-button-pet-info'>
+            <div className='main-edit-button-pet-info'>
               <div className='pet-details-profile'>
                 <div className='title-pet-profile'>
                   <span className='sub-title-info-pet'>Name:&nbsp;</span>{' '}

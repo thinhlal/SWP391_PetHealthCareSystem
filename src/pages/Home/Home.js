@@ -80,9 +80,11 @@ function Home() {
                     onClick={toggleMenu}
                   >
                     <img
-                      src={user?.customerDetails[0]?.image
-                        ? user?.customerDetails[0]?.image
-                        : userIcon}
+                      src={
+                        user?.customerDetails[0]?.image
+                          ? user?.customerDetails[0]?.image
+                          : userIcon
+                      }
                       alt='User Avatar'
                       className='avatar-login'
                     />
@@ -114,7 +116,7 @@ function Home() {
                     >
                       Your Booking
                     </div>
-                    
+
                     <div
                       className='menu-item-login'
                       onClick={() => (window.location.href = '/user-profile')}

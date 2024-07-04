@@ -37,9 +37,14 @@ function Header() {
                     Work Schedule
                   </div>
                 </a>
-                <div className='main-header-user-account_menu-item'>
-                  Settings
-                </div>
+                <a
+                  className='forward'
+                  href='time-table'
+                >
+                  <div className='main-header-user-account_menu-item'>
+                    Working Time
+                  </div>
+                </a>
                 <div
                   className='main-header-user-account_menu-item'
                   onClick={logOut}
