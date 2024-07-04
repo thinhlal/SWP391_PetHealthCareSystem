@@ -302,10 +302,12 @@ function YourBooking() {
                                   !booking.isCheckIn
                                   ? (
                                     <div
-                                      onClick={() =>
-                                        handleCancelBooking(booking.bookingID)
-                                      }
+                                      data-bs-toggle='modal'
+                                      data-bs-target='#CancelBooking'
                                       className='cancel-booking-button-1'
+                                      onClick={() =>
+                                        setCurrentBookingID(booking.bookingID)
+                                      }
                                     >
                                       <div className='text-sign-in-button-booking'>
                                         Cancel Booking
@@ -319,10 +321,12 @@ function YourBooking() {
                                     !booking.isCheckIn
                                     ? (
                                       <div
-                                        onClick={() =>
-                                          handleCancelBooking(booking.bookingID)
-                                        }
                                         className='cancel-booking-button-1'
+                                        data-bs-toggle='modal'
+                                        data-bs-target='#CancelBooking'
+                                        onClick={() =>
+                                          setCurrentBookingID(booking.bookingID)
+                                        }
                                       >
                                         <div className='text-sign-in-button-booking'>
                                           Cancel Booking
@@ -440,6 +444,46 @@ function YourBooking() {
               )}
             </div>
 
+
+            <div
+              className='modal fade'
+              id={`CancelBooking`}
+              tabIndex='-1'
+              aria-labelledby='exampleModalLabelMore'
+              aria-hidden='true'
+            >
+              <div className='modal-dialog'>
+                <div className='modal-content'>
+                  <div className='modal-body'>
+                    <div className='modal-confirmCancel'>
+                      <div className='change-user-password-modal-header'>
+                        Confirm Delete
+                      </div>
+                      <div>Are you sure you want to cancel booking?</div>
+                    </div>
+                  </div>
+                  <div className='modal-footer'>
+                    <div className='modal-confirmCancel-footer'>
+                      <button
+                        type='button'
+                        className='btn btn-danger'
+                        data-bs-dismiss='modal'
+                        onClick={() =>
+                          handleCancelBooking(currentBookingID)
+                        }
+                      >Yes
+                      </button>
+                      <button
+                        type='button'
+                        className='btn btn-light'
+                        data-bs-dismiss='modal'
+                      >Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div
               className='modal fade'
               id='newModal'

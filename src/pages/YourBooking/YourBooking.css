@@ -455,3 +455,24 @@ a {
   text-align: center;
   margin: 60px 0;
 }
+
+.main-container-your-booking-page .change-user-password-modal-header {
+  font-weight: 700;
+  font-size: 20px;
+  padding-bottom: 25px;
+}
+
+.main-container-your-booking-page .modal-confirmCancel{
+  padding: 50px 20px;
+}
+
+.modal-confirmCancel-footer{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.modal-confirmCancel-footer button:first-child{
+  margin-right: 10px;
+}
