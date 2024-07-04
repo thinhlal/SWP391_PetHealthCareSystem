@@ -28,6 +28,7 @@ import Unauthorized from './pages/Unauthorized/Unauthorized.js';
 import UserProfile from './pages/UserProfile/UserProfile.js';
 import ChangeUserPassword from './pages/ChangeUserPassWord/ChangeUserPassWord.js';
 import TimeTableWork from './pages/TimeTableWork/TimeTableWork.js';
+import PetStatus from './pages/PetStatus/PetStatus.js';
 function App() {
   return (
     <AuthProvider>
@@ -227,6 +228,14 @@ function App() {
           element={
             <ProtectedRoute>
               <TimeTableWork />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/pet-status'
+          element={
+            <ProtectedRoute>
+              <PetStatus />
             </ProtectedRoute>
           }
         />

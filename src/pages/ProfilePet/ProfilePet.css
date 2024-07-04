@@ -58,7 +58,7 @@
   padding: 20px;
   margin-right: 60px;
   width: 250px;
-  height: 325px;
+  height: 380px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   line-height: 2;
   font-size: 16px;
@@ -86,6 +86,26 @@
 .main-container-pet-profile .container-pet-profile .pet-id-info {
   font-size: 12px;
   color: #555;
+}
+
+.main-container-pet-profile .view-status-button {
+  margin-top: 20px;
+}
+
+.main-container-pet-profile .view-status-button a {
+  display: inline-block;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.main-container-pet-profile .view-status-button a:hover {
+  background-color: #da7b00;
+  transform: scale(1.05);
 }
 
 .main-container-pet-profile .container-pet-profile .main-content-pet {
