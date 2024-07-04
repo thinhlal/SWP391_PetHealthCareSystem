@@ -1,5 +1,7 @@
 const Doctor = require('../models/Doctor.js');
 const WorkingHour = require('../models/WorkingHour.js');
+const Booking = require('../models/Booking.js');
+const MedicalReport = require('../models/MedicalReport.js');
 
 class DoctorController {
   // GET /getTimeWork
@@ -78,6 +80,38 @@ class DoctorController {
         },
       ]);
       res.status(200).json(allDoctors);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching doctor', error: error.message });
+    }
+  }
+
+  // GET /getBookingByID
+  async getBookingByID(req, res, next) {
+    const { bookingID } = req.params;
+    try {
+      const booking = await Booking.aggregate([
+        { $match: { bookingID } },
+        {
+          $lookup: {
+            from: 'customers',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'customerDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'pets',
+            localField: 'petID',
+            foreignField: 'petID',
+            as: 'petDetails',
+          },
+        },
+      ]);
+      res.status(200).json(booking[0]);
     } catch (error) {
       console.log(error);
       res
@@ -318,6 +352,47 @@ class DoctorController {
       res
         .status(500)
         .json({ message: 'Error fetching doctor', error: error.message });
+    }
+  }
+
+  // POST /savePetExamRecord
+  async savePetExamRecord(req, res, next) {
+    const { bookingID, diagnosis, treatment, prescription, notes } = req.body;
+    try {
+      const booking = await Booking.findOne({bookingID});
+      let id;
+      while (true) {
+        try {
+          const lastMedicalReport = await MedicalReport.findOne().sort({
+            medicalReportID: -1,
+          });
+          if (lastMedicalReport) {
+            id = parseInt(lastMedicalReport.medicalReportID) + 1;
+          } else {
+            id = 0;
+          }
+          break;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      const newMedicalReport = new MedicalReport({
+        medicalReportID: id,
+        accountID: booking.accountID,
+        petID: booking.petID,
+        bookingID,
+        diagnosis,
+        treatment,
+        prescription,
+        notes,
+      });
+      await newMedicalReport.save();
+      res.status(204).send();
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching medical report', error: error.message });
     }
   }
 }

@@ -1,15 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './WorkSchedule.css';
 import Header from '../../components/Doctor/Header/Header.js';
-import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
 import { AuthContext } from '../../context/AuthContext.js';
-import axiosInstance from '../../utils/axiosInstance.js'; // Ensure this is configured properly
+import axiosInstance from '../../utils/axiosInstance.js';
+import { useNavigate } from 'react-router-dom';
 
 function WorkSchedule() {
   const { user } = useContext(AuthContext);
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
-  const [modalAction, setModalAction] = useState(() => () => {});
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(
     new Date(new Date().setHours(new Date().getHours() + 7))
       .toISOString()
@@ -44,14 +42,10 @@ function WorkSchedule() {
     setSelectedDate(e.target.value);
   };
 
-  const handleReceiveClick = (e, status) => {
-    e.preventDefault();
-    if (status !== 'Canceled') {
-      setModalMessage('Are you sure you want to receive this pet?');
-      setModalAction(() => () => (window.location.href = 'pet-exam-record'));
-      setShowModal(true);
-    }
+  const handleReceiveClick = (bookingID) => {
+    navigate(`/pet-exam-record?bookingID=${bookingID}`);
   };
+  
   console.log(schedules);
   const sortedBookings = schedules?.matchingBookings
     ?.filter(
@@ -172,21 +166,15 @@ function WorkSchedule() {
                         {schedule?.isCheckIn ? (
                           <td className='td_table-schedule'>
                             <div className='td_table-schedule-btn-center'>
-                              <a
-                                href='pet-exam-record'
-                                className={`click-button ${schedule?.status === 'Canceled' ? 'gray-button' : ''}`}
-                                onClick={e =>
-                                  handleReceiveClick(e, schedule?.status)
+                              <div
+                                className={`click-button`}
+                                onClick={(e) =>
+                                  handleReceiveClick(schedule.bookingID)
                                 }
-                                style={{
-                                  pointerEvents:
-                                    schedule?.status === 'Canceled'
-                                      ? 'none'
-                                      : 'auto',
-                                }}
+                                style={{ pointerEvents: 'auto' }}
                               >
                                 Receive
-                              </a>
+                              </div>
                             </div>
                           </td>
                         ) : (
@@ -231,12 +219,6 @@ function WorkSchedule() {
           </p>
         )
       ) : null}
-      <ConfirmationModal
-        show={showModal}
-        message={modalMessage}
-        onConfirm={modalAction}
-        onCancel={() => setShowModal(false)}
-      />
     </div>
   );
 }

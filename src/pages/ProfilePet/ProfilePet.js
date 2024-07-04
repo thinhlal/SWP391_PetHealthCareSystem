@@ -140,7 +140,7 @@ function ProfilePet() {
         </div>
         <div className='main-content-pet'>
           <div className='pet-info'>
-            <div className='sub-title-info-pet-line'>My Medical Info</div>
+            <div className='sub-title-info-pet-line'>My Pet Info</div>
             <div className='main-edit-button-pet-info'>
               <div className='pet-details-profile'>
                 <div className='title-pet-profile'>
@@ -229,7 +229,7 @@ function ProfilePet() {
           </div>
 
           <div className='medical-info'>
-            <div className='sub-title-info-pet-line'>My Medical Info</div>
+            <div className='sub-title-info-pet-line'>My Pet Medical Info</div>
             <div className='main-add-button-medical'></div>
             <table>
               <thead>
@@ -333,7 +333,7 @@ function ProfilePet() {
           </div>
 
           <div className='vaccination-info'>
-            <div className='sub-title-info-pet-line'>My Vaccination Info</div>
+            <div className='sub-title-info-pet-line'>My Pet Vaccination Info</div>
             <table>
               <thead>
                 <tr>
@@ -366,7 +366,6 @@ function ProfilePet() {
                           View
                         </button>
 
-                        {/* Modal */}
                         <div
                           className='modal fade'
                           id={`staticBackdropVaccine-${index}`}

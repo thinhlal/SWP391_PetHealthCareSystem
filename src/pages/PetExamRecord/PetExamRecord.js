@@ -1,69 +1,54 @@
 import './PetExamRecord.css';
 import Header from '../../components/Doctor/Header/Header.js';
-import React, { useState } from 'react';
-import ConfirmationModal from '../../components/Confirm-Cancel/ConfirmationModal.js'; // Adjust the path as needed
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../utils/axiosInstance.js';
+import { useLocation } from 'react-router-dom';
 
 function PetExamRecord() {
-  const [showModal, setShowModal] = useState(false);
+  const location = useLocation();
+  const [bookingData, setBookingData] = useState({});
+  const [diagnosis, setDiagnosis] = useState('');
+  const [treatment, setTreatment] = useState('');
+  const [prescription, setPrescription] = useState('');
+  const [notes, setNotes] = useState('');
 
-  const renderPetData = [
-    {
-      id: 'PET01',
-      type: 'Dog',
-      weight: '10 kg',
-      name: 'Jack',
-      owner: 'Messi',
-      gender: 'Male',
-    },
-    {
-      id: 'PET02',
-      type: 'Cat',
-      weight: '5 kg',
-      name: 'Luna',
-      owner: 'Ronaldo',
-      gender: 'Female',
-    },
-    {
-      id: 'PET03',
-      type: 'Bird',
-      weight: '0.5 kg',
-      name: 'Tweety',
-      owner: 'Neymar',
-      gender: 'Male',
-    },
-    {
-      id: 'PET04',
-      type: 'Rabbit',
-      weight: '2 kg',
-      name: 'Bunny',
-      owner: 'Mbappe',
-      gender: 'Female',
-    },
-    {
-      id: 'PET05',
-      type: 'Cat',
-      weight: '0.2 kg',
-      name: 'Nemo',
-      owner: 'Salah',
-      gender: 'Unknown',
-    },
-  ];
-
-  const selectedPetIndex = 0;
-  const selectedPet = renderPetData[selectedPetIndex];
+  useEffect(() => {
+    const fetchWorkSchedule = async () => {
+      try {
+        const params = new URLSearchParams(location.search);
+        const bookingID = params.get('bookingID');
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/doctor/getBookingByID/${bookingID}`
+        );
+        console.log(response.data);
+        setBookingData(response.data);
+      } catch (error) {
+        console.error('Error fetching booking data: ', error);
+      }
+    };
+    fetchWorkSchedule()
+  }, [location.search]);
 
   const handleCancelClick = e => {
     e.preventDefault();
-    setShowModal(true);
-  };
-
-  const handleConfirm = () => {
-    setShowModal(false);
     window.location.href = 'work-schedule';
   };
 
-  const handleCancel = () => {
-    setShowModal(false);
+  const handleSave = async e => {
+    e.preventDefault();
+    try {
+      const payload = {
+        bookingID: bookingData.bookingID,
+        diagnosis,
+        treatment,
+        prescription,
+        notes,
+      };
+      await axiosInstance.post(`${process.env.REACT_APP_API_URL}/doctor/savePetExamRecord`, payload);
+      window.location.href = 'work-schedule';
+    } catch (error) {
+      console.error('Error saving pet exam record: ', error);
+    }
   };
 
   return (
@@ -80,87 +65,88 @@ function PetExamRecord() {
             </div>
           </div>
         </div>
-        <form className='form-petE'>
-          <div className='form-petExam'>
-            <div className='pet-info-1'>Pet ID</div>
-            <div className='petE-info'>{selectedPet.id}</div>
-          </div>
-          <div className='form-petExam-1'>
-            <div className='pet-info-1'>Pet Type</div>
-            <div className='petE-info'>{selectedPet.type}</div>
-          </div>
-          <div className='form-petExam-2'>
-            <div className='pet-info-1'>Pet Weight</div>
-            <div className='petE-info'>{selectedPet.weight}</div>
-          </div>
-          <div className='form-petExam'>
-            <div className='pet-info-1'>Pet Name</div>
-            <div className='petE-info'>{selectedPet.name}</div>
-          </div>
-          <div className='form-petExam-1'>
-            <div className='pet-info-1'>Pet Owner</div>
-            <div className='petE-info'>{selectedPet.owner}</div>
-          </div>
-          <div className='form-petExam-2'>
-            <div className='pet-info-1'>Pet Gender</div>
-            <div className='petE-info'>{selectedPet.gender}</div>
-          </div>
-          <div className='form-petExam-3'>
-            <div className='pet-info-1'>Pet Diagnostic</div>
-            <textarea
-              className='petE-control'
-              placeholder='Enter Diagnostic'
-            ></textarea>
-          </div>
-          <div className='form-petExam-3'>
-            <div className='pet-info-1'>Pet Symptoms</div>
-            <textarea
-              className='petE-control'
-              placeholder='Enter Symptoms'
-            ></textarea>
-          </div>
-          <div className='form-petExam-3'>
-            <div className='pet-info-1'>Prescription</div>
-            <textarea
-              className='petE-control'
-              placeholder='Enter prescription'
-            ></textarea>
-          </div>
-          <div className='form-petExam-3'>
-            <div className='pet-info-1'>Note</div>
-            <textarea
-              className='petE-control'
-              placeholder='Enter note'
-            ></textarea>
-          </div>
-          <div className='final-petE'>
-            <a
-              href='work-schedule'
-              className='btn-save'
-            >
-              Save
-            </a>
-            <a
-              href='work-schedule'
-              className='btn-cancel'
-              onClick={handleCancelClick}
-            >
-              Cancel
-            </a>
-          </div>
-        </form>
+        {bookingData.petDetails ?
+          <form className='form-petE' onSubmit={handleSave}>
+            <div className='form-petExam'>
+              <div className='pet-info-1'>Pet ID</div>
+              <div className='petE-info'>{bookingData?.petDetails[0]?.petID}</div>
+            </div>
+            <div className='form-petExam-1'>
+              <div className='pet-info-1'>Pet Type</div>
+              <div className='petE-info'>{bookingData?.petDetails[0]?.petType}</div>
+            </div>
+            <div className='form-petExam-2'>
+              <div className='pet-info-1'>Pet Weight</div>
+              <div className='petE-info'>{bookingData?.petDetails[0]?.breed}</div>
+            </div>
+            <div className='form-petExam'>
+              <div className='pet-info-1'>Pet Name</div>
+              <div className='petE-info'>{bookingData?.petDetails[0]?.name}</div>
+            </div>
+            <div className='form-petExam-1'>
+              <div className='pet-info-1'>Pet Owner</div>
+              <div className='petE-info'>{bookingData?.customerDetails[0]?.name}</div>
+            </div>
+            <div className='form-petExam-2'>
+              <div className='pet-info-1'>Pet Gender</div>
+              <div className='petE-info'>{bookingData?.petDetails[0]?.gender}</div>
+            </div>
+            <div className='form-petExam-3'>
+              <div className='pet-info-1'>Pet Diagnostic</div>
+              <textarea
+                className='petE-control'
+                placeholder='Enter Diagnostic'
+                value={diagnosis}
+                onChange={(e) => setDiagnosis(e.target.value)}
+              ></textarea>
+            </div>
+            <div className='form-petExam-3'>
+              <div className='pet-info-1'>Pet Symptoms</div>
+              <textarea
+                className='petE-control'
+                placeholder='Enter Symptoms'
+                value={treatment}
+                onChange={(e) => setTreatment(e.target.value)}
+              ></textarea>
+            </div>
+            <div className='form-petExam-3'>
+              <div className='pet-info-1'>Prescription</div>
+              <textarea
+                className='petE-control'
+                placeholder='Enter prescription'
+                value={prescription}
+                onChange={(e) => setPrescription(e.target.value)}
+              ></textarea>
+            </div>
+            <div className='form-petExam-3'>
+              <div className='pet-info-1'>Note</div>
+              <textarea
+                className='petE-control'
+                placeholder='Enter notes'
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+              ></textarea>
+            </div>
+            <div className='final-petE'>
+              <button type='submit' className='btn-save'>
+                Save
+              </button>
+              <a
+                href='work-schedule'
+                className='btn-cancel'
+                onClick={handleCancelClick}
+              >
+                Cancel
+              </a>
+            </div>
+          </form>
+          : null}
         <div>
           <div className='petE-tittle-2'>
             ----------Information Pet----------
           </div>
         </div>
       </div>
-      <ConfirmationModal
-        show={showModal}
-        message='Are you sure you want to cancel?'
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      />
     </div>
   );
 }

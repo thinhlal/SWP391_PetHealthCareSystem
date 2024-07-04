@@ -13,6 +13,12 @@ const MedicalReportSchema = new Schema(
       maxlength: 8,
       ref: 'Account',
     },
+    petID: {
+      type: String,
+      required: true,
+      maxlength: 8,
+      ref: 'Pet',
+    },
     bookingID: {
       type: String,
       required: true,

@@ -119,6 +119,33 @@ function App() {
         />
 
         <Route
+          path='/user-profile'
+          element={
+            <ProtectedRoute allowedRoles={['Customer']}>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/change-user-password'
+          element={
+            <ProtectedRoute allowedRoles={['Customer']}>
+              <ChangeUserPassword />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/pet-status'
+          element={
+            <ProtectedRoute allowedRoles={['Customer']}>
+              <PetStatus />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
           path='/manage-booking'
           element={
             <ProtectedRoute allowedRoles={['Staff']}>
@@ -126,6 +153,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/manage-cages'
           element={
@@ -134,6 +162,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/work-schedule'
           element={
@@ -142,6 +171,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/sick-pet'
           element={
@@ -150,11 +180,21 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/pet-exam-record'
           element={
             <ProtectedRoute allowedRoles={['Doctor']}>
               <PetExamRecord />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path='/time-table'
+          element={
+            <ProtectedRoute allowedRoles={['Doctor']}>
+              <TimeTableWork />
             </ProtectedRoute>
           }
         />
@@ -167,6 +207,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/admin-dashboard'
           element={
@@ -175,6 +216,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/admin-services'
           element={
@@ -183,6 +225,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/admin-cages'
           element={
@@ -191,51 +234,12 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path='/admin-rating'
           element={
             <ProtectedRoute allowedRoles={['Admin']}>
               <AdminRating />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/user-profile'
-          element={
-            <ProtectedRoute>
-              <UserProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/user-profile'
-          element={
-            <ProtectedRoute>
-              <UserProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/change-user-password'
-          element={
-            <ProtectedRoute>
-              <ChangeUserPassword />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/time-table'
-          element={
-            <ProtectedRoute>
-              <TimeTableWork />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/pet-status'
-          element={
-            <ProtectedRoute>
-              <PetStatus />
             </ProtectedRoute>
           }
         />

@@ -43,8 +43,8 @@ class PetController {
         {
           $lookup: {
             from: 'medicalreports',
-            localField: 'accountID',
-            foreignField: 'accountID',
+            localField: 'petID',
+            foreignField: 'petID',
             as: 'medicalReportDetails',
           },
         },
