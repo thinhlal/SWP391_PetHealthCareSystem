@@ -462,17 +462,17 @@ a {
   padding-bottom: 25px;
 }
 
-.main-container-your-booking-page .modal-confirmCancel{
+.main-container-your-booking-page .modal-confirmCancel {
   padding: 50px 20px;
 }
 
-.modal-confirmCancel-footer{
+.modal-confirmCancel-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
 }
 
-.modal-confirmCancel-footer button:first-child{
+.modal-confirmCancel-footer button:first-child {
   margin-right: 10px;
 }

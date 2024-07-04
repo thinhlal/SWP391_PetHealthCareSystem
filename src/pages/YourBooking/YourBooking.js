@@ -291,99 +291,96 @@ function YourBooking() {
                                 {booking.totalPrice}
                               </div>
                             </div>
-                            {booking.isCancel
-                              ? null
-                              : booking.paymentsDetails[0].isCancelPayment
-                                ? null
-                                : booking.paymentsDetails[0].isSuccess &&
-                                  booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL' &&
-                                  new Date(booking.dateBook) > new Date() &&
-                                  !booking.isRate &&
-                                  !booking.isCheckIn
-                                  ? (
-                                    <div
-                                      data-bs-toggle='modal'
-                                      data-bs-target='#CancelBooking'
-                                      className='cancel-booking-button-1'
-                                      onClick={() =>
-                                        setCurrentBookingID(booking.bookingID)
-                                      }
-                                    >
-                                      <div className='text-sign-in-button-booking'>
-                                        Cancel Booking
-                                      </div>
-                                    </div>
-                                  ) : !booking.paymentsDetails[0].isSuccess &&
-                                    booking.paymentsDetails[0].paymentMethod ===
-                                    'COUNTER' &&
-                                    new Date(booking.dateBook) > new Date() &&
-                                    !booking.isRate &&
-                                    !booking.isCheckIn
-                                    ? (
-                                      <div
-                                        className='cancel-booking-button-1'
-                                        data-bs-toggle='modal'
-                                        data-bs-target='#CancelBooking'
-                                        onClick={() =>
-                                          setCurrentBookingID(booking.bookingID)
-                                        }
-                                      >
-                                        <div className='text-sign-in-button-booking'>
-                                          Cancel Booking
-                                        </div>
-                                      </div>
-                                    ) : booking.paymentsDetails[0].isSuccess &&
-                                      booking.paymentsDetails[0].paymentMethod ===
-                                      'PAYPAL' &&
-                                      booking.isCheckIn &&
-                                      !booking.isRate ? (
-                                      <button
-                                        type='button'
-                                        className='btn btn-primary feedback-rate-booking'
-                                        data-bs-toggle='modal'
-                                        data-bs-target='#newModal'
-                                        onClick={() =>
-                                          setCurrentBookingID(booking.bookingID)
-                                        }
-                                      >
-                                        <div className='text-feedback-rate-booking'>
-                                          Feedback
-                                        </div>
-                                      </button>
-                                    ) : booking.paymentsDetails[0].isSuccess &&
-                                      booking.paymentsDetails[0].paymentMethod ===
-                                      'COUNTER' &&
-                                      booking.isCheckIn &&
-                                      !booking.isRate ? (
-                                      <button
-                                        type='button'
-                                        className='btn btn-primary feedback-rate-booking'
-                                        data-bs-toggle='modal'
-                                        data-bs-target='#newModal'
-                                        onClick={() =>
-                                          setCurrentBookingID(booking.bookingID)
-                                        }
-                                      >
-                                        <div className='text-feedback-rate-booking'>
-                                          Feedback
-                                        </div>
-                                      </button>
-                                    ) : (
-                                      <button
-                                        type='button'
-                                        className='btn btn-primary feedback-rate-booking'
-                                        data-bs-toggle='modal'
-                                        data-bs-target='#yourRate'
-                                        onClick={() => {
-                                          setCurrentBookingData(booking)
-                                        }}
-                                      >
-                                        <div className='text-feedback-rate-booking'>
-                                          Your Rate
-                                        </div>
-                                      </button>
-                                    )}
+                            {booking.isCancel ? null : booking
+                                .paymentsDetails[0]
+                                .isCancelPayment ? null : booking
+                                .paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL' &&
+                              new Date(booking.dateBook) > new Date() &&
+                              !booking.isRate &&
+                              !booking.isCheckIn ? (
+                              <div
+                                data-bs-toggle='modal'
+                                data-bs-target='#CancelBooking'
+                                className='cancel-booking-button-1'
+                                onClick={() =>
+                                  setCurrentBookingID(booking.bookingID)
+                                }
+                              >
+                                <div className='text-sign-in-button-booking'>
+                                  Cancel Booking
+                                </div>
+                              </div>
+                            ) : !booking.paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'COUNTER' &&
+                              new Date(booking.dateBook) > new Date() &&
+                              !booking.isRate &&
+                              !booking.isCheckIn ? (
+                              <div
+                                className='cancel-booking-button-1'
+                                data-bs-toggle='modal'
+                                data-bs-target='#CancelBooking'
+                                onClick={() =>
+                                  setCurrentBookingID(booking.bookingID)
+                                }
+                              >
+                                <div className='text-sign-in-button-booking'>
+                                  Cancel Booking
+                                </div>
+                              </div>
+                            ) : booking.paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL' &&
+                              booking.isCheckIn &&
+                              !booking.isRate ? (
+                              <button
+                                type='button'
+                                className='btn btn-primary feedback-rate-booking'
+                                data-bs-toggle='modal'
+                                data-bs-target='#newModal'
+                                onClick={() =>
+                                  setCurrentBookingID(booking.bookingID)
+                                }
+                              >
+                                <div className='text-feedback-rate-booking'>
+                                  Feedback
+                                </div>
+                              </button>
+                            ) : booking.paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'COUNTER' &&
+                              booking.isCheckIn &&
+                              !booking.isRate ? (
+                              <button
+                                type='button'
+                                className='btn btn-primary feedback-rate-booking'
+                                data-bs-toggle='modal'
+                                data-bs-target='#newModal'
+                                onClick={() =>
+                                  setCurrentBookingID(booking.bookingID)
+                                }
+                              >
+                                <div className='text-feedback-rate-booking'>
+                                  Feedback
+                                </div>
+                              </button>
+                            ) : (
+                              <button
+                                type='button'
+                                className='btn btn-primary feedback-rate-booking'
+                                data-bs-toggle='modal'
+                                data-bs-target='#yourRate'
+                                onClick={() => {
+                                  setCurrentBookingData(booking);
+                                }}
+                              >
+                                <div className='text-feedback-rate-booking'>
+                                  Your Rate
+                                </div>
+                              </button>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -445,7 +442,6 @@ function YourBooking() {
               )}
             </div>
 
-
             <div
               className='modal fade'
               id={`CancelBooking`}
@@ -469,16 +465,16 @@ function YourBooking() {
                         type='button'
                         className='btn btn-danger'
                         data-bs-dismiss='modal'
-                        onClick={() =>
-                          handleCancelBooking(currentBookingID)
-                        }
-                      >Yes
+                        onClick={() => handleCancelBooking(currentBookingID)}
+                      >
+                        Yes
                       </button>
                       <button
                         type='button'
                         className='btn btn-light'
                         data-bs-dismiss='modal'
-                      >Cancel
+                      >
+                        Cancel
                       </button>
                     </div>
                   </div>
