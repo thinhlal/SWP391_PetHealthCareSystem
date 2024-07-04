@@ -77,7 +77,9 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .main-container-pet-status-history .view-detail-button:hover {
@@ -94,7 +96,9 @@
   cursor: pointer;
   font-size: 14px;
   margin-top: 20px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
   align-self: flex-end;
 }
 
@@ -122,34 +126,33 @@
 }
 
 .main-container-pet-status-history .status-in-cage {
-  color: #f59e0b; 
+  color: #f59e0b;
   font-weight: bold;
 }
 
 .main-container-pet-status-history .status-exited-cage {
-  color: #10b981; 
+  color: #10b981;
   font-weight: bold;
 }
 
-
 .main-container-pet-status-history .status-critical {
-  color: #dc2626; 
+  color: #dc2626;
 }
 
 .main-container-pet-status-history .status-severe {
-  color: #f97316; 
+  color: #f97316;
 }
 
 .main-container-pet-status-history .status-moderate {
-  color: #facc15; 
+  color: #facc15;
 }
 
 .main-container-pet-status-history .status-mild {
-  color: #3d9aa7; 
+  color: #3d9aa7;
 }
 
 .main-container-pet-status-history .status-healthy {
-  color: #16a34a; 
+  color: #16a34a;
 }
 
 .main-container-pet-status-history .sidebar-pet-status {

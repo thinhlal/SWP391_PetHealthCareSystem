@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom';
 import './ProfilePet.css';
 // component
 import Header from '../../components/User/Header/Header';
@@ -17,7 +17,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 function ProfilePet() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [petData, setPetData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
@@ -103,7 +103,7 @@ function ProfilePet() {
   }
 
   const handleViewStatusClick = () => {
-    navigate('/pet-status', { state: { petData, user } }); 
+    navigate('/pet-status', { state: { petData, user } });
   };
 
   return (
@@ -129,7 +129,10 @@ function ProfilePet() {
               <span className='ID-pet-profile'>{petData.petID}</span>
             </div>
             <div className='view-status-button'>
-              <button className='btn btn-info' onClick={handleViewStatusClick}>
+              <button
+                className='btn btn-info'
+                onClick={handleViewStatusClick}
+              >
                 <i className='bi bi-needle'></i> View Status
               </button>
             </div>
