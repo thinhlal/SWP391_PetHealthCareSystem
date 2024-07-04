@@ -25,6 +25,7 @@ function AdminDashBoard() {
   const openTab = tabName => setActiveTab(tabName);
   const [bookingData, setBookingData] = useState([]);
   const [bookingInfoModal, setBookingInfoModal] = useState({});
+
   useEffect(() => {
     const fetchBooking = async () => {
       try {
@@ -35,7 +36,7 @@ function AdminDashBoard() {
           b.bookingID.localeCompare(a.bookingID),
         );
         setBookingData(sortDate);
-        setBookingInfoModal(sortDate[0]);
+        setBookingInfoModal(sortDate[0])
       } catch (error) {
         console.log(error);
       }
@@ -159,45 +160,44 @@ function AdminDashBoard() {
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       <div
                         className={`Admin-DashBoard-Table-status-booking
-                              ${
-                                item.isCancel
-                                  ? 'Admin-DashBoard-Table-status-cancel'
-                                  : item.paymentsDetails[0].isCancelPayment
-                                    ? 'Admin-DashBoard-Table-status-cancel'
+                              ${item.isCancel
+                            ? 'Admin-DashBoard-Table-status-cancel'
+                            : item.paymentsDetails[0].isCancelPayment
+                              ? 'Admin-DashBoard-Table-status-cancel'
+                              : item.paymentsDetails[0].isSuccess &&
+                                item.paymentsDetails[0]
+                                  .paymentMethod === 'PAYPAL'
+                                && !item.isCheckIn
+                                ? 'Admin-DashBoard-Table-status-waiting'
+                                : !item.paymentsDetails[0].isSuccess &&
+                                  item.paymentsDetails[0]
+                                    .paymentMethod === 'COUNTER'
+                                  && !item.isCheckIn
+                                  ? 'Admin-DashBoard-Table-status-waiting'
+                                  : item.paymentsDetails[0].isSuccess &&
+                                    item.paymentsDetails[0]
+                                      .paymentMethod === 'PAYPAL' &&
+                                    item.isCheckIn
+                                    ? 'Admin-DashBoard-Table-status-done'
                                     : item.paymentsDetails[0].isSuccess &&
-                                        item.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL' &&
-                                        !item.isCheckIn
-                                      ? 'Admin-DashBoard-Table-status-waiting'
-                                      : !item.paymentsDetails[0].isSuccess &&
-                                          item.paymentsDetails[0]
-                                            .paymentMethod === 'COUNTER' &&
-                                          !item.isCheckIn
-                                        ? 'Admin-DashBoard-Table-status-waiting'
-                                        : item.paymentsDetails[0].isSuccess &&
-                                            item.paymentsDetails[0]
-                                              .paymentMethod === 'PAYPAL' &&
-                                            item.isCheckIn
-                                          ? 'Admin-DashBoard-Table-status-done'
-                                          : item.paymentsDetails[0].isSuccess &&
-                                              item.paymentsDetails[0]
-                                                .paymentMethod === 'COUNTER' &&
-                                              item.isCheckIn
-                                            ? 'Admin-DashBoard-Table-status-done'
-                                            : null
-                              }`}
+                                      item.paymentsDetails[0]
+                                        .paymentMethod === 'COUNTER' &&
+                                      item.isCheckIn
+                                      ? 'Admin-DashBoard-Table-status-done'
+                                      : null
+                          }`}
                       >
                         {item.isCancel ? (
                           <span>Cancel Booking</span>
                         ) : item.paymentsDetails[0].isCancelPayment ? (
                           <span>Cancel Payment</span>
                         ) : item.paymentsDetails[0].isSuccess &&
-                          item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-                          !item.isCheckIn ? (
+                          item.paymentsDetails[0].paymentMethod === 'PAYPAL'
+                          && !item.isCheckIn ? (
                           <span>Pending</span>
                         ) : !item.paymentsDetails[0].isSuccess &&
-                          item.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-                          !item.isCheckIn ? (
+                          item.paymentsDetails[0].paymentMethod ===
+                          'COUNTER' && !item.isCheckIn ? (
                           <span>Pending</span>
                         ) : item.paymentsDetails[0].isSuccess &&
                           item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
@@ -317,33 +317,20 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Name:
                                         </div>
-                                        <div>
-                                          {
-                                            bookingInfoModal?.petDetails[0]
-                                              ?.name
-                                          }
-                                        </div>
+                                        <div>{bookingInfoModal?.petDetails[0]?.name}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Breed:
                                         </div>
-                                        <div>
-                                          {
-                                            bookingInfoModal?.petDetails[0]
-                                              ?.breed
-                                          }
-                                        </div>
+                                        <div>{bookingInfoModal?.petDetails[0]?.breed}</div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Type:
                                         </div>
                                         <div>
-                                          {
-                                            bookingInfoModal?.petDetails[0]
-                                              ?.petType
-                                          }
+                                          {bookingInfoModal?.petDetails[0]?.petType}
                                         </div>
                                       </div>
                                       <div className='Admin-DashBoard-form-group'>
@@ -362,12 +349,7 @@ function AdminDashBoard() {
                                         <div className='Admin-DashBoard-sub-title-profile-pet'>
                                           Gender:
                                         </div>
-                                        <div>
-                                          {
-                                            bookingInfoModal?.petDetails[0]
-                                              ?.gender
-                                          }
-                                        </div>
+                                        <div>{bookingInfoModal?.petDetails[0]?.gender}</div>
                                       </div>
                                     </div>
                                     <div
@@ -386,7 +368,7 @@ function AdminDashBoard() {
                                         </div>
                                         <div>
                                           {servicePrice(
-                                            bookingInfoModal?.servicesInBooking,
+                                            bookingInfoModal?.servicesInBooking
                                           ).join(', ')}
                                         </div>
                                       </div>
@@ -407,10 +389,7 @@ function AdminDashBoard() {
                                           Doctor:
                                         </div>
                                         <div>
-                                          {
-                                            bookingInfoModal?.doctorDetails[0]
-                                              ?.name
-                                          }
+                                          {bookingInfoModal?.doctorDetails[0]?.name}
                                         </div>
                                       </div>
                                     </div>
