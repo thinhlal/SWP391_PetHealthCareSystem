@@ -1,0 +1,192 @@
+.main-container-pet-status-history {
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.main-container-pet-status-history .container-pet-status-history {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9fafb;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.main-container-pet-status-history .sub-title-info-pet-history {
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.main-container-pet-status-history .pet-status-details-history {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.main-container-pet-status-history .pet-status-summary-table,
+.pet-status-detail-table {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.main-container-pet-status-history .pet-status-summary-table table,
+.pet-status-detail-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.main-container-pet-status-history .pet-status-summary-table th,
+.pet-status-summary-table td,
+.pet-status-detail-table th,
+.pet-status-detail-table td {
+  border: 1px solid #e5e7eb;
+  padding: 15px;
+  text-align: left;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.main-container-pet-status-history .pet-status-summary-table th,
+.pet-status-detail-table th {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.main-container-pet-status-history .pet-status-summary-table tr:nth-child(even),
+.pet-status-detail-table tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.main-container-pet-status-history .pet-status-summary-table tr:hover,
+.pet-status-detail-table tr:hover {
+  background-color: #f3f4f6;
+}
+
+.main-container-pet-status-history .view-detail-button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.main-container-pet-status-history .view-detail-button:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.main-container-pet-status-history .close-detail-button {
+  background-color: #ef4444;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  align-self: flex-end;
+}
+
+.main-container-pet-status-history .close-detail-button:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+
+.main-container-pet-status-history .filter-container {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.main-container-pet-status-history .filter-container label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.main-container-pet-status-history .filter-container select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.main-container-pet-status-history .status-in-cage {
+  color: #f59e0b; 
+  font-weight: bold;
+}
+
+.main-container-pet-status-history .status-exited-cage {
+  color: #10b981; 
+  font-weight: bold;
+}
+
+
+.main-container-pet-status-history .status-critical {
+  color: #dc2626; 
+}
+
+.main-container-pet-status-history .status-severe {
+  color: #f97316; 
+}
+
+.main-container-pet-status-history .status-moderate {
+  color: #facc15; 
+}
+
+.main-container-pet-status-history .status-mild {
+  color: #3d9aa7; 
+}
+
+.main-container-pet-status-history .status-healthy {
+  color: #16a34a; 
+}
+
+.main-container-pet-status-history .sidebar-pet-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-right: 60px;
+  width: 250px;
+  height: 380px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  line-height: 2;
+  font-size: 16px;
+}
+
+.main-container-pet-status-history .sidebar-pet-status .pet-avatar img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.main-container-pet-status-history .sidebar-pet-status .pet-parent,
+.status {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.main-container-pet-status-history .sidebar-pet-status .status-active {
+  color: green;
+  font-weight: bold;
+}
+
+.main-container-pet-status-history .sidebar-pet-status .pet-id-info {
+  font-size: 12px;
+  color: #555;
+}
