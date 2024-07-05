@@ -18,7 +18,7 @@ function PetExamRecord() {
         const params = new URLSearchParams(location.search);
         const bookingID = params.get('bookingID');
         const response = await axiosInstance.get(
-          `${process.env.REACT_APP_API_URL}/doctor/getBookingByID/${bookingID}`
+          `${process.env.REACT_APP_API_URL}/doctor/getBookingByID/${bookingID}`,
         );
         console.log(response.data);
         setBookingData(response.data);
@@ -26,7 +26,7 @@ function PetExamRecord() {
         console.error('Error fetching booking data: ', error);
       }
     };
-    fetchWorkSchedule()
+    fetchWorkSchedule();
   }, [location.search]);
 
   const handleCancelClick = e => {
@@ -44,7 +44,10 @@ function PetExamRecord() {
         prescription,
         notes,
       };
-      await axiosInstance.post(`${process.env.REACT_APP_API_URL}/doctor/savePetExamRecord`, payload);
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/doctor/savePetExamRecord`,
+        payload,
+      );
       window.location.href = 'work-schedule';
     } catch (error) {
       console.error('Error saving pet exam record: ', error);
@@ -65,31 +68,46 @@ function PetExamRecord() {
             </div>
           </div>
         </div>
-        {bookingData.petDetails ?
-          <form className='form-petE' onSubmit={handleSave}>
+        {bookingData.petDetails ? (
+          <form
+            className='form-petE'
+            onSubmit={handleSave}
+          >
             <div className='form-petExam'>
               <div className='pet-info-1'>Pet ID</div>
-              <div className='petE-info'>{bookingData?.petDetails[0]?.petID}</div>
+              <div className='petE-info'>
+                {bookingData?.petDetails[0]?.petID}
+              </div>
             </div>
             <div className='form-petExam-1'>
               <div className='pet-info-1'>Pet Type</div>
-              <div className='petE-info'>{bookingData?.petDetails[0]?.petType}</div>
+              <div className='petE-info'>
+                {bookingData?.petDetails[0]?.petType}
+              </div>
             </div>
             <div className='form-petExam-2'>
               <div className='pet-info-1'>Pet Weight</div>
-              <div className='petE-info'>{bookingData?.petDetails[0]?.breed}</div>
+              <div className='petE-info'>
+                {bookingData?.petDetails[0]?.breed}
+              </div>
             </div>
             <div className='form-petExam'>
               <div className='pet-info-1'>Pet Name</div>
-              <div className='petE-info'>{bookingData?.petDetails[0]?.name}</div>
+              <div className='petE-info'>
+                {bookingData?.petDetails[0]?.name}
+              </div>
             </div>
             <div className='form-petExam-1'>
               <div className='pet-info-1'>Pet Owner</div>
-              <div className='petE-info'>{bookingData?.customerDetails[0]?.name}</div>
+              <div className='petE-info'>
+                {bookingData?.customerDetails[0]?.name}
+              </div>
             </div>
             <div className='form-petExam-2'>
               <div className='pet-info-1'>Pet Gender</div>
-              <div className='petE-info'>{bookingData?.petDetails[0]?.gender}</div>
+              <div className='petE-info'>
+                {bookingData?.petDetails[0]?.gender}
+              </div>
             </div>
             <div className='form-petExam-3'>
               <div className='pet-info-1'>Pet Diagnostic</div>
@@ -97,7 +115,7 @@ function PetExamRecord() {
                 className='petE-control'
                 placeholder='Enter Diagnostic'
                 value={diagnosis}
-                onChange={(e) => setDiagnosis(e.target.value)}
+                onChange={e => setDiagnosis(e.target.value)}
               ></textarea>
             </div>
             <div className='form-petExam-3'>
@@ -106,7 +124,7 @@ function PetExamRecord() {
                 className='petE-control'
                 placeholder='Enter Symptoms'
                 value={treatment}
-                onChange={(e) => setTreatment(e.target.value)}
+                onChange={e => setTreatment(e.target.value)}
               ></textarea>
             </div>
             <div className='form-petExam-3'>
@@ -115,7 +133,7 @@ function PetExamRecord() {
                 className='petE-control'
                 placeholder='Enter prescription'
                 value={prescription}
-                onChange={(e) => setPrescription(e.target.value)}
+                onChange={e => setPrescription(e.target.value)}
               ></textarea>
             </div>
             <div className='form-petExam-3'>
@@ -124,11 +142,14 @@ function PetExamRecord() {
                 className='petE-control'
                 placeholder='Enter notes'
                 value={notes}
-                onChange={(e) => setNotes(e.target.value)}
+                onChange={e => setNotes(e.target.value)}
               ></textarea>
             </div>
             <div className='final-petE'>
-              <button type='submit' className='btn-save'>
+              <button
+                type='submit'
+                className='btn-save'
+              >
                 Save
               </button>
               <a
@@ -140,7 +161,7 @@ function PetExamRecord() {
               </a>
             </div>
           </form>
-          : null}
+        ) : null}
         <div>
           <div className='petE-tittle-2'>
             ----------Information Pet----------

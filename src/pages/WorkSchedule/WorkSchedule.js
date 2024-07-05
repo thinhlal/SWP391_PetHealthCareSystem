@@ -42,10 +42,10 @@ function WorkSchedule() {
     setSelectedDate(e.target.value);
   };
 
-  const handleReceiveClick = (bookingID) => {
+  const handleReceiveClick = bookingID => {
     navigate(`/pet-exam-record?bookingID=${bookingID}`);
   };
-  
+
   console.log(schedules);
   const sortedBookings = schedules?.matchingBookings
     ?.filter(
@@ -168,7 +168,7 @@ function WorkSchedule() {
                             <div className='td_table-schedule-btn-center'>
                               <div
                                 className={`click-button`}
-                                onClick={(e) =>
+                                onClick={e =>
                                   handleReceiveClick(schedule.bookingID)
                                 }
                                 style={{ pointerEvents: 'auto' }}

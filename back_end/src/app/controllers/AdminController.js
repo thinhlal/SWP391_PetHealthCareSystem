@@ -5,6 +5,7 @@ const Staff = require('../models/Staff.js');
 const Doctor = require('../models/Doctor.js');
 const bcrypt = require('bcrypt');
 const Customer = require('../models/Customer.js');
+const Rate = require('../models/Rate.js');
 
 class AdminController {
   // POST /
@@ -209,6 +210,309 @@ class AdminController {
     }
   }
 
+  // GET /getRating
+  async getRating(req, res, next) {
+    try {
+      const rating = await Rate.aggregate([
+        {
+          $group: {
+            _id: null,
+            averageRate: { $avg: '$rate' },
+            totalReviews: { $sum: 1 },
+          },
+        },
+      ]);
+
+      if (rating.length > 0) {
+        res.status(200).json({
+          averageRate: rating[0]?.averageRate,
+          totalReviews: rating[0]?.totalReviews,
+        });
+      } else {
+        res.status(200).json({
+          averageRate: 0,
+          totalReviews: 0,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Error when get rating', error });
+    }
+  }
+
+  // GET /getTotalIncome
+  async getTotalIncome(req, res, next) {
+    const { date } = req.query;
+    try {
+      const timezoneOffset = 7 * 60 * 60 * 1000;
+      const currentDate = new Date(new Date(date).getTime() + timezoneOffset);
+      currentDate.setUTCHours(0, 0, 0, 0);
+      //Get Prev date
+      const previousDateStart = new Date(currentDate);
+      previousDateStart.setDate(previousDateStart.getDate() - 1);
+
+      // Get Week
+      const day = currentDate.getDay();
+      const weekStartDate = new Date(currentDate);
+      const weekEndDate = new Date(currentDate);
+
+      if (day === 0) {
+        weekStartDate.setDate(currentDate.getDate() - 6);
+      } else {
+        weekStartDate.setDate(currentDate.getDate() - (day - 1));
+      }
+
+      weekEndDate.setDate(weekStartDate.getDate() + 6);
+
+      const previousWeekStartDate = new Date(weekStartDate);
+      previousWeekStartDate.setDate(weekStartDate.getDate() - 7);
+      const previousWeekEndDate = new Date(weekEndDate);
+      previousWeekEndDate.setDate(weekEndDate.getDate() - 7);
+
+      // Get month
+      const previousMonthStartDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - 1,
+        1,
+      );
+      const previousMonthEndDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        1,
+      );
+
+      const monthStartDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        1,
+      );
+      const nextMonthStartDate = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() + 1,
+        1,
+      );
+
+      const currentBookings = await Booking.aggregate([
+        {
+          $match: {
+            dateBook: currentDate,
+            isCancel: false,
+            isCheckIn: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': false,
+            'paymentDetails.isSuccess': true,
+          },
+        },
+      ]);
+      const previousBookings = await Booking.aggregate([
+        {
+          $match: {
+            dateBook: previousDateStart,
+            isCancel: false,
+            isCheckIn: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': false,
+            'paymentDetails.isSuccess': true,
+          },
+        },
+      ]);
+
+      const previousWeeklyBookings = await Booking.aggregate([
+        {
+          $match: {
+            dateBook: {
+              $gte: previousWeekStartDate,
+              $lt: new Date(
+                previousWeekEndDate.getTime() + 24 * 60 * 60 * 1000,
+              ),
+            },
+            isCancel: false,
+            isCheckIn: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': false,
+            'paymentDetails.isSuccess': true,
+          },
+        },
+      ]);
+      const currentWeeklyBookings = await Booking.aggregate([
+        {
+          $match: {
+            dateBook: {
+              $gte: weekStartDate,
+              $lt: new Date(weekEndDate.getTime() + 24 * 60 * 60 * 1000),
+            },
+            isCancel: false,
+            isCheckIn: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': false,
+            'paymentDetails.isSuccess': true,
+          },
+        },
+      ]);
+
+      const previousMonthlyBookings = await Booking.aggregate([
+        {
+          $match: {
+            dateBook: {
+              $gte: previousMonthStartDate,
+              $lt: previousMonthEndDate,
+            },
+            isCancel: false,
+            isCheckIn: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': false,
+            'paymentDetails.isSuccess': true,
+          },
+        },
+      ]);
+      const currentMonthlyBookings = await Booking.aggregate([
+        {
+          $match: {
+            dateBook: {
+              $gte: monthStartDate,
+              $lt: nextMonthStartDate,
+            },
+            isCancel: false,
+            isCheckIn: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': false,
+            'paymentDetails.isSuccess': true,
+          },
+        },
+      ]);
+
+      const totalIncomeAllBookings = await Booking.aggregate([
+        {
+          $match: {
+            isCancel: false,
+            isCheckIn: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': false,
+            'paymentDetails.isSuccess': true,
+          },
+        },
+      ]);
+
+      const currentTotalIncome = currentBookings.reduce(
+        (total, booking) => total + booking.totalPrice,
+        0,
+      );
+      const previousTotalIncome = previousBookings.reduce(
+        (total, booking) => total + booking.totalPrice,
+        0,
+      );
+      const currentWeeklyTotalIncome = currentWeeklyBookings.reduce(
+        (total, booking) => total + booking.totalPrice,
+        0,
+      );
+      const previousWeeklyTotalIncome = previousWeeklyBookings.reduce(
+        (total, booking) => total + booking.totalPrice,
+        0,
+      );
+      const previousMonthlyTotalIncome = previousMonthlyBookings.reduce(
+        (total, booking) => total + booking.totalPrice,
+        0,
+      );
+      const currentMonthlyTotalIncome = currentMonthlyBookings.reduce(
+        (total, booking) => total + booking.totalPrice,
+        0,
+      );
+      const totalIncome = totalIncomeAllBookings.reduce(
+        (total, booking) => total + booking.totalPrice,
+        0,
+      );
+      res.status(200).json({
+        currentTotalIncome,
+        previousTotalIncome,
+        currentWeeklyTotalIncome,
+        previousWeeklyTotalIncome,
+        previousMonthlyTotalIncome,
+        currentMonthlyTotalIncome,
+        totalIncome,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Error when get rating', error });
+    }
+  }
+
   // [POST] /addAccount
   async addAccount(req, res, next) {
     try {
@@ -275,7 +579,6 @@ class AdminController {
           phone,
           email,
         });
-        console.log(newAdmin);
         await newAdmin.save();
       } else if (role === 'Staff') {
         const newAccount = new Account({

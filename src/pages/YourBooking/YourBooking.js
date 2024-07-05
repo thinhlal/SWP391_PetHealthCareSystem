@@ -103,7 +103,9 @@ function YourBooking() {
         customerID: user.customerDetails[0].customerID,
         bookingID: currentBookingID,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -339,7 +341,7 @@ function YourBooking() {
                                 type='button'
                                 className='btn btn-primary feedback-rate-booking'
                                 data-bs-toggle='modal'
-                                data-bs-target='#newModal'
+                                data-bs-target='#feedbackRatestar'
                                 onClick={() =>
                                   setCurrentBookingID(booking.bookingID)
                                 }
@@ -357,7 +359,7 @@ function YourBooking() {
                                 type='button'
                                 className='btn btn-primary feedback-rate-booking'
                                 data-bs-toggle='modal'
-                                data-bs-target='#newModal'
+                                data-bs-target='#feedbackRatestar'
                                 onClick={() =>
                                   setCurrentBookingID(booking.bookingID)
                                 }
@@ -483,7 +485,7 @@ function YourBooking() {
             </div>
             <div
               className='modal fade'
-              id='newModal'
+              id='feedbackRatestar'
               tabIndex='-1'
               aria-labelledby='newModalLabel'
               aria-hidden='true'
@@ -561,6 +563,7 @@ function YourBooking() {
                       ></textarea>
                       <button
                         className='rating-button'
+                        data-bs-dismiss='modal'
                         onClick={handleSubmitFeedback}
                       >
                         Rate now

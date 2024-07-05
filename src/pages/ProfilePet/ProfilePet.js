@@ -333,7 +333,9 @@ function ProfilePet() {
           </div>
 
           <div className='vaccination-info'>
-            <div className='sub-title-info-pet-line'>My Pet Vaccination Info</div>
+            <div className='sub-title-info-pet-line'>
+              My Pet Vaccination Info
+            </div>
             <table>
               <thead>
                 <tr>

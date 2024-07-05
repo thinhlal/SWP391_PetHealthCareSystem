@@ -144,7 +144,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path='/manage-booking'
           element={
@@ -189,7 +189,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path='/time-table'
           element={

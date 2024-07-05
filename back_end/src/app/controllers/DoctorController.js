@@ -359,7 +359,7 @@ class DoctorController {
   async savePetExamRecord(req, res, next) {
     const { bookingID, diagnosis, treatment, prescription, notes } = req.body;
     try {
-      const booking = await Booking.findOne({bookingID});
+      const booking = await Booking.findOne({ bookingID });
       let id;
       while (true) {
         try {
@@ -392,7 +392,10 @@ class DoctorController {
       console.log(error);
       res
         .status(500)
-        .json({ message: 'Error fetching medical report', error: error.message });
+        .json({
+          message: 'Error fetching medical report',
+          error: error.message,
+        });
     }
   }
 }
