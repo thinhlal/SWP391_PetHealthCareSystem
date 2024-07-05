@@ -37,7 +37,9 @@ const StarRate = ({ rating, totalStars, totalReviews }) => {
   return (
     <div className='Admin-DashBoard-Star'>
       {stars}
-      <span>({totalReviews})</span>
+      {totalReviews ?
+        <span>({totalReviews})</span>
+        : null}
     </div>
   );
 };

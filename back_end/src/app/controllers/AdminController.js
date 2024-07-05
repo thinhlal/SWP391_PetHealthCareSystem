@@ -210,6 +210,33 @@ class AdminController {
     }
   }
 
+  // GET /getAllRates
+  async getAllRates(req, res, next) {
+    try {
+      const allRates = await Rate.aggregate([
+        {
+          $lookup: {
+            from: 'customers',
+            localField: 'customerID',
+            foreignField: 'customerID',
+            as: 'customerDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'bookings',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'bookingDetails',
+          },
+        },
+      ]);
+      res.status(200).json(allRates);
+    } catch (error) {
+      res.status(500).json({ message: 'Error when get accounts', error });
+    }
+  }
+
   // GET /getRating
   async getRating(req, res, next) {
     try {
