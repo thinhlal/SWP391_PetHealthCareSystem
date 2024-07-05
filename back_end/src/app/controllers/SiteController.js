@@ -111,7 +111,7 @@ class SiteController {
       const token = jwt.sign(
         { id: account._id, username: account.username },
         JWT_SECRET,
-        { expiresIn: '15m' },
+        { expiresIn: '7d' },
       );
       const refreshToken = jwt.sign(
         { id: account._id, username: account.username },
@@ -206,7 +206,7 @@ class SiteController {
         const newAccessToken = jwt.sign(
           { id: account._id, username: account.username },
           JWT_SECRET,
-          { expiresIn: '15m' },
+          { expiresIn: '7d' },
         );
         const newRefreshToken = jwt.sign(
           { id: account._id, username: account.username },
