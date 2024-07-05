@@ -1,12 +1,33 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './PetStatus.css';
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
+import axiosInstance from '../../utils/axiosInstance';
+import { AuthContext } from '../../context/AuthContext';
 
 function PetStatus() {
+  const { user } = useContext(AuthContext);
   const location = useLocation();
-  const { petData, user } = location.state || {}; // Lấy dữ liệu từ state
+  const [petData, setPetData] = useState([]);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const params = new URLSearchParams(location.search);
+        const petID = params.get('petID');
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
+        );
+        console.log(response.data[0]);
+        setPetData(response.data[0]);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      }
+    };
+
+    fetchPets();
+  }, [location.search]);
 
   const [statusData] = useState([
     {

@@ -103,7 +103,9 @@ function ProfilePet() {
   }
 
   const handleViewStatusClick = () => {
-    navigate('/pet-status', { state: { petData, user } });
+    const params = new URLSearchParams(location.search);
+    const petID = params.get('petID');
+    navigate(`/pet-status?petID=${petID}`);
   };
 
   return (
