@@ -130,32 +130,33 @@ function AdminDashBoard() {
                     <div className='Admin-DashBoard-Main-Table-Content-Row '>
                       <div
                         className={`Admin-DashBoard-Table-status-booking
-                              ${item.isCancel
-                            ? 'Admin-DashBoard-Table-status-cancel'
-                            : item.paymentsDetails[0].isCancelPayment
-                              ? 'Admin-DashBoard-Table-status-cancel'
-                              : item.paymentsDetails[0].isSuccess &&
-                                item.paymentsDetails[0]
-                                  .paymentMethod === 'PAYPAL' &&
-                                !item.isCheckIn
-                                ? 'Admin-DashBoard-Table-status-waiting'
-                                : !item.paymentsDetails[0].isSuccess &&
-                                  item.paymentsDetails[0]
-                                    .paymentMethod === 'COUNTER' &&
-                                  !item.isCheckIn
-                                  ? 'Admin-DashBoard-Table-status-waiting'
-                                  : item.paymentsDetails[0].isSuccess &&
-                                    item.paymentsDetails[0]
-                                      .paymentMethod === 'PAYPAL' &&
-                                    item.isCheckIn
-                                    ? 'Admin-DashBoard-Table-status-done'
+                              ${
+                                item.isCancel
+                                  ? 'Admin-DashBoard-Table-status-cancel'
+                                  : item.paymentsDetails[0].isCancelPayment
+                                    ? 'Admin-DashBoard-Table-status-cancel'
                                     : item.paymentsDetails[0].isSuccess &&
-                                      item.paymentsDetails[0]
-                                        .paymentMethod === 'COUNTER' &&
-                                      item.isCheckIn
-                                      ? 'Admin-DashBoard-Table-status-done'
-                                      : null
-                          }`}
+                                        item.paymentsDetails[0]
+                                          .paymentMethod === 'PAYPAL' &&
+                                        !item.isCheckIn
+                                      ? 'Admin-DashBoard-Table-status-waiting'
+                                      : !item.paymentsDetails[0].isSuccess &&
+                                          item.paymentsDetails[0]
+                                            .paymentMethod === 'COUNTER' &&
+                                          !item.isCheckIn
+                                        ? 'Admin-DashBoard-Table-status-waiting'
+                                        : item.paymentsDetails[0].isSuccess &&
+                                            item.paymentsDetails[0]
+                                              .paymentMethod === 'PAYPAL' &&
+                                            item.isCheckIn
+                                          ? 'Admin-DashBoard-Table-status-done'
+                                          : item.paymentsDetails[0].isSuccess &&
+                                              item.paymentsDetails[0]
+                                                .paymentMethod === 'COUNTER' &&
+                                              item.isCheckIn
+                                            ? 'Admin-DashBoard-Table-status-done'
+                                            : null
+                              }`}
                       >
                         {item.isCancel ? (
                           <span>Cancel Booking</span>

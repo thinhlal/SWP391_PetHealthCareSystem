@@ -2,11 +2,24 @@ const Rate = require('../models/Rate.js');
 const Booking = require('../models/Booking.js');
 
 class RateController {
-  //GET /getAllServices
-  async getAllServices(req, res, next) {
+  //GET /getAllRates
+  async getAllRates(req, res, next) {
     try {
+      const getAllRates = await Rate.aggregate([
+        { $sort: { createdAt: -1 } },
+        { $limit: 10 },
+        {
+          $lookup: {
+            from: 'customers',
+            localField: 'customerID',
+            foreignField: 'customerID',
+            as: 'customerDetails',
+          },
+        },
+      ]);
+      res.status(200).json(getAllRates);
     } catch (error) {
-      res.status(500).json({ message: 'Error fetching services', error });
+      res.status(500).json({ message: 'Error fetching rate', error });
     }
   }
 

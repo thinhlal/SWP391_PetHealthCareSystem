@@ -1,6 +1,7 @@
 import './YourBooking.css';
 import Header from '../../components/User/Header/Header.js';
 import Footer from '../../components/User/Footer/Footer.js';
+import StarRate from '../../components/Admin/StarRate/StarRate.js';
 // Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
@@ -608,8 +609,12 @@ function YourBooking() {
                   </div>
                   <div className='modal-body'>
                     <h1>Rating</h1>
-                    <div>
-                      Rate Star: {currentBookingData?.rateDetails[0]?.rate}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      Rate Star:{' '}
+                      <StarRate
+                        rating={currentBookingData?.rateDetails[0]?.rate}
+                        totalStars={5}
+                      />
                     </div>
                     <div>
                       Rate Comment:{' '}

@@ -9,6 +9,11 @@ router.get('/getAllPets/:accountID', verifyToken, petController.getAllPets);
 router.get('/getPetID/:petID', verifyToken, petController.getPetID);
 router.get('/searchPet/:petIDOrName', verifyToken, petController.petIDOrName);
 router.get(
+  '/getAllCageDiseases',
+  verifyToken,
+  petController.getAllCageDiseasesByPetID,
+);
+router.get(
   '/searchPetOfUserID/:accountID',
   verifyToken,
   petController.searchPetWithAccountID,

@@ -219,7 +219,6 @@ function AdminCages() {
   return (
     <div className='Admin-Cages container-fluid'>
       <div className='row'>
-
         <Header />
 
         <div className='Admin-Cages-Content row'>

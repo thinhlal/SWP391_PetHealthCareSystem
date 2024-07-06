@@ -1,4 +1,5 @@
 const Pet = require('../models/Pet.js');
+const CageDisease = require('../models/CageDisease.js');
 
 class PetController {
   // GET /updatePetPatch/:petID
@@ -27,6 +28,37 @@ class PetController {
     try {
       const allPets = await Pet.find({ accountID });
       res.status(200).json(allPets);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Error fetching pets', error: error.message });
+    }
+  }
+
+  // GET /getAllCageDiseases
+  async getAllCageDiseasesByPetID(req, res, next) {
+    const { petID } = req.query;
+    try {
+      const allCageDisease = await CageDisease.aggregate([
+        { $match: { petID } },
+        {
+          $lookup: {
+            from: 'diseaseinfos',
+            localField: 'cageDiseaseID',
+            foreignField: 'cageDiseaseID',
+            as: 'diseaseInfos',
+          },
+        },
+        {
+          $lookup: {
+            from: 'doctors',
+            localField: 'doctorID',
+            foreignField: 'doctorID',
+            as: 'doctorDetails',
+          },
+        },
+      ]);
+      res.status(200).json(allCageDisease);
     } catch (error) {
       res
         .status(500)

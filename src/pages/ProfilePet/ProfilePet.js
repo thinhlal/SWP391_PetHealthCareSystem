@@ -103,9 +103,7 @@ function ProfilePet() {
   }
 
   const handleViewStatusClick = () => {
-    const params = new URLSearchParams(location.search);
-    const petID = params.get('petID');
-    navigate(`/pet-status?petID=${petID}`);
+    navigate('/pet-status', { state: { petData, user } });
   };
 
   return (

@@ -41,17 +41,20 @@ function AdminRating() {
     fetchRate();
   }, []);
 
-  const handleRatingFilterChange = (event) => {
+  const handleRatingFilterChange = event => {
     setRatingFilter(event.target.value);
   };
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = event => {
     setSearch(event.target.value);
   };
 
-  const filteredRateData = ratingData.filter((rating) => {
-    const matchesStatus = ratingFilter === 'All' || rating.rate.toString() === ratingFilter;
-    const matchesSearch = search === '' || rating.bookingID.toLowerCase().includes(search.toLowerCase());
+  const filteredRateData = ratingData.filter(rating => {
+    const matchesStatus =
+      ratingFilter === 'All' || rating.rate.toString() === ratingFilter;
+    const matchesSearch =
+      search === '' ||
+      rating.bookingID.toLowerCase().includes(search.toLowerCase());
     return matchesStatus && matchesSearch;
   });
 
@@ -135,7 +138,8 @@ function AdminRating() {
                     <div className='Admin-Rating-Main-Table-Content-Row '>
                       <StarRate
                         rating={item.rate}
-                        totalStars={5} />
+                        totalStars={5}
+                      />
                     </div>
                     <div className='Admin-Rating-Main-Table-Content-Row '>
                       {item.comment}
@@ -153,7 +157,7 @@ function AdminRating() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

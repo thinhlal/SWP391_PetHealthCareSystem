@@ -924,7 +924,6 @@ a {
 }
 
 .main .FEEDBACK {
-  position: relative;
 }
 
 .Feedback_Flex {
@@ -960,11 +959,7 @@ a {
 
 .main .element-tab-list {
   display: flex;
-  width: 239px;
-  align-items: flex-start;
-  position: absolute;
-  top: 62px;
-  left: 210px;
+  align-items: center;
 }
 
 .main .segmented-control {

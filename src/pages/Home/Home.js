@@ -17,13 +17,26 @@ import why_we_are from '../../assets/images/img_Home/dog_About.png';
 import checked_Icon from '../../assets/images/img_Home/checked.png';
 import vote_star from '../../assets/images/img_Home/star.png';
 import userIcon from '../../assets/images/img_Home/userlogincam.png';
+import axiosInstance from '../../utils/axiosInstance.js';
 
 const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
 
 function Home() {
   const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [feedbacks, setFeedbacks] = useState([]);
   const menuRef = useRef(null);
+
+  useEffect(() => {
+    const fetchAllFeedBack = async () => {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/rate/getAllRates`,
+      );
+      console.log(response.data);
+      setFeedbacks(response.data);
+    };
+    fetchAllFeedBack();
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -496,132 +509,43 @@ function Home() {
       <div className='MAIN-FEEDBACK lazy-load'>
         <div className='MAIN-FEEDBACK-title'>What Our Client’s Say</div>
         <div className='Feedback_Flex'>
-          <div className='FEEDBACK'>
-            <div className='overlap-group-6'>
-              <p className='a-great-strength-of'>
-                <span className='text-wrapper-8'>
-                  A great strength of this service is the detailed and attentive
-                  care for my pet. Employees are not only working people, but
-                  they are also passionate and knowledgeable about their
-                  animals. They showed interest in my pets, providing useful
-                  information and advice on how to care for and nurture them.
-                  <br />
-                  <br />
-                </span>
-                <span className='text-wrapper-5'>
-                  Mark
-                  <br />
-                </span>
-              </p>
-              <div className='element-tab-list'>
-                <div className='segmented-control'>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
+          {feedbacks.map(feedback => (
+            <div
+              className='FEEDBACK'
+              key={feedback.rateID}
+            >
+              <div className='overlap-group-6'>
+                <p className='a-great-strength-of'>
+                  <span className='text-wrapper-8'>
+                    {feedback.comment}
+                    <br />
+                    <br />
+                  </span>
+                  <span className='text-wrapper-5'>
+                    {feedback.customerDetails[0].name}
+                    <br />
+                  </span>
+                </p>
+                <div className='element-tab-list'>
+                  <div className='segmented-control'>
+                    {[...Array(feedback.rate)].map((_, i) => (
+                      <div
+                        className='item'
+                        key={i}
+                      >
+                        <img
+                          alt=''
+                          className='element-8'
+                          src={vote_star}
+                          loading='lazy'
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className='FEEDBACK'>
-            <div className='overlap-group-6'>
-              <p className='a-great-strength-of-2'>
-                <span className='text-wrapper-8'>
-                  A great strength of this service is the detailed and attentive
-                  care for my pet. Employees are not only working people, but
-                  they are also passionate and knowledgeable about their
-                  animals. They showed interest in my pets, providing useful
-                  information and advice on how to care for and nurture them.
-                  <br />
-                  <br />
-                </span>
-                <span className='text-wrapper-5'>
-                  Mark
-                  <br />
-                </span>
-              </p>
-              <div className='segmented-control-wrapper'>
-                <div className='segmented-control'>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                  <div className='item'>
-                    <img
-                      alt=''
-                      className='element-8'
-                      src={vote_star}
-                      loading='lazy'
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 

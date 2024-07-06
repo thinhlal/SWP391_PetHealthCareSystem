@@ -1,136 +1,49 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './PetStatus.css';
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
 import axiosInstance from '../../utils/axiosInstance';
-import { AuthContext } from '../../context/AuthContext';
 
 function PetStatus() {
-  const { user } = useContext(AuthContext);
   const location = useLocation();
-  const [petData, setPetData] = useState([]);
+  const { petData, user } = location.state || {};
 
-  useEffect(() => {
-    const fetchPets = async () => {
-      try {
-        const params = new URLSearchParams(location.search);
-        const petID = params.get('petID');
-        const response = await axiosInstance.get(
-          `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
-        );
-        console.log(response.data[0]);
-        setPetData(response.data[0]);
-      } catch (error) {
-        console.error('Error fetching pets:', error);
-      }
-    };
+  const [statusData, setStatusData] = useState([]);
 
-    fetchPets();
-  }, [location.search]);
-
-  const [statusData] = useState([
-    {
-      bookingID: 'B001',
-      entryDate: '2024-07-01',
-      status: 'In Cage',
-      doctor: 'Dr. John Doe',
-      reason: 'Check-up',
-      exitDate: '2024-07-05',
-    },
-    {
-      bookingID: 'B002',
-      entryDate: '2024-07-02',
-      status: 'Exited Cage',
-      doctor: 'Dr. Jane Smith',
-      reason: 'Vaccination',
-      exitDate: '2024-07-06',
-    },
-    {
-      bookingID: 'B003',
-      entryDate: '2024-07-03',
-      status: 'In Cage',
-      doctor: 'Dr. Emily Johnson',
-      reason: 'Surgery',
-      exitDate: '2024-07-10',
-    },
-    {
-      bookingID: 'B004',
-      entryDate: '2024-07-03',
-      status: 'In Cage',
-      doctor: 'Dr. Michael Brown',
-      reason: 'Routine Check-up',
-      exitDate: '2024-07-08',
-    },
-    {
-      bookingID: 'B005',
-      entryDate: '2024-07-03',
-      status: 'In Cage',
-      doctor: 'Dr. Linda Davis',
-      reason: 'Injury Treatment',
-      exitDate: '2024-07-09',
-    },
-    {
-      bookingID: 'B006',
-      entryDate: '2024-07-03',
-      status: 'In Cage',
-      doctor: 'Dr. William Wilson',
-      reason: 'Dental Cleaning',
-      exitDate: '2024-07-07',
-    },
-  ]);
-
-  const [detailData, setDetailData] = useState(null);
+  const [detailData, setDetailData] = useState([]);
   const [sortOrder, setSortOrder] = useState('newest');
 
-  const handleViewDetails = bookingID => {
-    const details = {
-      B001: {
-        bookingID: 'B001',
-        currentStatus: 'Mild',
-        doctorNotes: 'Check-up went smoothly, no issues found.',
-      },
-      B002: {
-        bookingID: 'B002',
-        currentStatus: 'Moderate',
-        doctorNotes: 'Vaccination successful, no side effects.',
-      },
-      B003: {
-        bookingID: 'B003',
-        currentStatus: 'Critical',
-        doctorNotes: 'Post-surgery monitoring required.',
-      },
-      B004: {
-        bookingID: 'B004',
-        currentStatus: 'Severe',
-        doctorNotes: 'Routine check-up, minor issues found.',
-      },
-      B005: {
-        bookingID: 'B005',
-        currentStatus: 'Healthy',
-        doctorNotes: 'Injury treatment ongoing, signs of recovery.',
-      },
-      B006: {
-        bookingID: 'B006',
-        currentStatus: 'Healthy',
-        doctorNotes: 'Dental cleaning completed successfully.',
-      },
-    };
-
-    setDetailData(details[bookingID]);
+  const handleViewDetails = diseaseInfos => {
+    setDetailData(diseaseInfos);
   };
 
   const handleCloseDetails = () => {
-    setDetailData(null);
+    setDetailData([]);
   };
+
+  useEffect(() => {
+    const fetchDiseaseOfPet = async () => {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/pet/getAllCageDiseases/`,
+        {
+          params: {
+            petID: petData.petID,
+          },
+        },
+      );
+      setStatusData(response.data);
+    };
+    fetchDiseaseOfPet();
+  }, [petData.petID]);
 
   const handleSortChange = order => {
     setSortOrder(order);
   };
 
   const sortedStatusData = [...statusData].sort((a, b) => {
-    const dateA = new Date(a.entryDate);
-    const dateB = new Date(b.entryDate);
+    const dateA = new Date(a.startDate);
+    const dateB = new Date(b.startDate);
     return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
   });
 
@@ -184,59 +97,87 @@ function PetStatus() {
                 </tr>
               </thead>
               <tbody>
-                {sortedStatusData.map((status, index) => (
-                  <tr key={index}>
-                    <td>{status.bookingID}</td>
-                    <td>{status.entryDate}</td>
-                    <td>{status.doctor}</td>
-                    <td>{status.reason}</td>
-                    <td
-                      className={
-                        status.status === 'In Cage'
-                          ? 'status-in-cage'
-                          : 'status-exited-cage'
-                      }
-                    >
-                      {status.status}
-                    </td>
-                    <td>
-                      {status.status === 'Exited Cage' ? status.exitDate : ''}
-                    </td>
-                    <td>
-                      <button
-                        className='view-detail-button'
-                        onClick={() => handleViewDetails(status.bookingID)}
+                {sortedStatusData.length > 0 ? (
+                  sortedStatusData.map((status, index) => (
+                    <tr key={index}>
+                      <td>{status?.bookingID}</td>
+                      <td>{status?.startDate.split('T')[0]}</td>
+                      <td>{status?.doctorDetails[0]?.name}</td>
+                      <td>{status?.reasonForAdmission}</td>
+                      <td
+                        className={
+                          status?.isRecover === false
+                            ? 'status-in-cage'
+                            : 'status-exited-cage'
+                        }
                       >
-                        View Details
-                      </button>
-                    </td>
+                        {status.isRecover ? 'Exited' : 'In cage'}
+                      </td>
+                      <td>
+                        {status.isRecover
+                          ? status.dischargeDate.split('T')[0]
+                          : ''}
+                      </td>
+                      <td>
+                        <button
+                          className='view-detail-button'
+                          onClick={() => handleViewDetails(status.diseaseInfos)}
+                        >
+                          View Details
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={7}>No data available</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
 
-          {detailData && (
+          {detailData.length > 0 && (
             <div className='pet-status-detail-table'>
               <h2 className='sub-title-info-pet-history'>Details</h2>
               <table>
                 <thead>
                   <tr>
-                    <th>Booking ID</th>
+                    <th>Date</th>
                     <th>Current Status</th>
                     <th>Doctor's Notes</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>{detailData.bookingID}</td>
-                    <td
-                      className={`status-${detailData.currentStatus.toLowerCase()}`}
-                    >
-                      {detailData.currentStatus}
-                    </td>
-                    <td>{detailData.doctorNotes}</td>
-                  </tr>
+                  {detailData.map(detail => (
+                    <tr key={detail.diseaseInfoID}>
+                      <td>{`${detail.date.split('T')[0]} ${detail.date.split('T')[1].split('.')[0]}`}</td>
+                      <td
+                        className={`status-${
+                          detail.status === 1
+                            ? 'critical'
+                            : detail.status === 2
+                              ? 'mild'
+                              : detail.status === 3
+                                ? 'moderate'
+                                : detail.status === 4
+                                  ? 'severe'
+                                  : 'healthy'
+                        }`}
+                      >
+                        {detail.status === 1
+                          ? 'Critical'
+                          : detail.status === 2
+                            ? 'Mild'
+                            : detail.status === 3
+                              ? 'Moderate'
+                              : detail.status === 4
+                                ? 'Severe'
+                                : 'Healthy'}
+                      </td>
+                      <td>{detail.notes}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
               <button
