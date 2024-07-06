@@ -6,13 +6,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 //Components
+import Header from '../../components/Admin/Header/Header';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Sidebar from '../../components/Admin/Sidebar/Sidebar';
 import Statistic from '../../components/Admin/Statistics/Statistics';
 
 //IMG
-import logo_pet_health_care from '../../assets/images/img_AdminServices/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminServices/icon_search.svg';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { blue } from '@mui/material/colors';
@@ -67,12 +67,6 @@ function AdminServices() {
     };
     getAllServices();
   }, []);
-
-  // useEffect(() => {
-  //   const today = new Date();
-  //   const formattedDate = today.toISOString().split('T')[0];
-  //   setCurrentDate(formattedDate);
-  // }, []);
 
   const validateInput = (name, value) => {
     let error = '';
@@ -223,383 +217,360 @@ function AdminServices() {
   return (
     <div className='Admin-Services container-fluid'>
       <div className='row'>
-        <div className='Admin-Services-Header row'>
-          <div className='Admin-Services-Header-Logo col-md-2'>
-            <img
-              className='Admin-Services-Logo'
-              src={logo_pet_health_care}
-              alt='logo-pet'
-            />
-          </div>
-          <div className='Admin-Services-Header-Account-Wrapper col-md-10'>
-            <div className='Admin-Services-Header-Account'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='20'
-                height='20'
-                fill='#000'
-                className='bi bi-person'
-                viewBox='0 0 16 16'
-              >
-                <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z' />
-              </svg>
-              <div className='Admin-Services-Header-Account-Text'>Hi Admin</div>
-            </div>
+        <Header />
+
+        <div className='Admin-Services-Content row'>
+          <div className='Admin-Services-Navigate col-md-2'>
+            <Sidebar />
           </div>
 
-          <div className='Admin-Services-Content row'>
-            <div className='Admin-Services-Navigate col-md-2'>
-              <Sidebar />
-            </div>
+          <div className='Admin-Services-Main col-md-10'>
+            <Statistic />
 
-            <div className='Admin-Services-Main col-md-10'>
-              <Statistic />
-
-              <div className='Admin-Services-Main-Table-Wrapper'>
-                <div className='Admin-Services-Main-Table'>
-                  <div className='Admin-Services-Main-Table-Title'>
-                    Services List
-                  </div>
-                  <div className='Admin-Services-Main-Table-Title-Text'>
-                    Services Information
-                  </div>
-                  <div className='Admin-Services-Main-Filter-Add'>
-                    <div className='Admin-Services-Main-Search'>
-                      <input
-                        type='text'
-                        placeholder='Search Name'
-                        className='Admin-Services-Main-Search-Input'
-                        onChange={e => setSearch(e.target.value)}
+            <div className='Admin-Services-Main-Table-Wrapper'>
+              <div className='Admin-Services-Main-Table'>
+                <div className='Admin-Services-Main-Table-Title'>
+                  Services List
+                </div>
+                <div className='Admin-Services-Main-Table-Title-Text'>
+                  Services Information
+                </div>
+                <div className='Admin-Services-Main-Filter-Add'>
+                  <div className='Admin-Services-Main-Search'>
+                    <input
+                      type='text'
+                      placeholder='Search Name'
+                      className='Admin-Services-Main-Search-Input'
+                      onChange={e => setSearch(e.target.value)}
+                    />
+                    <button className='Admin-Services-Main-Search-Button'>
+                      <img
+                        src={icon_search}
+                        alt=''
                       />
-                      <button className='Admin-Services-Main-Search-Button'>
-                        <img
-                          src={icon_search}
-                          alt=''
-                        />
-                      </button>
-                    </div>
-                    <div className='Admin-Services-Add-Services'>
-                      <button
-                        type='button'
-                        className='Admin-Services-add-services-btn'
-                        data-bs-toggle='modal'
-                        data-bs-target='#addServiceModal'
-                      >
-                        Add Services
-                      </button>
+                    </button>
+                  </div>
+                  <div className='Admin-Services-Add-Services'>
+                    <button
+                      type='button'
+                      className='Admin-Services-add-services-btn'
+                      data-bs-toggle='modal'
+                      data-bs-target='#addServiceModal'
+                    >
+                      Add Services
+                    </button>
 
-                      <div
-                        className='modal fade'
-                        id='addServiceModal'
-                        tabIndex='-1'
-                        aria-labelledby='addServiceModalLabel'
-                        aria-hidden='true'
-                        ref={modalCloseButtonRef}
-                      >
-                        <div className='modal-dialog'>
-                          <div className='modal-content'>
-                            <div className='modal-header'>
-                              <h1
-                                className='modal-title fs-5'
-                                id='addServiceModalLabel'
-                              >
-                                Add Services
-                              </h1>
-                              <button
-                                type='button'
-                                className='btn-close'
-                                data-bs-dismiss='modal'
-                                aria-label='Close'
-                              ></button>
-                            </div>
-                            <div className='modal-body'>
-                              <div className='Admin-Services-modal-update-name'>
-                                <div className='Admin-Services-modal-title'>
-                                  Name
-                                </div>
-                                <label className='Admin-Services-modal-initials'>
-                                  Services name:
-                                </label>
-                                <input
-                                  className='Admin-Services-input'
-                                  name='name'
-                                  value={newService.name}
-                                  onChange={handleInputChange}
-                                  placeholder='Services'
-                                />
-                                {addServiceErrors.name && (
-                                  <p className='error-message'>
-                                    {addServiceErrors.name}
-                                  </p>
-                                )}
+                    <div
+                      className='modal fade'
+                      id='addServiceModal'
+                      tabIndex='-1'
+                      aria-labelledby='addServiceModalLabel'
+                      aria-hidden='true'
+                      ref={modalCloseButtonRef}
+                    >
+                      <div className='modal-dialog'>
+                        <div className='modal-content'>
+                          <div className='modal-header'>
+                            <h1
+                              className='modal-title fs-5'
+                              id='addServiceModalLabel'
+                            >
+                              Add Services
+                            </h1>
+                            <button
+                              type='button'
+                              className='btn-close'
+                              data-bs-dismiss='modal'
+                              aria-label='Close'
+                            ></button>
+                          </div>
+                          <div className='modal-body'>
+                            <div className='Admin-Services-modal-update-name'>
+                              <div className='Admin-Services-modal-title'>
+                                Name
                               </div>
-                              <div className='Admin-Services-modal-update-name'>
-                                <div className='Admin-Services-modal-title'>
-                                  Description
-                                </div>
-                                <label className='Admin-Services-modal-initials'>
-                                  Services description:
-                                </label>
-                                <input
-                                  className='Admin-Services-input'
-                                  name='description'
-                                  value={newService.description}
-                                  onChange={handleInputChange}
-                                  placeholder='Description'
-                                />
-                                {addServiceErrors.description && (
-                                  <p className='error-message'>
-                                    {addServiceErrors.description}
-                                  </p>
-                                )}
-                              </div>
-                              <div className='Admin-Services-modal-update-name'>
-                                <div className='Admin-Services-modal-title'>
-                                  Price
-                                </div>
-                                <label className='Admin-Services-modal-initials'>
-                                  Services price:
-                                </label>
-                                <input
-                                  className='Admin-Services-input'
-                                  name='price'
-                                  value={newService.price}
-                                  onChange={handleInputChange}
-                                  placeholder='Price'
-                                />
-                                {addServiceErrors.price && (
-                                  <p className='error-message'>
-                                    {addServiceErrors.price}
-                                  </p>
-                                )}
-                              </div>
+                              <label className='Admin-Services-modal-initials'>
+                                Services name:
+                              </label>
+                              <input
+                                className='Admin-Services-input'
+                                name='name'
+                                value={newService.name}
+                                onChange={handleInputChange}
+                                placeholder='Services'
+                              />
+                              {addServiceErrors.name && (
+                                <p className='error-message'>
+                                  {addServiceErrors.name}
+                                </p>
+                              )}
                             </div>
-                            <div className='modal-footer'>
-                              <button
-                                type='button'
-                                className='btn btn-secondary'
-                                data-bs-dismiss='modal'
-                              >
-                                Close
-                              </button>
-                              <button
-                                type='button'
-                                className='btn btn-success'
-                                onClick={handleFormSubmit}
-                              >
-                                Add
-                              </button>
+                            <div className='Admin-Services-modal-update-name'>
+                              <div className='Admin-Services-modal-title'>
+                                Description
+                              </div>
+                              <label className='Admin-Services-modal-initials'>
+                                Services description:
+                              </label>
+                              <input
+                                className='Admin-Services-input'
+                                name='description'
+                                value={newService.description}
+                                onChange={handleInputChange}
+                                placeholder='Description'
+                              />
+                              {addServiceErrors.description && (
+                                <p className='error-message'>
+                                  {addServiceErrors.description}
+                                </p>
+                              )}
                             </div>
+                            <div className='Admin-Services-modal-update-name'>
+                              <div className='Admin-Services-modal-title'>
+                                Price
+                              </div>
+                              <label className='Admin-Services-modal-initials'>
+                                Services price:
+                              </label>
+                              <input
+                                className='Admin-Services-input'
+                                name='price'
+                                value={newService.price}
+                                onChange={handleInputChange}
+                                placeholder='Price'
+                              />
+                              {addServiceErrors.price && (
+                                <p className='error-message'>
+                                  {addServiceErrors.price}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                          <div className='modal-footer'>
+                            <button
+                              type='button'
+                              className='btn btn-secondary'
+                              data-bs-dismiss='modal'
+                            >
+                              Close
+                            </button>
+                            <button
+                              type='button'
+                              className='btn btn-success'
+                              onClick={handleFormSubmit}
+                            >
+                              Add
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className='Admin-Services-Main-Table-Header'>
-                    <div className='Admin-Services-Main-Table-Header-Title'>
-                      Services ID
-                    </div>
-                    <div className='Admin-Services-Main-Table-Header-Title'>
-                      Name Services
-                    </div>
-                    <div className='Admin-Services-Main-Table-Header-Title'>
-                      Description
-                    </div>
-                    <div className='Admin-Services-Main-Table-Header-Title'>
-                      Price
-                    </div>
-                    <div className='Admin-Services-Main-Table-Header-Title'>
-                      Status
-                    </div>
-                    <div className='Admin-Services-Main-Table-Header-Title-Btn'>
-                      Action
-                    </div>
+                <div className='Admin-Services-Main-Table-Header'>
+                  <div className='Admin-Services-Main-Table-Header-Title'>
+                    Services ID
                   </div>
+                  <div className='Admin-Services-Main-Table-Header-Title'>
+                    Name Services
+                  </div>
+                  <div className='Admin-Services-Main-Table-Header-Title'>
+                    Description
+                  </div>
+                  <div className='Admin-Services-Main-Table-Header-Title'>
+                    Price
+                  </div>
+                  <div className='Admin-Services-Main-Table-Header-Title'>
+                    Status
+                  </div>
+                  <div className='Admin-Services-Main-Table-Header-Title-Btn'>
+                    Action
+                  </div>
+                </div>
 
-                  {searchServicesData.map(item => (
-                    <div
-                      className={`Admin-Services-Main-Table-Content-Row-Wrapper ${item.status ? 'row-enable' : 'row-disable'}`}
-                      key={item.serviceID}
-                    >
-                      <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item?.serviceID}
-                      </div>
-                      <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item?.name}
-                      </div>
-                      <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item?.description}
-                      </div>
-                      <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item.price}
-                      </div>
-                      <div className='Admin-Services-Main-Table-Content-Row'>
-                        <label className='switch'>
-                          <input
-                            type='checkbox'
-                            checked={item.status}
-                            onChange={() => handleToggleStatus(item)}
+                {searchServicesData.map(item => (
+                  <div
+                    className={`Admin-Services-Main-Table-Content-Row-Wrapper ${item.status ? 'row-enable' : 'row-disable'}`}
+                    key={item.serviceID}
+                  >
+                    <div className='Admin-Services-Main-Table-Content-Row'>
+                      {item?.serviceID}
+                    </div>
+                    <div className='Admin-Services-Main-Table-Content-Row'>
+                      {item?.name}
+                    </div>
+                    <div className='Admin-Services-Main-Table-Content-Row'>
+                      {item?.description}
+                    </div>
+                    <div className='Admin-Services-Main-Table-Content-Row'>
+                      {item.price}
+                    </div>
+                    <div className='Admin-Services-Main-Table-Content-Row'>
+                      <label className='switch'>
+                        <input
+                          type='checkbox'
+                          checked={item.status}
+                          onChange={() => handleToggleStatus(item)}
+                        />
+                        <span className='slider round'></span>
+                      </label>
+                    </div>
+                    <div className='Admin-Services-Main-Table-Content-Row'>
+                      <span className='Admin-Services-Main-Table-Content-Btn_Wrapper'>
+                        <button
+                          type='button'
+                          className='Admin-Services-Main-Table-Content-Btn'
+                          data-bs-toggle='modal'
+                          data-bs-target={`#editServiceModal${item.serviceID}`}
+                          onClick={() => handleEditClick(item)}
+                        >
+                          <BorderColorOutlinedIcon
+                            sx={{
+                              color: blue[400],
+                            }}
                           />
-                          <span className='slider round'></span>
-                        </label>
-                      </div>
-                      <div className='Admin-Services-Main-Table-Content-Row'>
-                        <span className='Admin-Services-Main-Table-Content-Btn_Wrapper'>
-                          <button
-                            type='button'
-                            className='Admin-Services-Main-Table-Content-Btn'
-                            data-bs-toggle='modal'
-                            data-bs-target={`#editServiceModal${item.serviceID}`}
-                            onClick={() => handleEditClick(item)}
-                          >
-                            <BorderColorOutlinedIcon
-                              sx={{
-                                color: blue[400],
-                              }}
-                            />
-                          </button>
-                          <div
-                            className='modal fade'
-                            id={`editServiceModal${item.serviceID}`}
-                            tabIndex='-1'
-                            aria-labelledby={`editServiceModalLabel${item.serviceID}`}
-                            aria-hidden='true'
-                            ref={modalEditCloseButtonRef}
-                          >
-                            <div className='modal-dialog'>
-                              <div className='modal-content'>
-                                <div className='modal-header'>
-                                  <h1
-                                    className='modal-title fs-5'
-                                    id={`editServiceModalLabel${item.serviceID}`}
-                                  >
-                                    Edit Service
-                                  </h1>
-                                  <button
-                                    type='button'
-                                    className='btn-close'
-                                    data-bs-dismiss='modal'
-                                    aria-label='Close'
-                                  ></button>
+                        </button>
+                        <div
+                          className='modal fade'
+                          id={`editServiceModal${item.serviceID}`}
+                          tabIndex='-1'
+                          aria-labelledby={`editServiceModalLabel${item.serviceID}`}
+                          aria-hidden='true'
+                          ref={modalEditCloseButtonRef}
+                        >
+                          <div className='modal-dialog'>
+                            <div className='modal-content'>
+                              <div className='modal-header'>
+                                <h1
+                                  className='modal-title fs-5'
+                                  id={`editServiceModalLabel${item.serviceID}`}
+                                >
+                                  Edit Service
+                                </h1>
+                                <button
+                                  type='button'
+                                  className='btn-close'
+                                  data-bs-dismiss='modal'
+                                  aria-label='Close'
+                                ></button>
+                              </div>
+                              <div className='modal-body'>
+                                <div className='Admin-Services-modal-update-name'>
+                                  <div className='Admin-Services-modal-title-name'>
+                                    Name
+                                  </div>
+                                  <div className='Admin-Services-modal-update'>
+                                    <div className='Admin-Services-modal-update-title'>
+                                      Old name:
+                                    </div>
+                                    {originalEditService?.name}
+                                  </div>
+                                  <div className='Admin-Services-modal-update'>
+                                    <div className='Admin-Services-modal-update-title'>
+                                      New name:
+                                    </div>
+                                    <input
+                                      className='Admin-Services-input'
+                                      name='name'
+                                      value={editService?.name}
+                                      onChange={handleEditInputChange}
+                                      placeholder='Name'
+                                    />
+                                  </div>
+                                  {editServiceErrors.name && (
+                                    <p className='error-message'>
+                                      {editServiceErrors.name}
+                                    </p>
+                                  )}
                                 </div>
-                                <div className='modal-body'>
-                                  <div className='Admin-Services-modal-update-name'>
-                                    <div className='Admin-Services-modal-title-name'>
-                                      Name
-                                    </div>
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        Old name:
-                                      </div>
-                                      {originalEditService?.name}
-                                    </div>
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        New name:
-                                      </div>
-                                      <input
-                                        className='Admin-Services-input'
-                                        name='name'
-                                        value={editService?.name}
-                                        onChange={handleEditInputChange}
-                                        placeholder='Name'
-                                      />
-                                    </div>
-                                    {editServiceErrors.name && (
-                                      <p className='error-message'>
-                                        {editServiceErrors.name}
-                                      </p>
-                                    )}
+                                <div className='Admin-Services-modal-update-name'>
+                                  <div className='Admin-Services-modal-title'>
+                                    Description
                                   </div>
-                                  <div className='Admin-Services-modal-update-name'>
-                                    <div className='Admin-Services-modal-title'>
-                                      Description
+                                  <div className='Admin-Services-modal-update'>
+                                    <div className='Admin-Services-modal-update-title'>
+                                      Old Description:
                                     </div>
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        Old Description:
-                                      </div>
-                                      {originalEditService.description}
-                                    </div>
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        New Description:
-                                      </div>
-                                      <input
-                                        className='Admin-Services-input'
-                                        name='description'
-                                        value={editService?.description}
-                                        onChange={handleEditInputChange}
-                                        placeholder='Description'
-                                      />
-                                    </div>
-                                    {editServiceErrors.description && (
-                                      <p className='error-message'>
-                                        {editServiceErrors.description}
-                                      </p>
-                                    )}
+                                    {originalEditService.description}
                                   </div>
-                                  <div className='Admin-Services-modal-update-name'>
-                                    <div className='Admin-Services-modal-title'>
-                                      Price
+                                  <div className='Admin-Services-modal-update'>
+                                    <div className='Admin-Services-modal-update-title'>
+                                      New Description:
                                     </div>
+                                    <input
+                                      className='Admin-Services-input'
+                                      name='description'
+                                      value={editService?.description}
+                                      onChange={handleEditInputChange}
+                                      placeholder='Description'
+                                    />
+                                  </div>
+                                  {editServiceErrors.description && (
+                                    <p className='error-message'>
+                                      {editServiceErrors.description}
+                                    </p>
+                                  )}
+                                </div>
+                                <div className='Admin-Services-modal-update-name'>
+                                  <div className='Admin-Services-modal-title'>
+                                    Price
+                                  </div>
 
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update'>
-                                        <div className='Admin-Services-modal-update-title'>
-                                          Old price:
-                                        </div>
-                                        {originalEditService?.price}
-                                      </div>
-                                    </div>
+                                  <div className='Admin-Services-modal-update'>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
-                                        New Price:
+                                        Old price:
                                       </div>
-                                      <input
-                                        className='Admin-Services-input-phone'
-                                        name='price'
-                                        value={editService?.price}
-                                        onChange={handleEditInputChange}
-                                        placeholder='Price'
-                                      />
+                                      {originalEditService?.price}
                                     </div>
-                                    {editServiceErrors.price && (
-                                      <p className='error-message'>
-                                        {editServiceErrors.price}
-                                      </p>
-                                    )}
                                   </div>
+                                  <div className='Admin-Services-modal-update'>
+                                    <div className='Admin-Services-modal-update-title'>
+                                      New Price:
+                                    </div>
+                                    <input
+                                      className='Admin-Services-input-phone'
+                                      name='price'
+                                      value={editService?.price}
+                                      onChange={handleEditInputChange}
+                                      placeholder='Price'
+                                    />
+                                  </div>
+                                  {editServiceErrors.price && (
+                                    <p className='error-message'>
+                                      {editServiceErrors.price}
+                                    </p>
+                                  )}
                                 </div>
-                                <div className='modal-footer'>
-                                  <button
-                                    type='button'
-                                    className='btn btn-secondary'
-                                    data-bs-dismiss='modal'
-                                  >
-                                    Close
-                                  </button>
-                                  <button
-                                    type='button'
-                                    className='btn btn-success'
-                                    onClick={handleUpdateFormSubmit}
-                                  >
-                                    Save changes
-                                  </button>
-                                </div>
+                              </div>
+                              <div className='modal-footer'>
+                                <button
+                                  type='button'
+                                  className='btn btn-secondary'
+                                  data-bs-dismiss='modal'
+                                >
+                                  Close
+                                </button>
+                                <button
+                                  type='button'
+                                  className='btn btn-success'
+                                  onClick={handleUpdateFormSubmit}
+                                >
+                                  Save changes
+                                </button>
                               </div>
                             </div>
                           </div>
-                        </span>
-                      </div>
+                        </div>
+                      </span>
                     </div>
-                  ))}
-                  <div className='Admin-Services-Pagination'>
-                    <Stack spacing={2}>
-                      <Pagination count={10} />
-                    </Stack>
                   </div>
+                ))}
+                <div className='Admin-Services-Pagination'>
+                  <Stack spacing={2}>
+                    <Pagination count={10} />
+                  </Stack>
                 </div>
               </div>
             </div>

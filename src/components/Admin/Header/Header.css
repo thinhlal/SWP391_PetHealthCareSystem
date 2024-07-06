@@ -1,8 +1,8 @@
-.Admin-Rating {
+.Admin {
   background-color: #fafafa;
 }
 
-.Admin-Rating-Header {
+.Admin-Header {
   border-bottom: 1px solid #eae8f1;
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@
   height: 63px;
 }
 
-.Admin-Rating-Header-Logo {
+.Admin-Header-Logo {
   padding: 0;
   margin: 0;
   display: flex;
@@ -18,11 +18,11 @@
   justify-content: center;
 }
 
-.Admin-Rating-Logo {
+.Admin-Logo {
   width: 190px;
 }
 
-.Admin-Rating-Header-Account-Wrapper {
+.Admin-Header-Account-Wrapper {
   border-left: 1px solid #eae8f1;
   height: 100%;
   display: flex;
@@ -34,20 +34,20 @@
   color: white;
 }
 
-.Admin-Rating-Header-Account {
+.Admin-Header-Account {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
 
-.Admin-Rating-Header-Admin:hover {
+.Admin-Header-Admin:hover {
   transform: scale(1.1);
   color: #dd6637;
   cursor: pointer;
 }
 
-.Admin-Rating-Header-Account-Text {
+.Admin-Header-Account-Text {
   line-height: 25px;
   font-size: 16px;
   color: #000;

@@ -2,58 +2,6 @@
   background-color: #fafafa;
 }
 
-.Admin-Cages-Header {
-  border-bottom: 1px solid #eae8f1;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  height: 63px;
-}
-
-.Admin-Cages-Header-Logo {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.Admin-Cages-Logo {
-  width: 190px;
-}
-
-.Admin-Cages-Header-Account-Wrapper {
-  border-left: 1px solid #eae8f1;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-  padding: 0;
-  font-family: Roboto, sans-serif;
-  color: white;
-}
-
-.Admin-Cages-Header-Account {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.Admin-Cages-Header-Admin:hover {
-  transform: scale(1.1);
-  color: #dd6637;
-  cursor: pointer;
-}
-
-.Admin-Cages-Header-Account-Text {
-  font-family: Roboto, sans-serif;
-  line-height: 25px;
-  font-size: 16px;
-  color: #000;
-}
-
 .Admin-Cages-Content {
   padding: 0;
   margin: 0;

@@ -6,16 +6,15 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-//MUI
+//Components
+import Header from '../../components/Admin/Header/Header';
+import Sidebar from '../../components/Admin/Sidebar/Sidebar';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import Sidebar from '../../components/Admin/Sidebar/Sidebar';
-
 //images
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
 import StarRate from '../../components/Admin/StarRate/StarRate';
-import Header from '../../components/Admin/Header/Header';
 function AdminRating() {
   const [ratingData, setRatingData] = useState([]);
 

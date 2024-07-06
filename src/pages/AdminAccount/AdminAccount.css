@@ -2,58 +2,6 @@
   background-color: #fafafa;
 }
 
-.Admin-Account-Header {
-  border-bottom: 1px solid #eae8f1;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  height: 63px;
-}
-
-.Admin-Account-Header-Logo {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.Admin-Account-Logo {
-  width: 190px;
-}
-
-.Admin-Account-Header-Account-Wrapper {
-  border-left: 1px solid #eae8f1;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-  padding: 0;
-  font-family: Roboto, sans-serif;
-  color: white;
-}
-
-.Admin-Account-Header-Account {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.Admin-Account-Header-Admin:hover {
-  transform: scale(1.1);
-  color: #dd6637;
-  cursor: pointer;
-}
-
-.Admin-Account-Header-Account-Text {
-  font-family: Roboto, sans-serif;
-  line-height: 25px;
-  font-size: 16px;
-  color: #000;
-}
-
 .Admin-Account-Content {
   padding: 0;
   margin: 0;

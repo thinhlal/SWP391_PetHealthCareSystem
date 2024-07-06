@@ -1,28 +1,28 @@
 import './AdminAccount.css';
 // React
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
 // Img
-import logo_pet_health_care from '../../assets/images/img_AdminAccount/logo_pethealthcare.png';
 import icon_search from '../../assets/images/img_AdminAccount/icon_search.svg';
 import Statistic from '../../components/Admin/Statistics/Statistics';
+//Components
+import Header from '../../components/Admin/Header/Header';
+import Sidebar from '../../components/Admin/Sidebar/Sidebar';
+import Pagination from '@mui/material/Pagination';
+
 // MUI
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Switch from '@mui/joy/Switch';
 import { blue, green } from '@mui/material/colors';
-import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { AuthContext } from '../../context/AuthContext';
 import axiosInstance from '../../utils/axiosInstance';
-import Sidebar from '../../components/Admin/Sidebar/Sidebar';
 
 function AdminAccount() {
-  const { user } = useContext(AuthContext);
   const [search, setSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
   const [currentAccount, setCurrentAccount] = useState(null);
@@ -268,33 +268,8 @@ function AdminAccount() {
   return (
     <div className='Admin-Account container-fluid'>
       <div className='row'>
-        <div className='Admin-Account-Header row'>
-          <div className='Admin-Account-Header-Logo col-md-2'>
-            <img
-              className='Admin-Account-Logo'
-              src={logo_pet_health_care}
-              alt='logo-pet'
-            />
-          </div>
-          <div className='Admin-Account-Header-Account-Wrapper col-md-10'>
-            <div className='Admin-Account-Header-Account'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='20'
-                height='20'
-                fill='#000'
-                className='bi bi-person'
-                viewBox='0 0 16 16'
-              >
-                <path d='M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z' />
-              </svg>
-              <div className='Admin-Account-Header-Account-Text'>
-                {' '}
-                Hi {user.adminDetails[0].name}
-              </div>
-            </div>
-          </div>
-        </div>
+
+        <Header />
 
         <div className='Admin-Account-Content row'>
           <div className='Admin-Account-Navigate col-md-2'>
