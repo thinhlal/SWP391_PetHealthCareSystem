@@ -1,3 +1,7 @@
+.manage-booking-list {
+  font-family: 'Roboto', sans-serif;
+}
+
 .manage-booking-list .manage-booking-list-title {
   margin: 70px 0;
   display: flex;
@@ -270,6 +274,7 @@
 }
 
 .manage-booking-list .content-modal-manage-booking {
+  font-family: Roboto, sans-serif;
   display: flex;
   flex-direction: column;
   gap: 16px;
