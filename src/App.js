@@ -29,6 +29,7 @@ import UserProfile from './pages/UserProfile/UserProfile.js';
 import ChangeUserPassword from './pages/ChangeUserPassWord/ChangeUserPassWord.js';
 import TimeTableWork from './pages/TimeTableWork/TimeTableWork.js';
 import PetStatus from './pages/PetStatus/PetStatus.js';
+import DoctorCare from './pages/DoctorCare/DoctorCare.js';
 function App() {
   return (
     <AuthProvider>
@@ -242,6 +243,11 @@ function App() {
               <AdminRating />
             </ProtectedRoute>
           }
+        />
+
+        <Route
+          path='/doctor-care'
+          element={<DoctorCare />}
         />
       </Routes>
     </AuthProvider>
