@@ -388,13 +388,13 @@ function ManageListBooking() {
   };
   const filteredBookings = filterDate
     ? allBookings
-        .filter(booking => booking.dateBook.split('T')[0] === filterDate)
-        .sort((a, b) => b.bookingID.localeCompare(a.bookingID))
-        .sort((a, b) => a.startTime.localeCompare(b.startTime))
+      .filter(booking => booking.dateBook.split('T')[0] === filterDate)
+      .sort((a, b) => b.bookingID.localeCompare(a.bookingID))
+      .sort((a, b) => a.startTime.localeCompare(b.startTime))
     : allBookings
-        .sort((a, b) => b.bookingID.localeCompare(a.bookingID))
-        .sort((a, b) => a.startTime.localeCompare(b.startTime))
-        .sort((a, b) => new Date(b.dateBook) - new Date(a.dateBook));
+      .sort((a, b) => b.bookingID.localeCompare(a.bookingID))
+      .sort((a, b) => a.startTime.localeCompare(b.startTime))
+      .sort((a, b) => new Date(b.dateBook) - new Date(a.dateBook));
 
   const handleConfirmPayment = async bookingID => {
     try {
@@ -1088,7 +1088,7 @@ function ManageListBooking() {
                           <div>Cancelled</div>
                         ) : booking.paymentsDetails[0].isSuccess &&
                           booking.paymentsDetails[0].paymentMethod ===
-                            'PAYPAL' &&
+                          'PAYPAL' &&
                           !booking.isCheckIn ? (
                           <button
                             type='button'
@@ -1101,7 +1101,7 @@ function ManageListBooking() {
                           </button>
                         ) : !booking.paymentsDetails[0].isSuccess &&
                           booking.paymentsDetails[0].paymentMethod ===
-                            'COUNTER' &&
+                          'COUNTER' &&
                           !booking.isCheckIn ? (
                           <button
                             type='button'
@@ -1114,12 +1114,12 @@ function ManageListBooking() {
                           </button>
                         ) : booking.paymentsDetails[0].isSuccess &&
                           booking.paymentsDetails[0].paymentMethod ===
-                            'PAYPAL' &&
+                          'PAYPAL' &&
                           booking.isCheckIn ? (
                           booking?.doctorDetails[0]?.name
                         ) : booking.paymentsDetails[0].isSuccess &&
                           booking.paymentsDetails[0].paymentMethod ===
-                            'COUNTER' &&
+                          'COUNTER' &&
                           booking.isCheckIn ? (
                           booking?.doctorDetails[0]?.name
                         ) : (
@@ -1208,35 +1208,34 @@ function ManageListBooking() {
                       </div>
                       <div className='content-list-body-value'>
                         <span
-                          className={`${
-                            booking.isCancel ? (
-                              'status-cancel'
-                            ) : booking.paymentsDetails[0].isCancelPayment ? (
-                              'status-cancel'
-                            ) : booking.paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' &&
-                              !booking.isCheckIn ? (
-                              'status-waiting'
-                            ) : !booking.paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'COUNTER' &&
-                              !booking.isCheckIn ? (
-                              'status-waiting'
-                            ) : booking.paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' &&
-                              booking.isCheckIn ? (
-                              'status-checked-in'
-                            ) : booking.paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'COUNTER' &&
-                              booking.isCheckIn ? (
-                              'status-checked-in'
-                            ) : (
-                              <span>NULL</span>
-                            )
-                          }`}
+                          className={`${booking.isCancel ? (
+                            'status-cancel'
+                          ) : booking.paymentsDetails[0].isCancelPayment ? (
+                            'status-cancel'
+                          ) : booking.paymentsDetails[0].isSuccess &&
+                            booking.paymentsDetails[0].paymentMethod ===
+                            'PAYPAL' &&
+                            !booking.isCheckIn ? (
+                            'status-waiting'
+                          ) : !booking.paymentsDetails[0].isSuccess &&
+                            booking.paymentsDetails[0].paymentMethod ===
+                            'COUNTER' &&
+                            !booking.isCheckIn ? (
+                            'status-waiting'
+                          ) : booking.paymentsDetails[0].isSuccess &&
+                            booking.paymentsDetails[0].paymentMethod ===
+                            'PAYPAL' &&
+                            booking.isCheckIn ? (
+                            'status-checked-in'
+                          ) : booking.paymentsDetails[0].isSuccess &&
+                            booking.paymentsDetails[0].paymentMethod ===
+                            'COUNTER' &&
+                            booking.isCheckIn ? (
+                            'status-checked-in'
+                          ) : (
+                            <span>NULL</span>
+                          )
+                            }`}
                         >
                           {booking.isCancel ? (
                             <span>Cancel Booking</span>
@@ -1244,22 +1243,22 @@ function ManageListBooking() {
                             <span>Cancel Payment</span>
                           ) : booking.paymentsDetails[0].isSuccess &&
                             booking.paymentsDetails[0].paymentMethod ===
-                              'PAYPAL' &&
+                            'PAYPAL' &&
                             !booking.isCheckIn ? (
                             <span>Pending</span>
                           ) : !booking.paymentsDetails[0].isSuccess &&
                             booking.paymentsDetails[0].paymentMethod ===
-                              'COUNTER' &&
+                            'COUNTER' &&
                             !booking.isCheckIn ? (
                             <span>Pending</span>
                           ) : booking.paymentsDetails[0].isSuccess &&
                             booking.paymentsDetails[0].paymentMethod ===
-                              'PAYPAL' &&
+                            'PAYPAL' &&
                             booking.isCheckIn ? (
                             <span>Done</span>
                           ) : booking.paymentsDetails[0].isSuccess &&
                             booking.paymentsDetails[0].paymentMethod ===
-                              'COUNTER' &&
+                            'COUNTER' &&
                             booking.isCheckIn ? (
                             <span>Done</span>
                           ) : (
@@ -1280,8 +1279,8 @@ function ManageListBooking() {
                       </div>
 
                       {booking.isCancel &&
-                      booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-                      !booking.isRefund ? (
+                        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                        !booking.isRefund ? (
                         <div className='content-list-body-value'>
                           <button
                             type='button'
@@ -1296,7 +1295,7 @@ function ManageListBooking() {
                         <div className='content-list-body-value'></div>
                       ) : !booking.paymentsDetails[0].isSuccess &&
                         booking.paymentsDetails[0].paymentMethod ===
-                          'COUNTER' &&
+                        'COUNTER' &&
                         booking.isCancel ? (
                         <div className='content-list-body-value'></div>
                       ) : booking.paymentsDetails[0].isSuccess &&
@@ -1315,7 +1314,7 @@ function ManageListBooking() {
                         </div>
                       ) : !booking.paymentsDetails[0].isSuccess &&
                         booking.paymentsDetails[0].paymentMethod ===
-                          'COUNTER' &&
+                        'COUNTER' &&
                         !booking.isCheckIn ? (
                         <div className='content-list-body-value'>
                           <button
@@ -1496,14 +1495,6 @@ function ManageListBooking() {
                                             }
                                           </small>
                                         </div>
-                                        <div className='reason-manage-booking'>
-                                          <small className='title-reason-manage-booking'>
-                                            Date Booking:&nbsp;
-                                          </small>
-                                          <small>
-                                            {booking.dateBook.split('T')[0]}
-                                          </small>
-                                        </div>
                                         {booking?.dateCancelBook && (
                                           <div className='reason-manage-booking'>
                                             <small className='title-reason-manage-booking'>
@@ -1520,6 +1511,14 @@ function ManageListBooking() {
                                         )}
                                         <div className='reason-manage-booking'>
                                           <small className='title-reason-manage-booking'>
+                                            Date Booking:&nbsp;
+                                          </small>
+                                          <small>
+                                            {booking.dateBook.split('T')[0]}
+                                          </small>
+                                        </div>
+                                        <div className='reason-manage-booking'>
+                                          <small className='title-reason-manage-booking'>
                                             Status:&nbsp;
                                           </small>
                                           <small>
@@ -1527,7 +1526,7 @@ function ManageListBooking() {
                                               .isCancelPayment ? (
                                               <span>Cancelled</span>
                                             ) : booking.paymentsDetails[0]
-                                                .isSuccess === false ? (
+                                              .isSuccess === false ? (
                                               <span>Not paid</span>
                                             ) : (
                                               <span>Already paid</span>
@@ -1674,7 +1673,7 @@ function ManageListBooking() {
                                           .isCancelPayment ? (
                                           <span>Cancelled</span>
                                         ) : booking.paymentsDetails[0]
-                                            .isSuccess === false ? (
+                                          .isSuccess === false ? (
                                           <span>Not paid</span>
                                         ) : (
                                           <span>Already paid</span>
@@ -1833,7 +1832,7 @@ function ManageListBooking() {
                                           .isCancelPayment ? (
                                           <span>Cancelled</span>
                                         ) : booking.paymentsDetails[0]
-                                            .isSuccess === false ? (
+                                          .isSuccess === false ? (
                                           <span>Not paid</span>
                                         ) : (
                                           <span>Already paid</span>
@@ -1969,14 +1968,6 @@ function ManageListBooking() {
                                         }
                                       </small>
                                     </div>
-                                    <div className='reason-manage-booking'>
-                                      <small className='title-reason-manage-booking'>
-                                        Date Book:&nbsp;
-                                      </small>
-                                      <small>
-                                        {booking.dateBook.split('T')[0]}
-                                      </small>
-                                    </div>
                                     {booking?.dateCancelBook && (
                                       <div className='reason-manage-booking'>
                                         <small className='title-reason-manage-booking'>
@@ -1993,6 +1984,14 @@ function ManageListBooking() {
                                     )}
                                     <div className='reason-manage-booking'>
                                       <small className='title-reason-manage-booking'>
+                                        Date Book:&nbsp;
+                                      </small>
+                                      <small>
+                                        {booking.dateBook.split('T')[0]}
+                                      </small>
+                                    </div>
+                                    <div className='reason-manage-booking'>
+                                      <small className='title-reason-manage-booking'>
                                         Status:&nbsp;
                                       </small>
                                       <small>
@@ -2000,7 +1999,7 @@ function ManageListBooking() {
                                           .isCancelPayment ? (
                                           <span>Cancelled</span>
                                         ) : booking.paymentsDetails[0]
-                                            .isSuccess === false ? (
+                                          .isSuccess === false ? (
                                           <span>Not paid</span>
                                         ) : (
                                           <span>Already paid</span>
