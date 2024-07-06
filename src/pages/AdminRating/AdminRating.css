@@ -118,7 +118,6 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  justify-content: space-between;
   font-family: Roboto, sans-serif;
 }
 
@@ -147,6 +146,12 @@
   border: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+.Admin-Rating-Select-rate {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  padding-left: 60px;
 }
 
 .Admin-Rating-Select-Rating {

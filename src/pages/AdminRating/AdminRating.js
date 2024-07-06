@@ -12,10 +12,15 @@ import Sidebar from '../../components/Admin/Sidebar/Sidebar';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 //images
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import icon_search from '../../assets/images/img_AdminCages/icon_search.svg';
+
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
 import StarRate from '../../components/Admin/StarRate/StarRate';
 function AdminRating() {
+  const [search, setSearch] = useState('');
+  const [ratingFilter, setRatingFilter] = useState('All');
   const [ratingData, setRatingData] = useState([]);
 
   useEffect(() => {
@@ -36,10 +41,24 @@ function AdminRating() {
     fetchRate();
   }, []);
 
+  const handleRatingFilterChange = (event) => {
+    setRatingFilter(event.target.value);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const filteredRateData = ratingData.filter((rating) => {
+    const matchesStatus = ratingFilter === 'All' || rating.rate.toString() === ratingFilter;
+    const matchesSearch = search === '' || rating.bookingID.toLowerCase().includes(search.toLowerCase());
+    return matchesStatus && matchesSearch;
+  });
+
   return (
     <div className='Admin-Rating container-fluid'>
       <div className='row'>
-        <Header/>
+        <Header />
         <div className='Admin-Rating-Content row'>
           <div className='Admin-Rating-Navigate col-md-2'>
             <Sidebar />
@@ -52,6 +71,42 @@ function AdminRating() {
                 <div className='Admin-Rating-Main-Table-Title-Text'>
                   Rating Information
                 </div>
+                <div className='Admin-Rating-Main-Filter'>
+                  <div className='Admin-Rating-Main-Search'>
+                    <input
+                      type='text'
+                      placeholder='Search Cage ID'
+                      className='Admin-Rating-Main-Search-Input'
+                      value={search}
+                      onChange={handleSearchChange}
+                    />
+                    <button className='Admin-Rating-Main-Search-Button'>
+                      {' '}
+                      <img
+                        src={icon_search}
+                        alt=''
+                      />{' '}
+                    </button>
+                  </div>
+                  <div className='Admin-Rating-Select-rate'>
+                    <FilterAltIcon sx={{ fontSize: 20 }} />
+                    Select rating:
+                    <select
+                      className='Admin-Rating-Select-Filter'
+                      name='rate'
+                      value={ratingFilter}
+                      onChange={handleRatingFilterChange}
+                    >
+                      <option>All</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div className='Admin-Rating-Main-Table-Header'>
                   <div className='Admin-Rating-Main-Table-Header-Title '>
                     BookingID
@@ -66,7 +121,7 @@ function AdminRating() {
                     Comment
                   </div>
                 </div>
-                {ratingData.map(item => (
+                {filteredRateData.map(item => (
                   <div
                     className='Admin-Rating-Main-Table-Content-Row-Wrapper'
                     key={item.rateID}
