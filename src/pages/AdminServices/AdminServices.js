@@ -20,7 +20,6 @@ import axiosInstance from '../../utils/axiosInstance';
 
 function AdminServices() {
   const [search, setSearch] = useState('');
-  // const [currentDate, setCurrentDate] = useState('');
   const [newService, setNewService] = useState({
     name: '',
     description: '',
@@ -134,6 +133,7 @@ function AdminServices() {
       } catch (error) {
         console.error(error);
       }
+      setNewService({ name: '', description: '', price: '' });
       setAddServiceErrors({ name: '', description: '', price: '' });
       // Close the modal
       document.querySelector('#addServiceModal .btn-close').click();
@@ -389,184 +389,190 @@ function AdminServices() {
                   </div>
                 </div>
 
-                {searchServicesData.map(item => (
-                  <div
-                    className={`Admin-Services-Main-Table-Content-Row-Wrapper ${item.status ? 'row-enable' : 'row-disable'}`}
-                    key={item.serviceID}
-                  >
-                    <div className='Admin-Services-Main-Table-Content-Row'>
-                      {item?.serviceID}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row'>
-                      {item?.name}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row'>
-                      {item?.description}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row'>
-                      {item.price}
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row'>
-                      <label className='switch'>
-                        <input
-                          type='checkbox'
-                          checked={item.status}
-                          onChange={() => handleToggleStatus(item)}
-                        />
-                        <span className='slider round'></span>
-                      </label>
-                    </div>
-                    <div className='Admin-Services-Main-Table-Content-Row'>
-                      <span className='Admin-Services-Main-Table-Content-Btn_Wrapper'>
-                        <button
-                          type='button'
-                          className='Admin-Services-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#editServiceModal${item.serviceID}`}
-                          onClick={() => handleEditClick(item)}
-                        >
-                          <BorderColorOutlinedIcon
-                            sx={{
-                              color: blue[400],
-                            }}
+                {searchServicesData.length > 0 ? (
+                  searchServicesData.map(item => (
+                    <div
+                      className={`Admin-Services-Main-Table-Content-Row-Wrapper ${item.status ? 'row-enable' : 'row-disable'}`}
+                      key={item.serviceID}
+                    >
+                      <div className='Admin-Services-Main-Table-Content-Row'>
+                        {item?.serviceID}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row'>
+                        {item?.name}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row'>
+                        {item?.description}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row'>
+                        {item.price}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row'>
+                        <label className='switch'>
+                          <input
+                            type='checkbox'
+                            checked={item.status}
+                            onChange={() => handleToggleStatus(item)}
                           />
-                        </button>
-                        <div
-                          className='modal fade'
-                          id={`editServiceModal${item.serviceID}`}
-                          tabIndex='-1'
-                          aria-labelledby={`editServiceModalLabel${item.serviceID}`}
-                          aria-hidden='true'
-                          ref={modalEditCloseButtonRef}
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id={`editServiceModalLabel${item.serviceID}`}
-                                >
-                                  Edit Service
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title-name'>
-                                    Name
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old name:
-                                    </div>
-                                    {originalEditService?.name}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New name:
-                                    </div>
-                                    <input
-                                      className='Admin-Services-input'
-                                      name='name'
-                                      value={editService?.name}
-                                      onChange={handleEditInputChange}
-                                      placeholder='Name'
-                                    />
-                                  </div>
-                                  {editServiceErrors.name && (
-                                    <p className='error-message'>
-                                      {editServiceErrors.name}
-                                    </p>
-                                  )}
+                          <span className='slider round'></span>
+                        </label>
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row'>
+                        <span className='Admin-Services-Main-Table-Content-Btn_Wrapper'>
+                          <button
+                            type='button'
+                            className='Admin-Services-Main-Table-Content-Btn'
+                            data-bs-toggle='modal'
+                            data-bs-target={`#editServiceModal${item.serviceID}`}
+                            onClick={() => handleEditClick(item)}
+                          >
+                            <BorderColorOutlinedIcon
+                              sx={{
+                                color: blue[400],
+                              }}
+                            />
+                          </button>
+                          <div
+                            className='modal fade'
+                            id={`editServiceModal${item.serviceID}`}
+                            tabIndex='-1'
+                            aria-labelledby={`editServiceModalLabel${item.serviceID}`}
+                            aria-hidden='true'
+                            ref={modalEditCloseButtonRef}
+                          >
+                            <div className='modal-dialog'>
+                              <div className='modal-content'>
+                                <div className='modal-header'>
+                                  <h1
+                                    className='modal-title fs-5'
+                                    id={`editServiceModalLabel${item.serviceID}`}
+                                  >
+                                    Edit Service
+                                  </h1>
+                                  <button
+                                    type='button'
+                                    className='btn-close'
+                                    data-bs-dismiss='modal'
+                                    aria-label='Close'
+                                  ></button>
                                 </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    Description
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      Old Description:
+                                <div className='modal-body'>
+                                  <div className='Admin-Services-modal-update-name'>
+                                    <div className='Admin-Services-modal-title-name'>
+                                      Name
                                     </div>
-                                    {originalEditService.description}
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Description:
-                                    </div>
-                                    <input
-                                      className='Admin-Services-input'
-                                      name='description'
-                                      value={editService?.description}
-                                      onChange={handleEditInputChange}
-                                      placeholder='Description'
-                                    />
-                                  </div>
-                                  {editServiceErrors.description && (
-                                    <p className='error-message'>
-                                      {editServiceErrors.description}
-                                    </p>
-                                  )}
-                                </div>
-                                <div className='Admin-Services-modal-update-name'>
-                                  <div className='Admin-Services-modal-title'>
-                                    Price
-                                  </div>
-
-                                  <div className='Admin-Services-modal-update'>
                                     <div className='Admin-Services-modal-update'>
                                       <div className='Admin-Services-modal-update-title'>
-                                        Old price:
+                                        Old name:
                                       </div>
-                                      {originalEditService?.price}
+                                      {originalEditService?.name}
                                     </div>
-                                  </div>
-                                  <div className='Admin-Services-modal-update'>
-                                    <div className='Admin-Services-modal-update-title'>
-                                      New Price:
+                                    <div className='Admin-Services-modal-update'>
+                                      <div className='Admin-Services-modal-update-title'>
+                                        New name:
+                                      </div>
+                                      <input
+                                        className='Admin-Services-input'
+                                        name='name'
+                                        value={editService?.name}
+                                        onChange={handleEditInputChange}
+                                        placeholder='Name'
+                                      />
                                     </div>
-                                    <input
-                                      className='Admin-Services-input-phone'
-                                      name='price'
-                                      value={editService?.price}
-                                      onChange={handleEditInputChange}
-                                      placeholder='Price'
-                                    />
+                                    {editServiceErrors.name && (
+                                      <p className='error-message'>
+                                        {editServiceErrors.name}
+                                      </p>
+                                    )}
                                   </div>
-                                  {editServiceErrors.price && (
-                                    <p className='error-message'>
-                                      {editServiceErrors.price}
-                                    </p>
-                                  )}
+                                  <div className='Admin-Services-modal-update-name'>
+                                    <div className='Admin-Services-modal-title'>
+                                      Description
+                                    </div>
+                                    <div className='Admin-Services-modal-update'>
+                                      <div className='Admin-Services-modal-update-title'>
+                                        Old Description:
+                                      </div>
+                                      {originalEditService.description}
+                                    </div>
+                                    <div className='Admin-Services-modal-update'>
+                                      <div className='Admin-Services-modal-update-title'>
+                                        New Description:
+                                      </div>
+                                      <input
+                                        className='Admin-Services-input'
+                                        name='description'
+                                        value={editService?.description}
+                                        onChange={handleEditInputChange}
+                                        placeholder='Description'
+                                      />
+                                    </div>
+                                    {editServiceErrors.description && (
+                                      <p className='error-message'>
+                                        {editServiceErrors.description}
+                                      </p>
+                                    )}
+                                  </div>
+                                  <div className='Admin-Services-modal-update-name'>
+                                    <div className='Admin-Services-modal-title'>
+                                      Price
+                                    </div>
+
+                                    <div className='Admin-Services-modal-update'>
+                                      <div className='Admin-Services-modal-update'>
+                                        <div className='Admin-Services-modal-update-title'>
+                                          Old price:
+                                        </div>
+                                        {originalEditService?.price}
+                                      </div>
+                                    </div>
+                                    <div className='Admin-Services-modal-update'>
+                                      <div className='Admin-Services-modal-update-title'>
+                                        New Price:
+                                      </div>
+                                      <input
+                                        className='Admin-Services-input-phone'
+                                        name='price'
+                                        value={editService?.price}
+                                        onChange={handleEditInputChange}
+                                        placeholder='Price'
+                                      />
+                                    </div>
+                                    {editServiceErrors.price && (
+                                      <p className='error-message'>
+                                        {editServiceErrors.price}
+                                      </p>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                  onClick={handleUpdateFormSubmit}
-                                >
-                                  Save changes
-                                </button>
+                                <div className='modal-footer'>
+                                  <button
+                                    type='button'
+                                    className='btn btn-secondary'
+                                    data-bs-dismiss='modal'
+                                  >
+                                    Close
+                                  </button>
+                                  <button
+                                    type='button'
+                                    className='btn btn-success'
+                                    onClick={handleUpdateFormSubmit}
+                                  >
+                                    Save changes
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </span>
+                        </span>
+                      </div>
                     </div>
+                  ))
+                ) : (
+                  <div className='admin-no-content-available'>
+                    No Content Available
                   </div>
-                ))}
+                )}
                 <div className='Admin-Services-Pagination'>
                   <Stack spacing={2}>
                     <Pagination count={10} />

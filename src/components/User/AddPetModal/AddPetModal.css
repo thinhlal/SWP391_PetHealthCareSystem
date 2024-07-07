@@ -1,5 +1,5 @@
-/* Modal CSS */
 .modal-choose-pet {
+  font-family: Roboto, sans-serif;
   position: fixed;
   top: 0;
   left: 0;
@@ -125,7 +125,6 @@
   background: rgb(52, 92, 48);
 }
 
-/* Add close button styles */
 .modal-close-button {
   position: absolute;
   top: 10px;

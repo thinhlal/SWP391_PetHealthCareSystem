@@ -8,6 +8,13 @@ function Footer() {
   return (
     <div className='main-footer'>
       <div className='main-footer_Info'>
+        <div>
+          <img
+            alt=''
+            className='main-footer_FootSheep'
+            src={footer_Sheep}
+          />
+        </div>
         <div className='main-footer_Info_Desc'>
           <img
             alt=''
@@ -23,11 +30,6 @@ function Footer() {
             </div>
           </div>
           <div className='main-footer_Info_Desc-Address'>
-            <img
-              alt=''
-              className='main-footer_FootSheep'
-              src={footer_Sheep}
-            />
             <div className='main-footer_Info_Desc-Address_Text'>
               555 A, East Manster Street, Ready Halley Neon, Uk 4512
             </div>
@@ -60,20 +62,20 @@ function Footer() {
             - 22.00
           </div>
         </div>
-      </div>
-      <div className='footer_form-subriber'>
-        <div className='footer_form-subriber-title'>
-          Subscribe to our newsletter
-        </div>
-        <div className='footer_form-subriber-input'>
-          <input
-            type='email'
-            className='footer_form-subriber-input_Email'
-            placeholder='Email'
-          />
-        </div>
-        <div className='footer_form-subriber-button'>
-          <div className='footer_form-subriber-button-text'>Subcribe Now</div>
+        <div className='footer_form-subriber'>
+          <div className='footer_form-subriber-title'>
+            Subscribe to our newsletter
+          </div>
+          <div className='footer_form-subriber-input'>
+            <input
+              type='email'
+              className='footer_form-subriber-input_Email'
+              placeholder='Email'
+            />
+          </div>
+          <div className='footer_form-subriber-button'>
+            <div className='footer_form-subriber-button-text'>Subcribe Now</div>
+          </div>
         </div>
       </div>
     </div>

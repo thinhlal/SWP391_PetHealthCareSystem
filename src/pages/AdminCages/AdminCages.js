@@ -395,154 +395,164 @@ function AdminCages() {
                   </div>
                 </div>
 
-                {filteredcageData.map(item => (
-                  <div
-                    className='Admin-Cages-Main-Table-Content-Row-Wrapper'
-                    key={item.id}
-                  >
-                    <div className='Admin-Cages-Main-Table-Content-Row'>
-                      {' '}
-                      {item.cage_number_id}{' '}
-                    </div>
-                    <div className='Admin-Cages-Main-Table-Content-Row'>
-                      {' '}
-                      {item.name}{' '}
-                    </div>
-                    <div className='Admin-Cages-Main-Table-Content-Row'>
-                      {' '}
-                      {item.description}{' '}
-                    </div>
-                    <div className='Admin-Cages-Main-Table-Content-Row'>
-                      {' '}
-                      {item.status}{' '}
-                    </div>
-                    <div className='Admin-Cages-Main-Table-Content-Row-Action'>
-                      {' '}
-                      <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
-                        <button
-                          type='button'
-                          className='Admin-Cages-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#exampleModalEdit-${item.id}`}
-                          onClick={() => openEditModal(item)}
-                        >
-                          <BorderColorOutlinedIcon sx={{ color: blue[400] }} />
-                        </button>
-                        {/* Modal Edit */}
-                        <div
-                          className='modal fade'
-                          id={`exampleModalEdit-${item.id}`}
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelEdit'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelEdit'
-                                >
-                                  {' '}
-                                  Edit Cage{' '}
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Cages-modal-update'>
-                                  <div className='Admin-Cages-modal-title-name'>
+                {filteredcageData.length > 0 ? (
+                  filteredcageData.map(item => (
+                    <div
+                      className='Admin-Cages-Main-Table-Content-Row-Wrapper'
+                      key={item.id}
+                    >
+                      <div className='Admin-Cages-Main-Table-Content-Row'>
+                        {' '}
+                        {item.cage_number_id}{' '}
+                      </div>
+                      <div className='Admin-Cages-Main-Table-Content-Row'>
+                        {' '}
+                        {item.name}{' '}
+                      </div>
+                      <div className='Admin-Cages-Main-Table-Content-Row'>
+                        {' '}
+                        {item.description}{' '}
+                      </div>
+                      <div className='Admin-Cages-Main-Table-Content-Row'>
+                        {' '}
+                        {item.status}{' '}
+                      </div>
+                      <div className='Admin-Cages-Main-Table-Content-Row-Action'>
+                        {' '}
+                        <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
+                          <button
+                            type='button'
+                            className='Admin-Cages-Main-Table-Content-Btn'
+                            data-bs-toggle='modal'
+                            data-bs-target={`#exampleModalEdit-${item.id}`}
+                            onClick={() => openEditModal(item)}
+                          >
+                            <BorderColorOutlinedIcon
+                              sx={{ color: blue[400] }}
+                            />
+                          </button>
+                          {/* Modal Edit */}
+                          <div
+                            className='modal fade'
+                            id={`exampleModalEdit-${item.id}`}
+                            tabIndex='-1'
+                            aria-labelledby='exampleModalLabelEdit'
+                            aria-hidden='true'
+                          >
+                            <div className='modal-dialog'>
+                              <div className='modal-content'>
+                                <div className='modal-header'>
+                                  <h1
+                                    className='modal-title fs-5'
+                                    id='exampleModalLabelEdit'
+                                  >
                                     {' '}
-                                    Name{' '}
-                                  </div>
-                                  <label className='Admin-Cages-modal-update-new'>
-                                    {' '}
-                                    Cage name:{' '}
-                                  </label>
-                                  <input
-                                    className='Admin-Cages-input'
-                                    name='name'
-                                    value={editCage.name}
-                                    onChange={handleEditCageChange}
-                                    placeholder='Name'
-                                  />
-                                  {errors.name && (
-                                    <div className='Admin-Cages-Error'>
-                                      {errors.name}
-                                    </div>
-                                  )}
+                                    Edit Cage{' '}
+                                  </h1>
+                                  <button
+                                    type='button'
+                                    className='btn-close'
+                                    data-bs-dismiss='modal'
+                                    aria-label='Close'
+                                  ></button>
                                 </div>
-                                <div className='Admin-Cages-modal-update'>
-                                  <div className='Admin-Cages-modal-title'>
-                                    {' '}
-                                    Description{' '}
-                                  </div>
-                                  <label className='Admin-Cages-modal-update-new'>
-                                    {' '}
-                                    Cage description:{' '}
-                                  </label>
-                                  <input
-                                    className='Admin-Cages-input'
-                                    name='description'
-                                    value={editCage.description}
-                                    onChange={handleEditCageChange}
-                                    placeholder='Description'
-                                  />
-                                  {errors.description && (
-                                    <div className='Admin-Cages-Error'>
-                                      {errors.description}
+                                <div className='modal-body'>
+                                  <div className='Admin-Cages-modal-update'>
+                                    <div className='Admin-Cages-modal-title-name'>
+                                      {' '}
+                                      Name{' '}
                                     </div>
-                                  )}
+                                    <label className='Admin-Cages-modal-update-new'>
+                                      {' '}
+                                      Cage name:{' '}
+                                    </label>
+                                    <input
+                                      className='Admin-Cages-input'
+                                      name='name'
+                                      value={editCage.name}
+                                      onChange={handleEditCageChange}
+                                      placeholder='Name'
+                                    />
+                                    {errors.name && (
+                                      <div className='Admin-Cages-Error'>
+                                        {errors.name}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <div className='Admin-Cages-modal-update'>
+                                    <div className='Admin-Cages-modal-title'>
+                                      {' '}
+                                      Description{' '}
+                                    </div>
+                                    <label className='Admin-Cages-modal-update-new'>
+                                      {' '}
+                                      Cage description:{' '}
+                                    </label>
+                                    <input
+                                      className='Admin-Cages-input'
+                                      name='description'
+                                      value={editCage.description}
+                                      onChange={handleEditCageChange}
+                                      placeholder='Description'
+                                    />
+                                    {errors.description && (
+                                      <div className='Admin-Cages-Error'>
+                                        {errors.description}
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  {' '}
-                                  Close{' '}
-                                </button>
-                                <button
-                                  type='button'
-                                  className='btn btn-success'
-                                  onClick={handleSaveChanges}
-                                >
-                                  {' '}
-                                  Save changes{' '}
-                                </button>
+                                <div className='modal-footer'>
+                                  <button
+                                    type='button'
+                                    className='btn btn-secondary'
+                                    data-bs-dismiss='modal'
+                                  >
+                                    {' '}
+                                    Close{' '}
+                                  </button>
+                                  <button
+                                    type='button'
+                                    className='btn btn-success'
+                                    onClick={handleSaveChanges}
+                                  >
+                                    {' '}
+                                    Save changes{' '}
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </span>
-                      <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
-                        <Switch
-                          checked={item.condition === 'Enable'}
-                          onChange={() => handleStatusChange(item.id)}
-                          color={
-                            item.condition === 'Enable' ? 'success' : 'neutral'
-                          }
-                          variant={
-                            item.condition === 'Enable' ? 'solid' : 'outlined'
-                          }
-                          slotProps={{
-                            endDecorator: {
-                              sx: {
-                                minWidth: 24,
+                        </span>
+                        <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
+                          <Switch
+                            checked={item.condition === 'Enable'}
+                            onChange={() => handleStatusChange(item.id)}
+                            color={
+                              item.condition === 'Enable'
+                                ? 'success'
+                                : 'neutral'
+                            }
+                            variant={
+                              item.condition === 'Enable' ? 'solid' : 'outlined'
+                            }
+                            slotProps={{
+                              endDecorator: {
+                                sx: {
+                                  minWidth: 24,
+                                },
                               },
-                            },
-                          }}
-                        />
-                      </span>{' '}
+                            }}
+                          />
+                        </span>{' '}
+                      </div>
                     </div>
+                  ))
+                ) : (
+                  <div className='admin-no-content-available'>
+                    No data available
                   </div>
-                ))}
+                )}
 
                 <div className='Admin-Cages-Pagination'>
                   <Stack spacing={2}>

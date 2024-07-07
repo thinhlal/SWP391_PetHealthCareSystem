@@ -5,51 +5,42 @@
 }
 
 .main-footer_Info {
-  position: relative;
   display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
 }
 
 .main-footer_Info_Desc {
-  margin-top: 50px;
-  margin-right: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .main-footer_logo {
-  width: 240px;
-  height: 95px;
+  width: 200px;
   object-fit: cover;
 }
 
 .main-footer_Info_Desc-Contact {
-  margin: 50px 0;
+  margin: 30px 0;
 }
 
 .main-footer_Info_Desc-Contact_Text {
   font-weight: 500;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 30px;
   font-family: Roboto, sans-serif;
   letter-spacing: 0;
 }
 
 .main-footer_Info_Desc-Address {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 527px;
-  height: 246px;
+  margin: 20px 0;
 }
 
 .main-footer_FootSheep {
-  position: absolute;
-  width: 150px;
+  width: 100px;
   object-fit: cover;
-  left: 0;
 }
 
 .main-footer_Info_Desc-Address_Text {
@@ -60,7 +51,7 @@
   font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 0;
   line-height: 30px;
 }
@@ -71,34 +62,32 @@
   align-items: center;
   justify-content: center;
 }
+
 .main-footer_Info_Time-Title {
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #ffffff;
-  font-size: 40px;
+  font-size: 22px;
   text-align: center;
   letter-spacing: 0;
-  line-height: 60px;
-  margin-bottom: 40px;
+  line-height: 30px;
+  margin: 20px 0;
 }
 
 .main-footer_Info_Text {
-  margin: 10px 20px 10px 0;
+  margin: 2px 0px;
   font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 0;
   line-height: 30px;
   white-space: nowrap;
 }
 
 .footer_form-subriber {
-  position: absolute;
-  right: 35px;
-  top: 90px;
-  width: 494px;
-  height: 424px;
+  width: 300px;
+  height: 240px;
   background-color: #315194;
   border-radius: 50px;
 }
@@ -107,20 +96,19 @@
   margin: 20px;
   justify-content: center;
   display: flex;
-  height: 123px;
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #ffffff;
-  font-size: 35px;
+  font-size: 22px;
   text-align: center;
   letter-spacing: 0;
-  line-height: 52.5px;
+  line-height: 30px;
 }
 
 .footer_form-subriber-input {
   margin: auto;
   display: flex;
-  width: 399px;
+  width: 270px;
   align-items: center;
   gap: 16px;
   background-color: #113179;
@@ -134,12 +122,12 @@
   border-radius: 8px;
   background-color: #002169;
   flex: 1;
-  height: 55px;
   position: relative;
   font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #828282;
-  font-size: 20px;
+  font-size: 16px;
+  height: 40px;
   letter-spacing: 0;
   line-height: 150%;
   overflow: hidden;
@@ -148,14 +136,15 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   font-style: normal;
+  outline: none;
 }
 
 .footer_form-subriber-button {
   margin: auto;
   display: flex;
-  margin-top: 60px;
-  width: 399px;
-  height: 58px;
+  margin-top: 30px;
+  width: 270px;
+  height: 36px;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -174,7 +163,7 @@
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #ffffff;
-  font-size: 24px;
+  font-size: 16px;
   letter-spacing: 0;
   line-height: 36px;
   white-space: nowrap;

@@ -124,28 +124,34 @@ function AdminRating() {
                     Comment
                   </div>
                 </div>
-                {filteredRateData.map(item => (
-                  <div
-                    className='Admin-Rating-Main-Table-Content-Row-Wrapper'
-                    key={item.rateID}
-                  >
-                    <div className='Admin-Rating-Main-Table-Content-Row '>
-                      {item.bookingID}
+                {filteredRateData.length > 0 ? (
+                  filteredRateData.map(item => (
+                    <div
+                      className='Admin-Rating-Main-Table-Content-Row-Wrapper'
+                      key={item.rateID}
+                    >
+                      <div className='Admin-Rating-Main-Table-Content-Row '>
+                        {item.bookingID}
+                      </div>
+                      <div className='Admin-Rating-Main-Table-Content-Row '>
+                        {item.date.split('T')[0]}
+                      </div>
+                      <div className='Admin-Rating-Main-Table-Content-Row '>
+                        <StarRate
+                          rating={item.rate}
+                          totalStars={5}
+                        />
+                      </div>
+                      <div className='Admin-Rating-Main-Table-Content-Row '>
+                        {item.comment}
+                      </div>
                     </div>
-                    <div className='Admin-Rating-Main-Table-Content-Row '>
-                      {item.date.split('T')[0]}
-                    </div>
-                    <div className='Admin-Rating-Main-Table-Content-Row '>
-                      <StarRate
-                        rating={item.rate}
-                        totalStars={5}
-                      />
-                    </div>
-                    <div className='Admin-Rating-Main-Table-Content-Row '>
-                      {item.comment}
-                    </div>
+                  ))
+                ) : (
+                  <div className='admin-no-content-available'>
+                    No Content Available
                   </div>
-                ))}
+                )}
 
                 <div className='Admin-Rating-Pagination'>
                   <Stack spacing={2}>

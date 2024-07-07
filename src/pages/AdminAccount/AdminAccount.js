@@ -538,140 +538,265 @@ function AdminAccount() {
                   </div>
                 </div>
 
-                {filteredAccountData.map(item => (
-                  <div
-                    className='Admin-Account-Main-Table-Content-Row-Wrapper'
-                    key={item.accountID}
-                  >
-                    <div className='Admin-Account-Main-Table-Content-Row'>
-                      {item.accountID}
-                    </div>
-                    <div className='Admin-Account-Main-Table-Content-Row'>
-                      {item.username}
-                    </div>
-                    <div className='Admin-Account-Main-Table-Content-Row'>
-                      {item.role}
-                    </div>
-                    <div className='Admin-Account-Main-Table-Content-Row-Action'>
-                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
-                        <button
-                          type='button'
-                          className='Admin-Account-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#exampleModalEdit-${item.accountID}`}
-                          onClick={() => openEditModal(item)}
-                        >
-                          <BorderColorOutlinedIcon sx={{ color: blue[400] }} />
-                        </button>
-                        <div
-                          className='modal fade'
-                          id={`exampleModalEdit-${item.accountID}`}
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelEdit'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelEdit'
-                                >
-                                  Update Information
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title-name'>
-                                    Name
-                                  </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
-                                      Old name:
-                                    </div>
-                                    {currentAccount?.name}
-                                  </div>
-                                  <label className='Admin-Account-modal-update-new'>
-                                    New name:
-                                  </label>
-                                  <input
-                                    className='Admin-Account-input'
-                                    name='name'
-                                    value={editAccount.name}
-                                    onChange={handleEditAccountChange}
-                                    placeholder='Name'
-                                  />
-                                  {errors.name && (
-                                    <div className='Admin-Account-Error'>
-                                      {errors.name}
-                                    </div>
-                                  )}
+                {filteredAccountData.length > 0 ? (
+                  filteredAccountData.map(item => (
+                    <div
+                      className='Admin-Account-Main-Table-Content-Row-Wrapper'
+                      key={item.accountID}
+                    >
+                      <div className='Admin-Account-Main-Table-Content-Row'>
+                        {item.accountID}
+                      </div>
+                      <div className='Admin-Account-Main-Table-Content-Row'>
+                        {item.username}
+                      </div>
+                      <div className='Admin-Account-Main-Table-Content-Row'>
+                        {item.role}
+                      </div>
+                      <div className='Admin-Account-Main-Table-Content-Row-Action'>
+                        <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
+                          <button
+                            type='button'
+                            className='Admin-Account-Main-Table-Content-Btn'
+                            data-bs-toggle='modal'
+                            data-bs-target={`#exampleModalEdit-${item.accountID}`}
+                            onClick={() => openEditModal(item)}
+                          >
+                            <BorderColorOutlinedIcon
+                              sx={{ color: blue[400] }}
+                            />
+                          </button>
+                          <div
+                            className='modal fade'
+                            id={`exampleModalEdit-${item.accountID}`}
+                            tabIndex='-1'
+                            aria-labelledby='exampleModalLabelEdit'
+                            aria-hidden='true'
+                          >
+                            <div className='modal-dialog'>
+                              <div className='modal-content'>
+                                <div className='modal-header'>
+                                  <h1
+                                    className='modal-title fs-5'
+                                    id='exampleModalLabelEdit'
+                                  >
+                                    Update Information
+                                  </h1>
+                                  <button
+                                    type='button'
+                                    className='btn-close'
+                                    data-bs-dismiss='modal'
+                                    aria-label='Close'
+                                  ></button>
                                 </div>
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title'>
-                                    Email
-                                  </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
-                                      Old email:
+                                <div className='modal-body'>
+                                  <div className='Admin-Account-modal-update'>
+                                    <div className='Admin-Account-modal-title-name'>
+                                      Name
                                     </div>
-                                    {currentAccount?.email}
-                                  </div>
-                                  <label className='Admin-Account-modal-update-new'>
-                                    New email:
-                                  </label>
-                                  <input
-                                    className='Admin-Account-input'
-                                    type='email'
-                                    name='email'
-                                    value={editAccount.email}
-                                    onChange={handleEditAccountChange}
-                                    placeholder='Email'
-                                  />
-                                  {errors.email && (
-                                    <div className='Admin-Account-Error'>
-                                      {errors.email}
+                                    <div className='Admin-Account-modal-update-old'>
+                                      <div className='Admin-Account-modal-initials'>
+                                        Old name:
+                                      </div>
+                                      {currentAccount?.name}
                                     </div>
-                                  )}
-                                </div>
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title'>
-                                    Phone
+                                    <label className='Admin-Account-modal-update-new'>
+                                      New name:
+                                    </label>
+                                    <input
+                                      className='Admin-Account-input'
+                                      name='name'
+                                      value={editAccount.name}
+                                      onChange={handleEditAccountChange}
+                                      placeholder='Name'
+                                    />
+                                    {errors.name && (
+                                      <div className='Admin-Account-Error'>
+                                        {errors.name}
+                                      </div>
+                                    )}
                                   </div>
-                                  <div className='Admin-Account-modal-update-old'>
-                                    <div className='Admin-Account-modal-initials'>
-                                      Old phone number:
+                                  <div className='Admin-Account-modal-update'>
+                                    <div className='Admin-Account-modal-title'>
+                                      Email
                                     </div>
-                                    {currentAccount?.phone}
+                                    <div className='Admin-Account-modal-update-old'>
+                                      <div className='Admin-Account-modal-initials'>
+                                        Old email:
+                                      </div>
+                                      {currentAccount?.email}
+                                    </div>
+                                    <label className='Admin-Account-modal-update-new'>
+                                      New email:
+                                    </label>
+                                    <input
+                                      className='Admin-Account-input'
+                                      type='email'
+                                      name='email'
+                                      value={editAccount.email}
+                                      onChange={handleEditAccountChange}
+                                      placeholder='Email'
+                                    />
+                                    {errors.email && (
+                                      <div className='Admin-Account-Error'>
+                                        {errors.email}
+                                      </div>
+                                    )}
                                   </div>
-                                  <label className='Admin-Account-modal-update-new'>
-                                    New phone number:
-                                  </label>
-                                  <input
-                                    className='Admin-Account-input'
-                                    name='phone'
-                                    value={editAccount.phone}
-                                    onChange={handleEditAccountChange}
-                                    placeholder='Phone number'
-                                  />
-                                  {errors.phone && (
-                                    <div className='Admin-Account-Error'>
-                                      {errors.phone}
+                                  <div className='Admin-Account-modal-update'>
+                                    <div className='Admin-Account-modal-title'>
+                                      Phone
                                     </div>
-                                  )}
-                                </div>
+                                    <div className='Admin-Account-modal-update-old'>
+                                      <div className='Admin-Account-modal-initials'>
+                                        Old phone number:
+                                      </div>
+                                      {currentAccount?.phone}
+                                    </div>
+                                    <label className='Admin-Account-modal-update-new'>
+                                      New phone number:
+                                    </label>
+                                    <input
+                                      className='Admin-Account-input'
+                                      name='phone'
+                                      value={editAccount.phone}
+                                      onChange={handleEditAccountChange}
+                                      placeholder='Phone number'
+                                    />
+                                    {errors.phone && (
+                                      <div className='Admin-Account-Error'>
+                                        {errors.phone}
+                                      </div>
+                                    )}
+                                  </div>
 
-                                <div className='Admin-Account-modal-update'>
-                                  <div className='Admin-Account-modal-title'>
-                                    Role
+                                  <div className='Admin-Account-modal-update'>
+                                    <div className='Admin-Account-modal-title'>
+                                      Role
+                                    </div>
+                                    {editAccount.role}
                                   </div>
-                                  {editAccount.role}
+                                  <div className='modal-footer'>
+                                    <button
+                                      type='button'
+                                      className='btn btn-secondary'
+                                      data-bs-dismiss='modal'
+                                    >
+                                      Close
+                                    </button>
+                                    <button
+                                      type='button'
+                                      className='btn btn-success'
+                                      onClick={handleSaveChanges}
+                                    >
+                                      Save changes
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </span>
+
+                        <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
+                          <button
+                            type='button'
+                            className='Admin-Account-Main-Table-Content-Btn'
+                            data-bs-toggle='modal'
+                            data-bs-target={`#exampleModalMore-${item.accountID}`}
+                          >
+                            <MoreVertOutlinedIcon sx={{ color: green[400] }} />
+                          </button>
+                          <div
+                            className='modal fade'
+                            id={`exampleModalMore-${item.accountID}`}
+                            tabIndex='-1'
+                            aria-labelledby='exampleModalLabelMore'
+                            aria-hidden='true'
+                          >
+                            <div className='modal-dialog'>
+                              <div className='modal-content'>
+                                <div className='modal-header'>
+                                  <h1
+                                    className='modal-title fs-5'
+                                    id='exampleModalLabelMore'
+                                  >
+                                    Account Information
+                                  </h1>
+                                  <button
+                                    type='button'
+                                    className='btn-close'
+                                    data-bs-dismiss='modal'
+                                    aria-label='Close'
+                                  ></button>
+                                </div>
+                                <div className='modal-body'>
+                                  <div className='Admin-Account-modal-more'>
+                                    <div className='Admin-Account-modal-more-title'>
+                                      Account ID:
+                                    </div>
+                                    {item.accountID}
+                                  </div>
+                                  <div className='Admin-Account-modal-more'>
+                                    <div className='Admin-Account-modal-more-title'>
+                                      Name:
+                                    </div>
+                                    {item.role === 'Customer' ? (
+                                      item?.customerDetails[0]?.name
+                                    ) : item?.role === 'Staff' ? (
+                                      item?.staffDetails[0]?.name
+                                    ) : item?.role === 'Admin' ? (
+                                      item?.adminDetails[0]?.name
+                                    ) : item?.role === 'Doctor' ? (
+                                      item?.doctorDetails[0]?.name
+                                    ) : (
+                                      <span>Nothing</span>
+                                    )}
+                                  </div>
+                                  <div className='Admin-Account-modal-more'>
+                                    <div className='Admin-Account-modal-more-title'>
+                                      User name:
+                                    </div>
+                                    {item.username}
+                                  </div>
+                                  <div className='Admin-Account-modal-more'>
+                                    <div className='Admin-Account-modal-more-title'>
+                                      Email:
+                                    </div>
+                                    {item?.role === 'Customer' ? (
+                                      item?.customerDetails[0]?.email
+                                    ) : item?.role === 'Staff' ? (
+                                      item?.staffDetails[0]?.email
+                                    ) : item?.role === 'Admin' ? (
+                                      item?.adminDetails[0]?.email
+                                    ) : item?.role === 'Doctor' ? (
+                                      item?.doctorDetails[0]?.email
+                                    ) : (
+                                      <span>Nothing</span>
+                                    )}
+                                  </div>
+                                  <div className='Admin-Account-modal-more'>
+                                    <div className='Admin-Account-modal-more-title'>
+                                      Phone number:
+                                    </div>
+                                    {item?.role === 'Customer' ? (
+                                      item?.customerDetails[0]?.phone
+                                    ) : item?.role === 'Staff' ? (
+                                      item?.staffDetails[0]?.phone
+                                    ) : item?.role === 'Admin' ? (
+                                      item?.adminDetails[0]?.phone
+                                    ) : item?.role === 'Doctor' ? (
+                                      item?.doctorDetails[0]?.phone
+                                    ) : (
+                                      <span>Nothing</span>
+                                    )}
+                                  </div>
+                                  <div className='Admin-Account-modal-more'>
+                                    <div className='Admin-Account-modal-more-title'>
+                                      Role:
+                                    </div>
+                                    {item?.role}
+                                  </div>
                                 </div>
                                 <div className='modal-footer'>
                                   <button
@@ -681,151 +806,34 @@ function AdminAccount() {
                                   >
                                     Close
                                   </button>
-                                  <button
-                                    type='button'
-                                    className='btn btn-success'
-                                    onClick={handleSaveChanges}
-                                  >
-                                    Save changes
-                                  </button>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </span>
-
-                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
-                        <button
-                          type='button'
-                          className='Admin-Account-Main-Table-Content-Btn'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#exampleModalMore-${item.accountID}`}
-                        >
-                          <MoreVertOutlinedIcon sx={{ color: green[400] }} />
-                        </button>
-                        <div
-                          className='modal fade'
-                          id={`exampleModalMore-${item.accountID}`}
-                          tabIndex='-1'
-                          aria-labelledby='exampleModalLabelMore'
-                          aria-hidden='true'
-                        >
-                          <div className='modal-dialog'>
-                            <div className='modal-content'>
-                              <div className='modal-header'>
-                                <h1
-                                  className='modal-title fs-5'
-                                  id='exampleModalLabelMore'
-                                >
-                                  Account Information
-                                </h1>
-                                <button
-                                  type='button'
-                                  className='btn-close'
-                                  data-bs-dismiss='modal'
-                                  aria-label='Close'
-                                ></button>
-                              </div>
-                              <div className='modal-body'>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
-                                    Account ID:
-                                  </div>
-                                  {item.accountID}
-                                </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
-                                    Name:
-                                  </div>
-                                  {item.role === 'Customer' ? (
-                                    item?.customerDetails[0]?.name
-                                  ) : item?.role === 'Staff' ? (
-                                    item?.staffDetails[0]?.name
-                                  ) : item?.role === 'Admin' ? (
-                                    item?.adminDetails[0]?.name
-                                  ) : item?.role === 'Doctor' ? (
-                                    item?.doctorDetails[0]?.name
-                                  ) : (
-                                    <span>Nothing</span>
-                                  )}
-                                </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
-                                    User name:
-                                  </div>
-                                  {item.username}
-                                </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
-                                    Email:
-                                  </div>
-                                  {item?.role === 'Customer' ? (
-                                    item?.customerDetails[0]?.email
-                                  ) : item?.role === 'Staff' ? (
-                                    item?.staffDetails[0]?.email
-                                  ) : item?.role === 'Admin' ? (
-                                    item?.adminDetails[0]?.email
-                                  ) : item?.role === 'Doctor' ? (
-                                    item?.doctorDetails[0]?.email
-                                  ) : (
-                                    <span>Nothing</span>
-                                  )}
-                                </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
-                                    Phone number:
-                                  </div>
-                                  {item?.role === 'Customer' ? (
-                                    item?.customerDetails[0]?.phone
-                                  ) : item?.role === 'Staff' ? (
-                                    item?.staffDetails[0]?.phone
-                                  ) : item?.role === 'Admin' ? (
-                                    item?.adminDetails[0]?.phone
-                                  ) : item?.role === 'Doctor' ? (
-                                    item?.doctorDetails[0]?.phone
-                                  ) : (
-                                    <span>Nothing</span>
-                                  )}
-                                </div>
-                                <div className='Admin-Account-modal-more'>
-                                  <div className='Admin-Account-modal-more-title'>
-                                    Role:
-                                  </div>
-                                  {item?.role}
-                                </div>
-                              </div>
-                              <div className='modal-footer'>
-                                <button
-                                  type='button'
-                                  className='btn btn-secondary'
-                                  data-bs-dismiss='modal'
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </span>
-                      <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
-                        <Switch
-                          checked={item.status}
-                          onChange={() => handleStatusChange(item)}
-                          color={item.status ? 'success' : 'neutral'}
-                          variant={item.status ? 'solid' : 'outlined'}
-                          slotProps={{
-                            endDecorator: {
-                              sx: {
-                                minWidth: 24,
+                        </span>
+                        <span className='Admin-Account-Main-Table-Content-Btn_Wrapper'>
+                          <Switch
+                            checked={item.status}
+                            onChange={() => handleStatusChange(item)}
+                            color={item.status ? 'success' : 'neutral'}
+                            variant={item.status ? 'solid' : 'outlined'}
+                            slotProps={{
+                              endDecorator: {
+                                sx: {
+                                  minWidth: 24,
+                                },
                               },
-                            },
-                          }}
-                        />
-                      </span>
+                            }}
+                          />
+                        </span>
+                      </div>
                     </div>
+                  ))
+                ) : (
+                  <div className='admin-no-content-available'>
+                    No Content Available
                   </div>
-                ))}
+                )}
 
                 <div className='Admin-Account-Pagination'>
                   <Stack spacing={2}>
