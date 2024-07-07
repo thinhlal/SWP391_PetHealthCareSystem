@@ -148,7 +148,7 @@ const Booking = () => {
     }
     return slots;
   };
-  
+
   const generateSlots = (doctor, date) => {
     const slots = [];
     const workingDay = doctor.workingHoursDetails.find(
@@ -180,7 +180,8 @@ const Booking = () => {
         isBooked = doctor.matchingBookings.some(
           booking =>
             new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
-            next <= new Date(`1970-01-01T${booking.endTime}:00`) && booking.dateBook.split('T')[0] === date,
+            next <= new Date(`1970-01-01T${booking.endTime}:00`) &&
+            booking.dateBook.split('T')[0] === date,
         );
       }
 
@@ -575,14 +576,15 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${slot.isBooked
-                      ? 'element-button-red'
-                      : slot.isWithinWorkingHours
-                        ? selectedSlot === slot
-                          ? 'element-button-selected'
-                          : 'element-button-green'
-                        : 'element-button-gray'
-                      }`}
+                    className={`element-button ${
+                      slot.isBooked
+                        ? 'element-button-red'
+                        : slot.isWithinWorkingHours
+                          ? selectedSlot === slot
+                            ? 'element-button-selected'
+                            : 'element-button-green'
+                          : 'element-button-gray'
+                    }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>

@@ -1,265 +1,340 @@
 .main-container-doctor-care {
-    background-color: #f9fafb;
-    min-height: 100vh;
-  }
-  
-  .main-container-doctor-care .container-cage-status {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9fafb;
-    width: 100%;
-  }
-  
-  .main-container-doctor-care .filter-bar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    max-width: 1500px;
-    margin-bottom: 20px;
-  }
-  
-  .main-container-doctor-care .filter-bar label {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .main-container-doctor-care .filter-bar select {
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 100%;
-    max-width: 1500px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table th,
-  .cage-status-summary-table td {
-    border: 1px solid #e5e7eb;
-    padding: 15px;
-    text-align: left;
-    word-wrap: break-word;
-    word-break: break-word;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table th {
-    background-color: #f3f4f6;
-    color: #1f2937;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table tr:nth-child(even) {
-    background-color: #f9fafb;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table tr:hover {
-    background-color: #f3f4f6;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table .update-button,
-  .cage-status-summary-table .history-button {
-    background-color: #3b82f6;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-right: 10px;
-  }
-  
-  .main-container-doctor-care .cage-status-summary-table .update-button:hover,
-  .cage-status-summary-table .history-button:hover {
-    background-color: #2563eb;
-    transform: scale(1.05);
-  }
-  
-  .main-container-doctor-care .pagination-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-  }
-  
-  .main-container-doctor-care .update-section {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 100%;
-    max-width: 1500px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-  }
-  
-  .main-container-doctor-care .update-section h2 {
-    margin-top: 0;
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #1f2937;
-  }
-  
-  .main-container-doctor-care .pet-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .main-container-doctor-care .pet-details p {
-    flex: 1 1 calc(33.333% - 20px);
-    background-color: #f3f4f6;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 0;
-    font-size: 16px;
-    color: #1f2937;
-  }
-  
-  .main-container-doctor-care .pet-details p:first-of-type {
-    flex: 1 1 calc(33.333% - 20px);
-    background-color: #2f5194;
-    padding: 15px;
-    border-radius: 8px;
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-  }
-  
-  .main-container-doctor-care .update-section select,
-  .update-section textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .main-container-doctor-care .update-section textarea {
-    resize: none;
-    height: 100px;
-  }
-  
-  .main-container-doctor-care .update-section button {
-    margin-top: 20px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-right: 10px;
-  }
-  
-  .main-container-doctor-care .update-section button:hover {
-    transform: scale(1.05);
-  }
-  
-  .main-container-doctor-care .update-section button:first-of-type {
-    background-color: #10b981;
-    color: white;
-  }
-  
-  .main-container-doctor-care .update-section button:first-of-type:hover {
-    background-color: #059669;
-  }
-  
-  .main-container-doctor-care .update-section button:last-of-type {
-    background-color: #ef4444;
-    color: white;
-  }
-  
-  .main-container-doctor-care .update-section button:last-of-type:hover {
-    background-color: #dc2626;
-  }
-  
-  .main-container-doctor-care .history-section {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 100%;
-    max-width: 1500px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-  }
-  
-  .main-container-doctor-care .history-section h2 {
-    margin-top: 0;
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #1f2937;
-  }
-  
-  .main-container-doctor-care .history-section table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .main-container-doctor-care .history-section th,
-  .history-section td {
-    border: 1px solid #e5e7eb;
-    padding: 15px;
-    text-align: left;
-    word-wrap: break-word;
-    word-break: break-word;
-  }
-  
-  .main-container-doctor-care .history-section th {
-    background-color: #f3f4f6;
-    color: #1f2937;
-  }
-  
-  .main-container-doctor-care .history-section tr:nth-child(even) {
-    background-color: #f9fafb;
-  }
-  
-  .main-container-doctor-care .close-button {
-    background-color: #ef4444;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 20px;
-  }
-  
-  .main-container-doctor-care .close-button:hover {
-    background-color: #dc2626;
-    transform: scale(1.05);
-  }
-  
-  .main-container-doctor-care .delete-button {
-    background-color: #ef4444;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .main-container-doctor-care .delete-button:hover {
-    background-color: #dc2626;
-    transform: scale(1.05);
-  }
-  
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.main-container-doctor-care .container-cage-status {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9fafb;
+  width: 100%;
+}
+
+.main-container-doctor-care .filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1500px;
+  margin-bottom: 20px;
+}
+
+.main-container-doctor-care .filter-bar label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.main-container-doctor-care .filter-bar select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.main-container-doctor-care .cage-status-summary-table {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.main-container-doctor-care .cage-status-summary-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.main-container-doctor-care .cage-status-summary-table th,
+.cage-status-summary-table td {
+  border: 1px solid #e5e7eb;
+  padding: 15px;
+  text-align: left;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.main-container-doctor-care .cage-status-summary-table th {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.main-container-doctor-care .cage-status-summary-table tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.main-container-doctor-care .cage-status-summary-table tr:hover {
+  background-color: #f3f4f6;
+}
+
+.main-container-doctor-care .cage-status-summary-table .update-button,
+.cage-status-summary-table .history-button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  margin-right: 10px;
+}
+
+.main-container-doctor-care .cage-status-summary-table .update-button:hover,
+.cage-status-summary-table .history-button:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.main-container-doctor-care .pagination-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.main-container-doctor-care .update-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.main-container-doctor-care .update-section h2 {
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.main-container-doctor-care .pet-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.main-container-doctor-care .pet-details p {
+  flex: 1 1 calc(33.333% - 20px);
+  background-color: #f3f4f6;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 0;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.main-container-doctor-care .pet-details p:first-of-type {
+  flex: 1 1 calc(33.333% - 20px);
+  background-color: #2f5194;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.main-container-doctor-care .update-section select,
+.update-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.main-container-doctor-care .update-section textarea {
+  resize: none;
+  height: 100px;
+}
+
+.main-container-doctor-care .update-section button {
+  margin-top: 20px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  margin-right: 10px;
+}
+
+.main-container-doctor-care .update-section button:hover {
+  transform: scale(1.05);
+}
+
+.main-container-doctor-care .update-section button:first-of-type {
+  background-color: #10b981;
+  color: white;
+}
+
+.main-container-doctor-care .update-section button:first-of-type:hover {
+  background-color: #059669;
+}
+
+.main-container-doctor-care .update-section button:last-of-type {
+  background-color: #ef4444;
+  color: white;
+}
+
+.main-container-doctor-care .update-section button:last-of-type:hover {
+  background-color: #dc2626;
+}
+
+.main-container-doctor-care .history-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1500px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.main-container-doctor-care .history-section h2 {
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.main-container-doctor-care .history-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.main-container-doctor-care .history-section th,
+.history-section td {
+  border: 1px solid #e5e7eb;
+  padding: 15px;
+  text-align: left;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.main-container-doctor-care .history-section th {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.main-container-doctor-care .history-section tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.main-container-doctor-care .close-button {
+  background-color: #ef4444;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  margin-top: 20px;
+}
+
+.main-container-doctor-care .close-button:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+
+.main-container-doctor-care .delete-button {
+  background-color: #ef4444;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.main-container-doctor-care .delete-button:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+
+.main-container-doctor-care .modal-body-update-status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: Roboto, sans-serif;
+  margin: 15px 0;
+}
+
+.main-container-doctor-care .modal-body-update-status-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.main-container-doctor-care .modal-body-update-status-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 16px;
+}
+
+.main-container-doctor-care .modal-body-update-status-using {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 16px;
+}
+
+.main-container-doctor-care .modal-body-update-text {
+  font-family: Roboto, sans-serif;
+  width: 500px;
+}
+
+.main-container-doctor-care .modal-body-update-text-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.main-container-doctor-care .modal-body-update-text-info {
+  width: 100%;
+}
+
+.main-container-doctor-care .slider-update-status {
+  margin-left: 20px;
+}
+
+.main-container-doctor-care .status-critical {
+  color: #dc2626;
+}
+
+.main-container-doctor-care .status-severe {
+  color: #f97316;
+}
+
+.main-container-doctor-care .status-moderate {
+  color: #facc15;
+}
+
+.main-container-doctor-care .status-mild {
+  color: #3d9aa7;
+}
+
+.main-container-doctor-care .status-healthy {
+  color: #16a34a;
+}

@@ -87,6 +87,102 @@ class AdminController {
     }
   }
 
+  // GET /getDiseaseByDoctorID
+  async getDiseaseByDoctorID(req, res, next) {
+    const { doctorID } = req.query;
+    try {
+      const allCageDiseases = await CageDisease.aggregate([
+        { $match: { doctorID } },
+        {
+          $lookup: {
+            from: 'cages',
+            localField: 'cageID',
+            foreignField: 'cageID',
+            as: 'cageDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'pets',
+            localField: 'petID',
+            foreignField: 'petID',
+            as: 'petDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'bookings',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'bookingDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'customers',
+            localField: 'bookingDetails.accountID',
+            foreignField: 'accountID',
+            as: 'customerDetails',
+          },
+        },
+      ]);
+      res.status(200).json(allCageDiseases);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching cage disease', error: error.message });
+    }
+  }
+
+  // GET /getAllDiseaseInfoByID
+  async getAllDiseaseInfoByID(req, res, next) {
+    const { cageDiseaseID } = req.query;
+    try {
+      const allCageDiseases = await CageDisease.aggregate([
+        { $match: { cageDiseaseID } },
+        {
+          $lookup: {
+            from: 'diseaseinfos',
+            localField: 'cageDiseaseID',
+            foreignField: 'cageDiseaseID',
+            as: 'diseaseInfoDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'pets',
+            localField: 'petID',
+            foreignField: 'petID',
+            as: 'petDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'bookings',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'bookingDetails',
+          },
+        },
+        {
+          $lookup: {
+            from: 'customers',
+            localField: 'bookingDetails.accountID',
+            foreignField: 'accountID',
+            as: 'customerDetails',
+          },
+        },
+      ]);
+      res.status(200).json(allCageDiseases[0]);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching cage disease', error: error.message });
+    }
+  }
+
   // POST /updateCageInfo
   async updateCageInfo(req, res, next) {
     const { cageDiseaseID, petCondition, statusPet, textPetInfo } = req.body;
@@ -229,6 +325,20 @@ class AdminController {
 
       await cageDisease.save();
       res.status(204).send();
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching cage', error: error.message });
+    }
+  }
+
+  // POST /deleteDiseaseInfoByID
+  async deleteDiseaseInfoByID(req, res, next) {
+    const { diseaseInfoID } = req.body;
+    try {
+      await DiseaseInfo.findOneAndDelete({ diseaseInfoID });
+      res.status(200).send();
     } catch (error) {
       console.log(error);
       res

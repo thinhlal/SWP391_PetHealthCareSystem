@@ -194,6 +194,11 @@ function ManageCages() {
   };
 
   const handleRadioChange = event => {
+    if (event.target.value === 'Recover') {
+      setSliderValue(5);
+    } else if (event.target.value === 'Not Recover') {
+      setSliderValue(1);
+    }
     setPetCondition(event.target.value);
   };
 

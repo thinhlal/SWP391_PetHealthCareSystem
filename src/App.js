@@ -13,7 +13,6 @@ import Login from './pages/Login/Login.js';
 import ManageCages from './pages/ManageCages/ManageCages.js';
 import WorkSchedule from './pages/WorkSchedule/WorkSchedule.js';
 import AdminDashBoard from './pages/AdminDashBoard/AdminDashBoard.js';
-import ManageSickPet from './pages/ManageSickPet/ManageSickPet.js';
 import YourBooking from './pages/YourBooking/YourBooking.js';
 import AdminAccount from './pages/AdminAccount/AdminAccount.js';
 import PetExamRecord from './pages/PetExamRecord/PetExamRecord.js';
@@ -174,15 +173,6 @@ function App() {
         />
 
         <Route
-          path='/sick-pet'
-          element={
-            <ProtectedRoute allowedRoles={['Doctor']}>
-              <ManageSickPet />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
           path='/pet-exam-record'
           element={
             <ProtectedRoute allowedRoles={['Doctor']}>
@@ -196,6 +186,15 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={['Doctor']}>
               <TimeTableWork />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/doctor-care'
+          element={
+            <ProtectedRoute allowedRoles={['Doctor']}>
+              <DoctorCare />
             </ProtectedRoute>
           }
         />
@@ -243,11 +242,6 @@ function App() {
               <AdminRating />
             </ProtectedRoute>
           }
-        />
-
-        <Route
-          path='/doctor-care'
-          element={<DoctorCare />}
         />
       </Routes>
     </AuthProvider>

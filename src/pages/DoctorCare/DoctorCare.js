@@ -1,131 +1,91 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './DoctorCare.css';
 import Pagination from '../../components/Pagination/Pagination';
 import Header from '../../components/Doctor/Header/Header';
+import axiosInstance from '../../utils/axiosInstance';
+import { AuthContext } from '../../context/AuthContext';
+import { Slider } from '@mui/material';
 
 const DoctorCare = () => {
-  const [statusData, setStatusData] = useState([
-    {
-      cageID: 'C001',
-      cageName: 'Cage 1',
-      petID: 'P001',
-      entryDate: '2024-07-01',
-      reasonForEntry: 'Surgery',
-      status: 'In Cage',
-      currentStatus: 'Healthy',
-      exitDate: '',
-      petDetails: {
-        name: 'Buddy',
-        breed: 'Golden Retriever',
-        birthday: '2020-05-01',
-        gender: 'Male',
-        petType: 'Dog',
-      },
-      updateHistory: [],
-    },
-    {
-      cageID: 'C002',
-      cageName: 'Cage 2',
-      petID: 'P002',
-      entryDate: '2024-07-02',
-      reasonForEntry: 'Vaccination',
-      status: 'Exited Cage',
-      currentStatus: 'Healthy',
-      exitDate: '2024-07-05',
-      petDetails: {
-        name: 'Mittens',
-        breed: 'Siamese Cat',
-        birthday: '2019-03-15',
-        gender: 'Female',
-        petType: 'Cat',
-      },
-      updateHistory: [],
-    },
-    {
-      cageID: 'C003',
-      cageName: 'Cage 3',
-      petID: 'P003',
-      entryDate: '2024-07-03',
-      reasonForEntry: 'Injury Treatment',
-      status: 'In Cage',
-      currentStatus: 'Mild',
-      exitDate: '',
-      petDetails: {
-        name: 'Charlie',
-        breed: 'Bulldog',
-        birthday: '2018-11-22',
-        gender: 'Male',
-        petType: 'Dog',
-      },
-      updateHistory: [],
-    },
-    {
-      cageID: 'C004',
-      cageName: 'Cage 4',
-      petID: 'P004',
-      entryDate: '2024-07-04',
-      reasonForEntry: 'Dental Cleaning',
-      status: 'In Cage',
-      currentStatus: 'Moderate',
-      exitDate: '',
-      petDetails: {
-        name: 'Luna',
-        breed: 'Persian Cat',
-        birthday: '2021-01-08',
-        gender: 'Female',
-        petType: 'Cat',
-      },
-      updateHistory: [],
-    },
-    {
-      cageID: 'C005',
-      cageName: 'Cage 5',
-      petID: 'P005',
-      entryDate: '2024-07-05',
-      reasonForEntry: 'Routine Check-up',
-      status: 'In Cage',
-      currentStatus: 'Severe',
-      exitDate: '',
-      petDetails: {
-        name: 'Max',
-        breed: 'Beagle',
-        birthday: '2017-09-10',
-        gender: 'Male',
-        petType: 'Dog',
-      },
-      updateHistory: [],
-    },
-    // Add more data as needed
-  ]);
+  const { user } = useContext(AuthContext);
+  const [statusData, setStatusData] = useState([]);
 
   const [selectedPet, setSelectedPet] = useState(null);
   const [viewHistory, setViewHistory] = useState(false);
+  const [diseaseHistory, setDiseaseHistory] = useState([]);
   const [filterOrder, setFilterOrder] = useState('newest');
+  const [sliderValue, setSliderValue] = useState(1);
+  const [petCondition, setPetCondition] = useState('NotRecover');
+  const [petInfoStatus, setPetInfoStatus] = useState('');
+
+  useEffect(() => {
+    const fetchCageDisease = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/cage/getDiseaseByDoctorID`,
+          {
+            params: {
+              doctorID: user.doctorDetails[0].doctorID,
+            },
+          },
+        );
+        console.log(response.data);
+        setStatusData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCageDisease();
+  }, [user.doctorDetails]);
 
   const handleUpdateStatus = status => {
-    setSelectedPet({ ...status, newStatus: status.currentStatus, notes: '' });
+    setSelectedPet(status);
     setViewHistory(false);
   };
 
-  const handleSaveUpdate = () => {
-    const newStatusData = statusData.map(item =>
-      item.cageID === selectedPet.cageID
-        ? {
-            ...item,
-            currentStatus: selectedPet.newStatus,
-            updateHistory: [
-              ...item.updateHistory,
-              { date: new Date().toISOString().split('T')[0], status: selectedPet.newStatus, notes: selectedPet.notes },
-            ],
-          }
-        : item
-    );
-    setStatusData(newStatusData);
+  const handleSaveUpdate = async () => {
+    try {
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/cage/updateCageInfo`,
+        {
+          cageDiseaseID: selectedPet.cageDiseaseID,
+          statusPet: petCondition,
+          petCondition: sliderValue,
+          textPetInfo: petInfoStatus,
+        },
+      );
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/cage/getDiseaseByDoctorID`,
+        {
+          params: {
+            doctorID: user.doctorDetails[0].doctorID,
+          },
+        },
+      );
+      setStatusData(response.data);
+    } catch (error) {
+      console.error('Error fetching cage:', error);
+    }
+    setPetCondition('NotRecover');
+    setSliderValue(1);
+    setPetInfoStatus('');
     setSelectedPet(null);
   };
 
-  const handleViewHistory = status => {
-    setSelectedPet(status);
+  const handleViewHistory = async cageDiseaseID => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/cage/getAllDiseaseInfoByID`,
+        {
+          params: {
+            cageDiseaseID,
+          },
+        },
+      );
+      setDiseaseHistory(response.data.diseaseInfoDetails);
+    } catch (error) {
+      console.error('Error fetching disease info:', error);
+    }
     setViewHistory(true);
   };
 
@@ -138,32 +98,76 @@ const DoctorCare = () => {
     const order = event.target.value;
     setFilterOrder(order);
     const sortedData = [...statusData].sort((a, b) => {
-      const dateA = new Date(a.entryDate);
-      const dateB = new Date(b.entryDate);
+      const dateA = new Date(a.startDate);
+      const dateB = new Date(b.startDate);
       return order === 'newest' ? dateB - dateA : dateA - dateB;
     });
     setStatusData(sortedData);
   };
 
-  const handleDeleteHistory = index => {
-    const updatedHistory = selectedPet.updateHistory.filter((_, i) => i !== index);
-    const updatedPet = { ...selectedPet, updateHistory: updatedHistory };
+  // const handleDeleteHistory = async diseaseInfoID => {
+  //   try {
+  //     await axiosInstance.post(
+  //       `${process.env.REACT_APP_API_URL}/cage/deleteDiseaseInfoByID`,
+  //       {
+  //         diseaseInfoID
+  //       },
+  //     );
+  //   } catch (error) {
+  //     console.error('Error fetching disease info:', error);
+  //   }
+  //   setViewHistory(false);
+  // };
 
-    const newStatusData = statusData.map(item =>
-      item.cageID === selectedPet.cageID ? updatedPet : item
-    );
+  const handleSliderChange = (event, newValue) => {
+    console.log(typeof newValue);
+    if (typeof newValue === 'number') {
+      setSliderValue(newValue);
+      if (newValue === 5) {
+        setPetCondition('Recover');
+      } else {
+        setPetCondition('NotRecover');
+      }
+    }
+  };
 
-    setStatusData(newStatusData);
-    setSelectedPet(updatedPet);
+  function petStatus(value) {
+    switch (value) {
+      case 1:
+        return 'Critical';
+      case 2:
+        return 'Severe';
+      case 3:
+        return 'Moderate';
+      case 4:
+        return 'Mild';
+      case 5:
+        return 'Healthy';
+      default:
+        return '';
+    }
+  }
+
+  const handleRadioChange = event => {
+    if (event.target.value === 'Recover') {
+      setSliderValue(5);
+    } else if (event.target.value === 'NotRecover') {
+      setSliderValue(1);
+    }
+    setPetCondition(event.target.value);
   };
 
   return (
     <div className='main-container-doctor-care'>
-        <Header />
+      <Header />
       <div className='container-cage-status'>
         <div className='filter-bar'>
           <label htmlFor='sort-order'>Sort by:</label>
-          <select id='sort-order' value={filterOrder} onChange={handleFilterChange}>
+          <select
+            id='sort-order'
+            value={filterOrder}
+            onChange={handleFilterChange}
+          >
             <option value='newest'>Newest</option>
             <option value='oldest'>Oldest</option>
           </select>
@@ -178,7 +182,6 @@ const DoctorCare = () => {
                 <th>Entry Date</th>
                 <th>Reason for Entry</th>
                 <th>Status</th>
-                <th>Current Status</th>
                 <th>Exit Date</th>
                 <th>Actions</th>
               </tr>
@@ -187,16 +190,37 @@ const DoctorCare = () => {
               {statusData.map((status, index) => (
                 <tr key={index}>
                   <td>{status.cageID}</td>
-                  <td>{status.cageName}</td>
-                  <td>{status.petID}</td>
-                  <td>{status.entryDate}</td>
-                  <td>{status.reasonForEntry}</td>
-                  <td>{status.status}</td>
-                  <td>{status.currentStatus}</td>
-                  <td>{status.exitDate}</td>
+                  <td>{status?.cageDetails[0]?.name}</td>
+                  <td>{status?.petID}</td>
+                  <td>{status?.startDate.split('T')[0]}</td>
+                  <td>{status?.reasonForAdmission}</td>
                   <td>
-                    <button className='update-button' onClick={() => handleUpdateStatus(status)}>Update</button>
-                    <button className='history-button' onClick={() => handleViewHistory(status)}>View Update History</button>
+                    {status?.dischargeDate ? (
+                      <span>Exited Cage</span>
+                    ) : (
+                      <span>In Cage</span>
+                    )}
+                  </td>
+                  <td>
+                    {status?.dischargeDate
+                      ? status?.dischargeDate.split('T')[0]
+                      : null}
+                  </td>
+                  <td>
+                    <button
+                      className='history-button'
+                      onClick={() => handleViewHistory(status.cageDiseaseID)}
+                    >
+                      View Update History
+                    </button>
+                    {!status?.dischargeDate ? (
+                      <button
+                        className='update-button'
+                        onClick={() => handleUpdateStatus(status)}
+                      >
+                        Update
+                      </button>
+                    ) : null}
                   </td>
                 </tr>
               ))}
@@ -211,30 +235,86 @@ const DoctorCare = () => {
           <div className='update-section'>
             <h2>Pet Details</h2>
             <div className='pet-details'>
-              <p><strong>Pet ID:</strong> {selectedPet.petID}</p>
-              <p><strong>Name:</strong> {selectedPet.petDetails.name}</p>
-              <p><strong>Breed:</strong> {selectedPet.petDetails.breed}</p>
-              <p><strong>Birthday:</strong> {selectedPet.petDetails.birthday}</p>
-              <p><strong>Gender:</strong> {selectedPet.petDetails.gender}</p>
-              <p><strong>Pet Type:</strong> {selectedPet.petDetails.petType}</p>
+              <p>
+                <strong>Pet ID:</strong> {selectedPet.petID}
+              </p>
+              <p>
+                <strong>Name:</strong> {selectedPet.petDetails[0].name}
+              </p>
+              <p>
+                <strong>Breed:</strong> {selectedPet.petDetails[0].breed}
+              </p>
+              <p>
+                <strong>Birthday:</strong>{' '}
+                {selectedPet.petDetails[0].birthday.split('T')[0]}
+              </p>
+              <p>
+                <strong>Gender:</strong> {selectedPet.petDetails[0].gender}
+              </p>
+              <p>
+                <strong>Pet Type:</strong> {selectedPet.petDetails[0].petType}
+              </p>
             </div>
-
-            <h2>Update Status</h2>
-            <select
-              value={selectedPet.newStatus}
-              onChange={e => setSelectedPet({ ...selectedPet, newStatus: e.target.value })}
-            >
-              <option value=''>Select Status</option>
-              <option value='Critical'>Critical</option>
-              <option value='Mild'>Mild</option>
-              <option value='Moderate'>Moderate</option>
-              <option value='Severe'>Severe</option>
-              <option value='Healthy'>Healthy</option>
-            </select>
+            <div>
+              <div className='modal-body-update-status-title'>
+                Status of pet:
+              </div>
+              <div className='modal-body-update-status'>
+                <div className='modal-body-update-status-empty'>
+                  <input
+                    type='radio'
+                    id='NotRecover'
+                    name='status-of-pet'
+                    value='NotRecover'
+                    checked={petCondition === 'NotRecover'}
+                    onChange={handleRadioChange}
+                  />
+                  <div className='modal-body-update-status-empty-text'>
+                    Not Recover
+                  </div>
+                </div>
+                <div className='modal-body-update-status-using'>
+                  <input
+                    type='radio'
+                    id='Recover'
+                    name='status-of-pet'
+                    value='Recover'
+                    checked={petCondition === 'Recover'}
+                    onChange={handleRadioChange}
+                  />
+                  <div className='modal-body-update-status-using-text'>
+                    Recover
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='modal-body-update-text'>
+              <div className='modal-body-update-text-title'>Pet Condition:</div>
+              <div className='slider-update-status'>
+                <Slider
+                  aria-label='Pet Health Status'
+                  value={sliderValue}
+                  onChange={handleSliderChange}
+                  getAriaValueText={petStatus}
+                  valueLabelDisplay='auto'
+                  step={1}
+                  marks={[
+                    { value: 1, label: 'Critical' },
+                    { value: 2, label: 'Mild' },
+                    { value: 3, label: 'Moderate' },
+                    { value: 4, label: 'Severe' },
+                    { value: 5, label: 'Healthy' },
+                  ]}
+                  min={1}
+                  max={5}
+                />
+              </div>
+            </div>
             <textarea
-              value={selectedPet.notes}
-              onChange={e => setSelectedPet({ ...selectedPet, notes: e.target.value })}
+              value={petInfoStatus}
+              onChange={e => setPetInfoStatus(e.target.value)}
               placeholder='Enter notes here'
+              required
             ></textarea>
             <button onClick={handleSaveUpdate}>Save</button>
             <button onClick={() => setSelectedPet(null)}>Cancel</button>
@@ -254,19 +334,57 @@ const DoctorCare = () => {
                 </tr>
               </thead>
               <tbody>
-                {selectedPet.updateHistory.map((history, index) => (
-                  <tr key={index}>
-                    <td>{history.date}</td>
-                    <td>{history.status}</td>
-                    <td>{history.notes}</td>
-                    <td>
-                      <button className='delete-button' onClick={() => handleDeleteHistory(index)}>Delete</button>
-                    </td>
+                {diseaseHistory.length > 0 ? (
+                  diseaseHistory.map((history, index) => (
+                    <tr key={index}>
+                      <td>{history.date.split('T')[0]}</td>
+                      <td
+                        className={`status-${
+                          history.status === 1
+                            ? 'critical'
+                            : history.status === 2
+                              ? 'mild'
+                              : history.status === 3
+                                ? 'moderate'
+                                : history.status === 4
+                                  ? 'severe'
+                                  : 'healthy'
+                        }`}
+                      >
+                        {history.status === 1
+                          ? 'Critical'
+                          : history.status === 2
+                            ? 'Mild'
+                            : history.status === 3
+                              ? 'Moderate'
+                              : history.status === 4
+                                ? 'Severe'
+                                : 'Healthy'}
+                      </td>
+                      <td>{history.notes}</td>
+                      <td>
+                        <button
+                          className='delete-button'
+                          // {onClick={() => handleDeleteHistory(history.diseaseInfoID)}}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={4}>No history disease</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
-            <button className='close-button' onClick={handleCloseHistory}>Close</button>
+            <button
+              className='close-button'
+              onClick={handleCloseHistory}
+            >
+              Close
+            </button>
           </div>
         )}
       </div>

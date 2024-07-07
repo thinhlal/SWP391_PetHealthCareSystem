@@ -45,6 +45,14 @@ function Header() {
                     Working Time
                   </div>
                 </a>
+                <a
+                  className='forward'
+                  href='doctor-care'
+                >
+                  <div className='main-header-user-account_menu-item'>
+                    Doctor Care
+                  </div>
+                </a>
                 <div
                   className='main-header-user-account_menu-item'
                   onClick={logOut}
