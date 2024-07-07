@@ -358,13 +358,13 @@
   margin: 10px 0;
 }
 
-.search-owner-option-section,
+.manage-booking-list .search-owner-option-section,
 .searchPetSection-child {
   display: flex;
   align-items: center;
 }
 
-.booking-page-main-content-header-filter-date {
+.manage-booking-list .booking-page-main-content-header-filter-date {
   font-family: Roboto, sans-serif;
   border: none;
   border-radius: 20px;

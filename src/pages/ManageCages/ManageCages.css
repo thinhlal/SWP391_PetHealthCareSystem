@@ -460,3 +460,137 @@
   border-color: #cccccc;
   color: #ffffff;
 }
+
+
+
+.manage-cages .modal-content {
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.manage-cages .modal-header {
+  padding: 15px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  position: relative;
+  padding-right: 40px; /* Ensure space for the close button */
+}
+
+.manage-cages .modal-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+
+
+.manage-cages .modal-header .btn-close:hover {
+  color: #ccc;
+}
+
+.manage-cages .modal-body {
+  padding: 20px;
+}
+
+.manage-cages .search-owner-option-section {
+  margin-bottom: 20px;
+}
+
+.manage-cages .search-owner-option-section label {
+  display: block;
+  font-weight: 600;
+  width: 30%;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+.manage-cages .search-owner-option-section input,
+.search-owner-option-section div {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.manage-cages .search-owner-option-section input:focus {
+  outline: none;
+  border-color: #e18213;
+}
+
+.manage-cages .search-owner-option-section .error {
+  color: red;
+  font-size: 14px;
+}
+
+.manage-cages .modal-body-section-wrapper {
+  margin-bottom: 20px;
+}
+
+.manage-cages .modal-body-section-doctor-date {
+  margin-bottom: 20px;
+  display: grid;
+  gap: 15px;
+}
+
+
+.manage-cages .choose-Doctor-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.manage-cages .choose-Doctor-wrapper input[type='radio'] {
+  margin-right: 10px;
+}
+
+.manage-cages .choose-Doctor-Not-Found {
+  color: red;
+}
+
+.manage-cages .modal-footer {
+  background-color: #f7f7f7;
+  border-top: none;
+  padding: 15px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.manage-cages .modal-footer .btn {
+  min-width: 100px;
+}
+
+.manage-cages .btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.manage-cages .btn-secondary {
+  background-color: #e18213;
+  border-color: #e18213;
+}
+
+
+.manage-cages .manage-cage-search-button {
+  display: inline-block;
+  font-size: 13px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.manage-cages .manage-cage-search-button:hover {
+  background-color: #0056b3;
+}
+
+.manage-cages .manage-cage-search-button:active {
+  transform: scale(0.95);
+}
+
+.manage-cages .manage-cage-search-button {
+    width: 60px !important; 
+    height: 30px !important;  
+}
