@@ -204,7 +204,6 @@ class PaypalController {
           },
         },
       );
-
       if (response.status === 201 || response.status === 200) {
         booking.isRefund = true;
         booking.refundPrice = refundAmount;
