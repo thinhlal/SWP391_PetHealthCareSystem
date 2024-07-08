@@ -934,12 +934,15 @@ a {
 }
 
 .main .overlap-group-6 {
-  width: 638px;
-  height: 431px;
-  left: -4px;
+  width: 515px;
+  height: 350px;
   background-image: url(../../assets/images/img_Home/client-2.png);
   background-size: cover;
   background-position: 50% 50%;
+  display: flex; 
+  justify-content: center; 
+  align-items: flex-start; 
+  padding-top: 55px;
 }
 
 .main .a-great-strength-of {
@@ -947,7 +950,6 @@ a {
   width: 506px;
   height: 209px;
   top: 120px;
-  left: 88px;
   font-family: Roboto, sans-serif;
   font-weight: 400;
   color: #000000;
@@ -964,12 +966,12 @@ a {
 
 .main .segmented-control {
   display: flex;
-  width: 239px;
-  align-items: flex-start;
-  padding: 4px;
-  position: relative;
+  width: fit-content; 
+  align-items: center;
+  justify-content: center; 
   background-color: #ffffff;
   border-radius: 8px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
 .main .item {
@@ -986,7 +988,6 @@ a {
 }
 
 .main .element-8 {
-  position: relative;
   width: 22px;
   height: 24px;
   object-fit: cover;
