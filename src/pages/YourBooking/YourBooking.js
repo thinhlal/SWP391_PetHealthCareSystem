@@ -2,19 +2,17 @@ import './YourBooking.css';
 import Header from '../../components/User/Header/Header.js';
 import Footer from '../../components/User/Footer/Footer.js';
 import StarRate from '../../components/Admin/StarRate/StarRate.js';
-// Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-// Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-// Images
 import Sidebar from '../../components/User/Sidebar/Sidebar.js';
-// component
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import React, { useState, useEffect, useContext } from 'react';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { AuthContext } from '../../context/AuthContext.js';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 function YourBooking() {
   const { user } = useContext(AuthContext);
@@ -24,6 +22,8 @@ function YourBooking() {
   const [feedback, setFeedback] = useState('');
   const [currentBookingID, setCurrentBookingID] = useState(null);
   const [currentBookingData, setCurrentBookingData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -125,13 +125,21 @@ function YourBooking() {
     const timeDifference = cancelDate - bookDate;
     const millisecondsInDay = 24 * 60 * 60 * 1000;
     const remainingDays = Math.ceil(timeDifference / millisecondsInDay);
-    return remainingDays
+    return remainingDays;
   }
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentBookings = yourBookings.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(yourBookings.length / itemsPerPage);
 
   return (
     <div className='main-container-your-booking-page'>
       <div className='row-your-booking'>
-        <Header></Header>
+        <Header />
         <div className='main-tittle-your-booking'>
           <div className='overlap-group-booking'>
             <div className='text-tittle-your-booking'>Your Booking</div>
@@ -142,9 +150,7 @@ function YourBooking() {
           <div className='main-content-booking'>
             <div className='your-Pet-Header-booking'>
               <div className='search-pet-booking'>
-                <div className='search-pet-txt-booking'>
-                  Search Your Booking
-                </div>
+                <div className='search-pet-txt-booking'>Search Your Booking</div>
                 <div className='search-pet-input-booking'>
                   <input
                     type='text'
@@ -168,57 +174,52 @@ function YourBooking() {
             </div>
 
             <div className='detail-information-booking'>
-              {yourBookings.length === 0 ? (
+              {currentBookings.length === 0 ? (
                 <div className='no-bookings-message'>
                   You don't have any appointments at the moment.
                 </div>
               ) : (
-                yourBookings.map((booking, index) => (
-                  <div
-                    key={index}
-                    className='info-detail-booking'
-                  >
+                currentBookings.map((booking, index) => (
+                  <div key={index} className='info-detail-booking'>
                     <div className='detail-booking-confirm-booking'>
                       <div className='card-detail-booking-confirm-booking'>
                         <div className='card-ID-booking'>
                           <div className='detail-number-ID'>
                             ID: {booking.bookingID}
                             <div
-                              className={`status-booking
-                              ${booking.isCancel
+                              className={`status-booking ${booking.isCancel
+                                ? 'status-cancel'
+                                : booking.paymentsDetails[0].isCancelPayment || (!booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL')
                                   ? 'status-cancel'
-                                  : booking.paymentsDetails[0].isCancelPayment
-                                    ? 'status-cancel'
-                                    : booking.paymentsDetails[0].isSuccess &&
-                                      booking.paymentsDetails[0]
-                                        .paymentMethod === 'PAYPAL' &&
+                                  : booking.paymentsDetails[0].isSuccess &&
+                                    booking.paymentsDetails[0].paymentMethod ===
+                                    'PAYPAL' &&
+                                    !booking.isCheckIn
+                                    ? 'status-pending'
+                                    : !booking.paymentsDetails[0].isSuccess &&
+                                      booking.paymentsDetails[0].paymentMethod ===
+                                      'COUNTER' &&
                                       !booking.isCheckIn
                                       ? 'status-pending'
-                                      : !booking.paymentsDetails[0].isSuccess &&
-                                        booking.paymentsDetails[0]
-                                          .paymentMethod === 'COUNTER' &&
-                                        !booking.isCheckIn
-                                        ? 'status-pending'
-                                        : booking.paymentsDetails[0]
-                                          .isSuccess &&
-                                          booking.paymentsDetails[0]
-                                            .paymentMethod === 'PAYPAL' &&
+                                      : booking.paymentsDetails[0].isSuccess &&
+                                        booking.paymentsDetails[0].paymentMethod ===
+                                        'PAYPAL' &&
+                                        booking.isCheckIn
+                                        ? 'status-completed'
+                                        : booking.paymentsDetails[0].isSuccess &&
+                                          booking.paymentsDetails[0].paymentMethod ===
+                                          'COUNTER' &&
                                           booking.isCheckIn
                                           ? 'status-completed'
-                                          : booking.paymentsDetails[0]
-                                            .isSuccess &&
-                                            booking.paymentsDetails[0]
-                                              .paymentMethod === 'COUNTER' &&
-                                            booking.isCheckIn
-                                            ? 'status-completed'
-                                            : null
-                                }
+                                          : null
                                 }`}
                             >
                               Status:&nbsp;
                               {booking.isCancel ? (
                                 <span>Cancel Booking</span>
-                              ) : booking.paymentsDetails[0].isCancelPayment ? (
+                              ) : booking.paymentsDetails[0].isCancelPayment || (!booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL') ? (
                                 <span>Cancel Payment</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
@@ -250,35 +251,35 @@ function YourBooking() {
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Date Booking:
-                                </div>{' '}
+                                </div>
                                 <br />
                                 {booking.dateBook.split('T')[0]}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Time:
-                                </div>{' '}
+                                </div>
                                 <br />
                                 {`${booking.startTime} - ${booking.endTime}`}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Pet Name:
-                                </div>{' '}
+                                </div>
                                 <br />
                                 {booking?.petDetails[0]?.name}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Pet Type:
-                                </div>{' '}
+                                </div>
                                 <br />
                                 {booking?.petDetails[0]?.petType}
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Doctor:
-                                </div>{' '}
+                                </div>
                                 <br />
                                 {booking?.doctorDetails[0]?.name ? (
                                   booking.doctorDetails[0].name
@@ -289,7 +290,7 @@ function YourBooking() {
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Services:
-                                </div>{' '}
+                                </div>
                                 <br />
                                 {formatService(booking.servicesInBooking).join(
                                   ', ',
@@ -298,7 +299,7 @@ function YourBooking() {
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
                                   Payment:
-                                </div>{' '}
+                                </div>
                                 <br />
                                 {booking.paymentsDetails[0].paymentMethod}
                               </div>
@@ -316,24 +317,31 @@ function YourBooking() {
                               booking.paymentsDetails[0].paymentMethod ===
                               'PAYPAL' &&
                               booking.isRefund ? (
-                              <div className='status-cancel'>Refunded {booking.refundPrice}$</div>
-                            ) : booking.isCancel &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                              'PAYPAL' && calculateDateLeft(booking.dateCancelBook, booking.dateBook) < 3
-                              && !booking.isRefund ? (
                               <div className='status-cancel'>
-                                Refunded 0$
+                                Refunded {booking.refundPrice}$
                               </div>
                             ) : booking.isCancel &&
                               booking.paymentsDetails[0].paymentMethod ===
-                              'PAYPAL' && calculateDateLeft(booking.dateCancelBook, booking.dateBook) >= 3
-                              && !booking.isRefund ? (
-                              <div className='status-cancel'>
-                                ...Processing
-                              </div>
+                              'PAYPAL' &&
+                              calculateDateLeft(
+                                booking.dateCancelBook,
+                                booking.dateBook,
+                              ) < 3 &&
+                              !booking.isRefund ? (
+                              <div className='status-cancel'>Refunded 0$</div>
+                            ) : booking.isCancel &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                              'PAYPAL' &&
+                              calculateDateLeft(
+                                booking.dateCancelBook,
+                                booking.dateBook,
+                              ) >= 3 &&
+                              !booking.isRefund ? (
+                              <div className='status-cancel'>...Processing</div>
                             ) : booking.isCancel ? null : booking
                               .paymentsDetails[0]
-                              .isCancelPayment ? null : booking
+                              .isCancelPayment || (!booking.paymentsDetails[0].isSuccess && booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL') ? null : booking
                                 .paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                 'PAYPAL' &&
@@ -430,55 +438,14 @@ function YourBooking() {
               )}
 
               {yourBookings.length > 0 && (
-                <div className='add-pet_pagination'>
-                  <nav aria-label='...'>
-                    <ul className='pagination'>
-                      <li className='page-item disabled'>
-                        <a
-                          className='page-link'
-                          href='#123'
-                        >
-                          Previous
-                        </a>
-                      </li>
-                      <li className='page-item'>
-                        <a
-                          className='page-link'
-                          href='#123'
-                        >
-                          1
-                        </a>
-                      </li>
-                      <li
-                        className='page-item active'
-                        aria-current='page'
-                      >
-                        <a
-                          className='page-link'
-                          href='123'
-                        >
-                          2
-                        </a>
-                      </li>
-                      <li className='page-item'>
-                        <a
-                          className='page-link'
-                          href='#123'
-                        >
-                          3
-                        </a>
-                      </li>
-                      <li className='page-item'>
-                        <a
-                          className='page-link'
-                          href='123'
-                        >
-                          Next
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
+                <Stack spacing={2} alignItems="center" marginTop={2}>
+                  <Pagination
+                    count={totalPages}
+                    page={currentPage}
+                    onChange={handlePageChange}
+                    color="primary"
+                  />
+                </Stack>
               )}
             </div>
 
@@ -531,10 +498,7 @@ function YourBooking() {
               <div className='modal-dialog'>
                 <div className='modal-content'>
                   <div className='modal-header'>
-                    <h1
-                      className='modal-title fs-5'
-                      id='newModalLabel'
-                    >
+                    <h1 className='modal-title fs-5' id='newModalLabel'>
                       Your opinion matters to us!
                     </h1>
                     <button
@@ -631,10 +595,7 @@ function YourBooking() {
               <div className='modal-dialog'>
                 <div className='modal-content'>
                   <div className='modal-header'>
-                    <h1
-                      className='modal-title fs-5'
-                      id='newModalLabel'
-                    >
+                    <h1 className='modal-title fs-5' id='newModalLabel'>
                       Your Rate!
                     </h1>
                     <button
@@ -645,15 +606,18 @@ function YourBooking() {
                     ></button>
                   </div>
                   <div className='modal-body rating-modal'>
-                    <div style={{ display: 'flex', alignItems: 'center' }} className='rating-text'>
-                      Rate Star:{' '}  &nbsp;
+                    <div
+                      style={{ display: 'flex', alignItems: 'center' }}
+                      className='rating-text'
+                    >
+                      Rate Star:&nbsp;
                       <StarRate
                         rating={currentBookingData?.rateDetails[0]?.rate}
                         totalStars={5}
                       />
                     </div>
-                    <div className='rating-text' >
-                      Rate Comment:{' '}  &nbsp;
+                    <div className='rating-text'>
+                      Rate Comment:&nbsp;
                       {currentBookingData?.rateDetails[0]?.comment}
                     </div>
                   </div>
@@ -663,7 +627,7 @@ function YourBooking() {
             </div>
           </div>
         </div>
-        <Footer></Footer>
+        <Footer />
       </div>
     </div>
   );
