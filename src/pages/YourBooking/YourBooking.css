@@ -476,3 +476,8 @@ a {
 .modal-confirmCancel-footer button:first-child {
   margin-right: 10px;
 }
+
+.rating-text {
+  font-family: Roboto, sans-serif;
+  padding: 15px;
+}

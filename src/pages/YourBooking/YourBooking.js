@@ -644,17 +644,16 @@ function YourBooking() {
                       aria-label='Close'
                     ></button>
                   </div>
-                  <div className='modal-body'>
-                    <h1>Rating</h1>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      Rate Star:{' '}
+                  <div className='modal-body rating-modal'>
+                    <div style={{ display: 'flex', alignItems: 'center' }} className='rating-text'>
+                      Rate Star:{' '}  &nbsp;
                       <StarRate
                         rating={currentBookingData?.rateDetails[0]?.rate}
                         totalStars={5}
                       />
                     </div>
-                    <div>
-                      Rate Comment:{' '}
+                    <div className='rating-text' >
+                      Rate Comment:{' '}  &nbsp;
                       {currentBookingData?.rateDetails[0]?.comment}
                     </div>
                   </div>

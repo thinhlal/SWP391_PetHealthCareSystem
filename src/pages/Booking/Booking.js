@@ -343,6 +343,13 @@ const Booking = () => {
     setErrorMessageServices('');
   };
 
+  const handleRemoveService = (serviceID) => {
+    const updatedServices = selectedServices.filter(
+      (service) => service.serviceID !== serviceID
+    );
+    setSelectedServices(updatedServices);
+  };
+
   const totalAmount = selectedServices.reduce(
     (acc, service) => acc + service.price,
     0,
@@ -457,6 +464,12 @@ const Booking = () => {
                         className='service-item'
                       >
                         {service.name} - Price: {service.price}
+                        <button
+                          className='remove-service-button'
+                          onClick={() => handleRemoveService(service.serviceID)}
+                        >
+                          Remove
+                        </button>
                       </div>
                     ))
                   ) : (
