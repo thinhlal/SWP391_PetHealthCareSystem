@@ -335,7 +335,12 @@ function ManageCages() {
                               }}
                               required
                             />
-                            <div className="manage-cage-search-button" onClick={handleSearchBooking}>Search</div>
+                            <div
+                              className='manage-cage-search-button'
+                              onClick={handleSearchBooking}
+                            >
+                              Search
+                            </div>
                             {errors.bookingResult && (
                               <span className='error'>
                                 {errors.bookingResult}

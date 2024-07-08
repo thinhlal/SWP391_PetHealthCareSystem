@@ -181,7 +181,8 @@ const Booking = () => {
           booking =>
             new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
             next <= new Date(`1970-01-01T${booking.endTime}:00`) &&
-            booking.dateBook.split('T')[0] === date && !booking.isCancel,
+            booking.dateBook.split('T')[0] === date &&
+            !booking.isCancel,
         );
       }
 
@@ -343,9 +344,9 @@ const Booking = () => {
     setErrorMessageServices('');
   };
 
-  const handleRemoveService = (serviceID) => {
+  const handleRemoveService = serviceID => {
     const updatedServices = selectedServices.filter(
-      (service) => service.serviceID !== serviceID
+      service => service.serviceID !== serviceID,
     );
     setSelectedServices(updatedServices);
   };

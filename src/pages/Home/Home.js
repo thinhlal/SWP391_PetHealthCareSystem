@@ -318,7 +318,10 @@ function Home() {
         </div>
       </div>
 
-      <div id='aboutUs' className='overlap-4 lazy-load'>
+      <div
+        id='aboutUs'
+        className='overlap-4 lazy-load'
+      >
         <div className='main-why-choose'>
           <img
             alt=''

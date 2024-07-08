@@ -461,8 +461,6 @@
   color: #ffffff;
 }
 
-
-
 .manage-cages .modal-content {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -480,8 +478,6 @@
   font-size: 24px;
   margin: 0;
 }
-
-
 
 .manage-cages .modal-header .btn-close:hover {
   color: #ccc;
@@ -532,7 +528,6 @@
   gap: 15px;
 }
 
-
 .manage-cages .choose-Doctor-wrapper {
   display: flex;
   align-items: center;
@@ -569,7 +564,6 @@
   border-color: #e18213;
 }
 
-
 .manage-cages .manage-cage-search-button {
   display: inline-block;
   font-size: 13px;
@@ -579,7 +573,9 @@
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s, transform 0.1s;
+  transition:
+    background-color 0.3s,
+    transform 0.1s;
 }
 
 .manage-cages .manage-cage-search-button:hover {
@@ -591,6 +587,6 @@
 }
 
 .manage-cages .manage-cage-search-button {
-    width: 60px !important; 
-    height: 30px !important;  
+  width: 60px !important;
+  height: 30px !important;
 }
