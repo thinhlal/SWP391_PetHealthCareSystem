@@ -92,7 +92,7 @@ body {
 
 .select-booking_info-date-doctor {
   height: 70px;
-  margin-top: 115px;
+  margin-top: 135px;
   display: flex;
 }
 
@@ -478,4 +478,19 @@ body {
   font-family: Roboto, sans-serif;
 }
 .booking-container .patient_Input {
+}
+
+.booking-container .remove-service-button {
+  border: none;
+  background-color: #ff6347;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-family: Roboto, sans-serif;
+}
+
+.booking-container .remove-service-button:hover {
+  background-color: #ff4500;
 }
