@@ -29,6 +29,7 @@ import ChangeUserPassword from './pages/ChangeUserPassWord/ChangeUserPassWord.js
 import TimeTableWork from './pages/TimeTableWork/TimeTableWork.js';
 import PetStatus from './pages/PetStatus/PetStatus.js';
 import DoctorCare from './pages/DoctorCare/DoctorCare.js';
+import AdminChartStatistic from './pages/AdminChartStatistic/AdminChartStatistic.js';
 function App() {
   return (
     <AuthProvider>
@@ -240,6 +241,15 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={['Admin']}>
               <AdminRating />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/admin-statistic'
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminChartStatistic />
             </ProtectedRoute>
           }
         />

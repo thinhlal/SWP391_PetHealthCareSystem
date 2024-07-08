@@ -366,7 +366,9 @@ function ManageCages() {
                                 .isCancelPayment ? (
                                 <div>Cancel payment</div>
                               ) : bookingSearchResult.isCancel ? (
-                                <div style={{ color: 'red' }}>Cancel Booking</div>
+                                <div style={{ color: 'red' }}>
+                                  Cancel Booking
+                                </div>
                               ) : (
                                 <div className='booking-details-search'>
                                   <div>
@@ -388,9 +390,13 @@ function ManageCages() {
                                       <span>Payment Status:&nbsp;</span>
                                       <span style={{ display: 'inline-block' }}>
                                         {paymentUpdatePrice.isSuccess ? (
-                                          <div style={{ color: 'green' }}>Already paid</div>
+                                          <div style={{ color: 'green' }}>
+                                            Already paid
+                                          </div>
                                         ) : (
-                                          <span style={{ color: 'red' }}>Not paid</span>
+                                          <span style={{ color: 'red' }}>
+                                            Not paid
+                                          </span>
                                         )}
                                       </span>
                                     </div>
@@ -403,7 +409,7 @@ function ManageCages() {
                                           {paymentUpdatePrice.totalPrice}
                                         </span>
                                         <div
-                                         className='button-like'
+                                          className='button-like'
                                           onClick={() =>
                                             payUpdateByPaymentID(
                                               paymentUpdatePrice.paymentID,
@@ -457,7 +463,10 @@ function ManageCages() {
                                   )}
                                 </div>
                                 {errors.chosenDoctor && (
-                                  <span style={{ color: 'red' }} className='error'>
+                                  <span
+                                    style={{ color: 'red' }}
+                                    className='error'
+                                  >
                                     {errors.chosenDoctor}
                                   </span>
                                 )}

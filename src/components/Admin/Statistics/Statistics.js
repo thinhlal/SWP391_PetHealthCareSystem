@@ -120,78 +120,71 @@ function Statistic() {
           max='2026-12-31'
         />
       </div>
-      {
-        <div className='Admin-DashBoard-Main-Header row'>
-          <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-            <div className='Admin-DashBoard-Main-Header-Note'>Daily income</div>
-            <div className='Admin-DashBoard-Main-Header-Money'>
-              ${currentTotalIncome.toFixed(2)}
-            </div>
-            <div className='Admin-DashBoard-Main-Header-Percent'>
-              {calculatePercentageChange(
-                currentTotalIncome,
-                previousTotalIncome,
-              ).toFixed(2) > 0
-                ? `+${calculatePercentageChange(currentTotalIncome, previousTotalIncome).toFixed(2)}`
-                : calculatePercentageChange(
-                    currentTotalIncome,
-                    previousTotalIncome,
-                  ).toFixed(2)}
-              % to the previous day
-            </div>
+      <div className='Admin-DashBoard-Main-Header row'>
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'>Daily income</div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            ${currentTotalIncome.toFixed(2)}
           </div>
-          <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-            <div className='Admin-DashBoard-Main-Header-Note'>
-              Weekly income
-            </div>
-            <div className='Admin-DashBoard-Main-Header-Money'>
-              ${weeklyTotalIncome.toFixed(2)}
-            </div>
-            <div className='Admin-DashBoard-Main-Header-Percent'>
-              {calculatePercentageChange(
-                weeklyTotalIncome,
-                previousWeeklyTotalIncome,
-              ).toFixed(2) > 0
-                ? `+${calculatePercentageChange(weeklyTotalIncome, previousWeeklyTotalIncome).toFixed(2)}`
-                : calculatePercentageChange(
-                    weeklyTotalIncome,
-                    previousWeeklyTotalIncome,
-                  ).toFixed(2)}
-              % to the previous week
-            </div>
-          </div>
-
-          <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-            <div className='Admin-DashBoard-Main-Header-Note'>
-              Monthly income
-            </div>
-            <div className='Admin-DashBoard-Main-Header-Money'>
-              ${currentMonthlyTotalIncome.toFixed(2)}
-            </div>
-            <div className='Admin-DashBoard-Main-Header-Percent'>
-              {calculatePercentageChange(
-                currentMonthlyTotalIncome,
-                previousMonthlyTotalIncome,
-              ).toFixed(2) > 0
-                ? `+${calculatePercentageChange(currentMonthlyTotalIncome, previousMonthlyTotalIncome).toFixed(2)}`
-                : calculatePercentageChange(
-                    currentMonthlyTotalIncome,
-                    previousMonthlyTotalIncome,
-                  ).toFixed(2)}
-              % to previous month
-            </div>
-          </div>
-          <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-            <div className='Admin-DashBoard-Main-Header-Note'> Total </div>
-            <div className='Admin-DashBoard-Main-Header-Money'>
-              ${totalIncome.toFixed(2)}
-            </div>
-            <div className='Admin-DashBoard-Main-Header-Percent'>
-              +20% day over day
-            </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            {calculatePercentageChange(
+              currentTotalIncome,
+              previousTotalIncome,
+            ).toFixed(2) > 0
+              ? `+${calculatePercentageChange(currentTotalIncome, previousTotalIncome).toFixed(2)}`
+              : calculatePercentageChange(
+                  currentTotalIncome,
+                  previousTotalIncome,
+                ).toFixed(2)}
+            % to the previous day
           </div>
         </div>
-      }
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'>Weekly income</div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            ${weeklyTotalIncome.toFixed(2)}
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            {calculatePercentageChange(
+              weeklyTotalIncome,
+              previousWeeklyTotalIncome,
+            ).toFixed(2) > 0
+              ? `+${calculatePercentageChange(weeklyTotalIncome, previousWeeklyTotalIncome).toFixed(2)}`
+              : calculatePercentageChange(
+                  weeklyTotalIncome,
+                  previousWeeklyTotalIncome,
+                ).toFixed(2)}
+            % to the previous week
+          </div>
+        </div>
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'>Monthly income</div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            ${currentMonthlyTotalIncome.toFixed(2)}
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            {calculatePercentageChange(
+              currentMonthlyTotalIncome,
+              previousMonthlyTotalIncome,
+            ).toFixed(2) > 0
+              ? `+${calculatePercentageChange(currentMonthlyTotalIncome, previousMonthlyTotalIncome).toFixed(2)}`
+              : calculatePercentageChange(
+                  currentMonthlyTotalIncome,
+                  previousMonthlyTotalIncome,
+                ).toFixed(2)}
+            % to previous month
+          </div>
+        </div>
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'> Total </div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            ${totalIncome.toFixed(2)}
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            +20% day over day
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

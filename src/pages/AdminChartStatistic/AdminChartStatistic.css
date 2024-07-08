@@ -1,0 +1,26 @@
+.Admin-Statistic-Content {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.Admin-Statistic-Navigate {
+  padding: 0;
+  position: relative;
+}
+
+.Admin-Statistic-Main {
+  padding: 0;
+  background-color: #f1f5f9;
+  border-left: 1px solid #f9f9fa;
+}
+
+.Admin-Statistic-Revenue {
+  background-color: #fff;
+  width: 95%;
+  height: auto;
+  margin: 40px auto;
+  border-radius: 20px;
+  border: 1px solid #eae8f1;
+  box-shadow: -2px 4px 18px #dadee8;
+}

@@ -471,7 +471,7 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   position: relative;
-  padding-right: 40px; 
+  padding-right: 40px;
 }
 
 .manage-cages .modal-header h1 {
@@ -516,7 +516,7 @@
 }
 
 .manage-cages .booking-details-search span {
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .manage-cages .button-like {
@@ -528,7 +528,9 @@
   color: white;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .manage-cages .button-like:hover {
@@ -539,7 +541,6 @@
   background-color: #004085;
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
-
 
 .manage-cages .search-owner-option-section input:focus {
   outline: none;
@@ -639,5 +640,4 @@
 }
 
 .booking-details-search {
-
 }
