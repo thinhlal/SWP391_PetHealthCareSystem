@@ -263,7 +263,7 @@ const Calendar = () => {
       <Header />
       <div className='calendar-doctor-main-content'>
         <div className='calendar-work-doctor'>
-          <h1>Hello Doctor {user.doctorDetails[0].name}!</h1>
+          <h1>Welcome {user.doctorDetails[0].name}!</h1>
           <div className='calender-work-doctor-content-select'>
             <label htmlFor='year'>Select Year: </label>
             <select

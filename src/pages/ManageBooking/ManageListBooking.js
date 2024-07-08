@@ -7,6 +7,7 @@ import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
 import axiosInstance from '../../utils/axiosInstance';
 import { Tab, Tabs } from 'react-bootstrap';
+import { Pagination, Stack } from '@mui/material';
 
 function ManageListBooking() {
   const [allServices, setAllServices] = useState([]);
@@ -57,6 +58,19 @@ function ManageListBooking() {
     searchValuePet: '',
   });
   const [filterDate, setFilterDate] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  useEffect(() => {
+    const now = new Date();
+
+    const utcOffset = now.getTimezoneOffset() * 60000;
+    const utcDate = new Date(now.getTime() + utcOffset);
+
+    const formattedDate = utcDate.toISOString().split('T')[0];
+
+    setFilterDate(formattedDate);
+  }, []);
 
   const handleOwnerOptionChange = event => {
     setAccountOption(event.target.value);
@@ -386,6 +400,7 @@ function ManageListBooking() {
   const handleFilterDateChange = event => {
     setFilterDate(event.target.value);
   };
+
   const filteredBookings = filterDate
     ? allBookings
         .filter(booking => booking.dateBook.split('T')[0] === filterDate)
@@ -447,6 +462,17 @@ function ManageListBooking() {
     const remainingDays = Math.ceil(timeDifference / millisecondsInDay);
     return remainingDays;
   };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentBookings = filteredBookings.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+  const totalPages = Math.ceil(filteredBookings.length / itemsPerPage);
 
   return (
     <div className='manage-booking-list container-fluid'>
@@ -1066,8 +1092,8 @@ function ManageListBooking() {
                 <div className='main-content-list-title-text'>Payment</div>{' '}
               </div>
               <div className='main-content-list-body-wrapper'>
-                {filteredBookings.length !== 0 ? (
-                  filteredBookings.map(booking => (
+                {currentBookings.length !== 0 ? (
+                  currentBookings.map(booking => (
                     <div
                       className='content-list-body-info'
                       key={booking.bookingID}
@@ -2069,61 +2095,30 @@ function ManageListBooking() {
                     </div>
                   ))
                 ) : (
-                  <div>No Bookings This Day</div>
+                  <div className='no-booking-this-date'>
+                    No Bookings This Day
+                  </div>
                 )}
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className='pagination_wrapper'>
-          <nav aria-label='...'>
-            <ul className='pagination'>
-              <li className='page-item disabled'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  Previous
-                </a>
-              </li>
-              <li
-                className='page-item active'
-                aria-current='page'
+            {currentBookings.length > 0 && totalPages > 1 && (
+              <Stack
+                spacing={2}
+                alignItems='center'
+                marginTop={3}
+                marginBottom={12}
+                padding={0}
               >
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  1
-                </a>
-              </li>
-              <li className='page-item'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  2
-                </a>
-              </li>
-              <li className='page-item'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  3
-                </a>
-              </li>
-              <li className='page-item'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  variant='outlined'
+                  color='primary'
+                />
+              </Stack>
+            )}
+          </div>
         </div>
       </div>
     </div>

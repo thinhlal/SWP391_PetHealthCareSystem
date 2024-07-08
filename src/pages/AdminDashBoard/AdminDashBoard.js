@@ -21,6 +21,8 @@ function AdminDashBoard() {
   const openTab = tabName => setActiveTab(tabName);
   const [bookingData, setBookingData] = useState([]);
   const [bookingInfoModal, setBookingInfoModal] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchBooking = async () => {
@@ -52,6 +54,17 @@ function AdminDashBoard() {
       return `${service.name}($${service.price})`;
     });
   };
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentBookings = searchBookingData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+  const totalPages = Math.ceil(searchBookingData.length / itemsPerPage);
 
   return (
     <div className='Admin-DashBoard container-fluid'>
@@ -110,8 +123,8 @@ function AdminDashBoard() {
                     Details
                   </div>
                 </div>
-                {searchBookingData.length > 0 ? (
-                  searchBookingData.map(item => (
+                {currentBookings.length > 0 ? (
+                  currentBookings.map(item => (
                     <div
                       className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'
                       key={item.bookingID}
@@ -134,7 +147,10 @@ function AdminDashBoard() {
                               ${
                                 item.isCancel
                                   ? 'Admin-DashBoard-Table-status-cancel'
-                                  : item.paymentsDetails[0].isCancelPayment
+                                  : item.paymentsDetails[0].isCancelPayment ||
+                                      (!item.paymentsDetails[0].isSuccess &&
+                                        item.paymentsDetails[0]
+                                          .paymentMethod === 'PAYPAL')
                                     ? 'Admin-DashBoard-Table-status-cancel'
                                     : item.paymentsDetails[0].isSuccess &&
                                         item.paymentsDetails[0]
@@ -161,7 +177,10 @@ function AdminDashBoard() {
                         >
                           {item.isCancel ? (
                             <span>Cancel Booking</span>
-                          ) : item.paymentsDetails[0].isCancelPayment ? (
+                          ) : item.paymentsDetails[0].isCancelPayment ||
+                            (!item.paymentsDetails[0].isSuccess &&
+                              item.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL') ? (
                             <span>Cancel Payment</span>
                           ) : item.paymentsDetails[0].isSuccess &&
                             item.paymentsDetails[0].paymentMethod ===
@@ -418,9 +437,20 @@ function AdminDashBoard() {
                 )}
 
                 <div className='Admin-DashBoard-Pagination'>
-                  <Stack spacing={2}>
-                    <Pagination count={10} />
-                  </Stack>
+                  {currentBookings.length > 0 && totalPages > 1 && (
+                    <Stack
+                      spacing={2}
+                      marginTop={2}
+                      alignItems='center'
+                    >
+                      <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        color='primary'
+                      />
+                    </Stack>
+                  )}
                 </div>
               </div>
             </div>

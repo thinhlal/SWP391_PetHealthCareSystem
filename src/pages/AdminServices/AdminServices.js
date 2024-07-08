@@ -52,6 +52,8 @@ function AdminServices() {
 
   const modalCloseButtonRef = useRef(null);
   const modalEditCloseButtonRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const getAllServices = async () => {
@@ -213,6 +215,16 @@ function AdminServices() {
       services.name.toLowerCase().includes(search.toLowerCase());
     return matchesSearch;
   });
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentServices = searchServicesData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+  const totalPages = Math.ceil(searchServicesData.length / itemsPerPage);
 
   return (
     <div className='Admin-Services container-fluid'>
@@ -389,8 +401,8 @@ function AdminServices() {
                   </div>
                 </div>
 
-                {searchServicesData.length > 0 ? (
-                  searchServicesData.map(item => (
+                {currentServices.length > 0 ? (
+                  currentServices.map(item => (
                     <div
                       className={`Admin-Services-Main-Table-Content-Row-Wrapper ${item.status ? 'row-enable' : 'row-disable'}`}
                       key={item.serviceID}
@@ -574,9 +586,20 @@ function AdminServices() {
                   </div>
                 )}
                 <div className='Admin-Services-Pagination'>
-                  <Stack spacing={2}>
-                    <Pagination count={10} />
-                  </Stack>
+                  {currentServices.length > 0 && totalPages > 1 && (
+                    <Stack
+                      spacing={2}
+                      marginTop={2}
+                      alignItems='center'
+                    >
+                      <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        color='primary'
+                      />
+                    </Stack>
+                  )}
                 </div>
               </div>
             </div>

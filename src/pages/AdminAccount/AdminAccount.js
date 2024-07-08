@@ -64,6 +64,8 @@ function AdminAccount() {
 
   const [errors, setErrors] = useState({});
   const modalRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const handleRoleFilterChange = event => {
     setRoleFilter(event.target.value);
@@ -264,6 +266,17 @@ function AdminAccount() {
       account.username.toLowerCase().includes(search.toLowerCase());
     return matchesRole && matchesSearch;
   });
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentAccounts = filteredAccountData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+  const totalPages = Math.ceil(filteredAccountData.length / itemsPerPage);
 
   return (
     <div className='Admin-Account container-fluid'>
@@ -538,8 +551,8 @@ function AdminAccount() {
                   </div>
                 </div>
 
-                {filteredAccountData.length > 0 ? (
-                  filteredAccountData.map(item => (
+                {currentAccounts.length > 0 ? (
+                  currentAccounts.map(item => (
                     <div
                       className='Admin-Account-Main-Table-Content-Row-Wrapper'
                       key={item.accountID}
@@ -836,9 +849,20 @@ function AdminAccount() {
                 )}
 
                 <div className='Admin-Account-Pagination'>
-                  <Stack spacing={2}>
-                    <Pagination count={10} />
-                  </Stack>
+                  {currentAccounts.length > 0 && totalPages > 1 && (
+                    <Stack
+                      spacing={2}
+                      marginTop={2}
+                      alignItems='center'
+                    >
+                      <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        color='primary'
+                      />
+                    </Stack>
+                  )}
                 </div>
               </div>
             </div>

@@ -78,7 +78,9 @@ function Statistic() {
         console.error(error);
       }
     };
-    fetchTotalIncome();
+    if (selectedDate) {
+      fetchTotalIncome();
+    }
   }, [selectedDate]);
 
   const calculatePercentageChange = (current, previous) => {
@@ -182,7 +184,7 @@ function Statistic() {
           <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
             <div className='Admin-DashBoard-Main-Header-Note'> Total </div>
             <div className='Admin-DashBoard-Main-Header-Money'>
-              ${totalIncome}
+              ${totalIncome.toFixed(2)}
             </div>
             <div className='Admin-DashBoard-Main-Header-Percent'>
               +20% day over day

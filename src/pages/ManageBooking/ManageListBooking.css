@@ -23,6 +23,7 @@
 }
 
 .manage-booking-list-content {
+  margin-bottom: 50px;
   padding: 0 !important;
   display: flex;
 }
@@ -397,4 +398,18 @@
 
 .manage-booking-list .status-cancel {
   color: red;
+}
+
+.manage-booking-list .no-booking-this-date {
+  width: 100%;
+  border: 1px solid #eaecf0;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+}
+
+.manage-booking-list .content-list-body-info:last-child {
+  border-bottom: 1px solid #eaecf0;
 }

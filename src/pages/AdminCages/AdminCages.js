@@ -1,6 +1,6 @@
 import './AdminCages.css';
 // React
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -20,92 +20,41 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { blue } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
-import Switch from '@mui/joy/Switch';
+import axiosInstance from '../../utils/axiosInstance';
 
 function AdminCages() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [errors, setErrors] = useState({});
-  const [cageData, setCageData] = useState([
-    {
-      id: 1,
-      cage_number_id: 'C00001',
-      name: 'Cage1',
-      description: 'Cage1 description',
-      account_id: 'A00001',
-      status: 'Using',
-      condition: 'Enable',
-      user_name: 'leslie123',
-      email: 'leslie14@gmail.com',
-      phoneNum: '1234567891',
-      role: 'Veterinarian',
-    },
-    {
-      id: 2,
-      cage_number_id: 'C00002',
-      name: 'Cage2',
-      description: 'Cage2 description',
-      account_id: 'A00002',
-      status: 'Empty',
-      condition: 'Disable',
-      user_name: 'ronaldo123',
-      email: 'thichpen12@gmail.com',
-      phoneNum: '1234567892',
-      role: 'Staff',
-    },
-    {
-      id: 3,
-      cage_number_id: 'C00003',
-      name: 'Cage3',
-      description: 'Cage3 description',
-      account_id: 'A00003',
-      status: 'Empty',
-      condition: 'Disable',
-      user_name: 'messi123',
-      email: 'thichvuotrau2@gmail.com',
-      phoneNum: '1234567893',
-      role: 'Customer',
-    },
-    {
-      id: 4,
-      cage_number_id: 'C00004',
-      name: 'Cage4',
-      description: 'Cage4 description',
-      account_id: 'A00004',
-      status: 'Using',
-      condition: 'Enable',
-      user_name: 'victoria123',
-      email: 'victoriasecret13@gmail.com',
-      phoneNum: '1234567894',
-      role: 'Customer',
-    },
-    {
-      id: 5,
-      cage_number_id: 'C00005',
-      name: 'Cage5',
-      description: 'Cage5 description',
-      condition: 'Enable',
-      account_id: 'A00005',
-      status: 'Using',
-      user_name: 'john123',
-      email: 'johnydog143@gmail.com',
-      phoneNum: '1234567895',
-      role: 'Admin',
-    },
-  ]);
+  const [cageData, setCageData] = useState([]);
 
   const [newCage, setNewCage] = useState({
     name: '',
     description: '',
-    condition: 'Enable',
-    status: 'Empty',
   });
 
   const [editCage, setEditCage] = useState({
-    id: '',
+    cageID: '',
     name: '',
     description: '',
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  useEffect(() => {
+    const fetchCages = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/cage/getAllCagesByAdmin`,
+        );
+        console.log(response.data);
+        setCageData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCages();
+  }, []);
 
   const handleNewCageChange = e => {
     const { name, value } = e.target;
@@ -123,7 +72,7 @@ function AdminCages() {
     }));
   };
 
-  const handleAddCage = () => {
+  const handleAddCage = async () => {
     const newErrors = {};
     if (!newCage.name) newErrors.name = 'Name is required';
     if (!newCage.description) newErrors.description = 'Description is required';
@@ -132,20 +81,23 @@ function AdminCages() {
       setErrors(newErrors);
       return;
     }
-    const newId = cageData.length + 1;
-    const newCageData = {
-      ...newCage,
-      id: newId,
-      cage_number_id: `C0000${newId}`,
-      condition: 'Enable',
-    };
-    setCageData([...cageData, newCageData]);
+
+    try {
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/cage/addCage`,
+        {
+          newCage,
+        },
+      );
+    } catch (error) {
+      console.error(error);
+    }
+
     setNewCage({
       name: '',
       description: '',
-      condition: 'Enable',
-      status: 'Empty',
     });
+
     setErrors({});
     const modal = bootstrap.Modal.getInstance(modalRef.current);
     if (modal) {
@@ -153,7 +105,7 @@ function AdminCages() {
     }
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     const newErrors = {};
     if (!editCage.name) newErrors.name = 'Name is required';
     if (!editCage.description)
@@ -164,8 +116,19 @@ function AdminCages() {
       return;
     }
 
+    try {
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/cage/updateCageAdmin`,
+        {
+          editCage,
+        },
+      );
+    } catch (error) {
+      console.error(error);
+    }
+
     const updatedCageData = cageData.map(cage => {
-      if (cage.id === editCage.id) {
+      if (cage.cageID === editCage.cageID) {
         return { ...cage, ...editCage };
       }
       return cage;
@@ -173,7 +136,7 @@ function AdminCages() {
     setCageData(updatedCageData);
     setErrors({});
     const modal = bootstrap.Modal.getInstance(
-      document.getElementById(`exampleModalEdit-${editCage.id}`),
+      document.getElementById(`exampleModalEdit-${editCage.cageID}`),
     );
     if (modal) {
       modal.hide();
@@ -182,7 +145,7 @@ function AdminCages() {
 
   const openEditModal = cage => {
     setEditCage({
-      id: cage.id,
+      cageID: cage.cageID,
       name: cage.name,
       description: cage.description,
     });
@@ -190,50 +153,45 @@ function AdminCages() {
 
   const modalRef = useRef(null);
 
-  const handlestatusFilterChange = event => {
+  const handleStatusFilterChange = event => {
     setStatusFilter(event.target.value);
   };
 
-  const handleStatusChange = id => {
-    const updatedcageData = cageData.map(cage => {
-      if (cage.id === id) {
-        return {
-          ...cage,
-          condition: cage.condition === 'Enable' ? 'Disable' : 'Enable',
-        };
-      }
-      return cage;
-    });
-    setCageData(updatedcageData);
-  };
-
-  const filteredcageData = cageData.filter(cage => {
-    const matchesStatus =
-      statusFilter === 'All' || cage.status === statusFilter;
+  const filteredCageData = cageData.filter(cage => {
+    const status = cage.isEmpty ? 'Empty' : 'Using';
+    const matchesStatus = statusFilter === 'All' || status === statusFilter;
     const matchesSearch =
-      search === '' ||
-      cage.cage_number_id.toLowerCase().includes(search.toLowerCase());
+      search === '' || cage.cageID.toLowerCase().includes(search.toLowerCase());
     return matchesStatus && matchesSearch;
   });
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentCages = filteredCageData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+
+  const totalPages = Math.ceil(filteredCageData.length / itemsPerPage);
 
   return (
     <div className='Admin-Cages container-fluid'>
       <div className='row'>
         <Header />
-
         <div className='Admin-Cages-Content row'>
           <div className='Admin-Cages-Navigate col-md-2'>
             <Sidebar />
           </div>
-
           <div className='Admin-Cages-Main col-md-10'>
             <Statistic />
             <div className='Admin-Cages-Main-Table-Wrapper'>
               <div className='Admin-Cages-Main-Table'>
                 <div className='Admin-Cages-Main-Table-Title'> Cage List </div>
                 <div className='Admin-Cages-Main-Table-Title-Text'>
-                  {' '}
-                  Cages Information{' '}
+                  Cages Information
                 </div>
                 <div className='Admin-Cages-Main-Filter'>
                   <div className='Admin-Cages-Main-Search'>
@@ -244,11 +202,10 @@ function AdminCages() {
                       onChange={e => setSearch(e.target.value)}
                     />
                     <button className='Admin-Cages-Main-Search-Button'>
-                      {' '}
                       <img
                         src={icon_search}
                         alt=''
-                      />{' '}
+                      />
                     </button>
                   </div>
                   <div className='Admin-Cages-Select-Role'>
@@ -257,7 +214,7 @@ function AdminCages() {
                     <select
                       className='Admin-Cages-Select-Filter'
                       name='role'
-                      onChange={handlestatusFilterChange}
+                      onChange={handleStatusFilterChange}
                       value={statusFilter}
                     >
                       <option>All</option>
@@ -291,8 +248,7 @@ function AdminCages() {
                               className='modal-title fs-5'
                               id='exampleModalLabelEdit'
                             >
-                              {' '}
-                              Add Cage{' '}
+                              Add Cage
                             </h1>
                             <button
                               type='button'
@@ -304,12 +260,10 @@ function AdminCages() {
                           <div className='modal-body'>
                             <div className='Admin-Cages-modal-add-account'>
                               <div className='Admin-Cages-modal-title-name'>
-                                {' '}
-                                Name{' '}
+                                Name
                               </div>
                               <label className='Admin-Cages-modal-add'>
-                                {' '}
-                                Cage name:{' '}
+                                Cage name:
                               </label>
                               <input
                                 className='Admin-Cages-input'
@@ -324,15 +278,12 @@ function AdminCages() {
                                 </div>
                               )}
                             </div>
-
                             <div className='Admin-Cages-modal-add-account'>
                               <div className='Admin-Cages-modal-title-name'>
-                                {' '}
-                                Description{' '}
+                                Description
                               </div>
                               <label className='Admin-Cages-modal-add'>
-                                {' '}
-                                Description:{' '}
+                                Description:
                               </label>
                               <input
                                 className='Admin-Cages-input'
@@ -354,16 +305,14 @@ function AdminCages() {
                               className='btn btn-secondary'
                               data-bs-dismiss='modal'
                             >
-                              {' '}
-                              Close{' '}
+                              Close
                             </button>
                             <button
                               type='button'
                               className='btn btn-success'
                               onClick={handleAddCage}
                             >
-                              {' '}
-                              Add{' '}
+                              Add
                             </button>
                           </div>
                         </div>
@@ -374,67 +323,61 @@ function AdminCages() {
 
                 <div className='Admin-Cages-Main-Table-Header'>
                   <div className='Admin-Cages-Main-Table-Header-Title'>
-                    {' '}
-                    Cage number ID{' '}
+                    Cage ID
                   </div>
                   <div className='Admin-Cages-Main-Table-Header-Title'>
-                    {' '}
-                    Name{' '}
+                    Name
                   </div>
                   <div className='Admin-Cages-Main-Table-Header-Title'>
-                    {' '}
-                    Description{' '}
+                    Description
                   </div>
                   <div className='Admin-Cages-Main-Table-Header-Title'>
-                    {' '}
-                    Status{' '}
+                    Status
                   </div>
                   <div className='Admin-Cages-Main-Table-Header-Title-Btn'>
-                    {' '}
-                    Action{' '}
+                    Action
                   </div>
                 </div>
 
-                {filteredcageData.length > 0 ? (
-                  filteredcageData.map(item => (
+                {currentCages.length > 0 ? (
+                  currentCages.map(item => (
                     <div
                       className='Admin-Cages-Main-Table-Content-Row-Wrapper'
-                      key={item.id}
+                      key={item.cageID}
                     >
                       <div className='Admin-Cages-Main-Table-Content-Row'>
-                        {' '}
-                        {item.cage_number_id}{' '}
+                        {item.cageID}
                       </div>
                       <div className='Admin-Cages-Main-Table-Content-Row'>
-                        {' '}
-                        {item.name}{' '}
+                        {item.name}
                       </div>
                       <div className='Admin-Cages-Main-Table-Content-Row'>
-                        {' '}
-                        {item.description}{' '}
+                        {item.description}
                       </div>
                       <div className='Admin-Cages-Main-Table-Content-Row'>
-                        {' '}
-                        {item.status}{' '}
+                        {item.isEmpty ? (
+                          <span className='Admin-Cages-Empty'>Empty</span>
+                        ) : (
+                          <span className='Admin-Cages-Using'>Using</span>
+                        )}
                       </div>
                       <div className='Admin-Cages-Main-Table-Content-Row-Action'>
-                        {' '}
                         <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
                           <button
                             type='button'
                             className='Admin-Cages-Main-Table-Content-Btn'
                             data-bs-toggle='modal'
-                            data-bs-target={`#exampleModalEdit-${item.id}`}
+                            data-bs-target={`#exampleModalEdit-${item.cageID}`}
                             onClick={() => openEditModal(item)}
                           >
                             <BorderColorOutlinedIcon
                               sx={{ color: blue[400] }}
                             />
                           </button>
-                          {/* Modal Edit */}
+
                           <div
                             className='modal fade'
-                            id={`exampleModalEdit-${item.id}`}
+                            id={`exampleModalEdit-${item.cageID}`}
                             tabIndex='-1'
                             aria-labelledby='exampleModalLabelEdit'
                             aria-hidden='true'
@@ -446,8 +389,7 @@ function AdminCages() {
                                     className='modal-title fs-5'
                                     id='exampleModalLabelEdit'
                                   >
-                                    {' '}
-                                    Edit Cage{' '}
+                                    Edit Cage
                                   </h1>
                                   <button
                                     type='button'
@@ -459,12 +401,10 @@ function AdminCages() {
                                 <div className='modal-body'>
                                   <div className='Admin-Cages-modal-update'>
                                     <div className='Admin-Cages-modal-title-name'>
-                                      {' '}
-                                      Name{' '}
+                                      Name
                                     </div>
                                     <label className='Admin-Cages-modal-update-new'>
-                                      {' '}
-                                      Cage name:{' '}
+                                      Cage name:
                                     </label>
                                     <input
                                       className='Admin-Cages-input'
@@ -481,12 +421,10 @@ function AdminCages() {
                                   </div>
                                   <div className='Admin-Cages-modal-update'>
                                     <div className='Admin-Cages-modal-title'>
-                                      {' '}
-                                      Description{' '}
+                                      Description
                                     </div>
                                     <label className='Admin-Cages-modal-update-new'>
-                                      {' '}
-                                      Cage description:{' '}
+                                      Cage description:
                                     </label>
                                     <input
                                       className='Admin-Cages-input'
@@ -508,43 +446,20 @@ function AdminCages() {
                                     className='btn btn-secondary'
                                     data-bs-dismiss='modal'
                                   >
-                                    {' '}
-                                    Close{' '}
+                                    Close
                                   </button>
                                   <button
                                     type='button'
                                     className='btn btn-success'
                                     onClick={handleSaveChanges}
                                   >
-                                    {' '}
-                                    Save changes{' '}
+                                    Save changes
                                   </button>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </span>
-                        <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
-                          <Switch
-                            checked={item.condition === 'Enable'}
-                            onChange={() => handleStatusChange(item.id)}
-                            color={
-                              item.condition === 'Enable'
-                                ? 'success'
-                                : 'neutral'
-                            }
-                            variant={
-                              item.condition === 'Enable' ? 'solid' : 'outlined'
-                            }
-                            slotProps={{
-                              endDecorator: {
-                                sx: {
-                                  minWidth: 24,
-                                },
-                              },
-                            }}
-                          />
-                        </span>{' '}
                       </div>
                     </div>
                   ))
@@ -555,9 +470,19 @@ function AdminCages() {
                 )}
 
                 <div className='Admin-Cages-Pagination'>
-                  <Stack spacing={2}>
-                    <Pagination count={10} />
-                  </Stack>
+                  {currentCages.length > 0 && totalPages > 1 && (
+                    <Stack
+                      spacing={2}
+                      alignItems='center'
+                    >
+                      <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        color='primary'
+                      />
+                    </Stack>
+                  )}
                 </div>
               </div>
             </div>

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import axiosInstance from '../../utils/axiosInstance';
-import { Slider } from '@mui/material';
+import { Pagination, Slider, Stack } from '@mui/material';
 
 function ManageCages() {
   const [searchBookingIDValue, setSearchBookingValue] = useState('');
@@ -26,6 +26,8 @@ function ManageCages() {
     chosenDoctor: '',
     bookingResult: '',
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const handleGetAllCages = async () => {
@@ -232,6 +234,17 @@ function ManageCages() {
     const status = cage.isEmpty ? 'Empty' : 'Using';
     return status === statusFilter;
   });
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentCages = filteredCageData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+  const totalPages = Math.ceil(filteredCageData.length / itemsPerPage);
 
   return (
     <div className='manage-cages container-fluid'>
@@ -510,362 +523,53 @@ function ManageCages() {
                 </div>
               </div>
 
-              {filteredCageData.map(cage => (
-                <div
-                  className='main-content-list-body-wrapper'
-                  key={cage.cageID}
-                >
-                  <div className='content-list-body-info'>
-                    <div className='content-list-body-value'>{cage.cageID}</div>
-                    <div className='content-list-body-value'>{cage.name}</div>
-                    <div className='content-list-body-value'>
-                      {cage.description}
-                    </div>
-                    <div
-                      className={`content-list-body-value ${cage.isEmpty === false ? 'status-using' : 'status-empty'}`}
-                    >
-                      {cage.isEmpty ? <span>Empty</span> : <span>Using</span>}
-                    </div>
-                    <div className='content-list-body-value-button'>
-                      {!cage.isEmpty && (
-                        <button
-                          type='button'
-                          className='btn btn-primary'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#more_info_${cage.cageID}`}
-                          onClick={() => setSelectedCage(cage)}
-                        >
-                          More Details
-                        </button>
-                      )}
-                    </div>
-
-                    <div
-                      className='modal fade'
-                      id={`more_info_${cage.cageID}`}
-                      aria-labelledby='exampleModalLabel'
-                      aria-hidden='true'
-                    >
-                      <div className='modal-dialog'>
-                        <div className='modal-content'>
-                          <div className='modal-header'>
-                            <h1
-                              className='modal-title fs-5'
-                              id='exampleModalLabel'
-                            >
-                              More Info
-                            </h1>
-                            <button
-                              type='button'
-                              className='btn-close'
-                              data-bs-dismiss='modal'
-                              aria-label='Close'
-                            ></button>
-                          </div>
-                          <div className='modal-body'>
-                            <div className='container-modal-body-more-info'>
-                              <div className='tab-modal-body-more-info'>
-                                <button
-                                  className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
-                                  onClick={() => openTab('Profile')}
-                                >
-                                  Customer Profile
-                                </button>
-                                <button
-                                  className={`tablinks ${activeTab === 'Vacancies' ? 'active' : ''}`}
-                                  onClick={() => openTab('Vacancies')}
-                                >
-                                  Pet
-                                </button>
-                                <button
-                                  className={`tablinks ${activeTab === 'More' ? 'active' : ''}`}
-                                  onClick={() => openTab('More')}
-                                >
-                                  More
-                                </button>
-                              </div>
-
-                              <div
-                                id='profile-customer'
-                                className='tabcontent-customer'
-                                style={{
-                                  display:
-                                    activeTab === 'Profile' ? 'flex' : 'none',
-                                }}
-                              >
-                                <form className='profile-form'>
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile'>
-                                      Name:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-customer'
-                                      name='name'
-                                      value={
-                                        selectedCage?.customerDetails[0]
-                                          ?.name || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile'>
-                                      Email:
-                                    </div>
-                                    <input
-                                      type='email'
-                                      className='edit-customer'
-                                      name='email'
-                                      value={
-                                        selectedCage?.customerDetails[0]
-                                          ?.email || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile'>
-                                      Phone:
-                                    </div>
-                                    <input
-                                      type='tel'
-                                      className='edit-customer'
-                                      name='phone'
-                                      value={
-                                        selectedCage?.customerDetails[0]
-                                          ?.phone || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-                                </form>
-                              </div>
-
-                              <div
-                                id='Vacancies'
-                                className='tabcontent-pet'
-                                style={{
-                                  display:
-                                    activeTab === 'Vacancies' ? 'flex' : 'none',
-                                }}
-                              >
-                                <form className='pet-profile-form'>
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Name:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='name'
-                                      value={
-                                        selectedCage?.petDetails[0]?.name || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Breed:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='breed'
-                                      value={
-                                        selectedCage?.petDetails[0]?.breed || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Birthday:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='species'
-                                      value={
-                                        selectedCage?.petDetails[0]?.birthday.split(
-                                          'T',
-                                        )[0] || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Gender:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='gender'
-                                      value={
-                                        selectedCage?.petDetails[0]?.gender.toLowerCase() ||
-                                        ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Pet type:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='in-cage'
-                                      value={
-                                        selectedCage?.petDetails[0]?.petType.toLowerCase() ||
-                                        ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-                                </form>
-                              </div>
-
-                              <div
-                                id='More'
-                                className='tabcontent-pet-more'
-                                style={{
-                                  display:
-                                    activeTab === 'More' ? 'flex' : 'none',
-                                }}
-                              >
-                                <form className='pet-profile-form'>
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Doctor:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='doctor'
-                                      value={
-                                        selectedCage?.doctorDetailCage[0]
-                                          ?.name || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Cage Number:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='cageNumber'
-                                      value={selectedCage?.cageID || ''}
-                                      readOnly
-                                    />
-                                  </div>
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Admission Time:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='admissionTime'
-                                      value={
-                                        selectedCage?.cageDiseaseDetails?.startDate.split(
-                                          'T',
-                                        )[0] || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-                                  <div className='form-group'>
-                                    <div className='sub-title-profile-pet'>
-                                      Reason for admission:
-                                    </div>
-                                    <input
-                                      type='text'
-                                      className='edit-pet'
-                                      name='admissionTime'
-                                      value={
-                                        selectedCage?.cageDiseaseDetails
-                                          ?.reasonForAdmission || ''
-                                      }
-                                      readOnly
-                                    />
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className='modal-footer'>
-                            <button
-                              type='button'
-                              className='btn btn-secondary'
-                              data-bs-dismiss='modal'
-                            >
-                              Close
-                            </button>
-                            <button
-                              type='button'
-                              className='btn btn-primary'
-                            >
-                              Save changes
-                            </button>
-                          </div>
-                        </div>
+              {currentCages.length > 0 ? (
+                currentCages.map(cage => (
+                  <div
+                    className='main-content-list-body-wrapper'
+                    key={cage.cageID}
+                  >
+                    <div className='content-list-body-info'>
+                      <div className='content-list-body-value'>
+                        {cage.cageID}
                       </div>
-                    </div>
-                    <div className='content-list-body-value-button'>
-                      {cage.isEmpty ? (
-                        <button
-                          type='button'
-                          className='btn btn-secondary'
-                          data-bs-toggle='modal'
-                          data-bs-target='#exampleModal'
-                          onClick={() => {
-                            handleGetAllDoctors();
-                            setSelectedCage(cage);
-                          }}
-                        >
-                          Add Pet
-                        </button>
-                      ) : (
-                        <button
-                          type='button'
-                          className='btn btn-primary'
-                          data-bs-toggle='modal'
-                          data-bs-target={`#update_status_${cage.cageID}`}
-                          onClick={() => setSelectedCage(cage)}
-                        >
-                          Update
-                        </button>
-                      )}
-                    </div>
-                    <div
-                      className='modal fade'
-                      id={`update_status_${cage.cageID}`}
-                      aria-labelledby='exampleModalLabel'
-                      aria-hidden='true'
-                    >
-                      <div className='modal-dialog'>
-                        <form onSubmit={e => handleSubmitUpdate(e, cage)}>
+                      <div className='content-list-body-value'>{cage.name}</div>
+                      <div className='content-list-body-value'>
+                        {cage.description}
+                      </div>
+                      <div
+                        className={`content-list-body-value ${cage.isEmpty === false ? 'status-using' : 'status-empty'}`}
+                      >
+                        {cage.isEmpty ? <span>Empty</span> : <span>Using</span>}
+                      </div>
+                      <div className='content-list-body-value-button'>
+                        {!cage.isEmpty && (
+                          <button
+                            type='button'
+                            className='btn btn-primary'
+                            data-bs-toggle='modal'
+                            data-bs-target={`#more_info_${cage.cageID}`}
+                            onClick={() => setSelectedCage(cage)}
+                          >
+                            More Details
+                          </button>
+                        )}
+                      </div>
+
+                      <div
+                        className='modal fade'
+                        id={`more_info_${cage.cageID}`}
+                        aria-labelledby='exampleModalLabel'
+                        aria-hidden='true'
+                      >
+                        <div className='modal-dialog'>
                           <div className='modal-content'>
                             <div className='modal-header'>
                               <h1
                                 className='modal-title fs-5'
                                 id='exampleModalLabel'
                               >
-                                Update Status
+                                More Info
                               </h1>
                               <button
                                 type='button'
@@ -875,155 +579,442 @@ function ManageCages() {
                               ></button>
                             </div>
                             <div className='modal-body'>
-                              <div className='modal-body-update-status'>
-                                <div className='modal-body-update-status-title'>
-                                  Status of pet:
+                              <div className='container-modal-body-more-info'>
+                                <div className='tab-modal-body-more-info'>
+                                  <button
+                                    className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
+                                    onClick={() => openTab('Profile')}
+                                  >
+                                    Customer Profile
+                                  </button>
+                                  <button
+                                    className={`tablinks ${activeTab === 'Vacancies' ? 'active' : ''}`}
+                                    onClick={() => openTab('Vacancies')}
+                                  >
+                                    Pet
+                                  </button>
+                                  <button
+                                    className={`tablinks ${activeTab === 'More' ? 'active' : ''}`}
+                                    onClick={() => openTab('More')}
+                                  >
+                                    More
+                                  </button>
                                 </div>
-                                <div className='modal-body-update-status-empty'>
-                                  <input
-                                    type='radio'
-                                    id='NotRecover'
-                                    name='status-of-pet'
-                                    value='NotRecover'
-                                    checked={petCondition === 'NotRecover'}
-                                    onChange={handleRadioChange}
-                                  />
-                                  <div className='modal-body-update-status-empty-text'>
-                                    Not Recover
-                                  </div>
+
+                                <div
+                                  id='profile-customer'
+                                  className='tabcontent-customer'
+                                  style={{
+                                    display:
+                                      activeTab === 'Profile' ? 'flex' : 'none',
+                                  }}
+                                >
+                                  <form className='profile-form'>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile'>
+                                        Name:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-customer'
+                                        name='name'
+                                        value={
+                                          selectedCage?.customerDetails[0]
+                                            ?.name || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile'>
+                                        Email:
+                                      </div>
+                                      <input
+                                        type='email'
+                                        className='edit-customer'
+                                        name='email'
+                                        value={
+                                          selectedCage?.customerDetails[0]
+                                            ?.email || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile'>
+                                        Phone:
+                                      </div>
+                                      <input
+                                        type='tel'
+                                        className='edit-customer'
+                                        name='phone'
+                                        value={
+                                          selectedCage?.customerDetails[0]
+                                            ?.phone || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                  </form>
                                 </div>
-                                <div className='modal-body-update-status-using'>
-                                  <input
-                                    type='radio'
-                                    id='Recover'
-                                    name='status-of-pet'
-                                    value='Recover'
-                                    checked={petCondition === 'Recover'}
-                                    onChange={handleRadioChange}
-                                  />
-                                  <div className='modal-body-update-status-using-text'>
-                                    Recover
-                                  </div>
+
+                                <div
+                                  id='Vacancies'
+                                  className='tabcontent-pet'
+                                  style={{
+                                    display:
+                                      activeTab === 'Vacancies'
+                                        ? 'flex'
+                                        : 'none',
+                                  }}
+                                >
+                                  <form className='pet-profile-form'>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Name:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='name'
+                                        value={
+                                          selectedCage?.petDetails[0]?.name ||
+                                          ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Breed:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='breed'
+                                        value={
+                                          selectedCage?.petDetails[0]?.breed ||
+                                          ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Birthday:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='species'
+                                        value={
+                                          selectedCage?.petDetails[0]?.birthday.split(
+                                            'T',
+                                          )[0] || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Gender:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='gender'
+                                        value={
+                                          selectedCage?.petDetails[0]?.gender.toLowerCase() ||
+                                          ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Pet type:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='in-cage'
+                                        value={
+                                          selectedCage?.petDetails[0]?.petType.toLowerCase() ||
+                                          ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                  </form>
                                 </div>
-                              </div>
-                              <div className='modal-body-update-text'>
-                                <div className='modal-body-update-text-title'>
-                                  Pet Condition:
-                                </div>
-                                <Slider
-                                  aria-label='Pet Health Status'
-                                  value={sliderValue}
-                                  onChange={handleSliderChange}
-                                  getAriaValueText={petStatus}
-                                  valueLabelDisplay='auto'
-                                  step={1}
-                                  marks={[
-                                    { value: 1, label: 'Critical' },
-                                    { value: 2, label: 'Mild' },
-                                    { value: 3, label: 'Moderate' },
-                                    { value: 4, label: 'Severe' },
-                                    { value: 5, label: 'Healthy' },
-                                  ]}
-                                  min={1}
-                                  max={5}
-                                />
-                              </div>
-                              <div className='modal-body-update-text'>
-                                <div className='modal-body-update-text-title'>
-                                  Update Info Of Pet:
-                                </div>
-                                <div className='modal-body-update-text-info'>
-                                  <div className='mb-3'>
-                                    <textarea
-                                      className='form-control'
-                                      rows='3'
-                                      name='update-info-of-pet'
-                                      value={petInfoStatus}
-                                      onChange={e =>
-                                        setPetInfoStatus(e.target.value)
-                                      }
-                                      required
-                                    ></textarea>
-                                  </div>
+
+                                <div
+                                  id='More'
+                                  className='tabcontent-pet-more'
+                                  style={{
+                                    display:
+                                      activeTab === 'More' ? 'flex' : 'none',
+                                  }}
+                                >
+                                  <form className='pet-profile-form'>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Doctor:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='doctor'
+                                        value={
+                                          selectedCage?.doctorDetailCage[0]
+                                            ?.name || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Cage Number:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='cageNumber'
+                                        value={selectedCage?.cageID || ''}
+                                        readOnly
+                                      />
+                                    </div>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Admission Time:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='admissionTime'
+                                        value={
+                                          selectedCage?.cageDiseaseDetails?.startDate.split(
+                                            'T',
+                                          )[0] || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Reason for admission:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='admissionTime'
+                                        value={
+                                          selectedCage?.cageDiseaseDetails
+                                            ?.reasonForAdmission || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                  </form>
                                 </div>
                               </div>
                             </div>
+
                             <div className='modal-footer'>
                               <button
                                 type='button'
                                 className='btn btn-secondary'
                                 data-bs-dismiss='modal'
-                                onClick={resetFormUpdate}
                               >
                                 Close
                               </button>
                               <button
-                                type='submit'
+                                type='button'
                                 className='btn btn-primary'
                               >
-                                Update
+                                Save changes
                               </button>
                             </div>
                           </div>
-                        </form>
+                        </div>
+                      </div>
+                      <div className='content-list-body-value-button'>
+                        {cage.isEmpty ? (
+                          <button
+                            type='button'
+                            className='btn btn-secondary'
+                            data-bs-toggle='modal'
+                            data-bs-target='#exampleModal'
+                            onClick={() => {
+                              handleGetAllDoctors();
+                              setSelectedCage(cage);
+                            }}
+                          >
+                            Add Pet
+                          </button>
+                        ) : (
+                          <button
+                            type='button'
+                            className='btn btn-primary'
+                            data-bs-toggle='modal'
+                            data-bs-target={`#update_status_${cage.cageID}`}
+                            onClick={() => setSelectedCage(cage)}
+                          >
+                            Update
+                          </button>
+                        )}
+                      </div>
+                      <div
+                        className='modal fade'
+                        id={`update_status_${cage.cageID}`}
+                        aria-labelledby='exampleModalLabel'
+                        aria-hidden='true'
+                      >
+                        <div className='modal-dialog'>
+                          <form onSubmit={e => handleSubmitUpdate(e, cage)}>
+                            <div className='modal-content'>
+                              <div className='modal-header'>
+                                <h1
+                                  className='modal-title fs-5'
+                                  id='exampleModalLabel'
+                                >
+                                  Update Status
+                                </h1>
+                                <button
+                                  type='button'
+                                  className='btn-close'
+                                  data-bs-dismiss='modal'
+                                  aria-label='Close'
+                                ></button>
+                              </div>
+                              <div className='modal-body'>
+                                <div className='modal-body-update-status'>
+                                  <div className='modal-body-update-status-title'>
+                                    Status of pet:
+                                  </div>
+                                  <div className='modal-body-update-status-empty'>
+                                    <input
+                                      type='radio'
+                                      id='NotRecover'
+                                      name='status-of-pet'
+                                      value='NotRecover'
+                                      checked={petCondition === 'NotRecover'}
+                                      onChange={handleRadioChange}
+                                    />
+                                    <div className='modal-body-update-status-empty-text'>
+                                      Not Recover
+                                    </div>
+                                  </div>
+                                  <div className='modal-body-update-status-using'>
+                                    <input
+                                      type='radio'
+                                      id='Recover'
+                                      name='status-of-pet'
+                                      value='Recover'
+                                      checked={petCondition === 'Recover'}
+                                      onChange={handleRadioChange}
+                                    />
+                                    <div className='modal-body-update-status-using-text'>
+                                      Recover
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className='modal-body-update-text'>
+                                  <div className='modal-body-update-text-title'>
+                                    Pet Condition:
+                                  </div>
+                                  <Slider
+                                    aria-label='Pet Health Status'
+                                    value={sliderValue}
+                                    onChange={handleSliderChange}
+                                    getAriaValueText={petStatus}
+                                    valueLabelDisplay='auto'
+                                    step={1}
+                                    marks={[
+                                      { value: 1, label: 'Critical' },
+                                      { value: 2, label: 'Mild' },
+                                      { value: 3, label: 'Moderate' },
+                                      { value: 4, label: 'Severe' },
+                                      { value: 5, label: 'Healthy' },
+                                    ]}
+                                    min={1}
+                                    max={5}
+                                  />
+                                </div>
+                                <div className='modal-body-update-text'>
+                                  <div className='modal-body-update-text-title'>
+                                    Update Info Of Pet:
+                                  </div>
+                                  <div className='modal-body-update-text-info'>
+                                    <div className='mb-3'>
+                                      <textarea
+                                        className='form-control'
+                                        rows='3'
+                                        name='update-info-of-pet'
+                                        value={petInfoStatus}
+                                        onChange={e =>
+                                          setPetInfoStatus(e.target.value)
+                                        }
+                                        required
+                                      ></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className='modal-footer'>
+                                <button
+                                  type='button'
+                                  className='btn btn-secondary'
+                                  data-bs-dismiss='modal'
+                                  onClick={resetFormUpdate}
+                                >
+                                  Close
+                                </button>
+                                <button
+                                  type='submit'
+                                  className='btn btn-primary'
+                                >
+                                  Update
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <div className='no-booking-this-date'>No content available</div>
+              )}
             </div>
           </div>
         </div>
 
-        <div className='pagination_wrapper'>
-          <nav aria-label='...'>
-            <ul className='pagination'>
-              <li className='page-item disabled'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  Previous
-                </a>
-              </li>
-              <li
-                className='page-item active'
-                aria-current='page'
-              >
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  1
-                </a>
-              </li>
-              <li className='page-item'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  2
-                </a>
-              </li>
-              <li className='page-item'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  3
-                </a>
-              </li>
-              <li className='page-item'>
-                <a
-                  className='page-link'
-                  href='#123'
-                >
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        {currentCages.length > 0 && totalPages > 1 && (
+          <Stack
+            spacing={2}
+            alignItems='center'
+            marginTop={3}
+            marginBottom={12}
+            padding={0}
+          >
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              variant='outlined'
+              color='primary'
+            />
+          </Stack>
+        )}
       </div>
     </div>
   );

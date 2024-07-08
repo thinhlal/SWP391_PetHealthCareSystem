@@ -4,7 +4,7 @@ import Pagination from '../../components/Pagination/Pagination';
 import Header from '../../components/Doctor/Header/Header';
 import axiosInstance from '../../utils/axiosInstance';
 import { AuthContext } from '../../context/AuthContext';
-import { Slider } from '@mui/material';
+import { Slider, Stack } from '@mui/material';
 
 const DoctorCare = () => {
   const { user } = useContext(AuthContext);
@@ -17,6 +17,8 @@ const DoctorCare = () => {
   const [sliderValue, setSliderValue] = useState(1);
   const [petCondition, setPetCondition] = useState('NotRecover');
   const [petInfoStatus, setPetInfoStatus] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
   useEffect(() => {
     const fetchCageDisease = async () => {
@@ -157,6 +159,14 @@ const DoctorCare = () => {
     setPetCondition(event.target.value);
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentData = statusData.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(statusData.length / itemsPerPage);
+
   return (
     <div className='main-container-doctor-care'>
       <Header />
@@ -187,47 +197,69 @@ const DoctorCare = () => {
               </tr>
             </thead>
             <tbody>
-              {statusData.map((status, index) => (
-                <tr key={index}>
-                  <td>{status.cageID}</td>
-                  <td>{status?.cageDetails[0]?.name}</td>
-                  <td>{status?.petID}</td>
-                  <td>{status?.startDate.split('T')[0]}</td>
-                  <td>{status?.reasonForAdmission}</td>
-                  <td>
-                    {status?.dischargeDate ? (
-                      <span>Exited Cage</span>
-                    ) : (
-                      <span>In Cage</span>
-                    )}
-                  </td>
-                  <td>
-                    {status?.dischargeDate
-                      ? status?.dischargeDate.split('T')[0]
-                      : null}
-                  </td>
-                  <td>
-                    <button
-                      className='history-button'
-                      onClick={() => handleViewHistory(status.cageDiseaseID)}
-                    >
-                      View Update History
-                    </button>
-                    {!status?.dischargeDate ? (
+              {currentData.length > 0 ? (
+                currentData.map((status, index) => (
+                  <tr key={index}>
+                    <td>{status.cageID}</td>
+                    <td>{status?.cageDetails[0]?.name}</td>
+                    <td>{status?.petID}</td>
+                    <td>{status?.startDate.split('T')[0]}</td>
+                    <td>{status?.reasonForAdmission}</td>
+                    <td>
+                      {status?.dischargeDate ? (
+                        <span>Exited Cage</span>
+                      ) : (
+                        <span>In Cage</span>
+                      )}
+                    </td>
+                    <td>
+                      {status?.dischargeDate
+                        ? status?.dischargeDate.split('T')[0]
+                        : null}
+                    </td>
+                    <td>
                       <button
-                        className='update-button'
-                        onClick={() => handleUpdateStatus(status)}
+                        className='history-button'
+                        onClick={() => handleViewHistory(status.cageDiseaseID)}
                       >
-                        Update
+                        View Update History
                       </button>
-                    ) : null}
-                  </td>
+                      {!status?.dischargeDate ? (
+                        <button
+                          className='update-button'
+                          onClick={() => handleUpdateStatus(status)}
+                        >
+                          Update
+                        </button>
+                      ) : null}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={8}>No pet need to care</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
           <div className='pagination-container'>
-            <Pagination />
+            {currentData.length > 0 && totalPages > 1 && (
+              <Stack
+                spacing={2}
+                alignItems='center'
+                marginTop={2}
+                marginBottom={2}
+                padding={0}
+              >
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  variant='outlined'
+                  color='primary'
+                />
+              </Stack>
+            )}
           </div>
         </div>
 

@@ -420,3 +420,15 @@
   font-size: 0.875em;
   margin-top: 0.25em;
 }
+
+.Admin-Cages-Using {
+  color: Green;
+  font-size: 16px;
+  margin-top: 0.25em;
+}
+
+.Admin-Cages-Empty {
+  color: Red;
+  font-size: 16px;
+  margin-top: 0.25em;
+}

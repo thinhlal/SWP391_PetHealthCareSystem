@@ -338,6 +338,77 @@ class AdminController {
         .json({ message: 'Error fetching cage', error: error.message });
     }
   }
+
+  // POST /addCage
+  async addCage(req, res, next) {
+    const { name, description } = req.body.newCage;
+    try {
+      let idCage;
+      while (true) {
+        try {
+          const lastCageID = await Cage.findOne().sort({
+            cageID: -1,
+          });
+          if (lastCageID) {
+            idCage = parseInt(lastCageID.cageID) + 1;
+          } else {
+            idCage = 0;
+          }
+          break;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      const newCage = new Cage({
+        cageID: idCage,
+        name,
+        description,
+      });
+
+      await newCage.save();
+
+      res.status(201).send();
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching cage', error: error.message });
+    }
+  }
+
+  // GET /getAllCagesByAdmin
+  async getAllCagesByAdmin(req, res, next) {
+    try {
+      const allCages = await Cage.find({});
+      res.status(200).json(allCages);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching doctor', error: error.message });
+    }
+  }
+
+  // POST /updateCageAdmin
+  async updateCageAdmin(req, res, next) {
+    const { cageID, name, description } = req.body.editCage;
+    try {
+      await Cage.findOneAndUpdate(
+        { cageID },
+        {
+          name,
+          description,
+        },
+      );
+
+      res.status(201).send();
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching cage', error: error.message });
+    }
+  }
 }
 
 module.exports = new AdminController();

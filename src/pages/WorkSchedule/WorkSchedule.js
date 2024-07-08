@@ -46,7 +46,6 @@ function WorkSchedule() {
     navigate(`/pet-exam-record?bookingID=${bookingID}`);
   };
 
-  console.log(schedules);
   const sortedBookings = schedules?.matchingBookings
     ?.filter(
       schedule =>

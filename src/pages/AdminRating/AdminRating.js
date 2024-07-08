@@ -22,6 +22,8 @@ function AdminRating() {
   const [search, setSearch] = useState('');
   const [ratingFilter, setRatingFilter] = useState('All');
   const [ratingData, setRatingData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchRate = async () => {
@@ -58,6 +60,17 @@ function AdminRating() {
     return matchesStatus && matchesSearch;
   });
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentRates = filteredRateData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+  const totalPages = Math.ceil(filteredRateData.length / itemsPerPage);
+
   return (
     <div className='Admin-Rating container-fluid'>
       <div className='row'>
@@ -78,7 +91,7 @@ function AdminRating() {
                   <div className='Admin-Rating-Main-Search'>
                     <input
                       type='text'
-                      placeholder='Search Cage ID'
+                      placeholder='Search Booking ID'
                       className='Admin-Rating-Main-Search-Input'
                       value={search}
                       onChange={handleSearchChange}
@@ -124,8 +137,8 @@ function AdminRating() {
                     Comment
                   </div>
                 </div>
-                {filteredRateData.length > 0 ? (
-                  filteredRateData.map(item => (
+                {currentRates.length > 0 ? (
+                  currentRates.map(item => (
                     <div
                       className='Admin-Rating-Main-Table-Content-Row-Wrapper'
                       key={item.rateID}
@@ -154,9 +167,20 @@ function AdminRating() {
                 )}
 
                 <div className='Admin-Rating-Pagination'>
-                  <Stack spacing={2}>
-                    <Pagination count={10} />
-                  </Stack>
+                  {currentRates.length > 0 && totalPages > 1 && (
+                    <Stack
+                      spacing={2}
+                      marginTop={2}
+                      alignItems='center'
+                    >
+                      <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        color='primary'
+                      />
+                    </Stack>
+                  )}
                 </div>
               </div>
             </div>
