@@ -191,7 +191,7 @@ function Home() {
                 <div className='list-header-navigate-text'>Services</div>
               </a>
               <a
-                href='#123'
+                href='#aboutUs'
                 className='div-wrapper'
               >
                 <div className='list-header-navigate-text'>About us</div>
@@ -318,7 +318,7 @@ function Home() {
         </div>
       </div>
 
-      <div className='overlap-4 lazy-load'>
+      <div id='aboutUs' className='overlap-4 lazy-load'>
         <div className='main-why-choose'>
           <img
             alt=''

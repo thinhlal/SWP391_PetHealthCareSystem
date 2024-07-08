@@ -41,14 +41,13 @@ function YourBooking() {
         const dataBookings = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
         );
-        const sortDataBookings = dataBookings.data.allBookings.sort((a, b) =>
-          a.dateBook.localeCompare(b.dateBook),
-        );
-        const sortTimeBookings = sortDataBookings.sort((a, b) =>
+        const sortTimeBookings = dataBookings.data.allBookings.sort((a, b) =>
           b.startTime.localeCompare(a.startTime),
         );
-        console.log(sortTimeBookings);
-        setYourBookings(sortTimeBookings);
+        const sortDataBookings = sortTimeBookings.sort((a, b) =>
+          b.dateBook.localeCompare(a.dateBook),
+        );
+        setYourBookings(sortDataBookings);
       } catch (error) {
         console.log(error);
       }
@@ -118,6 +117,16 @@ function YourBooking() {
       console.error(error);
     }
   };
+
+  const calculateDateLeft = (dateCancelBook, dateBook) => {
+    const bookDate = new Date(dateBook);
+    const cancelDate = new Date(dateCancelBook);
+
+    const timeDifference = cancelDate - bookDate;
+    const millisecondsInDay = 24 * 60 * 60 * 1000;
+    const remainingDays = Math.ceil(timeDifference / millisecondsInDay);
+    return remainingDays
+  }
 
   return (
     <div className='main-container-your-booking-page'>
@@ -307,13 +316,20 @@ function YourBooking() {
                               booking.paymentsDetails[0].paymentMethod ===
                               'PAYPAL' &&
                               booking.isRefund ? (
-                              <div className='status-cancel'>Refunded</div>
+                              <div className='status-cancel'>Refunded {booking.refundPrice}$</div>
                             ) : booking.isCancel &&
                               booking.paymentsDetails[0].paymentMethod ===
-                              'PAYPAL' &&
-                              !booking.isRefund ? (
+                              'PAYPAL' && calculateDateLeft(booking.dateCancelBook, booking.dateBook) < 3
+                              && !booking.isRefund ? (
                               <div className='status-cancel'>
-                                ...Processing refund
+                                Refunded 0$
+                              </div>
+                            ) : booking.isCancel &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                              'PAYPAL' && calculateDateLeft(booking.dateCancelBook, booking.dateBook) >= 3
+                              && !booking.isRefund ? (
+                              <div className='status-cancel'>
+                                ...Processing
                               </div>
                             ) : booking.isCancel ? null : booking
                               .paymentsDetails[0]

@@ -181,7 +181,7 @@ const Booking = () => {
           booking =>
             new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
             next <= new Date(`1970-01-01T${booking.endTime}:00`) &&
-            booking.dateBook.split('T')[0] === date,
+            booking.dateBook.split('T')[0] === date && !booking.isCancel,
         );
       }
 

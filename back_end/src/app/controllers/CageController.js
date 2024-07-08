@@ -283,16 +283,8 @@ class AdminController {
         { $match: { bookingID: formData.bookingID } },
         {
           $lookup: {
-            from: 'bookings',
-            localField: 'bookingID',
-            foreignField: 'bookingID',
-            as: 'bookingDetails',
-          },
-        },
-        {
-          $lookup: {
             from: 'pets',
-            localField: 'bookingDetails.petID',
+            localField: 'petID',
             foreignField: 'petID',
             as: 'petDetails',
           },

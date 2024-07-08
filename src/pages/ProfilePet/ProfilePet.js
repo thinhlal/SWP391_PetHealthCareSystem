@@ -265,7 +265,6 @@ function ProfilePet() {
                           View
                         </button>
 
-                        {/* Modal */}
                         <div
                           className='modal fade'
                           id={`staticBackdropMedical-${index}`}
