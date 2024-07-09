@@ -13,12 +13,15 @@ import { storage } from '../../config/firebase.js';
 import { AuthContext } from '../../context/AuthContext.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Pagination, Stack } from '@mui/material';
 
 function ProfilePet() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [petData, setPetData] = useState([]);
+  const [medicalReport, setMedicalReport] = useState([]);
+  const [petVaccine, setPetVaccine] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [newPetData, setNewPetData] = useState({
@@ -27,6 +30,10 @@ function ProfilePet() {
     image: '',
   });
   const [loading, setLoading] = useState(true);
+  const [currentPageMedical, setCurrentPageMedical] = useState(1);
+  const itemsPerPageMedical = 1;
+  const [currentPageVaccine, setCurrentPageVaccine] = useState(1);
+  const itemsPerPageVaccine = 1;
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -46,8 +53,9 @@ function ProfilePet() {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
         );
-        console.log(response.data[0]);
         setPetData(response.data[0]);
+        setMedicalReport(response.data[0].medicalReportDetails);
+        setPetVaccine(response.data[0].vaccinationPetDetails);
       } catch (error) {
         console.error('Error fetching pets:', error);
       }
@@ -105,6 +113,30 @@ function ProfilePet() {
   const handleViewStatusClick = () => {
     navigate('/pet-status', { state: { petData, user } });
   };
+
+  const handlePageChangeMedical = (event, value) => {
+    setCurrentPageMedical(value);
+  };
+
+  const handlePageChangeVaccine = (event, value) => {
+    setCurrentPageVaccine(value);
+  };
+
+  const startIndexMedical = (currentPageMedical - 1) * itemsPerPageMedical;
+  const currentMedicals = medicalReport.slice(
+    startIndexMedical,
+    startIndexMedical + itemsPerPageMedical,
+  );
+  const totalPagesMedical = Math.ceil(
+    medicalReport.length / itemsPerPageMedical,
+  );
+
+  const startIndexVaccinee = (currentPageVaccine - 1) * itemsPerPageVaccine;
+  const currentVaccines = petVaccine.slice(
+    startIndexVaccinee,
+    startIndexVaccinee + itemsPerPageVaccine,
+  );
+  const totalPagesVaccine = Math.ceil(petVaccine.length / itemsPerPageVaccine);
 
   return (
     <div className='main-container-pet-profile'>
@@ -243,12 +275,12 @@ function ProfilePet() {
                 </tr>
               </thead>
               <tbody>
-                {petData.medicalReportDetails.length === 0 ? (
+                {currentMedicals.length === 0 ? (
                   <tr>
                     <td colSpan='6'>No medical information available.</td>
                   </tr>
                 ) : (
-                  petData.medicalReportDetails.map((reportInfo, index) => (
+                  currentMedicals.map((reportInfo, index) => (
                     <tr key={index}>
                       <td>{reportInfo.medicalReportID}</td>
                       <td>{reportInfo.diagnosis}</td>
@@ -329,6 +361,21 @@ function ProfilePet() {
                 )}
               </tbody>
             </table>
+            {currentMedicals.length > 0 && totalPagesMedical > 1 && (
+              <Stack
+                spacing={2}
+                alignItems='center'
+                marginTop={2}
+                padding={0}
+              >
+                <Pagination
+                  count={totalPagesMedical}
+                  page={currentPageMedical}
+                  onChange={handlePageChangeMedical}
+                  color='primary'
+                />
+              </Stack>
+            )}
           </div>
 
           <div className='vaccination-info'>
@@ -346,12 +393,12 @@ function ProfilePet() {
                 </tr>
               </thead>
               <tbody>
-                {petData.vaccinationPetDetails.length === 0 ? (
+                {currentVaccines.length === 0 ? (
                   <tr>
                     <td colSpan='6'>You didn't have any vaccination yet.</td>
                   </tr>
                 ) : (
-                  petData.vaccinationPetDetails.map((vaccine, index) => (
+                  currentVaccines.map((vaccine, index) => (
                     <tr key={index}>
                       <td>{`${vaccine.dateGiven.split('T')[0]} ${vaccine.dateGiven.split('T')[1].split('.')[0]}`}</td>
                       <td>{vaccine.vaccinationDetails.name}</td>
@@ -428,6 +475,22 @@ function ProfilePet() {
                 )}
               </tbody>
             </table>
+            {currentVaccines.length > 0 && totalPagesVaccine > 1 && (
+              <Stack
+                spacing={2}
+                alignItems='center'
+                marginTop={2}
+                marginBottom={2}
+                padding={0}
+              >
+                <Pagination
+                  count={totalPagesVaccine}
+                  page={currentPageVaccine}
+                  onChange={handlePageChangeVaccine}
+                  color='primary'
+                />
+              </Stack>
+            )}
           </div>
         </div>
       </div>

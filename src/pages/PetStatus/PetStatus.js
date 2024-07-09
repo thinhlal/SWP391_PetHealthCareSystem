@@ -4,6 +4,7 @@ import './PetStatus.css';
 import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
 import axiosInstance from '../../utils/axiosInstance';
+import { Pagination, Stack } from '@mui/material';
 
 function PetStatus() {
   const location = useLocation();
@@ -13,13 +14,20 @@ function PetStatus() {
 
   const [detailData, setDetailData] = useState([]);
   const [sortOrder, setSortOrder] = useState('newest');
+  const [isViewDetails, setIsViewDetails] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const [currentPageDetails, setCurrentPageDetails] = useState(1);
+  const itemsPerPageDetails = 5;
 
   const handleViewDetails = diseaseInfos => {
+    setIsViewDetails(true);
     setDetailData(diseaseInfos);
   };
 
   const handleCloseDetails = () => {
     setDetailData([]);
+    setIsViewDetails(false);
   };
 
   useEffect(() => {
@@ -46,6 +54,28 @@ function PetStatus() {
     const dateB = new Date(b.startDate);
     return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
   });
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const handlePageChangeDetails = (event, value) => {
+    setCurrentPageDetails(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentDisease = sortedStatusData.slice(
+    startIndex,
+    startIndex + itemsPerPage,
+  );
+  const totalPages = Math.ceil(sortedStatusData.length / itemsPerPage);
+
+  const startIndexDetails = (currentPageDetails - 1) * itemsPerPageDetails;
+  const currentDiseaseDetails = detailData.slice(
+    startIndexDetails,
+    startIndexDetails + itemsPerPageDetails,
+  );
+  const totalPagesDetails = Math.ceil(detailData.length / itemsPerPageDetails);
 
   return (
     <div className='main-container-pet-status-history'>
@@ -97,8 +127,8 @@ function PetStatus() {
                 </tr>
               </thead>
               <tbody>
-                {sortedStatusData.length > 0 ? (
-                  sortedStatusData.map((status, index) => (
+                {currentDisease.length > 0 ? (
+                  currentDisease.map((status, index) => (
                     <tr key={index}>
                       <td>{status?.bookingID}</td>
                       <td>{status?.startDate.split('T')[0]}</td>
@@ -135,9 +165,26 @@ function PetStatus() {
                 )}
               </tbody>
             </table>
+            {currentDisease.length > 0 && totalPages > 1 && (
+              <Stack
+                spacing={2}
+                alignItems='center'
+                marginTop={3}
+                marginBottom={1}
+                padding={0}
+              >
+                <Pagination
+                  count={totalPages}
+                  page={currentPage}
+                  onChange={handlePageChange}
+                  color='primary'
+                  size='small'
+                />
+              </Stack>
+            )}
           </div>
 
-          {detailData.length > 0 && (
+          {isViewDetails && currentDiseaseDetails.length > 0 ? (
             <div className='pet-status-detail-table'>
               <h2 className='sub-title-info-pet-history'>Details</h2>
               <table>
@@ -149,7 +196,7 @@ function PetStatus() {
                   </tr>
                 </thead>
                 <tbody>
-                  {detailData.map(detail => (
+                  {currentDiseaseDetails.map(detail => (
                     <tr key={detail.diseaseInfoID}>
                       <td>{`${detail.date.split('T')[0]} ${detail.date.split('T')[1].split('.')[0]}`}</td>
                       <td
@@ -180,6 +227,22 @@ function PetStatus() {
                   ))}
                 </tbody>
               </table>
+              {currentDisease.length > 0 && totalPagesDetails > 1 && (
+                <Stack
+                  spacing={2}
+                  alignItems='center'
+                  marginTop={2}
+                  padding={0}
+                >
+                  <Pagination
+                    count={totalPagesDetails}
+                    page={currentPageDetails}
+                    onChange={handlePageChangeDetails}
+                    color='primary'
+                    size='small'
+                  />
+                </Stack>
+              )}
               <button
                 className='close-detail-button'
                 onClick={handleCloseDetails}
@@ -187,7 +250,9 @@ function PetStatus() {
                 Close
               </button>
             </div>
-          )}
+          ) : isViewDetails && currentDiseaseDetails.length <= 0 ? (
+            <div>No data available</div>
+          ) : null}
         </div>
       </div>
       <Footer />

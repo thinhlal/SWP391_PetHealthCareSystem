@@ -1655,6 +1655,11 @@ function ManageListBooking() {
                                         </div>
                                       ),
                                     )}
+                                    <div className='reason-manage-booking'>
+                                      <div className='add-service-paymentDetails'>
+                                        Add Service
+                                      </div>
+                                    </div>
                                   </div>
 
                                   <div className='mb-3'>

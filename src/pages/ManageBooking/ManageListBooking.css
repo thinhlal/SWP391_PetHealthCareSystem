@@ -413,3 +413,13 @@
 .manage-booking-list .content-list-body-info:last-child {
   border-bottom: 1px solid #eaecf0;
 }
+
+.manage-booking-list .add-service-paymentDetails {
+  background-color: #1374ff;
+  color: #fff;
+  line-height: 25px;
+  font-size: 13px;
+  width: 90px;
+  text-align: center;
+  border-radius: 6px;
+}
