@@ -18,7 +18,8 @@ import Pagination from '@mui/material/Pagination';
 // MUI
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { blue } from '@mui/material/colors';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { blue, red } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 import axiosInstance from '../../utils/axiosInstance';
 
@@ -454,6 +455,56 @@ function AdminCages() {
                                     onClick={handleSaveChanges}
                                   >
                                     Save changes
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </span>
+
+                        <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
+                          <button
+                            type='button'
+                            className='Admin-Cages-Main-Table-Content-Btn'
+                            data-bs-toggle='modal'
+                            data-bs-target='#Delete-Cage-exampleModal'
+                          >
+                            <DeleteIcon
+                              sx={{ color: red[400] }}
+                            />
+                          </button>
+
+                          <div
+                            className='modal fade'
+                            id={`Delete-Cage-exampleModal`}
+                            tabIndex='-1'
+                            aria-labelledby='exampleModalLabelMore'
+                            aria-hidden='true'
+                          >
+                            <div className='modal-dialog'>
+                              <div className='modal-content'>
+                                <div className='modal-body'>
+                                  <div className='Admin-Cages-delete-modal-header'>
+                                    Confirm Delete
+                                  </div>
+                                  <div>Are you sure you want to delete?</div>
+                                </div>
+                                <div className='modal-footer'>
+                                  <button
+                                    type='button'
+                                    className='btn btn-danger'
+                                    data-bs-dismiss='modal'
+                                  >
+                                    {' '}
+                                    Save{' '}
+                                  </button>
+                                  <button
+                                    type='button'
+                                    className='btn btn-light'
+                                    data-bs-dismiss='modal'
+                                  >
+                                    {' '}
+                                    Cancel{' '}
                                   </button>
                                 </div>
                               </div>
