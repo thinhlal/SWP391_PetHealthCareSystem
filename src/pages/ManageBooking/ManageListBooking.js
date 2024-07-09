@@ -209,6 +209,10 @@ function ManageListBooking() {
 
   const handleServiceChange = (index, field, value) => {
     const newServices = [...services];
+    if (field === 'service' && newServices.some(service => service.service === value)) {
+      setErrors(prev => ({ ...prev, services: 'This service is already selected' }));
+      return;
+    }
     newServices[index][field] = value;
     setServices(newServices);
     setErrors(prev => ({ ...prev, services: '' }));
@@ -474,6 +478,10 @@ function ManageListBooking() {
   );
   const totalPages = Math.ceil(filteredBookings.length / itemsPerPage);
 
+  const removeService = index => {
+    setServices(services.filter((_, i) => i !== index));
+  };
+
   return (
     <div className='manage-booking-list container-fluid'>
       <div className='row'>
@@ -592,7 +600,7 @@ function ManageListBooking() {
                                       setSearchCustomerValue(e.target.value)
                                     }
                                   />
-                                  <div onClick={handleSearchCustomer}>
+                                  <div className='search-button' onClick={handleSearchCustomer}>
                                     Search
                                   </div>
                                   {errors.searchValueAccount && (
@@ -631,7 +639,7 @@ function ManageListBooking() {
                                         setSearchPetValue(e.target.value)
                                       }
                                     />
-                                    <div onClick={handleSearchPet}>Search</div>
+                                    <div className='search-button' onClick={handleSearchPet}>Search</div>
                                     {errors.searchValuePet && (
                                       <span className='error'>
                                         {errors.searchValuePet}
@@ -910,59 +918,63 @@ function ManageListBooking() {
                             )}
                           </div>
                           <div className='modal-body-section-wrapper'>
-                            <div>
-                              <label>Services used:</label>
-                              {services &&
-                                services.map((service, index) => (
-                                  <div
-                                    key={index}
-                                    className='service'
-                                  >
-                                    <label>Service:</label>
-                                    <select
-                                      value={service.service}
-                                      onChange={e =>
-                                        handleServiceChange(
-                                          index,
-                                          'service',
-                                          e.target.value,
-                                        )
-                                      }
-                                      required
-                                    >
-                                      <option value=''>Choose Services</option>
-                                      {allServices &&
-                                        allServices.map(service => (
-                                          <option
-                                            key={service.serviceID}
-                                            value={service.serviceID}
-                                          >
+                          <div>
+                            <label>Services used:</label>
+                            <table className="services-table">
+                              <thead>
+                                <tr>
+                                  <th>Service</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {services.map((service, index) => (
+                                  <tr key={index}>
+                                    <td>
+                                      <select
+                                        value={service.service}
+                                        onChange={e => handleServiceChange(index, 'service', e.target.value)}
+                                        required
+                                      >
+                                        <option value=''>Choose Services</option>
+                                        {allServices.map(service => (
+                                          <option key={service.serviceID} value={service.serviceID}>
                                             {`${service.name} - ${service.price}$`}
                                           </option>
                                         ))}
-                                    </select>
-                                  </div>
+                                      </select>
+                                    </td>
+                                    <td>
+                                      <button
+                                        type="button"
+                                        className="btn-remove-service"
+                                        onClick={() => removeService(index)}
+                                      >
+                                        Remove
+                                      </button>
+                                    </td>
+                                  </tr>
                                 ))}
-                              <div
-                                className='btn-add-services'
-                                onClick={addService}
+                              </tbody>
+                            </table>
+                            <div className="btn-add-services" onClick={addService}>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                className="bi bi-plus"
+                                viewBox="0 0 16 16"
                               >
-                                <svg
-                                  xmlns='http://www.w3.org/2000/svg'
-                                  width='16'
-                                  height='16'
-                                  fill='currentColor'
-                                  className='bi bi-plus'
-                                  viewBox='0 0 16 16'
-                                >
-                                  <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4' />
-                                </svg>
-                                <div>Add service</div>
-                              </div>
-                              {errors.services && (
-                                <span className='error'>{errors.services}</span>
-                              )}
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                              </svg>
+                              <div>Add service</div>
                             </div>
+                            {errors.services && (
+                              <span className="error">{errors.services}</span>
+                            )}
+                          </div>
+
                           </div>
 
                           <div className='modal-body-section-wrapper'>
