@@ -6,7 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import axiosInstance from '../../utils/axiosInstance';
-import { Pagination, Slider, Stack } from '@mui/material';
+import { Pagination, Stack } from '@mui/material';
+import PetHealthSlider from '../../components/Employee/StatusSlider/StatusSlider';
 
 function ManageCages() {
   const [searchBookingIDValue, setSearchBookingValue] = useState('');
@@ -211,23 +212,6 @@ function ManageCages() {
       setSliderValue(1);
     }
   }, [petCondition]);
-
-  function petStatus(value) {
-    switch (value) {
-      case 1:
-        return 'Critical';
-      case 2:
-        return 'Severe';
-      case 3:
-        return 'Moderate';
-      case 4:
-        return 'Mild';
-      case 5:
-        return 'Healthy';
-      default:
-        return '';
-    }
-  }
 
   const filteredCageData = cageData.filter(cage => {
     if (statusFilter === 'All') return true;
@@ -938,22 +922,9 @@ function ManageCages() {
                                   <div className='modal-body-update-text-title'>
                                     Pet Condition:
                                   </div>
-                                  <Slider
-                                    aria-label='Pet Health Status'
+                                  <PetHealthSlider
                                     value={sliderValue}
                                     onChange={handleSliderChange}
-                                    getAriaValueText={petStatus}
-                                    valueLabelDisplay='auto'
-                                    step={1}
-                                    marks={[
-                                      { value: 1, label: 'Critical' },
-                                      { value: 2, label: 'Mild' },
-                                      { value: 3, label: 'Moderate' },
-                                      { value: 4, label: 'Severe' },
-                                      { value: 5, label: 'Healthy' },
-                                    ]}
-                                    min={1}
-                                    max={5}
                                   />
                                 </div>
                                 <div className='modal-body-update-text'>

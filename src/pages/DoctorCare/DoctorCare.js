@@ -4,7 +4,8 @@ import Pagination from '../../components/Pagination/Pagination';
 import Header from '../../components/Doctor/Header/Header';
 import axiosInstance from '../../utils/axiosInstance';
 import { AuthContext } from '../../context/AuthContext';
-import { Slider, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
+import PetHealthSlider from '../../components/Employee/StatusSlider/StatusSlider';
 
 const DoctorCare = () => {
   const { user } = useContext(AuthContext);
@@ -132,23 +133,6 @@ const DoctorCare = () => {
       }
     }
   };
-
-  function petStatus(value) {
-    switch (value) {
-      case 1:
-        return 'Critical';
-      case 2:
-        return 'Severe';
-      case 3:
-        return 'Moderate';
-      case 4:
-        return 'Mild';
-      case 5:
-        return 'Healthy';
-      default:
-        return '';
-    }
-  }
 
   const handleRadioChange = event => {
     if (event.target.value === 'Recover') {
@@ -323,22 +307,9 @@ const DoctorCare = () => {
             <div className='modal-body-update-text'>
               <div className='modal-body-update-text-title'>Pet Condition:</div>
               <div className='slider-update-status'>
-                <Slider
-                  aria-label='Pet Health Status'
+                <PetHealthSlider
                   value={sliderValue}
                   onChange={handleSliderChange}
-                  getAriaValueText={petStatus}
-                  valueLabelDisplay='auto'
-                  step={1}
-                  marks={[
-                    { value: 1, label: 'Critical' },
-                    { value: 2, label: 'Mild' },
-                    { value: 3, label: 'Moderate' },
-                    { value: 4, label: 'Severe' },
-                    { value: 5, label: 'Healthy' },
-                  ]}
-                  min={1}
-                  max={5}
                 />
               </div>
             </div>
