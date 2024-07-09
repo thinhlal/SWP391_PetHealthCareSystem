@@ -409,6 +409,26 @@ class AdminController {
         .json({ message: 'Error fetching cage', error: error.message });
     }
   }
+
+  // POST /updateStatusCage
+  async updateStatusCage(req, res, next) {
+    const { cageID, status } = req.body;
+    try {
+      await Cage.findOneAndUpdate(
+        { cageID },
+        {
+          status: status,
+        },
+      );
+
+      res.status(201).send();
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching cage', error: error.message });
+    }
+  }
 }
 
 module.exports = new AdminController();

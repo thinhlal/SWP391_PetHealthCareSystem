@@ -18,10 +18,10 @@ import Pagination from '@mui/material/Pagination';
 // MUI
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { blue, red } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 import axiosInstance from '../../utils/axiosInstance';
+import { Switch } from '@mui/material';
 
 function AdminCages() {
   const [search, setSearch] = useState('');
@@ -39,6 +39,7 @@ function AdminCages() {
     name: '',
     description: '',
   });
+  const modalRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -152,7 +153,24 @@ function AdminCages() {
     });
   };
 
-  const modalRef = useRef(null);
+  const handleStatusChange = async (cageID, status, empty) => {
+    if (!empty) {
+      return window.confirm('Can not set status while Using');
+    }
+    try {
+      await axiosInstance.patch(
+        `${process.env.REACT_APP_API_URL}/cage/updateStatusCage`,
+        { cageID, status: !status },
+      );
+      setCageData(prevState =>
+        prevState.map(cage =>
+          cage.cageID === cageID ? { ...cage, status: !status } : cage,
+        ),
+      );
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   const handleStatusFilterChange = event => {
     setStatusFilter(event.target.value);
@@ -462,55 +480,25 @@ function AdminCages() {
                           </div>
                         </span>
 
-                        <span className='Admin-Cages-Main-Table-Content-Btn_Wrapper'>
-                          <button
-                            type='button'
-                            className='Admin-Cages-Main-Table-Content-Btn'
-                            data-bs-toggle='modal'
-                            data-bs-target='#Delete-Cage-exampleModal'
-                          >
-                            <DeleteIcon
-                              sx={{ color: red[400] }}
-                            />
-                          </button>
-
-                          <div
-                            className='modal fade'
-                            id={`Delete-Cage-exampleModal`}
-                            tabIndex='-1'
-                            aria-labelledby='exampleModalLabelMore'
-                            aria-hidden='true'
-                          >
-                            <div className='modal-dialog'>
-                              <div className='modal-content'>
-                                <div className='modal-body'>
-                                  <div className='Admin-Cages-delete-modal-header'>
-                                    Confirm Delete
-                                  </div>
-                                  <div>Are you sure you want to delete?</div>
-                                </div>
-                                <div className='modal-footer'>
-                                  <button
-                                    type='button'
-                                    className='btn btn-danger'
-                                    data-bs-dismiss='modal'
-                                  >
-                                    {' '}
-                                    Save{' '}
-                                  </button>
-                                  <button
-                                    type='button'
-                                    className='btn btn-light'
-                                    data-bs-dismiss='modal'
-                                  >
-                                    {' '}
-                                    Cancel{' '}
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </span>
+                        <Switch
+                          checked={item.status}
+                          onChange={() =>
+                            handleStatusChange(
+                              item.cageID,
+                              item.status,
+                              item.isEmpty,
+                            )
+                          }
+                          color={item.status ? 'success' : 'neutral'}
+                          variant={item.status ? 'solid' : 'outlined'}
+                          slotProps={{
+                            endDecorator: {
+                              sx: {
+                                minWidth: 24,
+                              },
+                            },
+                          }}
+                        />
                       </div>
                     </div>
                   ))

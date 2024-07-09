@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import axiosInstance from '../../../utils/axiosInstance';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -24,6 +25,32 @@ ChartJS.register(
 );
 
 const RevenueLineChart = () => {
+  const [revenueData, setRevenueData] = useState(Array(12).fill(0));
+  const [canceledData, setCanceledData] = useState(Array(12).fill(0));
+
+  useEffect(() => {
+    const fetchRevenue = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/admin/getRevenueOfEachMonth`,
+        );
+        const data = response.data;
+        const formattedRevenueData = Array(12).fill(0);
+        const formattedCanceledData = Array(12).fill(0);
+        data.forEach(item => {
+          formattedRevenueData[item.month - 1] = item.totalRevenue;
+          formattedCanceledData[item.month - 1] = item.canceledCount;
+        });
+
+        setRevenueData(formattedRevenueData);
+        setCanceledData(formattedCanceledData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchRevenue();
+  }, []);
+
   const data = {
     labels: [
       'January',
@@ -42,7 +69,7 @@ const RevenueLineChart = () => {
     datasets: [
       {
         label: 'Revenue',
-        data: [200, 132, 89, 251, 899, 275, 290, 320, 533, 280, 250, 1100], // Thay đổi dữ liệu doanh thu cho 12 tháng
+        data: revenueData,
         fill: true,
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
@@ -50,6 +77,19 @@ const RevenueLineChart = () => {
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        tension: 0.35,
+      },
+      {
+        label: 'Canceled Bookings',
+        data: canceledData,
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
         tension: 0.35,
       },
@@ -64,7 +104,25 @@ const RevenueLineChart = () => {
       },
       title: {
         display: true,
-        text: 'Monthly Revenue Data for 12 Months',
+        text: 'Monthly Revenue and Canceled Bookings Data for 12 Months',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || '';
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              if (context.dataset.label === 'Revenue') {
+                label += `$${context.parsed.y}`;
+              } else {
+                label += context.parsed.y;
+              }
+            }
+            return label;
+          },
+        },
       },
     },
     scales: {
@@ -78,7 +136,7 @@ const RevenueLineChart = () => {
           display: false,
         },
         beginAtZero: true,
-        suggestedMax: 1000,
+        suggestedMax: 500,
       },
     },
   };
@@ -89,7 +147,7 @@ const RevenueLineChart = () => {
         width: '1200px',
         height: '650px',
         margin: '0 auto',
-        padding: '10px 0',
+        padding: '30px 0',
       }}
     >
       <Line

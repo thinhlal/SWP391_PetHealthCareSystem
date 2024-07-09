@@ -21,6 +21,10 @@ const CageSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

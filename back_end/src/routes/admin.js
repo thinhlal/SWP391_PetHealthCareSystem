@@ -12,6 +12,11 @@ router.post(
 );
 router.post('/addAccount', verifyToken, AdminController.addAccount);
 router.get('/getAllBookings', verifyToken, AdminController.getAllBookings);
+router.get(
+  '/getRevenueOfEachMonth',
+  verifyToken,
+  AdminController.getRevenueOfEachMonth,
+);
 router.get('/getAllRates', verifyToken, AdminController.getAllRates);
 router.get('/getAllAccounts', verifyToken, AdminController.getAllAccounts);
 router.get('/getRating', verifyToken, AdminController.getRating);

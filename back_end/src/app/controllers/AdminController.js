@@ -25,6 +25,90 @@ class AdminController {
     }
   }
 
+  // GET /getRevenueOfEachMonth
+  async getRevenueOfEachMonth(req, res, next) {
+    try {
+      const currentYear = new Date().getFullYear();
+
+      const revenueByMonth = await Booking.aggregate([
+        {
+          $match: {
+            isCancel: false,
+            isCheckIn: true,
+            dateBook: {
+              $gte: new Date(`${currentYear}-01-01`),
+              $lte: new Date(`${currentYear}-12-31`),
+            },
+          },
+        },
+        {
+          $group: {
+            _id: {
+              year: { $year: '$dateBook' },
+              month: { $month: '$dateBook' },
+            },
+            totalRevenue: { $sum: '$totalPrice' },
+          },
+        },
+        {
+          $sort: {
+            '_id.year': 1,
+            '_id.month': 1,
+          },
+        },
+      ]);
+
+      const canceledBookingsByMonth = await Booking.aggregate([
+        {
+          $match: {
+            isCancel: true,
+            dateBook: {
+              $gte: new Date(`${currentYear}-01-01`),
+              $lte: new Date(`${currentYear}-12-31`),
+            },
+          },
+        },
+        {
+          $group: {
+            _id: {
+              year: { $year: '$dateBook' },
+              month: { $month: '$dateBook' },
+            },
+            canceledCount: { $sum: 1 },
+          },
+        },
+        {
+          $sort: {
+            '_id.year': 1,
+            '_id.month': 1,
+          },
+        },
+      ]);
+
+      // Initialize arrays for all months
+      const allMonths = Array.from({ length: 12 }, (_, i) => ({
+        year: currentYear,
+        month: i + 1,
+        totalRevenue: 0,
+        canceledCount: 0,
+      }));
+
+      revenueByMonth.forEach(item => {
+        const index = item._id.month - 1;
+        allMonths[index].totalRevenue = item.totalRevenue;
+      });
+
+      canceledBookingsByMonth.forEach(item => {
+        const index = item._id.month - 1;
+        allMonths[index].canceledCount = item.canceledCount;
+      });
+
+      res.status(200).json(allMonths);
+    } catch (error) {
+      res.status(500).json({ message: 'Error when getting bookings', error });
+    }
+  }
+
   // GET /getAllBookings
   async getAllBookings(req, res, next) {
     try {

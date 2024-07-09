@@ -4,6 +4,7 @@ const router = express.Router();
 const { verifyToken } = require('../app/controllers/MiddlewareController');
 const CageController = require('../app/controllers/CageController');
 
+router.patch('/updateStatusCage', verifyToken, CageController.updateStatusCage);
 router.post('/addCage', verifyToken, CageController.addCage);
 router.post('/addPetToCage', verifyToken, CageController.addPetToCage);
 router.get('/getAllCages', verifyToken, CageController.getAllCages);

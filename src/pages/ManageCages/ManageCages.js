@@ -524,6 +524,7 @@ function ManageCages() {
                 <div className='main-content-list-title-text'>CageID</div>
                 <div className='main-content-list-title-text'>Cage Name</div>
                 <div className='main-content-list-title-text'>Description</div>
+                <div className='main-content-list-title-text'>Situation</div>
                 <div className='main-content-list-title-text'>Status</div>
                 <div className='main-content-list-title-text-button'>
                   Details
@@ -546,6 +547,9 @@ function ManageCages() {
                       <div className='content-list-body-value'>{cage.name}</div>
                       <div className='content-list-body-value'>
                         {cage.description}
+                      </div>
+                      <div className='content-list-body-value'>
+                        {cage.status ? 'In Use' : 'Maintenance'}
                       </div>
                       <div
                         className={`content-list-body-value ${cage.isEmpty === false ? 'status-using' : 'status-empty'}`}
@@ -595,11 +599,11 @@ function ManageCages() {
                                     className={`tablinks ${activeTab === 'Profile' ? 'active' : ''}`}
                                     onClick={() => openTab('Profile')}
                                   >
-                                    Customer Profile
+                                    Profile
                                   </button>
                                   <button
-                                    className={`tablinks ${activeTab === 'Vacancies' ? 'active' : ''}`}
-                                    onClick={() => openTab('Vacancies')}
+                                    className={`tablinks ${activeTab === 'Pet' ? 'active' : ''}`}
+                                    onClick={() => openTab('Pet')}
                                   >
                                     Pet
                                   </button>
@@ -671,13 +675,11 @@ function ManageCages() {
                                 </div>
 
                                 <div
-                                  id='Vacancies'
+                                  id='Pet'
                                   className='tabcontent-pet'
                                   style={{
                                     display:
-                                      activeTab === 'Vacancies'
-                                        ? 'flex'
-                                        : 'none',
+                                      activeTab === 'Pet' ? 'flex' : 'none',
                                   }}
                                 >
                                   <form className='pet-profile-form'>
@@ -845,18 +847,12 @@ function ManageCages() {
                               >
                                 Close
                               </button>
-                              <button
-                                type='button'
-                                className='btn btn-primary'
-                              >
-                                Save changes
-                              </button>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div className='content-list-body-value-button'>
-                        {cage.isEmpty ? (
+                        {cage.isEmpty && cage.status ? (
                           <button
                             type='button'
                             className='btn btn-secondary'
@@ -869,7 +865,7 @@ function ManageCages() {
                           >
                             Add Pet
                           </button>
-                        ) : (
+                        ) : !cage.isEmpty && cage.status ? (
                           <button
                             type='button'
                             className='btn btn-primary'
@@ -879,6 +875,8 @@ function ManageCages() {
                           >
                             Update
                           </button>
+                        ) : (
+                          <div>Maintenance</div>
                         )}
                       </div>
                       <div
