@@ -51,6 +51,24 @@
   gap: 4.63px;
 }
 
+.manage-booking-list .search-button {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-left: 5px;
+  width: 80px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.manage-booking-list .search-button:hover {
+  background-color: #0056b3;
+}
+
+
 .manage-booking-list .main-content-header-search-title {
   font-weight: 600;
   color: #000000;
@@ -358,6 +376,36 @@
 .manage-booking-list .service {
   margin: 10px 0;
 }
+
+.manage-booking-list .services-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.manage-booking-list .services-table th, .services-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.manage-booking-list .services-table th {
+  background-color: #f2f2f2;
+}
+
+.manage-booking-list .btn-remove-service {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.manage-booking-list .btn-remove-service:hover {
+  background-color: darkred;
+}
+
 
 .manage-booking-list .search-owner-option-section,
 .searchPetSection-child {
