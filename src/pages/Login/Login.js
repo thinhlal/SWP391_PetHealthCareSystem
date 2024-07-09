@@ -43,7 +43,7 @@ function Login() {
       logIn(response.data.user);
       setError('');
       if (response.data.user.role === 'Admin') {
-        navigate('/admin-dashboard');
+        navigate('/admin-statistic');
       } else if (response.data.user.role === 'Staff') {
         navigate('/manage-booking');
       } else if (response.data.user.role === 'Doctor') {
