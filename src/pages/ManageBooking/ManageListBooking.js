@@ -30,7 +30,6 @@ function ManageListBooking() {
   ];
 
   const [createPetInfo, setCreatePetInfo] = useState({});
-
   const [createAccountInfo, setCreateAccountInfo] = useState({});
   const [petInfo, setPetInfo] = useState({});
   const [accountInfo, setAccountInfo] = useState(null);
@@ -61,6 +60,9 @@ function ManageListBooking() {
   const [filterDate, setFilterDate] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const [bookingDetailsCheckIn, setBookingDetailsCheckIn] = useState(null);
+  const [servicesWhileCheckIn, setServicesWhileCheckIn] = useState([]);
+  const [serviceFilter, setServiceFilter] = useState([]);
 
   useEffect(() => {
     const now = new Date();
@@ -110,6 +112,21 @@ function ManageListBooking() {
       }
     };
     fetchAllBooking();
+  }, []);
+
+  useEffect(() => {
+    const getAllServices = async () => {
+      try {
+        const services = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/service/getAllServices`,
+        );
+        setAllServices(services.data);
+      } catch (error) {
+        console.error('Err:', error);
+      }
+    };
+
+    getAllServices();
   }, []);
 
   const reRenderGetAllBookings = async () => {
@@ -195,19 +212,6 @@ function ManageListBooking() {
       }
     }
   };
-
-  const handleGetAllServicesAndDoctors = async () => {
-    try {
-      const services = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/service/getAllServices`,
-      );
-      setAllServices(services.data);
-      getAllDoctors();
-    } catch (error) {
-      console.error('Err:', error);
-    }
-  };
-
   const handleServiceChange = (index, field, value) => {
     const newServices = [...services];
     if (
@@ -225,8 +229,83 @@ function ManageListBooking() {
     setErrors(prev => ({ ...prev, services: '' }));
   };
 
+  const handleServiceWhileCheckInChange = (index, field, value) => {
+    const newServicesWhileCheckIn = [...servicesWhileCheckIn];
+
+    if (field === 'service') {
+      if (newServicesWhileCheckIn.some(service => service.service === value)) {
+        setErrors(prev => ({
+          ...prev,
+          servicesWhileCheckIn: 'This service is already selected',
+          alreadyChooseAllService: '',
+        }));
+        return;
+      }
+
+      const selectedService = serviceFilter.find(
+        service => service.serviceID === value,
+      );
+      const servicePrice = selectedService ? selectedService.price : 0;
+      newServicesWhileCheckIn[index] = {
+        ...newServicesWhileCheckIn[index],
+        service: value,
+        price: servicePrice,
+      };
+    } else {
+      newServicesWhileCheckIn[index][field] = value;
+    }
+
+    setServicesWhileCheckIn(newServicesWhileCheckIn);
+    setErrors(prev => ({
+      ...prev,
+      servicesWhileCheckIn: '',
+      alreadyChooseAllService: '',
+    }));
+  };
+
   const addService = () => {
     setServices([...services, { service: '' }]);
+  };
+
+  const addServiceWhileCheckIn = () => {
+    const newServices = allServices.filter(
+      service =>
+        !bookingDetailsCheckIn.servicesInBooking.some(
+          s => s.serviceID === service.serviceID,
+        ),
+    );
+    setServiceFilter(newServices);
+    let defaultServiceID = '';
+    if (newServices.length > 0) {
+      for (let service of newServices) {
+        if (!servicesWhileCheckIn.some(s => s.service === service.serviceID)) {
+          defaultServiceID = service.serviceID;
+          break;
+        }
+      }
+    }
+
+    if (defaultServiceID === '' && newServices.length > 0) {
+      setErrors(prev => ({
+        ...prev,
+        servicesWhileCheckIn: '',
+        alreadyChooseAllService: 'You are already choose all service!!!',
+      }));
+      return;
+    }
+    const selectedService = newServices.find(
+      service => service.serviceID === defaultServiceID,
+    );
+    const servicePrice = selectedService ? selectedService.price : 0;
+    setServicesWhileCheckIn([
+      ...servicesWhileCheckIn,
+      { service: defaultServiceID, price: servicePrice },
+    ]);
+    setErrors(prev => ({
+      ...prev,
+      servicesWhileCheckIn: '',
+      alreadyChooseAllService: '',
+    }));
   };
 
   const resetForm = () => {
@@ -428,12 +507,15 @@ function ManageListBooking() {
         `${process.env.REACT_APP_API_URL}/manageBooking/confirmPayment`,
         {
           bookingID,
+          servicesWhileCheckIn,
         },
       );
       reRenderGetAllBookings();
     } catch (error) {
       console.error('Error cancelling booking', error);
     }
+    setBookingDetailsCheckIn(null);
+    setServicesWhileCheckIn([]);
   };
 
   const handleConfirmRefund = async bookingID => {
@@ -456,12 +538,15 @@ function ManageListBooking() {
         `${process.env.REACT_APP_API_URL}/manageBooking/confirmCheckIn`,
         {
           bookingID,
+          servicesWhileCheckIn,
         },
       );
       reRenderGetAllBookings();
     } catch (error) {
-      console.error('Error cancelling booking', error);
+      console.error('Error Confirm Check In', error);
     }
+    setBookingDetailsCheckIn(null);
+    setServicesWhileCheckIn([]);
   };
 
   const calculateDateLeft = (dateCancelBook, dateBook) => {
@@ -487,6 +572,16 @@ function ManageListBooking() {
 
   const removeService = index => {
     setServices(services.filter((_, i) => i !== index));
+    setErrors(prev => ({ ...prev, service: '' }));
+  };
+
+  const removeServiceWhileCheckIn = index => {
+    setServicesWhileCheckIn(servicesWhileCheckIn.filter((_, i) => i !== index));
+    setErrors(prev => ({
+      ...prev,
+      servicesWhileCheckIn: '',
+      alreadyChooseAllService: '',
+    }));
   };
 
   const filteredBookingData = currentBookings.filter(booking => {
@@ -496,6 +591,7 @@ function ManageListBooking() {
     return matchesSearch;
   });
 
+  console.log(servicesWhileCheckIn);
   return (
     <div className='manage-booking-list container-fluid'>
       <div className='row'>
@@ -546,7 +642,7 @@ function ManageListBooking() {
                   className='booking-btn-add'
                   data-bs-toggle='modal'
                   data-bs-target='#exampleModal'
-                  onClick={handleGetAllServicesAndDoctors}
+                  onClick={getAllDoctors}
                 >
                   Add Booking
                 </button>
@@ -1402,6 +1498,7 @@ function ManageListBooking() {
                             className='btn btn-success'
                             data-bs-toggle='modal'
                             data-bs-target={`#checkIn-${booking.bookingID}`}
+                            onClick={() => setBookingDetailsCheckIn(booking)}
                           >
                             Check In
                           </button>
@@ -1417,6 +1514,7 @@ function ManageListBooking() {
                             className='btn btn-success'
                             data-bs-toggle='modal'
                             data-bs-target={`#paymentModal-${booking.bookingID}`}
+                            onClick={() => setBookingDetailsCheckIn(booking)}
                           >
                             Payment
                           </button>
@@ -1679,6 +1777,10 @@ function ManageListBooking() {
                                 className='btn-close'
                                 data-bs-dismiss='modal'
                                 aria-label='Close'
+                                onClick={() => {
+                                  setBookingDetailsCheckIn(null);
+                                  setServicesWhileCheckIn([]);
+                                }}
                               ></button>
                             </div>
                             <div className='modal-body'>
@@ -1690,21 +1792,98 @@ function ManageListBooking() {
                                         Service Details
                                       </span>
                                     </div>
-                                    {booking.servicesInBooking.map(
-                                      (service, index) => (
-                                        <div
-                                          key={index}
-                                          className='reason-manage-booking'
-                                        >
-                                          <small className='title-reason-manage-booking'>
-                                            {service.name}:&nbsp;
-                                          </small>
-                                          <small>{service.price}$</small>
-                                        </div>
-                                      ),
-                                    )}
+                                    {bookingDetailsCheckIn &&
+                                      bookingDetailsCheckIn.servicesInBooking.map(
+                                        (service, index) => (
+                                          <div
+                                            key={index}
+                                            className='reason-manage-booking'
+                                          >
+                                            <small className='title-reason-manage-booking'>
+                                              {service.name}:&nbsp;
+                                            </small>
+                                            <small>{service.price}$</small>
+                                          </div>
+                                        ),
+                                      )}
                                     <div className='reason-manage-booking'>
-                                      <div className='add-service-paymentDetails'>
+                                      {servicesWhileCheckIn.length > 0 ? (
+                                        <table className='services-table'>
+                                          <thead>
+                                            <tr>
+                                              <th>Service</th>
+                                              <th>Action</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {servicesWhileCheckIn.map(
+                                              (service, index) => (
+                                                <tr key={index}>
+                                                  <td>
+                                                    <select
+                                                      value={
+                                                        service.service ||
+                                                        serviceFilter[0]
+                                                          ?.serviceID
+                                                      }
+                                                      onChange={e =>
+                                                        handleServiceWhileCheckInChange(
+                                                          index,
+                                                          'service',
+                                                          e.target.value,
+                                                        )
+                                                      }
+                                                      required
+                                                    >
+                                                      {serviceFilter.map(
+                                                        service => (
+                                                          <option
+                                                            key={
+                                                              service.serviceID
+                                                            }
+                                                            value={
+                                                              service.serviceID
+                                                            }
+                                                          >
+                                                            {`${service.name} - ${service.price}$`}
+                                                          </option>
+                                                        ),
+                                                      )}
+                                                    </select>
+                                                  </td>
+                                                  <td>
+                                                    <button
+                                                      type='button'
+                                                      className='btn-remove-service'
+                                                      onClick={() =>
+                                                        removeServiceWhileCheckIn(
+                                                          index,
+                                                        )
+                                                      }
+                                                    >
+                                                      Remove
+                                                    </button>
+                                                  </td>
+                                                </tr>
+                                              ),
+                                            )}
+                                          </tbody>
+                                        </table>
+                                      ) : null}
+                                      {errors.servicesWhileCheckIn && (
+                                        <div>{errors.servicesWhileCheckIn}</div>
+                                      )}
+                                      {errors.alreadyChooseAllService && (
+                                        <div>
+                                          {errors.alreadyChooseAllService}
+                                        </div>
+                                      )}
+                                      <div
+                                        className='add-service-paymentDetails'
+                                        onClick={() => {
+                                          addServiceWhileCheckIn();
+                                        }}
+                                      >
                                         Add Service
                                       </div>
                                     </div>
@@ -1722,13 +1901,24 @@ function ManageListBooking() {
                                     </div>
                                     <div className='reason-manage-booking'>
                                       <small className='title-reason-manage-booking'>
-                                        Total:&nbsp;
+                                        Total Booking:&nbsp;
                                       </small>
                                       <small>{booking.totalPrice}$</small>
                                     </div>
+                                    {servicesWhileCheckIn.length > 0 && (
+                                      <div className='reason-manage-booking'>
+                                        <small className='title-reason-manage-booking'>
+                                          Total Add Service:&nbsp;
+                                        </small>
+                                        <small>
+                                          {`${servicesWhileCheckIn.reduce((total, item) => total + item.price, 0)}`}
+                                          $
+                                        </small>
+                                      </div>
+                                    )}
                                   </div>
 
-                                  <div className='mb-3'>
+                                  <div className='mb-2'>
                                     <hr className='new1' />
                                   </div>
 
@@ -1802,6 +1992,10 @@ function ManageListBooking() {
                                 type='button'
                                 className='btn btn-secondary'
                                 data-bs-dismiss='modal'
+                                onClick={() => {
+                                  setBookingDetailsCheckIn(null);
+                                  setServicesWhileCheckIn([]);
+                                }}
                               >
                                 Close
                               </button>
@@ -1854,19 +2048,101 @@ function ManageListBooking() {
                                         Service Details
                                       </span>
                                     </div>
-                                    {booking.servicesInBooking.map(
-                                      (service, index) => (
-                                        <div
-                                          key={index}
-                                          className='reason-manage-booking'
-                                        >
-                                          <small className='title-reason-manage-booking'>
-                                            {service.name}:&nbsp;
-                                          </small>
-                                          <small>{service.price}$</small>
+                                    {bookingDetailsCheckIn &&
+                                      bookingDetailsCheckIn.servicesInBooking.map(
+                                        (service, index) => (
+                                          <div
+                                            key={index}
+                                            className='reason-manage-booking'
+                                          >
+                                            <small className='title-reason-manage-booking'>
+                                              {service.name}:&nbsp;
+                                            </small>
+                                            <small>{service.price}$</small>
+                                          </div>
+                                        ),
+                                      )}
+                                    <div className='reason-manage-booking'>
+                                      {servicesWhileCheckIn.length > 0 ? (
+                                        <table className='services-table'>
+                                          <thead>
+                                            <tr>
+                                              <th>Service</th>
+                                              <th>Action</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {servicesWhileCheckIn.map(
+                                              (service, index) => (
+                                                <tr key={index}>
+                                                  <td>
+                                                    <select
+                                                      value={
+                                                        service.service ||
+                                                        serviceFilter[0]
+                                                          ?.serviceID
+                                                      }
+                                                      onChange={e =>
+                                                        handleServiceWhileCheckInChange(
+                                                          index,
+                                                          'service',
+                                                          e.target.value,
+                                                        )
+                                                      }
+                                                      required
+                                                    >
+                                                      {serviceFilter.map(
+                                                        service => (
+                                                          <option
+                                                            key={
+                                                              service.serviceID
+                                                            }
+                                                            value={
+                                                              service.serviceID
+                                                            }
+                                                          >
+                                                            {`${service.name} - ${service.price}$`}
+                                                          </option>
+                                                        ),
+                                                      )}
+                                                    </select>
+                                                  </td>
+                                                  <td>
+                                                    <button
+                                                      type='button'
+                                                      className='btn-remove-service'
+                                                      onClick={() =>
+                                                        removeServiceWhileCheckIn(
+                                                          index,
+                                                        )
+                                                      }
+                                                    >
+                                                      Remove
+                                                    </button>
+                                                  </td>
+                                                </tr>
+                                              ),
+                                            )}
+                                          </tbody>
+                                        </table>
+                                      ) : null}
+                                      {errors.servicesWhileCheckIn && (
+                                        <div>{errors.servicesWhileCheckIn}</div>
+                                      )}
+                                      {errors.alreadyChooseAllService && (
+                                        <div>
+                                          {errors.alreadyChooseAllService}
                                         </div>
-                                      ),
-                                    )}
+                                      )}
+                                      <div
+                                        className='add-service-paymentDetails'
+                                        onClick={() => {
+                                          addServiceWhileCheckIn();
+                                        }}
+                                      >
+                                        Add Service
+                                      </div>
+                                    </div>
                                   </div>
 
                                   <div className='mb-3'>
@@ -1884,10 +2160,21 @@ function ManageListBooking() {
                                         Total:&nbsp;
                                       </small>
                                       <small>{booking.totalPrice}$</small>
+                                      {servicesWhileCheckIn.length > 0 && (
+                                        <div className='reason-manage-booking'>
+                                          <small className='title-reason-manage-booking'>
+                                            Total Add Service:&nbsp;
+                                          </small>
+                                          <small>
+                                            {`${servicesWhileCheckIn.reduce((total, item) => total + item.price, 0)}`}
+                                            $
+                                          </small>
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
 
-                                  <div className='mb-3'>
+                                  <div className='mb-2'>
                                     <hr className='new1' />
                                   </div>
 
@@ -2002,6 +2289,10 @@ function ManageListBooking() {
                                 className='btn-close'
                                 data-bs-dismiss='modal'
                                 aria-label='Close'
+                                onClick={() => {
+                                  setBookingDetailsCheckIn(null);
+                                  setServicesWhileCheckIn([]);
+                                }}
                               ></button>
                             </div>
                             <div className='modal-body'>
@@ -2128,6 +2419,10 @@ function ManageListBooking() {
                                 type='button'
                                 className='btn btn-secondary'
                                 data-bs-dismiss='modal'
+                                onClick={() => {
+                                  setBookingDetailsCheckIn(null);
+                                  setServicesWhileCheckIn([]);
+                                }}
                               >
                                 Close
                               </button>

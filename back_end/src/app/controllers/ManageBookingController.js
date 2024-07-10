@@ -365,14 +365,68 @@ class ManageBookingController {
 
   // POST /confirmCheckIn
   async confirmCheckIn(req, res, next) {
-    const { bookingID } = req.body;
+    const { bookingID, servicesWhileCheckIn } = req.body;
     try {
-      await Booking.findOneAndUpdate(
-        { bookingID },
-        {
-          isCheckIn: true,
-        },
-      );
+      if (servicesWhileCheckIn.length > 0) {
+        const booking = await Booking.findOne({ bookingID });
+        if (!booking) {
+          return res.status(404).json({ message: 'Booking not found' });
+        }
+        const totalPrice =
+          booking.totalPrice +
+          servicesWhileCheckIn.reduce((total, item) => total + item.price, 0);
+        await Booking.findOneAndUpdate(
+          { bookingID },
+          {
+            isCheckIn: true,
+            totalPrice: totalPrice,
+          },
+        );
+
+        await Payment.findOneAndUpdate(
+          { bookingID },
+          {
+            isSuccess: true,
+            totalPrice: totalPrice,
+          },
+        );
+
+        const services = servicesWhileCheckIn;
+        for (let i = 0; i < services.length; i++) {
+          let idServiceBookingVet;
+          const service = services[i];
+          while (true) {
+            try {
+              const lastServiceBookingVet =
+                await ServiceBookingVet.findOne().sort({
+                  serviceBookingVetID: -1,
+                });
+              if (lastServiceBookingVet) {
+                idServiceBookingVet =
+                  parseInt(lastServiceBookingVet.serviceBookingVetID) + 1;
+              } else {
+                idServiceBookingVet = 0;
+              }
+              break;
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          const saveServiceBookingVet = new ServiceBookingVet({
+            serviceBookingVetID: idServiceBookingVet,
+            bookingID: bookingID,
+            serviceID: service.service,
+          });
+          await saveServiceBookingVet.save();
+        }
+      } else {
+        await Booking.findOneAndUpdate(
+          { bookingID },
+          {
+            isCheckIn: true,
+          },
+        );
+      }
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: 'Error creating ', error });
@@ -381,20 +435,74 @@ class ManageBookingController {
 
   // POST /confirmPayment
   async confirmPayment(req, res, next) {
-    const { bookingID } = req.body;
+    const { bookingID, servicesWhileCheckIn } = req.body;
     try {
-      await Booking.findOneAndUpdate(
-        { bookingID },
-        {
-          isCheckIn: true,
-        },
-      );
-      await Payment.findOneAndUpdate(
-        { bookingID },
-        {
-          isSuccess: true,
-        },
-      );
+      if (servicesWhileCheckIn.length > 0) {
+        const booking = await Booking.findOne({ bookingID });
+        if (!booking) {
+          return res.status(404).json({ message: 'Booking not found' });
+        }
+        const totalPrice =
+          booking.totalPrice +
+          servicesWhileCheckIn.reduce((total, item) => total + item.price, 0);
+
+        await Booking.findOneAndUpdate(
+          { bookingID },
+          {
+            isCheckIn: true,
+            totalPrice: totalPrice,
+          },
+        );
+
+        await Payment.findOneAndUpdate(
+          { bookingID },
+          {
+            isSuccess: true,
+            totalPrice: totalPrice,
+          },
+        );
+        const services = servicesWhileCheckIn;
+        for (let i = 0; i < services.length; i++) {
+          let idServiceBookingVet;
+          const service = services[i];
+          while (true) {
+            try {
+              const lastServiceBookingVet =
+                await ServiceBookingVet.findOne().sort({
+                  serviceBookingVetID: -1,
+                });
+              if (lastServiceBookingVet) {
+                idServiceBookingVet =
+                  parseInt(lastServiceBookingVet.serviceBookingVetID) + 1;
+              } else {
+                idServiceBookingVet = 0;
+              }
+              break;
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          const saveServiceBookingVet = new ServiceBookingVet({
+            serviceBookingVetID: idServiceBookingVet,
+            bookingID: bookingID,
+            serviceID: service.service,
+          });
+          await saveServiceBookingVet.save();
+        }
+      } else {
+        await Booking.findOneAndUpdate(
+          { bookingID },
+          {
+            isCheckIn: true,
+          },
+        );
+        await Payment.findOneAndUpdate(
+          { bookingID },
+          {
+            isSuccess: true,
+          },
+        );
+      }
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: 'Error creating ', error });
