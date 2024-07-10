@@ -291,7 +291,7 @@
 .Admin-Cages-Main-Table-Content-Row-Action {
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   display: flex;
   border-left: 1px solid #eae8f1;
   padding: 0 0 0 10px;
