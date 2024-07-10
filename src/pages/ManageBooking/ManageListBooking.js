@@ -11,6 +11,7 @@ import { Pagination, Stack } from '@mui/material';
 
 function ManageListBooking() {
   const [allServices, setAllServices] = useState([]);
+  const [search, setSearch] = useState('');
   const [allDoctorsWorkingHours, setAllDoctorsWorkingHours] = useState([]);
   const [searchPetValue, setSearchPetValue] = useState('');
   const [searchCustomerValue, setSearchCustomerValue] = useState('');
@@ -482,6 +483,13 @@ function ManageListBooking() {
     setServices(services.filter((_, i) => i !== index));
   };
 
+  const filteredBookingData = currentBookings.filter(booking => {
+    const matchesSearch =
+      search === '' ||
+      booking.bookingID.toLowerCase().includes(search.toLowerCase());
+    return matchesSearch;
+  });
+
   return (
     <div className='manage-booking-list container-fluid'>
       <div className='row'>
@@ -514,6 +522,7 @@ function ManageListBooking() {
                     type='text'
                     placeholder='Search'
                     className='main-content-header-search-input'
+                    onChange={e => setSearch(e.target.value)}
                   />
                 </div>
                 <div className='booking-page-main-content-header-filter-date'>
@@ -1104,8 +1113,8 @@ function ManageListBooking() {
                 <div className='main-content-list-title-text'>Payment</div>{' '}
               </div>
               <div className='main-content-list-body-wrapper'>
-                {currentBookings.length !== 0 ? (
-                  currentBookings.map(booking => (
+                {filteredBookingData.length !== 0 ? (
+                  filteredBookingData.map(booking => (
                     <div
                       className='content-list-body-info'
                       key={booking.bookingID}
