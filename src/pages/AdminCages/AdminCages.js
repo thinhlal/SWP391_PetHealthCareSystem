@@ -281,9 +281,6 @@ function AdminCages() {
                               <div className='Admin-Cages-modal-title-name'>
                                 Name
                               </div>
-                              <label className='Admin-Cages-modal-add'>
-                                Cage name:
-                              </label>
                               <input
                                 className='Admin-Cages-input'
                                 name='name'
@@ -301,9 +298,6 @@ function AdminCages() {
                               <div className='Admin-Cages-modal-title-name'>
                                 Description
                               </div>
-                              <label className='Admin-Cages-modal-add'>
-                                Description:
-                              </label>
                               <input
                                 className='Admin-Cages-input'
                                 name='description'

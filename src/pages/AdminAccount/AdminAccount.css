@@ -256,9 +256,10 @@
 }
 
 .Admin-Account-modal-title-name {
-  height: 30px;
+  line-height: 30px;
   font-weight: 600;
   font-size: 20px;
+  margin-bottom: 5px;
 }
 
 .Admin-Account-modal-title-radio {
@@ -281,7 +282,7 @@
 }
 
 .Admin-Account-modal-add-account {
-  padding: 15px;
+  padding: 10px 0 0 10px;
 }
 
 .Admin-Account-modal-add {
@@ -331,15 +332,19 @@
 }
 
 .Admin-Account-input {
+  width: 250px;
   height: 30px;
-  margin-top: 5px;
   line-height: 24px;
   font-size: 16px;
   padding-left: 5px;
 }
 
 .Admin-Account-input-confirm {
-  padding-top: 22px;
+  padding-top: 10px;
+}
+
+.Admin-Account-input-role{
+  width: 250px;
 }
 
 .Admin-Account-Main-Table-Content-Btn :hover {
@@ -358,5 +363,5 @@
 .Admin-Account-Error {
   color: red;
   font-size: 0.875em;
-  margin-top: 0.25em;
+  margin-top: 5px;
 }

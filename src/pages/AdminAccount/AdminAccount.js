@@ -368,9 +368,6 @@ function AdminAccount() {
                               <div className='Admin-Account-modal-title-name'>
                                 User name
                               </div>
-                              <label className='Admin-Account-modal-add'>
-                                User name:
-                              </label>
                               <input
                                 className='Admin-Account-input'
                                 name='username'
@@ -394,26 +391,21 @@ function AdminAccount() {
                               <div className='Admin-Account-modal-title-name'>
                                 Password
                               </div>
-                              <label className='Admin-Account-modal-add'>
-                                Password:
-                              </label>
-                              <input
-                                className='Admin-Account-input'
-                                type='password'
-                                name='password'
-                                value={newAccount.password}
-                                onChange={handleNewAccountChange}
-                                placeholder='Password'
-                              />
+                              <div>
+                                <input
+                                  className='Admin-Account-input'
+                                  type='password'
+                                  name='password'
+                                  value={newAccount.password}
+                                  onChange={handleNewAccountChange}
+                                  placeholder='Password'
+                                /></div>
                               {errors.password && (
                                 <div className='Admin-Account-Error'>
                                   {errors.password}
                                 </div>
                               )}
                               <div className='Admin-Account-input-confirm'>
-                                <label className='Admin-Account-modal-add'>
-                                  Confirm password:
-                                </label>
                                 <input
                                   className='Admin-Account-input'
                                   type='password'
@@ -434,9 +426,6 @@ function AdminAccount() {
                               <div className='Admin-Account-modal-title-name'>
                                 Name
                               </div>
-                              <label className='Admin-Account-modal-add'>
-                                Name:
-                              </label>
                               <input
                                 className='Admin-Account-input'
                                 name='name'
@@ -455,9 +444,6 @@ function AdminAccount() {
                               <div className='Admin-Account-modal-title-name'>
                                 Email
                               </div>
-                              <label className='Admin-Account-modal-add'>
-                                Email:
-                              </label>
                               <input
                                 className='Admin-Account-input'
                                 type='email'
@@ -477,9 +463,6 @@ function AdminAccount() {
                               <div className='Admin-Account-modal-title-name'>
                                 Phone Number
                               </div>
-                              <label className='Admin-Account-modal-add'>
-                                Phone Number:
-                              </label>
                               <input
                                 className='Admin-Account-input'
                                 name='phone'
@@ -498,9 +481,6 @@ function AdminAccount() {
                               <div className='Admin-Account-modal-title-name'>
                                 Role
                               </div>
-                              <label className='Admin-Account-modal-add'>
-                                Role:
-                              </label>
                               <select
                                 className='Admin-Account-input-role'
                                 name='role'

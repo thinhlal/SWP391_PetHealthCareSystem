@@ -301,9 +301,6 @@ function AdminServices() {
                               <div className='Admin-Services-modal-title'>
                                 Name
                               </div>
-                              <label className='Admin-Services-modal-initials'>
-                                Services name:
-                              </label>
                               <input
                                 className='Admin-Services-input'
                                 name='name'
@@ -321,9 +318,6 @@ function AdminServices() {
                               <div className='Admin-Services-modal-title'>
                                 Description
                               </div>
-                              <label className='Admin-Services-modal-initials'>
-                                Services description:
-                              </label>
                               <input
                                 className='Admin-Services-input'
                                 name='description'
@@ -341,9 +335,6 @@ function AdminServices() {
                               <div className='Admin-Services-modal-title'>
                                 Price
                               </div>
-                              <label className='Admin-Services-modal-initials'>
-                                Services price:
-                              </label>
                               <input
                                 className='Admin-Services-input'
                                 name='price'

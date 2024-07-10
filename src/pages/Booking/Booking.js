@@ -77,8 +77,9 @@ const Booking = () => {
   useEffect(() => {
     if (!petID) {
       alert('No pet selected. Please go back and select a pet.');
+      navigate('/choose');
     }
-  }, [petID]);
+  }, [petID, navigate]);
 
   const handleDoctorChange = e => {
     const newDoctorId = e.target.value;
@@ -590,15 +591,14 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${
-                      slot.isBooked
+                    className={`element-button ${slot.isBooked
                         ? 'element-button-red'
                         : slot.isWithinWorkingHours
                           ? selectedSlot === slot
                             ? 'element-button-selected'
                             : 'element-button-green'
                           : 'element-button-gray'
-                    }`}
+                      }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>
