@@ -342,17 +342,16 @@ const DoctorCare = () => {
                     <tr key={index}>
                       <td>{history.date.split('T')[0]}</td>
                       <td
-                        className={`status-${
-                          history.status === 1
-                            ? 'critical'
-                            : history.status === 2
-                              ? 'mild'
-                              : history.status === 3
-                                ? 'moderate'
-                                : history.status === 4
-                                  ? 'severe'
-                                  : 'healthy'
-                        }`}
+                        className={`status-${history.status === 1
+                          ? 'critical'
+                          : history.status === 2
+                            ? 'mild'
+                            : history.status === 3
+                              ? 'moderate'
+                              : history.status === 4
+                                ? 'severe'
+                                : 'healthy'
+                          }`}
                       >
                         {history.status === 1
                           ? 'Critical'
@@ -369,9 +368,47 @@ const DoctorCare = () => {
                         <button
                           className='delete-button'
                           // {onClick={() => handleDeleteHistory(history.diseaseInfoID)}}
+                          data-bs-toggle='modal'
+                          data-bs-target='#Delete-status-doctor-care-exampleModal'
                         >
                           Delete
                         </button>
+                        <div
+                          className='modal fade'
+                          id={`Delete-status-doctor-care-exampleModal`}
+                          tabIndex='-1'
+                          aria-labelledby='exampleModalLabelMore'
+                          aria-hidden='true'
+                        >
+                          <div className='modal-dialog'>
+                            <div className='modal-content'>
+                              <div className='modal-body'>
+                                <div className='change-user-password-modal-header'>
+                                  Confirm Delete
+                                </div>
+                                <div>Are you sure you want to delete?</div>
+                              </div>
+                              <div className='modal-footer'>
+                                <button
+                                  type='button'
+                                  className='btn btn-danger'
+                                  data-bs-dismiss='modal'
+                                >
+                                  {' '}
+                                  Save{' '}
+                                </button>
+                                <button
+                                  type='button'
+                                  className='btn btn-light'
+                                  data-bs-dismiss='modal'
+                                >
+                                  {' '}
+                                  Cancel{' '}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   ))
