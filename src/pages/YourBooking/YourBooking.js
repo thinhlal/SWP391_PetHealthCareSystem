@@ -136,7 +136,7 @@ function YourBooking() {
     setCurrentPage(value);
   };
 
-  const filteredAccountData = yourBookings.filter(booking => {
+  const filteredBookingData = yourBookings.filter(booking => {
     const matchesSearch =
       search === '' ||
       booking.bookingID.toLowerCase().includes(search.toLowerCase());
@@ -144,7 +144,7 @@ function YourBooking() {
   });
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentBookings = filteredAccountData.slice(
+  const currentBookings = filteredBookingData.slice(
     startIndex,
     startIndex + itemsPerPage,
   );

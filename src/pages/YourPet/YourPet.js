@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 function YourPet() {
   const { user } = useContext(AuthContext);
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
   const [pets, setPets] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,6 +84,13 @@ function YourPet() {
     return <AnimationComponent />;
   }
 
+  const filteredPetData = pets.filter(pet => {
+    const matchesSearch =
+      search === '' ||
+      pet.name.toLowerCase().includes(search.toLowerCase());
+    return matchesSearch;
+  });
+
   return (
     <div className='container-fluid your-pet'>
       <div className='row'>
@@ -103,6 +111,7 @@ function YourPet() {
                     type='text'
                     placeholder='Search'
                     className='label-input'
+                    onChange={e => setSearch(e.target.value)}
                   />
                   <div className='search-pet-input-icons'>
                     <svg
@@ -129,13 +138,13 @@ function YourPet() {
             </div>
 
             <div className='detail-information'>
-              {pets.length === 0 ? (
+              {filteredPetData.length === 0 ? (
                 <div className='no-pet-available'>
                   Currently, there are no pets available in the list. Please add
                   pet to see !!!
                 </div>
               ) : (
-                pets.map((pet, index) => (
+                filteredPetData.map((pet, index) => (
                   <PetProfileCard
                     key={index}
                     imgSrc={pet.image}
