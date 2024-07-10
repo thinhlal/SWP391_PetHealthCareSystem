@@ -16,6 +16,7 @@ import Stack from '@mui/material/Stack';
 
 function YourBooking() {
   const { user } = useContext(AuthContext);
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
   const [yourBookings, setYourBookings] = useState([]);
   const [rating, setRating] = useState(null);
@@ -135,13 +136,20 @@ function YourBooking() {
     setCurrentPage(value);
   };
 
+  const filteredAccountData = yourBookings.filter(booking => {
+    const matchesSearch =
+      search === '' ||
+      booking.bookingID.toLowerCase().includes(search.toLowerCase());
+    return matchesSearch;
+  });
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentBookings = yourBookings.slice(
+  const currentBookings = filteredAccountData.slice(
     startIndex,
     startIndex + itemsPerPage,
   );
   const totalPages = Math.ceil(yourBookings.length / itemsPerPage);
-
+  
   return (
     <div className='main-container-your-booking-page'>
       <div className='row-your-booking'>
@@ -164,6 +172,7 @@ function YourBooking() {
                     type='text'
                     placeholder='Search'
                     className='label-input-booking'
+                    onChange={e => setSearch(e.target.value)}
                   />
                   <div className='search-pet-input-icons-booking'>
                     <svg
