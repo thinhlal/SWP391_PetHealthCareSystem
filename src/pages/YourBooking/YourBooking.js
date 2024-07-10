@@ -149,7 +149,7 @@ function YourBooking() {
     startIndex + itemsPerPage,
   );
   const totalPages = Math.ceil(yourBookings.length / itemsPerPage);
-  
+
   return (
     <div className='main-container-your-booking-page'>
       <div className='row-your-booking'>

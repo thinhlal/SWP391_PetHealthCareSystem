@@ -11,7 +11,6 @@ import PetHealthSlider from '../../components/Employee/StatusSlider/StatusSlider
 import BuildIcon from '@mui/icons-material/Build';
 import { grey } from '@mui/material/colors';
 
-
 function ManageCages() {
   const [searchBookingIDValue, setSearchBookingValue] = useState('');
   const [search, setSearch] = useState('');
@@ -217,14 +216,15 @@ function ManageCages() {
     }
   }, [petCondition]);
 
-  const filteredCageData = cageData.filter(cage => {
-    if (statusFilter === 'All') return true;
-    const status = cage.isEmpty ? 'Empty' : 'Using';
-    return status === statusFilter;
-  }).filter(cage => {
-    return cage.name.toLowerCase().includes(search.toLowerCase())
-  });
-  
+  const filteredCageData = cageData
+    .filter(cage => {
+      if (statusFilter === 'All') return true;
+      const status = cage.isEmpty ? 'Empty' : 'Using';
+      return status === statusFilter;
+    })
+    .filter(cage => {
+      return cage.name.toLowerCase().includes(search.toLowerCase());
+    });
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -540,7 +540,9 @@ function ManageCages() {
                       <div className='content-list-body-value'>
                         {cage.description}
                       </div>
-                      <div className={`content-list-body-value ${cage.status ? 'situation-in-use' : 'situation-maintenance'}`}>
+                      <div
+                        className={`content-list-body-value ${cage.status ? 'situation-in-use' : 'situation-maintenance'}`}
+                      >
                         {cage.status ? 'In Use' : 'Maintenance'}
                       </div>
                       <div
@@ -869,10 +871,12 @@ function ManageCages() {
                           </button>
                         ) : (
                           <div>
-                            <BuildIcon sx={{
-                              fontSize: 20,
-                              color: grey[500]
-                            }} />
+                            <BuildIcon
+                              sx={{
+                                fontSize: 20,
+                                color: grey[500],
+                              }}
+                            />
                           </div>
                         )}
                       </div>

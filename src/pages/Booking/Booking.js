@@ -591,14 +591,15 @@ const Booking = () => {
                 availableSlots.map((slot, index) => (
                   <div
                     key={index}
-                    className={`element-button ${slot.isBooked
+                    className={`element-button ${
+                      slot.isBooked
                         ? 'element-button-red'
                         : slot.isWithinWorkingHours
                           ? selectedSlot === slot
                             ? 'element-button-selected'
                             : 'element-button-green'
                           : 'element-button-gray'
-                      }`}
+                    }`}
                     onClick={() => handleSlotClick(slot)}
                   >
                     <div className='booking-select_time'>

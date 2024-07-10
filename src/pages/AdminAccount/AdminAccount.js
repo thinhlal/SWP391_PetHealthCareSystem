@@ -399,7 +399,8 @@ function AdminAccount() {
                                   value={newAccount.password}
                                   onChange={handleNewAccountChange}
                                   placeholder='Password'
-                                /></div>
+                                />
+                              </div>
                               {errors.password && (
                                 <div className='Admin-Account-Error'>
                                   {errors.password}

@@ -210,8 +210,14 @@ function ManageListBooking() {
 
   const handleServiceChange = (index, field, value) => {
     const newServices = [...services];
-    if (field === 'service' && newServices.some(service => service.service === value)) {
-      setErrors(prev => ({ ...prev, services: 'This service is already selected' }));
+    if (
+      field === 'service' &&
+      newServices.some(service => service.service === value)
+    ) {
+      setErrors(prev => ({
+        ...prev,
+        services: 'This service is already selected',
+      }));
       return;
     }
     newServices[index][field] = value;
@@ -609,7 +615,10 @@ function ManageListBooking() {
                                       setSearchCustomerValue(e.target.value)
                                     }
                                   />
-                                  <div className='search-button' onClick={handleSearchCustomer}>
+                                  <div
+                                    className='search-button'
+                                    onClick={handleSearchCustomer}
+                                  >
                                     Search
                                   </div>
                                   {errors.searchValueAccount && (
@@ -648,7 +657,12 @@ function ManageListBooking() {
                                         setSearchPetValue(e.target.value)
                                       }
                                     />
-                                    <div className='search-button' onClick={handleSearchPet}>Search</div>
+                                    <div
+                                      className='search-button'
+                                      onClick={handleSearchPet}
+                                    >
+                                      Search
+                                    </div>
                                     {errors.searchValuePet && (
                                       <span className='error'>
                                         {errors.searchValuePet}
@@ -927,63 +941,76 @@ function ManageListBooking() {
                             )}
                           </div>
                           <div className='modal-body-section-wrapper'>
-                          <div>
-                            <label>Services used:</label>
-                            <table className="services-table">
-                              <thead>
-                                <tr>
-                                  <th>Service</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {services.map((service, index) => (
-                                  <tr key={index}>
-                                    <td>
-                                      <select
-                                        value={service.service}
-                                        onChange={e => handleServiceChange(index, 'service', e.target.value)}
-                                        required
-                                      >
-                                        <option value=''>Choose Services</option>
-                                        {allServices.map(service => (
-                                          <option key={service.serviceID} value={service.serviceID}>
-                                            {`${service.name} - ${service.price}$`}
-                                          </option>
-                                        ))}
-                                      </select>
-                                    </td>
-                                    <td>
-                                      <button
-                                        type="button"
-                                        className="btn-remove-service"
-                                        onClick={() => removeService(index)}
-                                      >
-                                        Remove
-                                      </button>
-                                    </td>
+                            <div>
+                              <label>Services used:</label>
+                              <table className='services-table'>
+                                <thead>
+                                  <tr>
+                                    <th>Service</th>
+                                    <th>Action</th>
                                   </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                            <div className="btn-add-services" onClick={addService}>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                className="bi bi-plus"
-                                viewBox="0 0 16 16"
+                                </thead>
+                                <tbody>
+                                  {services.map((service, index) => (
+                                    <tr key={index}>
+                                      <td>
+                                        <select
+                                          value={service.service}
+                                          onChange={e =>
+                                            handleServiceChange(
+                                              index,
+                                              'service',
+                                              e.target.value,
+                                            )
+                                          }
+                                          required
+                                        >
+                                          <option value=''>
+                                            Choose Services
+                                          </option>
+                                          {allServices.map(service => (
+                                            <option
+                                              key={service.serviceID}
+                                              value={service.serviceID}
+                                            >
+                                              {`${service.name} - ${service.price}$`}
+                                            </option>
+                                          ))}
+                                        </select>
+                                      </td>
+                                      <td>
+                                        <button
+                                          type='button'
+                                          className='btn-remove-service'
+                                          onClick={() => removeService(index)}
+                                        >
+                                          Remove
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                              <div
+                                className='btn-add-services'
+                                onClick={addService}
                               >
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                              </svg>
-                              <div>Add service</div>
+                                <svg
+                                  xmlns='http://www.w3.org/2000/svg'
+                                  width='16'
+                                  height='16'
+                                  fill='currentColor'
+                                  className='bi bi-plus'
+                                  viewBox='0 0 16 16'
+                                >
+                                  <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4' />
+                                </svg>
+                                <div>Add service</div>
+                              </div>
+                              {errors.services && (
+                                <span className='error'>{errors.services}</span>
+                              )}
                             </div>
-                            {errors.services && (
-                              <span className="error">{errors.services}</span>
-                            )}
-                          </div>
-
                           </div>
 
                           <div className='modal-body-section-wrapper'>

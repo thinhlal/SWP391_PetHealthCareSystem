@@ -86,8 +86,7 @@ function YourPet() {
 
   const filteredPetData = pets.filter(pet => {
     const matchesSearch =
-      search === '' ||
-      pet.name.toLowerCase().includes(search.toLowerCase());
+      search === '' || pet.name.toLowerCase().includes(search.toLowerCase());
     return matchesSearch;
   });
 

@@ -342,16 +342,17 @@ const DoctorCare = () => {
                     <tr key={index}>
                       <td>{history.date.split('T')[0]}</td>
                       <td
-                        className={`status-${history.status === 1
-                          ? 'critical'
-                          : history.status === 2
-                            ? 'mild'
-                            : history.status === 3
-                              ? 'moderate'
-                              : history.status === 4
-                                ? 'severe'
-                                : 'healthy'
-                          }`}
+                        className={`status-${
+                          history.status === 1
+                            ? 'critical'
+                            : history.status === 2
+                              ? 'mild'
+                              : history.status === 3
+                                ? 'moderate'
+                                : history.status === 4
+                                  ? 'severe'
+                                  : 'healthy'
+                        }`}
                       >
                         {history.status === 1
                           ? 'Critical'

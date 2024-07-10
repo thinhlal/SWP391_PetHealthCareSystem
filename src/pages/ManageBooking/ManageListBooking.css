@@ -68,7 +68,6 @@
   background-color: #0056b3;
 }
 
-
 .manage-booking-list .main-content-header-search-title {
   font-weight: 600;
   color: #000000;
@@ -383,7 +382,8 @@
   margin-top: 10px;
 }
 
-.manage-booking-list .services-table th, .services-table td {
+.manage-booking-list .services-table th,
+.services-table td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: left;
@@ -405,7 +405,6 @@
 .manage-booking-list .btn-remove-service:hover {
   background-color: darkred;
 }
-
 
 .manage-booking-list .search-owner-option-section,
 .searchPetSection-child {
