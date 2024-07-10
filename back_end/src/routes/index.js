@@ -11,8 +11,10 @@ const paymentRouter = require('./payment');
 const cageRouter = require('./cage');
 const rateRouter = require('./rate');
 const userRouter = require('./user');
+const vaccineRouter = require('./vaccine');
 
 function route(app) {
+  app.use('/vaccine', vaccineRouter);
   app.use('/user', userRouter);
   app.use('/rate', rateRouter);
   app.use('/cage', cageRouter);

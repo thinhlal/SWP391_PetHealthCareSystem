@@ -299,13 +299,6 @@ function YourBooking() {
                               </div>
                               <div className='col-booking'>
                                 <div className='mini-title-detail-booking'>
-                                  Pet Type:
-                                </div>
-                                <br />
-                                {booking?.petDetails[0]?.petType}
-                              </div>
-                              <div className='col-booking'>
-                                <div className='mini-title-detail-booking'>
                                   Doctor:
                                 </div>
                                 <br />
@@ -330,6 +323,13 @@ function YourBooking() {
                                 </div>
                                 <br />
                                 {booking.paymentsDetails[0].paymentMethod}
+                              </div>
+                              <div className='col-booking'>
+                                <div className='mini-title-detail-booking'>
+                                  Vaccination:
+                                </div>
+                                <br />
+                                {booking.isCheckedVaccinate ? 'Yes' : 'No'}
                               </div>
                             </div>
                           </div>

@@ -494,3 +494,10 @@ body {
 .booking-container .remove-service-button:hover {
   background-color: #ff4500;
 }
+
+.booking-container .checkBoxVaccineWrapper {
+  height: 70px;
+  width: 270px;
+  display: flex;
+  align-items: center;
+}

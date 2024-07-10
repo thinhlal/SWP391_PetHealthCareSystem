@@ -26,6 +26,7 @@ function WorkSchedule() {
           },
         },
       );
+      console.log(response.data);
       setSchedules(response.data);
     } catch (error) {
       console.error('Error fetching work schedule:', error);

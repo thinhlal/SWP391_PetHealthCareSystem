@@ -3,10 +3,24 @@ const Schema = mongoose.Schema;
 
 const VaccinationPetSchema = new Schema(
   {
-    vaccinationID: {
+    vaccinationPetID: {
       type: Number,
       unique: true,
+    },
+    vaccinationID: {
+      type: Number,
+      required: true,
       ref: 'Vaccination',
+    },
+    bookingID: {
+      type: String,
+      required: true,
+      maxlength: 8,
+      ref: 'Booking',
+    },
+    medicalReportID: {
+      type: Number,
+      ref: 'MedicalReport',
     },
     petID: {
       type: String,

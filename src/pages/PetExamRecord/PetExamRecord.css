@@ -1,12 +1,11 @@
-
 .form-petE {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .form-petExam-1 {
-  flex: 1 1 calc(33.333% - 20px); 
+  flex: 1 1 calc(33.333% - 20px);
   box-sizing: border-box;
 }
 
@@ -19,7 +18,7 @@
 }
 
 .form-petExam-3 .textarea-container {
-  flex: 1 1 calc(50% - 20px); 
+  flex: 1 1 calc(50% - 20px);
   box-sizing: border-box;
 }
 
@@ -34,11 +33,11 @@
   word-wrap: break-word;
 }
 
-.form-petExam-vaccine, .final-petE {
-  flex: 1 1 100%; 
+.form-petExam-vaccine,
+.final-petE {
+  flex: 1 1 100%;
   box-sizing: border-box;
 }
-
 
 .petExam-record {
   display: flex;
@@ -46,7 +45,7 @@
   min-height: 100vh;
   margin: 0;
   font-family: Roboto, sans-serif;
-  background-color: #F5F3F3;
+  background-color: #f5f3f3;
 }
 
 .petExam-record .nav-head {
@@ -200,7 +199,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background-color: orange; 
+  background-color: orange;
   transition: left 0.3s ease;
   z-index: -1;
 }
@@ -212,7 +211,7 @@
 
 .petExam-record .btn-save:hover,
 .btn-cancel:hover {
-  color: #fff; 
+  color: #fff;
 }
 
 .petExam-record .btn-save {
@@ -230,9 +229,9 @@
 }
 
 .petExam-record .final-petE {
- display: flex;
- justify-content: flex-end;
- margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -254,8 +253,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
-  max-height: 125px; 
-  overflow-y: auto; 
+  max-height: 125px;
+  overflow-y: auto;
 }
 
 .petExam-record .selected-vaccine {
@@ -270,19 +269,19 @@
   display: flex;
 }
 
- .modal-body-exam-record input[type="checkbox"] {
+.modal-body-exam-record input[type='checkbox'] {
   margin-right: 10px;
   font-family: Roboto, sans-serif;
 }
 
- .modal-body-exam-record label {
+.modal-body-exam-record label {
   margin-right: 20px;
   font-family: Roboto, sans-serif;
 }
 
 .modal-body-exam-record {
-  max-height: 300px; 
-  overflow-y: auto; 
+  max-height: 300px;
+  overflow-y: auto;
   font-family: Roboto, sans-serif;
   padding: 20px;
   display: grid;

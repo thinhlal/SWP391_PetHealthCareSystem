@@ -11,6 +11,7 @@ import gray from '../../assets/images/img_Booking/gray-color-solid-background-19
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
 const Booking = () => {
   const location = useLocation();
@@ -41,6 +42,7 @@ const Booking = () => {
   const [loading, setLoading] = useState(true);
   const [selectedServices, setSelectedServices] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [vaccinationChecked, setVaccinationChecked] = useState(false);
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -262,6 +264,7 @@ const Booking = () => {
         name: userInfo.name,
         phone: userInfo.phone,
         email: userInfo.email,
+        isCheckedVaccinate: vaccinationChecked,
       };
       try {
         const response = await axiosInstance.post(
@@ -525,7 +528,7 @@ const Booking = () => {
 
             <div className='select-booking_info'>
               <div>
-                <div className='select_Payment'>
+                <div className='select_Date'>
                   <div className='select_Name'>Payment</div>
                   <div className='select_Booking'>
                     <select
@@ -544,6 +547,18 @@ const Booking = () => {
                     {errorMessagePaymentMethod}
                   </div>
                 )}
+              </div>
+              <div className='checkBoxVaccineWrapper'>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={vaccinationChecked}
+                      onChange={e => setVaccinationChecked(e.target.checked)}
+                      color='success'
+                    />
+                  }
+                  label='I want to get vaccinated'
+                />
               </div>
             </div>
           </div>

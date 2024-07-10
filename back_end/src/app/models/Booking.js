@@ -82,6 +82,14 @@ const BookingSchema = new Schema(
       type: Number,
       default: 0,
     },
+    isCheckedVaccinate: {
+      type: Boolean,
+      default: false,
+    },
+    isCompleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

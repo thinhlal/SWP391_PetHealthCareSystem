@@ -2,6 +2,7 @@ const Doctor = require('../models/Doctor.js');
 const WorkingHour = require('../models/WorkingHour.js');
 const Booking = require('../models/Booking.js');
 const MedicalReport = require('../models/MedicalReport.js');
+const VaccinationPet = require('../models/VaccinationPet.js');
 
 class DoctorController {
   // GET /getTimeWork
@@ -166,14 +167,19 @@ class DoctorController {
                 input: '$bookingDetails',
                 as: 'booking',
                 cond: {
-                  $eq: [
+                  $and: [
                     {
-                      $dateToString: {
-                        format: '%Y-%m-%d',
-                        date: '$$booking.dateBook',
-                      },
+                      $eq: [
+                        {
+                          $dateToString: {
+                            format: '%Y-%m-%d',
+                            date: '$$booking.dateBook',
+                          },
+                        },
+                        date,
+                      ],
                     },
-                    date,
+                    { $eq: ['$$booking.isCompleted', false] },
                   ],
                 },
               },
@@ -357,9 +363,24 @@ class DoctorController {
 
   // POST /savePetExamRecord
   async savePetExamRecord(req, res, next) {
-    const { bookingID, diagnosis, treatment, prescription, notes } = req.body;
+    const {
+      bookingID,
+      diagnosis,
+      treatment,
+      prescription,
+      notes,
+      selectedVaccines,
+    } = req.body;
     try {
       const booking = await Booking.findOne({ bookingID });
+
+      await Booking.findOneAndUpdate(
+        { bookingID },
+        {
+          isCompleted: true,
+        },
+      );
+
       let id;
       while (true) {
         try {
@@ -387,6 +408,37 @@ class DoctorController {
         notes,
       });
       await newMedicalReport.save();
+
+      if (selectedVaccines.length > 0) {
+        for (let i = 0; i < selectedVaccines.length; i++) {
+          const vaccine = selectedVaccines[i];
+          let idVaccine;
+          while (true) {
+            try {
+              const lastVaccinationPetID = await VaccinationPet.findOne().sort({
+                vaccinationPetID: -1,
+              });
+              if (lastVaccinationPetID) {
+                idVaccine = parseInt(lastVaccinationPetID.vaccinationPetID) + 1;
+              } else {
+                idVaccine = 0;
+              }
+              break;
+            } catch (error) {
+              console.log(error);
+            }
+          }
+          const newVaccinePet = new VaccinationPet({
+            vaccinationPetID: idVaccine,
+            medicalReportID: id,
+            vaccinationID: parseInt(vaccine.vaccinationID),
+            bookingID,
+            petID: booking.petID,
+            dateGiven: new Date(),
+          });
+          await newVaccinePet.save();
+        }
+      }
       res.status(204).send();
     } catch (error) {
       console.log(error);

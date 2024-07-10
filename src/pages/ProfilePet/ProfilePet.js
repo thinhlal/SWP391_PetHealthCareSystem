@@ -31,9 +31,9 @@ function ProfilePet() {
   });
   const [loading, setLoading] = useState(true);
   const [currentPageMedical, setCurrentPageMedical] = useState(1);
-  const itemsPerPageMedical = 1;
+  const itemsPerPageMedical = 5;
   const [currentPageVaccine, setCurrentPageVaccine] = useState(1);
-  const itemsPerPageVaccine = 1;
+  const itemsPerPageVaccine = 5;
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
