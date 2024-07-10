@@ -14,6 +14,7 @@ import { grey } from '@mui/material/colors';
 
 function ManageCages() {
   const [searchBookingIDValue, setSearchBookingValue] = useState('');
+  const [search, setSearch] = useState('');
   const [bookingSearchResult, setBookingSearchResult] = useState({});
   const [paymentUpdatePrice, setPaymentUpdatePrice] = useState({});
   const [sliderValue, setSliderValue] = useState(1);
@@ -220,7 +221,10 @@ function ManageCages() {
     if (statusFilter === 'All') return true;
     const status = cage.isEmpty ? 'Empty' : 'Using';
     return status === statusFilter;
+  }).filter(cage => {
+    return cage.name.toLowerCase().includes(search.toLowerCase())
   });
+  
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
@@ -265,6 +269,7 @@ function ManageCages() {
                     type='text'
                     placeholder='Search'
                     className='main-content-header-search-input'
+                    onChange={e => setSearch(e.target.value)}
                   />
                 </div>
 
