@@ -8,6 +8,9 @@ import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import axiosInstance from '../../utils/axiosInstance';
 import { Pagination, Stack } from '@mui/material';
 import PetHealthSlider from '../../components/Employee/StatusSlider/StatusSlider';
+import BuildIcon from '@mui/icons-material/Build';
+import { grey } from '@mui/material/colors';
+
 
 function ManageCages() {
   const [searchBookingIDValue, setSearchBookingValue] = useState('');
@@ -532,7 +535,7 @@ function ManageCages() {
                       <div className='content-list-body-value'>
                         {cage.description}
                       </div>
-                      <div className='content-list-body-value'>
+                      <div className={`content-list-body-value ${cage.status ? 'situation-in-use' : 'situation-maintenance'}`}>
                         {cage.status ? 'In Use' : 'Maintenance'}
                       </div>
                       <div
@@ -860,7 +863,12 @@ function ManageCages() {
                             Update
                           </button>
                         ) : (
-                          <div>Maintenance</div>
+                          <div>
+                            <BuildIcon sx={{
+                              fontSize: 20,
+                              color: grey[500]
+                            }} />
+                          </div>
                         )}
                       </div>
                       <div

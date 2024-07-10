@@ -447,6 +447,14 @@
   border-radius: 5px;
 }
 
+.situation-in-use {
+  color: green;
+}
+
+.situation-maintenance {
+  color: grey
+}
+
 .status-using {
   color: green;
 }
