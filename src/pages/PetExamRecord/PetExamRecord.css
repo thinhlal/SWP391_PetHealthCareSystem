@@ -1,35 +1,80 @@
-.petExam {
+
+.form-petE {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+}
+
+.form-petExam-1 {
+  flex: 1 1 calc(33.333% - 20px); 
+  box-sizing: border-box;
+}
+
+.form-petExam-3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-petExam-3 .textarea-container {
+  flex: 1 1 calc(50% - 20px); 
+  box-sizing: border-box;
+}
+
+.form-petExam-3 textarea {
+  width: 100%;
+  height: 80px;
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+  padding: 10px;
+  resize: vertical;
+  overflow: auto;
+  word-wrap: break-word;
+}
+
+.form-petExam-vaccine, .final-petE {
+  flex: 1 1 100%; 
+  box-sizing: border-box;
+}
+
+
+.petExam-record {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
+  font-family: Roboto, sans-serif;
+  background-color: #F5F3F3;
 }
 
-.nav-head {
+.petExam-record .nav-head {
   width: 100%;
   display: flex;
   justify-content: right;
   background-color: #113179;
 }
 
-.nav-head {
+.petExam-record .nav-head {
   display: flex;
   align-items: center;
 }
 
-.nav-logo {
+.petExam-record .nav-logo {
   height: 40px;
   margin-right: 10px;
 }
 
-.icon_user {
+.petExam-record .icon_user {
   margin-left: auto;
 }
 
-.petE-head {
+.petExam-record .petE-head {
   text-align: center;
 }
-.petE-tittle {
+
+.petExam-record .petE-tittle {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   text-align: center;
   font-family: 'Montserrat', Helvetica;
@@ -43,7 +88,7 @@
   margin-left: 40px;
 }
 
-.petE-tittle-1 {
+.petExam-record .petE-tittle-1 {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: 'Montserrat', Helvetica;
   text-align: center;
@@ -57,7 +102,7 @@
   margin-left: 40px;
 }
 
-.petE-tittle-2 {
+.petExam-record .petE-tittle-2 {
   text-align: center;
   font-size: 25px;
   margin-top: 70px;
@@ -66,54 +111,50 @@
   font-family: Roboto, sans-serif;
 }
 
-.form-petE {
+.petExam-record .form-petE {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   width: 1100px;
-  height: 650px;
+  height: 950px;
   margin: 50px auto;
   padding: 50px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr) auto;
-  grid-gap: 40px;
   color: #113179;
+  background-color: #fff;
 }
 
-.form-petExam {
+.petExam-record .form-petExam {
   margin-right: 50px;
   margin-left: 20px;
 }
 
-.form-petExam-1 {
+.petExam-record .form-petExam-2 {
   margin-right: 50px;
 }
 
-.form-petExam-2 {
-  margin-right: 50px;
-}
-
-.form-petExam-3 textarea {
+.petExam-record .form-petExam-vaccine {
   height: 80px;
   font-size: 16px;
   font-family: Roboto, sans-serif;
-  padding: 10px;
-  margin-left: 20px;
   resize: vertical;
-  overflow: auto;
-  word-wrap: break-word;
 }
 
-.pet-info-1 {
+.petExam-record .form-petExam-vaccine .pet-info-2 {
   font-family: Roboto, sans-serif;
   display: block;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
-  margin-left: 20px;
 }
 
-.petE-control {
+.petExam-record .pet-info-1 {
+  font-family: Roboto, sans-serif;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.petExam-record .petE-control {
   display: block;
   width: 100%;
   padding: 10px;
@@ -122,21 +163,21 @@
   border-radius: 10px;
 }
 
-.petE-info {
+.petExam-record .petE-info {
   font-family: Roboto, sans-serif;
   display: block;
   font-weight: 500;
   margin-bottom: 10px;
-  margin-left: 20px;
   font-size: 18px;
   color: green;
 }
 
-.btn-save,
+.petExam-record .btn-save,
 .btn-cancel {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 0px 20px;
   font-size: 16px;
+  margin-top: 130px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
@@ -147,9 +188,11 @@
   overflow: hidden;
   z-index: 1;
   transition: color 0.3s ease;
+  width: 100px;
+  height: 50px;
 }
 
-.btn-save::before,
+.petExam-record .btn-save::before,
 .btn-cancel::before {
   content: '';
   position: absolute;
@@ -157,22 +200,22 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background-color: orange; /* Màu nền khi hover */
+  background-color: orange; 
   transition: left 0.3s ease;
   z-index: -1;
 }
 
-.btn-save:hover::before,
+.petExam-record .btn-save:hover::before,
 .btn-cancel:hover::before {
   left: 0;
 }
 
-.btn-save:hover,
+.petExam-record .btn-save:hover,
 .btn-cancel:hover {
-  color: #fff; /* Màu chữ khi hover */
+  color: #fff; 
 }
 
-.btn-save {
+.petExam-record .btn-save {
   background-color: #113179;
   color: #fff;
   border: none;
@@ -180,15 +223,16 @@
   margin-left: 50px;
 }
 
-.btn-cancel {
+.petExam-record .btn-cancel {
   background-color: #6c757d;
   color: #fff;
   border: none;
 }
 
-.final-petE {
-  margin-top: 200px;
-  margin-right: -200px;
+.petExam-record .final-petE {
+ display: flex;
+ justify-content: flex-end;
+ margin-top: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -199,4 +243,48 @@
   .header img {
     width: 20%;
   }
+}
+
+.petExam-record .selected-vaccines-container {
+  display: none;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  max-height: 125px; 
+  overflow-y: auto; 
+}
+
+.petExam-record .selected-vaccine {
+  padding: 5px 10px;
+  border: 1px solid #007bff;
+  border-radius: 3px;
+  background-color: #009131;
+  color: white;
+}
+
+.petExam-record .selected-vaccines-container.visible {
+  display: flex;
+}
+
+ .modal-body-exam-record input[type="checkbox"] {
+  margin-right: 10px;
+  font-family: Roboto, sans-serif;
+}
+
+ .modal-body-exam-record label {
+  margin-right: 20px;
+  font-family: Roboto, sans-serif;
+}
+
+.modal-body-exam-record {
+  max-height: 300px; 
+  overflow-y: auto; 
+  font-family: Roboto, sans-serif;
+  padding: 20px;
+  display: grid;
+  gap: 20px;
 }
