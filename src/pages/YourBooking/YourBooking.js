@@ -126,7 +126,7 @@ function YourBooking() {
     const bookDate = new Date(dateBook);
     const cancelDate = new Date(dateCancelBook);
 
-    const timeDifference = cancelDate - bookDate;
+    const timeDifference = bookDate - cancelDate;
     const millisecondsInDay = 24 * 60 * 60 * 1000;
     const remainingDays = Math.ceil(timeDifference / millisecondsInDay);
     return remainingDays;
