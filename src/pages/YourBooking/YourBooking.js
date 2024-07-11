@@ -465,7 +465,7 @@ function YourBooking() {
                 ))
               )}
 
-              {yourBookings.length > 0 && (
+              {yourBookings.length > 0 && totalPages > 1 &&  (
                 <Stack
                   spacing={2}
                   alignItems='center'

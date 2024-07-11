@@ -70,6 +70,7 @@ a {
 
 .main-container-your-booking-page .overlap-booking {
   display: flex;
+  padding: 0;
 }
 .main-container-your-booking-page .main-content-booking {
   width: 100%;
