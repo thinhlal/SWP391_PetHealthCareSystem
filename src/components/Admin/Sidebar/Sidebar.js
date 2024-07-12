@@ -48,6 +48,9 @@ function Sidebar() {
           <a href='/admin-rating'>
             <div className='Admin-Account-Navigate-Text-Rest-Menu'>Rating</div>
           </a>
+          <a href='/admin-vaccine'>
+            <div className='Admin-Account-Navigate-Text-Rest-Menu'>Vaccine</div>
+          </a>
         </div>
       </div>
 

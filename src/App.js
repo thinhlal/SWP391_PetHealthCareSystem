@@ -30,6 +30,7 @@ import TimeTableWork from './pages/TimeTableWork/TimeTableWork.js';
 import PetStatus from './pages/PetStatus/PetStatus.js';
 import DoctorCare from './pages/DoctorCare/DoctorCare.js';
 import AdminChartStatistic from './pages/AdminChartStatistic/AdminChartStatistic.js';
+import AdminVaccine from './pages/AdminVaccine/AdminVaccine.js';
 function App() {
   return (
     <AuthProvider>
@@ -250,6 +251,15 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={['Admin']}>
               <AdminChartStatistic />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path='/admin-vaccine'
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminVaccine />
             </ProtectedRoute>
           }
         />
