@@ -49,6 +49,7 @@ function AdminServices() {
   });
 
   const [servicesData, setServicesData] = useState([]);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const modalCloseButtonRef = useRef(null);
   const modalEditCloseButtonRef = useRef(null);
@@ -93,6 +94,48 @@ function AdminServices() {
     return error;
   };
 
+  const validateEditInput = (name, value) => {
+    let error = '';
+    const maxPrice = 1000000; // Giới hạn giá tối đa
+    const strValue = String(value); // Chuyển đổi giá trị thành chuỗi
+
+    if (name === 'name') {
+      if (!strValue.trim()) {
+        error = 'Please enter your information';
+      } else if (strValue.trim() === originalEditService.name.trim() && editService.serviceID !== originalEditService.serviceID) {
+        error = 'New name cannot be the same as the old name';
+      } else if (servicesData.some(service => service.name.trim().toLowerCase() === strValue.trim().toLowerCase() && service.serviceID !== editService.serviceID)) {
+        error = 'New name cannot duplicate an existing service name';
+      } else {
+        const regex = /^[a-zA-Z\s]*$/;
+        if (!regex.test(strValue)) {
+          error = 'Only letters and spaces are allowed';
+        }
+      }
+    } else if (name === 'description') {
+      if (!strValue.trim()) {
+        error = 'Please enter your information';
+      } else {
+        const regex = /^[a-zA-Z\s]*$/;
+        if (!regex.test(strValue)) {
+          error = 'Only letters and spaces are allowed';
+        }
+      }
+    } else if (name === 'price') {
+      if (!strValue || strValue === '$' || strValue.startsWith('0')) {
+        error = 'Price must be a positive number and cannot start with 0';
+      } else {
+        const regex = /^\d+$/;
+        if (!regex.test(strValue)) {
+          error = 'Price must be a number';
+        } else if (parseInt(strValue, 10) > maxPrice) {
+          error = `Price cannot exceed ${maxPrice}`;
+        }
+      }
+    }
+    return error;
+  };
+
   const handleInputChange = e => {
     const { name, value } = e.target;
     const error = validateInput(name, value);
@@ -102,7 +145,7 @@ function AdminServices() {
 
   const handleEditInputChange = e => {
     const { name, value } = e.target;
-    const error = validateInput(name, value);
+    const error = validateEditInput(name, value);
     setEditServiceErrors({ ...editServiceErrors, [name]: error });
     setEditService({ ...editService, [name]: value });
   };
@@ -146,9 +189,9 @@ function AdminServices() {
 
   const handleUpdateFormSubmit = async () => {
     const newErrors = {
-      name: validateInput('name', editService.name),
-      description: validateInput('description', editService.description),
-      price: validateInput('price', editService.price),
+      name: validateEditInput('name', editService.name),
+      description: validateEditInput('description', editService.description),
+      price: validateEditInput('price', editService.price),
     };
 
     if (
@@ -165,6 +208,8 @@ function AdminServices() {
           `${process.env.REACT_APP_API_URL}/service/getAllServices`,
         );
         setServicesData(response.data);
+        setUpdateSuccess(true);
+        document.addEventListener('click', handleAlertClickOutside);
       } catch (error) {
         console.error(error);
       }
@@ -177,7 +222,7 @@ function AdminServices() {
       });
       setEditServiceErrors({ name: '', description: '', price: '' });
 
-      document.querySelector('#addServiceModal .btn-close').click();
+      document.querySelector(`#editServiceModal${editService.serviceID} .btn-close`).click();
     } else {
       setEditServiceErrors(newErrors);
     }
@@ -226,9 +271,23 @@ function AdminServices() {
   );
   const totalPages = Math.ceil(searchServicesData.length / itemsPerPage);
 
+  const handleAlertClickOutside = (event) => {
+    const alertBox = document.querySelector('.alert-success');
+    if (alertBox && !alertBox.contains(event.target)) {
+      setUpdateSuccess(false);
+      document.removeEventListener('click', handleAlertClickOutside);
+    }
+  };
+
   return (
     <div className='Admin-Services container-fluid'>
       <div className='row'>
+      {updateSuccess && (
+        <div className="alert alert-success alert-dismissible fade show" role="alert">
+          Service updated successfully!
+          <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      )}
         <Header />
 
         <div className='Admin-Services-Content row'>
@@ -539,6 +598,8 @@ function AdminServices() {
                                         value={editService?.price}
                                         onChange={handleEditInputChange}
                                         placeholder='Price'
+                                        maxLength={10} // Giới hạn độ dài số tiền
+                                        pattern="^[1-9]\d*$" // Không cho phép bắt đầu bằng số 0
                                       />
                                     </div>
                                     {editServiceErrors.price && (
