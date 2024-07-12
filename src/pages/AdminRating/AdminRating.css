@@ -9,69 +9,6 @@
   position: relative;
 }
 
-.Admin-Rating-Navigate-Dashboard {
-  font-family: Roboto, sans-serif;
-  display: flex;
-  height: 36px;
-  align-items: center;
-  margin: 10px 10px 5px 20px;
-}
-
-.Admin-Rating-Navigate-Text-Dashboard {
-  color: #000;
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.Admin-Rating-Navigate-Text {
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 16px;
-  text-align: center;
-}
-
-.Admin-Rating-Navigate-Logout {
-  color: #000;
-  line-height: 42px;
-  text-align: center;
-  width: 100%;
-  font-family: Roboto, sans-serif;
-  position: absolute;
-  bottom: 50px;
-}
-
-.Admin-Rating-Navigate-Logout:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
-}
-
-.Admin-Rating-Navigate-Logout span {
-  margin-left: 10px;
-}
-
-.Admin-Rating-Navigate-Text-Rest {
-  font-family: Roboto, sans-serif;
-}
-
-.Admin-Rating-Navigate-Text-Rest-Menu {
-  color: #000;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 50px;
-}
-
-.Admin-Rating-Navigate-Text-Rest-Menu:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
-}
-
 .Admin-Rating-Main {
   padding: 0;
   background-color: #f1f5f9;
@@ -271,31 +208,6 @@
   width: 105%;
 }
 
-.Admin-Rating-Main-Table-Content-Btn_Wrapper {
-  border-left: 1px solid #eae8f1;
-  text-align: center;
-  width: 100%;
-  padding: 3px 0;
-  margin: 0;
-}
-
-.Admin-Rating-Main-Table-Content-Btn_Wrapper:last-child {
-  border-right: 1px solid #eae8f1;
-}
-
-.Admin-Rating-Main-Table-Content-Btn {
-  border: none;
-  width: 123px;
-  line-height: 30px;
-  border-radius: 5px;
-}
-
-.Admin-Rating-Main-Table-Content-Btn:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
-}
-
 .Admin-Rating-Pagination {
   display: flex;
   align-items: center;
@@ -303,69 +215,3 @@
   padding: 20px 0 10px 0;
 }
 
-.Admin-Rating-sub-title-profile-customer {
-  padding-right: 5px;
-  text-align: left;
-  color: #000000;
-  font-weight: 600;
-}
-
-.Admin-Rating-form-group {
-  display: flex;
-  justify-content: left;
-}
-
-.Admin-Rating-sub-title-profile-pet {
-  padding-right: 5px;
-  text-align: left;
-  color: #000000;
-  font-weight: 600;
-}
-
-.Admin-Rating-tab-modal-body-more-info {
-  overflow: hidden;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 20px;
-}
-
-.Admin-Rating-tab-modal-body-more-info button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
-
-.Admin-Rating-tab-modal-body-more-info button:hover {
-  background-color: #ddd;
-}
-
-.Admin-Rating-tab-modal-body-more-info button.active {
-  background-color: #f1f1f1;
-  border-bottom: 2px solid #004cb9;
-}
-
-.Admin-Rating-container-modal-body-more-info {
-  width: 100%;
-  margin: 50px auto;
-  background-color: #fff;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-.Admin-Rating-tabcontent-customer {
-  margin-left: 20px;
-}
-
-.Admin-Rating-tabcontent-pet {
-  margin-left: 20px;
-}
-
-.Admin-Rating-tabcontent-services {
-  margin-left: 20px;
-}
