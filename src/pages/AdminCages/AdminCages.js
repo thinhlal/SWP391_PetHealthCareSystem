@@ -277,7 +277,7 @@ function AdminCages() {
                             ></button>
                           </div>
                           <div className='modal-body'>
-                            <div className='Admin-Cages-modal-add-account'>
+                            <div className='Admin-Cages-modal-add-cage'>
                               <div className='Admin-Cages-modal-title-name'>
                                 Name
                               </div>
@@ -294,7 +294,7 @@ function AdminCages() {
                                 </div>
                               )}
                             </div>
-                            <div className='Admin-Cages-modal-add-account'>
+                            <div className='Admin-Cages-modal-add-cage'>
                               <div className='Admin-Cages-modal-title-name'>
                                 Description
                               </div>

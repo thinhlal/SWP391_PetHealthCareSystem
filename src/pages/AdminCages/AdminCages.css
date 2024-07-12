@@ -24,111 +24,10 @@
   position: relative;
 }
 
-.Admin-Cages-Navigate-Dashboard {
-  font-family: Roboto, sans-serif;
-  display: flex;
-  height: 36px;
-  align-items: center;
-  margin: 10px 10px 5px 20px;
-}
-
-.Admin-Cages-Navigate-Text-Dashboard {
-  font-family: Roboto, sans-serif;
-  color: #000;
-  margin-left: 10px;
-  margin-top: 5px;
-  font-weight: 600;
-  font-size: 18px;
-}
-
-.Admin-Cages-Navigate-Text {
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 16px;
-  text-align: center;
-}
-
-.Admin-Cages-Navigate-Logout {
-  color: #000;
-  line-height: 42px;
-  text-align: center;
-  width: 100%;
-  font-family: Roboto, sans-serif;
-  position: absolute;
-  bottom: 50px;
-}
-
-.Admin-Cages-Navigate-Logout:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
-}
-
-.Admin-Cages-Navigate-Logout span {
-  margin-left: 10px;
-}
-
-.Admin-Cages-Navigate-Text-Rest-Menu {
-  font-family: Roboto, sans-serif;
-  color: #000;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 50px;
-}
-
-.Admin-Cages-Navigate-Text-Rest-Menu:hover {
-  color: rgb(70, 128, 255);
-  cursor: pointer;
-  background-color: #e3eafc;
-}
-
 .Admin-Cages-Main {
   padding: 0;
   background-color: #f1f5f9;
   border-left: 1px solid #f9f9fa;
-}
-
-.Admin-Cages-Main_Title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 3%;
-}
-
-.Admin-Cages-Main_Title-Left {
-  font-family: Roboto, sans-serif;
-}
-
-.Admin-Cages-Main_Title-Left-Intro {
-  color: #242f48;
-  font-weight: 600;
-  font-size: 20px;
-  text-indent: -1px;
-  line-height: 1;
-  margin-bottom: 5px;
-}
-
-.Admin-Cages-Main_Title-Left-text {
-  color: #78829a;
-  font-weight: 400;
-  font-size: 12px;
-}
-
-.Admin-Cages-Main_Title-Right {
-  font-family: Roboto, sans-serif;
-}
-
-.Admin-Cages-title-Star {
-  color: #78829a;
-  font-size: 13px;
-}
-
-.Admin-Cages-Star span {
-  font-size: 13px;
-  margin-left: 5px;
 }
 
 .Admin-Cages-Main-Search {
@@ -341,7 +240,7 @@
   padding-right: 10px;
 }
 
-.Admin-Cages-modal-add-account {
+.Admin-Cages-modal-add-cage {
   padding: 15px;
 }
 
@@ -349,10 +248,6 @@
   color: #000000;
   font-weight: 500;
   padding-right: 10px;
-}
-
-.Admin-Cages-modal-update-old {
-  display: flex;
 }
 
 .Admin-Cages-modal-update-new {
@@ -364,31 +259,6 @@
 
 .Admin-Cages-modal-update {
   margin-left: 10px;
-}
-
-.Admin-Cages-modal-delete-title {
-  padding-right: 5px;
-  font-weight: 600;
-  font-size: 15px;
-  color: #000000;
-}
-
-.Admin-Cages-modal-more-title {
-  padding-right: 5px;
-  font-weight: 600;
-  font-size: 15px;
-  color: #000000;
-}
-
-.Admin-Cages-modal-more {
-  font-weight: 700px;
-  display: flex;
-  padding: 5px;
-}
-
-.Admin-Cages-modal-delete {
-  display: flex;
-  padding: 5px;
 }
 
 .Admin-Cages-input {
@@ -432,10 +302,4 @@
   color: Red;
   font-size: 16px;
   margin-top: 0.25em;
-}
-
-.Admin-Cages-delete-modal-header {
-  font-weight: 700;
-  font-size: 20px;
-  padding-bottom: 25px;
 }
