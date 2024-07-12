@@ -13,58 +13,10 @@
   position: relative;
 }
 
-.Admin-Account-Navigate-Dashboard {
-  font-family: Roboto, sans-serif;
-  display: flex;
-  height: 36px;
-  align-items: center;
-  margin: 10px 10px 5px 20px;
-}
-
 .Admin-Account-Main {
   padding: 0;
   background-color: #f1f5f9;
   border-left: 1px solid #f9f9fa;
-}
-
-.Admin-Account-Main_Title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 3%;
-}
-
-.Admin-Account-Main_Title-Left {
-  font-family: Roboto, sans-serif;
-}
-
-.Admin-Account-Main_Title-Left-Intro {
-  color: #242f48;
-  font-weight: 600;
-  font-size: 20px;
-  text-indent: -1px;
-  line-height: 1;
-  margin-bottom: 5px;
-}
-
-.Admin-Account-Main_Title-Left-text {
-  color: #78829a;
-  font-weight: 400;
-  font-size: 12px;
-}
-
-.Admin-Account-Main_Title-Right {
-  font-family: Roboto, sans-serif;
-}
-
-.Admin-Account-title-Star {
-  color: #78829a;
-  font-size: 13px;
-}
-
-.Admin-Account-Star span {
-  font-size: 13px;
-  margin-left: 5px;
 }
 
 .Admin-Account-Main-Search {
@@ -306,13 +258,6 @@
   margin-left: 10px;
 }
 
-.Admin-Account-modal-delete-title {
-  padding-right: 5px;
-  font-weight: 600;
-  font-size: 15px;
-  color: #000000;
-}
-
 .Admin-Account-modal-more-title {
   padding-right: 5px;
   font-weight: 600;
@@ -322,11 +267,6 @@
 
 .Admin-Account-modal-more {
   font-weight: 700px;
-  display: flex;
-  padding: 5px;
-}
-
-.Admin-Account-modal-delete {
   display: flex;
   padding: 5px;
 }
