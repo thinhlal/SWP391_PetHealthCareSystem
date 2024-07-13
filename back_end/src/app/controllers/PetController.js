@@ -6,10 +6,33 @@ class PetController {
   async updatePetPatch(req, res, next) {
     const { petID } = req.params;
     const { petDataUpdate } = req.body;
+    const { name, image, birthday } = petDataUpdate;
     try {
-      const updatedPet = await Pet.findOneAndUpdate({ petID }, petDataUpdate, {
-        new: true,
-      });
+      let updatedPet;
+      if (petDataUpdate.image !== '') {
+        updatedPet = await Pet.findOneAndUpdate(
+          { petID },
+          {
+            name,
+            image,
+            birthday: new Date(birthday),
+          },
+          {
+            new: true,
+          },
+        );
+      } else {
+        updatedPet = await Pet.findOneAndUpdate(
+          { petID },
+          {
+            name,
+            birthday: new Date(birthday),
+          },
+          {
+            new: true,
+          },
+        );
+      }
       if (!updatedPet) {
         return res.status(404).json({ message: 'Pet not found' });
       }

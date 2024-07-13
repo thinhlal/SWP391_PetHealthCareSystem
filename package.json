@@ -28,6 +28,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.3",
+    "dayjs": "^1.11.11",
     "firebase": "^10.12.2",
     "js-cookie": "^3.0.5",
     "lottie-web": "^5.12.2",

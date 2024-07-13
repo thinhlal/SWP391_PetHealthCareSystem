@@ -102,9 +102,19 @@ function AdminServices() {
     if (name === 'name') {
       if (!strValue.trim()) {
         error = 'Please enter your information';
-      } else if (strValue.trim() === originalEditService.name.trim() && editService.serviceID !== originalEditService.serviceID) {
+      } else if (
+        strValue.trim() === originalEditService.name.trim() &&
+        editService.serviceID !== originalEditService.serviceID
+      ) {
         error = 'New name cannot be the same as the old name';
-      } else if (servicesData.some(service => service.name.trim().toLowerCase() === strValue.trim().toLowerCase() && service.serviceID !== editService.serviceID)) {
+      } else if (
+        servicesData.some(
+          service =>
+            service.name.trim().toLowerCase() ===
+              strValue.trim().toLowerCase() &&
+            service.serviceID !== editService.serviceID,
+        )
+      ) {
         error = 'New name cannot duplicate an existing service name';
       } else {
         const regex = /^[a-zA-Z\s]*$/;
@@ -222,7 +232,9 @@ function AdminServices() {
       });
       setEditServiceErrors({ name: '', description: '', price: '' });
 
-      document.querySelector(`#editServiceModal${editService.serviceID} .btn-close`).click();
+      document
+        .querySelector(`#editServiceModal${editService.serviceID} .btn-close`)
+        .click();
     } else {
       setEditServiceErrors(newErrors);
     }
@@ -271,7 +283,7 @@ function AdminServices() {
   );
   const totalPages = Math.ceil(searchServicesData.length / itemsPerPage);
 
-  const handleAlertClickOutside = (event) => {
+  const handleAlertClickOutside = event => {
     const alertBox = document.querySelector('.alert-success');
     if (alertBox && !alertBox.contains(event.target)) {
       setUpdateSuccess(false);
@@ -282,12 +294,20 @@ function AdminServices() {
   return (
     <div className='Admin-Services container-fluid'>
       <div className='row'>
-      {updateSuccess && (
-        <div className="alert alert-success alert-dismissible fade show" role="alert">
-          Service updated successfully!
-          <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      )}
+        {updateSuccess && (
+          <div
+            className='alert alert-success alert-dismissible fade show'
+            role='alert'
+          >
+            Service updated successfully!
+            <button
+              type='button'
+              className='btn-close'
+              data-bs-dismiss='alert'
+              aria-label='Close'
+            ></button>
+          </div>
+        )}
         <Header />
 
         <div className='Admin-Services-Content row'>
@@ -599,7 +619,7 @@ function AdminServices() {
                                         onChange={handleEditInputChange}
                                         placeholder='Price'
                                         maxLength={10} // Giới hạn độ dài số tiền
-                                        pattern="^[1-9]\d*$" // Không cho phép bắt đầu bằng số 0
+                                        pattern='^[1-9]\d*$' // Không cho phép bắt đầu bằng số 0
                                       />
                                     </div>
                                     {editServiceErrors.price && (

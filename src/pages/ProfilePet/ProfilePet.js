@@ -14,6 +14,7 @@ import { AuthContext } from '../../context/AuthContext.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Pagination, Stack } from '@mui/material';
+import dayjs from 'dayjs';
 
 function ProfilePet() {
   const { user } = useContext(AuthContext);
@@ -29,6 +30,7 @@ function ProfilePet() {
     birthday: '',
     image: '',
   });
+  const [errorMessageDate, setErrorMessageDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [currentPageMedical, setCurrentPageMedical] = useState(1);
   const itemsPerPageMedical = 5;
@@ -53,9 +55,17 @@ function ProfilePet() {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
         );
-        setPetData(response.data[0]);
-        setMedicalReport(response.data[0].medicalReportDetails);
-        setPetVaccine(response.data[0].vaccinationPetDetails);
+        const getPetInfo = response.data[0];
+        setPetData(getPetInfo);
+        setMedicalReport(getPetInfo.medicalReportDetails);
+        setPetVaccine(getPetInfo.vaccinationPetDetails);
+
+        const { name, birthday } = response.data[0];
+        setNewPetData({
+          name: name,
+          birthday: birthday.split('T')[0],
+          image: '',
+        });
       } catch (error) {
         console.error('Error fetching pets:', error);
       }
@@ -74,6 +84,15 @@ function ProfilePet() {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
+    if (name === 'birthday') {
+      const today = dayjs().startOf('day');
+      const selected = dayjs(value);
+
+      if (selected.isBefore(today)) {
+        setErrorMessageDate('Date cannot be in the past');
+        return;
+      }
+    }
     setNewPetData({ ...newPetData, [name]: value });
   };
 
@@ -85,9 +104,12 @@ function ProfilePet() {
 
   const handleFormSubmit = async e => {
     e.preventDefault();
-    const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
-    await uploadBytes(imageRef, imageFile);
-    const imageUrl = await getDownloadURL(imageRef);
+    let imageUrl = '';
+    if (imageFile) {
+      const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
+      await uploadBytes(imageRef, imageFile);
+      imageUrl = await getDownloadURL(imageRef);
+    }
     const petDataUpdate = { ...newPetData, image: imageUrl };
     const params = new URLSearchParams(location.search);
     const petID = params.get('petID');
@@ -234,6 +256,7 @@ function ProfilePet() {
                     value={newPetData.birthday}
                     onChange={handleInputChange}
                   />
+                  {errorMessageDate !== '' && <span>{errorMessageDate}</span>}
                 </label>
                 <label className='select-pet-type'>
                   Image:

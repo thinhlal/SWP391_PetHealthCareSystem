@@ -183,7 +183,7 @@ function AdminVaccine() {
       search === '' || cage.cageID.toLowerCase().includes(search.toLowerCase());
     return matchesStatus && matchesSearch;
   });
-  
+
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -208,7 +208,10 @@ function AdminVaccine() {
             <Statistic />
             <div className='Admin-Vaccine-Main-Table-Wrapper'>
               <div className='Admin-Vaccine-Main-Table'>
-                <div className='Admin-Vaccine-Main-Table-Title'> Cage List </div>
+                <div className='Admin-Vaccine-Main-Table-Title'>
+                  {' '}
+                  Cage List{' '}
+                </div>
                 <div className='Admin-Vaccine-Main-Table-Title-Text'>
                   Cages Information
                 </div>

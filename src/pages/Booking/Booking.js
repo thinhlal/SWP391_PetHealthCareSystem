@@ -12,6 +12,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import { Checkbox, FormControlLabel } from '@mui/material';
+import dayjs from 'dayjs';
 
 const Booking = () => {
   const location = useLocation();
@@ -91,6 +92,13 @@ const Booking = () => {
 
   const handleDateChange = e => {
     const newDate = e.target.value;
+    const today = dayjs().startOf('day');
+    const selected = dayjs(newDate);
+
+    if (selected.isBefore(today)) {
+      setErrorMessageDate('Date cannot be in the past');
+      return;
+    }
     setSelectedDate(newDate);
     updateAvailableSlots(selectedDoctor, newDate);
     setErrorMessageDate('');

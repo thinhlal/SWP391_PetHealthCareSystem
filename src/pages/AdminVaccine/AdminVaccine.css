@@ -1,316 +1,315 @@
 .Admin-Vaccine {
-    background-color: #fafafa;
-  }
-  
-  .admin-no-content-available {
-    display: flex;
-    line-height: 40px;
-    border-bottom: 1px solid #eae8f1;
-    border-right: 1px solid #eae8f1;
-    border-left: 1px solid #eae8f1;
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
-    padding-left: 10px;
-  }
-  
-  .Admin-Vaccine-Content {
-    min-height: 100vh;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .Admin-Vaccine-Navigate {
-    padding: 0;
-    position: relative;
-  }
-  
-  .Admin-Vaccine-Main {
-    padding: 0;
-    background-color: #f1f5f9;
-    border-left: 1px solid #f9f9fa;
-  }
+  background-color: #fafafa;
+}
 
-  .Admin-Vaccine-Main-Search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    height: 35px;
-  }
-  
-  .Admin-Vaccine-Main-Search-Input {
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    height: 35px;
-    padding: 0 16px;
-    border: none;
-    background-color: #ecf0fa;
-    font-family: Roboto, sans-serif;
-    font-weight: 500;
-    color: #000000;
-    font-size: 16px;
-    line-height: 24px;
-  }
-  
-  .Admin-Vaccine-Main-Search-Input:focus {
-    outline: none;
-  }
-  
-  .Admin-Vaccine-Main-Search-Button {
-    background-color: #ecf0fa;
-    height: 100%;
-    border: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  
-  .Admin-Vaccine-Main-Filter {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    justify-content: space-between;
-    font-family: Roboto, sans-serif;
-  }
-  
-  .Admin-Vaccine-Select-Role {
-    font-family: Roboto, sans-serif;
-    font-weight: 600;
-    line-height: 10px;
-    margin-right: 40%;
-  }
-  
-  .Admin-Vaccine-Select-Filter {
-    margin-left: 5px;
-  }
-  
-  .Admin-Vaccine-add-pet-btn {
-    background-color: #e18213;
-    height: 45px;
-    outline: none;
-    border: none;
-    color: #fff;
-    width: 100px;
-    border-radius: 10px;
-  }
-  
-  .Admin-Vaccine-add-pet-btn:hover {
-    background-color: #002169;
-    cursor: pointer;
-  }
-  
-  .Admin-Vaccine-Main-Table-Wrapper {
-    margin: 50px 3%;
-    padding: 0;
-    border: 1px solid #eae8f1;
-    border-radius: 10px;
-    box-shadow: -2px 8px 18px #dadee8;
-  }
-  
-  .Admin-Vaccine-Main-Table {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-  
-  .Admin-Vaccine-Main-Table-Title {
-    color: #242f48;
-    font-family: Roboto, sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 16px;
-    letter-spacing: 0.2px;
-    margin-bottom: 4px;
-  }
-  
-  .Admin-Vaccine-Main-Table-Title-Text {
-    font-size: 12px;
-    font-family: Roboto, sans-serif;
-    margin-bottom: 15px;
-  }
-  
-  .Admin-Vaccine-Main-Table-Header {
-    display: flex;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: Roboto, sans-serif;
-    text-align: center;
-    border-bottom: 1px solid #eae8f1;
-  }
-  
-  .Admin-Vaccine-Main-Table-Header-Title {
-    width: 100%;
-    background-color: #f1f5f9;
-    line-height: 40px;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: left;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
-  }
-  
-  .Admin-Vaccine-Main-Table-Header-Title-Btn {
-    line-height: 40px;
-    width: 100%;
-    background-color: #f1f5f9;
-    padding: 0 0 0 10px;
-    margin: 0;
-    text-align: center;
-    border-left: 1px solid #eae8f1;
-    border-top: 1px solid #eae8f1;
-  }
-  
-  .Admin-Vaccine-Main-Table-Header-Title-Btn:last-child {
-    border-top-right-radius: 8px;
-    border-right: 1px solid #eae8f1;
-  }
-  
-  .Admin-Vaccine-Main-Table-Header-Title:first-child {
-    border-top-left-radius: 8px;
-  }
-  
-  .Admin-Vaccine-Main-Table-Content-Row-Wrapper {
-    display: flex;
-    line-height: 40px;
-    border-bottom: 1px solid #eae8f1;
-    font-family: Roboto, sans-serif;
-    font-size: 16px;
-  }
-  
-  .Admin-Vaccine-Main-Table-Content-Row {
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-    margin: 0;
-  }
-  
-  .Admin-Vaccine-Main-Table-Content-Row-Action {
-    width: 100%;
-    align-items: center;
-    justify-content: space-around;
-    display: flex;
-    border-left: 1px solid #eae8f1;
-    padding: 0 0 0 10px;
-  }
-  
-  .Admin-Vaccine-Main-Table-Content-Btn {
-    border: none;
-    background-color: white;
-  }
-  
-  .Admin-Vaccine-Main-Table-Content-Btn_Wrapper {
-    justify-content: center;
-    display: flex;
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-  
-  .Admin-Vaccine-modal-title {
-    height: 45px;
-    font-weight: 600;
-    font-size: 20px;
-    padding-top: 15px;
-  }
-  
-  .Admin-Vaccine-modal-title-name {
-    height: 30px;
-    font-weight: 600;
-    font-size: 20px;
-  }
-  
-  .Admin-Vaccine-modal-title-radio {
-    display: flex;
-  }
-  
-  .Admin-Vaccine-modal-title-radio-Enable {
-    padding-right: 20px;
-  }
-  
-  .Admin-Vaccine-modal-radio {
-    margin-right: 8px;
-  }
-  
-  .Admin-Vaccine-modal-initials {
-    color: #000000;
-    font-weight: 600;
-    font-size: 15px;
-    padding-right: 10px;
-  }
-  
-  .Admin-Vaccine-modal-add-account {
-    padding: 15px;
-  }
-  
-  .Admin-Vaccine-modal-add {
-    color: #000000;
-    font-weight: 500;
-    padding-right: 10px;
-  }
-  
-  .Admin-Vaccine-modal-update-old {
-    display: flex;
-  }
-  
-  .Admin-Vaccine-modal-update-new {
-    color: #000000;
-    font-weight: 600;
-    font-size: 15px;
-    padding-right: 10px;
-  }
-  
-  .Admin-Vaccine-modal-update {
-    margin-left: 10px;
-  }
-  
-  .Admin-Vaccine-input {
-    height: 30px;
-    margin-top: 5px;
-    line-height: 24px;
-    font-size: 16px;
-    padding-left: 5px;
-  }
-  
-  .Admin-Vaccine-input-confirm {
-    padding-top: 22px;
-  }
-  
-  .Admin-Vaccine-Main-Table-Content-Btn :hover {
-    color: rgb(70, 128, 255);
-    cursor: pointer;
-    background-color: #e3eafc;
-  }
-  
-  .Admin-Vaccine-Pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 0 10px 0;
-  }
-  
-  .Admin-Vaccine-Error {
-    color: red;
-    font-size: 0.875em;
-    margin-top: 0.25em;
-  }
-  
-  .Admin-Vaccine-Using {
-    color: Green;
-    font-size: 16px;
-    margin-top: 0.25em;
-  }
-  
-  .Admin-Vaccine-Empty {
-    color: Red;
-    font-size: 16px;
-    margin-top: 0.25em;
-  }
-  
-  .Admin-Vaccine-delete-modal-header {
-    font-weight: 700;
-    font-size: 20px;
-    padding-bottom: 25px;
-  }
-  
+.admin-no-content-available {
+  display: flex;
+  line-height: 40px;
+  border-bottom: 1px solid #eae8f1;
+  border-right: 1px solid #eae8f1;
+  border-left: 1px solid #eae8f1;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+.Admin-Vaccine-Content {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.Admin-Vaccine-Navigate {
+  padding: 0;
+  position: relative;
+}
+
+.Admin-Vaccine-Main {
+  padding: 0;
+  background-color: #f1f5f9;
+  border-left: 1px solid #f9f9fa;
+}
+
+.Admin-Vaccine-Main-Search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 35px;
+}
+
+.Admin-Vaccine-Main-Search-Input {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 35px;
+  padding: 0 16px;
+  border: none;
+  background-color: #ecf0fa;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: #000000;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.Admin-Vaccine-Main-Search-Input:focus {
+  outline: none;
+}
+
+.Admin-Vaccine-Main-Search-Button {
+  background-color: #ecf0fa;
+  height: 100%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.Admin-Vaccine-Main-Filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  justify-content: space-between;
+  font-family: Roboto, sans-serif;
+}
+
+.Admin-Vaccine-Select-Role {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  line-height: 10px;
+  margin-right: 40%;
+}
+
+.Admin-Vaccine-Select-Filter {
+  margin-left: 5px;
+}
+
+.Admin-Vaccine-add-pet-btn {
+  background-color: #e18213;
+  height: 45px;
+  outline: none;
+  border: none;
+  color: #fff;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.Admin-Vaccine-add-pet-btn:hover {
+  background-color: #002169;
+  cursor: pointer;
+}
+
+.Admin-Vaccine-Main-Table-Wrapper {
+  margin: 50px 3%;
+  padding: 0;
+  border: 1px solid #eae8f1;
+  border-radius: 10px;
+  box-shadow: -2px 8px 18px #dadee8;
+}
+
+.Admin-Vaccine-Main-Table {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.Admin-Vaccine-Main-Table-Title {
+  color: #242f48;
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+  margin-bottom: 4px;
+}
+
+.Admin-Vaccine-Main-Table-Title-Text {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 15px;
+}
+
+.Admin-Vaccine-Main-Table-Header {
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  border-bottom: 1px solid #eae8f1;
+}
+
+.Admin-Vaccine-Main-Table-Header-Title {
+  width: 100%;
+  background-color: #f1f5f9;
+  line-height: 40px;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: left;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
+}
+
+.Admin-Vaccine-Main-Table-Header-Title-Btn {
+  line-height: 40px;
+  width: 100%;
+  background-color: #f1f5f9;
+  padding: 0 0 0 10px;
+  margin: 0;
+  text-align: center;
+  border-left: 1px solid #eae8f1;
+  border-top: 1px solid #eae8f1;
+}
+
+.Admin-Vaccine-Main-Table-Header-Title-Btn:last-child {
+  border-top-right-radius: 8px;
+  border-right: 1px solid #eae8f1;
+}
+
+.Admin-Vaccine-Main-Table-Header-Title:first-child {
+  border-top-left-radius: 8px;
+}
+
+.Admin-Vaccine-Main-Table-Content-Row-Wrapper {
+  display: flex;
+  line-height: 40px;
+  border-bottom: 1px solid #eae8f1;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+}
+
+.Admin-Vaccine-Main-Table-Content-Row {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 10px;
+  margin: 0;
+}
+
+.Admin-Vaccine-Main-Table-Content-Row-Action {
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  border-left: 1px solid #eae8f1;
+  padding: 0 0 0 10px;
+}
+
+.Admin-Vaccine-Main-Table-Content-Btn {
+  border: none;
+  background-color: white;
+}
+
+.Admin-Vaccine-Main-Table-Content-Btn_Wrapper {
+  justify-content: center;
+  display: flex;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.Admin-Vaccine-modal-title {
+  height: 45px;
+  font-weight: 600;
+  font-size: 20px;
+  padding-top: 15px;
+}
+
+.Admin-Vaccine-modal-title-name {
+  height: 30px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.Admin-Vaccine-modal-title-radio {
+  display: flex;
+}
+
+.Admin-Vaccine-modal-title-radio-Enable {
+  padding-right: 20px;
+}
+
+.Admin-Vaccine-modal-radio {
+  margin-right: 8px;
+}
+
+.Admin-Vaccine-modal-initials {
+  color: #000000;
+  font-weight: 600;
+  font-size: 15px;
+  padding-right: 10px;
+}
+
+.Admin-Vaccine-modal-add-account {
+  padding: 15px;
+}
+
+.Admin-Vaccine-modal-add {
+  color: #000000;
+  font-weight: 500;
+  padding-right: 10px;
+}
+
+.Admin-Vaccine-modal-update-old {
+  display: flex;
+}
+
+.Admin-Vaccine-modal-update-new {
+  color: #000000;
+  font-weight: 600;
+  font-size: 15px;
+  padding-right: 10px;
+}
+
+.Admin-Vaccine-modal-update {
+  margin-left: 10px;
+}
+
+.Admin-Vaccine-input {
+  height: 30px;
+  margin-top: 5px;
+  line-height: 24px;
+  font-size: 16px;
+  padding-left: 5px;
+}
+
+.Admin-Vaccine-input-confirm {
+  padding-top: 22px;
+}
+
+.Admin-Vaccine-Main-Table-Content-Btn :hover {
+  color: rgb(70, 128, 255);
+  cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.Admin-Vaccine-Pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 10px 0;
+}
+
+.Admin-Vaccine-Error {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 0.25em;
+}
+
+.Admin-Vaccine-Using {
+  color: Green;
+  font-size: 16px;
+  margin-top: 0.25em;
+}
+
+.Admin-Vaccine-Empty {
+  color: Red;
+  font-size: 16px;
+  margin-top: 0.25em;
+}
+
+.Admin-Vaccine-delete-modal-header {
+  font-weight: 700;
+  font-size: 20px;
+  padding-bottom: 25px;
+}
