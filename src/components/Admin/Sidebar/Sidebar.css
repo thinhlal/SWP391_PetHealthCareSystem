@@ -43,11 +43,17 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 50px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .main-sidebar-account .Admin-Account-Navigate-Text-Rest-Menu:hover {
   color: rgb(70, 128, 255);
   cursor: pointer;
+  background-color: #e3eafc;
+}
+
+.main-sidebar-account .active {
+  color: rgb(70, 128, 255);
   background-color: #e3eafc;
 }
 

@@ -1,10 +1,16 @@
-//css
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import './Sidebar.css';
 import { AuthContext } from '../../../context/AuthContext';
 
 function Sidebar() {
   const { logOut } = useContext(AuthContext);
+  const [activePath, setActivePath] = useState(window.location.pathname);
+
+  const handleClick = (path) => {
+    setActivePath(path);
+  };
+
   return (
     <div className='main-sidebar-account'>
       <div className='Admin-Account-Navigate-Text'>
@@ -19,37 +25,47 @@ function Sidebar() {
           >
             <path d='M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z' />
           </svg>
-          <a href='/admin-statistic'>
-            <div className='Admin-Account-Navigate-Text-Dashboard'>
+          <a href='/admin-statistic' onClick={() => handleClick('/admin-statistic')}>
+            <div className={`Admin-Account-Navigate-Text-Dashboard`}>
               DashBoard
             </div>
           </a>
         </div>
         <div className='Admin-Account-Navigate-Text-Rest'>
-          <a href='/admin-statistic'>
-            <div className='Admin-Account-Navigate-Text-Rest-Menu'>
+          <a href='/admin-statistic' onClick={() => handleClick('/admin-statistic')}>
+            <div className={`Admin-Account-Navigate-Text-Rest-Menu ${activePath === '/admin-statistic' ? 'active' : ''}`}>
               Statistic
             </div>
           </a>
-          <a href='/admin-dashboard'>
-            <div className='Admin-Account-Navigate-Text-Rest-Menu'>Booking</div>
+          <a href='/admin-dashboard' onClick={() => handleClick('/admin-dashboard')}>
+            <div className={`Admin-Account-Navigate-Text-Rest-Menu ${activePath === '/admin-dashboard' ? 'active' : ''}`}>
+              Booking
+            </div>
           </a>
-          <a href='/admin-account'>
-            <div className='Admin-Account-Navigate-Text-Rest-Menu'>Account</div>
+          <a href='/admin-account' onClick={() => handleClick('/admin-account')}>
+            <div className={`Admin-Account-Navigate-Text-Rest-Menu ${activePath === '/admin-account' ? 'active' : ''}`}>
+              Account
+            </div>
           </a>
-          <a href='/admin-services'>
-            <div className='Admin-Account-Navigate-Text-Rest-Menu'>
+          <a href='/admin-services' onClick={() => handleClick('/admin-services')}>
+            <div className={`Admin-Account-Navigate-Text-Rest-Menu ${activePath === '/admin-services' ? 'active' : ''}`}>
               Services
             </div>
           </a>
-          <a href='/admin-cages'>
-            <div className='Admin-Account-Navigate-Text-Rest-Menu'>Cages</div>
+          <a href='/admin-cages' onClick={() => handleClick('/admin-cages')}>
+            <div className={`Admin-Account-Navigate-Text-Rest-Menu ${activePath === '/admin-cages' ? 'active' : ''}`}>
+              Cages
+            </div>
           </a>
-          <a href='/admin-rating'>
-            <div className='Admin-Account-Navigate-Text-Rest-Menu'>Rating</div>
+          <a href='/admin-rating' onClick={() => handleClick('/admin-rating')}>
+            <div className={`Admin-Account-Navigate-Text-Rest-Menu ${activePath === '/admin-rating' ? 'active' : ''}`}>
+              Rating
+            </div>
           </a>
-          <a href='/admin-vaccine'>
-            <div className='Admin-Account-Navigate-Text-Rest-Menu'>Vaccine</div>
+          <a href='/admin-vaccine' onClick={() => handleClick('/admin-vaccine')}>
+            <div className={`Admin-Account-Navigate-Text-Rest-Menu ${activePath === '/admin-vaccine' ? 'active' : ''}`}>
+              Vaccine
+            </div>
           </a>
         </div>
       </div>
