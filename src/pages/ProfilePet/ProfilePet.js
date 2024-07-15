@@ -14,7 +14,6 @@ import { AuthContext } from '../../context/AuthContext.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Pagination, Stack } from '@mui/material';
-import dayjs from 'dayjs';
 
 function ProfilePet() {
   const { user } = useContext(AuthContext);
@@ -30,7 +29,6 @@ function ProfilePet() {
     birthday: '',
     image: '',
   });
-  const [errorMessageDate, setErrorMessageDate] = useState('');
   const [loading, setLoading] = useState(true);
   const [currentPageMedical, setCurrentPageMedical] = useState(1);
   const itemsPerPageMedical = 5;
@@ -84,15 +82,6 @@ function ProfilePet() {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    if (name === 'birthday') {
-      const today = dayjs().startOf('day');
-      const selected = dayjs(value);
-
-      if (selected.isBefore(today)) {
-        setErrorMessageDate('Date cannot be in the past');
-        return;
-      }
-    }
     setNewPetData({ ...newPetData, [name]: value });
   };
 
@@ -256,7 +245,6 @@ function ProfilePet() {
                     value={newPetData.birthday}
                     onChange={handleInputChange}
                   />
-                  {errorMessageDate !== '' && <span>{errorMessageDate}</span>}
                 </label>
                 <label className='select-pet-type'>
                   Image:

@@ -288,7 +288,7 @@ class DoctorController {
 
   // POST /addTimeWork
   async addTimeWork(req, res, next) {
-    const { doctorID, date, startTime, endTime, isOff } = req.body;
+    const { doctorID, date, startTime, endTime, isOff, isFullTime } = req.body;
     try {
       const workingHour = await WorkingHour.findOne({
         doctorID: doctorID,
@@ -296,22 +296,34 @@ class DoctorController {
       });
 
       if (workingHour) {
-        if (!isOff) {
+        if (!isOff && !isFullTime) {
           await WorkingHour.findOneAndUpdate(
             { workingID: workingHour.workingID },
             {
               startTime,
               endTime,
               isOff: false,
+              isFulltime: false,
             },
           );
-        } else {
+        } else if (isOff) {
           await WorkingHour.findOneAndUpdate(
             { workingID: workingHour.workingID },
             {
               startTime: null,
               endTime: null,
               isOff: true,
+              isFulltime: false,
+            },
+          );
+        } else if (isFullTime) {
+          await WorkingHour.findOneAndUpdate(
+            { workingID: workingHour.workingID },
+            {
+              startTime: '08:00',
+              endTime: '17:00',
+              isOff: false,
+              isFulltime: true,
             },
           );
         }
@@ -333,7 +345,7 @@ class DoctorController {
           }
         }
 
-        if (!isOff) {
+        if (!isOff && !isFullTime) {
           const newWorking = new WorkingHour({
             workingID: id,
             doctorID: doctorID,
@@ -342,11 +354,21 @@ class DoctorController {
             date: new Date(date),
           });
           await newWorking.save();
-        } else {
+        } else if (isOff) {
           const newWorking = new WorkingHour({
             workingID: id,
             doctorID: doctorID,
             isOff: true,
+            date: new Date(date),
+          });
+          await newWorking.save();
+        } else if (isFullTime) {
+          const newWorking = new WorkingHour({
+            workingID: id,
+            doctorID: doctorID,
+            startTime: '08:00',
+            endTime: '17:00',
+            isFulltime: true,
             date: new Date(date),
           });
           await newWorking.save();

@@ -35,9 +35,9 @@ const Booking = () => {
   const [errorMessagePaymentMethod, setErrorMessagePaymentMethod] =
     useState('');
   const [userInfo, setUserInfo] = useState({
-    name: '',
-    phone: '',
-    email: '',
+    name: user?.customerDetails[0]?.name || '',
+    phone: user?.customerDetails[0]?.phone || '',
+    email: user?.customerDetails[0]?.email || '',
     serviceID: '',
   });
   const [loading, setLoading] = useState(true);

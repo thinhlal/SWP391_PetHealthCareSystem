@@ -15,6 +15,8 @@ import './TimeTableWork.css';
 import axiosInstance from '../../utils/axiosInstance';
 import { AuthContext } from '../../context/AuthContext';
 import Header from '../../components/Doctor/Header/Header';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Calendar = () => {
   const { user } = useContext(AuthContext);
@@ -27,6 +29,7 @@ const Calendar = () => {
   const [endTime, setEndTime] = useState('17:00');
   const [schedule, setSchedule] = useState({});
   const [isHoliday, setIsHoliday] = useState(false);
+  const [isFullTime, setIsFullTime] = useState(false);
 
   const reRenderSchedule = async () => {
     try {
@@ -108,6 +111,12 @@ const Calendar = () => {
   };
 
   const handleDayClick = day => {
+    const today = new Date();
+    if (day < today.setHours(0, 0, 0, 0)) {
+      toast.error('Cannot select a past date');
+      return;
+    }
+
     setSelectedDay(day);
     const dayKey = format(day, 'yyyy-MM-dd');
     if (schedule[dayKey] && schedule[dayKey] !== 'Holiday') {
@@ -119,6 +128,7 @@ const Calendar = () => {
       setEndTime('17:00');
     }
     setIsHoliday(schedule[dayKey] === 'Holiday');
+    setIsFullTime(false);
     document.getElementById('timeModalButton').click();
   };
 
@@ -127,6 +137,7 @@ const Calendar = () => {
     if (
       formattedDay &&
       (isHoliday ||
+        isFullTime ||
         (startTime &&
           endTime &&
           parseInt(endTime.split(':')[0]) - parseInt(startTime.split(':')[0]) >=
@@ -138,9 +149,10 @@ const Calendar = () => {
           {
             doctorID: user.doctorDetails[0].doctorID,
             date: formattedDay,
-            startTime: isHoliday ? null : startTime,
-            endTime: isHoliday ? null : endTime,
+            startTime: isHoliday || isFullTime ? null : startTime,
+            endTime: isHoliday || isFullTime ? null : endTime,
             isOff: isHoliday,
+            isFullTime: isFullTime,
           },
         );
         reRenderSchedule();
@@ -153,6 +165,16 @@ const Calendar = () => {
 
   const handleHolidayToggle = () => {
     setIsHoliday(!isHoliday);
+    if (!isHoliday) {
+      setIsFullTime(false);
+    }
+  };
+
+  const handleFullTimeToggle = () => {
+    setIsFullTime(!isFullTime);
+    if (!isFullTime) {
+      setIsHoliday(false);
+    }
   };
 
   const generateTimeOptions = (start, end) => {
@@ -258,6 +280,7 @@ const Calendar = () => {
     const end = endOfWeek(start, { weekStartsOn: 1 });
     return `${format(start, 'dd/MM/yyyy')} - ${format(end, 'dd/MM/yyyy')}`;
   };
+
   return (
     <div className='calendar-doctor-container'>
       <Header />
@@ -351,7 +374,7 @@ const Calendar = () => {
                 ></button>
               </div>
               <div className='modal-body'>
-                {!isHoliday && (
+                {!isHoliday && !isFullTime && (
                   <>
                     <div className='mb-3'>
                       <label className='form-label'>Start Time</label>
@@ -383,18 +406,40 @@ const Calendar = () => {
                     </div>
                   </>
                 )}
-                <div className='mb-3'>
-                  <label className='form-label'>Holiday</label>
-                  <div className='form-check'>
-                    <input
-                      className='form-check-input'
-                      type='checkbox'
-                      checked={isHoliday}
-                      onChange={handleHolidayToggle}
-                    />
-                    <label className='form-check-label'>Mark as Holiday</label>
+                {!isFullTime && (
+                  <div className='mb-3'>
+                    <label className='form-label'>Holiday</label>
+                    <div className='form-check'>
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        checked={isHoliday}
+                        onChange={handleHolidayToggle}
+                        disabled={isFullTime}
+                      />
+                      <label className='form-check-label'>
+                        Mark as Holiday
+                      </label>
+                    </div>
                   </div>
-                </div>
+                )}
+                {!isHoliday && (
+                  <div className='mb-3'>
+                    <label className='form-label'>Full Time</label>
+                    <div className='form-check'>
+                      <input
+                        className='form-check-input'
+                        type='checkbox'
+                        checked={isFullTime}
+                        onChange={handleFullTimeToggle}
+                        disabled={isHoliday}
+                      />
+                      <label className='form-check-label'>
+                        Mark as Full Time
+                      </label>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className='modal-footer'>
                 <button
@@ -417,6 +462,7 @@ const Calendar = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );

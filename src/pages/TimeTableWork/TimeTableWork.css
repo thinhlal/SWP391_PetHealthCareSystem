@@ -113,7 +113,6 @@
   font-size: 0.8rem;
   box-sizing: border-box;
   background: rgb(134 129 203 / 25%);
-  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
@@ -121,66 +120,15 @@
   cursor: pointer;
   transition:
     box-shadow 0.3s ease,
-    transform 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+    transform 0.3s ease;
 }
 
 .calendar-work-doctor ul li:hover {
-  transform: translateY(-5px); /* Dịch chuyển lên một chút khi di chuột vào */
+  transform: translateY(-5px);
 }
 
 .calendar-work-doctor ul li time {
   font-size: 2rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
-}
-
-/* Media Queries for Responsive Design */
-@media (max-width: 1200px) {
-  .calendar-work-doctor ul li {
-    width: 8rem;
-    height: 8rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .calendar-container {
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  .sidebar-calendar {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .calendar-work-doctor {
-    width: 100%;
-  }
-
-  .calendar-work-doctor ul {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .calendar-work-doctor ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .calendar-work-doctor ul li {
-    width: 6rem;
-    height: 6rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .calendar-work-doctor ul {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .calendar-work-doctor ul li {
-    width: 100%;
-    height: auto;
-  }
 }
