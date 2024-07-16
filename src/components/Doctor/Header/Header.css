@@ -1,6 +1,7 @@
 .main-header-doctor-overlap a {
   text-decoration: none !important;
 }
+
 .main-header-doctor-overlap {
   position: relative;
   padding: 0 !important;
@@ -14,12 +15,36 @@
   justify-content: space-between;
 }
 
-/* responsive */
 .main-header-doctor-overlap .main-header-logo {
   height: 30px;
   object-fit: cover;
   margin: 14px 10px;
   padding-left: 20px;
+}
+
+.main-header-doctor-overlap .navbar {
+  display: flex;
+  gap: 20px; 
+}
+
+.main-header-doctor-overlap .nav-item {
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.main-header-doctor-overlap .nav-item:hover {
+  background-color: #0056b3;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main-header-doctor-overlap .nav-item.active {
+  background-color: #0056b3;
+  border-radius: 5px;
 }
 
 .main-header-doctor-overlap .main-header-user_wrapper {
@@ -94,15 +119,12 @@
   border-bottom: 10px solid #fff;
 }
 
-.main-header-doctor-overlap
-  .main-header-user-account:hover
-  .main-header-user-account_menu {
-  display: block; /* Hiển thị nội dung 'Log out' khi di chuột vào */
+.main-header-doctor-overlap .main-header-user-account:hover .main-header-user-account_menu {
+  display: block; 
   cursor: pointer;
 }
-.main-header-doctor-overlap
-  .main-header-user-account:hover
-  .main-header-user-account_menu::before {
+
+.main-header-doctor-overlap .main-header-user-account:hover .main-header-user-account_menu::before {
   display: block;
 }
 

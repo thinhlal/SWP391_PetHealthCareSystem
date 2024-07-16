@@ -25,6 +25,11 @@ function YourBooking() {
   const [currentBookingData, setCurrentBookingData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
+  const [statusFilters, setStatusFilters] = useState({
+    pending: false,
+    cancel: false,
+    done: false,
+  });
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -140,8 +145,38 @@ function YourBooking() {
   const filteredBookingData = yourBookings.filter(booking => {
     const matchesSearch =
       search === '' ||
-      booking.bookingID.toLowerCase().includes(search.toLowerCase());
-    return matchesSearch;
+       booking.bookingID.toLowerCase().includes(search.toLowerCase());
+
+    const bookingStatus = booking.isCancel
+      ? 'cancel'
+      : booking.paymentsDetails[0].isCancelPayment ||
+        (!booking.paymentsDetails[0].isSuccess &&
+          booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
+      ? 'cancel'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+        !booking.isCheckIn
+      ? 'pending'
+      : !booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+        !booking.isCheckIn
+      ? 'pending'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+        booking.isCheckIn
+      ? 'done'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+        booking.isCheckIn
+      ? 'done'
+      : null;
+
+    const matchesStatus =
+      (statusFilters.pending && bookingStatus === 'pending') ||
+      (statusFilters.cancel && bookingStatus === 'cancel') ||
+      (statusFilters.done && bookingStatus === 'done');
+
+    return matchesSearch && (statusFilters.pending || statusFilters.cancel || statusFilters.done ? matchesStatus : true);
   });
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -149,7 +184,7 @@ function YourBooking() {
     startIndex,
     startIndex + itemsPerPage,
   );
-  const totalPages = Math.ceil(yourBookings.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredBookingData.length / itemsPerPage);
 
   return (
     <div className='container-fluid main-container-your-booking-page'>
@@ -188,6 +223,46 @@ function YourBooking() {
                     </svg>
                   </div>
                 </div>
+              </div>
+              <div className="dropdown-filter">
+                <button
+                  className="menu-filter dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Filter by Status
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li>
+                    <input
+                      type="checkbox"
+                      checked={statusFilters.pending}
+                      onChange={() =>
+                        setStatusFilters({ ...statusFilters, pending: !statusFilters.pending })
+                      }
+                    /> Pending
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      checked={statusFilters.cancel}
+                      onChange={() =>
+                        setStatusFilters({ ...statusFilters, cancel: !statusFilters.cancel })
+                      }
+                    /> Cancel
+                  </li>
+                  <li>
+                    <input
+                      type="checkbox"
+                      checked={statusFilters.done}
+                      onChange={() =>
+                        setStatusFilters({ ...statusFilters, done: !statusFilters.done })
+                      }
+                    /> Done
+                  </li>
+                </ul>
               </div>
             </div>
 

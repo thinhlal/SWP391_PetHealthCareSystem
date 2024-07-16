@@ -483,3 +483,72 @@ a {
   font-family: Roboto, sans-serif;
   padding: 15px;
 }
+
+.main-content-booking .dropdown-filter {
+  position: relative;
+  display: inline-block;
+  margin-right: 15px;
+  margin-top: 27px;
+}
+
+.main-content-booking .menu-filter {
+  background-color: #4a00e0;
+  color: #ffffff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.main-content-booking .menu-filter:hover {
+  background-color: #372da0;
+}
+
+.main-content-booking .dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  min-width: 200px;
+}
+
+.main-content-booking .dropdown-menu li {
+  list-style-type: none;
+  margin: 5px 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.main-content-booking .dropdown-menu input[type='checkbox'] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #4a00e0;
+  border-radius: 3px;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.main-content-booking .dropdown-menu input[type='checkbox']:checked {
+  background-color: #4a00e0;
+}
+
+.main-content-booking .dropdown-menu input[type='checkbox']:checked::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
