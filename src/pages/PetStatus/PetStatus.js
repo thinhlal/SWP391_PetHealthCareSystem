@@ -184,7 +184,7 @@ function PetStatus() {
             )}
           </div>
 
-          {isViewDetails && currentDiseaseDetails.length > 0 ? (
+          {isViewDetails ? (
             <div className='pet-status-detail-table'>
               <h2 className='sub-title-info-pet-history'>Details</h2>
               <table>
@@ -196,35 +196,41 @@ function PetStatus() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentDiseaseDetails.map(detail => (
-                    <tr key={detail.diseaseInfoID}>
-                      <td>{`${detail.date.split('T')[0]} ${detail.date.split('T')[1].split('.')[0]}`}</td>
-                      <td
-                        className={`status-${
-                          detail.status === 1
-                            ? 'critical'
+                  {currentDiseaseDetails.length > 0 ? (
+                    currentDiseaseDetails.map(detail => (
+                      <tr key={detail.diseaseInfoID}>
+                        <td>{`${detail.date.split('T')[0]}`}</td>
+                        <td
+                          className={`status-${
+                            detail.status === 1
+                              ? 'critical'
+                              : detail.status === 2
+                                ? 'mild'
+                                : detail.status === 3
+                                  ? 'moderate'
+                                  : detail.status === 4
+                                    ? 'severe'
+                                    : 'healthy'
+                          }`}
+                        >
+                          {detail.status === 1
+                            ? 'Critical'
                             : detail.status === 2
-                              ? 'mild'
+                              ? 'Mild'
                               : detail.status === 3
-                                ? 'moderate'
+                                ? 'Moderate'
                                 : detail.status === 4
-                                  ? 'severe'
-                                  : 'healthy'
-                        }`}
-                      >
-                        {detail.status === 1
-                          ? 'Critical'
-                          : detail.status === 2
-                            ? 'Mild'
-                            : detail.status === 3
-                              ? 'Moderate'
-                              : detail.status === 4
-                                ? 'Severe'
-                                : 'Healthy'}
-                      </td>
-                      <td>{detail.notes}</td>
+                                  ? 'Severe'
+                                  : 'Healthy'}
+                        </td>
+                        <td>{detail.notes}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={3}>No data available</td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
               {currentDisease.length > 0 && totalPagesDetails > 1 && (
@@ -250,8 +256,6 @@ function PetStatus() {
                 Close
               </button>
             </div>
-          ) : isViewDetails && currentDiseaseDetails.length <= 0 ? (
-            <div>No data available</div>
           ) : null}
         </div>
       </div>

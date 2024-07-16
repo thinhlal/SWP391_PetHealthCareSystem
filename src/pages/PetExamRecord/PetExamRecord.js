@@ -1,11 +1,16 @@
 import './PetExamRecord.css';
 import Header from '../../components/Doctor/Header/Header.js';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import TextField from '@mui/material/TextField';
+import { AuthContext } from '../../context/AuthContext.js';
 
 function PetExamRecord() {
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const [bookingData, setBookingData] = useState({});
   const [diagnosis, setDiagnosis] = useState('');
@@ -17,6 +22,9 @@ function PetExamRecord() {
   const [showSelectedVaccines, setShowSelectedVaccines] = useState(false);
   const [listVaccines, setListVaccines] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [requireCage, setRequireCage] = useState(false);
+  const [reasonForAdmission, setReasonForAdmission] = useState('');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchWorkSchedule = async () => {
@@ -61,12 +69,19 @@ function PetExamRecord() {
         prescription,
         notes,
         selectedVaccines,
+        requireCage,
+        reasonForAdmission,
+        doctorID: user.doctorDetails[0].doctorID,
       };
-      await axiosInstance.post(
+      const response = await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/doctor/savePetExamRecord`,
         payload,
       );
-      window.location.href = 'work-schedule';
+      if (response.data.success) {
+        window.location.href = 'work-schedule';
+      } else {
+        setError(response.data.message);
+      }
     } catch (error) {
       console.error('Error saving pet exam record: ', error);
     }
@@ -190,7 +205,7 @@ function PetExamRecord() {
                   Select Vaccines
                 </button>
                 <div
-                  className={`selected-vaccines-container ${showSelectedVaccines ? 'visible' : ''}`}
+                  className={`selected-vaccines-container ${showSelectedVaccines && selectedVaccines.length > 0 ? 'visible' : ''}`}
                 >
                   {selectedVaccines.map((vaccine, index) => (
                     <span
@@ -203,6 +218,30 @@ function PetExamRecord() {
                 </div>
               </div>
             )}
+            <div className='checkbox-cage'>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={requireCage}
+                    onChange={e => setRequireCage(e.target.checked)}
+                  />
+                }
+                label='Require Cage'
+              />
+              {requireCage && (
+                <TextField
+                  sx={{ width: '100%', mt: 1 }}
+                  id='outlined-basic'
+                  label='Reason For Admission'
+                  variant='outlined'
+                  value={reasonForAdmission}
+                  onChange={e => setReasonForAdmission(e.target.value)}
+                  required
+                  error={!!error}
+                  helperText={error}
+                />
+              )}
+            </div>
             <div className='final-petE'>
               <button
                 type='submit'

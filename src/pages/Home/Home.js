@@ -32,7 +32,6 @@ function Home() {
       const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/rate/getAllRates`,
       );
-      console.log(response.data);
       setFeedbacks(response.data);
     };
     fetchAllFeedBack();

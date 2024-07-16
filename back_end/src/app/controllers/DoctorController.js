@@ -4,6 +4,9 @@ const Booking = require('../models/Booking.js');
 const MedicalReport = require('../models/MedicalReport.js');
 const VaccinationPet = require('../models/VaccinationPet.js');
 const Vaccination = require('../models/Vaccination.js');
+const Pet = require('../models/Pet.js');
+const CageDisease = require('../models/CageDisease.js');
+const Cage = require('../models/Cage.js');
 
 class DoctorController {
   // GET /getTimeWork
@@ -393,16 +396,83 @@ class DoctorController {
       prescription,
       notes,
       selectedVaccines,
+      requireCage,
+      reasonForAdmission,
+      doctorID,
     } = req.body;
+
     try {
       const booking = await Booking.findOne({ bookingID });
 
-      await Booking.findOneAndUpdate(
-        { bookingID },
-        {
-          isCompleted: true,
-        },
-      );
+      let emptyCage;
+      if (requireCage) {
+        emptyCage = await Cage.findOneAndUpdate(
+          { isEmpty: true },
+          { $set: { isEmpty: false } },
+          { new: true },
+        );
+
+        if (!emptyCage) {
+          return res.status(200).json({
+            success: false,
+            message: 'No empty cage available',
+          });
+        }
+      }
+
+      // Add pet to cage if required
+      if (requireCage && emptyCage) {
+        let idCageDisease;
+        while (true) {
+          try {
+            const lastCageDisease = await CageDisease.findOne().sort({
+              cageDiseaseID: -1,
+            });
+            if (lastCageDisease) {
+              const lastID = parseInt(
+                lastCageDisease.cageDiseaseID.substring(2),
+              );
+              idCageDisease = 'CD' + (lastID + 1).toString().padStart(6, '0');
+            } else {
+              idCageDisease = 'CD000000';
+            }
+            break;
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
+        const pet = await Booking.aggregate([
+          { $match: { bookingID } },
+          {
+            $lookup: {
+              from: 'pets',
+              localField: 'petID',
+              foreignField: 'petID',
+              as: 'petDetails',
+            },
+          },
+        ]);
+
+        await Pet.findOneAndUpdate(
+          { petID: pet[0].petDetails[0].petID },
+          {
+            status: false,
+          },
+        );
+
+        const cageDisease = new CageDisease({
+          cageID: emptyCage.cageID,
+          petID: pet[0].petDetails[0].petID,
+          bookingID: bookingID,
+          cageDiseaseID: idCageDisease,
+          doctorID: doctorID,
+          startDate: new Date(),
+          reasonForAdmission: reasonForAdmission,
+        });
+
+        await cageDisease.save();
+      }
 
       let id;
       while (true) {
@@ -420,6 +490,7 @@ class DoctorController {
           console.log(error);
         }
       }
+
       const newMedicalReport = new MedicalReport({
         medicalReportID: id,
         accountID: booking.accountID,
@@ -430,7 +501,15 @@ class DoctorController {
         prescription,
         notes,
       });
+
       await newMedicalReport.save();
+
+      await Booking.findOneAndUpdate(
+        { bookingID },
+        {
+          isCompleted: true,
+        },
+      );
 
       if (selectedVaccines.length > 0) {
         for (let i = 0; i < selectedVaccines.length; i++) {
@@ -469,11 +548,16 @@ class DoctorController {
           );
         }
       }
-      res.status(204).send();
+
+      res.status(200).json({
+        success: true,
+        message: 'Pet exam record saved successfully',
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        message: 'Error fetching medical report',
+        success: false,
+        message: 'Error saving pet exam record',
         error: error.message,
       });
     }

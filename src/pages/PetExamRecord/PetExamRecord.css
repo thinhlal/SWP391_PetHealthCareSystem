@@ -33,12 +33,6 @@
   word-wrap: break-word;
 }
 
-.form-petExam-vaccine,
-.final-petE {
-  flex: 1 1 100%;
-  box-sizing: border-box;
-}
-
 .petExam-record {
   display: flex;
   flex-direction: column;
@@ -131,7 +125,8 @@
 }
 
 .petExam-record .form-petExam-vaccine {
-  height: 80px;
+  width: 100%;
+  margin-top: 10px;
   font-size: 16px;
   font-family: Roboto, sans-serif;
   resize: vertical;
@@ -171,12 +166,20 @@
   color: green;
 }
 
+.petExam-record .final-petE {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
 .petExam-record .btn-save,
 .btn-cancel {
   display: inline-block;
   padding: 0px 20px;
   font-size: 16px;
-  margin-top: 130px;
+  margin-top: 30px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
@@ -219,29 +222,12 @@
   color: #fff;
   border: none;
   margin-right: 20px;
-  margin-left: 50px;
 }
 
 .petExam-record .btn-cancel {
   background-color: #6c757d;
   color: #fff;
   border: none;
-}
-
-.petExam-record .final-petE {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 30px;
-}
-
-@media screen and (max-width: 768px) {
-  .header {
-    display: block;
-    text-align: center;
-  }
-  .header img {
-    width: 20%;
-  }
 }
 
 .petExam-record .selected-vaccines-container {
@@ -286,4 +272,11 @@
   padding: 20px;
   display: grid;
   gap: 20px;
+}
+
+.petExam-record .checkbox-cage {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
