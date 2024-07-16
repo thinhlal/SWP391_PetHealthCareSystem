@@ -66,10 +66,6 @@ const BookingSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    isPrepayment: {
-      type: Boolean,
-      default: false,
-    },
     isRate: {
       type: Boolean,
       default: false,
