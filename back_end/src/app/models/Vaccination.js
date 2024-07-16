@@ -11,6 +11,10 @@ const VaccinationSchema = new Schema(
       type: String,
       required: true,
     },
+    notes: {
+      type: String,
+      required: true,
+    },
     quantity: {
       type: Number,
       require: true,

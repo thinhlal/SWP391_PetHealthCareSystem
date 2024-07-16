@@ -43,7 +43,9 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 50px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .main-sidebar-account .Admin-Account-Navigate-Text-Rest-Menu:hover {

@@ -279,8 +279,6 @@ function ProfilePet() {
                 <tr>
                   <th>Medical ReportID</th>
                   <th>Diagnosis</th>
-                  <th>Treatment</th>
-                  <th>Prescription</th>
                   <th>Notes</th>
                   <th>More</th>
                 </tr>
@@ -295,8 +293,6 @@ function ProfilePet() {
                     <tr key={index}>
                       <td>{reportInfo.medicalReportID}</td>
                       <td>{reportInfo.diagnosis}</td>
-                      <td>{reportInfo.treatment}</td>
-                      <td>{reportInfo.prescription}</td>
                       <td>{reportInfo.notes}</td>
                       <td>
                         <button
@@ -399,7 +395,6 @@ function ProfilePet() {
                   <th>Date Given</th>
                   <th className='vaccines-column'>Vaccines</th>
                   <th>Next Vaccination Date</th>
-                  <th>Vaccination Notes</th>
                   <th>More</th>
                 </tr>
               </thead>
@@ -411,10 +406,13 @@ function ProfilePet() {
                 ) : (
                   currentVaccines.map((vaccine, index) => (
                     <tr key={index}>
-                      <td>{`${vaccine.dateGiven.split('T')[0]} ${vaccine.dateGiven.split('T')[1].split('.')[0]}`}</td>
+                      <td>{`${vaccine.dateGiven.split('T')[0]}`}</td>
                       <td>{vaccine.vaccinationDetails.name}</td>
-                      <td>{`${parseInt(vaccine.dateGiven.split('-')[0]) + vaccine.vaccinationDetails.nextDate}`}</td>
-                      <td>{vaccine.vaccinationDetails.notes}</td>
+                      <td>
+                        {vaccine.vaccinationDetails.nextDate > 0
+                          ? `${parseInt(vaccine.dateGiven.split('-')[0]) + vaccine.vaccinationDetails.nextDate}`
+                          : 'Not available'}
+                      </td>
                       <td>
                         <button
                           type='button'
@@ -453,7 +451,7 @@ function ProfilePet() {
                               <div className='modal-body'>
                                 <p>
                                   <strong>Date Given:</strong>{' '}
-                                  {`${vaccine.dateGiven.split('T')[0]} ${vaccine.dateGiven.split('T')[1].split('.')[0]}`}
+                                  {`${vaccine.dateGiven.split('T')[0]}`}
                                 </p>
                                 <p>
                                   <strong>Vaccines:</strong>{' '}

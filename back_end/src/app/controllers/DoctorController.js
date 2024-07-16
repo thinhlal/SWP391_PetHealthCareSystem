@@ -3,6 +3,7 @@ const WorkingHour = require('../models/WorkingHour.js');
 const Booking = require('../models/Booking.js');
 const MedicalReport = require('../models/MedicalReport.js');
 const VaccinationPet = require('../models/VaccinationPet.js');
+const Vaccination = require('../models/Vaccination.js');
 
 class DoctorController {
   // GET /getTimeWork
@@ -459,6 +460,13 @@ class DoctorController {
             dateGiven: new Date(),
           });
           await newVaccinePet.save();
+
+          await Vaccination.findOneAndUpdate(
+            { vaccinationID: vaccine.vaccinationID },
+            {
+              $inc: { quantity: -1 },
+            },
+          );
         }
       }
       res.status(204).send();

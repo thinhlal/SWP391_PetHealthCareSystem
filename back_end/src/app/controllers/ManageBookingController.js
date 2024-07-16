@@ -343,7 +343,7 @@ class ManageBookingController {
     }
   }
 
-  // POST /addHaveCustomer
+  // POST /updateBookingDoctors
   async updateBookingDoctors(req, res, next) {
     const { bookingID, chosenDoctor } = req.body;
     console.log(chosenDoctor);

@@ -15,6 +15,11 @@ router.patch(
   serviceController.updateServiceStatus,
 );
 router.get('/getAllServices', verifyToken, serviceController.getAllServices);
+router.get(
+  '/checkServiceName',
+  verifyToken,
+  serviceController.checkServiceName,
+);
 
 router.post('/addService', verifyToken, serviceController.addService);
 
