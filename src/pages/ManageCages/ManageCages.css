@@ -1,3 +1,6 @@
+.manage-cages {
+  font-family: Roboto, sans-serif !important;
+}
 .manage-cages .manage-cages-title {
   margin: 70px 0 70px 0;
   display: flex;
@@ -8,7 +11,6 @@
 .manage-cages .manage-cages-title-text {
   width: fit-content;
   margin-top: -1px;
-  font-family: 'Montserrat', Helvetica;
   font-weight: 700;
   color: #4f3c3c;
   font-size: 40px;
@@ -52,7 +54,6 @@
   font-size: 18px;
   margin-bottom: 0 !important;
   white-space: nowrap;
-  font-family: 'Inter', Helvetica;
   letter-spacing: 0;
 }
 
@@ -92,7 +93,6 @@
   border-radius: 5px;
   width: 350px;
   padding-left: 10px;
-  font-family: 'Inter', Helvetica;
   font-weight: 400;
   color: #000;
   font-size: 16px;
@@ -112,7 +112,6 @@
 
 .manage-cages .main-content-header-add-booking {
   margin-right: 25px;
-  font-family: 'Montserrat', sans-serif;
   font-size: 15px;
 }
 
@@ -120,7 +119,6 @@
   font-weight: 600;
   padding-right: 40%;
   padding-top: 2%;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .Status-Select-Filter {
@@ -161,7 +159,6 @@
   font-weight: 600;
   font-size: 16px;
   width: 100%;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .manage-cages .main-content-list-title-text-button {
@@ -172,7 +169,6 @@
   font-weight: 600;
   font-size: 16px;
   width: 100%;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .manage-cages .content-list-body-info {
@@ -189,7 +185,6 @@
   justify-content: left;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
-  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
 }
 .manage-cages .content-list-body-value:hover {
@@ -210,7 +205,6 @@
   justify-content: center;
   border-left: 1px solid #eaecf0;
   border-top: 1px solid #eaecf0;
-  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
 }
 .manage-cages .content-list-body-value-button:hover {
@@ -226,7 +220,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   margin-bottom: 50px;
 }
@@ -234,13 +227,10 @@
   margin-top: 50px;
 }
 
-/* css modal update status */
-
 .manage-cages .modal-body-update-status {
   display: flex;
   align-items: center;
   gap: 15px;
-  font-family: Roboto, sans-serif;
   margin: 20px;
 }
 
@@ -266,7 +256,6 @@
 }
 
 .manage-cages .modal-body-update-text {
-  font-family: Roboto, sans-serif;
   margin: 20px;
 }
 
@@ -307,7 +296,6 @@
   margin: 50px auto;
   background-color: #fff;
   padding: 20px;
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -385,14 +373,12 @@
 }
 
 .manage-cages .profile-form {
-  font-family: 'Montserrat', sans-serif;
   line-height: 30px;
   font-size: 18px;
   margin-left: 10px;
 }
 
 .manage-cages .pet-profile-form {
-  font-family: 'Montserrat', sans-serif;
   line-height: 30px;
   font-size: 18px;
   margin-left: 10px;

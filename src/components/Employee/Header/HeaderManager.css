@@ -1,5 +1,6 @@
 .navigation {
   position: relative;
+  font-family: Roboto, sans-serif;
   height: 60px;
   background-color: #002169;
   display: flex;
@@ -8,7 +9,6 @@
 
 .text-wrapper {
   width: fit-content;
-  font-family: Roboto, sans-serif;
   font-weight: 300;
   color: #ffffff;
   font-size: 16px;
@@ -95,8 +95,8 @@
 }
 
 .navigation-user_notify_content-text {
-  padding-left: 16px;
-  font-size: 18px;
+  padding-left: 12px;
+  font-size: 16px;
   color: #000;
 }
 
@@ -110,7 +110,6 @@
 
 .text-wrapper-2 {
   height: 24px;
-  font-family: Roboto, sans-serif;
   font-weight: 500;
   color: #ffffff;
   font-size: 16px;

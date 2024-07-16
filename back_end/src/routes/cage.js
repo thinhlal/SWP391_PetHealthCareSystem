@@ -8,6 +8,7 @@ router.patch('/updateStatusCage', verifyToken, CageController.updateStatusCage);
 router.post('/addCage', verifyToken, CageController.addCage);
 router.post('/addPetToCage', verifyToken, CageController.addPetToCage);
 router.get('/getAllCages', verifyToken, CageController.getAllCages);
+router.get('/checkCageName', verifyToken, CageController.checkCageName);
 router.get(
   '/getAllDiseaseInfoByID',
   verifyToken,

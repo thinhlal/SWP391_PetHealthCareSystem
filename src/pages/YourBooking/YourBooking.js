@@ -145,38 +145,43 @@ function YourBooking() {
   const filteredBookingData = yourBookings.filter(booking => {
     const matchesSearch =
       search === '' ||
-       booking.bookingID.toLowerCase().includes(search.toLowerCase());
+      booking.bookingID.toLowerCase().includes(search.toLowerCase());
 
     const bookingStatus = booking.isCancel
       ? 'cancel'
       : booking.paymentsDetails[0].isCancelPayment ||
-        (!booking.paymentsDetails[0].isSuccess &&
-          booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
-      ? 'cancel'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-        !booking.isCheckIn
-      ? 'pending'
-      : !booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-        !booking.isCheckIn
-      ? 'pending'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-        booking.isCheckIn
-      ? 'done'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-        booking.isCheckIn
-      ? 'done'
-      : null;
+          (!booking.paymentsDetails[0].isSuccess &&
+            booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
+        ? 'cancel'
+        : booking.paymentsDetails[0].isSuccess &&
+            booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+            !booking.isCheckIn
+          ? 'pending'
+          : !booking.paymentsDetails[0].isSuccess &&
+              booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+              !booking.isCheckIn
+            ? 'pending'
+            : booking.paymentsDetails[0].isSuccess &&
+                booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                booking.isCheckIn
+              ? 'done'
+              : booking.paymentsDetails[0].isSuccess &&
+                  booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                  booking.isCheckIn
+                ? 'done'
+                : null;
 
     const matchesStatus =
       (statusFilters.pending && bookingStatus === 'pending') ||
       (statusFilters.cancel && bookingStatus === 'cancel') ||
       (statusFilters.done && bookingStatus === 'done');
 
-    return matchesSearch && (statusFilters.pending || statusFilters.cancel || statusFilters.done ? matchesStatus : true);
+    return (
+      matchesSearch &&
+      (statusFilters.pending || statusFilters.cancel || statusFilters.done
+        ? matchesStatus
+        : true)
+    );
   });
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -224,43 +229,58 @@ function YourBooking() {
                   </div>
                 </div>
               </div>
-              <div className="dropdown-filter">
+              <div className='dropdown-filter'>
                 <button
-                  className="menu-filter dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  className='menu-filter dropdown-toggle'
+                  type='button'
+                  id='dropdownMenuButton'
+                  data-bs-toggle='dropdown'
+                  aria-expanded='false'
                 >
                   Filter by Status
                 </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li>
+                <ul
+                  className='dropdown-menu'
+                  aria-labelledby='dropdownMenuButton'
+                >
+                  <li className='filter-dropdown'>
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       checked={statusFilters.pending}
                       onChange={() =>
-                        setStatusFilters({ ...statusFilters, pending: !statusFilters.pending })
+                        setStatusFilters({
+                          ...statusFilters,
+                          pending: !statusFilters.pending,
+                        })
                       }
-                    /> Pending
+                    />{' '}
+                    Pending
                   </li>
-                  <li>
+                  <li className='filter-dropdown'>
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       checked={statusFilters.cancel}
                       onChange={() =>
-                        setStatusFilters({ ...statusFilters, cancel: !statusFilters.cancel })
+                        setStatusFilters({
+                          ...statusFilters,
+                          cancel: !statusFilters.cancel,
+                        })
                       }
-                    /> Cancel
+                    />{' '}
+                    Cancel
                   </li>
-                  <li>
+                  <li className='filter-dropdown'>
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       checked={statusFilters.done}
                       onChange={() =>
-                        setStatusFilters({ ...statusFilters, done: !statusFilters.done })
+                        setStatusFilters({
+                          ...statusFilters,
+                          done: !statusFilters.done,
+                        })
                       }
-                    /> Done
+                    />{' '}
+                    Done
                   </li>
                 </ul>
               </div>
@@ -306,15 +326,30 @@ function YourBooking() {
                                               .isSuccess &&
                                             booking.paymentsDetails[0]
                                               .paymentMethod === 'PAYPAL' &&
-                                            booking.isCheckIn
-                                          ? 'status-completed'
+                                            booking.isCheckIn &&
+                                            !booking.isCompleted
+                                          ? 'status-pending'
                                           : booking.paymentsDetails[0]
                                                 .isSuccess &&
                                               booking.paymentsDetails[0]
                                                 .paymentMethod === 'COUNTER' &&
-                                              booking.isCheckIn
-                                            ? 'status-completed'
-                                            : null
+                                              booking.isCheckIn &&
+                                              !booking.isCompleted
+                                            ? 'status-pending'
+                                            : booking.paymentsDetails[0]
+                                                  .isSuccess &&
+                                                booking.paymentsDetails[0]
+                                                  .paymentMethod === 'PAYPAL' &&
+                                                booking.isCheckIn
+                                              ? 'status-completed'
+                                              : booking.paymentsDetails[0]
+                                                    .isSuccess &&
+                                                  booking.paymentsDetails[0]
+                                                    .paymentMethod ===
+                                                    'COUNTER' &&
+                                                  booking.isCheckIn
+                                                ? 'status-completed'
+                                                : null
                               }`}
                             >
                               Status:&nbsp;
@@ -337,6 +372,18 @@ function YourBooking() {
                                 !booking.isCheckIn &&
                                 !booking.isCompleted ? (
                                 <span>Pending</span>
+                              ) : booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL' &&
+                                booking.isCheckIn &&
+                                !booking.isCompleted ? (
+                                <span>Being examined</span>
+                              ) : booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'COUNTER' &&
+                                booking.isCheckIn &&
+                                !booking.isCompleted ? (
+                                <span>Being examined</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'PAYPAL' &&
@@ -550,7 +597,8 @@ function YourBooking() {
                 <Stack
                   spacing={2}
                   alignItems='center'
-                  marginTop={2}
+                  marginTop={3}
+                  marginBottom={3}
                 >
                   <Pagination
                     count={totalPages}

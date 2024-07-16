@@ -14,22 +14,48 @@ function Header() {
     <div className='main-header-doctor-overlap'>
       <div className='main-header-navigation'>
         <div>
-          <img className='main-header-logo' src={logo} alt='' />
+          <img
+            className='main-header-logo'
+            src={logo}
+            alt=''
+          />
         </div>
         <div className='navbar'>
-          <a className={`nav-item ${pathname === '/work-schedule' ? 'active' : ''}`} href='work-schedule'>Work Schedule</a>
-          <a className={`nav-item ${pathname === '/time-table' ? 'active' : ''}`} href='time-table'>Working Time</a>
-          <a className={`nav-item ${pathname === '/doctor-care' ? 'active' : ''}`} href='doctor-care'>Doctor Care</a>
+          <a
+            className={`nav-item ${pathname === '/work-schedule' ? 'active' : ''}`}
+            href='work-schedule'
+          >
+            Work Schedule
+          </a>
+          <a
+            className={`nav-item ${pathname === '/time-table' ? 'active' : ''}`}
+            href='time-table'
+          >
+            Working Time
+          </a>
+          <a
+            className={`nav-item ${pathname === '/doctor-care' ? 'active' : ''}`}
+            href='doctor-care'
+          >
+            Doctor Care
+          </a>
         </div>
         <div className='main-header-user_wrapper'>
           <div className='main-header-user'>
             <div className='main-header-user-account'>
-              <img className='account_icon' src={userAccount} alt='' />
+              <img
+                className='account_icon'
+                src={userAccount}
+                alt=''
+              />
               <div className='main-header-user-account-name'>
                 Hi {user?.doctorDetails[0]?.name}
               </div>
               <div className='main-header-user-account_menu'>
-                <div className='main-header-user-account_menu-item' onClick={logOut}>
+                <div
+                  className='main-header-user-account_menu-item'
+                  onClick={logOut}
+                >
                   Log out
                 </div>
               </div>

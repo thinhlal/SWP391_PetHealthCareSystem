@@ -286,7 +286,7 @@
   background-color: #fff;
   border-color: #fff;
   font-family: Roboto, sans-serif;
-  margin: 0px 20px 50px;
+  margin: 10px 20px 50px;
   display: flex;
   align-items: center;
 }
@@ -296,6 +296,11 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-top: 10px;
+}
+
+.manage-booking-list .content-modal-manage-booking:last-child {
+  margin-top: 10px;
 }
 
 .manage-booking-list .grid-container {

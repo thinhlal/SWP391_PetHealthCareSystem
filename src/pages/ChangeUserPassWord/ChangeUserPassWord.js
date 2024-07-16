@@ -13,6 +13,7 @@ const ChangeUserPassword = () => {
     confirmPassword: '',
   });
   const [message, setMessage] = useState('');
+  const [messageSuccess, setMessageSuccess] = useState('');
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -21,6 +22,7 @@ const ChangeUserPassword = () => {
       [name]: value,
     });
     setMessage('');
+    setMessageSuccess('');
   };
 
   const handleSave = async () => {
@@ -36,7 +38,7 @@ const ChangeUserPassword = () => {
           passwords,
         },
       );
-      setMessage(res.data.message);
+      setMessageSuccess(res.data.message);
       setPasswords({
         currentPassword: '',
         newPassword: '',
@@ -144,6 +146,9 @@ const ChangeUserPassword = () => {
                     />
                   </div>
                   {message && <div className='error-message'>{message}</div>}
+                  {messageSuccess && (
+                    <div className='success-message'>{messageSuccess}</div>
+                  )}
                   <button
                     className='btn btn-primary'
                     type='button'

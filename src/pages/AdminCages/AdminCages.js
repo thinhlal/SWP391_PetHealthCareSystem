@@ -107,12 +107,28 @@ function AdminCages() {
     }
   };
 
+  const checkDuplicateCageName = async cageName => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/cage/checkCageName`,
+        { params: { name: cageName.trim().toLowerCase() } },
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
   const handleSaveChanges = async () => {
     const newErrors = {};
     if (!editCage.name) newErrors.name = 'Name is required';
     if (!editCage.description)
       newErrors.description = 'Description is required';
-
+    const isDuplicate = await checkDuplicateCageName(editCage.name);
+    if (isDuplicate) {
+      newErrors.name = 'Cage name already exists';
+    }
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -274,6 +290,13 @@ function AdminCages() {
                               className='btn-close'
                               data-bs-dismiss='modal'
                               aria-label='Close'
+                              onClick={() => {
+                                setNewCage({
+                                  name: '',
+                                  description: '',
+                                });
+                                setErrors({});
+                              }}
                             ></button>
                           </div>
                           <div className='modal-body'>
@@ -317,6 +340,13 @@ function AdminCages() {
                               type='button'
                               className='btn btn-secondary'
                               data-bs-dismiss='modal'
+                              onClick={() => {
+                                setNewCage({
+                                  name: '',
+                                  description: '',
+                                });
+                                setErrors({});
+                              }}
                             >
                               Close
                             </button>
@@ -409,6 +439,7 @@ function AdminCages() {
                                     className='btn-close'
                                     data-bs-dismiss='modal'
                                     aria-label='Close'
+                                    onClick={() => setErrors({})}
                                   ></button>
                                 </div>
                                 <div className='modal-body'>
@@ -416,9 +447,6 @@ function AdminCages() {
                                     <div className='Admin-Cages-modal-title-name'>
                                       Name
                                     </div>
-                                    <label className='Admin-Cages-modal-update-new'>
-                                      Cage name:
-                                    </label>
                                     <input
                                       className='Admin-Cages-input'
                                       name='name'
@@ -436,9 +464,6 @@ function AdminCages() {
                                     <div className='Admin-Cages-modal-title'>
                                       Description
                                     </div>
-                                    <label className='Admin-Cages-modal-update-new'>
-                                      Cage description:
-                                    </label>
                                     <input
                                       className='Admin-Cages-input'
                                       name='description'
@@ -458,6 +483,7 @@ function AdminCages() {
                                     type='button'
                                     className='btn btn-secondary'
                                     data-bs-dismiss='modal'
+                                    onClick={() => setErrors({})}
                                   >
                                     Close
                                   </button>

@@ -24,7 +24,7 @@
 
 .main-header-doctor-overlap .navbar {
   display: flex;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .main-header-doctor-overlap .nav-item {
@@ -119,12 +119,16 @@
   border-bottom: 10px solid #fff;
 }
 
-.main-header-doctor-overlap .main-header-user-account:hover .main-header-user-account_menu {
-  display: block; 
+.main-header-doctor-overlap
+  .main-header-user-account:hover
+  .main-header-user-account_menu {
+  display: block;
   cursor: pointer;
 }
 
-.main-header-doctor-overlap .main-header-user-account:hover .main-header-user-account_menu::before {
+.main-header-doctor-overlap
+  .main-header-user-account:hover
+  .main-header-user-account_menu::before {
   display: block;
 }
 

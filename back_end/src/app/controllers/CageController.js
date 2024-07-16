@@ -389,6 +389,20 @@ class AdminController {
     }
   }
 
+  // GET /checkCageName
+  async checkCageName(req, res, next) {
+    const { name } = req.query;
+    try {
+      const service = await Cage.findOne({
+        name: { $regex: `^${name}$`, $options: 'i' },
+      });
+      const exists = service ? true : false;
+      res.status(200).json({ exists });
+    } catch (error) {
+      res.status(500).json({ message: 'Error checking service name', error });
+    }
+  }
+
   // POST /updateCageAdmin
   async updateCageAdmin(req, res, next) {
     const { cageID, name, description } = req.body.editCage;

@@ -8,14 +8,6 @@ const Customer = require('../models/Customer.js');
 const Rate = require('../models/Rate.js');
 
 class AdminController {
-  // POST /
-  async index(req, res, next) {
-    try {
-    } catch (error) {
-      res.status(500).json({ message: 'Error creating ', error });
-    }
-  }
-
   // POST /add
   async add(req, res, next) {
     //const bookingInfo = req.body;
@@ -185,6 +177,11 @@ class AdminController {
             isCancel: { $first: '$isCancel' },
             isCheckIn: { $first: '$isCheckIn' },
             isPrepayment: { $first: '$isPrepayment' },
+            isRate: { $first: '$isRate' },
+            isRefund: { $first: '$isRefund' },
+            refundPrice: { $first: '$refundPrice' },
+            isCheckedVaccinate: { $first: '$isCheckedVaccinate' },
+            isCompleted: { $first: '$isCompleted' },
             customerDetails: { $first: '$customerDetails' },
             petDetails: { $first: '$petDetails' },
             doctorDetails: { $first: '$doctorDetails' },
@@ -235,6 +232,11 @@ class AdminController {
             isCancel: 1,
             isCheckIn: 1,
             isPrepayment: 1,
+            isRate: 1,
+            isRefund: 1,
+            refundPrice: 1,
+            isCheckedVaccinate: 1,
+            isCompleted: 1,
             doctorID: 1,
             customerDetails: 1,
             petDetails: 1,
