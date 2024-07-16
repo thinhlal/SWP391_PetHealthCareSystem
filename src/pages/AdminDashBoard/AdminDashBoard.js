@@ -15,14 +15,23 @@ import Stack from '@mui/material/Stack';
 import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg';
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
+
 function AdminDashBoard() {
   const [activeTab, setActiveTab] = useState('Profile');
   const [search, setSearch] = useState('');
-  const openTab = tabName => setActiveTab(tabName);
   const [bookingData, setBookingData] = useState([]);
   const [bookingInfoModal, setBookingInfoModal] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const [statusFilters, setStatusFilters] = useState({
+    pending: false,
+    cancel: false,
+    done: false,
+  });
+
+  const openTab = (tabName) => {
+    setActiveTab(tabName);
+  };
 
   useEffect(() => {
     const fetchBooking = async () => {
@@ -42,15 +51,45 @@ function AdminDashBoard() {
     fetchBooking();
   }, []);
 
-  const searchBookingData = bookingData.filter(booking => {
+  const searchBookingData = bookingData.filter((booking) => {
     const matchesSearch =
       search === '' ||
       booking.bookingID.toLowerCase().includes(search.toLowerCase());
-    return matchesSearch;
+
+    const bookingStatus = booking.isCancel
+      ? 'cancel'
+      : booking.paymentsDetails[0].isCancelPayment ||
+        (!booking.paymentsDetails[0].isSuccess &&
+          booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
+      ? 'cancel'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+        !booking.isCheckIn
+      ? 'pending'
+      : !booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+        !booking.isCheckIn
+      ? 'pending'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+        booking.isCheckIn
+      ? 'done'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+        booking.isCheckIn
+      ? 'done'
+      : null;
+
+    const matchesStatus =
+      (statusFilters.pending && bookingStatus === 'pending') ||
+      (statusFilters.cancel && bookingStatus === 'cancel') ||
+      (statusFilters.done && bookingStatus === 'done');
+
+    return matchesSearch && (statusFilters.pending || statusFilters.cancel || statusFilters.done ? matchesStatus : true);
   });
 
-  const servicePrice = services => {
-    return services.map(service => {
+  const servicePrice = (services) => {
+    return services.map((service) => {
       return `${service.name}($${service.price})`;
     });
   };
@@ -91,14 +130,60 @@ function AdminDashBoard() {
                     type='text'
                     placeholder='Search BookingID'
                     className='Admin-DashBoard-Main-Search-Input '
-                    onChange={e => setSearch(e.target.value)}
+                    onChange={(e) => setSearch(e.target.value)}
                   />
                   <button className='Admin-DashBoard-Main-Search-Button'>
-                    <img
-                      src={icon_search}
-                      alt=''
-                    />
+                    <img src={icon_search} alt='' />
                   </button>
+                </div>
+                <div className='dropdown-filter'>
+                  <button
+                    className='menu-filter dropdown-toggle'
+                    type='button'
+                    id='dropdownMenuButton'
+                    data-bs-toggle='dropdown'
+                    aria-expanded='false'
+                  >
+                    Filter by Status
+                  </button>
+                  <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                    <li>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.pending}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            pending: !statusFilters.pending,
+                          })
+                        }
+                      /> Pending
+                    </li>
+                    <li>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.cancel}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            cancel: !statusFilters.cancel,
+                          })
+                        }
+                      /> Cancel
+                    </li>
+                    <li>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.done}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            done: !statusFilters.done,
+                          })
+                        }
+                      /> Done
+                    </li>
+                  </ul>
                 </div>
                 <div className='Admin-DashBoard-Main-Table-Header'>
                   <div className='Admin-DashBoard-Main-Table-Header-Title '>
@@ -124,7 +209,7 @@ function AdminDashBoard() {
                   </div>
                 </div>
                 {currentBookings.length > 0 ? (
-                  currentBookings.map(item => (
+                  currentBookings.map((item) => (
                     <div
                       className='Admin-DashBoard-Main-Table-Content-Row-Wrapper'
                       key={item.bookingID}
@@ -148,58 +233,48 @@ function AdminDashBoard() {
                                 item.isCancel
                                   ? 'Admin-DashBoard-Table-status-cancel'
                                   : item.paymentsDetails[0].isCancelPayment ||
-                                      (!item.paymentsDetails[0].isSuccess &&
-                                        item.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL')
-                                    ? 'Admin-DashBoard-Table-status-cancel'
-                                    : item.paymentsDetails[0].isSuccess &&
-                                        item.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL' &&
-                                        !item.isCheckIn
-                                      ? 'Admin-DashBoard-Table-status-waiting'
-                                      : !item.paymentsDetails[0].isSuccess &&
-                                          item.paymentsDetails[0]
-                                            .paymentMethod === 'COUNTER' &&
-                                          !item.isCheckIn
-                                        ? 'Admin-DashBoard-Table-status-waiting'
-                                        : item.paymentsDetails[0].isSuccess &&
-                                            item.paymentsDetails[0]
-                                              .paymentMethod === 'PAYPAL' &&
-                                            item.isCheckIn
-                                          ? 'Admin-DashBoard-Table-status-done'
-                                          : item.paymentsDetails[0].isSuccess &&
-                                              item.paymentsDetails[0]
-                                                .paymentMethod === 'COUNTER' &&
-                                              item.isCheckIn
-                                            ? 'Admin-DashBoard-Table-status-done'
-                                            : null
+                                    (!item.paymentsDetails[0].isSuccess &&
+                                      item.paymentsDetails[0].paymentMethod === 'PAYPAL')
+                                  ? 'Admin-DashBoard-Table-status-cancel'
+                                  : item.paymentsDetails[0].isSuccess &&
+                                    item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                                    !item.isCheckIn
+                                  ? 'Admin-DashBoard-Table-status-waiting'
+                                  : !item.paymentsDetails[0].isSuccess &&
+                                    item.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                                    !item.isCheckIn
+                                  ? 'Admin-DashBoard-Table-status-waiting'
+                                  : item.paymentsDetails[0].isSuccess &&
+                                    item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                                    item.isCheckIn
+                                  ? 'Admin-DashBoard-Table-status-done'
+                                  : item.paymentsDetails[0].isSuccess &&
+                                    item.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                                    item.isCheckIn
+                                  ? 'Admin-DashBoard-Table-status-done'
+                                  : null
                               }`}
                         >
                           {item.isCancel ? (
                             <span>Cancel Booking</span>
                           ) : item.paymentsDetails[0].isCancelPayment ||
                             (!item.paymentsDetails[0].isSuccess &&
-                              item.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL') ? (
+                              item.paymentsDetails[0].paymentMethod === 'PAYPAL') ? (
                             <span>Cancel Payment</span>
                           ) : item.paymentsDetails[0].isSuccess &&
-                            item.paymentsDetails[0].paymentMethod ===
-                              'PAYPAL' &&
+                            item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
                             !item.isCheckIn ? (
                             <span>Pending</span>
                           ) : !item.paymentsDetails[0].isSuccess &&
-                            item.paymentsDetails[0].paymentMethod ===
-                              'COUNTER' &&
+                            item.paymentsDetails[0].paymentMethod === 'COUNTER' &&
                             !item.isCheckIn ? (
                             <span>Pending</span>
                           ) : item.paymentsDetails[0].isSuccess &&
-                            item.paymentsDetails[0].paymentMethod ===
-                              'PAYPAL' &&
+                            item.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
                             item.isCheckIn ? (
                             <span>Done</span>
                           ) : item.paymentsDetails[0].isSuccess &&
-                            item.paymentsDetails[0].paymentMethod ===
-                              'COUNTER' &&
+                            item.paymentsDetails[0].paymentMethod === 'COUNTER' &&
                             item.isCheckIn ? (
                             <span>Done</span>
                           ) : (

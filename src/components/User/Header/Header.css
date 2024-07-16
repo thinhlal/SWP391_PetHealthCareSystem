@@ -73,6 +73,7 @@
 
 .main-header-user-overlap .account_icon {
   height: 35px;
+  width: 35px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 10px;
