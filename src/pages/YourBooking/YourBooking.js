@@ -328,22 +328,26 @@ function YourBooking() {
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'PAYPAL' &&
-                                !booking.isCheckIn ? (
+                                !booking.isCheckIn &&
+                                !booking.isCompleted ? (
                                 <span>Pending</span>
                               ) : !booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'COUNTER' &&
-                                !booking.isCheckIn ? (
+                                !booking.isCheckIn &&
+                                !booking.isCompleted ? (
                                 <span>Pending</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'PAYPAL' &&
-                                booking.isCheckIn ? (
+                                booking.isCheckIn &&
+                                booking.isCompleted ? (
                                 <span>Done</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'COUNTER' &&
-                                booking.isCheckIn ? (
+                                booking.isCheckIn &&
+                                booking.isCompleted ? (
                                 <span>Done</span>
                               ) : (
                                 <span>NULL</span>

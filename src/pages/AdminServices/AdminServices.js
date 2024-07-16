@@ -160,6 +160,19 @@ function AdminServices() {
     setEditService({ ...editService, [name]: value });
   };
 
+  const checkDuplicateServiceName = async serviceName => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/service/checkServiceName`,
+        { params: { name: serviceName.trim().toLowerCase() } },
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
   const handleFormSubmit = async () => {
     const newErrors = {
       name: validateInput('name', newService.name),
@@ -172,6 +185,14 @@ function AdminServices() {
       newService.name &&
       newService.description
     ) {
+      const isDuplicate = await checkDuplicateServiceName(newService.name);
+      if (isDuplicate) {
+        setAddServiceErrors({
+          ...addServiceErrors,
+          name: 'Service name already exists',
+        });
+        return;
+      }
       try {
         await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/service/addService`,

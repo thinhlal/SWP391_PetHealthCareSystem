@@ -78,6 +78,20 @@ class ServiceController {
       res.status(500).json({ message: 'Error update services', error });
     }
   }
+
+  //GET /checkServiceName
+  async checkServiceName(req, res, next) {
+    const { name } = req.query;
+    try {
+      const service = await Service.findOne({
+        name: { $regex: `^${name}$`, $options: 'i' },
+      });
+      const exists = service ? true : false;
+      res.status(200).json({ exists });
+    } catch (error) {
+      res.status(500).json({ message: 'Error checking service name', error });
+    }
+  }
 }
 
 module.exports = new ServiceController();

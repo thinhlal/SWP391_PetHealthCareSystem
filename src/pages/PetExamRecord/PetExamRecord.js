@@ -17,7 +17,7 @@ function PetExamRecord() {
   const [showSelectedVaccines, setShowSelectedVaccines] = useState(false);
   const [listVaccines, setListVaccines] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  console.log(selectedVaccines);
+
   useEffect(() => {
     const fetchWorkSchedule = async () => {
       try {
@@ -38,9 +38,8 @@ function PetExamRecord() {
   const fetchVaccines = async () => {
     try {
       const response = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/vaccine/getAllVaccines`,
+        `${process.env.REACT_APP_API_URL}/vaccine/getAllVaccinesAvailable`,
       );
-      console.log(response.data);
       setListVaccines(response.data);
     } catch (error) {
       console.error('Error fetching booking data: ', error);

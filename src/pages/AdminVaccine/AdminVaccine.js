@@ -27,57 +27,67 @@ function AdminVaccine() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [errors, setErrors] = useState({});
-  const [cageData, setCageData] = useState([]);
+  const [vaccineData, setVaccineData] = useState([]);
 
-  const [newCage, setNewCage] = useState({
+  const [newVaccine, setNewVaccine] = useState({
     name: '',
-    description: '',
+    notes: '',
+    nextDate: 0,
+    quantity: 0,
   });
 
-  const [editCage, setEditCage] = useState({
-    cageID: '',
+  const [editVaccine, setEditVaccine] = useState({
+    vaccinationID: '',
     name: '',
-    description: '',
+    notes: '',
+    nextDate: 0,
+    quantity: 0,
+    status: false,
   });
   const modalRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
   useEffect(() => {
-    const fetchCages = async () => {
+    const fetchVaccines = async () => {
       try {
         const response = await axiosInstance.get(
-          `${process.env.REACT_APP_API_URL}/cage/getAllCagesByAdmin`,
+          `${process.env.REACT_APP_API_URL}/vaccine/getAllVaccines`,
         );
         console.log(response.data);
-        setCageData(response.data);
+        setVaccineData(response.data);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchCages();
+    fetchVaccines();
   }, []);
 
-  const handleNewCageChange = e => {
+  const handleNewVaccineChange = e => {
     const { name, value } = e.target;
-    setNewCage(prevState => ({
+    setNewVaccine(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+    setErrors({});
+  };
+
+  const handleEditVaccineChange = e => {
+    const { name, value } = e.target;
+    setEditVaccine(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleEditCageChange = e => {
-    const { name, value } = e.target;
-    setEditCage(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleAddCage = async () => {
+  const handleAddVaccine = async () => {
     const newErrors = {};
-    if (!newCage.name) newErrors.name = 'Name is required';
-    if (!newCage.description) newErrors.description = 'Description is required';
+    if (!newVaccine.name) newErrors.name = 'Name is required';
+    if (!newVaccine.notes) newErrors.notes = 'Notes is required';
+    if (parseInt(newVaccine.nextDate) < 0)
+      newErrors.nextDate = 'NextDate should greater than or equal to zero';
+    if (parseInt(newVaccine.quantity) < 0)
+      newErrors.quantity = 'Quantity should greater than or equal to zero';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -85,19 +95,38 @@ function AdminVaccine() {
     }
 
     try {
-      await axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/cage/addCage`,
-        {
-          newCage,
-        },
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/vaccine/checkDuplicateName`,
+        { params: { name: newVaccine.name.trim().toLowerCase() } },
       );
+
+      if (response.data.exists) {
+        setErrors({ name: 'Vaccine name already exists' });
+        return;
+      }
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+
+    try {
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/vaccine/addVaccine`,
+        newVaccine,
+      );
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/vaccine/getAllVaccines`,
+      );
+      setVaccineData(response.data);
     } catch (error) {
       console.error(error);
     }
 
-    setNewCage({
+    setNewVaccine({
       name: '',
-      description: '',
+      notes: '',
+      nextDate: 0,
+      quantity: 0,
     });
 
     setErrors({});
@@ -107,11 +136,14 @@ function AdminVaccine() {
     }
   };
 
-  const handleSaveChanges = async () => {
+  const handleSaveChangesUpdate = async () => {
     const newErrors = {};
-    if (!editCage.name) newErrors.name = 'Name is required';
-    if (!editCage.description)
-      newErrors.description = 'Description is required';
+    if (!editVaccine.name) newErrors.name = 'Name is required';
+    if (!editVaccine.notes) newErrors.notes = 'Notes is required';
+    if (editVaccine.nextDate < 0)
+      newErrors.nextDate = 'NextDate should greater than or equal to zero';
+    if (editVaccine.quantity < 0)
+      newErrors.quantity = 'Quantity should greater than or equal to zero';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -120,51 +152,55 @@ function AdminVaccine() {
 
     try {
       await axiosInstance.post(
-        `${process.env.REACT_APP_API_URL}/cage/updateCageAdmin`,
-        {
-          editCage,
-        },
+        `${process.env.REACT_APP_API_URL}/vaccine/updateVaccineAdmin`,
+        editVaccine,
       );
     } catch (error) {
       console.error(error);
     }
 
-    const updatedCageData = cageData.map(cage => {
-      if (cage.cageID === editCage.cageID) {
-        return { ...cage, ...editCage };
+    const updatedVaccineData = vaccineData.map(vaccine => {
+      if (vaccine.vaccinationID === editVaccine.vaccinationID) {
+        return { ...vaccine, ...editVaccine };
       }
-      return cage;
+      return vaccine;
     });
-    setCageData(updatedCageData);
+    setVaccineData(updatedVaccineData);
     setErrors({});
     const modal = bootstrap.Modal.getInstance(
-      document.getElementById(`exampleModalEdit-${editCage.cageID}`),
+      document.getElementById(`exampleModalEdit-${editVaccine.vaccinationID}`),
     );
     if (modal) {
       modal.hide();
     }
   };
 
-  const openEditModal = cage => {
-    setEditCage({
-      cageID: cage.cageID,
-      name: cage.name,
-      description: cage.description,
+  const openEditModal = vaccine => {
+    setEditVaccine({
+      vaccinationID: vaccine.vaccinationID,
+      name: vaccine.name,
+      notes: vaccine.notes,
+      nextDate: vaccine.nextDate,
+      quantity: vaccine.quantity,
+      status: vaccine.status,
     });
   };
 
-  const handleStatusChange = async (cageID, status, empty) => {
-    if (!empty) {
-      return window.confirm('Can not set status while Using');
+  const handleStatusChange = async (vaccinationID, status, quantity) => {
+    if (quantity <= 0) {
+      alert('Vaccine out of stock!!!');
+      return;
     }
     try {
       await axiosInstance.patch(
-        `${process.env.REACT_APP_API_URL}/cage/updateStatusCage`,
-        { cageID, status: !status },
+        `${process.env.REACT_APP_API_URL}/vaccine/updateStatusVaccine`,
+        { vaccinationID, status: !status },
       );
-      setCageData(prevState =>
-        prevState.map(cage =>
-          cage.cageID === cageID ? { ...cage, status: !status } : cage,
+      setVaccineData(prevState =>
+        prevState.map(vaccine =>
+          vaccine.vaccinationID === vaccinationID
+            ? { ...vaccine, status: !status }
+            : vaccine,
         ),
       );
     } catch (error) {
@@ -176,11 +212,12 @@ function AdminVaccine() {
     setStatusFilter(event.target.value);
   };
 
-  const filteredCageData = cageData.filter(cage => {
-    const status = cage.isEmpty ? 'Empty' : 'Using';
+  const filteredVaccineData = vaccineData.filter(vaccine => {
+    const status = vaccine.quantity > 0 ? 'In stock' : 'Out of stock';
     const matchesStatus = statusFilter === 'All' || status === statusFilter;
     const matchesSearch =
-      search === '' || cage.cageID.toLowerCase().includes(search.toLowerCase());
+      search === '' ||
+      vaccine.name.toLowerCase().includes(search.toLowerCase());
     return matchesStatus && matchesSearch;
   });
 
@@ -189,12 +226,12 @@ function AdminVaccine() {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentCages = filteredCageData.slice(
+  const currentVaccines = filteredVaccineData.slice(
     startIndex,
     startIndex + itemsPerPage,
   );
 
-  const totalPages = Math.ceil(filteredCageData.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredVaccineData.length / itemsPerPage);
 
   return (
     <div className='Admin-Vaccine container-fluid'>
@@ -209,17 +246,16 @@ function AdminVaccine() {
             <div className='Admin-Vaccine-Main-Table-Wrapper'>
               <div className='Admin-Vaccine-Main-Table'>
                 <div className='Admin-Vaccine-Main-Table-Title'>
-                  {' '}
-                  Cage List{' '}
+                  VACCINES LIST
                 </div>
                 <div className='Admin-Vaccine-Main-Table-Title-Text'>
-                  Cages Information
+                  Vaccines Information
                 </div>
                 <div className='Admin-Vaccine-Main-Filter'>
                   <div className='Admin-Vaccine-Main-Search'>
                     <input
                       type='text'
-                      placeholder='Search Cage ID'
+                      placeholder='Search Vaccine Name'
                       className='Admin-Vaccine-Main-Search-Input'
                       onChange={e => setSearch(e.target.value)}
                     />
@@ -240,8 +276,8 @@ function AdminVaccine() {
                       value={statusFilter}
                     >
                       <option>All</option>
-                      <option>Using</option>
-                      <option>Empty</option>
+                      <option>In stock</option>
+                      <option>Out of stock</option>
                     </select>
                   </div>
 
@@ -252,7 +288,7 @@ function AdminVaccine() {
                       data-bs-toggle='modal'
                       data-bs-target='#Admin-Vaccine-exampleModal'
                     >
-                      Add Cage
+                      Add Vaccine
                     </button>
 
                     <div
@@ -270,7 +306,7 @@ function AdminVaccine() {
                               className='modal-title fs-5'
                               id='exampleModalLabelEdit'
                             >
-                              Add Cage
+                              Add Vaccine
                             </h1>
                             <button
                               type='button'
@@ -285,11 +321,13 @@ function AdminVaccine() {
                                 Name
                               </div>
                               <input
+                                type='text'
                                 className='Admin-Vaccine-input'
                                 name='name'
-                                value={newCage.name}
-                                onChange={handleNewCageChange}
+                                value={newVaccine.name}
+                                onChange={handleNewVaccineChange}
                                 placeholder='Name'
+                                required
                               />
                               {errors.name && (
                                 <div className='Admin-Vaccine-Error'>
@@ -299,18 +337,56 @@ function AdminVaccine() {
                             </div>
                             <div className='Admin-Vaccine-modal-add-account'>
                               <div className='Admin-Vaccine-modal-title-name'>
-                                Description
+                                Notes
                               </div>
                               <input
+                                type='text'
                                 className='Admin-Vaccine-input'
-                                name='description'
-                                value={newCage.description}
-                                onChange={handleNewCageChange}
-                                placeholder='Description'
+                                name='notes'
+                                value={newVaccine.notes}
+                                onChange={handleNewVaccineChange}
+                                placeholder='Notes'
+                                required
                               />
-                              {errors.description && (
+                              {errors.notes && (
                                 <div className='Admin-Vaccine-Error'>
-                                  {errors.description}
+                                  {errors.notes}
+                                </div>
+                              )}
+                            </div>
+                            <div className='Admin-Vaccine-modal-add-account'>
+                              <div className='Admin-Vaccine-modal-title-name'>
+                                Quantity
+                              </div>
+                              <input
+                                type='number'
+                                className='Admin-Vaccine-input'
+                                name='quantity'
+                                value={newVaccine.quantity}
+                                onChange={handleNewVaccineChange}
+                                placeholder='Quantity'
+                              />
+                              {errors.quantity && (
+                                <div className='Admin-Vaccine-Error'>
+                                  {errors.quantity}
+                                </div>
+                              )}
+                            </div>
+                            <div className='Admin-Vaccine-modal-add-account'>
+                              <div className='Admin-Vaccine-modal-title-name'>
+                                Years until next vaccination:
+                              </div>
+                              <input
+                                type='number'
+                                className='Admin-Vaccine-input'
+                                name='nextDate'
+                                value={newVaccine.nextDate}
+                                onChange={handleNewVaccineChange}
+                                placeholder='Next Year'
+                              />
+                              {errors.nextDate && (
+                                <div className='Admin-Vaccine-Error'>
+                                  {errors.nextDate}
                                 </div>
                               )}
                             </div>
@@ -326,7 +402,7 @@ function AdminVaccine() {
                             <button
                               type='button'
                               className='btn btn-success'
-                              onClick={handleAddCage}
+                              onClick={handleAddVaccine}
                             >
                               Add
                             </button>
@@ -339,43 +415,45 @@ function AdminVaccine() {
 
                 <div className='Admin-Vaccine-Main-Table-Header'>
                   <div className='Admin-Vaccine-Main-Table-Header-Title'>
-                    Cage ID
+                    Vaccination ID
                   </div>
                   <div className='Admin-Vaccine-Main-Table-Header-Title'>
                     Name
                   </div>
                   <div className='Admin-Vaccine-Main-Table-Header-Title'>
-                    Description
+                    Notes
                   </div>
                   <div className='Admin-Vaccine-Main-Table-Header-Title'>
-                    Status
+                    Quantity
+                  </div>
+                  <div className='Admin-Vaccine-Main-Table-Header-Title'>
+                    Years until next vaccination
                   </div>
                   <div className='Admin-Vaccine-Main-Table-Header-Title-Btn'>
                     Action
                   </div>
                 </div>
 
-                {currentCages.length > 0 ? (
-                  currentCages.map(item => (
+                {currentVaccines.length > 0 ? (
+                  currentVaccines.map(item => (
                     <div
                       className='Admin-Vaccine-Main-Table-Content-Row-Wrapper'
-                      key={item.cageID}
+                      key={item.vaccinationID}
                     >
                       <div className='Admin-Vaccine-Main-Table-Content-Row'>
-                        {item.cageID}
+                        {item.vaccinationID}
                       </div>
                       <div className='Admin-Vaccine-Main-Table-Content-Row'>
                         {item.name}
                       </div>
                       <div className='Admin-Vaccine-Main-Table-Content-Row'>
-                        {item.description}
+                        {item.notes}
                       </div>
                       <div className='Admin-Vaccine-Main-Table-Content-Row'>
-                        {item.isEmpty ? (
-                          <span className='Admin-Vaccine-Empty'>Empty</span>
-                        ) : (
-                          <span className='Admin-Vaccine-Using'>Using</span>
-                        )}
+                        {item.quantity}
+                      </div>
+                      <div className='Admin-Vaccine-Main-Table-Content-Row'>
+                        {item.nextDate}
                       </div>
                       <div className='Admin-Vaccine-Main-Table-Content-Row-Action'>
                         <span className='Admin-Vaccine-Main-Table-Content-Btn_Wrapper'>
@@ -383,7 +461,7 @@ function AdminVaccine() {
                             type='button'
                             className='Admin-Vaccine-Main-Table-Content-Btn'
                             data-bs-toggle='modal'
-                            data-bs-target={`#exampleModalEdit-${item.cageID}`}
+                            data-bs-target={`#exampleModalEdit-${item.vaccinationID}`}
                             onClick={() => openEditModal(item)}
                           >
                             <BorderColorOutlinedIcon
@@ -393,7 +471,7 @@ function AdminVaccine() {
 
                           <div
                             className='modal fade'
-                            id={`exampleModalEdit-${item.cageID}`}
+                            id={`exampleModalEdit-${item.vaccinationID}`}
                             tabIndex='-1'
                             aria-labelledby='exampleModalLabelEdit'
                             aria-hidden='true'
@@ -405,7 +483,7 @@ function AdminVaccine() {
                                     className='modal-title fs-5'
                                     id='exampleModalLabelEdit'
                                   >
-                                    Edit Cage
+                                    Edit Vaccine
                                   </h1>
                                   <button
                                     type='button'
@@ -419,14 +497,11 @@ function AdminVaccine() {
                                     <div className='Admin-Vaccine-modal-title-name'>
                                       Name
                                     </div>
-                                    <label className='Admin-Vaccine-modal-update-new'>
-                                      Cage name:
-                                    </label>
                                     <input
                                       className='Admin-Vaccine-input'
                                       name='name'
-                                      value={editCage.name}
-                                      onChange={handleEditCageChange}
+                                      value={editVaccine.name}
+                                      onChange={handleEditVaccineChange}
                                       placeholder='Name'
                                     />
                                     {errors.name && (
@@ -437,21 +512,52 @@ function AdminVaccine() {
                                   </div>
                                   <div className='Admin-Vaccine-modal-update'>
                                     <div className='Admin-Vaccine-modal-title'>
-                                      Description
+                                      Notes
                                     </div>
-                                    <label className='Admin-Vaccine-modal-update-new'>
-                                      Cage description:
-                                    </label>
                                     <input
                                       className='Admin-Vaccine-input'
-                                      name='description'
-                                      value={editCage.description}
-                                      onChange={handleEditCageChange}
-                                      placeholder='Description'
+                                      name='notes'
+                                      value={editVaccine.notes}
+                                      onChange={handleEditVaccineChange}
+                                      placeholder='Notes'
                                     />
-                                    {errors.description && (
+                                    {errors.notes && (
                                       <div className='Admin-Vaccine-Error'>
-                                        {errors.description}
+                                        {errors.notes}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <div className='Admin-Vaccine-modal-update'>
+                                    <div className='Admin-Vaccine-modal-title'>
+                                      Quantity
+                                    </div>
+                                    <input
+                                      type='number'
+                                      className='Admin-Vaccine-input'
+                                      name='quantity'
+                                      value={editVaccine.quantity}
+                                      onChange={handleEditVaccineChange}
+                                    />
+                                    {errors.quantity && (
+                                      <div className='Admin-Vaccine-Error'>
+                                        {errors.quantity}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <div className='Admin-Vaccine-modal-update'>
+                                    <div className='Admin-Vaccine-modal-title'>
+                                      Years until next vaccination
+                                    </div>
+                                    <input
+                                      className='Admin-Vaccine-input'
+                                      type='number'
+                                      name='nextDate'
+                                      value={editVaccine.nextDate}
+                                      onChange={handleEditVaccineChange}
+                                    />
+                                    {errors.nextDate && (
+                                      <div className='Admin-Vaccine-Error'>
+                                        {errors.nextDate}
                                       </div>
                                     )}
                                   </div>
@@ -467,7 +573,7 @@ function AdminVaccine() {
                                   <button
                                     type='button'
                                     className='btn btn-success'
-                                    onClick={handleSaveChanges}
+                                    onClick={handleSaveChangesUpdate}
                                   >
                                     Save changes
                                   </button>
@@ -478,23 +584,16 @@ function AdminVaccine() {
                         </span>
 
                         <Switch
-                          checked={item.status}
+                          checked={item.status && item.quantity > 0}
                           onChange={() =>
                             handleStatusChange(
-                              item.cageID,
+                              item.vaccinationID,
                               item.status,
-                              item.isEmpty,
+                              item.quantity,
                             )
                           }
                           color={item.status ? 'success' : 'neutral'}
                           variant={item.status ? 'solid' : 'outlined'}
-                          slotProps={{
-                            endDecorator: {
-                              sx: {
-                                minWidth: 24,
-                              },
-                            },
-                          }}
                         />
                       </div>
                     </div>
@@ -506,7 +605,7 @@ function AdminVaccine() {
                 )}
 
                 <div className='Admin-Vaccine-Pagination'>
-                  {currentCages.length > 0 && totalPages > 1 && (
+                  {currentVaccines.length > 0 && totalPages > 1 && (
                     <Stack
                       spacing={2}
                       alignItems='center'

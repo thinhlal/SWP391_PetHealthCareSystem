@@ -811,13 +811,6 @@ function AdminAccount() {
                             onChange={() => handleStatusChange(item)}
                             color={item.status ? 'success' : 'neutral'}
                             variant={item.status ? 'solid' : 'outlined'}
-                            slotProps={{
-                              endDecorator: {
-                                sx: {
-                                  minWidth: 24,
-                                },
-                              },
-                            }}
                           />
                         </span>
                       </div>
