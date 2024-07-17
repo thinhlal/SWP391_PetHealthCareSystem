@@ -409,8 +409,6 @@ class AdminController {
         {
           $match: {
             dateBook: currentDate,
-            isCancel: false,
-            isCheckIn: true,
           },
         },
         {
@@ -432,8 +430,6 @@ class AdminController {
         {
           $match: {
             dateBook: previousDateStart,
-            isCancel: false,
-            isCheckIn: true,
           },
         },
         {
@@ -461,8 +457,6 @@ class AdminController {
                 previousWeekEndDate.getTime() + 24 * 60 * 60 * 1000,
               ),
             },
-            isCancel: false,
-            isCheckIn: true,
           },
         },
         {
@@ -487,8 +481,6 @@ class AdminController {
               $gte: weekStartDate,
               $lt: new Date(weekEndDate.getTime() + 24 * 60 * 60 * 1000),
             },
-            isCancel: false,
-            isCheckIn: true,
           },
         },
         {
@@ -514,8 +506,6 @@ class AdminController {
               $gte: previousMonthStartDate,
               $lt: previousMonthEndDate,
             },
-            isCancel: false,
-            isCheckIn: true,
           },
         },
         {
@@ -540,8 +530,6 @@ class AdminController {
               $gte: monthStartDate,
               $lt: nextMonthStartDate,
             },
-            isCancel: false,
-            isCheckIn: true,
           },
         },
         {
@@ -562,12 +550,6 @@ class AdminController {
 
       const totalIncomeAllBookings = await Booking.aggregate([
         {
-          $match: {
-            isCancel: false,
-            isCheckIn: true,
-          },
-        },
-        {
           $lookup: {
             from: 'payments',
             localField: 'bookingID',
@@ -583,34 +565,67 @@ class AdminController {
         },
       ]);
 
-      const currentTotalIncome = currentBookings.reduce(
-        (total, booking) => total + booking.totalPrice,
-        0,
-      );
-      const previousTotalIncome = previousBookings.reduce(
-        (total, booking) => total + booking.totalPrice,
-        0,
-      );
+      const currentTotalIncome = currentBookings.reduce((total, booking) => {
+        if (booking.isRefund) {
+          return total + (booking.totalPrice - booking.refundPrice);
+        } else {
+          return total + booking.totalPrice;
+        }
+      }, 0);
+      const previousTotalIncome = previousBookings.reduce((total, booking) => {
+        if (booking.isRefund) {
+          return total + (booking.totalPrice - booking.refundPrice);
+        } else {
+          return total + booking.totalPrice;
+        }
+      }, 0);
       const currentWeeklyTotalIncome = currentWeeklyBookings.reduce(
-        (total, booking) => total + booking.totalPrice,
+        (total, booking) => {
+          if (booking.isRefund) {
+            return total + (booking.totalPrice - booking.refundPrice);
+          } else {
+            return total + booking.totalPrice;
+          }
+        },
         0,
       );
       const previousWeeklyTotalIncome = previousWeeklyBookings.reduce(
-        (total, booking) => total + booking.totalPrice,
+        (total, booking) => {
+          if (booking.isRefund) {
+            return total + (booking.totalPrice - booking.refundPrice);
+          } else {
+            return total + booking.totalPrice;
+          }
+        },
         0,
       );
       const previousMonthlyTotalIncome = previousMonthlyBookings.reduce(
-        (total, booking) => total + booking.totalPrice,
+        (total, booking) => {
+          if (booking.isRefund) {
+            return total + (booking.totalPrice - booking.refundPrice);
+          } else {
+            return total + booking.totalPrice;
+          }
+        },
         0,
       );
       const currentMonthlyTotalIncome = currentMonthlyBookings.reduce(
-        (total, booking) => total + booking.totalPrice,
+        (total, booking) => {
+          if (booking.isRefund) {
+            return total + (booking.totalPrice - booking.refundPrice);
+          } else {
+            return total + booking.totalPrice;
+          }
+        },
         0,
       );
-      const totalIncome = totalIncomeAllBookings.reduce(
-        (total, booking) => total + booking.totalPrice,
-        0,
-      );
+      const totalIncome = totalIncomeAllBookings.reduce((total, booking) => {
+        if (booking.isRefund) {
+          return total + (booking.totalPrice - booking.refundPrice);
+        } else {
+          return total + booking.totalPrice;
+        }
+      }, 0);
       res.status(200).json({
         currentTotalIncome,
         previousTotalIncome,

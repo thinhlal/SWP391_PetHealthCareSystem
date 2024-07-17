@@ -558,6 +558,7 @@ const Booking = () => {
               </div>
               <div className='checkBoxVaccineWrapper'>
                 <FormControlLabel
+                  sx={{ mt: 2 }}
                   control={
                     <Checkbox
                       checked={vaccinationChecked}

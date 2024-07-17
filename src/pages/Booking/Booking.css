@@ -183,6 +183,7 @@ body {
 }
 
 .booking-container .content-selected-services-frame .total-selected-services {
+  font-size: 18px;
   margin-top: 10px;
   font-weight: bold;
 }

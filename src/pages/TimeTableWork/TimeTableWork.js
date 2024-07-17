@@ -454,7 +454,10 @@ const Calendar = () => {
                   className='btn btn-primary'
                   data-bs-dismiss='modal'
                   onClick={handleSave}
-                  disabled={!startTime || !endTime}
+                  disabled={
+                    (!startTime && !isHoliday && !isFullTime) ||
+                    (!endTime && !isHoliday && !isFullTime)
+                  }
                 >
                   Save changes
                 </button>
