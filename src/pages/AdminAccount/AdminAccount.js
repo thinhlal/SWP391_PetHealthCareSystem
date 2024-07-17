@@ -82,7 +82,7 @@ function AdminAccount() {
   };
 
   const validatePhone = phone => {
-    const re = /^[0-9]{10}$/;
+    const re = /^[0-9]{9,10}$/;
     return re.test(String(phone));
   };
 
@@ -95,6 +95,23 @@ function AdminAccount() {
     if (!editAccount.phone) newErrors.phone = 'Phone number is required';
     else if (!validatePhone(editAccount.phone))
       newErrors.phone = 'Invalid phone number format';
+
+    const currentEmail = accountData.find(
+      account => account.accountID === editAccount.accountID,
+    )?.email;
+    const currentPhone = accountData.find(
+      account => account.accountID === editAccount.accountID,
+    )?.phone;
+
+    if (editAccount.email !== currentEmail) {
+      const emailExists = await checkEmailExists(editAccount.email);
+      if (emailExists) newErrors.email = 'Email already exists';
+    }
+
+    if (editAccount.phone !== currentPhone) {
+      const phoneExists = await checkPhoneExists(editAccount.phone);
+      if (phoneExists) newErrors.phone = 'Phone number already exists';
+    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -180,33 +197,84 @@ function AdminAccount() {
     }));
   };
 
-  const handleAddAccount = async () => {
-    const newErrors = {};
-    if (!newAccount.username) newErrors.username = 'User name is required';
-    if (!newAccount.password) newErrors.password = 'Password is required';
-    else if (!validatePassword(newAccount.password))
-      newErrors.password = 'The minimum length is 8 characters';
-    if (!newAccount.confirmPassword)
-      newErrors.confirmPassword = 'Confirm password is required';
-    if (newAccount.password !== newAccount.confirmPassword)
-      newErrors.confirmPassword = 'Passwords do not match';
-    if (!newAccount.name) newErrors.name = 'Name is required';
-    if (!newAccount.email) newErrors.email = 'Email is required';
-    else if (!validateEmail(newAccount.email))
-      newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
-    if (!newAccount.phone) newErrors.phone = 'Phone number is required';
-    else if (!validatePhone(newAccount.phone))
-      newErrors.phone = 'Invalid phone number format';
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    const newAccountData = {
-      ...newAccount,
-    };
+  const checkUsernameExists = async username => {
     try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/admin/checkUsername?username=${username}`,
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error('Error checking username:', error);
+      return false;
+    }
+  };
+  const checkEmailExists = async email => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/admin/checkEmail?email=${email}`,
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error('Error checking email:', error);
+      return false;
+    }
+  };
+
+  const checkPhoneExists = async phone => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/admin/checkPhone?phone=${phone}`,
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error('Error checking phone:', error);
+      return false;
+    }
+  };
+
+  const handleAddAccount = async () => {
+    try {
+      const newErrors = {};
+
+      if (!newAccount.username) newErrors.username = 'User name is required';
+      if (newAccount.username.includes(' ')) {
+        newErrors.username = 'Username must not contain spaces';
+      }
+      if (newAccount.username.length < 5) {
+        newErrors.username = 'Username must be at least 5 characters long';
+      }
+      const usernameExists = await checkUsernameExists(newAccount.username);
+      if (usernameExists) newErrors.username = 'Username already exists';
+
+      if (!newAccount.password) newErrors.password = 'Password is required';
+      else if (!validatePassword(newAccount.password))
+        newErrors.password = 'The minimum length is 8 characters';
+      if (!newAccount.confirmPassword)
+        newErrors.confirmPassword = 'Confirm password is required';
+      if (newAccount.password !== newAccount.confirmPassword)
+        newErrors.confirmPassword = 'Passwords do not match';
+      if (!newAccount.name) newErrors.name = 'Name is required';
+      if (!newAccount.email) newErrors.email = 'Email is required';
+      if (!validateEmail(newAccount.email))
+        newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
+      const emailExists = await checkEmailExists(newAccount.email);
+      if (emailExists) newErrors.email = 'Email already exists';
+
+      if (!newAccount.phone) newErrors.phone = 'Phone number is required';
+      if (!validatePhone(newAccount.phone))
+        newErrors.phone = 'Invalid phone number format';
+      const phoneExists = await checkPhoneExists(newAccount.phone);
+      if (phoneExists) newErrors.phone = 'Phone number already exists';
+
+      if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+
+      const newAccountData = {
+        ...newAccount,
+      };
+
       await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/admin/addAccount`,
         newAccountData,
@@ -361,6 +429,18 @@ function AdminAccount() {
                               className='btn-close'
                               data-bs-dismiss='modal'
                               aria-label='Close'
+                              onClick={() => {
+                                setErrors({});
+                                setNewAccount({
+                                  username: '',
+                                  password: '',
+                                  confirmPassword: '',
+                                  name: '',
+                                  email: '',
+                                  phone: '',
+                                  role: 'Customer',
+                                });
+                              }}
                             ></button>
                           </div>
                           <div className='modal-body'>
@@ -500,6 +580,18 @@ function AdminAccount() {
                               type='button'
                               className='btn btn-secondary'
                               data-bs-dismiss='modal'
+                              onClick={() => {
+                                setErrors({});
+                                setNewAccount({
+                                  username: '',
+                                  password: '',
+                                  confirmPassword: '',
+                                  name: '',
+                                  email: '',
+                                  phone: '',
+                                  role: 'Customer',
+                                });
+                              }}
                             >
                               Close
                             </button>
@@ -581,6 +673,15 @@ function AdminAccount() {
                                     className='btn-close'
                                     data-bs-dismiss='modal'
                                     aria-label='Close'
+                                    onClick={() => {
+                                      setErrors({});
+                                      setNewAccount({
+                                        name: '',
+                                        email: '',
+                                        phone: '',
+                                        role: '',
+                                      });
+                                    }}
                                   ></button>
                                 </div>
                                 <div className='modal-body'>
@@ -675,6 +776,15 @@ function AdminAccount() {
                                       type='button'
                                       className='btn btn-secondary'
                                       data-bs-dismiss='modal'
+                                      onClick={() => {
+                                        setErrors({});
+                                        setNewAccount({
+                                          name: '',
+                                          email: '',
+                                          phone: '',
+                                          role: '',
+                                        });
+                                      }}
                                     >
                                       Close
                                     </button>

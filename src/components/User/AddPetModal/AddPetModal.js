@@ -2,10 +2,10 @@ import './AddPetModal.css';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import axiosInstance from '../../../utils/axiosInstance';
-import { storage } from '../../../config/firebase'; // Import the storage from your firebaseConfig.js
+import { storage } from '../../../config/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
+const AddPetModal = ({ isOpen, onClose, onAddPet, onLoadingChange }) => {
   const { user } = useContext(AuthContext);
   const [newPet, setNewPet] = useState({
     name: '',
@@ -78,41 +78,57 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
     if (!validateFields()) {
       return;
     }
+    onLoadingChange(true);
+    try {
+      const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
+      await uploadBytes(imageRef, imageFile);
+      const imageUrl = await getDownloadURL(imageRef);
 
-    const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
-    await uploadBytes(imageRef, imageFile);
-    const imageUrl = await getDownloadURL(imageRef);
+      const res = await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/pet/add`,
+        {
+          accountID: user.accountID,
+          name: newPet.name,
+          birthday: newPet.age,
+          breed: newPet.breed,
+          type: newPet.type,
+          gender: newPet.gender,
+          image: imageUrl,
+        },
+      );
 
-    const res = await axiosInstance.post(
-      `${process.env.REACT_APP_API_URL}/pet/add`,
-      {
-        accountID: user.accountID,
-        name: newPet.name,
-        birthday: newPet.age,
-        breed: newPet.breed,
-        type: newPet.type,
-        gender: newPet.gender,
-        image: imageUrl,
-      },
-    );
-
-    const petID = res.data.petID;
-    onAddPet({ petID, ...newPet, image: imageUrl });
-    onClose();
-    setNewPet({
-      name: '',
-      age: '',
-      breed: '',
-      type: '',
-      gender: '',
-      image: '',
-    });
-    setImagePreview('');
-    resetErrors();
+      const petID = res.data.petID;
+      onAddPet({ petID, ...newPet, image: imageUrl });
+      onClose();
+      setNewPet({
+        name: '',
+        age: '',
+        breed: '',
+        type: '',
+        gender: '',
+        image: '',
+      });
+      setImagePreview('');
+      resetErrors();
+    } catch (error) {
+      console.error('Error adding pet:', error);
+    } finally {
+      onLoadingChange(false);
+    }
   };
 
   const handleChange = e => {
     const { name, value } = e.target;
+    const currentDate = new Date();
+
+    if (name === 'age') {
+      const selectedDate = new Date(value);
+      if (selectedDate > currentDate) {
+        setErrorMessageAge('Age cannot be a future date');
+        return;
+      }
+    }
+
     setNewPet({ ...newPet, [name]: value });
 
     switch (name) {
@@ -154,6 +170,16 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
   const handleModalClick = e => {
     if (e.target.classList.contains('modal-choose-pet')) {
       onClose();
+      setNewPet({
+        name: '',
+        age: '',
+        breed: '',
+        type: '',
+        gender: '',
+        image: '',
+      });
+      setImagePreview('');
+      resetErrors();
     }
   };
 
@@ -165,7 +191,19 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
       <div className='modal-choose-pet-content show'>
         <button
           className='modal-close-button'
-          onClick={onClose}
+          onClick={() => {
+            setNewPet({
+              name: '',
+              age: '',
+              breed: '',
+              type: '',
+              gender: '',
+              image: '',
+            });
+            setImagePreview('');
+            resetErrors();
+            onClose();
+          }}
         >
           ×
         </button>
@@ -285,7 +323,19 @@ const AddPetModal = ({ isOpen, onClose, onAddPet }) => {
         </button>
         <button
           className='button-modal-choose-pet'
-          onClick={onClose}
+          onClick={() => {
+            setNewPet({
+              name: '',
+              age: '',
+              breed: '',
+              type: '',
+              gender: '',
+              image: '',
+            });
+            setImagePreview('');
+            resetErrors();
+            onClose();
+          }}
         >
           Close
         </button>

@@ -8,15 +8,6 @@ const Customer = require('../models/Customer.js');
 const Rate = require('../models/Rate.js');
 
 class AdminController {
-  // POST /add
-  async add(req, res, next) {
-    //const bookingInfo = req.body;
-    try {
-    } catch (error) {
-      res.status(500).json({ message: 'Error creating ', error });
-    }
-  }
-
   // GET /getRevenueOfEachMonth
   async getRevenueOfEachMonth(req, res, next) {
     try {
@@ -884,6 +875,54 @@ class AdminController {
       res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: 'Error when get accounts', error });
+    }
+  }
+
+  // GET /checkUsername
+  async checkUsername(req, res, next) {
+    const { username } = req.query;
+    try {
+      const account = await Account.findOne({ username });
+      if (account) {
+        return res.status(200).json({ exists: true });
+      }
+      res.status(200).json({ exists: false });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  }
+
+  // GET /checkPhone
+  async checkPhone(req, res, next) {
+    const { phone } = req.query;
+    try {
+      const customer = await Customer.findOne({ phone });
+      const staff = await Staff.findOne({ phone });
+      const doctor = await Doctor.findOne({ phone });
+      const admin = await Admin.findOne({ phone });
+      if (customer || staff || doctor || admin) {
+        return res.status(200).json({ exists: true });
+      }
+      res.status(200).json({ exists: false });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  }
+
+  // GET /checkEmail
+  async checkEmail(req, res, next) {
+    const { email } = req.query;
+    try {
+      const customer = await Customer.findOne({ email });
+      const staff = await Staff.findOne({ email });
+      const doctor = await Doctor.findOne({ email });
+      const admin = await Admin.findOne({ email });
+      if (customer || staff || doctor || admin) {
+        return res.status(200).json({ exists: true });
+      }
+      res.status(200).json({ exists: false });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
     }
   }
 }

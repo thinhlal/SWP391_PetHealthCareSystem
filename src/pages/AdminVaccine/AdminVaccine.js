@@ -83,6 +83,8 @@ function AdminVaccine() {
   const handleAddVaccine = async () => {
     const newErrors = {};
     if (!newVaccine.name) newErrors.name = 'Name is required';
+    const duplicateVaccineName = await checkDuplicateName(editVaccine.name);
+    if (duplicateVaccineName) newErrors.name = 'Cage name already exists';
     if (!newVaccine.notes) newErrors.notes = 'Notes is required';
     if (parseInt(newVaccine.nextDate) < 0)
       newErrors.nextDate = 'NextDate should greater than or equal to zero';
@@ -91,21 +93,6 @@ function AdminVaccine() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      return;
-    }
-
-    try {
-      const response = await axiosInstance.get(
-        `${process.env.REACT_APP_API_URL}/vaccine/checkDuplicateName`,
-        { params: { name: newVaccine.name.trim().toLowerCase() } },
-      );
-
-      if (response.data.exists) {
-        setErrors({ name: 'Vaccine name already exists' });
-        return;
-      }
-    } catch (error) {
-      console.error(error);
       return;
     }
 
@@ -136,9 +123,23 @@ function AdminVaccine() {
     }
   };
 
+  const checkDuplicateName = async phone => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/vaccine/checkDuplicateName`,
+        { params: { name: newVaccine.name.trim().toLowerCase() } },
+      );
+      return response.data.exists;
+    } catch (error) {
+      return false;
+    }
+  };
+
   const handleSaveChangesUpdate = async () => {
     const newErrors = {};
     if (!editVaccine.name) newErrors.name = 'Name is required';
+    const duplicateVaccineName = await checkDuplicateName(editVaccine.name);
+    if (duplicateVaccineName) newErrors.name = 'Cage name already exists';
     if (!editVaccine.notes) newErrors.notes = 'Notes is required';
     if (editVaccine.nextDate < 0)
       newErrors.nextDate = 'NextDate should greater than or equal to zero';

@@ -7,7 +7,7 @@ import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
 import axiosInstance from '../../utils/axiosInstance';
 import { Tab, Tabs } from 'react-bootstrap';
-import { Pagination, Stack } from '@mui/material';
+import { CircularProgress, Pagination, Stack } from '@mui/material';
 
 function ManageListBooking() {
   const [allServices, setAllServices] = useState([]);
@@ -63,6 +63,7 @@ function ManageListBooking() {
   const [bookingDetailsCheckIn, setBookingDetailsCheckIn] = useState(null);
   const [servicesWhileCheckIn, setServicesWhileCheckIn] = useState([]);
   const [serviceFilter, setServiceFilter] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -356,6 +357,7 @@ function ManageListBooking() {
   };
 
   const handleSave = async bookingID => {
+    setLoading(true);
     try {
       await axiosInstance.patch(
         `${process.env.REACT_APP_API_URL}/manageBooking/updateBookingDoctors`,
@@ -367,6 +369,8 @@ function ManageListBooking() {
       setAllBookings(response.data.allBookings);
     } catch (error) {
       console.error('error Update Manage Booking: ' + error);
+    } finally {
+      setLoading(false);
     }
     setChosenDoctor('');
   };
@@ -428,6 +432,7 @@ function ManageListBooking() {
     if (!validateForm()) return;
 
     if (accountOption === 'hasOwnerID') {
+      setLoading(true);
       const newBookingHasCustomer = {
         day: selectedDate,
         startTime: selectedTimeSlot.startTime,
@@ -449,8 +454,11 @@ function ManageListBooking() {
         setAllBookings(response.data.allBookings);
       } catch (error) {
         console.error('error Add Manage Booking: ' + error);
+      } finally {
+        setLoading(false);
       }
     } else {
+      setLoading(true);
       const newBookingAndNewCustomer = {
         day: selectedDate,
         startTime: selectedTimeSlot.startTime,
@@ -473,6 +481,8 @@ function ManageListBooking() {
         setAllBookings(response.data.allBookings);
       } catch (error) {
         console.error('error Add Manage Booking: ' + error);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -503,6 +513,7 @@ function ManageListBooking() {
         .sort((a, b) => new Date(b.dateBook) - new Date(a.dateBook));
 
   const handleConfirmPayment = async bookingID => {
+    setLoading(true);
     try {
       await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/manageBooking/confirmPayment`,
@@ -514,12 +525,15 @@ function ManageListBooking() {
       reRenderGetAllBookings();
     } catch (error) {
       console.error('Error cancelling booking', error);
+    } finally {
+      setLoading(false);
     }
     setBookingDetailsCheckIn(null);
     setServicesWhileCheckIn([]);
   };
 
   const handleConfirmRefund = async bookingID => {
+    setLoading(true);
     try {
       await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/paypal/refundPaymentBooking`,
@@ -530,10 +544,13 @@ function ManageListBooking() {
       reRenderGetAllBookings();
     } catch (error) {
       console.error('Error cancelling booking', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleConfirmCheckIn = async bookingID => {
+    setLoading(true);
     try {
       await axiosInstance.post(
         `${process.env.REACT_APP_API_URL}/manageBooking/confirmCheckIn`,
@@ -545,6 +562,8 @@ function ManageListBooking() {
       reRenderGetAllBookings();
     } catch (error) {
       console.error('Error Confirm Check In', error);
+    } finally {
+      setLoading(false);
     }
     setBookingDetailsCheckIn(null);
     setServicesWhileCheckIn([]);
@@ -594,6 +613,11 @@ function ManageListBooking() {
 
   return (
     <div className='manage-booking-list container-fluid'>
+      {loading && (
+        <div className='loading-overlay'>
+          <CircularProgress />
+        </div>
+      )}
       <div className='row'>
         <HeaderManager />
         <div className='manage-booking-list-title'>
@@ -1738,6 +1762,18 @@ function ManageListBooking() {
                                             {booking.dateBook.split('T')[0]}
                                           </small>
                                         </div>
+                                        {booking.isRefund &&
+                                        calculateDateLeft(
+                                          booking.dateCancelBook,
+                                          booking.dateBook,
+                                        ) >= 3 ? (
+                                          <div className='reason-manage-booking'>
+                                            <small className='title-reason-manage-booking'>
+                                              Refund price:&nbsp;
+                                            </small>
+                                            <small>{booking.refundPrice}</small>
+                                          </div>
+                                        ) : null}
                                         <div className='reason-manage-booking'>
                                           <small className='title-reason-manage-booking'>
                                             Status:&nbsp;

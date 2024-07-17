@@ -8,8 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Sidebar from '../../components/User/Sidebar/Sidebar.js';
 import AddPetModal from '../../components/User/AddPetModal/AddPetModal.js';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { AuthContext } from '../../context/AuthContext.js';
@@ -22,10 +20,9 @@ function YourPet() {
   const [pets, setPets] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isModalLoading, setIsModalLoading] = useState(false);
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });
-
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -50,6 +47,7 @@ function YourPet() {
 
   const addPet = pet => {
     setPets([...pets, pet]);
+    setIsModalLoading(false);
   };
 
   const PetProfileCard = ({ imgSrc, name, petID }) => (
@@ -80,7 +78,7 @@ function YourPet() {
     navigate(`/pet-profile?petID=${petID}`);
   };
 
-  if (loading) {
+  if (loading || isModalLoading) {
     return <AnimationComponent />;
   }
 
@@ -157,6 +155,7 @@ function YourPet() {
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
               onAddPet={addPet}
+              onLoadingChange={setIsModalLoading}
             />
           </div>
         </div>

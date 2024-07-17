@@ -5,8 +5,6 @@ import StarRate from '../../components/Admin/StarRate/StarRate.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Sidebar from '../../components/User/Sidebar/Sidebar.js';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import React, { useState, useEffect, useContext } from 'react';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import axiosInstance from '../../utils/axiosInstance.js';
@@ -32,8 +30,6 @@ function YourBooking() {
   });
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });
-
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -47,13 +43,12 @@ function YourBooking() {
         const dataBookings = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
         );
-        const sortTimeBookings = dataBookings.data.allBookings.sort((a, b) =>
-          b.startTime.localeCompare(a.startTime),
-        );
-        const sortDataBookings = sortTimeBookings.sort((a, b) =>
+        const sortDateBooking = dataBookings.data.allBookings.sort((a, b) =>
           b.dateBook.localeCompare(a.dateBook),
         );
-        console.log(sortDataBookings);
+        const sortDataBookings = sortDateBooking.sort((a, b) =>
+          b.bookingID.localeCompare(a.bookingID),
+        );
         setYourBookings(sortDataBookings);
       } catch (error) {
         console.log(error);
@@ -538,6 +533,7 @@ function YourBooking() {
                               booking.paymentsDetails[0].paymentMethod ===
                                 'PAYPAL' &&
                               booking.isCheckIn &&
+                              booking.isCompleted &&
                               !booking.isRate ? (
                               <button
                                 type='button'
@@ -556,6 +552,7 @@ function YourBooking() {
                               booking.paymentsDetails[0].paymentMethod ===
                                 'COUNTER' &&
                               booking.isCheckIn &&
+                              booking.isCompleted &&
                               !booking.isRate ? (
                               <button
                                 type='button'
@@ -570,7 +567,14 @@ function YourBooking() {
                                   Feedback
                                 </div>
                               </button>
-                            ) : (
+                            ) : booking.paymentsDetails[0].isSuccess &&
+                              (booking.paymentsDetails[0].paymentMethod ===
+                                'COUNTER' ||
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL') &&
+                              booking.isCheckIn &&
+                              !booking.isCompleted &&
+                              !booking.isRate ? null : (
                               <button
                                 type='button'
                                 className='btn btn-primary feedback-rate-booking'

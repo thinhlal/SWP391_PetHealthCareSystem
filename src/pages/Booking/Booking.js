@@ -8,8 +8,6 @@ import Header from '../../components/User/Header/Header.js';
 import red from '../../assets/images/img_Booking/red_square.png';
 import green from '../../assets/images/img_Booking/green_square.png';
 import gray from '../../assets/images/img_Booking/gray-color-solid-background-1920x1080.png';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import dayjs from 'dayjs';
@@ -46,8 +44,6 @@ const Booking = () => {
   const [vaccinationChecked, setVaccinationChecked] = useState(false);
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });
-
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -251,6 +247,7 @@ const Booking = () => {
       return setErrorMessageDate('Choose date to book!!');
     }
     if (selectedSlot && selectedDate) {
+      setLoading(true);
       const bookingData = {
         doctorID: selectedDoctor,
         dateBook: selectedDate,
@@ -320,6 +317,9 @@ const Booking = () => {
       case 'email':
         setErrorMessageEmail('');
         break;
+      case 'serviceID':
+        setErrorMessageServices('');
+        break;
       default:
         break;
     }
@@ -349,6 +349,11 @@ const Booking = () => {
 
     if (isServiceAlreadySelected) {
       setErrorMessageServices('This service has already been selected.');
+      return;
+    }
+
+    if (selectedServices.length + 1 > 3) {
+      setErrorMessageServices('Maximum 3 services in 1 slot');
       return;
     }
 

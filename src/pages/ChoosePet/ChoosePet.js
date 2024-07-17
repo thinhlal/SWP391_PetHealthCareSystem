@@ -1,6 +1,5 @@
 import './ChoosePet.css';
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 // components
@@ -20,9 +19,12 @@ function ChoosePet() {
   const [petID, setSelectedPetId] = useState(null);
   const petContainerRef = useRef(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [isModalLoading, setIsModalLoading] = useState(false);
 
   const addPet = pet => {
     setPets([...pets, pet]);
+    setIsModalLoading(false);
   };
 
   const handleSelectPet = id => {
@@ -46,8 +48,6 @@ function ChoosePet() {
     }
   };
 
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -57,8 +57,6 @@ function ChoosePet() {
   }, []);
 
   useEffect(() => {
-    AOS.init({ duration: 1000 });
-
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -80,7 +78,8 @@ function ChoosePet() {
 
     fetchPets();
   }, [user]);
-  if (loading) {
+
+  if (loading || isModalLoading) {
     return <AnimationComponent />;
   }
 
@@ -139,6 +138,7 @@ function ChoosePet() {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onAddPet={addPet}
+          onLoadingChange={setIsModalLoading}
         />
       </div>
       <Footer />

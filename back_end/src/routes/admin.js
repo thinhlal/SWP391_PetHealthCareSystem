@@ -21,6 +21,8 @@ router.get('/getAllRates', verifyToken, AdminController.getAllRates);
 router.get('/getAllAccounts', verifyToken, AdminController.getAllAccounts);
 router.get('/getRating', verifyToken, AdminController.getRating);
 router.get('/getTotalIncome', verifyToken, AdminController.getTotalIncome);
-router.post('/add', verifyToken, AdminController.add);
+router.get('/checkUsername', verifyToken, AdminController.checkUsername);
+router.get('/checkPhone', verifyToken, AdminController.checkPhone);
+router.get('/checkEmail', verifyToken, AdminController.checkEmail);
 
 module.exports = router;

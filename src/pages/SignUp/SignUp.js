@@ -27,6 +27,10 @@ function SignUp() {
     event.preventDefault();
     const newErrors = {};
 
+    if (formData.username.includes(' ')) {
+      newErrors.username = 'Username must not contain spaces';
+    }
+
     if (formData.username.length < 5) {
       newErrors.username = 'Username must be at least 5 characters long';
     }

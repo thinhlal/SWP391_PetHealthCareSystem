@@ -2,6 +2,19 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.manage-booking-list .loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999999;
+}
+
 .manage-booking-list .manage-booking-list-title {
   margin: 70px 0;
   display: flex;
@@ -289,6 +302,10 @@
   margin: 10px 20px 50px;
   display: flex;
   align-items: center;
+}
+
+.manage-booking-list .main-modal-content-manage-booking {
+  width: 100%;
 }
 
 .manage-booking-list .content-modal-manage-booking {
