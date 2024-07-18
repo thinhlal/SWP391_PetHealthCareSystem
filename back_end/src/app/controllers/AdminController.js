@@ -16,8 +16,6 @@ class AdminController {
       const revenueByMonth = await Booking.aggregate([
         {
           $match: {
-            isCancel: false,
-            isCheckIn: true,
             dateBook: {
               $gte: new Date(`${currentYear}-01-01`),
               $lte: new Date(`${currentYear}-12-31`),
@@ -25,12 +23,44 @@ class AdminController {
           },
         },
         {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails'
+          }
+        },
+        {
+          $unwind: {
+            path: '$paymentDetails',
+            preserveNullAndEmptyArrays: true
+          }
+        },
+        {
+          $match: {
+            'paymentDetails.isCancelPayment': { $ne: true }
+          }
+        },
+        {
+          $project: {
+            year: { $year: '$dateBook' },
+            month: { $month: '$dateBook' },
+            effectivePrice: {
+              $cond: {
+                if: '$isRefund',
+                then: { $subtract: ['$totalPrice', '$refundPrice'] },
+                else: '$totalPrice'
+              }
+            }
+          }
+        },
+        {
           $group: {
             _id: {
-              year: { $year: '$dateBook' },
-              month: { $month: '$dateBook' },
+              year: '$year',
+              month: '$month',
             },
-            totalRevenue: { $sum: '$totalPrice' },
+            totalRevenue: { $sum: '$effectivePrice' },
           },
         },
         {
@@ -39,7 +69,7 @@ class AdminController {
             '_id.month': 1,
           },
         },
-      ]);
+      ]); 
 
       const canceledBookingsByMonth = await Booking.aggregate([
         {
@@ -68,7 +98,6 @@ class AdminController {
         },
       ]);
 
-      // Initialize arrays for all months
       const allMonths = Array.from({ length: 12 }, (_, i) => ({
         year: currentYear,
         month: i + 1,
