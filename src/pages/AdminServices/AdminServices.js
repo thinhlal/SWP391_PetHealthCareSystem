@@ -82,12 +82,16 @@ function AdminServices() {
         }
       }
     } else if (name === 'price') {
-      if (!value || value === '$') {
-        error = 'Please enter your information';
+      if (!value || value === '$' || value.startsWith('0')) {
+        error = 'Please enter a valid price';
       } else {
         const regex = /^\d+$/;
         if (!regex.test(value)) {
           error = 'Price must be a number';
+        } else if (parseInt(value, 10) <= 0) {
+          error = 'Price must be a positive number';
+        } else if (parseInt(value, 10) > 1000000) {
+          error = 'Price cannot exceed 1000000';
         }
       }
     }
