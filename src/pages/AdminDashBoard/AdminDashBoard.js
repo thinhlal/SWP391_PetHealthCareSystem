@@ -1,20 +1,15 @@
-//css
 import './AdminDashBoard.css';
-//React
 import React, { useEffect, useState } from 'react';
-// Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
-// Bootstrap Bundle JS
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-//Components
 import Header from '../../components/Admin/Header/Header';
 import Sidebar from '../../components/Admin/Sidebar/Sidebar';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-//images
 import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg';
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
+import { useDate } from '../../components/Admin/DateContext/DateContext';
 
 function AdminDashBoard() {
   const [activeTab, setActiveTab] = useState('Profile');
@@ -29,6 +24,7 @@ function AdminDashBoard() {
     done: false,
     beingExamined: false,
   });
+  const { selectedDate } = useDate();
 
   const openTab = tabName => {
     setActiveTab(tabName);
@@ -53,6 +49,7 @@ function AdminDashBoard() {
   }, []);
 
   const searchBookingData = bookingData.filter(booking => {
+    const matchesDate = booking.dateBook.split('T')[0] === selectedDate;
     const matchesSearch =
       search === '' ||
       booking.bookingID.toLowerCase().includes(search.toLowerCase());
@@ -100,6 +97,7 @@ function AdminDashBoard() {
       (statusFilters.beingExamined && bookingStatus === 'beingExamined');
 
     return (
+      matchesDate &&
       matchesSearch &&
       (statusFilters.pending ||
       statusFilters.cancel ||

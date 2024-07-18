@@ -31,239 +31,242 @@ import PetStatus from './pages/PetStatus/PetStatus.js';
 import DoctorCare from './pages/DoctorCare/DoctorCare.js';
 import AdminChartStatistic from './pages/AdminChartStatistic/AdminChartStatistic.js';
 import AdminVaccine from './pages/AdminVaccine/AdminVaccine.js';
+import { DateProvider } from './components/Admin/DateContext/DateContext.js';
 function App() {
   return (
     <AuthProvider>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/unauthorized'
-          element={<Unauthorized />}
-        />
-        <Route
-          path='/login'
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path='/signup'
-          element={
-            <PublicRoute>
-              <SignUp />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path='/services'
-          element={<Services />}
-        />
-        <Route
-          path='/veterinarian-info'
-          element={<VeterinarianInfo />}
-        />
-        <Route
-          path='/your-pet'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <YourPet />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/your-booking'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <YourBooking />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/booking'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <Booking />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/choose'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <ChoosePet />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/pet-profile'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <ProfilePet />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path='/payment'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <Payment />
-            </ProtectedRoute>
-          }
-        />
+      <DateProvider>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/unauthorized'
+            element={<Unauthorized />}
+          />
+          <Route
+            path='/login'
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/signup'
+            element={
+              <PublicRoute>
+                <SignUp />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path='/services'
+            element={<Services />}
+          />
+          <Route
+            path='/veterinarian-info'
+            element={<VeterinarianInfo />}
+          />
+          <Route
+            path='/your-pet'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <YourPet />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/your-booking'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <YourBooking />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/booking'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <Booking />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/choose'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <ChoosePet />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/pet-profile'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <ProfilePet />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/payment'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <Payment />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/user-profile'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <UserProfile />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/user-profile'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <UserProfile />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/change-user-password'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <ChangeUserPassword />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/change-user-password'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <ChangeUserPassword />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/pet-status'
-          element={
-            <ProtectedRoute allowedRoles={['Customer']}>
-              <PetStatus />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/pet-status'
+            element={
+              <ProtectedRoute allowedRoles={['Customer']}>
+                <PetStatus />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/manage-booking'
-          element={
-            <ProtectedRoute allowedRoles={['Staff']}>
-              <ManageListBooking />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/manage-booking'
+            element={
+              <ProtectedRoute allowedRoles={['Staff']}>
+                <ManageListBooking />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/manage-cages'
-          element={
-            <ProtectedRoute allowedRoles={['Staff']}>
-              <ManageCages />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/manage-cages'
+            element={
+              <ProtectedRoute allowedRoles={['Staff']}>
+                <ManageCages />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/work-schedule'
-          element={
-            <ProtectedRoute allowedRoles={['Doctor']}>
-              <WorkSchedule />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/work-schedule'
+            element={
+              <ProtectedRoute allowedRoles={['Doctor']}>
+                <WorkSchedule />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/pet-exam-record'
-          element={
-            <ProtectedRoute allowedRoles={['Doctor']}>
-              <PetExamRecord />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/pet-exam-record'
+            element={
+              <ProtectedRoute allowedRoles={['Doctor']}>
+                <PetExamRecord />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/time-table'
-          element={
-            <ProtectedRoute allowedRoles={['Doctor']}>
-              <TimeTableWork />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/time-table'
+            element={
+              <ProtectedRoute allowedRoles={['Doctor']}>
+                <TimeTableWork />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/doctor-care'
-          element={
-            <ProtectedRoute allowedRoles={['Doctor']}>
-              <DoctorCare />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/doctor-care'
+            element={
+              <ProtectedRoute allowedRoles={['Doctor']}>
+                <DoctorCare />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/admin-account'
-          element={
-            <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminAccount />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/admin-account'
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <AdminAccount />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/admin-dashboard'
-          element={
-            <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminDashBoard />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/admin-dashboard'
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <AdminDashBoard />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/admin-services'
-          element={
-            <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminServices />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/admin-services'
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <AdminServices />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/admin-cages'
-          element={
-            <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminCages />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/admin-cages'
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <AdminCages />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/admin-rating'
-          element={
-            <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminRating />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/admin-rating'
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <AdminRating />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/admin-statistic'
-          element={
-            <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminChartStatistic />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path='/admin-statistic'
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <AdminChartStatistic />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path='/admin-vaccine'
-          element={
-            <ProtectedRoute allowedRoles={['Admin']}>
-              <AdminVaccine />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+          <Route
+            path='/admin-vaccine'
+            element={
+              <ProtectedRoute allowedRoles={['Admin']}>
+                <AdminVaccine />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </DateProvider>
     </AuthProvider>
   );
 }

@@ -1,10 +1,12 @@
-import StarRate from '../StarRate/StarRate';
-import './Statistics.css';
+// Statistic.js
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../../utils/axiosInstance.js';
+import StarRate from '../StarRate/StarRate';
+import './Statistics.css';
+import { useDate } from '../DateContext/DateContext';
 
 function Statistic() {
-  const [selectedDate, setSelectedDate] = useState('');
+  const { selectedDate, setSelectedDate } = useDate();
   const [previousTotalIncome, setPreviousTotalIncome] = useState(0);
   const [currentTotalIncome, setCurrentTotalIncome] = useState(0);
   const [previousWeeklyTotalIncome, setPreviousWeeklyTotalIncome] = useState(0);
@@ -15,7 +17,6 @@ function Statistic() {
   const [totalIncome, setTotalIncome] = useState(0);
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
-
   useEffect(() => {
     const updateDate = () => {
       const currentDate = new Date();
@@ -25,17 +26,14 @@ function Statistic() {
       setSelectedDate(formattedDate);
     };
 
-    updateDate();
+    if (!selectedDate) {
+      updateDate();
+    }
 
-    const interval = setInterval(
-      () => {
-        updateDate();
-      },
-      60 * 60 * 1000,
-    );
+    const interval = setInterval(updateDate, 60 * 60 * 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [selectedDate, setSelectedDate]);
 
   const handleDateChange = event => {
     setSelectedDate(event.target.value);
@@ -61,11 +59,7 @@ function Statistic() {
       try {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/admin/getTotalIncome`,
-          {
-            params: {
-              date: selectedDate,
-            },
-          },
+          { params: { date: selectedDate } },
         );
         setPreviousTotalIncome(response.data.previousTotalIncome);
         setCurrentTotalIncome(response.data.currentTotalIncome);
@@ -176,7 +170,7 @@ function Statistic() {
           </div>
         </div>
         <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-          <div className='Admin-DashBoard-Main-Header-Note'> Total </div>
+          <div className='Admin-DashBoard-Main-Header-Note'>Total</div>
           <div className='Admin-DashBoard-Main-Header-Money'>
             ${totalIncome.toFixed(2)}
           </div>
