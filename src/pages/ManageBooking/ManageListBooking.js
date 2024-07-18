@@ -64,6 +64,12 @@ function ManageListBooking() {
   const [servicesWhileCheckIn, setServicesWhileCheckIn] = useState([]);
   const [serviceFilter, setServiceFilter] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [statusFilters, setStatusFilters] = useState({
+    pending: false,
+    beingExamined: false,
+    cancel: false,
+    done: false,
+  });
 
   useEffect(() => {
     const now = new Date();
@@ -608,7 +614,58 @@ function ManageListBooking() {
     const matchesSearch =
       search === '' ||
       booking.bookingID.toLowerCase().includes(search.toLowerCase());
-    return matchesSearch;
+
+    const bookingStatus = booking.isCancel
+      ? 'cancel'
+      : booking.paymentsDetails[0].isCancelPayment ||
+        (!booking.paymentsDetails[0].isSuccess &&
+          booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
+      ? 'cancel'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+        !booking.isCheckIn
+      ? 'pending'
+      : !booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+        !booking.isCheckIn
+      ? 'pending'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+        booking.isCheckIn &&
+        !booking.isCompleted
+      ? 'beingExamined'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+        booking.isCheckIn &&
+        !booking.isCompleted
+      ? 'beingExamined'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+        booking.isCheckIn &&
+        booking.isCompleted
+      ? 'done'
+      : booking.paymentsDetails[0].isSuccess &&
+        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+        booking.isCheckIn &&
+        booking.isCompleted
+      ? 'done'
+      : null;
+
+    const matchesStatus =
+      (statusFilters.pending && bookingStatus === 'pending') ||
+      (statusFilters.cancel && bookingStatus === 'cancel') ||
+      (statusFilters.done && bookingStatus === 'done') ||
+      (statusFilters.beingExamined && bookingStatus === 'beingExamined');
+
+    return (
+      matchesSearch &&
+      (statusFilters.pending ||
+      statusFilters.cancel ||
+      statusFilters.done ||
+      statusFilters.beingExamined
+        ? matchesStatus
+        : true)
+    );
   });
 
   return (
@@ -659,6 +716,71 @@ function ManageListBooking() {
                     placeholder='Filter by Date'
                   />
                 </div>
+              </div>
+              <div className='dropdown-filter'>
+                <button
+                  className='menu-filter dropdown-toggle'
+                  type='button'
+                  id='dropdownMenuButton'
+                  data-bs-toggle='dropdown'
+                  aria-expanded='false'
+                >
+                  Filter by Status
+                </button>
+                <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                  <li className='filter-dropdown'>
+                    <input
+                      type='checkbox'
+                      checked={statusFilters.pending}
+                      onChange={() =>
+                        setStatusFilters({
+                          ...statusFilters,
+                          pending: !statusFilters.pending,
+                        })
+                      }
+                    />{' '}
+                    Pending
+                  </li>
+                  <li className='filter-dropdown'>
+                    <input
+                      type='checkbox'
+                      checked={statusFilters.beingExamined}
+                      onChange={() =>
+                        setStatusFilters({
+                          ...statusFilters,
+                          beingExamined: !statusFilters.beingExamined,
+                        })
+                      }
+                    />{' '}
+                    Being examined
+                  </li>
+                  <li className='filter-dropdown'>
+                    <input
+                      type='checkbox'
+                      checked={statusFilters.cancel}
+                      onChange={() =>
+                        setStatusFilters({
+                          ...statusFilters,
+                          cancel: !statusFilters.cancel,
+                        })
+                      }
+                    />{' '}
+                    Cancel
+                  </li>
+                  <li className='filter-dropdown'>
+                    <input
+                      type='checkbox'
+                      checked={statusFilters.done}
+                      onChange={() =>
+                        setStatusFilters({
+                          ...statusFilters,
+                          done: !statusFilters.done,
+                        })
+                      }
+                    />{' '}
+                    Done
+                  </li>
+                </ul>
               </div>
               <div className='main-content-header-add-booking'>
                 <button
@@ -1980,6 +2102,7 @@ function ManageListBooking() {
                                         </small>
                                       </div>
                                     )}
+                                    
                                   </div>
 
                                   <div className='mb-2'>
