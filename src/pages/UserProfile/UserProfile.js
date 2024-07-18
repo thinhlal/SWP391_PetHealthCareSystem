@@ -15,6 +15,7 @@ const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({ email: '', phone: '' });
   const [message, setMessage] = useState('');
+  const [editAccountInfo, setEditAccountInfo] = useState({});
 
   useEffect(() => {
     const fetchAccountByID = async () => {
@@ -24,6 +25,7 @@ const UserProfile = () => {
             `${process.env.REACT_APP_API_URL}/user/getUserProfile/${user.accountID}`,
           );
           setProfile(response.data);
+          setEditAccountInfo(response.data.customerDetails[0]);
         } catch (error) {
           console.error(error);
         }
@@ -34,35 +36,77 @@ const UserProfile = () => {
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setProfile({
-      ...profile,
-      customerDetails: [{ ...profile.customerDetails[0], [name]: value }],
-      [name]: value,
-    });
+    if (name === 'birthday' && !validateBirthday(value)) {
+      return setErrors({ ...errors, birthday: 'Birthday cannot be in the future' });
+    }
+    setEditAccountInfo({ ...editAccountInfo, [name]: value });
     setErrors({ ...errors, [name]: '' });
     setMessage('');
+  };
+
+  const checkEmailExists = async email => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/admin/checkEmail?email=${email}`,
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error('Error checking email:', error);
+      return false;
+    }
+  };
+
+  const checkPhoneExists = async phone => {
+    try {
+      const response = await axiosInstance.get(
+        `${process.env.REACT_APP_API_URL}/admin/checkPhone?phone=${phone}`,
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error('Error checking phone:', error);
+      return false;
+    }
   };
 
   const handleSave = async () => {
     let emailError = '';
     let phoneError = '';
-
-    if (!validateEmail(profile.customerDetails[0].email)) {
-      emailError = 'Invalid email address';
+    if (editAccountInfo.email === profile.customerDetails[0].email
+      && editAccountInfo.phone === profile.customerDetails[0].phone
+      && editAccountInfo.birthday === profile.customerDetails[0].birthday
+    ) {
+      setErrors({ email: '', phone: '', birthday: '' });
+      setIsEditing(false);
+      return;
     }
 
-    if (!validatePhone(profile.customerDetails[0].phone)) {
-      phoneError = 'Invalid phone number';
+    if (editAccountInfo.email !== profile.customerDetails[0].email) {
+      if (!validateEmail(editAccountInfo.email)) {
+        emailError = 'Invalid email address';
+      } else {
+        const emailExists = await checkEmailExists(editAccountInfo.email);
+        if (emailExists) emailError = 'Email already exists';
+      }
     }
 
+    if (editAccountInfo.phone !== profile.customerDetails[0].phone) {
+      if (!validatePhone(editAccountInfo.phone)) {
+        phoneError = 'Invalid phone number';
+      } else {
+        const phoneExists = await checkPhoneExists(editAccountInfo.phone);
+        if (phoneExists) phoneError = 'Phone number already exists';
+      }
+    }
     if (emailError || phoneError) {
       setErrors({ email: emailError, phone: phoneError });
     } else {
+      console.log(editAccountInfo);
+      console.log(profile);
       try {
         const updateSuccess = await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/user/updateUserInfo`,
           {
-            profile,
+            editAccountInfo,
           },
         );
         setMessage(updateSuccess.data);
@@ -80,6 +124,7 @@ const UserProfile = () => {
 
   const handleEdit = () => {
     setIsEditing(!isEditing);
+    setEditAccountInfo(profile.customerDetails[0]);
   };
 
   const handleImageChange = async e => {
@@ -120,6 +165,12 @@ const UserProfile = () => {
   const validatePhone = phone => {
     const phoneRegex = /^[0-9]{10,15}$/;
     return phoneRegex.test(phone);
+  };
+
+  const validateBirthday = birthday => {
+    const today = new Date();
+    const birthDate = new Date(birthday);
+    return birthDate <= today;
   };
 
   return (
@@ -213,7 +264,7 @@ const UserProfile = () => {
                           name='name'
                           type='text'
                           placeholder='Enter your first name'
-                          value={profile?.customerDetails[0]?.name || ''}
+                          value={editAccountInfo.name || ''}
                           onChange={handleChange}
                           readOnly={!isEditing}
                           required
@@ -236,7 +287,7 @@ const UserProfile = () => {
                         name='email'
                         type='email'
                         placeholder='Enter your email address'
-                        value={profile?.customerDetails[0]?.email || ''}
+                        value={editAccountInfo.email || ''}
                         onChange={handleChange}
                         readOnly={!isEditing}
                       />
@@ -261,7 +312,7 @@ const UserProfile = () => {
                           name='phone'
                           type='tel'
                           placeholder='Enter your phone number'
-                          value={profile?.customerDetails[0]?.phone || ''}
+                          value={editAccountInfo.phone || ''}
                           onChange={handleChange}
                           readOnly={!isEditing}
                         />
@@ -286,7 +337,7 @@ const UserProfile = () => {
                           type='date'
                           placeholder='Enter your birthday'
                           value={
-                            profile?.customerDetails[0]?.birthday?.split(
+                            editAccountInfo.birthday?.split(
                               'T',
                             )[0] || ''
                           }
@@ -294,6 +345,9 @@ const UserProfile = () => {
                           readOnly={!isEditing}
                         />
                       </div>
+                      {errors.birthday && (
+                        <div className='text-danger ms-2'>{errors.birthday}</div>
+                      )}
                     </div>
                     {message !== '' && (
                       <div className='text-success ms-2 message-success-userInfo'>

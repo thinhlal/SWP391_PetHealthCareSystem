@@ -21,6 +21,7 @@ function YourBooking() {
   const [feedback, setFeedback] = useState('');
   const [currentBookingID, setCurrentBookingID] = useState(null);
   const [currentBookingData, setCurrentBookingData] = useState(null);
+  const [currentBookingCancel, setCurrentBookingCancel] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const [statusFilters, setStatusFilters] = useState({
@@ -68,10 +69,10 @@ function YourBooking() {
         `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
       );
       const sortDataBookings = dataBookings.data.allBookings.sort((a, b) =>
-        a.dateBook.localeCompare(b.dateBook),
+        b.dateBook.localeCompare(a.dateBook),
       );
       const sortTimeBookings = sortDataBookings.sort((a, b) =>
-        b.startTime.localeCompare(a.startTime),
+        b.bookingID.localeCompare(a.bookingID),
       );
       setYourBookings(sortTimeBookings);
     } catch (error) {
@@ -133,6 +134,33 @@ function YourBooking() {
     return remainingDays;
   };
 
+  const showDateLeft = (dateBook) => {
+    const bookDate = new Date(dateBook);
+
+    const currentDate = new Date();
+    const vietnamTimezoneOffset = 7 * 60;
+    const localTimezoneOffset = currentDate.getTimezoneOffset();
+
+    const vietnamDate = new Date(currentDate.getTime() + (vietnamTimezoneOffset - localTimezoneOffset) * 60000);
+
+    const timeDifference = bookDate - vietnamDate;
+
+    const millisecondsInDay = 24 * 60 * 60 * 1000;
+    const remainingDays = Math.ceil(timeDifference / millisecondsInDay);
+
+    return remainingDays;
+  };
+
+  const getVietnamDate = () => {
+    const currentDate = new Date();
+    const vietnamTimezoneOffset = 7 * 60;
+    const localTimezoneOffset = currentDate.getTimezoneOffset();
+
+    const vietnamDate = new Date(currentDate.getTime() + (vietnamTimezoneOffset - localTimezoneOffset) * 60000);
+
+    return vietnamDate;
+  };
+
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -145,35 +173,51 @@ function YourBooking() {
     const bookingStatus = booking.isCancel
       ? 'cancel'
       : booking.paymentsDetails[0].isCancelPayment ||
-          (!booking.paymentsDetails[0].isSuccess &&
-            booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
+        (!booking.paymentsDetails[0].isSuccess &&
+          booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
         ? 'cancel'
         : booking.paymentsDetails[0].isSuccess &&
-            booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-            !booking.isCheckIn
+          booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+          !booking.isCheckIn
           ? 'pending'
           : !booking.paymentsDetails[0].isSuccess &&
-              booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-              !booking.isCheckIn
+            booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+            !booking.isCheckIn
             ? 'pending'
             : booking.paymentsDetails[0].isSuccess &&
-                booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-                booking.isCheckIn
-              ? 'done'
+              booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+              booking.isCheckIn &&
+              !booking.isCompleted
+              ? 'beingExamined'
               : booking.paymentsDetails[0].isSuccess &&
-                  booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-                  booking.isCheckIn
-                ? 'done'
-                : null;
+                booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                booking.isCheckIn &&
+                !booking.isCompleted
+                ? 'beingExamined'
+                : booking.paymentsDetails[0].isSuccess &&
+                  booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                  booking.isCheckIn &&
+                  booking.isCompleted
+                  ? 'done'
+                  : booking.paymentsDetails[0].isSuccess &&
+                    booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                    booking.isCheckIn &&
+                    booking.isCompleted
+                    ? 'done'
+                    : null;
 
     const matchesStatus =
       (statusFilters.pending && bookingStatus === 'pending') ||
       (statusFilters.cancel && bookingStatus === 'cancel') ||
-      (statusFilters.done && bookingStatus === 'done');
+      (statusFilters.done && bookingStatus === 'done') ||
+      (statusFilters.beingExamined && bookingStatus === 'beingExamined');
 
     return (
       matchesSearch &&
-      (statusFilters.pending || statusFilters.cancel || statusFilters.done
+      (statusFilters.pending ||
+        statusFilters.cancel ||
+        statusFilters.done ||
+        statusFilters.beingExamined
         ? matchesStatus
         : true)
     );
@@ -251,6 +295,19 @@ function YourBooking() {
                     />{' '}
                     Pending
                   </li>
+                  <li>
+                    <input
+                      type='checkbox'
+                      checked={statusFilters.beingExamined}
+                      onChange={() =>
+                        setStatusFilters({
+                          ...statusFilters,
+                          beingExamined: !statusFilters.beingExamined,
+                        })
+                      }
+                    />{' '}
+                    Being examined
+                  </li>
                   <li className='filter-dropdown'>
                     <input
                       type='checkbox'
@@ -298,54 +355,53 @@ function YourBooking() {
                           <div className='detail-number-ID'>
                             ID: {booking.bookingID}
                             <div
-                              className={`status-booking ${
-                                booking.isCancel
+                              className={`status-booking ${booking.isCancel
+                                ? 'status-cancel'
+                                : booking.paymentsDetails[0]
+                                  .isCancelPayment ||
+                                  (!booking.paymentsDetails[0].isSuccess &&
+                                    booking.paymentsDetails[0]
+                                      .paymentMethod === 'PAYPAL')
                                   ? 'status-cancel'
-                                  : booking.paymentsDetails[0]
-                                        .isCancelPayment ||
-                                      (!booking.paymentsDetails[0].isSuccess &&
-                                        booking.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL')
-                                    ? 'status-cancel'
-                                    : booking.paymentsDetails[0].isSuccess &&
+                                  : booking.paymentsDetails[0].isSuccess &&
+                                    booking.paymentsDetails[0]
+                                      .paymentMethod === 'PAYPAL' &&
+                                    !booking.isCheckIn
+                                    ? 'status-pending'
+                                    : !booking.paymentsDetails[0].isSuccess &&
+                                      booking.paymentsDetails[0]
+                                        .paymentMethod === 'COUNTER' &&
+                                      !booking.isCheckIn
+                                      ? 'status-pending'
+                                      : booking.paymentsDetails[0]
+                                        .isSuccess &&
                                         booking.paymentsDetails[0]
                                           .paymentMethod === 'PAYPAL' &&
-                                        !booking.isCheckIn
-                                      ? 'status-pending'
-                                      : !booking.paymentsDetails[0].isSuccess &&
-                                          booking.paymentsDetails[0]
-                                            .paymentMethod === 'COUNTER' &&
-                                          !booking.isCheckIn
+                                        booking.isCheckIn &&
+                                        !booking.isCompleted
                                         ? 'status-pending'
                                         : booking.paymentsDetails[0]
-                                              .isSuccess &&
-                                            booking.paymentsDetails[0]
-                                              .paymentMethod === 'PAYPAL' &&
-                                            booking.isCheckIn &&
-                                            !booking.isCompleted
+                                          .isSuccess &&
+                                          booking.paymentsDetails[0]
+                                            .paymentMethod === 'COUNTER' &&
+                                          booking.isCheckIn &&
+                                          !booking.isCompleted
                                           ? 'status-pending'
                                           : booking.paymentsDetails[0]
-                                                .isSuccess &&
-                                              booking.paymentsDetails[0]
-                                                .paymentMethod === 'COUNTER' &&
-                                              booking.isCheckIn &&
-                                              !booking.isCompleted
-                                            ? 'status-pending'
+                                            .isSuccess &&
+                                            booking.paymentsDetails[0]
+                                              .paymentMethod === 'PAYPAL' &&
+                                            booking.isCheckIn
+                                            ? 'status-completed'
                                             : booking.paymentsDetails[0]
-                                                  .isSuccess &&
-                                                booking.paymentsDetails[0]
-                                                  .paymentMethod === 'PAYPAL' &&
-                                                booking.isCheckIn
+                                              .isSuccess &&
+                                              booking.paymentsDetails[0]
+                                                .paymentMethod ===
+                                              'COUNTER' &&
+                                              booking.isCheckIn
                                               ? 'status-completed'
-                                              : booking.paymentsDetails[0]
-                                                    .isSuccess &&
-                                                  booking.paymentsDetails[0]
-                                                    .paymentMethod ===
-                                                    'COUNTER' &&
-                                                  booking.isCheckIn
-                                                ? 'status-completed'
-                                                : null
-                              }`}
+                                              : null
+                                }`}
                             >
                               Status:&nbsp;
                               {booking.isCancel ? (
@@ -353,41 +409,41 @@ function YourBooking() {
                               ) : booking.paymentsDetails[0].isCancelPayment ||
                                 (!booking.paymentsDetails[0].isSuccess &&
                                   booking.paymentsDetails[0].paymentMethod ===
-                                    'PAYPAL') ? (
+                                  'PAYPAL') ? (
                                 <span>Cancel Payment</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL' &&
+                                'PAYPAL' &&
                                 !booking.isCheckIn &&
                                 !booking.isCompleted ? (
                                 <span>Pending</span>
                               ) : !booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'COUNTER' &&
+                                'COUNTER' &&
                                 !booking.isCheckIn &&
                                 !booking.isCompleted ? (
                                 <span>Pending</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL' &&
+                                'PAYPAL' &&
                                 booking.isCheckIn &&
                                 !booking.isCompleted ? (
                                 <span>Being examined</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'COUNTER' &&
+                                'COUNTER' &&
                                 booking.isCheckIn &&
                                 !booking.isCompleted ? (
                                 <span>Being examined</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL' &&
+                                'PAYPAL' &&
                                 booking.isCheckIn &&
                                 booking.isCompleted ? (
                                 <span>Done</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
-                                  'COUNTER' &&
+                                'COUNTER' &&
                                 booking.isCheckIn &&
                                 booking.isCompleted ? (
                                 <span>Done</span>
@@ -464,15 +520,15 @@ function YourBooking() {
                               </div>
                             </div>
                             {booking.isCancel &&
-                            booking.paymentsDetails[0].paymentMethod ===
+                              booking.paymentsDetails[0].paymentMethod ===
                               'PAYPAL' &&
-                            booking.isRefund ? (
+                              booking.isRefund ? (
                               <div className='status-cancel'>
                                 Refunded {booking.refundPrice}$
                               </div>
                             ) : booking.isCancel &&
                               booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' &&
+                              'PAYPAL' &&
                               calculateDateLeft(
                                 booking.dateCancelBook,
                                 booking.dateBook,
@@ -481,114 +537,116 @@ function YourBooking() {
                               <div className='status-cancel'>Refunded 0$</div>
                             ) : booking.isCancel &&
                               booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' &&
+                              'PAYPAL' &&
                               calculateDateLeft(
                                 booking.dateCancelBook,
                                 booking.dateBook,
                               ) >= 3 &&
                               !booking.isRefund ? (
                               <div className='status-cancel'>...Processing</div>
-                            ) : booking.isCancel ? null : booking
-                                .paymentsDetails[0].isCancelPayment ||
-                              (!booking.paymentsDetails[0].isSuccess &&
-                                booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL') ? null : booking.paymentsDetails[0]
-                                .isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' &&
-                              new Date(booking.dateBook) > new Date() &&
-                              !booking.isRate &&
-                              !booking.isCheckIn ? (
-                              <div
-                                data-bs-toggle='modal'
-                                data-bs-target='#CancelBooking'
-                                className='cancel-booking-button-1'
-                                onClick={() =>
-                                  setCurrentBookingID(booking.bookingID)
-                                }
-                              >
-                                <div className='text-sign-in-button-booking'>
-                                  Cancel Booking
-                                </div>
-                              </div>
-                            ) : !booking.paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'COUNTER' &&
-                              new Date(booking.dateBook) > new Date() &&
-                              !booking.isRate &&
-                              !booking.isCheckIn ? (
-                              <div
-                                className='cancel-booking-button-1'
-                                data-bs-toggle='modal'
-                                data-bs-target='#CancelBooking'
-                                onClick={() =>
-                                  setCurrentBookingID(booking.bookingID)
-                                }
-                              >
-                                <div className='text-sign-in-button-booking'>
-                                  Cancel Booking
-                                </div>
-                              </div>
-                            ) : booking.paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'PAYPAL' &&
-                              booking.isCheckIn &&
-                              booking.isCompleted &&
-                              !booking.isRate ? (
-                              <button
-                                type='button'
-                                className='btn btn-primary feedback-rate-booking'
-                                data-bs-toggle='modal'
-                                data-bs-target='#feedbackRatestar'
-                                onClick={() =>
-                                  setCurrentBookingID(booking.bookingID)
-                                }
-                              >
-                                <div className='text-feedback-rate-booking'>
-                                  Feedback
-                                </div>
-                              </button>
-                            ) : booking.paymentsDetails[0].isSuccess &&
-                              booking.paymentsDetails[0].paymentMethod ===
-                                'COUNTER' &&
-                              booking.isCheckIn &&
-                              booking.isCompleted &&
-                              !booking.isRate ? (
-                              <button
-                                type='button'
-                                className='btn btn-primary feedback-rate-booking'
-                                data-bs-toggle='modal'
-                                data-bs-target='#feedbackRatestar'
-                                onClick={() =>
-                                  setCurrentBookingID(booking.bookingID)
-                                }
-                              >
-                                <div className='text-feedback-rate-booking'>
-                                  Feedback
-                                </div>
-                              </button>
-                            ) : booking.paymentsDetails[0].isSuccess &&
-                              (booking.paymentsDetails[0].paymentMethod ===
-                                'COUNTER' ||
-                                booking.paymentsDetails[0].paymentMethod ===
-                                  'PAYPAL') &&
-                              booking.isCheckIn &&
-                              !booking.isCompleted &&
-                              !booking.isRate ? null : (
-                              <button
-                                type='button'
-                                className='btn btn-primary feedback-rate-booking'
-                                data-bs-toggle='modal'
-                                data-bs-target='#yourRate'
-                                onClick={() => {
-                                  setCurrentBookingData(booking);
-                                }}
-                              >
-                                <div className='text-feedback-rate-booking'>
-                                  Your Rate
-                                </div>
-                              </button>
-                            )}
+                            ) : booking.isCancel ? null
+                              : booking.paymentsDetails[0].isCancelPayment ||
+                                (!booking.paymentsDetails[0].isSuccess &&
+                                  booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL') ? null
+                                : booking.paymentsDetails[0].isSuccess &&
+                                  booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL' &&
+                                  new Date(booking.dateBook) > getVietnamDate() &&
+                                  !booking.isRate &&
+                                  !booking.isCheckIn ? (
+                                  <div
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#CancelBooking'
+                                    className='cancel-booking-button-1'
+                                    onClick={() => {
+                                      setCurrentBookingID(booking.bookingID)
+                                      setCurrentBookingCancel(booking);
+                                    }}
+                                  >
+                                    <div className='text-sign-in-button-booking'>
+                                      Cancel Booking
+                                    </div>
+                                  </div>
+                                ) : !booking.paymentsDetails[0].isSuccess &&
+                                  booking.paymentsDetails[0].paymentMethod ===
+                                  'COUNTER' &&
+                                  new Date(booking.dateBook) > getVietnamDate() &&
+                                  !booking.isRate &&
+                                  !booking.isCheckIn ? (
+                                  <div
+                                    className='cancel-booking-button-1'
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#CancelBooking'
+                                    onClick={() => {
+                                      setCurrentBookingID(booking.bookingID)
+                                      setCurrentBookingCancel(booking);
+                                    }}
+                                  >
+                                    <div className='text-sign-in-button-booking'>
+                                      Cancel Booking
+                                    </div>
+                                  </div>
+                                ) : booking.paymentsDetails[0].isSuccess &&
+                                  booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL' &&
+                                  booking.isCheckIn &&
+                                  booking.isCompleted &&
+                                  !booking.isRate ? (
+                                  <button
+                                    type='button'
+                                    className='btn btn-primary feedback-rate-booking'
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#feedbackRatestar'
+                                    onClick={() =>
+                                      setCurrentBookingID(booking.bookingID)
+                                    }
+                                  >
+                                    <div className='text-feedback-rate-booking'>
+                                      Feedback
+                                    </div>
+                                  </button>
+                                ) : booking.paymentsDetails[0].isSuccess &&
+                                  booking.paymentsDetails[0].paymentMethod ===
+                                  'COUNTER' &&
+                                  booking.isCheckIn &&
+                                  booking.isCompleted &&
+                                  !booking.isRate ? (
+                                  <button
+                                    type='button'
+                                    className='btn btn-primary feedback-rate-booking'
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#feedbackRatestar'
+                                    onClick={() =>
+                                      setCurrentBookingID(booking.bookingID)
+                                    }
+                                  >
+                                    <div className='text-feedback-rate-booking'>
+                                      Feedback
+                                    </div>
+                                  </button>
+                                ) : booking.paymentsDetails[0].isSuccess &&
+                                  (booking.paymentsDetails[0].paymentMethod ===
+                                    'COUNTER' ||
+                                    booking.paymentsDetails[0].paymentMethod ===
+                                    'PAYPAL') &&
+                                  booking.isCheckIn &&
+                                  !booking.isCompleted &&
+                                  !booking.isRate ? null : (
+                                  <button
+                                    type='button'
+                                    className='btn btn-primary feedback-rate-booking'
+                                    data-bs-toggle='modal'
+                                    data-bs-target='#yourRate'
+                                    onClick={() => {
+                                      setCurrentBookingData(booking);
+                                    }}
+                                  >
+                                    <div className='text-feedback-rate-booking'>
+                                      Your Rate
+                                    </div>
+                                  </button>
+                                )}
                           </div>
                         </div>
                       </div>
@@ -626,9 +684,27 @@ function YourBooking() {
                   <div className='modal-body'>
                     <div className='modal-confirmCancel'>
                       <div className='change-user-password-modal-header'>
-                        Confirm Delete
+                        Confirm Refund
                       </div>
-                      <div>Are you sure you want to cancel booking?</div>
+                      <div className="refund-policy">
+                        <h3>Refund Policy</h3>
+                        <p>We will refund <span className="highlight">100%</span> if you cancel your booking more than 6 days in advance, <span className="highlight">75%</span> if you cancel within 3 to 6 days, and <span className='no-refund-highlight'>no refund</span> if you cancel less than 3 days in advance.</p>
+                        <p className="days-left">{currentBookingCancel && showDateLeft(currentBookingCancel?.dateBook) > 1 ? `${showDateLeft(currentBookingCancel?.dateBook)} days left` : `${showDateLeft(currentBookingCancel?.dateBook)} day left`}</p>
+                        <div className="refund-policy">
+                          <p>
+                            If you sure cancel we will refund to you&nbsp;
+                            <span className="highlight">
+                              {currentBookingCancel && showDateLeft(currentBookingCancel?.dateBook) >= 7 ? '100%'
+                                : (showDateLeft(currentBookingCancel?.dateBook) >= 3 && showDateLeft(currentBookingCancel?.dateBook) < 7)
+                                  ? '75%'
+                                  : showDateLeft(currentBookingCancel?.dateBook) < 3
+                                    ? '0%'
+                                    : null}
+                            </span>
+                            &nbsp;of total (<span className="amount">{`${currentBookingCancel?.totalPrice}$`}</span>)
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className='modal-footer'>
@@ -800,7 +876,7 @@ function YourBooking() {
         </div>
         <Footer />
       </div>
-    </div>
+    </div >
   );
 }
 

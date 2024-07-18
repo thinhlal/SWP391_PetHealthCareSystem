@@ -7,6 +7,9 @@ const { verifyToken } = require('../app/controllers/MiddlewareController');
 //Sign Up
 router.post('/signup', siteController.signUp);
 
+//Check Phone Exist Sign Up
+router.get('/checkPhoneSignUp', siteController.checkPhoneSignUp);
+
 //Log In
 router.post('/login', siteController.logIn);
 

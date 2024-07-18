@@ -551,3 +551,44 @@ a {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
+
+.main-content-booking .refund-policy {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.main-content-booking .refund-policy h3 {
+  color: #333;
+  font-size: 1.5em;
+}
+
+.main-content-booking .refund-policy p {
+  color: #555;
+  line-height: 1.6;
+}
+
+.main-content-booking .refund-policy .highlight {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.main-content-booking .refund-policy .days-left {
+  margin-bottom: 0;
+  font-size: 1.2em;
+  color: #28a745;
+}
+
+.main-content-booking .no-refund-highlight {
+  font-weight: bold;
+  color: red;
+}
+
+.main-content-booking .refund-policy .amount {
+  font-weight: bold;
+  color: #28a745;
+}

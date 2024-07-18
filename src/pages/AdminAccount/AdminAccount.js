@@ -88,6 +88,7 @@ function AdminAccount() {
 
   const handleSaveChanges = async () => {
     const newErrors = {};
+
     if (!editAccount.name) newErrors.name = 'Name is required';
     if (!editAccount.email) newErrors.email = 'Email is required';
     else if (!validateEmail(editAccount.email))
@@ -95,13 +96,38 @@ function AdminAccount() {
     if (!editAccount.phone) newErrors.phone = 'Phone number is required';
     else if (!validatePhone(editAccount.phone))
       newErrors.phone = 'Invalid phone number format';
+    let currentEmail;
+    let currentPhone;
 
-    const currentEmail = accountData.find(
-      account => account.accountID === editAccount.accountID,
-    )?.email;
-    const currentPhone = accountData.find(
-      account => account.accountID === editAccount.accountID,
-    )?.phone;
+    if (editAccount.role === 'Customer') {
+      currentEmail = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.customerDetails[0]?.email;
+      currentPhone = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.customerDetails[0]?.phone;
+    } else if (editAccount.role === 'Staff') {
+      currentEmail = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.staffDetails[0]?.email;
+      currentPhone = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.staffDetails[0]?.phone;
+    } if (editAccount.role === 'Doctor') {
+      currentEmail = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.doctorDetails[0]?.email;
+      currentPhone = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.doctorDetails[0]?.phone;
+    } if (editAccount.role === 'Admin') {
+      currentEmail = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.adminDetails[0]?.email;
+      currentPhone = accountData.find(
+        account => account.accountID === editAccount.accountID,
+      )?.adminDetails[0]?.phone;
+    }
 
     if (editAccount.email !== currentEmail) {
       const emailExists = await checkEmailExists(editAccount.email);
@@ -257,14 +283,18 @@ function AdminAccount() {
       if (!newAccount.email) newErrors.email = 'Email is required';
       if (!validateEmail(newAccount.email))
         newErrors.email = 'Invalid email format - Ex: Example@gmail.com';
-      const emailExists = await checkEmailExists(newAccount.email);
-      if (emailExists) newErrors.email = 'Email already exists';
+      else {
+        const emailExists = await checkEmailExists(newAccount.email);
+        if (emailExists) newErrors.email = 'Email already exists';
+      }
 
       if (!newAccount.phone) newErrors.phone = 'Phone number is required';
       if (!validatePhone(newAccount.phone))
         newErrors.phone = 'Invalid phone number format';
-      const phoneExists = await checkPhoneExists(newAccount.phone);
-      if (phoneExists) newErrors.phone = 'Phone number already exists';
+      else {
+        const phoneExists = await checkPhoneExists(newAccount.phone);
+        if (phoneExists) newErrors.phone = 'Phone number already exists';
+      }
 
       if (Object.keys(newErrors).length > 0) {
         setErrors(newErrors);
@@ -675,7 +705,7 @@ function AdminAccount() {
                                     aria-label='Close'
                                     onClick={() => {
                                       setErrors({});
-                                      setNewAccount({
+                                      setEditAccount({
                                         name: '',
                                         email: '',
                                         phone: '',
@@ -778,7 +808,7 @@ function AdminAccount() {
                                       data-bs-dismiss='modal'
                                       onClick={() => {
                                         setErrors({});
-                                        setNewAccount({
+                                        setEditAccount({
                                           name: '',
                                           email: '',
                                           phone: '',

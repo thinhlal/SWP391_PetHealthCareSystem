@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const redisClient = require('../../config/redis/redisClient.js');
 const Customer = require('../models/Customer.js');
+const Staff = require('../models/Staff.js');
+const Doctor = require('../models/Doctor.js');
+const Admin = require('../models/Admin.js');
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
@@ -258,6 +261,23 @@ class SiteController {
     } catch (error) {
       console.error('Logout Error:', error);
       res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  // GET /checkPhoneSignUp
+  async checkPhoneSignUp(req, res, next) {
+    const { phone } = req.query;
+    try {
+      const customer = await Customer.findOne({ phone });
+      const staff = await Staff.findOne({ phone });
+      const doctor = await Doctor.findOne({ phone });
+      const admin = await Admin.findOne({ phone });
+      if (customer || staff || doctor || admin) {
+        return res.status(200).json({ exists: true });
+      }
+      res.status(200).json({ exists: false });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
     }
   }
 }

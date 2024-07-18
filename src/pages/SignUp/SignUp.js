@@ -23,6 +23,18 @@ function SignUp() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const checkPhoneExists = async phone => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/checkPhoneSignUp?phone=${phone}`,
+      );
+      return response.data.exists;
+    } catch (error) {
+      console.error('Error checking phone:', error);
+      return false;
+    }
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
     const newErrors = {};
@@ -47,9 +59,11 @@ function SignUp() {
       newErrors.name = 'Name must not be blank';
     }
 
-    if (formData.phone.length < 8) {
-      newErrors.phone = 'Phone must be at least 8 number';
+    if (formData.phone.length < 9) {
+      newErrors.phone = 'Phone must be at least 9 number';
     }
+    const phoneExists = await checkPhoneExists(formData.phone);
+    if (phoneExists) newErrors.phone = 'Phone number already exists';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);

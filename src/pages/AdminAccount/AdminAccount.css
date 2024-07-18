@@ -304,6 +304,7 @@
 
 .Admin-Account-Error {
   color: red;
-  font-size: 0.875em;
+  font-size: 14PX;
   margin-top: 5px;
+  line-height: 20px;
 }
