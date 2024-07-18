@@ -90,7 +90,8 @@ class UserController {
 
   // POST /updateUserInfo
   async updateUserInfo(req, res, next) {
-    const { customerID, name, phone, email, birthday } = req.body.editAccountInfo;
+    const { customerID, name, phone, email, birthday } =
+      req.body.editAccountInfo;
     try {
       await Customer.findOneAndUpdate(
         { customerID },

@@ -113,14 +113,16 @@ function AdminAccount() {
       currentPhone = accountData.find(
         account => account.accountID === editAccount.accountID,
       )?.staffDetails[0]?.phone;
-    } if (editAccount.role === 'Doctor') {
+    }
+    if (editAccount.role === 'Doctor') {
       currentEmail = accountData.find(
         account => account.accountID === editAccount.accountID,
       )?.doctorDetails[0]?.email;
       currentPhone = accountData.find(
         account => account.accountID === editAccount.accountID,
       )?.doctorDetails[0]?.phone;
-    } if (editAccount.role === 'Admin') {
+    }
+    if (editAccount.role === 'Admin') {
       currentEmail = accountData.find(
         account => account.accountID === editAccount.accountID,
       )?.adminDetails[0]?.email;

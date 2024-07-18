@@ -37,7 +37,10 @@ const UserProfile = () => {
   const handleChange = e => {
     const { name, value } = e.target;
     if (name === 'birthday' && !validateBirthday(value)) {
-      return setErrors({ ...errors, birthday: 'Birthday cannot be in the future' });
+      return setErrors({
+        ...errors,
+        birthday: 'Birthday cannot be in the future',
+      });
     }
     setEditAccountInfo({ ...editAccountInfo, [name]: value });
     setErrors({ ...errors, [name]: '' });
@@ -71,9 +74,10 @@ const UserProfile = () => {
   const handleSave = async () => {
     let emailError = '';
     let phoneError = '';
-    if (editAccountInfo.email === profile.customerDetails[0].email
-      && editAccountInfo.phone === profile.customerDetails[0].phone
-      && editAccountInfo.birthday === profile.customerDetails[0].birthday
+    if (
+      editAccountInfo.email === profile.customerDetails[0].email &&
+      editAccountInfo.phone === profile.customerDetails[0].phone &&
+      editAccountInfo.birthday === profile.customerDetails[0].birthday
     ) {
       setErrors({ email: '', phone: '', birthday: '' });
       setIsEditing(false);
@@ -336,17 +340,15 @@ const UserProfile = () => {
                           name='birthday'
                           type='date'
                           placeholder='Enter your birthday'
-                          value={
-                            editAccountInfo.birthday?.split(
-                              'T',
-                            )[0] || ''
-                          }
+                          value={editAccountInfo.birthday?.split('T')[0] || ''}
                           onChange={handleChange}
                           readOnly={!isEditing}
                         />
                       </div>
                       {errors.birthday && (
-                        <div className='text-danger ms-2'>{errors.birthday}</div>
+                        <div className='text-danger ms-2'>
+                          {errors.birthday}
+                        </div>
                       )}
                     </div>
                     {message !== '' && (
