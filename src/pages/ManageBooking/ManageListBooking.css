@@ -373,6 +373,11 @@
   margin-left: 18%;
 }
 
+.manage-booking-list .error_service_checkIn {
+  color: red;
+  font-size: 0.8em;
+}
+
 .manage-booking-list .has-select-option {
   margin: 8px 0 5px 0px;
 }
@@ -412,9 +417,9 @@
 }
 
 .manage-booking-list .services-table th,
-.services-table td {
+.manage-booking-list .services-table td {
   border: 1px solid #ccc;
-  padding: 8px;
+  padding: 0px 8px;
   text-align: left;
 }
 
@@ -426,7 +431,8 @@
   background-color: red;
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 3px 5px;
+  margin: 3px 0;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -513,7 +519,6 @@
   border-radius: 10px;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
-  font-weight: 600;
   font-size: 16px;
 }
 

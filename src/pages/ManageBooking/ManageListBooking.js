@@ -287,6 +287,14 @@ function ManageListBooking() {
   };
 
   const addService = () => {
+    if (services.length >= 3) {
+      setErrors(prev => ({
+        ...prev,
+        services: 'You can only add up to 3 services.',
+      }));
+      return;
+    }
+
     const newServices = allServices.filter(
       service => !services.some(s => s.service === service.serviceID),
     );
@@ -302,7 +310,6 @@ function ManageListBooking() {
     const defaultServiceID = newServices[0].serviceID;
 
     setServices([...services, { service: defaultServiceID }]);
-
     setErrors(prev => ({
       ...prev,
       services: '',
@@ -310,6 +317,14 @@ function ManageListBooking() {
   };
 
   const addServiceWhileCheckIn = () => {
+    if (servicesWhileCheckIn.length >= 3) {
+      setErrors(prev => ({
+        ...prev,
+        servicesWhileCheckIn: 'You can only add up to 3 services.',
+      }));
+      return;
+    }
+
     const newServices = allServices.filter(
       service =>
         !bookingDetailsCheckIn.servicesInBooking.some(
@@ -524,24 +539,24 @@ function ManageListBooking() {
   };
 
   const handlePetChange = (field, value) => {
-    const newPetInfo = { ...createPetInfo, [field]: value };
-    setCreatePetInfo(newPetInfo);
-
     let error = '';
 
     switch (field) {
       case 'name':
-        if (!validatePetName(value))
+        if (!validatePetName(value)) {
           error =
             'Pet name cannot contain special characters and must have at least one word';
+        }
         break;
       case 'breed':
-        if (!validateBreed(value))
+        if (!validateBreed(value)) {
           error = 'Breed cannot contain special characters';
+        }
         break;
       case 'birthday':
-        if (!validateBirthday(value))
+        if (!validateBirthday(value)) {
           error = 'Birthday cannot be in the future';
+        }
         break;
       default:
         break;
@@ -551,6 +566,11 @@ function ManageListBooking() {
       ...prev,
       [`pet${field.charAt(0).toUpperCase() + field.slice(1)}`]: error,
     }));
+
+    if (!error) {
+      const newPetInfo = { ...createPetInfo, [field]: value };
+      setCreatePetInfo(newPetInfo);
+    }
   };
 
   const handleSubmit = async event => {
@@ -719,7 +739,12 @@ function ManageListBooking() {
 
   const removeService = index => {
     setServices(services.filter((_, i) => i !== index));
-    setErrors(prev => ({ ...prev, service: '' }));
+    setErrors(prev => ({
+      ...prev,
+      service: '',
+      services: '',
+      alreadyChooseAllService: '',
+    }));
   };
 
   const removeServiceWhileCheckIn = index => {
@@ -1301,7 +1326,13 @@ function ManageListBooking() {
                                               ))}
                                             </select>
                                           </td>
-                                          <td>
+                                          <td
+                                            style={{
+                                              display: 'flex',
+                                              alignItems: 'center',
+                                              justifyContent: 'center',
+                                            }}
+                                          >
                                             <button
                                               type='button'
                                               className='btn-remove-service'
@@ -2118,7 +2149,13 @@ function ManageListBooking() {
                                                       )}
                                                     </select>
                                                   </td>
-                                                  <td>
+                                                  <td
+                                                    style={{
+                                                      display: 'flex',
+                                                      alignItems: 'center',
+                                                      justifyContent: 'center',
+                                                    }}
+                                                  >
                                                     <button
                                                       type='button'
                                                       className='btn-remove-service'
@@ -2138,10 +2175,12 @@ function ManageListBooking() {
                                         </table>
                                       ) : null}
                                       {errors.servicesWhileCheckIn && (
-                                        <div>{errors.servicesWhileCheckIn}</div>
+                                        <div className='error_service_checkIn'>
+                                          {errors.servicesWhileCheckIn}
+                                        </div>
                                       )}
                                       {errors.alreadyChooseAllService && (
-                                        <div>
+                                        <div className='error_service_checkIn'>
                                           {errors.alreadyChooseAllService}
                                         </div>
                                       )}
@@ -2374,7 +2413,13 @@ function ManageListBooking() {
                                                       )}
                                                     </select>
                                                   </td>
-                                                  <td>
+                                                  <td
+                                                    style={{
+                                                      display: 'flex',
+                                                      alignItems: 'center',
+                                                      justifyContent: 'center',
+                                                    }}
+                                                  >
                                                     <button
                                                       type='button'
                                                       className='btn-remove-service'
