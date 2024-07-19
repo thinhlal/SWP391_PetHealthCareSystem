@@ -431,6 +431,81 @@ function ManageListBooking() {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
   };
+  const validateName = name => /^[A-Za-z\s]+$/.test(name) && name.trim().length > 0;
+  const validatePetName = petName => /^[A-Za-z\s]+$/.test(petName) && petName.trim().length > 0; 
+  const validatePhone = phone => /^\d{10}$/.test(phone);
+  const validateBreed = breed => /^[A-Za-z\s]+$/.test(breed);
+  const validateBirthday = birthday => {
+    const selectedDate = new Date(birthday);
+    const currentDate = new Date();
+    return selectedDate <= currentDate;
+  };
+  const validateFutureDate = date => {
+    const selectedDate = new Date(date);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Set time to the start of the day
+    return selectedDate >= currentDate;
+  };
+  
+  const handleDateChange = (e) => {
+    const value = e.target.value;
+    if (!validateFutureDate(value)) {
+      setErrors(prev => ({ ...prev, selectedDate: 'Date cannot be in the past' }));
+    } else {
+      setSelectedDate(value);
+      setErrors(prev => ({ ...prev, selectedDate: '' }));
+    }
+  };
+  
+  
+
+  const handleChange = (field, value) => {
+    const newAccountInfo = { ...createAccountInfo, [field]: value };
+    setCreateAccountInfo(newAccountInfo);
+  
+    let error = '';
+  
+    switch (field) {
+      case 'name':
+        if (!validateName(value)) error = 'Cannot contain special characters and must have at least one word';
+        break;
+      case 'email':
+        if (!validateEmail(value)) error = 'Invalid email format';
+        break;
+      case 'phone':
+        if (!validatePhone(value)) error = 'Phone number must be 10 digits';
+        break;
+      default:
+        break;
+    }
+  
+    setErrors(prev => ({ ...prev, [field]: error }));
+  };
+  
+  const handlePetChange = (field, value) => {
+    const newPetInfo = { ...createPetInfo, [field]: value };
+    setCreatePetInfo(newPetInfo);
+  
+    let error = '';
+  
+    switch (field) {
+      case 'name':
+        if (!validatePetName(value)) error = 'Pet name cannot contain special characters and must have at least one word';
+        break;
+      case 'breed':
+        if (!validateBreed(value)) error = 'Breed cannot contain special characters';
+        break;
+      case 'birthday':
+        if (!validateBirthday(value)) error = 'Birthday cannot be in the future';
+        break;
+      default:
+        break;
+    }
+  
+    setErrors(prev => ({ ...prev, [`pet${field.charAt(0).toUpperCase() + field.slice(1)}`]: error }));
+  };
+  
+  
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -930,257 +1005,136 @@ function ManageListBooking() {
                                   </div>
                                 </div>
                               </div>
-                            )}
-
-                            {accountOption === 'noOwnerID' && (
-                              <div id='newOwnerSection'>
-                                <div>
-                                  <div className='modal-body-section'>
-                                    <label>Name:</label>
-                                    <input
-                                      type='text'
-                                      value={createAccountInfo.name || ''}
-                                      onChange={e => {
-                                        setCreateAccountInfo({
-                                          ...createAccountInfo,
-                                          name: e.target.value,
-                                        });
-                                        setErrors(prev => ({
-                                          ...prev,
-                                          ownerName: '',
-                                        }));
-                                      }}
-                                      required
-                                    />
-                                    {errors.ownerName && (
-                                      <span className='error'>
-                                        {errors.ownerName}
-                                      </span>
-                                    )}
-                                  </div>
-                                  <div className='modal-body-section'>
-                                    <label>Email:</label>
-                                    <input
-                                      type='email'
-                                      value={createAccountInfo.email || ''}
-                                      onChange={e => {
-                                        const email = e.target.value;
-                                        setCreateAccountInfo({
-                                          ...createAccountInfo,
-                                          email,
-                                        });
-                                        if (!validateEmail(email)) {
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            ownerEmail: 'Invalid email format',
-                                          }));
-                                        } else {
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            ownerEmail: '',
-                                          }));
-                                        }
-                                      }}
-                                      required
-                                    />
-                                    {errors.ownerEmail && (
-                                      <span className='error'>
-                                        {errors.ownerEmail}
-                                      </span>
-                                    )}
-                                  </div>
-                                  <div className='modal-body-section'>
-                                    <label>Phone:</label>
-                                    <input
-                                      type='text'
-                                      value={createAccountInfo.phone || ''}
-                                      onChange={e => {
-                                        setCreateAccountInfo({
-                                          ...createAccountInfo,
-                                          phone: e.target.value,
-                                        });
-                                        setErrors(prev => ({
-                                          ...prev,
-                                          ownerPhone: '',
-                                        }));
-                                      }}
-                                      required
-                                    />
-                                    {errors.ownerPhone && (
-                                      <span className='error'>
-                                        {errors.ownerPhone}
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-
-                                <div id='newPetSection'>
+                             )}
+                              
+                              {accountOption === 'noOwnerID' && (
+                                <div id='newOwnerSection'>
                                   <div>
                                     <div className='modal-body-section'>
-                                      <label>Pet Name:</label>
+                                      <label>Name:</label>
                                       <input
                                         type='text'
-                                        value={createPetInfo.name || ''}
-                                        onChange={e => {
-                                          setCreatePetInfo({
-                                            ...createPetInfo,
-                                            name: e.target.value,
-                                          });
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            petName: '',
-                                          }));
-                                        }}
+                                        value={createAccountInfo.name || ''}
+                                        onChange={e => handleChange('name', e.target.value)}
                                         required
                                       />
-                                      {errors.petName && (
-                                        <span className='error'>
-                                          {errors.petName}
-                                        </span>
-                                      )}
+                                      {errors.name && <div className='error'>{errors.name}</div>}
                                     </div>
                                     <div className='modal-body-section'>
-                                      <label>Type:</label>
+                                      <label>Email:</label>
                                       <input
-                                        type='radio'
-                                        name='petType'
-                                        value='Dog'
-                                        checked={createPetInfo.type === 'Dog'}
-                                        onChange={e => {
-                                          setCreatePetInfo({
-                                            ...createPetInfo,
-                                            type: e.target.value,
-                                          });
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            petType: '',
-                                          }));
-                                        }}
+                                        type='email'
+                                        value={createAccountInfo.email || ''}
+                                        onChange={e => handleChange('email', e.target.value)}
                                         required
-                                      />{' '}
-                                      <span>Dog</span>
-                                      <input
-                                        type='radio'
-                                        name='petType'
-                                        value='Cat'
-                                        checked={createPetInfo.type === 'Cat'}
-                                        onChange={e => {
-                                          setCreatePetInfo({
-                                            ...createPetInfo,
-                                            type: e.target.value,
-                                          });
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            petType: '',
-                                          }));
-                                        }}
-                                        required
-                                      />{' '}
-                                      <span>Cat</span>
-                                      {errors.petType && (
-                                        <span className='error'>
-                                          {errors.petType}
-                                        </span>
-                                      )}
+                                      />
+                                      {errors.email && <div className='error'>{errors.email}</div>}
                                     </div>
                                     <div className='modal-body-section'>
-                                      <label>Breed:</label>
+                                      <label>Phone:</label>
                                       <input
                                         type='text'
-                                        value={createPetInfo.breed}
-                                        onChange={e => {
-                                          setCreatePetInfo({
-                                            ...createPetInfo,
-                                            breed: e.target.value,
-                                          });
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            petBreed: '',
-                                          }));
-                                        }}
+                                        value={createAccountInfo.phone || ''}
+                                        onChange={e => handleChange('phone', e.target.value)}
                                         required
                                       />
-                                      {errors.petBreed && (
-                                        <span className='error'>
-                                          {errors.petBreed}
-                                        </span>
-                                      )}
+                                      {errors.phone && <div className='error'>{errors.phone}</div>}
                                     </div>
-                                    <div className='modal-body-section'>
-                                      <label>Birthday:</label>
-                                      <input
-                                        type='date'
-                                        value={createPetInfo.birthday || ''}
-                                        onChange={e => {
-                                          setCreatePetInfo({
-                                            ...createPetInfo,
-                                            birthday: e.target.value,
-                                          });
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            petBirthday: '',
-                                          }));
-                                        }}
-                                        required
-                                      />
-                                      {errors.petBirthday && (
-                                        <span className='error'>
-                                          {errors.petBirthday}
-                                        </span>
-                                      )}
-                                    </div>
-                                    <div className='modal-body-section'>
-                                      <label>Gender:</label>
-                                      <input
-                                        type='radio'
-                                        name='gender'
-                                        value='Male'
-                                        checked={
-                                          createPetInfo.gender === 'Male'
-                                        }
-                                        onChange={e => {
-                                          setCreatePetInfo({
-                                            ...createPetInfo,
-                                            gender: e.target.value,
-                                          });
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            petGender: '',
-                                          }));
-                                        }}
-                                        required
-                                      />
-                                      <span>Male</span>
-                                      <input
-                                        type='radio'
-                                        name='gender'
-                                        value='Female'
-                                        checked={
-                                          createPetInfo.gender === 'Female'
-                                        }
-                                        onChange={e => {
-                                          setCreatePetInfo({
-                                            ...createPetInfo,
-                                            gender: e.target.value,
-                                          });
-                                          setErrors(prev => ({
-                                            ...prev,
-                                            petGender: '',
-                                          }));
-                                        }}
-                                        required
-                                      />
-                                      <span>Female</span>
-                                      {errors.petGender && (
-                                        <span className='error'>
-                                          {errors.petGender}
-                                        </span>
-                                      )}
+                                  </div>
+                              
+                                  <div id='newPetSection'>
+                                    <div>
+                                      <div className='modal-body-section'>
+                                        <label>Pet Name:</label>
+                                        <input
+                                          type='text'
+                                          value={createPetInfo.name || ''}
+                                          onChange={e => handlePetChange('name', e.target.value)}
+                                          required
+                                        />
+                                        {errors.petName && <div className='error'>{errors.petName}</div>}
+                                      </div>
+                                      <div className='modal-body-section'>
+                                        <label>Type:</label>
+                                        <input
+                                          type='radio'
+                                          name='petType'
+                                          value='Dog'
+                                          checked={createPetInfo.type === 'Dog'}
+                                          onChange={e => {
+                                            setCreatePetInfo({ ...createPetInfo, type: e.target.value });
+                                            setErrors(prev => ({ ...prev, petType: '' }));
+                                          }}
+                                          required
+                                        />{' '}
+                                        <span>Dog</span>
+                                        <input
+                                          type='radio'
+                                          name='petType'
+                                          value='Cat'
+                                          checked={createPetInfo.type === 'Cat'}
+                                          onChange={e => {
+                                            setCreatePetInfo({ ...createPetInfo, type: e.target.value });
+                                            setErrors(prev => ({ ...prev, petType: '' }));
+                                          }}
+                                          required
+                                        />{' '}
+                                        <span>Cat</span>
+                                        {errors.petType && <span className='error'>{errors.petType}</span>}
+                                      </div>
+                                      <div className='modal-body-section'>
+                                        <label>Breed:</label>
+                                        <input
+                                          type='text'
+                                          value={createPetInfo.breed}
+                                          onChange={e => handlePetChange('breed', e.target.value)}
+                                          required
+                                        />
+                                        {errors.petBreed && <div className='error'>{errors.petBreed}</div>}
+                                      </div>
+                                      <div className='modal-body-section'>
+                                        <label>Birthday:</label>
+                                        <input
+                                          type='date'
+                                          value={createPetInfo.birthday || ''}
+                                          onChange={e => handlePetChange('birthday', e.target.value)}
+                                          required
+                                        />
+                                         {errors.petBirthday && <div className='error'>{errors.petBirthday}</div>}
+                                      </div>
+                                      <div className='modal-body-section'>
+                                        <label>Gender:</label>
+                                        <input
+                                          type='radio'
+                                          name='gender'
+                                          value='Male'
+                                          checked={createPetInfo.gender === 'Male'}
+                                          onChange={e => {
+                                            setCreatePetInfo({ ...createPetInfo, gender: e.target.value });
+                                            setErrors(prev => ({ ...prev, petGender: '' }));
+                                          }}
+                                          required
+                                        />
+                                        <span>Male</span>
+                                        <input
+                                          type='radio'
+                                          name='gender'
+                                          value='Female'
+                                          checked={createPetInfo.gender === 'Female'}
+                                          onChange={e => {
+                                            setCreatePetInfo({ ...createPetInfo, gender: e.target.value });
+                                            setErrors(prev => ({ ...prev, petGender: '' }));
+                                          }}
+                                          required
+                                        />
+                                        <span>Female</span>
+                                        {errors.petGender && <span className='error'>{errors.petGender}</span>}
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            )}
+                              )}
+
                           </div>
                           <div className='modal-body-section-wrapper'>
                             <div>
@@ -1262,13 +1216,7 @@ function ManageListBooking() {
                                 <input
                                   type='date'
                                   value={selectedDate}
-                                  onChange={e => {
-                                    setSelectedDate(e.target.value);
-                                    setErrors(prev => ({
-                                      ...prev,
-                                      selectedDate: '',
-                                    }));
-                                  }}
+                                  onChange={handleDateChange}
                                   required
                                 />
                                 {errors.selectedDate && (

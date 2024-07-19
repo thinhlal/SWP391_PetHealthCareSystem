@@ -250,7 +250,7 @@
 
 .manage-booking-list .modal-body-section {
   margin: 10px 0;
-  display: flex;
+  /* display: flex; */
   align-items: center;
 }
 
@@ -364,6 +364,7 @@
 .manage-booking-list .error {
   color: red;
   font-size: 0.8em;
+  margin-left: 18%;
 }
 
 .manage-booking-list .has-select-option {
