@@ -28,7 +28,6 @@ function ManageListBooking() {
     { startTime: '15:00', endTime: '16:00' },
     { startTime: '16:00', endTime: '17:00' },
   ];
-
   const [createPetInfo, setCreatePetInfo] = useState({});
   const [createAccountInfo, setCreateAccountInfo] = useState({});
   const [petInfo, setPetInfo] = useState({});
@@ -62,7 +61,9 @@ function ManageListBooking() {
   const itemsPerPage = 10;
   const [bookingDetailsCheckIn, setBookingDetailsCheckIn] = useState(null);
   const [servicesWhileCheckIn, setServicesWhileCheckIn] = useState([]);
-  const [serviceFilter, setServiceFilter] = useState([]);
+  const [serviceWhileCheckInFilter, setServiceWhileCheckInFilter] = useState(
+    [],
+  );
   const [loading, setLoading] = useState(false);
   const [statusFilters, setStatusFilters] = useState({
     pending: false,
@@ -113,7 +114,6 @@ function ManageListBooking() {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings`,
         );
-        console.log(response.data.allBookings);
         setAllBookings(response.data.allBookings);
       } catch (error) {
         console.error('Error ManageBooking Get All: ', error);
@@ -222,19 +222,34 @@ function ManageListBooking() {
   };
   const handleServiceChange = (index, field, value) => {
     const newServices = [...services];
-    if (
-      field === 'service' &&
-      newServices.some(service => service.service === value)
-    ) {
-      setErrors(prev => ({
-        ...prev,
-        services: 'This service is already selected',
-      }));
-      return;
+
+    if (field === 'service') {
+      if (newServices.some(service => service.service === value)) {
+        setErrors(prev => ({
+          ...prev,
+          services: 'This service is already selected',
+        }));
+        return;
+      }
+
+      const selectedService = allServices.find(
+        service => service.serviceID === value,
+      );
+      const servicePrice = selectedService ? selectedService.price : 0;
+      newServices[index] = {
+        ...newServices[index],
+        service: value,
+        price: servicePrice,
+      };
+    } else {
+      newServices[index][field] = value;
     }
-    newServices[index][field] = value;
+
     setServices(newServices);
-    setErrors(prev => ({ ...prev, services: '' }));
+    setErrors(prev => ({
+      ...prev,
+      services: '',
+    }));
   };
 
   const handleServiceWhileCheckInChange = (index, field, value) => {
@@ -250,7 +265,7 @@ function ManageListBooking() {
         return;
       }
 
-      const selectedService = serviceFilter.find(
+      const selectedService = serviceWhileCheckInFilter.find(
         service => service.serviceID === value,
       );
       const servicePrice = selectedService ? selectedService.price : 0;
@@ -272,7 +287,26 @@ function ManageListBooking() {
   };
 
   const addService = () => {
-    setServices([...services, { service: '' }]);
+    const newServices = allServices.filter(
+      service => !services.some(s => s.service === service.serviceID),
+    );
+
+    if (newServices.length === 0) {
+      setErrors(prev => ({
+        ...prev,
+        services: 'All services have been added.',
+      }));
+      return;
+    }
+
+    const defaultServiceID = newServices[0].serviceID;
+
+    setServices([...services, { service: defaultServiceID }]);
+
+    setErrors(prev => ({
+      ...prev,
+      services: '',
+    }));
   };
 
   const addServiceWhileCheckIn = () => {
@@ -282,7 +316,7 @@ function ManageListBooking() {
           s => s.serviceID === service.serviceID,
         ),
     );
-    setServiceFilter(newServices);
+    setServiceWhileCheckInFilter(newServices);
     let defaultServiceID = '';
     if (newServices.length > 0) {
       for (let service of newServices) {
@@ -346,7 +380,9 @@ function ManageListBooking() {
         if (withinWorkingHours) {
           const hasNoOverlap = doctor.matchingBookings.every(
             booking =>
-              endTime !== booking.endTime && startTime !== booking.startTime,
+              booking.isCancel ||
+              booking.paymentDetails[0].isCancelPayment ||
+              (endTime !== booking.endTime && startTime !== booking.startTime),
           );
           if (hasNoOverlap) {
             availableDoctors.push(doctor);
@@ -431,8 +467,10 @@ function ManageListBooking() {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
   };
-  const validateName = name => /^[A-Za-z\s]+$/.test(name) && name.trim().length > 0;
-  const validatePetName = petName => /^[A-Za-z\s]+$/.test(petName) && petName.trim().length > 0; 
+  const validateName = name =>
+    /^[A-Za-z\s]+$/.test(name) && name.trim().length > 0;
+  const validatePetName = petName =>
+    /^[A-Za-z\s]+$/.test(petName) && petName.trim().length > 0;
   const validatePhone = phone => /^\d{10}$/.test(phone);
   const validateBreed = breed => /^[A-Za-z\s]+$/.test(breed);
   const validateBirthday = birthday => {
@@ -443,31 +481,34 @@ function ManageListBooking() {
   const validateFutureDate = date => {
     const selectedDate = new Date(date);
     const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // Set time to the start of the day
+    currentDate.setHours(0, 0, 0, 0);
     return selectedDate >= currentDate;
   };
-  
-  const handleDateChange = (e) => {
+
+  const handleDateChange = e => {
     const value = e.target.value;
     if (!validateFutureDate(value)) {
-      setErrors(prev => ({ ...prev, selectedDate: 'Date cannot be in the past' }));
+      setErrors(prev => ({
+        ...prev,
+        selectedDate: 'Date cannot be in the past',
+      }));
     } else {
       setSelectedDate(value);
       setErrors(prev => ({ ...prev, selectedDate: '' }));
     }
   };
-  
-  
 
   const handleChange = (field, value) => {
     const newAccountInfo = { ...createAccountInfo, [field]: value };
     setCreateAccountInfo(newAccountInfo);
-  
+
     let error = '';
-  
+
     switch (field) {
       case 'name':
-        if (!validateName(value)) error = 'Cannot contain special characters and must have at least one word';
+        if (!validateName(value))
+          error =
+            'Cannot contain special characters and must have at least one word';
         break;
       case 'email':
         if (!validateEmail(value)) error = 'Invalid email format';
@@ -478,34 +519,39 @@ function ManageListBooking() {
       default:
         break;
     }
-  
+
     setErrors(prev => ({ ...prev, [field]: error }));
   };
-  
+
   const handlePetChange = (field, value) => {
     const newPetInfo = { ...createPetInfo, [field]: value };
     setCreatePetInfo(newPetInfo);
-  
+
     let error = '';
-  
+
     switch (field) {
       case 'name':
-        if (!validatePetName(value)) error = 'Pet name cannot contain special characters and must have at least one word';
+        if (!validatePetName(value))
+          error =
+            'Pet name cannot contain special characters and must have at least one word';
         break;
       case 'breed':
-        if (!validateBreed(value)) error = 'Breed cannot contain special characters';
+        if (!validateBreed(value))
+          error = 'Breed cannot contain special characters';
         break;
       case 'birthday':
-        if (!validateBirthday(value)) error = 'Birthday cannot be in the future';
+        if (!validateBirthday(value))
+          error = 'Birthday cannot be in the future';
         break;
       default:
         break;
     }
-  
-    setErrors(prev => ({ ...prev, [`pet${field.charAt(0).toUpperCase() + field.slice(1)}`]: error }));
+
+    setErrors(prev => ({
+      ...prev,
+      [`pet${field.charAt(0).toUpperCase() + field.slice(1)}`]: error,
+    }));
   };
-  
-  
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -693,38 +739,38 @@ function ManageListBooking() {
     const bookingStatus = booking.isCancel
       ? 'cancel'
       : booking.paymentsDetails[0].isCancelPayment ||
-        (!booking.paymentsDetails[0].isSuccess &&
-          booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
-      ? 'cancel'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-        !booking.isCheckIn
-      ? 'pending'
-      : !booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-        !booking.isCheckIn
-      ? 'pending'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-        booking.isCheckIn &&
-        !booking.isCompleted
-      ? 'beingExamined'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-        booking.isCheckIn &&
-        !booking.isCompleted
-      ? 'beingExamined'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-        booking.isCheckIn &&
-        booking.isCompleted
-      ? 'done'
-      : booking.paymentsDetails[0].isSuccess &&
-        booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-        booking.isCheckIn &&
-        booking.isCompleted
-      ? 'done'
-      : null;
+          (!booking.paymentsDetails[0].isSuccess &&
+            booking.paymentsDetails[0].paymentMethod === 'PAYPAL')
+        ? 'cancel'
+        : booking.paymentsDetails[0].isSuccess &&
+            booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+            !booking.isCheckIn
+          ? 'pending'
+          : !booking.paymentsDetails[0].isSuccess &&
+              booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+              !booking.isCheckIn
+            ? 'pending'
+            : booking.paymentsDetails[0].isSuccess &&
+                booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                booking.isCheckIn &&
+                !booking.isCompleted
+              ? 'beingExamined'
+              : booking.paymentsDetails[0].isSuccess &&
+                  booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                  booking.isCheckIn &&
+                  !booking.isCompleted
+                ? 'beingExamined'
+                : booking.paymentsDetails[0].isSuccess &&
+                    booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                    booking.isCheckIn &&
+                    booking.isCompleted
+                  ? 'done'
+                  : booking.paymentsDetails[0].isSuccess &&
+                      booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
+                      booking.isCheckIn &&
+                      booking.isCompleted
+                    ? 'done'
+                    : null;
 
     const matchesStatus =
       (statusFilters.pending && bookingStatus === 'pending') ||
@@ -792,221 +838,225 @@ function ManageListBooking() {
                   />
                 </div>
               </div>
-              <div className='dropdown-filter'>
-                <button
-                  className='menu-filter dropdown-toggle'
-                  type='button'
-                  id='dropdownMenuButton'
-                  data-bs-toggle='dropdown'
-                  aria-expanded='false'
-                >
-                  Filter by Status
-                </button>
-                <ul className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                  <li className='filter-dropdown'>
-                    <input
-                      type='checkbox'
-                      checked={statusFilters.pending}
-                      onChange={() =>
-                        setStatusFilters({
-                          ...statusFilters,
-                          pending: !statusFilters.pending,
-                        })
-                      }
-                    />{' '}
-                    Pending
-                  </li>
-                  <li className='filter-dropdown'>
-                    <input
-                      type='checkbox'
-                      checked={statusFilters.beingExamined}
-                      onChange={() =>
-                        setStatusFilters({
-                          ...statusFilters,
-                          beingExamined: !statusFilters.beingExamined,
-                        })
-                      }
-                    />{' '}
-                    Being examined
-                  </li>
-                  <li className='filter-dropdown'>
-                    <input
-                      type='checkbox'
-                      checked={statusFilters.cancel}
-                      onChange={() =>
-                        setStatusFilters({
-                          ...statusFilters,
-                          cancel: !statusFilters.cancel,
-                        })
-                      }
-                    />{' '}
-                    Cancel
-                  </li>
-                  <li className='filter-dropdown'>
-                    <input
-                      type='checkbox'
-                      checked={statusFilters.done}
-                      onChange={() =>
-                        setStatusFilters({
-                          ...statusFilters,
-                          done: !statusFilters.done,
-                        })
-                      }
-                    />{' '}
-                    Done
-                  </li>
-                </ul>
-              </div>
-              <div className='main-content-header-add-booking'>
-                <button
-                  type='button'
-                  className='booking-btn-add'
-                  data-bs-toggle='modal'
-                  data-bs-target='#exampleModal'
-                  onClick={getAllDoctors}
-                >
-                  Add Booking
-                </button>
-                <div
-                  className='modal fade'
-                  id='exampleModal'
-                  aria-labelledby='exampleModalLabel'
-                  aria-hidden='true'
-                >
-                  <div className='modal-dialog'>
-                    <form
-                      id='addPetForm'
-                      onSubmit={handleSubmit}
-                    >
-                      <div className='modal-content'>
-                        <div className='modal-header'>
-                          <h1
-                            className='modal-title fs-5'
-                            id='exampleModalLabel'
-                          >
-                            Add Booking
-                          </h1>
-                          <button
-                            type='button'
-                            onClick={resetForm}
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
-                          ></button>
-                        </div>
-                        <div className='modal-body'>
-                          <div className='modal-body-section-wrapper'>
-                            <div className='modal-body-section-type-user'>
-                              <label>Customer:</label>
-                              <input
-                                type='radio'
-                                name='accountOption'
-                                value='hasOwnerID'
-                                checked={accountOption === 'hasOwnerID'}
-                                onChange={handleOwnerOptionChange}
-                              />
-                              <span>Have CustomerID</span>
-                              <input
-                                type='radio'
-                                name='accountOption'
-                                value='noOwnerID'
-                                checked={accountOption === 'noOwnerID'}
-                                onChange={handleOwnerOptionChange}
-                              />
-                              <span>Not Have CustomerID</span>
-                              {errors.accountOption && (
-                                <span className='error'>
-                                  {errors.accountOption}
-                                </span>
-                              )}
-                            </div>
-                            {accountOption === 'hasOwnerID' && (
-                              <div id='searchOwnerSection'>
-                                <div className='search-owner-option-section'>
-                                  <label>Search Customer:</label>
-                                  <input
-                                    type='text'
-                                    id='searchOwnerInput'
-                                    value={searchCustomerValue}
-                                    onChange={e =>
-                                      setSearchCustomerValue(e.target.value)
-                                    }
-                                  />
-                                  <div
-                                    className='search-button'
-                                    onClick={handleSearchCustomer}
-                                  >
-                                    Search
-                                  </div>
-                                  {errors.searchValueAccount && (
-                                    <span className='error'>
-                                      {errors.searchValueAccount}
-                                    </span>
-                                  )}
-                                </div>
-                                <div className='has-select-option'>
-                                  <select onChange={handleAccountSelect}>
-                                    <option value=''>Choose Customer</option>
-                                    {accountSearchResults &&
-                                      accountSearchResults.map(account => (
-                                        <option
-                                          key={account.accountID}
-                                          value={account.accountID}
-                                        >
-                                          {`${account.accountID} - ${account.username}`}
-                                        </option>
-                                      ))}
-                                  </select>
-                                  {errors.accountSelect && (
-                                    <span className='error'>
-                                      {errors.accountSelect}
-                                    </span>
-                                  )}
-                                </div>
-
-                                <div id='searchPetSection'>
-                                  <div className='searchPetSection-child'>
-                                    <label>Search Pet ID:</label>
+              <div className='right-header-content'>
+                <div className='dropdown-filter'>
+                  <button
+                    className='menu-filter dropdown-toggle'
+                    type='button'
+                    id='dropdownMenuButton'
+                    data-bs-toggle='dropdown'
+                    aria-expanded='false'
+                  >
+                    Filter by Status
+                  </button>
+                  <ul
+                    className='dropdown-menu'
+                    aria-labelledby='dropdownMenuButton'
+                  >
+                    <li className='filter-dropdown'>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.pending}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            pending: !statusFilters.pending,
+                          })
+                        }
+                      />{' '}
+                      Pending
+                    </li>
+                    <li className='filter-dropdown'>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.beingExamined}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            beingExamined: !statusFilters.beingExamined,
+                          })
+                        }
+                      />{' '}
+                      Being examined
+                    </li>
+                    <li className='filter-dropdown'>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.cancel}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            cancel: !statusFilters.cancel,
+                          })
+                        }
+                      />{' '}
+                      Cancel
+                    </li>
+                    <li className='filter-dropdown'>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.done}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            done: !statusFilters.done,
+                          })
+                        }
+                      />{' '}
+                      Done
+                    </li>
+                  </ul>
+                </div>
+                <div className='main-content-header-add-booking'>
+                  <button
+                    type='button'
+                    className='booking-btn-add'
+                    data-bs-toggle='modal'
+                    data-bs-target='#exampleModal'
+                    onClick={getAllDoctors}
+                  >
+                    Add Booking
+                  </button>
+                  <div
+                    className='modal fade'
+                    id='exampleModal'
+                    aria-labelledby='exampleModalLabel'
+                    aria-hidden='true'
+                  >
+                    <div className='modal-dialog'>
+                      <form
+                        id='addPetForm'
+                        onSubmit={handleSubmit}
+                      >
+                        <div className='modal-content'>
+                          <div className='modal-header'>
+                            <h1
+                              className='modal-title fs-5'
+                              id='exampleModalLabel'
+                            >
+                              Add Booking
+                            </h1>
+                            <button
+                              type='button'
+                              onClick={resetForm}
+                              className='btn-close'
+                              data-bs-dismiss='modal'
+                              aria-label='Close'
+                            ></button>
+                          </div>
+                          <div className='modal-body'>
+                            <div className='modal-body-section-wrapper'>
+                              <div className='modal-body-section-type-user'>
+                                <label>Customer:</label>
+                                <input
+                                  type='radio'
+                                  name='accountOption'
+                                  value='hasOwnerID'
+                                  checked={accountOption === 'hasOwnerID'}
+                                  onChange={handleOwnerOptionChange}
+                                />
+                                <span>Have CustomerID</span>
+                                <input
+                                  type='radio'
+                                  name='accountOption'
+                                  value='noOwnerID'
+                                  checked={accountOption === 'noOwnerID'}
+                                  onChange={handleOwnerOptionChange}
+                                />
+                                <span>Not Have CustomerID</span>
+                                {errors.accountOption && (
+                                  <span className='error'>
+                                    {errors.accountOption}
+                                  </span>
+                                )}
+                              </div>
+                              {accountOption === 'hasOwnerID' && (
+                                <div id='searchOwnerSection'>
+                                  <div className='search-owner-option-section'>
+                                    <label>Search Customer:</label>
                                     <input
                                       type='text'
-                                      value={searchPetValue}
+                                      id='searchOwnerInput'
+                                      value={searchCustomerValue}
                                       onChange={e =>
-                                        setSearchPetValue(e.target.value)
+                                        setSearchCustomerValue(e.target.value)
                                       }
                                     />
                                     <div
                                       className='search-button'
-                                      onClick={handleSearchPet}
+                                      onClick={handleSearchCustomer}
                                     >
                                       Search
                                     </div>
-                                    {errors.searchValuePet && (
+                                    {errors.searchValueAccount && (
                                       <span className='error'>
-                                        {errors.searchValuePet}
+                                        {errors.searchValueAccount}
                                       </span>
                                     )}
                                   </div>
                                   <div className='has-select-option'>
-                                    <select onChange={handlePetSelect}>
-                                      <option value=''>Choose Pet</option>
-                                      {petSearchResults &&
-                                        petSearchResults.map(pet => (
+                                    <select onChange={handleAccountSelect}>
+                                      <option value=''>Choose Customer</option>
+                                      {accountSearchResults &&
+                                        accountSearchResults.map(account => (
                                           <option
-                                            key={pet.petID}
-                                            value={pet.petID}
-                                          >{`${pet.petID} - ${pet.name}`}</option>
+                                            key={account.accountID}
+                                            value={account.accountID}
+                                          >
+                                            {`${account.accountID} - ${account.username}`}
+                                          </option>
                                         ))}
                                     </select>
-                                    {errors.petSelect && (
+                                    {errors.accountSelect && (
                                       <span className='error'>
-                                        {errors.petSelect}
+                                        {errors.accountSelect}
                                       </span>
                                     )}
                                   </div>
+
+                                  <div id='searchPetSection'>
+                                    <div className='searchPetSection-child'>
+                                      <label>Search Pet ID:</label>
+                                      <input
+                                        type='text'
+                                        value={searchPetValue}
+                                        onChange={e =>
+                                          setSearchPetValue(e.target.value)
+                                        }
+                                      />
+                                      <div
+                                        className='search-button'
+                                        onClick={handleSearchPet}
+                                      >
+                                        Search
+                                      </div>
+                                      {errors.searchValuePet && (
+                                        <span className='error'>
+                                          {errors.searchValuePet}
+                                        </span>
+                                      )}
+                                    </div>
+                                    <div className='has-select-option'>
+                                      <select onChange={handlePetSelect}>
+                                        <option value=''>Choose Pet</option>
+                                        {petSearchResults &&
+                                          petSearchResults.map(pet => (
+                                            <option
+                                              key={pet.petID}
+                                              value={pet.petID}
+                                            >{`${pet.petID} - ${pet.name}`}</option>
+                                          ))}
+                                      </select>
+                                      {errors.petSelect && (
+                                        <span className='error'>
+                                          {errors.petSelect}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                             )}
-                              
+                              )}
+
                               {accountOption === 'noOwnerID' && (
                                 <div id='newOwnerSection'>
                                   <div>
@@ -1015,33 +1065,51 @@ function ManageListBooking() {
                                       <input
                                         type='text'
                                         value={createAccountInfo.name || ''}
-                                        onChange={e => handleChange('name', e.target.value)}
+                                        onChange={e =>
+                                          handleChange('name', e.target.value)
+                                        }
                                         required
                                       />
-                                      {errors.name && <div className='error'>{errors.name}</div>}
+                                      {errors.name && (
+                                        <div className='error'>
+                                          {errors.name}
+                                        </div>
+                                      )}
                                     </div>
                                     <div className='modal-body-section'>
                                       <label>Email:</label>
                                       <input
                                         type='email'
                                         value={createAccountInfo.email || ''}
-                                        onChange={e => handleChange('email', e.target.value)}
+                                        onChange={e =>
+                                          handleChange('email', e.target.value)
+                                        }
                                         required
                                       />
-                                      {errors.email && <div className='error'>{errors.email}</div>}
+                                      {errors.email && (
+                                        <div className='error'>
+                                          {errors.email}
+                                        </div>
+                                      )}
                                     </div>
                                     <div className='modal-body-section'>
                                       <label>Phone:</label>
                                       <input
                                         type='text'
                                         value={createAccountInfo.phone || ''}
-                                        onChange={e => handleChange('phone', e.target.value)}
+                                        onChange={e =>
+                                          handleChange('phone', e.target.value)
+                                        }
                                         required
                                       />
-                                      {errors.phone && <div className='error'>{errors.phone}</div>}
+                                      {errors.phone && (
+                                        <div className='error'>
+                                          {errors.phone}
+                                        </div>
+                                      )}
                                     </div>
                                   </div>
-                              
+
                                   <div id='newPetSection'>
                                     <div>
                                       <div className='modal-body-section'>
@@ -1049,10 +1117,19 @@ function ManageListBooking() {
                                         <input
                                           type='text'
                                           value={createPetInfo.name || ''}
-                                          onChange={e => handlePetChange('name', e.target.value)}
+                                          onChange={e =>
+                                            handlePetChange(
+                                              'name',
+                                              e.target.value,
+                                            )
+                                          }
                                           required
                                         />
-                                        {errors.petName && <div className='error'>{errors.petName}</div>}
+                                        {errors.petName && (
+                                          <div className='error'>
+                                            {errors.petName}
+                                          </div>
+                                        )}
                                       </div>
                                       <div className='modal-body-section'>
                                         <label>Type:</label>
@@ -1062,8 +1139,14 @@ function ManageListBooking() {
                                           value='Dog'
                                           checked={createPetInfo.type === 'Dog'}
                                           onChange={e => {
-                                            setCreatePetInfo({ ...createPetInfo, type: e.target.value });
-                                            setErrors(prev => ({ ...prev, petType: '' }));
+                                            setCreatePetInfo({
+                                              ...createPetInfo,
+                                              type: e.target.value,
+                                            });
+                                            setErrors(prev => ({
+                                              ...prev,
+                                              petType: '',
+                                            }));
                                           }}
                                           required
                                         />{' '}
@@ -1074,33 +1157,61 @@ function ManageListBooking() {
                                           value='Cat'
                                           checked={createPetInfo.type === 'Cat'}
                                           onChange={e => {
-                                            setCreatePetInfo({ ...createPetInfo, type: e.target.value });
-                                            setErrors(prev => ({ ...prev, petType: '' }));
+                                            setCreatePetInfo({
+                                              ...createPetInfo,
+                                              type: e.target.value,
+                                            });
+                                            setErrors(prev => ({
+                                              ...prev,
+                                              petType: '',
+                                            }));
                                           }}
                                           required
                                         />{' '}
                                         <span>Cat</span>
-                                        {errors.petType && <span className='error'>{errors.petType}</span>}
+                                        {errors.petType && (
+                                          <span className='error'>
+                                            {errors.petType}
+                                          </span>
+                                        )}
                                       </div>
                                       <div className='modal-body-section'>
                                         <label>Breed:</label>
                                         <input
                                           type='text'
                                           value={createPetInfo.breed}
-                                          onChange={e => handlePetChange('breed', e.target.value)}
+                                          onChange={e =>
+                                            handlePetChange(
+                                              'breed',
+                                              e.target.value,
+                                            )
+                                          }
                                           required
                                         />
-                                        {errors.petBreed && <div className='error'>{errors.petBreed}</div>}
+                                        {errors.petBreed && (
+                                          <div className='error'>
+                                            {errors.petBreed}
+                                          </div>
+                                        )}
                                       </div>
                                       <div className='modal-body-section'>
                                         <label>Birthday:</label>
                                         <input
                                           type='date'
                                           value={createPetInfo.birthday || ''}
-                                          onChange={e => handlePetChange('birthday', e.target.value)}
+                                          onChange={e =>
+                                            handlePetChange(
+                                              'birthday',
+                                              e.target.value,
+                                            )
+                                          }
                                           required
                                         />
-                                         {errors.petBirthday && <div className='error'>{errors.petBirthday}</div>}
+                                        {errors.petBirthday && (
+                                          <div className='error'>
+                                            {errors.petBirthday}
+                                          </div>
+                                        )}
                                       </div>
                                       <div className='modal-body-section'>
                                         <label>Gender:</label>
@@ -1108,10 +1219,18 @@ function ManageListBooking() {
                                           type='radio'
                                           name='gender'
                                           value='Male'
-                                          checked={createPetInfo.gender === 'Male'}
+                                          checked={
+                                            createPetInfo.gender === 'Male'
+                                          }
                                           onChange={e => {
-                                            setCreatePetInfo({ ...createPetInfo, gender: e.target.value });
-                                            setErrors(prev => ({ ...prev, petGender: '' }));
+                                            setCreatePetInfo({
+                                              ...createPetInfo,
+                                              gender: e.target.value,
+                                            });
+                                            setErrors(prev => ({
+                                              ...prev,
+                                              petGender: '',
+                                            }));
                                           }}
                                           required
                                         />
@@ -1120,199 +1239,213 @@ function ManageListBooking() {
                                           type='radio'
                                           name='gender'
                                           value='Female'
-                                          checked={createPetInfo.gender === 'Female'}
+                                          checked={
+                                            createPetInfo.gender === 'Female'
+                                          }
                                           onChange={e => {
-                                            setCreatePetInfo({ ...createPetInfo, gender: e.target.value });
-                                            setErrors(prev => ({ ...prev, petGender: '' }));
+                                            setCreatePetInfo({
+                                              ...createPetInfo,
+                                              gender: e.target.value,
+                                            });
+                                            setErrors(prev => ({
+                                              ...prev,
+                                              petGender: '',
+                                            }));
                                           }}
                                           required
                                         />
                                         <span>Female</span>
-                                        {errors.petGender && <span className='error'>{errors.petGender}</span>}
+                                        {errors.petGender && (
+                                          <span className='error'>
+                                            {errors.petGender}
+                                          </span>
+                                        )}
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               )}
-
-                          </div>
-                          <div className='modal-body-section-wrapper'>
-                            <div>
-                              <label>Services used:</label>
-                              <table className='services-table'>
-                                <thead>
-                                  <tr>
-                                    <th>Service</th>
-                                    <th>Action</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {services.map((service, index) => (
-                                    <tr key={index}>
-                                      <td>
-                                        <select
-                                          value={service.service}
-                                          onChange={e =>
-                                            handleServiceChange(
-                                              index,
-                                              'service',
-                                              e.target.value,
-                                            )
-                                          }
-                                          required
-                                        >
-                                          <option value=''>
-                                            Choose Services
-                                          </option>
-                                          {allServices.map(service => (
-                                            <option
-                                              key={service.serviceID}
-                                              value={service.serviceID}
-                                            >
-                                              {`${service.name} - ${service.price}$`}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      </td>
-                                      <td>
-                                        <button
-                                          type='button'
-                                          className='btn-remove-service'
-                                          onClick={() => removeService(index)}
-                                        >
-                                          Remove
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                              <div
-                                className='btn-add-services'
-                                onClick={addService}
-                              >
-                                <svg
-                                  xmlns='http://www.w3.org/2000/svg'
-                                  width='16'
-                                  height='16'
-                                  fill='currentColor'
-                                  className='bi bi-plus'
-                                  viewBox='0 0 16 16'
-                                >
-                                  <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4' />
-                                </svg>
-                                <div>Add service</div>
-                              </div>
-                              {errors.services && (
-                                <span className='error'>{errors.services}</span>
-                              )}
                             </div>
-                          </div>
-
-                          <div className='modal-body-section-wrapper'>
-                            <div>
-                              <div className='modal-body-section-doctor-date'>
-                                <label>Choose Date:</label>
-                                <input
-                                  type='date'
-                                  value={selectedDate}
-                                  onChange={handleDateChange}
-                                  required
-                                />
-                                {errors.selectedDate && (
-                                  <span className='error'>
-                                    {errors.selectedDate}
-                                  </span>
+                            <div className='modal-body-section-wrapper'>
+                              <div>
+                                <label>Services used:</label>
+                                {services.length > 0 && (
+                                  <table className='services-table'>
+                                    <thead>
+                                      <tr>
+                                        <th>Service</th>
+                                        <th>Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {services.map((service, index) => (
+                                        <tr key={index}>
+                                          <td>
+                                            <select
+                                              value={service.service}
+                                              onChange={e =>
+                                                handleServiceChange(
+                                                  index,
+                                                  'service',
+                                                  e.target.value,
+                                                )
+                                              }
+                                            >
+                                              {allServices.map(service => (
+                                                <option
+                                                  key={service.serviceID}
+                                                  value={service.serviceID}
+                                                >
+                                                  {`${service.name} - ${service.price}$`}
+                                                </option>
+                                              ))}
+                                            </select>
+                                          </td>
+                                          <td>
+                                            <button
+                                              type='button'
+                                              className='btn-remove-service'
+                                              onClick={() =>
+                                                removeService(index)
+                                              }
+                                            >
+                                              Remove
+                                            </button>
+                                          </td>
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
                                 )}
-                              </div>
-                              <div className='modal-body-section-doctor-date'>
-                                <label>Choose Time Slot:</label>
-                                <select
-                                  value={`${selectedTimeSlot.startTime}-${selectedTimeSlot.endTime}`}
-                                  onChange={e => handleTimeSlotChange(e)}
-                                  required
+                                <div
+                                  className='btn-add-services'
+                                  onClick={addService}
                                 >
-                                  <option value=''>Select Time Slot</option>
-                                  {availableTimeSlots &&
-                                    availableTimeSlots.map((slot, index) => (
-                                      <option
-                                        key={index}
-                                        value={`${slot.startTime}-${slot.endTime}`}
-                                      >{`${slot.startTime} - ${slot.endTime}`}</option>
-                                    ))}
-                                </select>
-                                {errors.selectedTimeSlot && (
+                                  <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='16'
+                                    height='16'
+                                    fill='currentColor'
+                                    className='bi bi-plus'
+                                    viewBox='0 0 16 16'
+                                  >
+                                    <path d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4' />
+                                  </svg>
+                                  <div>Add service</div>
+                                </div>
+                                {errors.services && (
                                   <span className='error'>
-                                    {errors.selectedTimeSlot}
+                                    {errors.services}
                                   </span>
                                 )}
                               </div>
-                              <div className='modal-body-section-doctor-date'>
-                                <label>Veterinarian:</label>
-                                <div id='veterinarian'>
-                                  {findAvailableDoctor(
-                                    selectedDate,
-                                    selectedTimeSlot.startTime,
-                                    selectedTimeSlot.endTime,
-                                  ) ? (
-                                    findAvailableDoctor(
+                            </div>
+
+                            <div className='modal-body-section-wrapper'>
+                              <div>
+                                <div className='modal-body-section-doctor-date'>
+                                  <label>Choose Date:</label>
+                                  <input
+                                    type='date'
+                                    value={selectedDate}
+                                    onChange={handleDateChange}
+                                    required
+                                  />
+                                  {errors.selectedDate && (
+                                    <span className='error'>
+                                      {errors.selectedDate}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className='modal-body-section-doctor-date'>
+                                  <label>Choose Time Slot:</label>
+                                  <select
+                                    value={`${selectedTimeSlot.startTime}-${selectedTimeSlot.endTime}`}
+                                    onChange={e => handleTimeSlotChange(e)}
+                                    required
+                                  >
+                                    <option value=''>Select Time Slot</option>
+                                    {availableTimeSlots &&
+                                      availableTimeSlots.map((slot, index) => (
+                                        <option
+                                          key={index}
+                                          value={`${slot.startTime}-${slot.endTime}`}
+                                        >{`${slot.startTime} - ${slot.endTime}`}</option>
+                                      ))}
+                                  </select>
+                                  {errors.selectedTimeSlot && (
+                                    <span className='error'>
+                                      {errors.selectedTimeSlot}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className='modal-body-section-doctor-date'>
+                                  <label>Veterinarian:</label>
+                                  <div id='veterinarian'>
+                                    {findAvailableDoctor(
                                       selectedDate,
                                       selectedTimeSlot.startTime,
                                       selectedTimeSlot.endTime,
-                                    ).map((doctor, index) => {
-                                      return (
-                                        <div
-                                          key={doctor.doctorID}
-                                          className='choose-Doctor-wrapper'
-                                        >
-                                          <input
-                                            type='radio'
-                                            id={`doctor-${index}`}
-                                            name='doctor'
-                                            value={doctor.doctorID}
-                                            onChange={e =>
-                                              handleDoctorChange(e)
-                                            }
-                                          />
-                                          <label htmlFor={`doctor-${index}`}>
-                                            {doctor.name}
-                                          </label>
-                                        </div>
-                                      );
-                                    })
-                                  ) : (
-                                    <div className='choose-Doctor-Not-Found'>
-                                      No Doctors Found
-                                    </div>
+                                    ) ? (
+                                      findAvailableDoctor(
+                                        selectedDate,
+                                        selectedTimeSlot.startTime,
+                                        selectedTimeSlot.endTime,
+                                      ).map((doctor, index) => {
+                                        return (
+                                          <div
+                                            key={doctor.doctorID}
+                                            className='choose-Doctor-wrapper'
+                                          >
+                                            <input
+                                              type='radio'
+                                              id={`doctor-${index}`}
+                                              name='doctor'
+                                              value={doctor.doctorID}
+                                              onChange={e =>
+                                                handleDoctorChange(e)
+                                              }
+                                            />
+                                            <label htmlFor={`doctor-${index}`}>
+                                              {doctor.name}
+                                            </label>
+                                          </div>
+                                        );
+                                      })
+                                    ) : (
+                                      <div className='choose-Doctor-Not-Found'>
+                                        No Doctors Found
+                                      </div>
+                                    )}
+                                  </div>
+                                  {errors.chosenDoctor && (
+                                    <span className='error'>
+                                      {errors.chosenDoctor}
+                                    </span>
                                   )}
                                 </div>
-                                {errors.chosenDoctor && (
-                                  <span className='error'>
-                                    {errors.chosenDoctor}
-                                  </span>
-                                )}
                               </div>
                             </div>
                           </div>
+                          <div className='modal-footer'>
+                            <button
+                              type='button'
+                              onClick={resetForm}
+                              className='btn btn-secondary'
+                              data-bs-dismiss='modal'
+                            >
+                              Close
+                            </button>
+                            <button
+                              type='submit'
+                              className='btn btn-success'
+                            >
+                              Add
+                            </button>
+                          </div>
                         </div>
-                        <div className='modal-footer'>
-                          <button
-                            type='button'
-                            onClick={resetForm}
-                            className='btn btn-secondary'
-                            data-bs-dismiss='modal'
-                          >
-                            Close
-                          </button>
-                          <button
-                            type='submit'
-                            className='btn btn-success'
-                          >
-                            Add
-                          </button>
-                        </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1957,7 +2090,7 @@ function ManageListBooking() {
                                                     <select
                                                       value={
                                                         service.service ||
-                                                        serviceFilter[0]
+                                                        serviceWhileCheckInFilter[0]
                                                           ?.serviceID
                                                       }
                                                       onChange={e =>
@@ -1969,7 +2102,7 @@ function ManageListBooking() {
                                                       }
                                                       required
                                                     >
-                                                      {serviceFilter.map(
+                                                      {serviceWhileCheckInFilter.map(
                                                         service => (
                                                           <option
                                                             key={
@@ -2050,7 +2183,6 @@ function ManageListBooking() {
                                         </small>
                                       </div>
                                     )}
-                                    
                                   </div>
 
                                   <div className='mb-2'>
@@ -2214,7 +2346,7 @@ function ManageListBooking() {
                                                     <select
                                                       value={
                                                         service.service ||
-                                                        serviceFilter[0]
+                                                        serviceWhileCheckInFilter[0]
                                                           ?.serviceID
                                                       }
                                                       onChange={e =>
@@ -2226,7 +2358,7 @@ function ManageListBooking() {
                                                       }
                                                       required
                                                     >
-                                                      {serviceFilter.map(
+                                                      {serviceWhileCheckInFilter.map(
                                                         service => (
                                                           <option
                                                             key={

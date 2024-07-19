@@ -41,6 +41,32 @@ class DoctorController {
           },
         },
         {
+          $unwind: {
+            path: '$bookingDetails',
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingDetails.bookingID',
+            foreignField: 'bookingID',
+            as: 'bookingDetails.paymentDetails',
+          },
+        },
+        {
+          $group: {
+            _id: '$doctorID',
+            doctorID: { $first: '$doctorID' },
+            accountID: { $first: '$accountID' },
+            name: { $first: '$name' },
+            phone: { $first: '$phone' },
+            email: { $first: '$email' },
+            workingHoursDetails: { $first: '$workingHoursDetails' },
+            bookingDetails: { $push: '$bookingDetails' },
+          },
+        },
+        {
           $addFields: {
             matchingBookings: {
               $filter: {

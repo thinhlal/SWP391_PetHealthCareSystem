@@ -66,9 +66,9 @@
 
 .manage-booking-list .search-button {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 3px 10px;
   margin-left: 5px;
-  width: 80px;
+  width: 70px;
   background-color: #007bff;
   color: white;
   border-radius: 5px;
@@ -145,8 +145,14 @@
   outline: none;
 }
 
+.manage-booking-list .right-header-content {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  gap: 20px;
+}
+
 .manage-booking-list .main-content-header-add-booking {
-  margin-right: 25px;
   font-family: Roboto, sans-serif;
   font-size: 15px;
 }
@@ -494,11 +500,9 @@
   border-radius: 6px;
 }
 
-
 .manage-booking-list .dropdown-filter {
   position: relative;
   display: inline-block;
-  margin-left: 50%;
 }
 
 .manage-booking-list .menu-filter {

@@ -27,19 +27,19 @@ class AdminController {
             from: 'payments',
             localField: 'bookingID',
             foreignField: 'bookingID',
-            as: 'paymentDetails'
-          }
+            as: 'paymentDetails',
+          },
         },
         {
           $unwind: {
             path: '$paymentDetails',
-            preserveNullAndEmptyArrays: true
-          }
+            preserveNullAndEmptyArrays: true,
+          },
         },
         {
           $match: {
-            'paymentDetails.isCancelPayment': { $ne: true }
-          }
+            'paymentDetails.isCancelPayment': { $ne: true },
+          },
         },
         {
           $project: {
@@ -49,10 +49,10 @@ class AdminController {
               $cond: {
                 if: '$isRefund',
                 then: { $subtract: ['$totalPrice', '$refundPrice'] },
-                else: '$totalPrice'
-              }
-            }
-          }
+                else: '$totalPrice',
+              },
+            },
+          },
         },
         {
           $group: {
@@ -69,7 +69,7 @@ class AdminController {
             '_id.month': 1,
           },
         },
-      ]); 
+      ]);
 
       const canceledBookingsByMonth = await Booking.aggregate([
         {
