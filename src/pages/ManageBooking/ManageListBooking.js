@@ -393,7 +393,8 @@ function ManageListBooking() {
         const withinWorkingHours =
           startTime >= workingHour.startTime && endTime <= workingHour.endTime;
         if (withinWorkingHours) {
-          const hasNoOverlap = doctor.matchingBookings.every(
+          const allBookingsInDay = doctor.matchingBookings.filter(booking => booking.dateBook.split('T')[0] === date);
+          const hasNoOverlap = allBookingsInDay.every(
             booking =>
               booking.isCancel ||
               booking.paymentDetails[0].isCancelPayment ||
