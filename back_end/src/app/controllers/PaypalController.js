@@ -174,8 +174,16 @@ class PaypalController {
     try {
       const booking = await Booking.findOne({ bookingID });
       const payment = await Payment.findOne({ bookingID });
+      var dateBooking = new Date(booking.dateBook)
+        .toISOString()
+        .substring(0, 10);
+      var dateCancelBook = new Date(booking.dateCancelBook)
+        .toISOString()
+        .substring(0, 10);
+
       const daysBefore =
-        (booking.dateBook - booking.dateCancelBook) / (1000 * 60 * 60 * 24);
+        (new Date(dateBooking) - new Date(dateCancelBook)) /
+        (1000 * 60 * 60 * 24);
       let refundAmount = payment.totalPrice;
       if (daysBefore < 3) {
         refundAmount = 0;
