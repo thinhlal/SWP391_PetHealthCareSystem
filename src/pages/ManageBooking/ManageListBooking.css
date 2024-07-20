@@ -191,7 +191,7 @@
   font-family: Roboto, sans-serif;
 }
 
-.content-list-body-value {
+.manage-booking-list .content-list-body-value {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -422,7 +422,7 @@ function ManageCages() {
                           <div className='modal-body-section-wrapper'>
                             <div>
                               <div className='modal-body-section-doctor-date'>
-                                <label>Doctor:</label>
+                                <label className='doctor-choose-title'>Doctor:</label>
                                 <div id='veterinarian'>
                                   {allDoctorsWorkingHours ? (
                                     allDoctorsWorkingHours.map(
