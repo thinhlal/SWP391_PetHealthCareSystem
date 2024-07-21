@@ -488,13 +488,12 @@
 .manage-cages .search-owner-option-section label {
   display: block;
   font-weight: 600;
-  width: 30%;
+  width: 100%;
   margin-bottom: 5px;
   margin-right: 10px;
 }
 
-.manage-cages .search-owner-option-section input,
-.manage-cages .search-owner-option-section > div {
+.manage-cages .search-owner-option-section input {
   width: 100%;
   padding: 8px;
   margin-bottom: 5px;
@@ -556,10 +555,24 @@
   gap: 15px;
 }
 
+.manage-cages .modal-body-section-doctor-date .doctor-choose-title {
+  font-weight: 600;
+  color: #004085;
+}
+
+.manage-cages .modal-body-section-doctor-date #veterinarian {
+  border: 1px solid #b5b5b5;
+  overflow-y: scroll;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
 .manage-cages .choose-Doctor-wrapper {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .manage-cages .choose-Doctor-wrapper input[type='radio'] {
@@ -593,7 +606,9 @@
 }
 
 .manage-cages .manage-cage-search-button {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 13px;
   color: #fff;
   background-color: #0355ad;
