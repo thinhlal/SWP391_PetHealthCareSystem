@@ -411,15 +411,14 @@ class BookingController {
   async cancelBooking(req, res, next) {
     const { bookingID } = req.body;
     try {
-      const booking = await Booking.findOneAndUpdate(
+      await Booking.findOneAndUpdate(
         { bookingID: bookingID },
         {
           isCancel: true,
           dateCancelBook: new Date(),
         },
-        { new: true, runValidators: true },
       );
-      res.status(201).json({ booking });
+      res.status(204).send();
     } catch (error) {
       res.status(500).json({ message: 'Error when get booking ', error });
     }

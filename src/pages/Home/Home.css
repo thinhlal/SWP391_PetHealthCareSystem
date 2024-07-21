@@ -23,13 +23,11 @@ a {
   opacity: 1;
 }
 
-/* Add these new styles to the end of your Home.css file */
-
 .header_form_login {
   position: relative;
   display: flex;
   align-items: center;
-  z-index: 10000; /* Ensure header form is on top */
+  z-index: 10000;
 }
 
 .user-icon-login {
@@ -80,7 +78,7 @@ a {
   color: #0d6efd;
   text-align: left;
   cursor: pointer;
-  z-index: 10003; /* Ensure menu items are on top */
+  z-index: 10003;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

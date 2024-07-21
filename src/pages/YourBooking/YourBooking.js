@@ -44,13 +44,14 @@ function YourBooking() {
         const dataBookings = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
         );
-        const sortDateBooking = dataBookings.data.allBookings.sort((a, b) =>
-          b.dateBook.localeCompare(a.dateBook),
-        );
-        const sortDataBookings = sortDateBooking.sort((a, b) =>
-          b.bookingID.localeCompare(a.bookingID),
-        );
-        setYourBookings(sortDataBookings);
+        const sortBookings = dataBookings.data.allBookings.sort((a, b) => {
+          const dateComparison = b.dateBook.localeCompare(a.dateBook);
+          if (dateComparison !== 0) {
+            return dateComparison;
+          }
+          return b.bookingID.localeCompare(a.bookingID);
+        });
+        setYourBookings(sortBookings);
       } catch (error) {
         console.log(error);
       }
@@ -68,13 +69,14 @@ function YourBooking() {
       const dataBookings = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
       );
-      const sortDataBookings = dataBookings.data.allBookings.sort((a, b) =>
-        b.dateBook.localeCompare(a.dateBook),
-      );
-      const sortTimeBookings = sortDataBookings.sort((a, b) =>
-        b.bookingID.localeCompare(a.bookingID),
-      );
-      setYourBookings(sortTimeBookings);
+      const sortBookings = dataBookings.data.allBookings.sort((a, b) => {
+        const dateComparison = b.dateBook.localeCompare(a.dateBook);
+        if (dateComparison !== 0) {
+          return dateComparison;
+        }
+        return b.bookingID.localeCompare(a.bookingID);
+      });
+      setYourBookings(sortBookings);
     } catch (error) {
       console.log(error);
     }
@@ -154,19 +156,6 @@ function YourBooking() {
     return remainingDays;
   };
 
-  const getVietnamDate = () => {
-    const currentDate = new Date();
-    const vietnamTimezoneOffset = 7 * 60;
-    const localTimezoneOffset = currentDate.getTimezoneOffset();
-
-    const vietnamDate = new Date(
-      currentDate.getTime() +
-        (vietnamTimezoneOffset - localTimezoneOffset) * 60000,
-    );
-
-    return vietnamDate;
-  };
-
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -228,6 +217,44 @@ function YourBooking() {
         : true)
     );
   });
+
+  function getCurrentTimeInVietnam() {
+    const currentDate = new Date();
+    const vietnamTime = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      hour12: false,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }).formatToParts(currentDate);
+
+    const formattedVietnamTime = vietnamTime.reduce((acc, part) => {
+      if (part.type !== 'literal') {
+        acc[part.type] = part.value;
+      }
+      return acc;
+    }, {});
+
+    return new Date(
+      `${formattedVietnamTime.year}-${formattedVietnamTime.month}-${formattedVietnamTime.day}T${formattedVietnamTime.hour}:${formattedVietnamTime.minute}:${formattedVietnamTime.second}+07:00`,
+    );
+  }
+
+  function compareCurrentTimeWithEndTimeAndDateBook(endTime, dateBook) {
+    const currentTime = getCurrentTimeInVietnam();
+    const endDateTime = new Date(
+      `${dateBook.split('T')[0]}T${endTime}:00+07:00`,
+    );
+
+    if (currentTime > endDateTime) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentBookings = filteredBookingData.slice(
@@ -301,7 +328,7 @@ function YourBooking() {
                     />{' '}
                     Pending
                   </li>
-                  <li>
+                  <li className='filter-dropdown'>
                     <input
                       type='checkbox'
                       checked={statusFilters.beingExamined}
@@ -362,57 +389,100 @@ function YourBooking() {
                             ID: {booking.bookingID}
                             <div
                               className={`status-booking ${
-                                booking.isCancel
+                                booking.isCancel && !booking.dateBook
                                   ? 'status-cancel'
-                                  : booking.paymentsDetails[0]
-                                        .isCancelPayment ||
-                                      (!booking.paymentsDetails[0].isSuccess &&
-                                        booking.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL')
+                                  : booking.isCancel && booking.dateBook
                                     ? 'status-cancel'
-                                    : booking.paymentsDetails[0].isSuccess &&
-                                        booking.paymentsDetails[0]
-                                          .paymentMethod === 'PAYPAL' &&
-                                        !booking.isCheckIn
-                                      ? 'status-pending'
-                                      : !booking.paymentsDetails[0].isSuccess &&
+                                    : booking.paymentsDetails[0]
+                                          .isCancelPayment ||
+                                        (!booking.paymentsDetails[0]
+                                          .isSuccess &&
                                           booking.paymentsDetails[0]
-                                            .paymentMethod === 'COUNTER' &&
-                                          !booking.isCheckIn
-                                        ? 'status-pending'
-                                        : booking.paymentsDetails[0]
+                                            .paymentMethod === 'PAYPAL')
+                                      ? 'status-cancel'
+                                      : booking.paymentsDetails[0].isSuccess &&
+                                          booking.paymentsDetails[0]
+                                            .paymentMethod === 'PAYPAL' &&
+                                          !booking.isCheckIn &&
+                                          !booking.isCompleted &&
+                                          !compareCurrentTimeWithEndTimeAndDateBook(
+                                            booking.endTime,
+                                            booking.dateBook,
+                                          )
+                                        ? 'status-over'
+                                        : !booking.paymentsDetails[0]
                                               .isSuccess &&
                                             booking.paymentsDetails[0]
-                                              .paymentMethod === 'PAYPAL' &&
-                                            booking.isCheckIn &&
-                                            !booking.isCompleted
-                                          ? 'status-pending'
+                                              .paymentMethod === 'COUNTER' &&
+                                            !booking.isCheckIn &&
+                                            !booking.isCompleted &&
+                                            !compareCurrentTimeWithEndTimeAndDateBook(
+                                              booking.endTime,
+                                              booking.dateBook,
+                                            )
+                                          ? 'status-over'
                                           : booking.paymentsDetails[0]
                                                 .isSuccess &&
                                               booking.paymentsDetails[0]
-                                                .paymentMethod === 'COUNTER' &&
-                                              booking.isCheckIn &&
-                                              !booking.isCompleted
+                                                .paymentMethod === 'PAYPAL' &&
+                                              !booking.isCheckIn &&
+                                              !booking.isCompleted &&
+                                              compareCurrentTimeWithEndTimeAndDateBook(
+                                                booking.endTime,
+                                                booking.dateBook,
+                                              )
                                             ? 'status-pending'
-                                            : booking.paymentsDetails[0]
+                                            : !booking.paymentsDetails[0]
                                                   .isSuccess &&
                                                 booking.paymentsDetails[0]
-                                                  .paymentMethod === 'PAYPAL' &&
-                                                booking.isCheckIn
-                                              ? 'status-completed'
+                                                  .paymentMethod ===
+                                                  'COUNTER' &&
+                                                !booking.isCheckIn &&
+                                                !booking.isCompleted &&
+                                                compareCurrentTimeWithEndTimeAndDateBook(
+                                                  booking.endTime,
+                                                  booking.dateBook,
+                                                )
+                                              ? 'status-pending'
                                               : booking.paymentsDetails[0]
                                                     .isSuccess &&
                                                   booking.paymentsDetails[0]
                                                     .paymentMethod ===
-                                                    'COUNTER' &&
-                                                  booking.isCheckIn
-                                                ? 'status-completed'
-                                                : null
+                                                    'PAYPAL' &&
+                                                  booking.isCheckIn &&
+                                                  !booking.isCompleted
+                                                ? 'status-pending'
+                                                : booking.paymentsDetails[0]
+                                                      .isSuccess &&
+                                                    booking.paymentsDetails[0]
+                                                      .paymentMethod ===
+                                                      'COUNTER' &&
+                                                    booking.isCheckIn &&
+                                                    !booking.isCompleted
+                                                  ? 'status-pending'
+                                                  : booking.paymentsDetails[0]
+                                                        .isSuccess &&
+                                                      booking.paymentsDetails[0]
+                                                        .paymentMethod ===
+                                                        'PAYPAL' &&
+                                                      booking.isCheckIn
+                                                    ? 'status-completed'
+                                                    : booking.paymentsDetails[0]
+                                                          .isSuccess &&
+                                                        booking
+                                                          .paymentsDetails[0]
+                                                          .paymentMethod ===
+                                                          'COUNTER' &&
+                                                        booking.isCheckIn
+                                                      ? 'status-completed'
+                                                      : null
                               }`}
                             >
                               Status:&nbsp;
-                              {booking.isCancel ? (
+                              {booking.isCancel && !booking.isRefund ? (
                                 <span>Cancel Booking</span>
+                              ) : booking.isCancel && booking.isRefund ? (
+                                <span>Refunded</span>
                               ) : booking.paymentsDetails[0].isCancelPayment ||
                                 (!booking.paymentsDetails[0].isSuccess &&
                                   booking.paymentsDetails[0].paymentMethod ===
@@ -422,13 +492,41 @@ function YourBooking() {
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'PAYPAL' &&
                                 !booking.isCheckIn &&
-                                !booking.isCompleted ? (
+                                !booking.isCompleted &&
+                                !compareCurrentTimeWithEndTimeAndDateBook(
+                                  booking.endTime,
+                                  booking.dateBook,
+                                ) ? (
+                                <span>Expired</span>
+                              ) : !booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'COUNTER' &&
+                                !booking.isCheckIn &&
+                                !booking.isCompleted &&
+                                !compareCurrentTimeWithEndTimeAndDateBook(
+                                  booking.endTime,
+                                  booking.dateBook,
+                                ) ? (
+                                <span>Out</span>
+                              ) : booking.paymentsDetails[0].isSuccess &&
+                                booking.paymentsDetails[0].paymentMethod ===
+                                  'PAYPAL' &&
+                                !booking.isCheckIn &&
+                                !booking.isCompleted &&
+                                compareCurrentTimeWithEndTimeAndDateBook(
+                                  booking.endTime,
+                                  booking.dateBook,
+                                ) ? (
                                 <span>Pending</span>
                               ) : !booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'COUNTER' &&
                                 !booking.isCheckIn &&
-                                !booking.isCompleted ? (
+                                !booking.isCompleted &&
+                                compareCurrentTimeWithEndTimeAndDateBook(
+                                  booking.endTime,
+                                  booking.dateBook,
+                                ) ? (
                                 <span>Pending</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
@@ -559,9 +657,29 @@ function YourBooking() {
                                 .isSuccess &&
                               booking.paymentsDetails[0].paymentMethod ===
                                 'PAYPAL' &&
-                              new Date(booking.dateBook) > getVietnamDate() &&
                               !booking.isRate &&
-                              !booking.isCheckIn ? (
+                              !booking.isCheckIn &&
+                              !compareCurrentTimeWithEndTimeAndDateBook(
+                                booking.endTime,
+                                booking.dateBook,
+                              ) ? null : !booking.paymentsDetails[0]
+                                .isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'COUNTER' &&
+                              !booking.isRate &&
+                              !booking.isCheckIn &&
+                              !compareCurrentTimeWithEndTimeAndDateBook(
+                                booking.endTime,
+                                booking.dateBook,
+                              ) ? null : booking.paymentsDetails[0].isSuccess &&
+                              booking.paymentsDetails[0].paymentMethod ===
+                                'PAYPAL' &&
+                              !booking.isRate &&
+                              !booking.isCheckIn &&
+                              compareCurrentTimeWithEndTimeAndDateBook(
+                                booking.endTime,
+                                booking.dateBook,
+                              ) ? (
                               <div
                                 data-bs-toggle='modal'
                                 data-bs-target='#CancelBooking'
@@ -578,9 +696,12 @@ function YourBooking() {
                             ) : !booking.paymentsDetails[0].isSuccess &&
                               booking.paymentsDetails[0].paymentMethod ===
                                 'COUNTER' &&
-                              new Date(booking.dateBook) > getVietnamDate() &&
                               !booking.isRate &&
-                              !booking.isCheckIn ? (
+                              !booking.isCheckIn &&
+                              compareCurrentTimeWithEndTimeAndDateBook(
+                                booking.endTime,
+                                booking.dateBook,
+                              ) ? (
                               <div
                                 className='cancel-booking-button-1'
                                 data-bs-toggle='modal'

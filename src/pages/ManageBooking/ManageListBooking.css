@@ -482,6 +482,10 @@
   color: red;
 }
 
+.manage-booking-list .status-expired {
+  color: gray;
+}
+
 .manage-booking-list .no-booking-this-date {
   width: 100%;
   border: 1px solid #eaecf0;

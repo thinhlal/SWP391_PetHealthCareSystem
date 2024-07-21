@@ -67,7 +67,8 @@ const Booking = () => {
       const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/doctor/getAllDoctors`,
       );
-      setDoctors(response.data);
+      const sortDoctor = response.data.sort((a,b) => a.name.localeCompare(b.name));
+      setDoctors(sortDoctor);
     } catch (error) {
       console.error('Error fetching services:', error);
     }
