@@ -164,6 +164,10 @@
   color: blue;
 }
 
+.Admin-DashBoard-Table-status-expired {
+  color: gray;
+}
+
 .Admin-DashBoard-Table-status-cancel {
   color: red;
 }

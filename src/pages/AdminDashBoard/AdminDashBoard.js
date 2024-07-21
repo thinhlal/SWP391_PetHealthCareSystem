@@ -125,6 +125,44 @@ function AdminDashBoard() {
   );
   const totalPages = Math.ceil(searchBookingData.length / itemsPerPage);
 
+  function getCurrentTimeInVietnam() {
+    const currentDate = new Date();
+    const vietnamTime = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      hour12: false,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }).formatToParts(currentDate);
+
+    const formattedVietnamTime = vietnamTime.reduce((acc, part) => {
+      if (part.type !== 'literal') {
+        acc[part.type] = part.value;
+      }
+      return acc;
+    }, {});
+
+    return new Date(
+      `${formattedVietnamTime.year}-${formattedVietnamTime.month}-${formattedVietnamTime.day}T${formattedVietnamTime.hour}:${formattedVietnamTime.minute}:${formattedVietnamTime.second}+07:00`,
+    );
+  }
+
+  function compareCurrentTimeWithEndTimeAndDateBook(endTime, dateBook) {
+    const currentTime = getCurrentTimeInVietnam();
+    const endDateTime = new Date(
+      `${dateBook.split('T')[0]}T${endTime}:00+07:00`,
+    );
+
+    if (currentTime > endDateTime) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   return (
     <div className='Admin-DashBoard container-fluid'>
       <div className='row'>
@@ -283,38 +321,71 @@ function AdminDashBoard() {
                                 : item.paymentsDetails[0].isSuccess &&
                                     item.paymentsDetails[0].paymentMethod ===
                                       'PAYPAL' &&
-                                    !item.isCheckIn
-                                  ? 'Admin-DashBoard-Table-status-waiting'
+                                    !item.isCheckIn &&
+                                    !item.isCompleted &&
+                                    !compareCurrentTimeWithEndTimeAndDateBook(
+                                      item.endTime,
+                                      item.dateBook,
+                                    )
+                                  ? 'Admin-DashBoard-Table-status-expired'
                                   : !item.paymentsDetails[0].isSuccess &&
                                       item.paymentsDetails[0].paymentMethod ===
                                         'COUNTER' &&
-                                      !item.isCheckIn
-                                    ? 'Admin-DashBoard-Table-status-waiting'
+                                      !item.isCheckIn &&
+                                      !item.isCompleted &&
+                                      !compareCurrentTimeWithEndTimeAndDateBook(
+                                        item.endTime,
+                                        item.dateBook,
+                                      )
+                                    ? 'Admin-DashBoard-Table-status-expired'
                                     : item.paymentsDetails[0].isSuccess &&
                                         item.paymentsDetails[0]
                                           .paymentMethod === 'PAYPAL' &&
-                                        item.isCheckIn &&
-                                        !item.isCompleted
+                                        !item.isCheckIn &&
+                                        !item.isCompleted &&
+                                        compareCurrentTimeWithEndTimeAndDateBook(
+                                          item.endTime,
+                                          item.dateBook,
+                                        )
                                       ? 'Admin-DashBoard-Table-status-waiting'
-                                      : item.paymentsDetails[0].isSuccess &&
+                                      : !item.paymentsDetails[0].isSuccess &&
                                           item.paymentsDetails[0]
                                             .paymentMethod === 'COUNTER' &&
-                                          item.isCheckIn &&
-                                          !item.isCompleted
+                                          !item.isCheckIn &&
+                                          !item.isCompleted &&
+                                          compareCurrentTimeWithEndTimeAndDateBook(
+                                            item.endTime,
+                                            item.dateBook,
+                                          )
                                         ? 'Admin-DashBoard-Table-status-waiting'
                                         : item.paymentsDetails[0].isSuccess &&
                                             item.paymentsDetails[0]
                                               .paymentMethod === 'PAYPAL' &&
                                             item.isCheckIn &&
-                                            item.isCompleted
-                                          ? 'Admin-DashBoard-Table-status-done'
+                                            !item.isCompleted
+                                          ? 'Admin-DashBoard-Table-status-waiting'
                                           : item.paymentsDetails[0].isSuccess &&
                                               item.paymentsDetails[0]
                                                 .paymentMethod === 'COUNTER' &&
                                               item.isCheckIn &&
-                                              item.isCompleted
-                                            ? 'Admin-DashBoard-Table-status-done'
-                                            : null
+                                              !item.isCompleted
+                                            ? 'Admin-DashBoard-Table-status-waiting'
+                                            : item.paymentsDetails[0]
+                                                  .isSuccess &&
+                                                item.paymentsDetails[0]
+                                                  .paymentMethod === 'PAYPAL' &&
+                                                item.isCheckIn &&
+                                                item.isCompleted
+                                              ? 'Admin-DashBoard-Table-status-done'
+                                              : item.paymentsDetails[0]
+                                                    .isSuccess &&
+                                                  item.paymentsDetails[0]
+                                                    .paymentMethod ===
+                                                    'COUNTER' &&
+                                                  item.isCheckIn &&
+                                                  item.isCompleted
+                                                ? 'Admin-DashBoard-Table-status-done'
+                                                : null
                           }`}
                         >
                           {item.isCancel ? (
@@ -327,12 +398,42 @@ function AdminDashBoard() {
                           ) : item.paymentsDetails[0].isSuccess &&
                             item.paymentsDetails[0].paymentMethod ===
                               'PAYPAL' &&
-                            !item.isCheckIn ? (
+                            !item.isCheckIn &&
+                            !item.isCompleted &&
+                            !compareCurrentTimeWithEndTimeAndDateBook(
+                              item.endTime,
+                              item.dateBook,
+                            ) ? (
+                            <span>Expired</span>
+                          ) : !item.paymentsDetails[0].isSuccess &&
+                            item.paymentsDetails[0].paymentMethod ===
+                              'COUNTER' &&
+                            !item.isCheckIn &&
+                            !item.isCompleted &&
+                            !compareCurrentTimeWithEndTimeAndDateBook(
+                              item.endTime,
+                              item.dateBook,
+                            ) ? (
+                            <span>Expired</span>
+                          ) : item.paymentsDetails[0].isSuccess &&
+                            item.paymentsDetails[0].paymentMethod ===
+                              'PAYPAL' &&
+                            !item.isCheckIn &&
+                            !item.isCompleted &&
+                            compareCurrentTimeWithEndTimeAndDateBook(
+                              item.endTime,
+                              item.dateBook,
+                            ) ? (
                             <span>Pending</span>
                           ) : !item.paymentsDetails[0].isSuccess &&
                             item.paymentsDetails[0].paymentMethod ===
                               'COUNTER' &&
-                            !item.isCheckIn ? (
+                            !item.isCheckIn &&
+                            !item.isCompleted &&
+                            compareCurrentTimeWithEndTimeAndDateBook(
+                              item.endTime,
+                              item.dateBook,
+                            ) ? (
                             <span>Pending</span>
                           ) : item.paymentsDetails[0].isSuccess &&
                             item.paymentsDetails[0].paymentMethod ===
