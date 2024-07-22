@@ -4,6 +4,8 @@ import Header from '../../components/Doctor/Header/Header.js';
 import { AuthContext } from '../../context/AuthContext.js';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function WorkSchedule() {
   const { user } = useContext(AuthContext);
@@ -26,7 +28,6 @@ function WorkSchedule() {
           },
         },
       );
-      console.log(response.data);
       setSchedules(response.data);
     } catch (error) {
       console.error('Error fetching work schedule:', error);
@@ -40,6 +41,12 @@ function WorkSchedule() {
   }, [user, selectedDate]);
 
   const handleDateChange = e => {
+    const currentDate = new Date();
+    const selectedDate = new Date(e.target.value);
+    if (selectedDate < currentDate) {
+      toast.error('Cannot select a past date');
+      return;
+    }
     setSelectedDate(e.target.value);
   };
 
@@ -200,6 +207,7 @@ function WorkSchedule() {
               </tbody>
             </table>
           </form>
+          <ToastContainer />
         </div>
       </div>
       {Object.keys(schedules).length !== 0 ? (
