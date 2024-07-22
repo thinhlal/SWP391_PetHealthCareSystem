@@ -102,6 +102,7 @@ const Booking = () => {
     setSelectedDate(newDate);
     updateAvailableSlots(selectedDoctor, newDate);
     setErrorMessageDate('');
+    setErrorMessageChooseSlot('');
   };
 
   const handlePaymentChange = event => {
