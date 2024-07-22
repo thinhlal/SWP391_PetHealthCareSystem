@@ -226,11 +226,17 @@ const Booking = () => {
     if (!userInfo.phone) {
       setErrorMessagePhone('Phone is required');
       valid = false;
+    } else if (!/^\d{10,15}$/.test(userInfo.phone)) {
+      setErrorMessagePhone('Phone number must be 10-15 digits');
+      valid = false;
     } else {
       setErrorMessagePhone('');
     }
     if (!userInfo.email) {
       setErrorMessageEmail('Email is required');
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(userInfo.email)) {
+      setErrorMessageEmail('Invalid email format');
       valid = false;
     } else {
       setErrorMessageEmail('');
