@@ -23,6 +23,7 @@ function AdminDashBoard() {
     cancel: false,
     done: false,
     beingExamined: false,
+    expired: false,
   });
   const { selectedDate } = useDate();
 
@@ -62,36 +63,56 @@ function AdminDashBoard() {
         ? 'cancel'
         : booking.paymentsDetails[0].isSuccess &&
             booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-            !booking.isCheckIn
-          ? 'pending'
+            !booking.isCheckIn &&
+            !booking.isCompleted &&
+            !compareCurrentTimeWithEndTimeAndDateBook(
+              booking.endTime,
+              booking.dateBook,
+            )
+          ? 'expired'
           : !booking.paymentsDetails[0].isSuccess &&
               booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-              !booking.isCheckIn
-            ? 'pending'
+              !booking.isCheckIn &&
+              !booking.isCompleted &&
+              !compareCurrentTimeWithEndTimeAndDateBook(
+                booking.endTime,
+                booking.dateBook,
+              )
+            ? 'expired'
             : booking.paymentsDetails[0].isSuccess &&
                 booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-                booking.isCheckIn &&
-                !booking.isCompleted
-              ? 'beingExamined'
-              : booking.paymentsDetails[0].isSuccess &&
+                !booking.isCheckIn
+              ? 'pending'
+              : !booking.paymentsDetails[0].isSuccess &&
                   booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-                  booking.isCheckIn &&
-                  !booking.isCompleted
-                ? 'beingExamined'
+                  !booking.isCheckIn
+                ? 'pending'
                 : booking.paymentsDetails[0].isSuccess &&
                     booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
                     booking.isCheckIn &&
-                    booking.isCompleted
-                  ? 'done'
+                    !booking.isCompleted
+                  ? 'beingExamined'
                   : booking.paymentsDetails[0].isSuccess &&
                       booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
                       booking.isCheckIn &&
-                      booking.isCompleted
-                    ? 'done'
-                    : null;
+                      !booking.isCompleted
+                    ? 'beingExamined'
+                    : booking.paymentsDetails[0].isSuccess &&
+                        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                        booking.isCheckIn &&
+                        booking.isCompleted
+                      ? 'done'
+                      : booking.paymentsDetails[0].isSuccess &&
+                          booking.paymentsDetails[0].paymentMethod ===
+                            'COUNTER' &&
+                          booking.isCheckIn &&
+                          booking.isCompleted
+                        ? 'done'
+                        : null;
 
     const matchesStatus =
       (statusFilters.pending && bookingStatus === 'pending') ||
+      (statusFilters.expired && bookingStatus === 'expired') ||
       (statusFilters.cancel && bookingStatus === 'cancel') ||
       (statusFilters.done && bookingStatus === 'done') ||
       (statusFilters.beingExamined && bookingStatus === 'beingExamined');
@@ -100,6 +121,7 @@ function AdminDashBoard() {
       matchesDate &&
       matchesSearch &&
       (statusFilters.pending ||
+      statusFilters.expired ||
       statusFilters.cancel ||
       statusFilters.done ||
       statusFilters.beingExamined
@@ -215,19 +237,6 @@ function AdminDashBoard() {
                       <li>
                         <input
                           type='checkbox'
-                          checked={statusFilters.cancel}
-                          onChange={() =>
-                            setStatusFilters({
-                              ...statusFilters,
-                              cancel: !statusFilters.cancel,
-                            })
-                          }
-                        />{' '}
-                        Cancel
-                      </li>
-                      <li>
-                        <input
-                          type='checkbox'
                           checked={statusFilters.pending}
                           onChange={() =>
                             setStatusFilters({
@@ -263,6 +272,32 @@ function AdminDashBoard() {
                           }
                         />{' '}
                         Done
+                      </li>
+                      <li>
+                        <input
+                          type='checkbox'
+                          checked={statusFilters.cancel}
+                          onChange={() =>
+                            setStatusFilters({
+                              ...statusFilters,
+                              cancel: !statusFilters.cancel,
+                            })
+                          }
+                        />{' '}
+                        Cancel
+                      </li>
+                      <li>
+                        <input
+                          type='checkbox'
+                          checked={statusFilters.expired}
+                          onChange={() =>
+                            setStatusFilters({
+                              ...statusFilters,
+                              expired: !statusFilters.expired,
+                            })
+                          }
+                        />{' '}
+                        Expired
                       </li>
                     </ul>
                   </div>

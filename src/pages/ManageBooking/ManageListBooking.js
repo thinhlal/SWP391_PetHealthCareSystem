@@ -7,7 +7,13 @@ import search_icon from '../../assets/images/img_ManageBookings/search.svg';
 import Sidebar from '../../components/Employee/Sidebar/Sidebar';
 import axiosInstance from '../../utils/axiosInstance';
 import { Tab, Tabs } from 'react-bootstrap';
-import { CircularProgress, Pagination, Stack } from '@mui/material';
+import {
+  Checkbox,
+  CircularProgress,
+  FormControlLabel,
+  Pagination,
+  Stack,
+} from '@mui/material';
 
 function ManageListBooking() {
   const [allServices, setAllServices] = useState([]);
@@ -70,7 +76,9 @@ function ManageListBooking() {
     beingExamined: false,
     cancel: false,
     done: false,
+    expired: false,
   });
+  const [isConfirmPayment, setIsConfirmPayment] = useState(false);
 
   useEffect(() => {
     const now = new Date();
@@ -678,6 +686,7 @@ function ManageListBooking() {
     } finally {
       setLoading(false);
     }
+    setIsConfirmPayment(false);
     setBookingDetailsCheckIn(null);
     setServicesWhileCheckIn([]);
   };
@@ -759,6 +768,10 @@ function ManageListBooking() {
     }));
   };
 
+  const handleChangeConfirmPayment = event => {
+    setIsConfirmPayment(event.target.checked);
+  };
+
   const filteredBookingData = currentBookings.filter(booking => {
     const matchesSearch =
       search === '' ||
@@ -772,36 +785,66 @@ function ManageListBooking() {
         ? 'cancel'
         : booking.paymentsDetails[0].isSuccess &&
             booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-            !booking.isCheckIn
-          ? 'pending'
+            !booking.isCheckIn &&
+            !booking.isCompleted &&
+            !compareCurrentTimeWithEndTimeAndDateBook(
+              booking.endTime,
+              booking.dateBook,
+            )
+          ? 'expired'
           : !booking.paymentsDetails[0].isSuccess &&
               booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-              !booking.isCheckIn
-            ? 'pending'
+              !booking.isCheckIn &&
+              !booking.isCompleted &&
+              !compareCurrentTimeWithEndTimeAndDateBook(
+                booking.endTime,
+                booking.dateBook,
+              )
+            ? 'expired'
             : booking.paymentsDetails[0].isSuccess &&
                 booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-                booking.isCheckIn &&
-                !booking.isCompleted
-              ? 'beingExamined'
-              : booking.paymentsDetails[0].isSuccess &&
+                !booking.isCheckIn &&
+                !booking.isCompleted &&
+                compareCurrentTimeWithEndTimeAndDateBook(
+                  booking.endTime,
+                  booking.dateBook,
+                )
+              ? 'pending'
+              : !booking.paymentsDetails[0].isSuccess &&
                   booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-                  booking.isCheckIn &&
-                  !booking.isCompleted
-                ? 'beingExamined'
+                  !booking.isCheckIn &&
+                  !booking.isCompleted &&
+                  compareCurrentTimeWithEndTimeAndDateBook(
+                    booking.endTime,
+                    booking.dateBook,
+                  )
+                ? 'pending'
                 : booking.paymentsDetails[0].isSuccess &&
                     booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
                     booking.isCheckIn &&
-                    booking.isCompleted
-                  ? 'done'
+                    !booking.isCompleted
+                  ? 'beingExamined'
                   : booking.paymentsDetails[0].isSuccess &&
                       booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
                       booking.isCheckIn &&
-                      booking.isCompleted
-                    ? 'done'
-                    : null;
+                      !booking.isCompleted
+                    ? 'beingExamined'
+                    : booking.paymentsDetails[0].isSuccess &&
+                        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                        booking.isCheckIn &&
+                        booking.isCompleted
+                      ? 'done'
+                      : booking.paymentsDetails[0].isSuccess &&
+                          booking.paymentsDetails[0].paymentMethod ===
+                            'COUNTER' &&
+                          booking.isCheckIn &&
+                          booking.isCompleted
+                        ? 'done'
+                        : null;
 
     const matchesStatus =
       (statusFilters.pending && bookingStatus === 'pending') ||
+      (statusFilters.expired && bookingStatus === 'expired') ||
       (statusFilters.cancel && bookingStatus === 'cancel') ||
       (statusFilters.done && bookingStatus === 'done') ||
       (statusFilters.beingExamined && bookingStatus === 'beingExamined');
@@ -809,6 +852,7 @@ function ManageListBooking() {
     return (
       matchesSearch &&
       (statusFilters.pending ||
+      statusFilters.expired ||
       statusFilters.cancel ||
       statusFilters.done ||
       statusFilters.beingExamined
@@ -957,6 +1001,19 @@ function ManageListBooking() {
                         }
                       />{' '}
                       Cancel
+                    </li>
+                    <li className='filter-dropdown'>
+                      <input
+                        type='checkbox'
+                        checked={statusFilters.expired}
+                        onChange={() =>
+                          setStatusFilters({
+                            ...statusFilters,
+                            expired: !statusFilters.expired,
+                          })
+                        }
+                      />{' '}
+                      Expired
                     </li>
                     <li className='filter-dropdown'>
                       <input
@@ -1901,7 +1958,13 @@ function ManageListBooking() {
                             className='btn btn-success'
                             data-bs-toggle='modal'
                             data-bs-target={`#checkIn-${booking.bookingID}`}
-                            onClick={() => setBookingDetailsCheckIn(booking)}
+                            onClick={() => {
+                              if (booking.doctorID === '') {
+                                alert('Choose Doctor First');
+                                return;
+                              }
+                              setBookingDetailsCheckIn(booking);
+                            }}
                           >
                             Check In
                           </button>
@@ -1921,7 +1984,13 @@ function ManageListBooking() {
                             className='btn btn-success'
                             data-bs-toggle='modal'
                             data-bs-target={`#paymentModal-${booking.bookingID}`}
-                            onClick={() => setBookingDetailsCheckIn(booking)}
+                            onClick={() => {
+                              if (booking.doctorID === '') {
+                                alert('Choose Doctor First');
+                                return;
+                              }
+                              setBookingDetailsCheckIn(booking);
+                            }}
                           >
                             Payment
                           </button>
@@ -2674,6 +2743,23 @@ function ManageListBooking() {
                                     </div>
                                   </div>
                                 </div>
+                                <div
+                                  style={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    marginTop: '10px',
+                                  }}
+                                >
+                                  <FormControlLabel
+                                    control={
+                                      <Checkbox
+                                        checked={isConfirmPayment}
+                                        onChange={handleChangeConfirmPayment}
+                                      />
+                                    }
+                                    label='Confirm payment received'
+                                  />
+                                </div>
                               </div>
                             </div>
                             <div className='modal-footer'>
@@ -2691,6 +2777,9 @@ function ManageListBooking() {
                                 onClick={() => {
                                   if (booking.doctorID === '') {
                                     alert('Choose Doctor First');
+                                    return;
+                                  } else if (!isConfirmPayment) {
+                                    alert('You should tick to confirm!!!');
                                     return;
                                   }
                                   handleConfirmPayment(booking.bookingID);
@@ -2894,7 +2983,6 @@ function ManageListBooking() {
                   count={totalPages}
                   page={currentPage}
                   onChange={handlePageChange}
-                  variant='outlined'
                   color='primary'
                 />
               </Stack>

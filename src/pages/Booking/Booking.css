@@ -493,8 +493,8 @@ body {
   align-items: center;
   color: red;
   height: 20px;
-  font-size: 18px;
-  margin-top: 15px;
+  font-size: 12px;
+  margin-top: 5px;
   font-family: Roboto, sans-serif;
 }
 .booking-container .patient_Input {

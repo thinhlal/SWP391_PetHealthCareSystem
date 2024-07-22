@@ -28,6 +28,8 @@ function YourBooking() {
     pending: false,
     cancel: false,
     done: false,
+    expired: false,
+    beingExamined: false,
   });
 
   useEffect(() => {
@@ -173,36 +175,66 @@ function YourBooking() {
         ? 'cancel'
         : booking.paymentsDetails[0].isSuccess &&
             booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-            !booking.isCheckIn
-          ? 'pending'
+            !booking.isCheckIn &&
+            !booking.isCompleted &&
+            !compareCurrentTimeWithEndTimeAndDateBook(
+              booking.endTime,
+              booking.dateBook,
+            )
+          ? 'expired'
           : !booking.paymentsDetails[0].isSuccess &&
               booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-              !booking.isCheckIn
-            ? 'pending'
+              !booking.isCheckIn &&
+              !booking.isCompleted &&
+              !compareCurrentTimeWithEndTimeAndDateBook(
+                booking.endTime,
+                booking.dateBook,
+              )
+            ? 'expired'
             : booking.paymentsDetails[0].isSuccess &&
                 booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
-                booking.isCheckIn &&
-                !booking.isCompleted
-              ? 'beingExamined'
-              : booking.paymentsDetails[0].isSuccess &&
+                !booking.isCheckIn &&
+                !booking.isCompleted &&
+                compareCurrentTimeWithEndTimeAndDateBook(
+                  booking.endTime,
+                  booking.dateBook,
+                )
+              ? 'pending'
+              : !booking.paymentsDetails[0].isSuccess &&
                   booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
-                  booking.isCheckIn &&
-                  !booking.isCompleted
-                ? 'beingExamined'
+                  !booking.isCheckIn &&
+                  !booking.isCompleted &&
+                  compareCurrentTimeWithEndTimeAndDateBook(
+                    booking.endTime,
+                    booking.dateBook,
+                  )
+                ? 'pending'
                 : booking.paymentsDetails[0].isSuccess &&
                     booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
                     booking.isCheckIn &&
-                    booking.isCompleted
-                  ? 'done'
+                    !booking.isCompleted
+                  ? 'beingExamined'
                   : booking.paymentsDetails[0].isSuccess &&
                       booking.paymentsDetails[0].paymentMethod === 'COUNTER' &&
                       booking.isCheckIn &&
-                      booking.isCompleted
-                    ? 'done'
-                    : null;
+                      !booking.isCompleted
+                    ? 'beingExamined'
+                    : booking.paymentsDetails[0].isSuccess &&
+                        booking.paymentsDetails[0].paymentMethod === 'PAYPAL' &&
+                        booking.isCheckIn &&
+                        booking.isCompleted
+                      ? 'done'
+                      : booking.paymentsDetails[0].isSuccess &&
+                          booking.paymentsDetails[0].paymentMethod ===
+                            'COUNTER' &&
+                          booking.isCheckIn &&
+                          booking.isCompleted
+                        ? 'done'
+                        : null;
 
     const matchesStatus =
       (statusFilters.pending && bookingStatus === 'pending') ||
+      (statusFilters.expired && bookingStatus === 'expired') ||
       (statusFilters.cancel && bookingStatus === 'cancel') ||
       (statusFilters.done && bookingStatus === 'done') ||
       (statusFilters.beingExamined && bookingStatus === 'beingExamined');
@@ -211,6 +243,7 @@ function YourBooking() {
       matchesSearch &&
       (statusFilters.pending ||
       statusFilters.cancel ||
+      statusFilters.expired ||
       statusFilters.done ||
       statusFilters.beingExamined
         ? matchesStatus
@@ -353,6 +386,19 @@ function YourBooking() {
                       }
                     />{' '}
                     Cancel
+                  </li>
+                  <li className='filter-dropdown'>
+                    <input
+                      type='checkbox'
+                      checked={statusFilters.expired}
+                      onChange={() =>
+                        setStatusFilters({
+                          ...statusFilters,
+                          expired: !statusFilters.expired,
+                        })
+                      }
+                    />{' '}
+                    Expired
                   </li>
                   <li className='filter-dropdown'>
                     <input
