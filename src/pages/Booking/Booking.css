@@ -276,6 +276,13 @@ body {
   object-fit: cover;
 }
 
+.booking-container .square-expired {
+  margin: 0 0 0 5px;
+  height: 14px;
+  width: 14px;
+  object-fit: cover;
+}
+
 .booking-container .available-slot {
   display: flex;
   align-items: center;
@@ -325,6 +332,18 @@ body {
   gap: 8px;
   padding: 10px 15px;
   background-color: #c02b0a;
+  border-radius: 10px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.booking-container .element-button-past {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background-color: #d3d3d3;
   border-radius: 10px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
@@ -473,9 +492,9 @@ body {
   display: flex;
   align-items: center;
   color: red;
-  height: 16px;
-  font-size: 12px;
-  margin-top: 5px;
+  height: 20px;
+  font-size: 18px;
+  margin-top: 15px;
   font-family: Roboto, sans-serif;
 }
 .booking-container .patient_Input {

@@ -7,6 +7,7 @@ import Footer from '../../components/User/Footer/Footer.js';
 import Header from '../../components/User/Header/Header.js';
 import red from '../../assets/images/img_Booking/red_square.png';
 import green from '../../assets/images/img_Booking/green_square.png';
+import expired from '../../assets/images/img_Booking/expired.png';
 import gray from '../../assets/images/img_Booking/gray-color-solid-background-1920x1080.png';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
 import { Checkbox, FormControlLabel } from '@mui/material';
@@ -572,7 +573,7 @@ const Booking = () => {
               </div>
               <div className='checkBoxVaccineWrapper'>
                 <FormControlLabel
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 3 }}
                   control={
                     <Checkbox
                       checked={vaccinationChecked}
@@ -611,6 +612,14 @@ const Booking = () => {
                 alt='Not Working'
               />
             </div>
+            <div className='available-slot'>
+              <div className='booked-status'>Expired</div>
+              <img
+                className='square-expired'
+                src={expired}
+                alt='Expired'
+              />
+            </div>
           </div>
 
           <div className='booking-menu-wrapper'>
@@ -634,7 +643,7 @@ const Booking = () => {
                         ? 'element-button-red'
                         : slot.isWithinWorkingHours
                           ? slot.isPast
-                            ? 'element-button-gray'
+                            ? 'element-button-past'
                             : selectedSlot === slot
                               ? 'element-button-selected'
                               : 'element-button-green'
