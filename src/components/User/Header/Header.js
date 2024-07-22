@@ -49,7 +49,7 @@ function Header() {
           </div>
         </div>
         <div className='main-header-user_wrapper'>
-          <div className='main-header-user'>
+          {user && <div className='main-header-user'>
             <div className='main-header-user-account'>
               <img
                 className='account_icon'
@@ -86,7 +86,7 @@ function Header() {
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     </div>

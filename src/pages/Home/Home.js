@@ -34,6 +34,7 @@ function Home() {
       );
       setFeedbacks(response.data);
     };
+
     fetchAllFeedBack();
   }, []);
 
