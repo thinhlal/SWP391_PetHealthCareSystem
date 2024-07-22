@@ -52,12 +52,12 @@
 .time-doctor-choose-holiday {
   font-size: 18px;
   color: grey;
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .time-doctor-choose-selectTime {
