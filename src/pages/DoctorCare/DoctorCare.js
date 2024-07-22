@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './DoctorCare.css';
-import Pagination from '../../components/Pagination/Pagination';
+import { Pagination, Stack } from '@mui/material';
 import Header from '../../components/Doctor/Header/Header';
 import axiosInstance from '../../utils/axiosInstance';
 import { AuthContext } from '../../context/AuthContext';
-import { Stack } from '@mui/material';
 import PetHealthSlider from '../../components/Employee/StatusSlider/StatusSlider';
 
 const DoctorCare = () => {
@@ -18,8 +17,10 @@ const DoctorCare = () => {
   const [sliderValue, setSliderValue] = useState(1);
   const [petCondition, setPetCondition] = useState('NotRecover');
   const [petInfoStatus, setPetInfoStatus] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const [currentPageDisease, setCurrentPageDisease] = useState(1);
+  const itemsPerPageDisease = 3;
+  const [currentPageDiseaseInfo, setCurrentPageDiseaseInfo] = useState(1);
+  const itemsPerPageDiseaseInfo = 3;
 
   useEffect(() => {
     const fetchCageDisease = async () => {
@@ -93,6 +94,7 @@ const DoctorCare = () => {
   };
 
   const handleCloseHistory = () => {
+    setDiseaseHistory([]);
     setSelectedPet(null);
     setViewHistory(false);
   };
@@ -108,22 +110,21 @@ const DoctorCare = () => {
     setStatusData(sortedData);
   };
 
-  // const handleDeleteHistory = async diseaseInfoID => {
-  //   try {
-  //     await axiosInstance.post(
-  //       `${process.env.REACT_APP_API_URL}/cage/deleteDiseaseInfoByID`,
-  //       {
-  //         diseaseInfoID
-  //       },
-  //     );
-  //   } catch (error) {
-  //     console.error('Error fetching disease info:', error);
-  //   }
-  //   setViewHistory(false);
-  // };
+  const handleDeleteHistory = async diseaseInfoID => {
+    try {
+      await axiosInstance.post(
+        `${process.env.REACT_APP_API_URL}/cage/deleteDiseaseInfoByID`,
+        {
+          diseaseInfoID,
+        },
+      );
+    } catch (error) {
+      console.error('Error fetching disease info:', error);
+    }
+    setViewHistory(false);
+  };
 
   const handleSliderChange = (event, newValue) => {
-    console.log(typeof newValue);
     if (typeof newValue === 'number') {
       setSliderValue(newValue);
       if (newValue === 5) {
@@ -144,12 +145,29 @@ const DoctorCare = () => {
   };
 
   const handlePageChange = (event, value) => {
-    setCurrentPage(value);
+    setCurrentPageDiseaseInfo(value);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentData = statusData.slice(startIndex, startIndex + itemsPerPage);
-  const totalPages = Math.ceil(statusData.length / itemsPerPage);
+  const handlePageDiseaseChange = (event, value) => {
+    setCurrentPageDisease(value);
+  };
+
+  const startIndexDiseaseInfo =
+    (currentPageDiseaseInfo - 1) * itemsPerPageDiseaseInfo;
+  const currentDataDiseaseInfo = diseaseHistory.slice(
+    startIndexDiseaseInfo,
+    startIndexDiseaseInfo + itemsPerPageDiseaseInfo,
+  );
+  const totalPagesDiseaseInfo = Math.ceil(
+    diseaseHistory.length / itemsPerPageDiseaseInfo,
+  );
+
+  const startIndex = (currentPageDisease - 1) * itemsPerPageDisease;
+  const currentDataDisease = statusData.slice(
+    startIndex,
+    startIndex + itemsPerPageDisease,
+  );
+  const totalPagesDisease = Math.ceil(statusData.length / itemsPerPageDisease);
 
   return (
     <div className='main-container-doctor-care'>
@@ -181,8 +199,8 @@ const DoctorCare = () => {
               </tr>
             </thead>
             <tbody>
-              {currentData.length > 0 ? (
-                currentData.map((status, index) => (
+              {currentDataDisease.length > 0 ? (
+                currentDataDisease.map((status, index) => (
                   <tr key={index}>
                     <td>{status.cageID}</td>
                     <td>{status?.cageDetails[0]?.name}</td>
@@ -227,19 +245,18 @@ const DoctorCare = () => {
             </tbody>
           </table>
           <div className='pagination-container'>
-            {currentData.length > 0 && totalPages > 1 && (
+            {currentDataDisease.length > 0 && totalPagesDisease > 1 && (
               <Stack
                 spacing={2}
                 alignItems='center'
                 marginTop={2}
-                marginBottom={2}
+                marginBottom={1}
                 padding={0}
               >
                 <Pagination
-                  count={totalPages}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  variant='outlined'
+                  count={totalPagesDisease}
+                  page={currentPageDisease}
+                  onChange={handlePageDiseaseChange}
                   color='primary'
                 />
               </Stack>
@@ -337,8 +354,8 @@ const DoctorCare = () => {
                 </tr>
               </thead>
               <tbody>
-                {diseaseHistory.length > 0 ? (
-                  diseaseHistory.map((history, index) => (
+                {currentDataDiseaseInfo.length > 0 ? (
+                  currentDataDiseaseInfo.map((history, index) => (
                     <tr key={index}>
                       <td>{history.date.split('T')[0]}</td>
                       <td
@@ -366,14 +383,18 @@ const DoctorCare = () => {
                       </td>
                       <td>{history.notes}</td>
                       <td>
-                        <button
-                          className='delete-button'
-                          // {onClick={() => handleDeleteHistory(history.diseaseInfoID)}}
-                          data-bs-toggle='modal'
-                          data-bs-target='#Delete-status-doctor-care-exampleModal'
-                        >
-                          Delete
-                        </button>
+                        {history.status !== 5 && (
+                          <button
+                            className='delete-button'
+                            onClick={() =>
+                              handleDeleteHistory(history.diseaseInfoID)
+                            }
+                            data-bs-toggle='modal'
+                            data-bs-target='#Delete-status-doctor-care-exampleModal'
+                          >
+                            Delete
+                          </button>
+                        )}
                         <div
                           className='modal fade'
                           id={`Delete-status-doctor-care-exampleModal`}
@@ -419,6 +440,24 @@ const DoctorCare = () => {
                   </tr>
                 )}
               </tbody>
+
+              {currentDataDiseaseInfo.length > 0 &&
+                totalPagesDiseaseInfo > 1 && (
+                  <Stack
+                    spacing={2}
+                    alignItems='center'
+                    marginTop={2}
+                    marginBottom={2}
+                    padding={0}
+                  >
+                    <Pagination
+                      count={totalPagesDiseaseInfo}
+                      page={currentPageDiseaseInfo}
+                      onChange={handlePageChange}
+                      color='primary'
+                    />
+                  </Stack>
+                )}
             </table>
             <button
               className='close-button'

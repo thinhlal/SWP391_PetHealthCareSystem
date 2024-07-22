@@ -1,6 +1,8 @@
 import './ChoosePet.css';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import 'aos/dist/aos.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // components
 import Header from '../../components/User/Header/Header';
@@ -42,9 +44,16 @@ function ChoosePet() {
 
   const handleBooking = () => {
     if (petID !== null) {
-      navigate('/booking', { state: { petID } });
+      const selectedPet = pets.find(pet => pet.petID === petID);
+      if (selectedPet && selectedPet.status) {
+        navigate('/booking', { state: { petID } });
+      } else {
+        toast.error(
+          'The selected pet is either in a cage or undergoing treatment.',
+        );
+      }
     } else {
-      alert('Please select a pet first.');
+      toast.error('Please select a pet first.');
     }
   };
 
@@ -124,6 +133,9 @@ function ChoosePet() {
                 <div className='choose-pet-id-card'>
                   PetID:&nbsp;{pet.petID}
                 </div>
+                {!pet.status ? (
+                  <div className='choose-pet-status'>Status:&nbsp; In Cage</div>
+                ) : null}
               </div>
             ))
           )}
@@ -142,6 +154,7 @@ function ChoosePet() {
         />
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

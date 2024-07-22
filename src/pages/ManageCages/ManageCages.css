@@ -23,6 +23,7 @@
 .manage-cages-content {
   padding: 0 !important;
   display: flex;
+  margin-bottom: 50px;
 }
 
 .manage-cages .manage-booking-main-content {

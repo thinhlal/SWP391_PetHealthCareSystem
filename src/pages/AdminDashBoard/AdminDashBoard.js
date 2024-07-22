@@ -659,10 +659,11 @@ function AdminDashBoard() {
                                             Doctor:
                                           </div>
                                           <div>
-                                            {
-                                              bookingInfoModal?.doctorDetails[0]
-                                                ?.name
-                                            }
+                                            {bookingInfoModal?.doctorDetails[0]
+                                              ?.name
+                                              ? bookingInfoModal
+                                                  ?.doctorDetails[0]?.name
+                                              : 'No doctor selected'}
                                           </div>
                                         </div>
                                       </div>

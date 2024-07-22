@@ -50,7 +50,7 @@ function YourPet() {
     setIsModalLoading(false);
   };
 
-  const PetProfileCard = ({ imgSrc, name, petID }) => (
+  const PetProfileCard = ({ imgSrc, name, petID, status }) => (
     <div
       onClick={() => handleClickPet(petID)}
       className='profile-card-link'
@@ -70,6 +70,7 @@ function YourPet() {
           <span>Name: </span>
           <div>{name}</div>
         </div>
+        {!status ? <div className='status-pet'>In Cage</div> : null}
       </div>
     </div>
   );
@@ -147,6 +148,7 @@ function YourPet() {
                     imgSrc={pet.image}
                     name={pet.name}
                     petID={pet.petID}
+                    status={pet.status}
                   />
                 ))
               )}

@@ -95,7 +95,9 @@ function ProfilePet() {
     e.preventDefault();
     let imageUrl = '';
     if (imageFile) {
-      const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
+      const timestamp = Date.now();
+      const uniqueFilename = `${timestamp}_${imageFile.name}`;
+      const imageRef = ref(storage, `pets/${user.accountID}/${uniqueFilename}`);
       await uploadBytes(imageRef, imageFile);
       imageUrl = await getDownloadURL(imageRef);
     }

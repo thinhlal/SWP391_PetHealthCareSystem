@@ -218,30 +218,32 @@ function PetExamRecord() {
                 </div>
               </div>
             )}
-            <div className='checkbox-cage'>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={requireCage}
-                    onChange={e => setRequireCage(e.target.checked)}
-                  />
-                }
-                label='Require Cage'
-              />
-              {requireCage && (
-                <TextField
-                  sx={{ width: '100%', mt: 1 }}
-                  id='outlined-basic'
-                  label='Reason For Admission'
-                  variant='outlined'
-                  value={reasonForAdmission}
-                  onChange={e => setReasonForAdmission(e.target.value)}
-                  required
-                  error={!!error}
-                  helperText={error}
+            {bookingData.petDetails[0].status ? (
+              <div className='checkbox-cage'>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={requireCage}
+                      onChange={e => setRequireCage(e.target.checked)}
+                    />
+                  }
+                  label='Require Cage'
                 />
-              )}
-            </div>
+                {requireCage && (
+                  <TextField
+                    sx={{ width: '100%', mt: 1 }}
+                    id='outlined-basic'
+                    label='Reason For Admission'
+                    variant='outlined'
+                    value={reasonForAdmission}
+                    onChange={e => setReasonForAdmission(e.target.value)}
+                    required
+                    error={!!error}
+                    helperText={error}
+                  />
+                )}
+              </div>
+            ) : null}
             <div className='final-petE'>
               <button
                 type='submit'

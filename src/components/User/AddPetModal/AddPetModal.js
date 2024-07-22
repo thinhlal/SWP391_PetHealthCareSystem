@@ -80,7 +80,9 @@ const AddPetModal = ({ isOpen, onClose, onAddPet, onLoadingChange }) => {
     }
     onLoadingChange(true);
     try {
-      const imageRef = ref(storage, `pets/${user.accountID}/${imageFile.name}`);
+      const timestamp = Date.now();
+      const uniqueFilename = `${timestamp}_${imageFile.name}`;
+      const imageRef = ref(storage, `pets/${user.accountID}/${uniqueFilename}`);
       await uploadBytes(imageRef, imageFile);
       const imageUrl = await getDownloadURL(imageRef);
 

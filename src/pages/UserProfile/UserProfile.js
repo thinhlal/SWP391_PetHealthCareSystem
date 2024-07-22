@@ -134,7 +134,11 @@ const UserProfile = () => {
   const handleImageChange = async e => {
     const file = e.target.files[0];
     if (file) {
-      const storageRef = ref(storage, `profilePictures/${user.accountID}`);
+      const timestamp = Date.now();
+      const storageRef = ref(
+        storage,
+        `profilePictures/${user.accountID}_${timestamp}`,
+      );
       try {
         await uploadBytes(storageRef, file);
         const downloadURL = await getDownloadURL(storageRef);
