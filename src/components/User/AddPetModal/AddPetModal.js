@@ -100,7 +100,7 @@ const AddPetModal = ({ isOpen, onClose, onAddPet, onLoadingChange }) => {
       );
 
       const petID = res.data.petID;
-      onAddPet({ petID, ...newPet, image: imageUrl });
+      onAddPet({ petID, ...newPet, image: imageUrl, status: true });
       onClose();
       setNewPet({
         name: '',

@@ -109,7 +109,7 @@ const Booking = () => {
   };
 
   const handleSlotClick = slot => {
-    if (!slot.isBooked) {
+    if (!slot.isBooked && slot.isWithinWorkingHours && !slot.isPast) {
       setSelectedSlot(slot);
       setErrorMessageChooseSlot('');
     }
@@ -131,29 +131,31 @@ const Booking = () => {
         }
       } else {
         setIsDayOff(false);
-        setAvailableSlots(generateDefaultSlots());
+        setAvailableSlots(generateDefaultSlots(date));
       }
     } else {
       setAvailableSlots([]);
     }
   };
 
-  const generateDefaultSlots = () => {
+  const generateDefaultSlots = date => {
     const slots = [];
-    const start = new Date('1970-01-01T08:00:00');
-    const end = new Date('1970-01-01T17:00:00');
-
+    const dateObj = new Date(date);
+    const start = new Date(dateObj.setHours(8, 0, 0, 0));
+    const end = new Date(dateObj.setHours(17, 0, 0, 0));
     for (
       let current = new Date(start);
       current < end;
       current = new Date(current.getTime() + 60 * 60 * 1000)
     ) {
       const next = new Date(current.getTime() + 60 * 60 * 1000);
+      const now = new Date();
       slots.push({
         startTime: new Date(current),
         endTime: new Date(next),
         isBooked: false,
         isWithinWorkingHours: true,
+        isPast: current < now,
       });
     }
     return slots;
@@ -164,16 +166,19 @@ const Booking = () => {
     const workingDay = doctor.workingHoursDetails.find(
       wh => wh.date.split('T')[0] === date,
     );
-    const start = new Date(`1970-01-01T08:00:00`);
-    const end = new Date(`1970-01-01T17:00:00`);
+    const dateObj = new Date(date);
+    const start = new Date(dateObj.setHours(8, 0, 0, 0));
+    const end = new Date(dateObj.setHours(17, 0, 0, 0));
 
     let workStart, workEnd;
     if (workingDay && !workingDay.isOff) {
-      workStart = new Date(`1970-01-01T${workingDay.startTime}:00`);
-      workEnd = new Date(`1970-01-01T${workingDay.endTime}:00`);
+      workStart = new Date(`${date}T${workingDay.startTime}:00`);
+      workEnd = new Date(`${date}T${workingDay.endTime}:00`);
     } else {
       workStart = workEnd = null;
     }
+
+    const now = new Date();
 
     for (
       let current = new Date(start);
@@ -189,18 +194,19 @@ const Booking = () => {
       if (doctor.matchingBookings) {
         isBooked = doctor.matchingBookings.some(
           booking =>
-            new Date(`1970-01-01T${booking.startTime}:00`) <= current &&
-            next <= new Date(`1970-01-01T${booking.endTime}:00`) &&
+            new Date(`${date}T${booking.startTime}:00`) <= current &&
+            next <= new Date(`${date}T${booking.endTime}:00`) &&
             booking.dateBook.split('T')[0] === date &&
             !booking.isCancel,
         );
       }
 
       slots.push({
-        startTime: new Date(current),
-        endTime: new Date(next),
+        startTime: current,
+        endTime: next,
         isBooked,
         isWithinWorkingHours,
+        isPast: next < now,
       });
     }
 
@@ -627,9 +633,11 @@ const Booking = () => {
                       slot.isBooked
                         ? 'element-button-red'
                         : slot.isWithinWorkingHours
-                          ? selectedSlot === slot
-                            ? 'element-button-selected'
-                            : 'element-button-green'
+                          ? slot.isPast
+                            ? 'element-button-gray'
+                            : selectedSlot === slot
+                              ? 'element-button-selected'
+                              : 'element-button-green'
                           : 'element-button-gray'
                     }`}
                     onClick={() => handleSlotClick(slot)}

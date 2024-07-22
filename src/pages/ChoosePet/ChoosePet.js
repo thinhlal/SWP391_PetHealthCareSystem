@@ -79,6 +79,7 @@ function ChoosePet() {
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/pet/getAllPets/${user.accountID}`,
         );
+        console.log(response.data);
         setPets(response.data);
       } catch (error) {
         console.error('Error fetching pets:', error);
