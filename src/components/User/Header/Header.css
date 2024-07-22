@@ -1,6 +1,7 @@
 .main-header-user-overlap a {
   text-decoration: none !important;
 }
+
 .main-header-user-overlap {
   position: relative;
   padding: 0 !important;
@@ -27,6 +28,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .main-header-user-overlap .header_link {
   text-align: center;
   padding: 10px 16px;
@@ -123,6 +125,7 @@
   display: block;
   cursor: pointer;
 }
+
 .main-header-user-overlap
   .main-header-user-account:hover
   .main-header-user-account_menu::before {
@@ -157,4 +160,28 @@
   border-bottom-right-radius: 5px;
   background-color: #ccc;
   cursor: pointer;
+}
+
+
+.main-header-user-overlap .auth-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; 
+}
+
+.main-header-user-overlap .auth-button {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #e18213; 
+  padding: 8px 16px; 
+  border-radius: 5px; 
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.main-header-user-overlap .auth-button:hover {
+  background-color: #c76810; 
 }
