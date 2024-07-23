@@ -335,20 +335,20 @@
 }
 
 .manage-cages .tabcontent-customer {
+  width: 100%;
   display: flex;
-  margin-left: 30px;
   gap: 23px;
 }
 
 .manage-cages .tabcontent-pet {
+  width: 100%;
   display: flex;
-  margin-left: 30px;
   gap: 23px;
 }
 
 .manage-cages .tabcontent-pet-more {
+  width: 100%;
   display: flex;
-  margin-left: 30px;
   gap: 23px;
 }
 

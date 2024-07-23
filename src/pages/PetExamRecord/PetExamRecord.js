@@ -302,7 +302,10 @@ function PetExamRecord() {
                     .includes(searchQuery.toLowerCase()),
                 )
                 .map(vaccine => (
-                  <div style={{display: 'flex'}} key={vaccine.vaccinationID}>
+                  <div
+                    style={{ display: 'flex' }}
+                    key={vaccine.vaccinationID}
+                  >
                     <input
                       type='checkbox'
                       id={vaccine.vaccinationID}

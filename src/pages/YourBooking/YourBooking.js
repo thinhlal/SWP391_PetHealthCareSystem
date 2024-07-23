@@ -116,13 +116,16 @@ function YourBooking() {
       const dataBookings = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/booking/getAllBookings/${user.accountID}`,
       );
-      const sortDataBookings = dataBookings.data.allBookings.sort((a, b) =>
-        a.dateBook.localeCompare(b.dateBook),
-      );
-      const sortTimeBookings = sortDataBookings.sort((a, b) =>
-        b.startTime.localeCompare(a.startTime),
-      );
-      setYourBookings(sortTimeBookings);
+      const sortBookings = dataBookings.data.allBookings.sort((a, b) => {
+        const dateComparison = b.dateBook.localeCompare(a.dateBook);
+        if (dateComparison !== 0) {
+          return dateComparison;
+        }
+        return b.bookingID.localeCompare(a.bookingID);
+      });
+      setYourBookings(sortBookings);
+      setFeedback('');
+      setRating('');
     } catch (error) {
       console.error(error);
     }

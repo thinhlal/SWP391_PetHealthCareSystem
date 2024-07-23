@@ -162,12 +162,11 @@
   cursor: pointer;
 }
 
-
 .main-header-user-overlap .auth-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .main-header-user-overlap .auth-button {
@@ -175,13 +174,13 @@
   font-weight: 600;
   font-size: 14px;
   color: #ffffff;
-  background-color: #e18213; 
-  padding: 8px 16px; 
-  border-radius: 5px; 
+  background-color: #e18213;
+  padding: 8px 16px;
+  border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
 .main-header-user-overlap .auth-button:hover {
-  background-color: #c76810; 
+  background-color: #c76810;
 }

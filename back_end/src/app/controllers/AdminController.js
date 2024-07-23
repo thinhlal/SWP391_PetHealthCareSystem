@@ -424,7 +424,6 @@ class AdminController {
         currentDate.getMonth() + 1,
         1,
       );
-
       const currentBookings = await Booking.aggregate([
         {
           $match: {
@@ -586,29 +585,23 @@ class AdminController {
       ]);
 
       const currentTotalIncome = currentBookings.reduce((total, booking) => {
-        if (booking.isRefund && booking.refundPrice > 0) {
+        if (booking.isRefund) {
           return total + (booking.totalPrice - booking.refundPrice);
-        } else if (booking.isRefund && booking.refundPrice === 0) {
-          return total;
         } else {
           return total + booking.totalPrice;
         }
       }, 0);
       const previousTotalIncome = previousBookings.reduce((total, booking) => {
-        if (booking.isRefund && booking.refundPrice > 0) {
+        if (booking.isRefund) {
           return total + (booking.totalPrice - booking.refundPrice);
-        } else if (booking.isRefund && booking.refundPrice === 0) {
-          return total;
         } else {
           return total + booking.totalPrice;
         }
       }, 0);
       const currentWeeklyTotalIncome = currentWeeklyBookings.reduce(
         (total, booking) => {
-          if (booking.isRefund && booking.refundPrice > 0) {
+          if (booking.isRefund) {
             return total + (booking.totalPrice - booking.refundPrice);
-          } else if (booking.isRefund && booking.refundPrice === 0) {
-            return total;
           } else {
             return total + booking.totalPrice;
           }
@@ -617,10 +610,8 @@ class AdminController {
       );
       const previousWeeklyTotalIncome = previousWeeklyBookings.reduce(
         (total, booking) => {
-          if (booking.isRefund && booking.refundPrice > 0) {
+          if (booking.isRefund) {
             return total + (booking.totalPrice - booking.refundPrice);
-          } else if (booking.isRefund && booking.refundPrice === 0) {
-            return total;
           } else {
             return total + booking.totalPrice;
           }
@@ -629,10 +620,8 @@ class AdminController {
       );
       const previousMonthlyTotalIncome = previousMonthlyBookings.reduce(
         (total, booking) => {
-          if (booking.isRefund && booking.refundPrice > 0) {
+          if (booking.isRefund) {
             return total + (booking.totalPrice - booking.refundPrice);
-          } else if (booking.isRefund && booking.refundPrice === 0) {
-            return total;
           } else {
             return total + booking.totalPrice;
           }
@@ -641,10 +630,8 @@ class AdminController {
       );
       const currentMonthlyTotalIncome = currentMonthlyBookings.reduce(
         (total, booking) => {
-          if (booking.isRefund && booking.refundPrice > 0) {
+          if (booking.isRefund) {
             return total + (booking.totalPrice - booking.refundPrice);
-          } else if (booking.isRefund && booking.refundPrice === 0) {
-            return total;
           } else {
             return total + booking.totalPrice;
           }
@@ -652,10 +639,8 @@ class AdminController {
         0,
       );
       const totalIncome = totalIncomeAllBookings.reduce((total, booking) => {
-        if (booking.isRefund && booking.refundPrice > 0) {
+        if (booking.isRefund) {
           return total + (booking.totalPrice - booking.refundPrice);
-        } else if (booking.isRefund && booking.refundPrice === 0) {
-          return total;
         } else {
           return total + booking.totalPrice;
         }

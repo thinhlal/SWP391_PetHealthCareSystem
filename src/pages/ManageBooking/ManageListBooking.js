@@ -83,12 +83,7 @@ function ManageListBooking() {
   useEffect(() => {
     const now = new Date();
 
-    const utcOffset = now.getTimezoneOffset() * 60000;
-    const utcDate = new Date(now.getTime() + utcOffset);
-
-    const formattedDate = utcDate.toISOString().split('T')[0];
-
-    setFilterDate(formattedDate);
+    setFilterDate(now.toISOString().split('T')[0]);
   }, []);
 
   const handleOwnerOptionChange = event => {
@@ -1908,7 +1903,14 @@ function ManageListBooking() {
                         </span>
                       </div>
 
-                      <div className='content-list-body-value'>
+                      <div
+                        className='content-list-body-value'
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          padding: '0 5px',
+                        }}
+                      >
                         <button
                           type='button'
                           className='btn btn-primary'
@@ -1926,7 +1928,14 @@ function ManageListBooking() {
                         booking.dateCancelBook,
                         booking.dateBook,
                       ) >= 3 ? (
-                        <div className='content-list-body-value'>
+                        <div
+                          className='content-list-body-value'
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            padding: '0 5px',
+                          }}
+                        >
                           <button
                             type='button'
                             className='btn btn-danger'
@@ -1952,7 +1961,14 @@ function ManageListBooking() {
                           booking.endTime,
                           booking.dateBook,
                         ) ? (
-                        <div className='content-list-body-value'>
+                        <div
+                          className='content-list-body-value'
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            padding: '0 5px',
+                          }}
+                        >
                           <button
                             type='button'
                             className='btn btn-success'
@@ -1978,7 +1994,14 @@ function ManageListBooking() {
                           booking.endTime,
                           booking.dateBook,
                         ) ? (
-                        <div className='content-list-body-value'>
+                        <div
+                          className='content-list-body-value'
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            padding: '0 5px',
+                          }}
+                        >
                           <button
                             type='button'
                             className='btn btn-success'
