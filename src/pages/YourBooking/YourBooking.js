@@ -556,7 +556,7 @@ function YourBooking() {
                                   booking.endTime,
                                   booking.dateBook,
                                 ) ? (
-                                <span>Out</span>
+                                <span>Expired</span>
                               ) : booking.paymentsDetails[0].isSuccess &&
                                 booking.paymentsDetails[0].paymentMethod ===
                                   'PAYPAL' &&

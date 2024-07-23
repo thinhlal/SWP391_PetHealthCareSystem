@@ -202,7 +202,7 @@ const Booking = () => {
             !booking.isCancel,
         );
       }
-
+      
       slots.push({
         startTime: current,
         endTime: next,
