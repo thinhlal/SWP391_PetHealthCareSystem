@@ -1,10 +1,13 @@
 import './Home.css';
 import { useEffect, useContext, useState, useRef } from 'react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { AuthContext } from '../../context/AuthContext';
-// Components
-import Slider from '../../components/Slider/Slider.js';
+import Slider from 'react-slick'; // Components
+import SliderPetHome from '../../components/Slider/Slider.js';
+
 import Footer from '../../components/User/Footer/Footer.js';
-// Images
+
 import logo_navigate from '../../assets/images/img_Home/logo.png';
 import logo_header_img from '../../assets/images/img_Home/header_img_logo.png';
 import petSlider2 from '../../assets/images/img_Home/PLCA0277_Diabetes_In_Cats_Symptoms.jpg';
@@ -12,30 +15,52 @@ import petSlider3 from '../../assets/images/img_Home/Pet-Cares.jpg';
 import petSlider4 from '../../assets/images/img_Home/slider_bg.png';
 import petSlider5 from '../../assets/images/img_Home/slider_bg_02.png';
 import petSlider6 from '../../assets/images/img_Home/slider_bg_03.png';
-import dogBackground from '../../assets/images/img_Home/dogBackground.png';
 import why_we_are from '../../assets/images/img_Home/dog_About.png';
 import checked_Icon from '../../assets/images/img_Home/checked.png';
 import vote_star from '../../assets/images/img_Home/star.png';
 import userIcon from '../../assets/images/img_Home/userlogincam.png';
-import axiosInstance from '../../utils/axiosInstance.js';
+import axios from 'axios';
 
 const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
+
+const sliderSettings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+};
 
 function Home() {
   const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [feedbacks, setFeedbacks] = useState([]);
+  const [services, setServices] = useState([]);
   const menuRef = useRef(null);
 
   useEffect(() => {
     const fetchAllFeedBack = async () => {
-      const response = await axiosInstance.get(
+      const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/rate/getAllRates`,
       );
       setFeedbacks(response.data);
     };
 
     fetchAllFeedBack();
+  }, []);
+
+  useEffect(() => {
+    const fetchAllService = async () => {
+      const services = await axios.get(
+        `${process.env.REACT_APP_API_URL}/service/getAllServices`,
+      );
+      console.log(services.data);
+      setServices(services.data);
+    };
+
+    fetchAllService();
   }, []);
 
   const toggleMenu = () => {
@@ -166,7 +191,7 @@ function Home() {
               )}
             </div>
           </div>
-          <Slider images={images}></Slider>
+          <SliderPetHome images={images}></SliderPetHome>
 
           <div className='white-navigate'>
             <div className='white-navigate-logo-wrapper'>
@@ -256,64 +281,40 @@ function Home() {
         </div>
       </div>
       <div className='MAIN-SERVICES lazy-load'>
-        <div className='overlap-3 row'>
+        <div className='overlap-3'>
           <div className='MAIN-SERVICES_title'>PRIMARY PET CARE SERVICES</div>
-          <img
-            alt=''
-            className='floofins-and-co'
-            src={dogBackground}
-            loading='lazy'
-          />
-          <div className='service-detail-wrapper'>
-            <div className='service_Info_Detail'>
-              <div className='service_Info_Detail-img service_Info_Detail-img-pet-1'></div>
-              <div className='service_Info_Detail-text'>
-                Sign up for a time-specific medical examination for your pet.
-              </div>
-              <div className='service_Info_Detail-button-wrapper-flex'>
-                <div className='service_Info_Detail-button-wrapper'>
-                  <a
-                    href='services'
-                    className='service_Info_Detail-button'
-                  >
-                    <span>View Services</span>
-                  </a>
+          <div className='slider_service'>
+            <Slider {...sliderSettings}>
+              {services.map(service => (
+                <div
+                  key={service.serviceID}
+                  className='service_Info_Detail'
+                >
+                  <img
+                    src={service.image}
+                    className='service_Info_Detail-img'
+                    alt={service.name}
+                  />
+                  <div className='service_Info_Detail-text'>{service.name}</div>
+                  <div className='service_Info_Detail-text'>
+                    {service.description}
+                  </div>
+                  <div className='service_Info_Detail-text'>
+                    {service.price}
+                  </div>
+                  <div className='service_Info_Detail-button-wrapper-flex'>
+                    <div className='service_Info_Detail-button-wrapper'>
+                      <a
+                        href='choose'
+                        className='service_Info_Detail-button'
+                      >
+                        <span>Booking Now</span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className='service_Info_Detail'>
-              <div className='service_Info_Detail-img service_Info_Detail-img-pet-2'></div>
-              <div className='service_Info_Detail-text'>
-                Provide medical examination and treatment services with a team
-                of professional and experienced doctors
-              </div>
-              <div className='service_Info_Detail-button-wrapper-flex'>
-                <div className='service_Info_Detail-button-wrapper'>
-                  <a
-                    href='services'
-                    className='service_Info_Detail-button'
-                  >
-                    <span>View Services</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className='service_Info_Detail'>
-              <div className='service_Info_Detail-img service_Info_Detail-img-pet-3'></div>
-              <div className='service_Info_Detail-text'>
-                Sign up for a time-specific medical examination for your pet.
-              </div>
-              <div className='service_Info_Detail-button-wrapper-flex'>
-                <div className='service_Info_Detail-button-wrapper'>
-                  <a
-                    href='services'
-                    className='service_Info_Detail-button'
-                  >
-                    <span>View Services</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+              ))}
+            </Slider>
           </div>
         </div>
       </div>

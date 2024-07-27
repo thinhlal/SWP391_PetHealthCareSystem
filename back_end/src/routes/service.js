@@ -14,7 +14,7 @@ router.patch(
   verifyToken,
   serviceController.updateServiceStatus,
 );
-router.get('/getAllServices', verifyToken, serviceController.getAllServices);
+router.get('/getAllServices', serviceController.getAllServices);
 router.get(
   '/checkServiceName',
   verifyToken,

@@ -17,6 +17,8 @@ import icon_search from '../../assets/images/img_AdminServices/icon_search.svg';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { blue } from '@mui/material/colors';
 import axiosInstance from '../../utils/axiosInstance';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { storage } from '../../config/firebase';
 
 function AdminServices() {
   const [search, setSearch] = useState('');
@@ -54,6 +56,8 @@ function AdminServices() {
 
   const [servicesData, setServicesData] = useState([]);
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [imageFileEdit, setImageFileEdit] = useState(null);
 
   const modalCloseButtonRef = useRef(null);
   const modalEditCloseButtonRef = useRef(null);
@@ -164,6 +168,18 @@ function AdminServices() {
     setTypeEditService(e.target.value);
   };
 
+  const handleFileChange = e => {
+    const { name, files } = e.target;
+    setImageFile(files[0]);
+    setNewService({ ...newService, [name]: files[0] });
+  };
+
+  const handleFileEditChange = e => {
+    const { name, files } = e.target;
+    setImageFileEdit(files[0]);
+    setEditService({ ...editService, [name]: files[0] });
+  };
+
   const handleEditInputChange = e => {
     const { name, value } = e.target;
     const error = validateEditInput(name, value);
@@ -189,13 +205,19 @@ function AdminServices() {
       name: validateInput('name', newService.name),
       description: validateInput('description', newService.description),
       price: validateInput('price', newService.price),
+      image: imageFile !== null ? '' : 'Select your image !!!!',
     };
-
     if (
       Object.values(newErrors).every(error => error === '') &&
       newService.name &&
-      newService.description
+      newService.description &&
+      !imageFile
     ) {
+      const timestamp = Date.now();
+      const uniqueFilename = `${timestamp}_${imageFile.name}`;
+      const imageRef = ref(storage, `services/${uniqueFilename}`);
+      await uploadBytes(imageRef, imageFile);
+      const imageUrl = await getDownloadURL(imageRef);
       const isDuplicate = await checkDuplicateServiceName(newService.name);
       if (isDuplicate) {
         setAddServiceErrors({
@@ -212,6 +234,7 @@ function AdminServices() {
             description: newService.description,
             price: newService.price,
             type: typeAddService,
+            image: imageUrl,
           },
         );
         const response = await axiosInstance.get(
@@ -225,9 +248,11 @@ function AdminServices() {
         name: '',
         description: '',
         price: '',
+        image: '',
       });
       setTypeAddService('Dog');
       setAddServiceErrors({ name: '', description: '', price: '' });
+      setImageFile(null);
       document.querySelector('#addServiceModal .btn-close').click();
     } else {
       setAddServiceErrors(newErrors);
@@ -245,10 +270,21 @@ function AdminServices() {
       editService.name &&
       editService.description
     ) {
+      let imageEdit = '';
+      if (!(imageFileEdit === null)) {
+        const timestamp = Date.now();
+        const uniqueFilename = `${timestamp}_${imageFileEdit.name}`;
+        const imageRef = ref(storage, `services/${uniqueFilename}`);
+        await uploadBytes(imageRef, imageFileEdit);
+        imageEdit = await getDownloadURL(imageRef);
+      } else {
+        imageEdit = editService.image;
+      }
+
       try {
         await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/service/updateServiceInfo`,
-          { editService, typeEditService },
+          { editService, typeEditService, imageEdit },
         );
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/service/getAllServices`,
@@ -268,6 +304,7 @@ function AdminServices() {
       });
       setEditServiceErrors({ name: '', description: '', price: '' });
       setTypeEditService('');
+      setImageFileEdit(null);
       document
         .querySelector(`#editServiceModal${editService.serviceID} .btn-close`)
         .click();
@@ -300,6 +337,7 @@ function AdminServices() {
       name: service.name,
       description: service.description,
       price: service.price,
+      image: service.image,
     });
   };
 
@@ -414,6 +452,7 @@ function AdminServices() {
                                   name: '',
                                   description: '',
                                   price: '',
+                                  image: '',
                                 });
                                 setAddServiceErrors({
                                   name: '',
@@ -421,6 +460,7 @@ function AdminServices() {
                                   price: '',
                                 });
                                 setTypeAddService('Dog');
+                                setImageFile(null);
                               }}
                             ></button>
                           </div>
@@ -478,6 +518,22 @@ function AdminServices() {
                             </div>
                             <div className='Admin-Services-modal-update-name'>
                               <div className='Admin-Services-modal-title'>
+                                Image
+                              </div>
+                              <input
+                                type='file'
+                                className='Admin-Services-input'
+                                name='image'
+                                onChange={handleFileChange}
+                              />
+                              {addServiceErrors.image && (
+                                <p className='error-message'>
+                                  {addServiceErrors.image}
+                                </p>
+                              )}
+                            </div>
+                            <div className='Admin-Services-modal-update-name'>
+                              <div className='Admin-Services-modal-title'>
                                 Service for:
                               </div>
                               <div className='Admin-Services-input-radio-group'>
@@ -530,6 +586,7 @@ function AdminServices() {
                                   name: '',
                                   description: '',
                                   price: '',
+                                  image: '',
                                 });
                                 setAddServiceErrors({
                                   name: '',
@@ -537,6 +594,7 @@ function AdminServices() {
                                   price: '',
                                 });
                                 setTypeAddService('Dog');
+                                setImageFile(null);
                               }}
                             >
                               Close
@@ -661,6 +719,7 @@ function AdminServices() {
                                         price: '',
                                       });
                                       setTypeEditService('');
+                                      setImageFileEdit(null);
                                     }}
                                   ></button>
                                 </div>
@@ -720,39 +779,64 @@ function AdminServices() {
                                         {editServiceErrors.description}
                                       </p>
                                     )}
-                                  </div>
-                                  <div className='Admin-Services-modal-update-name'>
-                                    <div className='Admin-Services-modal-title'>
-                                      Price
-                                    </div>
 
-                                    <div className='Admin-Services-modal-update'>
+                                    <div className='Admin-Services-modal-update-name'>
+                                      <div className='Admin-Services-modal-title'>
+                                        Price
+                                      </div>
+
+                                      <div className='Admin-Services-modal-update'>
+                                        <div className='Admin-Services-modal-update'>
+                                          <div className='Admin-Services-modal-update-title'>
+                                            Old price:
+                                          </div>
+                                          {originalEditService?.price}
+                                        </div>
+                                      </div>
                                       <div className='Admin-Services-modal-update'>
                                         <div className='Admin-Services-modal-update-title'>
-                                          Old price:
+                                          New Price:
                                         </div>
-                                        {originalEditService?.price}
+                                        <input
+                                          className='Admin-Services-input-phone'
+                                          name='price'
+                                          value={editService?.price}
+                                          onChange={handleEditInputChange}
+                                          placeholder='Price'
+                                          maxLength={10}
+                                          pattern='^[1-9]\d*$'
+                                        />
+                                      </div>
+                                      {editServiceErrors.price && (
+                                        <p className='error-message'>
+                                          {editServiceErrors.price}
+                                        </p>
+                                      )}
+                                    </div>
+                                    <div className='Admin-Services-modal-update-name'>
+                                      <div className='Admin-Services-modal-title'>
+                                        Image
+                                      </div>
+
+                                      <div className='Admin-Services-modal-update'>
+                                        <div className='Admin-Services-modal-update'>
+                                          <div className='Admin-Services-modal-update-title'>
+                                            Old Image Link:
+                                          </div>
+                                          <a href={originalEditService?.image}>
+                                            Link
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
                                     <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        New Price:
-                                      </div>
                                       <input
+                                        type='file'
                                         className='Admin-Services-input-phone'
-                                        name='price'
-                                        value={editService?.price}
-                                        onChange={handleEditInputChange}
-                                        placeholder='Price'
-                                        maxLength={10}
-                                        pattern='^[1-9]\d*$'
+                                        name='editImage'
+                                        onChange={handleFileEditChange}
                                       />
                                     </div>
-                                    {editServiceErrors.price && (
-                                      <p className='error-message'>
-                                        {editServiceErrors.price}
-                                      </p>
-                                    )}
                                   </div>
                                   <div className='Admin-Services-modal-update-name'>
                                     <div className='Admin-Services-modal-title'>
@@ -811,6 +895,7 @@ function AdminServices() {
                                         price: '',
                                       });
                                       setTypeEditService('');
+                                      setImageFileEdit(null);
                                     }}
                                   >
                                     Close
