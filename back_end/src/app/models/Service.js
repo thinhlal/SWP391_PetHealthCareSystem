@@ -19,6 +19,11 @@ const ServiceSchema = new Schema(
       required: true,
       maxlength: 255,
     },
+    type: {
+      type: String,
+      required: true,
+      enum: ['Dog', 'Cat'],
+    },
     price: {
       type: Number,
       required: true,

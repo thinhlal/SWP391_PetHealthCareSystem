@@ -14,7 +14,7 @@ class ServiceController {
   //GET /addService
   async addService(req, res, next) {
     try {
-      let { serviceName, description, price } = req.body;
+      let { serviceName, description, price, type } = req.body;
       let serviceID;
       while (true) {
         try {
@@ -35,6 +35,7 @@ class ServiceController {
         name: serviceName,
         description: description,
         price: price,
+        type: type,
       });
 
       await newService.save();
@@ -47,7 +48,6 @@ class ServiceController {
   //PATCH /updateServiceStatus
   async updateServiceStatus(req, res, next) {
     const { service } = req.body;
-    console.log(service);
     try {
       await Service.findOneAndUpdate(
         { serviceID: service.serviceID },
@@ -63,7 +63,8 @@ class ServiceController {
 
   //POST /updateServiceInfo
   async updateServiceInfo(req, res, next) {
-    const { serviceID, name, description, price } = req.body;
+    const { serviceID, name, description, price } = req.body.editService;
+    const type = req.body.typeEditService;
     try {
       await Service.findOneAndUpdate(
         { serviceID },
@@ -71,6 +72,7 @@ class ServiceController {
           name,
           description,
           price,
+          type: type,
         },
       );
       res.status(204).send();

@@ -25,6 +25,8 @@ function AdminServices() {
     description: '',
     price: '',
   });
+  const [typeAddService, setTypeAddService] = useState('Dog');
+  const [typeEditService, setTypeEditService] = useState('');
   const [editService, setEditService] = useState({
     serviceID: '',
     name: '',
@@ -32,11 +34,13 @@ function AdminServices() {
     price: '',
     status: '',
   });
+
   const [originalEditService, setOriginalEditService] = useState({
     name: '',
     description: '',
     price: '',
   });
+
   const [addServiceErrors, setAddServiceErrors] = useState({
     name: '',
     description: '',
@@ -100,8 +104,8 @@ function AdminServices() {
 
   const validateEditInput = (name, value) => {
     let error = '';
-    const maxPrice = 1000000; // Giới hạn giá tối đa
-    const strValue = String(value); // Chuyển đổi giá trị thành chuỗi
+    const maxPrice = 1000000;
+    const strValue = String(value);
 
     if (name === 'name') {
       if (!strValue.trim()) {
@@ -153,8 +157,16 @@ function AdminServices() {
   const handleInputChange = e => {
     const { name, value } = e.target;
     const error = validateInput(name, value);
-    setAddServiceErrors({ ...addServiceErrors, [name]: error });
-    setNewService({ ...newService, [name]: value });
+    setAddServiceErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+    setNewService(prevService => ({ ...prevService, [name]: value }));
+  };
+
+  const handleTypeChange = e => {
+    setTypeAddService(e.target.value);
+  };
+
+  const handleTypeEditChange = e => {
+    setTypeEditService(e.target.value);
   };
 
   const handleEditInputChange = e => {
@@ -204,6 +216,7 @@ function AdminServices() {
             serviceName: newService.name,
             description: newService.description,
             price: newService.price,
+            type: typeAddService,
           },
         );
         const response = await axiosInstance.get(
@@ -213,9 +226,13 @@ function AdminServices() {
       } catch (error) {
         console.error(error);
       }
-      setNewService({ name: '', description: '', price: '' });
+      setNewService({
+        name: '',
+        description: '',
+        price: '',
+      });
+      setTypeAddService('Dog');
       setAddServiceErrors({ name: '', description: '', price: '' });
-      // Close the modal
       document.querySelector('#addServiceModal .btn-close').click();
     } else {
       setAddServiceErrors(newErrors);
@@ -228,7 +245,6 @@ function AdminServices() {
       description: validateEditInput('description', editService.description),
       price: validateEditInput('price', editService.price),
     };
-
     if (
       Object.values(newErrors).every(error => error === '') &&
       editService.name &&
@@ -237,7 +253,7 @@ function AdminServices() {
       try {
         await axiosInstance.post(
           `${process.env.REACT_APP_API_URL}/service/updateServiceInfo`,
-          editService,
+          { editService, typeEditService },
         );
         const response = await axiosInstance.get(
           `${process.env.REACT_APP_API_URL}/service/getAllServices`,
@@ -256,7 +272,7 @@ function AdminServices() {
         status: '',
       });
       setEditServiceErrors({ name: '', description: '', price: '' });
-
+      setTypeEditService('');
       document
         .querySelector(`#editServiceModal${editService.serviceID} .btn-close`)
         .click();
@@ -284,6 +300,7 @@ function AdminServices() {
 
   const handleEditClick = service => {
     setEditService(service);
+    setTypeEditService(service.type);
     setOriginalEditService({
       name: service.name,
       description: service.description,
@@ -300,7 +317,6 @@ function AdminServices() {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentServices = searchServicesData.slice(
     startIndex,
@@ -398,6 +414,19 @@ function AdminServices() {
                               className='btn-close'
                               data-bs-dismiss='modal'
                               aria-label='Close'
+                              onClick={() => {
+                                setNewService({
+                                  name: '',
+                                  description: '',
+                                  price: '',
+                                });
+                                setAddServiceErrors({
+                                  name: '',
+                                  description: '',
+                                  price: '',
+                                });
+                                setTypeAddService('Dog');
+                              }}
                             ></button>
                           </div>
                           <div className='modal-body'>
@@ -452,12 +481,55 @@ function AdminServices() {
                                 </p>
                               )}
                             </div>
+                            <div className='Admin-Services-modal-update-name'>
+                              <div className='Admin-Services-modal-title'>
+                                Service for:
+                              </div>
+                              <div className='Admin-Services-input-radio-group'>
+                                <label
+                                  className='Admin-Services-input-radio'
+                                  style={{ marginRight: '10px' }}
+                                >
+                                  <input
+                                    type='radio'
+                                    name='type'
+                                    value='Dog'
+                                    checked={typeAddService === 'Dog'}
+                                    onChange={handleTypeChange}
+                                  />
+                                  Dog
+                                </label>
+                                <label className='Admin-Services-input-radio'>
+                                  <input
+                                    type='radio'
+                                    name='type'
+                                    value='Cat'
+                                    checked={typeAddService === 'Cat'}
+                                    onChange={handleTypeChange}
+                                  />
+                                  Cat
+                                </label>
+                              </div>
+                            </div>
                           </div>
                           <div className='modal-footer'>
                             <button
                               type='button'
                               className='btn btn-secondary'
                               data-bs-dismiss='modal'
+                              onClick={() => {
+                                setNewService({
+                                  name: '',
+                                  description: '',
+                                  price: '',
+                                });
+                                setAddServiceErrors({
+                                  name: '',
+                                  description: '',
+                                  price: '',
+                                });
+                                setTypeAddService('Dog');
+                              }}
                             >
                               Close
                             </button>
@@ -489,6 +561,9 @@ function AdminServices() {
                     Price
                   </div>
                   <div className='Admin-Services-Main-Table-Header-Title'>
+                    Service For
+                  </div>
+                  <div className='Admin-Services-Main-Table-Header-Title'>
                     Status
                   </div>
                   <div className='Admin-Services-Main-Table-Header-Title-Btn'>
@@ -513,6 +588,9 @@ function AdminServices() {
                       </div>
                       <div className='Admin-Services-Main-Table-Content-Row'>
                         {item.price}
+                      </div>
+                      <div className='Admin-Services-Main-Table-Content-Row'>
+                        {item.type}
                       </div>
                       <div className='Admin-Services-Main-Table-Content-Row'>
                         <label className='switch'>
@@ -561,6 +639,21 @@ function AdminServices() {
                                     className='btn-close'
                                     data-bs-dismiss='modal'
                                     aria-label='Close'
+                                    onClick={() => {
+                                      setEditService({
+                                        serviceID: '',
+                                        name: '',
+                                        description: '',
+                                        price: '',
+                                        status: '',
+                                      });
+                                      setEditServiceErrors({
+                                        name: '',
+                                        description: '',
+                                        price: '',
+                                      });
+                                      setTypeEditService('');
+                                    }}
                                   ></button>
                                 </div>
                                 <div className='modal-body'>
@@ -643,8 +736,8 @@ function AdminServices() {
                                         value={editService?.price}
                                         onChange={handleEditInputChange}
                                         placeholder='Price'
-                                        maxLength={10} // Giới hạn độ dài số tiền
-                                        pattern='^[1-9]\d*$' // Không cho phép bắt đầu bằng số 0
+                                        maxLength={10}
+                                        pattern='^[1-9]\d*$'
                                       />
                                     </div>
                                     {editServiceErrors.price && (
@@ -653,12 +746,54 @@ function AdminServices() {
                                       </p>
                                     )}
                                   </div>
+                                  <div className='Admin-Services-modal-update-name'>
+                                    <div className='Admin-Services-modal-title'>
+                                      Type
+                                    </div>
+                                    <div className='Admin-Services-modal-update'>
+                                      <label style={{ marginRight: '10px' }}>
+                                        <input
+                                          type='radio'
+                                          name='typeEdit'
+                                          value='Dog'
+                                          checked={typeEditService === 'Dog'}
+                                          onChange={handleTypeEditChange}
+                                        />
+                                        Dog
+                                      </label>
+                                      <label>
+                                        <input
+                                          type='radio'
+                                          name='typeEdit'
+                                          value='Cat'
+                                          checked={typeEditService === 'Cat'}
+                                          onChange={handleTypeEditChange}
+                                        />
+                                        Cat
+                                      </label>
+                                    </div>
+                                  </div>
                                 </div>
                                 <div className='modal-footer'>
                                   <button
                                     type='button'
                                     className='btn btn-secondary'
                                     data-bs-dismiss='modal'
+                                    onClick={() => {
+                                      setEditService({
+                                        serviceID: '',
+                                        name: '',
+                                        description: '',
+                                        price: '',
+                                        status: '',
+                                      });
+                                      setEditServiceErrors({
+                                        name: '',
+                                        description: '',
+                                        price: '',
+                                      });
+                                      setTypeEditService('');
+                                    }}
                                   >
                                     Close
                                   </button>
