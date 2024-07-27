@@ -526,6 +526,7 @@ class DoctorController {
         treatment,
         prescription,
         notes,
+        date: new Date(),
       });
 
       await newMedicalReport.save();

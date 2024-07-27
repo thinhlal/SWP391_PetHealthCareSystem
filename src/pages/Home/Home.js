@@ -20,6 +20,7 @@ import checked_Icon from '../../assets/images/img_Home/checked.png';
 import vote_star from '../../assets/images/img_Home/star.png';
 import userIcon from '../../assets/images/img_Home/userlogincam.png';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
 
@@ -34,6 +35,7 @@ const sliderSettings = {
 };
 
 function Home() {
+  const navigate = useNavigate();
   const { user, logOut } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [feedbacks, setFeedbacks] = useState([]);
@@ -50,6 +52,13 @@ function Home() {
 
     fetchAllFeedBack();
   }, []);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (userData && !userData.customerDetails[0]) {
+      navigate('/unauthorized');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const fetchAllService = async () => {
@@ -140,7 +149,7 @@ function Home() {
                         alt='User Icon'
                         style={{ width: '20px', marginBottom: '-5px' }}
                       />
-                      &nbsp;{user && user.customerDetails[0].name}
+                      &nbsp;{user && user?.customerDetails[0]?.name}
                     </div>
                     <div
                       className='menu-item-login'

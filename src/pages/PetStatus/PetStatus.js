@@ -131,7 +131,7 @@ function PetStatus() {
                   currentDisease.map((status, index) => (
                     <tr key={index}>
                       <td>{status?.bookingID}</td>
-                      <td>{status?.startDate.split('T')[0]}</td>
+                      <td>{new Date(status?.startDate).toLocaleString()}</td>
                       <td>{status?.doctorDetails[0]?.name}</td>
                       <td>{status?.reasonForAdmission}</td>
                       <td
@@ -145,7 +145,7 @@ function PetStatus() {
                       </td>
                       <td>
                         {status.isRecover
-                          ? status.dischargeDate.split('T')[0]
+                          ? new Date(status.dischargeDate).toLocaleString()
                           : ''}
                       </td>
                       <td>
@@ -199,7 +199,7 @@ function PetStatus() {
                   {currentDiseaseDetails.length > 0 ? (
                     currentDiseaseDetails.map(detail => (
                       <tr key={detail.diseaseInfoID}>
-                        <td>{`${detail.date.split('T')[0]}`}</td>
+                        <td>{new Date(detail.date).toLocaleString()}</td>
                         <td
                           className={`status-${
                             detail.status === 1

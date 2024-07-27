@@ -83,11 +83,6 @@ function AdminServices() {
     if (name === 'name' || name === 'description') {
       if (!value) {
         error = 'Please enter your information';
-      } else {
-        const regex = /^[a-zA-Z\s]*$/;
-        if (!regex.test(value)) {
-          error = 'Only letters and spaces are allowed';
-        }
       }
     } else if (name === 'price') {
       if (!value || value === '$' || value.startsWith('0')) {
@@ -114,29 +109,10 @@ function AdminServices() {
     if (name === 'name') {
       if (!strValue.trim()) {
         error = 'Please enter your information';
-      } else if (
-        servicesData.some(
-          service =>
-            service.name.trim().toLowerCase() ===
-              strValue.trim().toLowerCase() &&
-            service.serviceID !== editService.serviceID,
-        )
-      ) {
-        error = 'New name cannot duplicate an existing service name';
-      } else {
-        const regex = /^[a-zA-Z\s]*$/;
-        if (!regex.test(strValue)) {
-          error = 'Only letters and spaces are allowed';
-        }
       }
     } else if (name === 'description') {
       if (!strValue.trim()) {
         error = 'Please enter your information';
-      } else {
-        const regex = /^[a-zA-Z\s]*$/;
-        if (!regex.test(strValue)) {
-          error = 'Only letters and spaces are allowed';
-        }
       }
     } else if (name === 'price') {
       if (!strValue || strValue === '$' || strValue.startsWith('0')) {
@@ -210,8 +186,7 @@ function AdminServices() {
     if (
       Object.values(newErrors).every(error => error === '') &&
       newService.name &&
-      newService.description &&
-      !imageFile
+      newService.description
     ) {
       const timestamp = Date.now();
       const uniqueFilename = `${timestamp}_${imageFile.name}`;
@@ -465,7 +440,7 @@ function AdminServices() {
                             ></button>
                           </div>
                           <div className='modal-body'>
-                            <div className='Admin-Services-modal-update-name'>
+                            <div>
                               <div className='Admin-Services-modal-title'>
                                 Name
                               </div>
@@ -482,7 +457,7 @@ function AdminServices() {
                                 </p>
                               )}
                             </div>
-                            <div className='Admin-Services-modal-update-name'>
+                            <div>
                               <div className='Admin-Services-modal-title'>
                                 Description
                               </div>
@@ -499,7 +474,7 @@ function AdminServices() {
                                 </p>
                               )}
                             </div>
-                            <div className='Admin-Services-modal-update-name'>
+                            <div>
                               <div className='Admin-Services-modal-title'>
                                 Price
                               </div>
@@ -516,7 +491,7 @@ function AdminServices() {
                                 </p>
                               )}
                             </div>
-                            <div className='Admin-Services-modal-update-name'>
+                            <div>
                               <div className='Admin-Services-modal-title'>
                                 Image
                               </div>
@@ -532,7 +507,7 @@ function AdminServices() {
                                 </p>
                               )}
                             </div>
-                            <div className='Admin-Services-modal-update-name'>
+                            <div>
                               <div className='Admin-Services-modal-title'>
                                 Service for:
                               </div>
@@ -724,20 +699,11 @@ function AdminServices() {
                                   ></button>
                                 </div>
                                 <div className='modal-body'>
-                                  <div className='Admin-Services-modal-update-name'>
+                                  <div>
                                     <div className='Admin-Services-modal-title-name'>
                                       Name
                                     </div>
                                     <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        Old name:
-                                      </div>
-                                      {originalEditService?.name}
-                                    </div>
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        New name:
-                                      </div>
                                       <input
                                         className='Admin-Services-input'
                                         name='name'
@@ -752,51 +718,32 @@ function AdminServices() {
                                       </p>
                                     )}
                                   </div>
-                                  <div className='Admin-Services-modal-update-name'>
-                                    <div className='Admin-Services-modal-title'>
-                                      Description
-                                    </div>
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        Old Description:
+                                  <div>
+                                    <div>
+                                      <div className='Admin-Services-modal-title'>
+                                        Description
                                       </div>
-                                      {originalEditService.description}
-                                    </div>
-                                    <div className='Admin-Services-modal-update'>
-                                      <div className='Admin-Services-modal-update-title'>
-                                        New Description:
+                                      <div className='Admin-Services-modal-update'>
+                                        <input
+                                          className='Admin-Services-input'
+                                          name='description'
+                                          value={editService?.description}
+                                          onChange={handleEditInputChange}
+                                          placeholder='Description'
+                                        />
                                       </div>
-                                      <input
-                                        className='Admin-Services-input'
-                                        name='description'
-                                        value={editService?.description}
-                                        onChange={handleEditInputChange}
-                                        placeholder='Description'
-                                      />
+                                      {editServiceErrors.description && (
+                                        <p className='error-message'>
+                                          {editServiceErrors.description}
+                                        </p>
+                                      )}
                                     </div>
-                                    {editServiceErrors.description && (
-                                      <p className='error-message'>
-                                        {editServiceErrors.description}
-                                      </p>
-                                    )}
 
-                                    <div className='Admin-Services-modal-update-name'>
+                                    <div>
                                       <div className='Admin-Services-modal-title'>
                                         Price
                                       </div>
-
                                       <div className='Admin-Services-modal-update'>
-                                        <div className='Admin-Services-modal-update'>
-                                          <div className='Admin-Services-modal-update-title'>
-                                            Old price:
-                                          </div>
-                                          {originalEditService?.price}
-                                        </div>
-                                      </div>
-                                      <div className='Admin-Services-modal-update'>
-                                        <div className='Admin-Services-modal-update-title'>
-                                          New Price:
-                                        </div>
                                         <input
                                           className='Admin-Services-input-phone'
                                           name='price'
@@ -813,20 +760,15 @@ function AdminServices() {
                                         </p>
                                       )}
                                     </div>
-                                    <div className='Admin-Services-modal-update-name'>
+                                    <div>
                                       <div className='Admin-Services-modal-title'>
                                         Image
                                       </div>
 
                                       <div className='Admin-Services-modal-update'>
-                                        <div className='Admin-Services-modal-update'>
-                                          <div className='Admin-Services-modal-update-title'>
-                                            Old Image Link:
-                                          </div>
-                                          <a href={originalEditService?.image}>
-                                            Link
-                                          </a>
-                                        </div>
+                                        <a href={originalEditService?.image}>
+                                          Link
+                                        </a>
                                       </div>
                                     </div>
                                     <div className='Admin-Services-modal-update'>
@@ -838,7 +780,7 @@ function AdminServices() {
                                       />
                                     </div>
                                   </div>
-                                  <div className='Admin-Services-modal-update-name'>
+                                  <div>
                                     <div className='Admin-Services-modal-title'>
                                       Type
                                     </div>

@@ -2064,9 +2064,20 @@ function ManageListBooking() {
                                         </div>
                                         <div className='reason-manage-booking'>
                                           <small className='title-reason-manage-booking'>
-                                            CustomerID:&nbsp;
+                                            AccountID:&nbsp;
                                           </small>
                                           <small>{booking.accountID}</small>
+                                        </div>
+                                        <div className='reason-manage-booking'>
+                                          <small className='title-reason-manage-booking'>
+                                            CustomerID:&nbsp;
+                                          </small>
+                                          <small>
+                                            {
+                                              booking.customerDetails[0]
+                                                .customerID
+                                            }
+                                          </small>
                                         </div>
                                         <div className='reason-manage-booking'>
                                           <small className='title-reason-manage-booking'>
@@ -2093,6 +2104,14 @@ function ManageListBooking() {
                                           <span className='font-weight-bold'>
                                             Pet Information
                                           </span>
+                                        </div>
+                                        <div className='reason-manage-booking'>
+                                          <small className='title-reason-manage-booking'>
+                                            PetID:&nbsp;
+                                          </small>
+                                          <small>
+                                            {booking.petDetails[0].petID}
+                                          </small>
                                         </div>
                                         <div className='reason-manage-booking'>
                                           <small className='title-reason-manage-booking'>
@@ -2175,29 +2194,29 @@ function ManageListBooking() {
                                             Payment status
                                           </span>
                                         </div>
-                                        <div className='reason-manage-booking'>
-                                          <small className='title-reason-manage-booking'>
-                                            Date pay:&nbsp;
-                                          </small>
-                                          <small>
-                                            {
-                                              booking.paymentsDetails[0].date.split(
-                                                'T',
-                                              )[0]
-                                            }
-                                          </small>
-                                        </div>
+                                        {!booking?.paymentsDetails[0]
+                                          ?.isCancelPayment &&
+                                          booking?.isSuccess && (
+                                            <div className='reason-manage-booking'>
+                                              <small className='title-reason-manage-booking'>
+                                                Date pay:&nbsp;
+                                              </small>
+                                              <small>
+                                                {new Date(
+                                                  booking.paymentsDetails[0].date,
+                                                ).toLocaleString()}
+                                              </small>
+                                            </div>
+                                          )}
                                         {booking?.dateCancelBook && (
                                           <div className='reason-manage-booking'>
                                             <small className='title-reason-manage-booking'>
                                               Date Cancel:&nbsp;
                                             </small>
                                             <small>
-                                              {
-                                                booking?.dateCancelBook?.split(
-                                                  'T',
-                                                )[0]
-                                              }
+                                              {new Date(
+                                                booking?.dateCancelBook,
+                                              ).toLocaleString()}
                                             </small>
                                           </div>
                                         )}
@@ -2207,6 +2226,14 @@ function ManageListBooking() {
                                           </small>
                                           <small>
                                             {booking.dateBook.split('T')[0]}
+                                          </small>
+                                        </div>
+                                        <div className='reason-manage-booking'>
+                                          <small className='title-reason-manage-booking'>
+                                            Time:&nbsp;
+                                          </small>
+                                          <small>
+                                            {`${booking.startTime}-${booking.endTime}`}
                                           </small>
                                         </div>
                                         {booking.isRefund &&

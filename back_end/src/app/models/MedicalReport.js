@@ -41,6 +41,9 @@ const MedicalReportSchema = new Schema(
       type: String,
       required: true,
     },
+    date: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

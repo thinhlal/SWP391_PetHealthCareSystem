@@ -147,7 +147,7 @@ function AdminRating() {
                         {item.bookingID}
                       </div>
                       <div className='Admin-Rating-Main-Table-Content-Row '>
-                        {item.date.split('T')[0]}
+                        {new Date(item.date).toLocaleString()}
                       </div>
                       <div className='Admin-Rating-Main-Table-Content-Row '>
                         <StarRate

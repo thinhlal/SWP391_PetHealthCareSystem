@@ -10,7 +10,16 @@ import green from '../../assets/images/img_Booking/green_square.png';
 import expired from '../../assets/images/img_Booking/expired.png';
 import gray from '../../assets/images/img_Booking/gray-color-solid-background-1920x1080.png';
 import AnimationComponent from '../../components/Animation/AnimationComponent.js';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Checkbox,
+  FormControlLabel,
+  Typography,
+} from '@mui/material';
 import dayjs from 'dayjs';
 
 const Booking = () => {
@@ -18,6 +27,7 @@ const Booking = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { petID } = location.state || {};
+  const [petData, setPetData] = useState(null);
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -52,12 +62,34 @@ const Booking = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/pet/getPetID/${petID}`,
+        );
+        const getPetInfo = response.data[0];
+        setPetData(getPetInfo);
+      } catch (error) {
+        console.error('Error fetching pets:', error);
+      }
+    };
+
+    fetchPets();
+  }, [petID]);
+
   const getAllServices = async () => {
     try {
       const response = await axiosInstance.get(
         `${process.env.REACT_APP_API_URL}/service/getAllServices`,
       );
-      setServices(response.data);
+      const servicesFilterByPetType = response.data.filter(
+        service =>
+          service.type.toLowerCase() === petData.petType.toLowerCase() ||
+          service.type === 'Both',
+      );
+      console.log(servicesFilterByPetType);
+      setServices(servicesFilterByPetType);
     } catch (error) {
       console.error('Error fetching services:', error);
     }
@@ -404,192 +436,246 @@ const Booking = () => {
             Please choose your desired service
           </div>
 
-          <div className='select-booking'>
-            <div className='select-booking_info'>
-              <div className='patient_Input'>
-                <div className='select_Name'>Name</div>
-                <input
-                  type='text'
-                  className='name_input'
-                  name='name'
-                  value={userInfo.name}
-                  onChange={handleInputChange}
+          <div className='booking-content'>
+            <div style={{ marginTop: '50px' }}>
+              <Card sx={{ width: 405 }}>
+                <CardMedia
+                  sx={{ height: 300 }}
+                  image={petData?.image}
+                  title={petData?.name}
                 />
-                {errorMessageName && (
-                  <div className='error-message'>{errorMessageName}</div>
-                )}
-              </div>
-              <div className='patient_Input'>
-                <div className='select_Name'>Phone</div>
-                <input
-                  type='text'
-                  className='name_input'
-                  name='phone'
-                  value={userInfo.phone}
-                  onChange={handleInputChange}
-                />
-                {errorMessagePhone && (
-                  <div className='error-message'>{errorMessagePhone}</div>
-                )}
-              </div>
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant='h5'
+                    component='div'
+                  >
+                    {petData?.name}
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    color='text.secondary'
+                  >
+                    Type: {petData?.petType}
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    color='text.secondary'
+                  >
+                    Breed: {petData?.breed}
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    color='text.secondary'
+                  >
+                    Gender: {petData?.gender}
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    color='text.secondary'
+                  >
+                    BirthDate: {petData?.birthday.split('T')[0]}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size='small'
+                    href='/choose'
+                  >
+                    Change Pet
+                  </Button>
+                </CardActions>
+              </Card>
             </div>
-
-            <div className='select-booking_info'>
-              <div className='patient_Input'>
-                <div className='select_Name'>E-Mail</div>
-                <input
-                  type='email'
-                  className='name_input'
-                  name='email'
-                  value={userInfo.email}
-                  onChange={handleInputChange}
-                />
-                {errorMessageEmail && (
-                  <div className='error-message'>{errorMessageEmail}</div>
-                )}
+            <div className='select-booking'>
+              <div className='select-booking_info'>
+                <div className='patient_Input'>
+                  <div className='select_Name'>Name</div>
+                  <input
+                    type='text'
+                    className='name_input'
+                    name='name'
+                    value={userInfo.name}
+                    onChange={handleInputChange}
+                  />
+                  {errorMessageName && (
+                    <div className='error-message'>{errorMessageName}</div>
+                  )}
+                </div>
+                <div className='patient_Input'>
+                  <div className='select_Name'>Phone</div>
+                  <input
+                    type='text'
+                    className='name_input'
+                    name='phone'
+                    value={userInfo.phone}
+                    onChange={handleInputChange}
+                  />
+                  {errorMessagePhone && (
+                    <div className='error-message'>{errorMessagePhone}</div>
+                  )}
+                </div>
               </div>
-              <div className='patient_Input'>
-                <div className='select_Name'>PetID</div>
-                <input
-                  type='text'
-                  className='name_input'
-                  value={petID || ''}
-                  readOnly
-                />
-              </div>
-            </div>
 
-            <div className='select-booking_info'>
-              <div className='select_Name'>Services</div>
-              <div className='content-select-booking'>
-                <div className='select_Service'>
-                  <div className='select_Booking-Select'>
+              <div className='select-booking_info'>
+                <div className='patient_Input'>
+                  <div className='select_Name'>E-Mail</div>
+                  <input
+                    type='email'
+                    className='name_input'
+                    name='email'
+                    value={userInfo.email}
+                    onChange={handleInputChange}
+                  />
+                  {errorMessageEmail && (
+                    <div className='error-message'>{errorMessageEmail}</div>
+                  )}
+                </div>
+                <div className='patient_Input'>
+                  <div className='select_Name'>PetID</div>
+                  <input
+                    type='text'
+                    className='name_input'
+                    value={petID || ''}
+                    readOnly
+                  />
+                </div>
+              </div>
+
+              <div className='select-booking_info'>
+                <div className='select_Name'>Services</div>
+                <div className='content-select-booking'>
+                  <div className='select_Service'>
+                    <div className='select_Booking-Select'>
+                      <select
+                        name='serviceID'
+                        className='select_Info-services'
+                        value={userInfo.serviceID}
+                        onChange={handleInputChange}
+                        onFocus={handleFocusServices}
+                        required
+                      >
+                        <option value=''>Choose Service:</option>
+                        {services.map((service, index) => (
+                          <option
+                            key={index}
+                            value={service.serviceID}
+                          >
+                            {`${service.name} - Price: ${service.price}`}
+                          </option>
+                        ))}
+                      </select>
+                      <button onClick={handleAddService}>Add Service</button>
+                    </div>
+                  </div>
+                  {errorMessageServices && (
+                    <div className='error-message'>{errorMessageServices}</div>
+                  )}
+                </div>
+                <div className='selected-services'>
+                  <div className='select_Name'>Selected Services:</div>
+                  <div className='content-selected-services-frame'>
+                    {selectedServices.length > 0 ? (
+                      selectedServices.map((service, index) => (
+                        <div
+                          key={index}
+                          className='service-item'
+                        >
+                          {service.name} - Price: {service.price}
+                          <button
+                            className='remove-service-button'
+                            onClick={() =>
+                              handleRemoveService(service.serviceID)
+                            }
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <div className='sub-title-selected-services'>
+                        No services selected.
+                      </div>
+                    )}
+                    <h3 className='total-selected-services'>
+                      Total Amount: {totalAmount}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div className='select-booking_info-date-doctor'>
+                <div className='select_Date'>
+                  <div className='select_Name'>Date</div>
+                  <input
+                    type='date'
+                    className='select_Info'
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    placeholder='Select a date'
+                  />
+                  {errorMessageDate && (
+                    <div className='error-message'>{errorMessageDate}</div>
+                  )}
+                </div>
+                <div className='select_Doctors'>
+                  <div className='select_Name'>Doctors</div>
+                  <div className='select_Booking'>
                     <select
-                      name='serviceID'
-                      className='select_Info-services'
-                      value={userInfo.serviceID}
-                      onChange={handleInputChange}
-                      onFocus={handleFocusServices}
-                      required
+                      name='doctors'
+                      className='select_Info'
+                      onChange={handleDoctorChange}
+                      onFocus={handleFocusDoctors}
                     >
-                      <option value=''>Choose Service:</option>
-                      {services.map((service, index) => (
+                      <option value=''>Choose Doctor:</option>
+                      {doctors.map((doctor, index) => (
                         <option
                           key={index}
-                          value={service.serviceID}
+                          value={doctor.doctorID}
                         >
-                          {`${service.name} - Price: ${service.price}`}
+                          {`${doctor.name}`}
                         </option>
                       ))}
                     </select>
-                    <button onClick={handleAddService}>Add Service</button>
                   </div>
                 </div>
-                {errorMessageServices && (
-                  <div className='error-message'>{errorMessageServices}</div>
-                )}
               </div>
-              <div className='selected-services'>
-                <div className='select_Name'>Selected Services:</div>
-                <div className='content-selected-services-frame'>
-                  {selectedServices.length > 0 ? (
-                    selectedServices.map((service, index) => (
-                      <div
-                        key={index}
-                        className='service-item'
+
+              <div className='select-booking_info'>
+                <div>
+                  <div className='select_Date'>
+                    <div className='select_Name'>Payment</div>
+                    <div className='select_Booking'>
+                      <select
+                        name='paymentMethod'
+                        className='select_Info'
+                        onChange={handlePaymentChange}
                       >
-                        {service.name} - Price: {service.price}
-                        <button
-                          className='remove-service-button'
-                          onClick={() => handleRemoveService(service.serviceID)}
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <div className='sub-title-selected-services'>
-                      No services selected.
+                        <option value=''>Select a payment method</option>
+                        <option value='paypal'>PayPal</option>
+                        <option value='counter'>Pay at Counter</option>
+                      </select>
+                    </div>
+                  </div>
+                  {errorMessagePaymentMethod && (
+                    <div className='error-message error-message-choose'>
+                      {errorMessagePaymentMethod}
                     </div>
                   )}
-                  <h3 className='total-selected-services'>
-                    Total Amount: {totalAmount}
-                  </h3>
                 </div>
-              </div>
-            </div>
-
-            <div className='select-booking_info-date-doctor'>
-              <div className='select_Date'>
-                <div className='select_Name'>Date</div>
-                <input
-                  type='date'
-                  className='select_Info'
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  placeholder='Select a date'
-                />
-                {errorMessageDate && (
-                  <div className='error-message'>{errorMessageDate}</div>
-                )}
-              </div>
-              <div className='select_Doctors'>
-                <div className='select_Name'>Doctors</div>
-                <div className='select_Booking'>
-                  <select
-                    name='doctors'
-                    className='select_Info'
-                    onChange={handleDoctorChange}
-                    onFocus={handleFocusDoctors}
-                  >
-                    <option value=''>Choose Doctor:</option>
-                    {doctors.map((doctor, index) => (
-                      <option
-                        key={index}
-                        value={doctor.doctorID}
-                      >
-                        {`${doctor.name}`}
-                      </option>
-                    ))}
-                  </select>
+                <div className='checkBoxVaccineWrapper'>
+                  <FormControlLabel
+                    sx={{ mt: 3 }}
+                    control={
+                      <Checkbox
+                        checked={vaccinationChecked}
+                        onChange={e => setVaccinationChecked(e.target.checked)}
+                        color='success'
+                      />
+                    }
+                    label='I want to get vaccinated'
+                  />
                 </div>
-              </div>
-            </div>
-
-            <div className='select-booking_info'>
-              <div>
-                <div className='select_Date'>
-                  <div className='select_Name'>Payment</div>
-                  <div className='select_Booking'>
-                    <select
-                      name='paymentMethod'
-                      className='select_Info'
-                      onChange={handlePaymentChange}
-                    >
-                      <option value=''>Select a payment method</option>
-                      <option value='paypal'>PayPal</option>
-                      <option value='counter'>Pay at Counter</option>
-                    </select>
-                  </div>
-                </div>
-                {errorMessagePaymentMethod && (
-                  <div className='error-message error-message-choose'>
-                    {errorMessagePaymentMethod}
-                  </div>
-                )}
-              </div>
-              <div className='checkBoxVaccineWrapper'>
-                <FormControlLabel
-                  sx={{ mt: 3 }}
-                  control={
-                    <Checkbox
-                      checked={vaccinationChecked}
-                      onChange={e => setVaccinationChecked(e.target.checked)}
-                      color='success'
-                    />
-                  }
-                  label='I want to get vaccinated'
-                />
               </div>
             </div>
           </div>

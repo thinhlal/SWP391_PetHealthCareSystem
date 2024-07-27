@@ -558,6 +558,12 @@ function AdminDashBoard() {
                                         >
                                           Services
                                         </button>
+                                        <button
+                                          className={`tablinks ${activeTab === 'Payment' ? 'active' : ''}`}
+                                          onClick={() => openTab('Payment')}
+                                        >
+                                          Payment
+                                        </button>
                                       </div>
                                       <div
                                         id='Admin-DashBoard-profile-customer'
@@ -569,6 +575,14 @@ function AdminDashBoard() {
                                               : 'none',
                                         }}
                                       >
+                                        <div className='Admin-DashBoard-form-group'>
+                                          <div className='Admin-DashBoard-sub-title-profile-customer'>
+                                            AccountID:
+                                          </div>
+                                          <div>
+                                            {bookingInfoModal?.accountID}
+                                          </div>
+                                        </div>
                                         <div className='Admin-DashBoard-form-group'>
                                           <div className='Admin-DashBoard-sub-title-profile-customer'>
                                             Name:
@@ -598,6 +612,17 @@ function AdminDashBoard() {
                                               : 'none',
                                         }}
                                       >
+                                        <div className='Admin-DashBoard-form-group'>
+                                          <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                            PetID:
+                                          </div>
+                                          <div>
+                                            {
+                                              bookingInfoModal?.petDetails[0]
+                                                ?.petID
+                                            }
+                                          </div>
+                                        </div>
                                         <div className='Admin-DashBoard-form-group'>
                                           <div className='Admin-DashBoard-sub-title-profile-pet'>
                                             Name:
@@ -701,6 +726,120 @@ function AdminDashBoard() {
                                               : 'No doctor selected'}
                                           </div>
                                         </div>
+                                      </div>
+                                      <div
+                                        id='Admin-DashBoard-Vacancies'
+                                        className='Admin-DashBoard-tabcontent-services'
+                                        style={{
+                                          display:
+                                            activeTab === 'Payment'
+                                              ? 'block'
+                                              : 'none',
+                                        }}
+                                      >
+                                        <div className='Admin-DashBoard-form-group'>
+                                          <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                            PaymentID:
+                                          </div>
+                                          <div>
+                                            {
+                                              bookingInfoModal
+                                                ?.paymentsDetails[0]?.paymentID
+                                            }
+                                          </div>
+                                        </div>
+                                        <div className='Admin-DashBoard-form-group'>
+                                          <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                            Status:
+                                          </div>
+                                          <div>
+                                            {bookingInfoModal.paymentsDetails[0]
+                                              .isSuccess
+                                              ? 'Already Paid'
+                                              : 'Not Paid'}
+                                          </div>
+                                        </div>
+                                        {bookingInfoModal?.paymentsDetails[0]
+                                          .isCancelPayment ||
+                                        bookingInfoModal?.isCancel ? (
+                                          <div className='Admin-DashBoard-form-group'>
+                                            <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                              Cancel:
+                                            </div>
+                                            <div>
+                                              {bookingInfoModal?.isCancel
+                                                ? 'Cancelled Booking'
+                                                : bookingInfoModal
+                                                      ?.paymentsDetails[0]
+                                                      ?.isCancelPayment
+                                                  ? 'Cancelled Payment'
+                                                  : 'Not Cancel'}
+                                            </div>
+                                          </div>
+                                        ) : null}
+                                        {bookingInfoModal?.isCancel ? (
+                                          <div className='Admin-DashBoard-form-group'>
+                                            <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                              Cancel Date:
+                                            </div>
+                                            <div>
+                                              {new Date(
+                                                bookingInfoModal?.dateCancelBook,
+                                              ).toLocaleString()}
+                                            </div>
+                                          </div>
+                                        ) : null}
+                                        {!bookingInfoModal?.paymentsDetails[0]
+                                          .isCancelPayment &&
+                                        bookingInfoModal.paymentsDetails[0]
+                                          .isSuccess ? (
+                                          <div className='Admin-DashBoard-form-group'>
+                                            <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                              Date Paid:
+                                            </div>
+                                            <div>
+                                              {bookingInfoModal
+                                                ?.paymentsDetails[0]?.date &&
+                                              !bookingInfoModal
+                                                ?.paymentsDetails[0]
+                                                ?.isCancelPayment
+                                                ? new Date(
+                                                    bookingInfoModal?.paymentsDetails[0]?.date,
+                                                  ).toLocaleString()
+                                                : 'N/A'}
+                                            </div>
+                                          </div>
+                                        ) : null}
+                                        <div className='Admin-DashBoard-form-group'>
+                                          <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                            Payment Method:
+                                          </div>
+                                          <div>
+                                            {
+                                              bookingInfoModal
+                                                ?.paymentsDetails[0]
+                                                ?.paymentMethod
+                                            }
+                                          </div>
+                                        </div>
+                                        <div className='Admin-DashBoard-form-group'>
+                                          <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                            Total Price:
+                                          </div>
+                                          <div>
+                                            {bookingInfoModal?.totalPrice}
+                                          </div>
+                                        </div>
+                                        {bookingInfoModal?.isRefund ? (
+                                          <div className='Admin-DashBoard-form-group'>
+                                            <div className='Admin-DashBoard-sub-title-profile-pet'>
+                                              Refund price:
+                                            </div>
+                                            <div>
+                                              {bookingInfoModal?.refundPrice}
+                                            </div>
+                                          </div>
+                                        ) : null}
                                       </div>
                                     </div>
                                   </div>

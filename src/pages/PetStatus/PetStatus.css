@@ -26,7 +26,7 @@
 }
 
 .main-container-pet-status-history .pet-status-summary-table,
-.pet-status-detail-table {
+.main-container-pet-status-history .pet-status-detail-table {
   background: #ffffff;
   border-radius: 12px;
   padding: 20px;
@@ -36,7 +36,7 @@
 }
 
 .main-container-pet-status-history .pet-status-summary-table table,
-.pet-status-detail-table table {
+.main-container-pet-status-history .pet-status-detail-table table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;

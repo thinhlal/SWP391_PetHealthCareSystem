@@ -280,6 +280,7 @@ function ProfilePet() {
               <thead>
                 <tr>
                   <th>Medical ReportID</th>
+                  <th>Date</th>
                   <th>Diagnosis</th>
                   <th>Notes</th>
                   <th>More</th>
@@ -294,6 +295,7 @@ function ProfilePet() {
                   currentMedicals.map((reportInfo, index) => (
                     <tr key={index}>
                       <td>{reportInfo.medicalReportID}</td>
+                      <td>{new Date(reportInfo.date).toLocaleString()}</td>
                       <td>{reportInfo.diagnosis}</td>
                       <td>{reportInfo.notes}</td>
                       <td>
@@ -408,7 +410,7 @@ function ProfilePet() {
                 ) : (
                   currentVaccines.map((vaccine, index) => (
                     <tr key={index}>
-                      <td>{`${vaccine.dateGiven.split('T')[0]}`}</td>
+                      <td>{new Date(vaccine.dateGiven).toLocaleString()}</td>
                       <td>{vaccine.vaccinationDetails.name}</td>
                       <td>
                         {vaccine.vaccinationDetails.nextDate > 0
