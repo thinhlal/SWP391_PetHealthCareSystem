@@ -111,11 +111,6 @@ function AdminServices() {
       if (!strValue.trim()) {
         error = 'Please enter your information';
       } else if (
-        strValue.trim() === originalEditService.name.trim() &&
-        editService.serviceID !== originalEditService.serviceID
-      ) {
-        error = 'New name cannot be the same as the old name';
-      } else if (
         servicesData.some(
           service =>
             service.name.trim().toLowerCase() ===
@@ -499,7 +494,10 @@ function AdminServices() {
                                   />
                                   Dog
                                 </label>
-                                <label className='Admin-Services-input-radio'>
+                                <label
+                                  className='Admin-Services-input-radio'
+                                  style={{ marginRight: '10px' }}
+                                >
                                   <input
                                     type='radio'
                                     name='type'
@@ -508,6 +506,16 @@ function AdminServices() {
                                     onChange={handleTypeChange}
                                   />
                                   Cat
+                                </label>
+                                <label className='Admin-Services-input-radio'>
+                                  <input
+                                    type='radio'
+                                    name='type'
+                                    value='Both'
+                                    checked={typeAddService === 'Both'}
+                                    onChange={handleTypeChange}
+                                  />
+                                  Both Cat And Dog
                                 </label>
                               </div>
                             </div>
@@ -590,7 +598,7 @@ function AdminServices() {
                         {item.price}
                       </div>
                       <div className='Admin-Services-Main-Table-Content-Row'>
-                        {item.type}
+                        {item.type === 'Both' ? 'Cat And Dog' : item.type}
                       </div>
                       <div className='Admin-Services-Main-Table-Content-Row'>
                         <label className='switch'>
@@ -754,22 +762,32 @@ function AdminServices() {
                                       <label style={{ marginRight: '10px' }}>
                                         <input
                                           type='radio'
-                                          name='typeEdit'
+                                          name={`typeEdit_${item.serviceID}`}
                                           value='Dog'
                                           checked={typeEditService === 'Dog'}
                                           onChange={handleTypeEditChange}
                                         />
                                         Dog
                                       </label>
-                                      <label>
+                                      <label style={{ marginRight: '10px' }}>
                                         <input
                                           type='radio'
-                                          name='typeEdit'
+                                          name={`typeEdit_${item.serviceID}`}
                                           value='Cat'
                                           checked={typeEditService === 'Cat'}
                                           onChange={handleTypeEditChange}
                                         />
                                         Cat
+                                      </label>
+                                      <label>
+                                        <input
+                                          type='radio'
+                                          name={`typeEdit_${item.serviceID}`}
+                                          value='Both'
+                                          checked={typeEditService === 'Both'}
+                                          onChange={handleTypeEditChange}
+                                        />
+                                        Both Cat And Dog
                                       </label>
                                     </div>
                                   </div>

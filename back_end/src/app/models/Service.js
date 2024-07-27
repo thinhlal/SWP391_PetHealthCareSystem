@@ -22,7 +22,7 @@ const ServiceSchema = new Schema(
     type: {
       type: String,
       required: true,
-      enum: ['Dog', 'Cat'],
+      enum: ['Dog', 'Cat', 'Both'],
     },
     price: {
       type: Number,
