@@ -85,10 +85,10 @@ const Booking = () => {
       );
       const servicesFilterByPetType = response.data.filter(
         service =>
-          service.type.toLowerCase() === petData.petType.toLowerCase() ||
-          service.type === 'Both',
+          (service.type.toLowerCase() === petData.petType.toLowerCase() ||
+            service.type === 'Both') &&
+          service.status,
       );
-      console.log(servicesFilterByPetType);
       setServices(servicesFilterByPetType);
     } catch (error) {
       console.error('Error fetching services:', error);

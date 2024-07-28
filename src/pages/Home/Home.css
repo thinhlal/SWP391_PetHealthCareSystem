@@ -521,11 +521,6 @@ a {
   left: 130px;
   border-radius: 5px;
 }
-
-.main .service_Info_Detail-button-wrapper {
-  position: relative;
-}
-
 .main .service_Info_Detail-button {
   display: block;
   width: 190px;
@@ -644,17 +639,6 @@ a {
   height: 146px;
 }
 
-.main .group {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  top: 14px;
-  left: 5px;
-  background-image: url(../../assets/images/img_Home/4315445-1.png);
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
 .main .more-pet-training {
   width: 461px;
   height: 146px;
@@ -719,17 +703,9 @@ a {
   position: relative;
 }
 
-.main .button-doctor {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0 110px 0;
-}
-
 .main .MAIN-DOCTOR-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  width: 90%;
+  margin: auto;
 }
 
 .main .text-wrapper-11 {
@@ -744,29 +720,20 @@ a {
 }
 
 .main .doctor {
-  width: 232px;
-  display: flex;
-  flex-direction: column;
-  height: 362px;
-  align-items: flex-start;
-  gap: 20px;
 }
 
-/* doctor 1 */
 .main .graphic {
-  background-image: url(../../assets/images/img_Home/graphic.svg);
-  position: relative;
-  align-self: stretch;
+  object-fit: cover;
   width: 100%;
-  height: 232px;
-  border-radius: 180px;
+  height: 250px;
+  border-radius: 50%;
   background-size: cover;
   background-position: 50% 50%;
-  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
+  transition: transform 0.3s;
 }
 
 .main .graphic:hover {
-  transform: scale(1.05); /* Phóng to hình khi hover */
+  transform: scale(1.05);
   cursor: pointer;
 }
 
@@ -815,60 +782,6 @@ a {
   -webkit-box-orient: vertical;
 }
 
-/* doctor 1 */
-.main .graphic-2 {
-  background-image: url(../../assets/images/img_Home/graphic-1.svg);
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  height: 232px;
-  border-radius: 180px;
-  background-size: cover;
-  background-position: 50% 50%;
-  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
-}
-
-.main .graphic-2:hover {
-  transform: scale(1.05); /* Phóng to hình khi hover */
-  cursor: pointer;
-}
-
-/* doctor 3 */
-.main .graphic-3 {
-  background-image: url(../../assets/images/img_Home/graphic-2.svg);
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  height: 232px;
-  border-radius: 180px;
-  background-size: cover;
-  background-position: 50% 50%;
-  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
-}
-
-.main .graphic-3:hover {
-  transform: scale(1.05); /* Phóng to hình khi hover */
-  cursor: pointer;
-}
-
-/* doctor 4 */
-.main .graphic-4 {
-  background-image: url(../../assets/images/img_Home/graphic-3.svg);
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  height: 232px;
-  border-radius: 180px;
-  background-size: cover;
-  background-position: 50% 50%;
-  transition: transform 0.3s; /* Thêm transition để hiệu ứng mượt mà */
-}
-
-.main .graphic-4:hover {
-  transform: scale(1.05); /* Phóng to hình khi hover */
-  cursor: pointer;
-}
-
 .main .title-doctor {
   display: flex;
   justify-content: center;
@@ -884,7 +797,7 @@ a {
   margin-bottom: 50px;
 }
 .main .MAIN-FEEDBACK {
-  margin: 110px 0 0 0;
+  margin: 80px 0 0 0;
   background-color: #d9d9d9;
   background-image: url(../../assets/images/img_Home/background-item-1.png);
   background-size: cover;

@@ -6,6 +6,10 @@ const doctorController = require('../app/controllers/DoctorController');
 
 router.get('/getAllDoctors', verifyToken, doctorController.getAllDoctors);
 router.get(
+  '/getAllDoctorsInfoToShow',
+  doctorController.getAllDoctorsInfoToShow,
+);
+router.get(
   '/getBookingByID/:bookingID',
   verifyToken,
   doctorController.getBookingByID,

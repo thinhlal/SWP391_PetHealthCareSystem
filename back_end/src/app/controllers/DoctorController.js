@@ -119,6 +119,19 @@ class DoctorController {
     }
   }
 
+  // GET /getAllDoctorsInfoToShow
+  async getAllDoctorsInfoToShow(req, res, next) {
+    try {
+      const allDoctors = await Doctor.find();
+      res.status(200).json(allDoctors);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error fetching doctor', error: error.message });
+    }
+  }
+
   // GET /getDoctorProfile
   async getDoctorProfile(req, res, next) {
     const { accountID } = req.params;
@@ -137,12 +150,10 @@ class DoctorController {
       res.status(200).json(booking);
     } catch (error) {
       console.log(error);
-      res
-        .status(500)
-        .json({
-          message: 'Error fetching doctor profile',
-          error: error.message,
-        });
+      res.status(500).json({
+        message: 'Error fetching doctor profile',
+        error: error.message,
+      });
     }
   }
 

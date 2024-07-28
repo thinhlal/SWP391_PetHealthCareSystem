@@ -24,7 +24,7 @@ import { useNavigate } from 'react-router-dom';
 
 const images = [petSlider6, petSlider2, petSlider3, petSlider4, petSlider5];
 
-const sliderSettings = {
+const sliderSettingServices = {
   dots: true,
   infinite: true,
   speed: 500,
@@ -32,6 +32,21 @@ const sliderSettings = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 2000,
+  centerPadding: 50,
+  pauseOnDotsHover: true,
+  pauseOnHover: true,
+};
+
+const sliderSettingDoctors = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  pauseOnDotsHover: true,
+  pauseOnHover: true,
 };
 
 function Home() {
@@ -40,6 +55,7 @@ function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [feedbacks, setFeedbacks] = useState([]);
   const [services, setServices] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -65,11 +81,22 @@ function Home() {
       const services = await axios.get(
         `${process.env.REACT_APP_API_URL}/service/getAllServices`,
       );
-      console.log(services.data);
       setServices(services.data);
     };
 
     fetchAllService();
+  }, []);
+
+  useEffect(() => {
+    const fetchAllDoctors = async () => {
+      const doctors = await axios.get(
+        `${process.env.REACT_APP_API_URL}/doctor/getAllDoctorsInfoToShow`,
+      );
+      console.log(doctors.data);
+      setDoctors(doctors.data);
+    };
+
+    fetchAllDoctors();
   }, []);
 
   const toggleMenu = () => {
@@ -293,7 +320,7 @@ function Home() {
         <div className='overlap-3'>
           <div className='MAIN-SERVICES_title'>PRIMARY PET CARE SERVICES</div>
           <div className='slider_service'>
-            <Slider {...sliderSettings}>
+            <Slider {...sliderSettingServices}>
               {services.map(service => (
                 <div
                   key={service.serviceID}
@@ -471,50 +498,25 @@ function Home() {
         <div className='MAIN-DOCTOR'>
           <div className='title-doctor'>Meet Our Expertise Pet Doctors</div>
           <div className='MAIN-DOCTOR-flex'>
-            <div className='doctor lazy-load'>
-              <div className='graphic'></div>
-              <div className='copy'>
-                <div className='text-wrapper-13'>Daria Andaloro</div>
-                <div className='text-wrapper-14'>Veterinary Technician</div>
-              </div>
-            </div>
-
-            <div className='doctor lazy-load'>
-              <div className='graphic-2'></div>
-              <div className='copy'>
-                <div className='text-wrapper-13'>Daria Andaloro</div>
-                <div className='text-wrapper-14'>Veterinary Technician</div>
-              </div>
-            </div>
-
-            <div className='doctor lazy-load'>
-              <div className='graphic-3'></div>
-              <div className='copy'>
-                <div className='text-wrapper-13'>Daria Andaloro</div>
-                <div className='text-wrapper-14'>Veterinary Technician</div>
-              </div>
-            </div>
-            <div className='doctor lazy-load'>
-              <div className='graphic-4'></div>
-              <div className='copy'>
-                <div className='text-wrapper-13'>Michael Brian</div>
-                <div className='text-wrapper-14'>Medicine Specialist</div>
-              </div>
-            </div>
-          </div>
-          <div className='button-doctor lazy-load'>
-            <div className='text-wrapper-11'>
-              Our Valuable Expert Doctors Team
-            </div>
-
-            <div className='service_Info_Detail-button-wrapper'>
-              <a
-                href='veterinarian-info'
-                className='service_Info_Detail-button'
-              >
-                <span>View Doctors</span>
-              </a>
-            </div>
+            <Slider {...sliderSettingDoctors}>
+              {doctors.map(doctor => (
+                <div
+                  key={doctor.doctorID}
+                  style={{ margin: '0 10px !important' }}
+                >
+                  <div className='doctor'>
+                    <img
+                      src={doctor.image}
+                      alt={doctor.name}
+                      className='graphic'
+                    ></img>
+                    <div className='copy'>
+                      <div className='text-wrapper-13'>{doctor.name}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       </div>
