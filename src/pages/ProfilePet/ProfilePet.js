@@ -253,6 +253,7 @@ function ProfilePet() {
                   <input
                     type='file'
                     name='image'
+                    accept='image/png, image/jpeg, image/gif'
                     onChange={handleFileChange}
                   ></input>
                 </label>

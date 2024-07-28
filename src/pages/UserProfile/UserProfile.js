@@ -225,9 +225,9 @@ const UserProfile = () => {
                 <input
                   type='file'
                   id='fileInput'
+                  accept='image/png, image/jpeg, image/gif'
                   style={{ display: 'none' }}
                   onChange={handleImageChange}
-                  accept='image/*'
                 />
               </div>
             </div>

@@ -144,16 +144,30 @@ function AdminServices() {
     setTypeEditService(e.target.value);
   };
 
-  const handleFileChange = e => {
+  const handleFileChange = (e) => {
     const { name, files } = e.target;
-    setImageFile(files[0]);
-    setNewService({ ...newService, [name]: files[0] });
+    const file = files[0];
+    if (file && file.type.startsWith('image/')) {
+      setImageFile(file);
+      setNewService({ ...newService, [name]: file });
+      setAddServiceErrors(prevErrors => ({ ...prevErrors, image: '' }));
+    } else {
+      setImageFile(null);
+      setAddServiceErrors(prevErrors => ({ ...prevErrors, image: 'Selected file is not a valid image.' }));
+    }
   };
 
-  const handleFileEditChange = e => {
+  const handleFileEditChange = (e) => {
     const { name, files } = e.target;
-    setImageFileEdit(files[0]);
-    setEditService({ ...editService, [name]: files[0] });
+    const file = files[0];
+    if (file && file.type.startsWith('image/')) {
+      setImageFileEdit(file);
+      setEditService({ ...editService, [name]: file });
+      setEditServiceErrors(prevErrors => ({ ...prevErrors, image: '' }));
+    } else {
+      setImageFileEdit(null);
+      setEditServiceErrors(prevErrors => ({ ...prevErrors, image: 'Selected file is not a valid image.' }));
+    }
   };
 
   const handleEditInputChange = e => {
@@ -499,6 +513,7 @@ function AdminServices() {
                                 type='file'
                                 className='Admin-Services-input'
                                 name='image'
+                                accept='image/png, image/jpeg, image/gif'
                                 onChange={handleFileChange}
                               />
                               {addServiceErrors.image && (
@@ -776,8 +791,14 @@ function AdminServices() {
                                         type='file'
                                         className='Admin-Services-input-phone'
                                         name='editImage'
+                                        accept='image/png, image/jpeg, image/gif'
                                         onChange={handleFileEditChange}
                                       />
+                                      {addServiceErrors.image && (
+                                        <p className='error-message'>
+                                          {addServiceErrors.image}
+                                        </p>
+                                      )}
                                     </div>
                                   </div>
                                   <div>

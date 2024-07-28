@@ -222,6 +222,7 @@ const AddPetModal = ({ isOpen, onClose, onAddPet, onLoadingChange }) => {
             <input
               className='choose-img-pet'
               type='file'
+              accept='image/png, image/jpeg, image/gif'
               name='image'
               onChange={handleImageChange}
             />
