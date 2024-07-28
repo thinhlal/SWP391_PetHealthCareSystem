@@ -471,7 +471,10 @@ class DoctorController {
       let emptyCage;
       if (requireCage) {
         emptyCage = await Cage.findOneAndUpdate(
-          { isEmpty: true },
+          {
+            isEmpty: true,
+            status: true,
+          },
           { $set: { isEmpty: false } },
           { new: true },
         );
