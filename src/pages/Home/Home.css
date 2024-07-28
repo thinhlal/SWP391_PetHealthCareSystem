@@ -720,11 +720,13 @@ a {
 }
 
 .main .doctor {
+  display: grid;
+  justify-content: center;
 }
 
 .main .graphic {
   object-fit: cover;
-  width: 100%;
+  width: 250px;
   height: 250px;
   border-radius: 50%;
   background-size: cover;
@@ -750,7 +752,7 @@ a {
 .main .text-wrapper-13 {
   position: relative;
   align-self: stretch;
-  margin-top: -1px;
+  margin-top: 5px;
   font-family: Roboto, sans-serif;
   font-weight: 700;
   color: #002169;
@@ -937,3 +939,5 @@ a {
   overflow: hidden;
   white-space: nowrap;
 }
+
+
