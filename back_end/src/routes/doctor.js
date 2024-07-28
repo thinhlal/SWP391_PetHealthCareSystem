@@ -11,6 +11,21 @@ router.get(
   doctorController.getBookingByID,
 );
 router.get('/schedules', verifyToken, doctorController.schedules);
+router.post(
+  '/updateDoctorInfo',
+  verifyToken,
+  doctorController.updateDoctorInfo,
+);
+router.patch(
+  '/updateImageDoctor',
+  verifyToken,
+  doctorController.updateImageDoctor,
+);
+router.get(
+  '/getDoctorProfile/:accountID',
+  verifyToken,
+  doctorController.getDoctorProfile,
+);
 router.get('/getTimeWork', verifyToken, doctorController.getTimeWork);
 router.post('/addTimeWork', verifyToken, doctorController.addTimeWork);
 router.post(

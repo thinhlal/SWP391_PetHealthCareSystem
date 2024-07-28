@@ -119,6 +119,33 @@ class DoctorController {
     }
   }
 
+  // GET /getDoctorProfile
+  async getDoctorProfile(req, res, next) {
+    const { accountID } = req.params;
+    try {
+      const booking = await Doctor.aggregate([
+        { $match: { accountID } },
+        {
+          $lookup: {
+            from: 'accounts',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'accountDetails',
+          },
+        },
+      ]);
+      res.status(200).json(booking);
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({
+          message: 'Error fetching doctor profile',
+          error: error.message,
+        });
+    }
+  }
+
   // GET /getBookingByID
   async getBookingByID(req, res, next) {
     const { bookingID } = req.params;
@@ -587,6 +614,40 @@ class DoctorController {
         message: 'Error saving pet exam record',
         error: error.message,
       });
+    }
+  }
+
+  // POST /updateDoctorInfo
+  async updateDoctorInfo(req, res, next) {
+    const { doctorID, name, phone, email } = req.body.editAccountInfo;
+    try {
+      await Doctor.findOneAndUpdate(
+        { doctorID },
+        {
+          name,
+          phone,
+          email,
+        },
+      );
+      res.status(201).json('Save successfully!!!');
+    } catch (error) {
+      res.status(500).json({ message: 'Error when update doctorInfo', error });
+    }
+  }
+
+  // PATCH /updateImageDoctor
+  async updateImageDoctor(req, res, next) {
+    const { doctorID, image } = req.body;
+    try {
+      await Doctor.findOneAndUpdate(
+        { doctorID },
+        {
+          image: image,
+        },
+      );
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: 'Error when get booking', error });
     }
   }
 }

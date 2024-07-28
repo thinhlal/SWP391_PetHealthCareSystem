@@ -144,7 +144,7 @@ function AdminServices() {
     setTypeEditService(e.target.value);
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = e => {
     const { name, files } = e.target;
     const file = files[0];
     if (file && file.type.startsWith('image/')) {
@@ -153,11 +153,14 @@ function AdminServices() {
       setAddServiceErrors(prevErrors => ({ ...prevErrors, image: '' }));
     } else {
       setImageFile(null);
-      setAddServiceErrors(prevErrors => ({ ...prevErrors, image: 'Selected file is not a valid image.' }));
+      setAddServiceErrors(prevErrors => ({
+        ...prevErrors,
+        image: 'Selected file is not a valid image.',
+      }));
     }
   };
 
-  const handleFileEditChange = (e) => {
+  const handleFileEditChange = e => {
     const { name, files } = e.target;
     const file = files[0];
     if (file && file.type.startsWith('image/')) {
@@ -166,7 +169,10 @@ function AdminServices() {
       setEditServiceErrors(prevErrors => ({ ...prevErrors, image: '' }));
     } else {
       setImageFileEdit(null);
-      setEditServiceErrors(prevErrors => ({ ...prevErrors, image: 'Selected file is not a valid image.' }));
+      setEditServiceErrors(prevErrors => ({
+        ...prevErrors,
+        image: 'Selected file is not a valid image.',
+      }));
     }
   };
 

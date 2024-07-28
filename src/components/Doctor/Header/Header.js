@@ -2,9 +2,9 @@
 import './Header.css';
 //css
 import logo from '../../../assets/images/Components/User/Header/logo.png';
-import userAccount from '../../../assets/images/Components/User/Header/img-7.png';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
+import { Avatar } from '@mui/material';
 
 function Header() {
   const { logOut, user } = useContext(AuthContext);
@@ -39,14 +39,20 @@ function Header() {
           >
             Doctor Care
           </a>
+          <a
+            className={`nav-item ${pathname === '/doctor-profile' ? 'active' : ''}`}
+            href='doctor-profile'
+          >
+            Profile
+          </a>
         </div>
         <div className='main-header-user_wrapper'>
           <div className='main-header-user'>
             <div className='main-header-user-account'>
-              <img
-                className='account_icon'
-                src={userAccount}
-                alt=''
+              <Avatar
+                alt='Remy Sharp'
+                className='doctor_account_icon'
+                src={user.doctorDetails[0].image}
               />
               <div className='main-header-user-account-name'>
                 Hi {user?.doctorDetails[0]?.name}

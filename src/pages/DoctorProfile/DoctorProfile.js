@@ -1,31 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react';
-import './UserProfile.css';
-import Header from '../../components/User/Header/Header';
-import Footer from '../../components/User/Footer/Footer';
+import './DoctorProfile.css';
+import Header from '../../components/Doctor/Header/Header';
 import { AuthContext } from '../../context/AuthContext';
 import axiosInstance from '../../utils/axiosInstance';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../../config/firebase';
 
-const UserProfile = () => {
+const DoctorProfile = () => {
   const { user } = useContext(AuthContext);
-  const [profile, setProfile] = useState({
-    customerDetails: [{}],
-  });
+  const [profile, setProfile] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({ email: '', phone: '' });
   const [message, setMessage] = useState('');
   const [editAccountInfo, setEditAccountInfo] = useState({});
-
   useEffect(() => {
     const fetchAccountByID = async () => {
       if (user && user.accountID) {
         try {
           const response = await axiosInstance.get(
-            `${process.env.REACT_APP_API_URL}/user/getUserProfile/${user.accountID}`,
+            `${process.env.REACT_APP_API_URL}/doctor/getDoctorProfile/${user.accountID}`,
           );
-          setProfile(response.data);
-          setEditAccountInfo(response.data.customerDetails[0]);
+          setProfile(response.data[0]);
+          setEditAccountInfo(response.data[0]);
+          console.log(response.data[0]);
         } catch (error) {
           console.error(error);
         }
@@ -36,12 +33,6 @@ const UserProfile = () => {
 
   const handleChange = e => {
     const { name, value } = e.target;
-    if (name === 'birthday' && !validateBirthday(value)) {
-      return setErrors({
-        ...errors,
-        birthday: 'Birthday cannot be in the future',
-      });
-    }
     setEditAccountInfo({ ...editAccountInfo, [name]: value });
     setErrors({ ...errors, [name]: '' });
     setMessage('');
@@ -75,17 +66,16 @@ const UserProfile = () => {
     let emailError = '';
     let phoneError = '';
     if (
-      editAccountInfo.email === profile.customerDetails[0].email &&
-      editAccountInfo.phone === profile.customerDetails[0].phone &&
-      editAccountInfo.birthday === profile.customerDetails[0].birthday &&
-      editAccountInfo.name === profile.customerDetails[0].name
+      editAccountInfo.email === profile.email &&
+      editAccountInfo.phone === profile.phone &&
+      editAccountInfo.name === profile.name
     ) {
-      setErrors({ email: '', phone: '', birthday: '' });
+      setErrors({ email: '', phone: '' });
       setIsEditing(false);
       return;
     }
 
-    if (editAccountInfo.email !== profile.customerDetails[0].email) {
+    if (editAccountInfo.email !== profile.email) {
       if (!validateEmail(editAccountInfo.email)) {
         emailError = 'Invalid email address';
       } else {
@@ -94,7 +84,7 @@ const UserProfile = () => {
       }
     }
 
-    if (editAccountInfo.phone !== profile.customerDetails[0].phone) {
+    if (editAccountInfo.phone !== profile.phone) {
       if (!validatePhone(editAccountInfo.phone)) {
         phoneError = 'Invalid phone number';
       } else {
@@ -105,31 +95,30 @@ const UserProfile = () => {
     if (emailError || phoneError) {
       setErrors({ email: emailError, phone: phoneError });
     } else {
-      console.log(editAccountInfo);
-      console.log(profile);
       try {
+        console.log(editAccountInfo);
         const updateSuccess = await axiosInstance.post(
-          `${process.env.REACT_APP_API_URL}/user/updateUserInfo`,
+          `${process.env.REACT_APP_API_URL}/doctor/updateDoctorInfo`,
           {
             editAccountInfo,
           },
         );
         setMessage(updateSuccess.data);
         const response = await axiosInstance.get(
-          `${process.env.REACT_APP_API_URL}/user/getUserProfile/${user.accountID}`,
+          `${process.env.REACT_APP_API_URL}/doctor/getDoctorProfile/${user.accountID}`,
         );
-        setProfile(response.data);
+        setProfile(response.data[0]);
         setErrors({ email: '', phone: '' });
         setIsEditing(false);
       } catch (error) {
-        console.error('Error update user info:', error);
+        console.error('Error update doctor info:', error);
       }
     }
   };
 
   const handleEdit = () => {
     setIsEditing(!isEditing);
-    setEditAccountInfo(profile.customerDetails[0]);
+    setEditAccountInfo(profile);
   };
 
   const handleImageChange = async e => {
@@ -145,15 +134,13 @@ const UserProfile = () => {
         const downloadURL = await getDownloadURL(storageRef);
         setProfile({
           ...profile,
-          customerDetails: [
-            { ...profile.customerDetails[0], image: downloadURL },
-          ],
+          image: downloadURL,
         });
         await axiosInstance.patch(
-          `${process.env.REACT_APP_API_URL}/user/updateImageUser`,
+          `${process.env.REACT_APP_API_URL}/doctor/updateImageDoctor`,
           {
             image: downloadURL,
-            customerID: user.customerDetails[0].customerID,
+            doctorID: profile.doctorID,
           },
         );
       } catch (error) {
@@ -176,28 +163,16 @@ const UserProfile = () => {
     return phoneRegex.test(phone);
   };
 
-  const validateBirthday = birthday => {
-    const today = new Date();
-    const birthDate = new Date(birthday);
-    return birthDate <= today;
-  };
-
   return (
-    <div className='main-user-profile-container'>
+    <div className='main-doctor-profile-container'>
       <Header />
-      <div className='UserProfile-container container-xl px-4 mt-4'>
+      <div className='doctor_Profile_Container container-xl px-4 mt-4'>
         <nav className='UserProfile-nav nav nav-borders'>
           <a
             className='UserProfile-nav-link nav-link active ms-0'
-            href='/user-profile'
+            href='/doctor-profile'
           >
             Profile
-          </a>
-          <a
-            className='UserProfile-nav-link nav-link'
-            href='/change-user-password'
-          >
-            Security
           </a>
         </nav>
         <hr className='UserProfile-hr mt-0 mb-4' />
@@ -210,7 +185,7 @@ const UserProfile = () => {
               <div className='UserProfile-card-body card-body text-center'>
                 <img
                   className='UserProfile-img-account-profile rounded-circle mb-2'
-                  src={profile?.customerDetails[0]?.image}
+                  src={profile?.image}
                   alt=''
                 />
                 <div className='small font-italic text-muted mb-4'>
@@ -254,7 +229,11 @@ const UserProfile = () => {
                       name='username'
                       type='text'
                       placeholder='Enter your username'
-                      value={profile?.username || ''}
+                      value={
+                        profile?.accountDetails
+                          ? profile?.accountDetails[0]?.username
+                          : ''
+                      }
                       readOnly
                     />
                   </div>
@@ -306,7 +285,7 @@ const UserProfile = () => {
                     )}
                   </div>
                   <div className='row gx-3 mb-3'>
-                    <div className='col-md-6'>
+                    <div className='col-md-12'>
                       <label
                         className='small mb-1'
                         htmlFor='inputPhone'
@@ -328,32 +307,6 @@ const UserProfile = () => {
                       </div>
                       {errors.phone && (
                         <div className='text-danger ms-2'>{errors.phone}</div>
-                      )}
-                    </div>
-                    <div className='col-md-6'>
-                      <label
-                        className='small mb-1'
-                        htmlFor='inputBirthday'
-                      >
-                        Birthday
-                      </label>
-                      <div className='d-flex'>
-                        <input
-                          required
-                          className='UserProfile-form-control form-control'
-                          id='inputBirthday'
-                          name='birthday'
-                          type='date'
-                          placeholder='Enter your birthday'
-                          value={editAccountInfo.birthday?.split('T')[0] || ''}
-                          onChange={handleChange}
-                          readOnly={!isEditing}
-                        />
-                      </div>
-                      {errors.birthday && (
-                        <div className='text-danger ms-2'>
-                          {errors.birthday}
-                        </div>
                       )}
                     </div>
                     {message !== '' && (
@@ -384,9 +337,8 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default UserProfile;
+export default DoctorProfile;

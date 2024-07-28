@@ -32,6 +32,7 @@ import DoctorCare from './pages/DoctorCare/DoctorCare.js';
 import AdminChartStatistic from './pages/AdminChartStatistic/AdminChartStatistic.js';
 import AdminVaccine from './pages/AdminVaccine/AdminVaccine.js';
 import { DateProvider } from './components/Admin/DateContext/DateContext.js';
+import DoctorProfile from './pages/DoctorProfile/DoctorProfile.js';
 function App() {
   return (
     <AuthProvider>
@@ -195,6 +196,15 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['Doctor']}>
                 <DoctorCare />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/doctor-profile'
+            element={
+              <ProtectedRoute allowedRoles={['Doctor']}>
+                <DoctorProfile />
               </ProtectedRoute>
             }
           />
