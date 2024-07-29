@@ -31,6 +31,7 @@ import PetStatus from './pages/PetStatus/PetStatus.js';
 import DoctorCare from './pages/DoctorCare/DoctorCare.js';
 import AdminChartStatistic from './pages/AdminChartStatistic/AdminChartStatistic.js';
 import AdminVaccine from './pages/AdminVaccine/AdminVaccine.js';
+import ManageDoctorBooking from './pages/DoctorBooking/ManageDoctorBooking.js';
 import { DateProvider } from './components/Admin/DateContext/DateContext.js';
 import DoctorProfile from './pages/DoctorProfile/DoctorProfile.js';
 function App() {
@@ -160,6 +161,15 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['Staff']}>
                 <ManageCages />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path='/manage-doctor'
+            element={
+              <ProtectedRoute allowedRoles={['Staff']}>
+                <ManageDoctorBooking />
               </ProtectedRoute>
             }
           />
