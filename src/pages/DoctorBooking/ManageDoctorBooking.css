@@ -1,25 +1,35 @@
 .manage-doctor-container {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Roboto, sans-serif;
 }
 
 .manage-doctor-container h1 {
   text-align: center;
   color: #333;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#dropdown-doctor-name {
+  margin-left: 30px;
+  width: 300px;
+}
+
+.dropdown-menu-doctor {
+  width: 300px;
 }
 
 .schedule-details {
   margin-top: 20px;
 }
 
+.title-working-hours {
+  margin-left: 30px;
+}
+
 .date-picker {
   display: flex;
   align-items: center;
+  margin-left: 30px;
   margin-bottom: 20px;
 }
 
@@ -33,30 +43,71 @@
   border: 1px solid #ccc;
 }
 
+.status-working-filter {
+  margin-left: 30px;
+}
+
+.control-filter-status {
+  margin-left: 30px;
+  width: 300px;
+}
+
+.error-slot-text {
+  display: flex;
+  justify-content: center;
+  color: red;
+  font-size: 25px;
+}
+
 .slots-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 25px;
+  justify-content: center;
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  border: 1px solid rgb(122, 122, 122);
+  border-radius: 20px;
+  padding: 20px;
+  height: 400px;
+}
+
+.slots-list::before {
+  margin-left: 30px;
+}
+
+.title-working-time-slot {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .slot-item {
   padding: 10px;
   border-radius: 4px;
+  font-size: 18px;
   border: 1px solid #ccc;
-  background-color: #fff;
+  border-radius: 20px;
+  background-color: #1272aa;
+  color: #fff;
   cursor: pointer;
   transition:
     background-color 0.3s ease,
     transform 0.3s ease;
+  width: 162px;
+  height: 170px;
+  text-align: center;
 }
 
 .slot-item:hover {
-  background-color: #f1f1f1;
+  background-color: #cc7d07;
   transform: scale(1.05);
 }
 
 .slot-item.booked {
-  background-color: #ffc107;
+  background-color: #cc7d07;
 }
 
 .bookings-list {
@@ -65,8 +116,8 @@
 
 .booking-item {
   padding: 5px;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+  border-radius: 10px;
+  background-color: #055da5;
   margin-bottom: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -114,7 +165,6 @@
   margin-bottom: 1rem !important;
 }
 
-/* Custom styles for Dropdown */
 .dropdown-toggle {
   background-color: #007bff;
   color: #fff;
@@ -129,7 +179,6 @@
   background-color: #0056b3;
 }
 
-/* Custom styles for Modal */
 .modal-header {
   border-bottom: none;
 }
@@ -160,7 +209,6 @@ button.btn-secondary:focus {
   box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
 }
 
-/* Custom styles for Tabs */
 .nav-tabs .nav-link {
   border: none;
   color: #007bff;

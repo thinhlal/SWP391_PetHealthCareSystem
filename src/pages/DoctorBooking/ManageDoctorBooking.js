@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../utils/axiosInstance.js';
 import './ManageDoctorBooking.css';
+import HeaderManager from '../../components/Employee/Header/HeaderManager';
 import dayjs from 'dayjs';
 import {
   Modal,
@@ -170,13 +171,15 @@ const DoctorSchedule = () => {
 
   return (
     <div className='manage-doctor-container'>
-      <h1>Doctor Schedules</h1>
+      <HeaderManager />
+      <h1>Doctor Booking</h1>
       <DropdownButton
-        id='dropdown-basic-button'
+        id='dropdown-doctor-name'
         title={selectedDoctor ? selectedDoctor.name : 'Select Doctor'}
       >
         {doctors.map(doctor => (
           <Dropdown.Item
+            className='dropdown-menu-doctor'
             key={doctor.doctorID}
             onClick={() => handleDoctorSelect(doctor)}
           >
@@ -186,7 +189,7 @@ const DoctorSchedule = () => {
       </DropdownButton>
       {selectedDoctor && (
         <div className='schedule-details'>
-          <h2>Working Hours for {selectedDoctor.name}</h2>
+          <h2 className='title-working-hours'>Working Hours for {selectedDoctor.name}</h2>
           <div className='date-picker'>
             <label htmlFor='date'>Select Date: </label>
             <input
@@ -197,10 +200,11 @@ const DoctorSchedule = () => {
             />
           </div>
           <Form.Group controlId='statusFilter'>
-            <Form.Label>Status Filter</Form.Label>
+            <Form.Label className='status-working-filter'>Status Filter</Form.Label>
             <Form.Control
               as='select'
               value={statusFilter}
+              className='control-filter-status'
               onChange={handleStatusFilterChange}
             >
               <option value='all'>All</option>
@@ -221,6 +225,7 @@ const DoctorSchedule = () => {
                   onClick={() => handleSlotClick(slot)}
                 >
                   <div>
+                    <div className='title-working-time-slot'>Working Time</div>
                     {slot.startTime.toLocaleTimeString('vi-VN', {
                       hour: '2-digit',
                       minute: '2-digit',
@@ -268,7 +273,7 @@ const DoctorSchedule = () => {
               ))}
             </div>
           ) : (
-            <div>No available slots for this day</div>
+            <div className='error-slot-text'>No available slots for this day</div>
           )}
         </div>
       )}

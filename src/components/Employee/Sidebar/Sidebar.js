@@ -34,6 +34,11 @@ function Sidebar() {
             <div className='sidebar-list-item-text'>Cages</div>
           </div>
         </a>
+        <a href='manage-doctor'>
+          <div className='sidebar-list-item'>
+            <div className='sidebar-list-item-text'>Doctors</div>
+          </div>
+        </a>
       </div>
     </div>
   );
