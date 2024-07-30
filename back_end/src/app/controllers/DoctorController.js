@@ -122,7 +122,36 @@ class DoctorController {
   // GET /getAllDoctorsInfoToShow
   async getAllDoctorsInfoToShow(req, res, next) {
     try {
-      const allDoctors = await Doctor.find();
+      const allDoctors = await Doctor.aggregate([
+        {
+          $lookup: {
+            from: 'accounts',
+            localField: 'accountID',
+            foreignField: 'accountID',
+            as: 'accountDetails',
+            pipeline: [
+              {
+                $project: {
+                  status: 1,
+                  _id: 0
+                }
+              }
+            ]
+          },
+        },
+        {
+          $addFields: {
+            status: {
+              $arrayElemAt:  ['$accountDetails.status', 0],
+            }
+          }
+        },
+        {
+          $project: {
+            accountDetails: 0
+          }
+        }
+      ]);
       res.status(200).json(allDoctors);
     } catch (error) {
       console.log(error);

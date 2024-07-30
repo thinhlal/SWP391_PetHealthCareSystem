@@ -91,8 +91,8 @@ function Home() {
       const doctors = await axios.get(
         `${process.env.REACT_APP_API_URL}/doctor/getAllDoctorsInfoToShow`,
       );
-      console.log(doctors.data);
-      setDoctors(doctors.data);
+      const filterDoctor = doctors.data.filter(doctor => doctor.status);
+      setDoctors(filterDoctor);
     };
 
     fetchAllDoctors();
