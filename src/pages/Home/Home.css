@@ -458,7 +458,7 @@ a {
   padding: 0;
   margin: 0;
   position: relative;
-  height: 750px;
+  height: 800px;
   background-color: #002169;
   padding-bottom: 10px;
 }
@@ -493,9 +493,9 @@ a {
 }
 
 .main .service_Info_Detail {
-  width: 420px;
+  width: 440px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  height: 500px;
+  height: 600px;
   z-index: 1;
   background-color: #fff;
   border-radius: 50px;
@@ -515,10 +515,37 @@ a {
   border-top-right-radius: 50px;
 }
 
-.main .service_Info_Detail-text {
-  font-size: 18px;
+.main .service_Info_Detail-text:nth-of-type(1) {
+  font-size: 25px;
+  padding-top: 10px;
+  text-wrap: balance;
+  color: #ff5733; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+  letter-spacing: 1px; 
+  text-align: center; 
+}
+
+.main .service_Info_Detail-text:nth-of-type(2) {
+  font-size: 20px;
   padding: 5px;
   text-wrap: balance;
+  color: #337aff; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+
+.main .service_Info_Detail-text:nth-of-type(3) {
+  font-size: 20px;
+  padding: 5px;
+  text-wrap: balance;
+  font-family: 'Montserrat', sans-serif; 
+  color: #ff5733; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+  letter-spacing: 1px; 
+  text-align: center; 
+  margin-bottom: 20px;
 }
 
 .main .service_Info_Detail-button-wrapper-flex {

@@ -333,10 +333,10 @@ function Home() {
                         {service.name}
                       </div>
                       <div className='service_Info_Detail-text'>
-                        {service.description}
+                        Description:&nbsp; {service.description}
                       </div>
                       <div className='service_Info_Detail-text'>
-                        {service.price}
+                        Price:&nbsp;&nbsp;{service.price}
                       </div>
                       <div className='service_Info_Detail-button-wrapper-flex'>
                         <div className='service_Info_Detail-button-wrapper'>
