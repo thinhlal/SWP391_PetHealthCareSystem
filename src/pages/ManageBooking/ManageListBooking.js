@@ -2196,7 +2196,8 @@ function ManageListBooking() {
                                         </div>
                                         {!booking?.paymentsDetails[0]
                                           ?.isCancelPayment &&
-                                          booking?.paymentsDetails[0]?.isSuccess && (
+                                          booking?.paymentsDetails[0]
+                                            ?.isSuccess && (
                                             <div className='reason-manage-booking'>
                                               <small className='title-reason-manage-booking'>
                                                 Date pay:&nbsp;

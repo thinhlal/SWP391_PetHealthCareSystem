@@ -32,7 +32,6 @@ const sliderSettingServices = {
   slidesToScroll: 1,
   autoplay: true,
   autoplaySpeed: 2000,
-  centerPadding: 50,
   pauseOnDotsHover: true,
   pauseOnHover: true,
 };
@@ -322,30 +321,33 @@ function Home() {
           <div className='slider_service'>
             <Slider {...sliderSettingServices}>
               {services.map(service => (
-                <div
-                  key={service.serviceID}
-                  className='service_Info_Detail'
-                >
-                  <img
-                    src={service.image}
-                    className='service_Info_Detail-img'
-                    alt={service.name}
-                  />
-                  <div className='service_Info_Detail-text'>{service.name}</div>
-                  <div className='service_Info_Detail-text'>
-                    {service.description}
-                  </div>
-                  <div className='service_Info_Detail-text'>
-                    {service.price}
-                  </div>
-                  <div className='service_Info_Detail-button-wrapper-flex'>
-                    <div className='service_Info_Detail-button-wrapper'>
-                      <a
-                        href='choose'
-                        className='service_Info_Detail-button'
-                      >
-                        <span>Booking Now</span>
-                      </a>
+                <div key={service.serviceID}>
+                  <div className='service-wrapper'>
+                    <div className='service_Info_Detail'>
+                      <img
+                        src={service.image}
+                        className='service_Info_Detail-img'
+                        alt={service.name}
+                      />
+                      <div className='service_Info_Detail-text'>
+                        {service.name}
+                      </div>
+                      <div className='service_Info_Detail-text'>
+                        {service.description}
+                      </div>
+                      <div className='service_Info_Detail-text'>
+                        {service.price}
+                      </div>
+                      <div className='service_Info_Detail-button-wrapper-flex'>
+                        <div className='service_Info_Detail-button-wrapper'>
+                          <a
+                            href='choose'
+                            className='service_Info_Detail-button'
+                          >
+                            <span>Booking Now</span>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

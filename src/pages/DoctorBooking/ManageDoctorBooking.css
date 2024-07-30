@@ -1,5 +1,3 @@
-
-
 .manage-doctor-container {
   font-family: Arial, sans-serif;
   margin: 20px;
@@ -47,7 +45,9 @@
   border: 1px solid #ccc;
   background-color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .slot-item:hover {
