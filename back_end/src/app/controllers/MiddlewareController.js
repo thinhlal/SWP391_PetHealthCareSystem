@@ -10,8 +10,6 @@ const verifyToken = (req, res, next) => {
       if (err) {
         return res.status(401).json('Token expired');
       }
-
-      req.user = user;
       next();
     });
   } else {
