@@ -175,7 +175,27 @@ function Statistic() {
             ${totalIncome.toFixed(2)}
           </div>
           <div className='Admin-DashBoard-Main-Header-Percent'>
-            +20% day over day
+            Total income all time
+          </div>
+        </div>
+
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'>Total Booking</div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            ${totalIncome.toFixed(2)}
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            Total income all time
+          </div>
+        </div>
+
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'>Total</div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            ${totalIncome.toFixed(2)}
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            Total income all time
           </div>
         </div>
       </div>

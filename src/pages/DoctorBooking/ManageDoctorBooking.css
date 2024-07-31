@@ -9,41 +9,41 @@
   margin-bottom: 30px;
 }
 
-#dropdown-doctor-name {
+.manage-doctor-container #dropdown-doctor-name {
   margin-left: 30px;
   width: 300px;
 }
 
-.dropdown-menu-doctor {
+.manage-doctor-container .dropdown-menu-doctor {
   width: 300px;
 }
 
-.schedule-details {
+.manage-doctor-container .schedule-details {
   margin-top: 20px;
 }
 
-.title-working-hours {
+.manage-doctor-container .title-working-hours {
   margin-left: 30px;
 }
 
-.date-picker {
+.manage-doctor-container .date-picker {
   display: flex;
   align-items: center;
   margin-left: 30px;
   margin-bottom: 20px;
 }
 
-.date-picker label {
+.manage-doctor-container .date-picker label {
   margin-right: 10px;
 }
 
-#date {
+.manage-doctor-container #date {
   padding: 5px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
 
-.status-working-filter {
+.manage-doctor-container .status-working-filter {
   margin-left: 30px;
 }
 
@@ -52,14 +52,14 @@
   width: 300px;
 }
 
-.error-slot-text {
+.manage-doctor-container .error-slot-text {
   display: flex;
   justify-content: center;
   color: red;
   font-size: 25px;
 }
 
-.slots-list {
+.manage-doctor-container .slots-list {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
@@ -73,18 +73,18 @@
   height: 400px;
 }
 
-.slots-list::before {
+.manage-doctor-container .slots-list::before {
   margin-left: 30px;
 }
 
-.title-working-time-slot {
+.manage-doctor-container .title-working-time-slot {
   font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.slot-item {
+.manage-doctor-container .slot-item {
   padding: 10px;
   border-radius: 4px;
   font-size: 18px;
@@ -101,20 +101,20 @@
   text-align: center;
 }
 
-.slot-item:hover {
+.manage-doctor-container .slot-item:hover {
   background-color: #cc7d07;
   transform: scale(1.05);
 }
 
-.slot-item.booked {
+.manage-doctor-container .slot-item.booked {
   background-color: #cc7d07;
 }
 
-.bookings-list {
+.manage-doctor-container .bookings-list {
   margin-top: 10px;
 }
 
-.booking-item {
+.manage-doctor-container .booking-item {
   padding: 5px;
   border-radius: 10px;
   background-color: #055da5;
@@ -123,25 +123,25 @@
   transition: background-color 0.3s ease;
 }
 
-.booking-item:hover {
+.manage-doctor-container .booking-item:hover {
   background-color: #e9e9e9;
 }
 
-.booking-item div {
+.manage-doctor-container .booking-item div {
   margin-bottom: 3px;
 }
 
-.modal-content {
+.manage-doctor-container .modal-content {
   padding: 20px;
 }
 
-.grid-container {
+.manage-doctor-container .grid-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
 }
 
-.content-modal-manage-booking {
+.manage-doctor-container .content-modal-manage-booking {
   flex: 1;
   background-color: #f9f9f9;
   padding: 10px;
@@ -149,23 +149,23 @@
   border: 1px solid #ddd;
 }
 
-.reason-manage-booking {
+.manage-doctor-container .reason-manage-booking {
   margin-bottom: 10px;
 }
 
-.reason-manage-booking span {
+.manage-doctor-container .reason-manage-booking span {
   font-weight: bold;
 }
 
-.font-weight-bold {
+.manage-doctor-container .font-weight-bold {
   font-weight: bold;
 }
 
-.mb-3 {
+.manage-doctor-container .mb-3 {
   margin-bottom: 1rem !important;
 }
 
-.dropdown-toggle {
+.manage-doctor-container .dropdown-toggle {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -174,54 +174,54 @@
   transition: background-color 0.3s ease;
 }
 
-.dropdown-toggle:hover,
-.dropdown-toggle:focus {
+.manage-doctor-container .dropdown-toggle:hover,
+.manage-doctor-container .dropdown-toggle:focus {
   background-color: #0056b3;
 }
 
-.modal-header {
+.manage-doctor-container .modal-header {
   border-bottom: none;
 }
 
-.modal-title {
+.manage-doctor-container .modal-title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.modal-footer {
+.manage-doctor-container .modal-footer {
   border-top: none;
   display: flex;
   justify-content: flex-end;
 }
 
-button.btn-secondary {
+.manage-doctor-container button.btn-secondary {
   background-color: #6c757d;
   border: none;
   transition: background-color 0.3s ease;
 }
 
-button.btn-secondary:hover,
-button.btn-secondary:focus {
+.manage-doctor-container button.btn-secondary:hover,
+.manage-doctor-container button.btn-secondary:focus {
   background-color: #5a6268;
 }
 
-button.btn-secondary:focus {
+.manage-doctor-container button.btn-secondary:focus {
   box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
 }
 
-.nav-tabs .nav-link {
+.manage-doctor-container .nav-tabs .nav-link {
   border: none;
   color: #007bff;
   background-color: #f9f9f9;
   border-radius: 4px 4px 0 0;
 }
 
-.nav-tabs .nav-link.active {
+.manage-doctor-container .nav-tabs .nav-link.active {
   color: #fff;
   background-color: #007bff;
 }
 
-.tab-content > .tab-pane {
+.manage-doctor-container .tab-content > .tab-pane {
   background-color: #fff;
   padding: 20px;
   border: 1px solid #ddd;

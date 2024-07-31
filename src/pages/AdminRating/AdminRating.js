@@ -18,6 +18,7 @@ import icon_search from '../../assets/images/img_AdminCages/icon_search.svg';
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
 import StarRate from '../../components/Admin/StarRate/StarRate';
+import { formatDateTime } from '../../utils/formatDate';
 function AdminRating() {
   const [search, setSearch] = useState('');
   const [ratingFilter, setRatingFilter] = useState('All');
@@ -147,7 +148,7 @@ function AdminRating() {
                         {item.bookingID}
                       </div>
                       <div className='Admin-Rating-Main-Table-Content-Row '>
-                        {new Date(item.date).toLocaleString()}
+                        {formatDateTime(item.date)}
                       </div>
                       <div className='Admin-Rating-Main-Table-Content-Row '>
                         <StarRate

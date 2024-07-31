@@ -189,7 +189,9 @@ const DoctorSchedule = () => {
       </DropdownButton>
       {selectedDoctor && (
         <div className='schedule-details'>
-          <h2 className='title-working-hours'>Working Hours for {selectedDoctor.name}</h2>
+          <h2 className='title-working-hours'>
+            Working Hours for {selectedDoctor.name}
+          </h2>
           <div className='date-picker'>
             <label htmlFor='date'>Select Date: </label>
             <input
@@ -200,7 +202,9 @@ const DoctorSchedule = () => {
             />
           </div>
           <Form.Group controlId='statusFilter'>
-            <Form.Label className='status-working-filter'>Status Filter</Form.Label>
+            <Form.Label className='status-working-filter'>
+              Status Filter
+            </Form.Label>
             <Form.Control
               as='select'
               value={statusFilter}
@@ -273,7 +277,9 @@ const DoctorSchedule = () => {
               ))}
             </div>
           ) : (
-            <div className='error-slot-text'>No available slots for this day</div>
+            <div className='error-slot-text'>
+              No available slots for this day
+            </div>
           )}
         </div>
       )}

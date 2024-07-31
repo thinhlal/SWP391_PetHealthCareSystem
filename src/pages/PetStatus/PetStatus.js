@@ -5,6 +5,7 @@ import Header from '../../components/User/Header/Header';
 import Footer from '../../components/User/Footer/Footer';
 import axiosInstance from '../../utils/axiosInstance';
 import { Pagination, Stack } from '@mui/material';
+import { formatDateTime } from '../../utils/formatDate';
 
 function PetStatus() {
   const location = useLocation();
@@ -118,6 +119,8 @@ function PetStatus() {
               <thead>
                 <tr>
                   <th>Booking ID</th>
+                  <th>CageID</th>
+                  <th>Cage Name</th>
                   <th>Entry Date</th>
                   <th>Doctor</th>
                   <th>Reason for Entry</th>
@@ -131,7 +134,9 @@ function PetStatus() {
                   currentDisease.map((status, index) => (
                     <tr key={index}>
                       <td>{status?.bookingID}</td>
-                      <td>{new Date(status?.startDate).toLocaleString()}</td>
+                      <td>{status?.cageDetails[0]?.cageID}</td>
+                      <td>{status?.cageDetails[0]?.name}</td>
+                      <td>{formatDateTime(status?.startDate)}</td>
                       <td>{status?.doctorDetails[0]?.name}</td>
                       <td>{status?.reasonForAdmission}</td>
                       <td
@@ -145,7 +150,7 @@ function PetStatus() {
                       </td>
                       <td>
                         {status.isRecover
-                          ? new Date(status.dischargeDate).toLocaleString()
+                          ? formatDateTime(status.dischargeDate)
                           : ''}
                       </td>
                       <td>
@@ -199,7 +204,7 @@ function PetStatus() {
                   {currentDiseaseDetails.length > 0 ? (
                     currentDiseaseDetails.map(detail => (
                       <tr key={detail.diseaseInfoID}>
-                        <td>{new Date(detail.date).toLocaleString()}</td>
+                        <td>{formatDateTime(detail.date)}</td>
                         <td
                           className={`status-${
                             detail.status === 1

@@ -14,6 +14,7 @@ import {
   Pagination,
   Stack,
 } from '@mui/material';
+import { formatDateTime } from '../../utils/formatDate';
 
 function ManageListBooking() {
   const [allServices, setAllServices] = useState([]);
@@ -2200,12 +2201,13 @@ function ManageListBooking() {
                                             ?.isSuccess && (
                                             <div className='reason-manage-booking'>
                                               <small className='title-reason-manage-booking'>
-                                                Date pay:&nbsp;
+                                                Date paid:&nbsp;
                                               </small>
                                               <small>
-                                                {new Date(
-                                                  booking.paymentsDetails[0].date,
-                                                ).toLocaleString()}
+                                                {formatDateTime(
+                                                  booking.paymentsDetails[0]
+                                                    .date,
+                                                )}
                                               </small>
                                             </div>
                                           )}
@@ -2215,9 +2217,9 @@ function ManageListBooking() {
                                               Date Cancel:&nbsp;
                                             </small>
                                             <small>
-                                              {new Date(
+                                              {formatDateTime(
                                                 booking?.dateCancelBook,
-                                              ).toLocaleString()}
+                                              )}
                                             </small>
                                           </div>
                                         )}
@@ -2477,14 +2479,12 @@ function ManageListBooking() {
                                     </div>
                                     <div className='reason-manage-booking'>
                                       <small className='title-reason-manage-booking'>
-                                        Date:&nbsp;
+                                        Date Paid:&nbsp;
                                       </small>
                                       <small>
-                                        {
-                                          booking.paymentsDetails[0].date.split(
-                                            'T',
-                                          )[0]
-                                        }
+                                        {formatDateTime(
+                                          booking.paymentsDetails[0].date,
+                                        )}
                                       </small>
                                     </div>
                                     {booking?.dateCancelBook && (
@@ -2493,11 +2493,9 @@ function ManageListBooking() {
                                           Date Cancel:&nbsp;
                                         </small>
                                         <small>
-                                          {
-                                            booking?.dateCancelBook?.split(
-                                              'T',
-                                            )[0]
-                                          }
+                                          {formatDateTime(
+                                            booking?.dateCancelBook,
+                                          )}
                                         </small>
                                       </div>
                                     )}
@@ -2739,14 +2737,12 @@ function ManageListBooking() {
                                     </div>
                                     <div className='reason-manage-booking'>
                                       <small className='title-reason-manage-booking'>
-                                        Date:&nbsp;
+                                        Date Paid:&nbsp;
                                       </small>
                                       <small>
-                                        {
-                                          booking.paymentsDetails[0].date.split(
-                                            'T',
-                                          )[0]
-                                        }
+                                        {formatDateTime(
+                                          booking.paymentsDetails[0].date,
+                                        )}
                                       </small>
                                     </div>
                                     {booking?.dateCancelBook && (
@@ -2755,11 +2751,9 @@ function ManageListBooking() {
                                           Date Cancel:&nbsp;
                                         </small>
                                         <small>
-                                          {
-                                            booking?.dateCancelBook?.split(
-                                              'T',
-                                            )[0]
-                                          }
+                                          {formatDateTime(
+                                            booking?.dateCancelBook,
+                                          )}
                                         </small>
                                       </div>
                                     )}
@@ -2925,11 +2919,9 @@ function ManageListBooking() {
                                         Date Paid:&nbsp;
                                       </small>
                                       <small>
-                                        {
-                                          booking.paymentsDetails[0].date.split(
-                                            'T',
-                                          )[0]
-                                        }
+                                        {formatDateTime(
+                                          booking.paymentsDetails[0].date,
+                                        )}
                                       </small>
                                     </div>
                                     {booking?.dateCancelBook && (
@@ -2938,11 +2930,9 @@ function ManageListBooking() {
                                           Date Cancel:&nbsp;
                                         </small>
                                         <small>
-                                          {
-                                            booking?.dateCancelBook?.split(
-                                              'T',
-                                            )[0]
-                                          }
+                                          {formatDateTime(
+                                            booking?.dateCancelBook,
+                                          )}
                                         </small>
                                       </div>
                                     )}

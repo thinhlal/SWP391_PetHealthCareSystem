@@ -10,6 +10,7 @@ import icon_search from '../../assets/images/img_AdminDashBoard/icon_search.svg'
 import Statistic from '../../components/Admin/Statistics/Statistics';
 import axiosInstance from '../../utils/axiosInstance';
 import { useDate } from '../../components/Admin/DateContext/DateContext';
+import { formatDateTime } from '../../utils/formatDate';
 
 function AdminDashBoard() {
   const [activeTab, setActiveTab] = useState('Profile');
@@ -783,9 +784,9 @@ function AdminDashBoard() {
                                               Cancel Date:
                                             </div>
                                             <div>
-                                              {new Date(
+                                              {formatDateTime(
                                                 bookingInfoModal?.dateCancelBook,
-                                              ).toLocaleString()}
+                                              )}
                                             </div>
                                           </div>
                                         ) : null}
@@ -803,9 +804,11 @@ function AdminDashBoard() {
                                               !bookingInfoModal
                                                 ?.paymentsDetails[0]
                                                 ?.isCancelPayment
-                                                ? new Date(
-                                                    bookingInfoModal?.paymentsDetails[0]?.date,
-                                                  ).toLocaleString()
+                                                ? formatDateTime(
+                                                    bookingInfoModal
+                                                      ?.paymentsDetails[0]
+                                                      ?.date,
+                                                  )
                                                 : 'N/A'}
                                             </div>
                                           </div>

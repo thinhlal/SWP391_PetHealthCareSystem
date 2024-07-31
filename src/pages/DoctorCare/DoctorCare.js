@@ -5,6 +5,7 @@ import Header from '../../components/Doctor/Header/Header';
 import axiosInstance from '../../utils/axiosInstance';
 import { AuthContext } from '../../context/AuthContext';
 import PetHealthSlider from '../../components/Employee/StatusSlider/StatusSlider';
+import { formatDateTime } from '../../utils/formatDate';
 
 const DoctorCare = () => {
   const { user } = useContext(AuthContext);
@@ -205,7 +206,7 @@ const DoctorCare = () => {
                     <td>{status.cageID}</td>
                     <td>{status?.cageDetails[0]?.name}</td>
                     <td>{status?.petID}</td>
-                    <td>{status?.startDate.split('T')[0]}</td>
+                    <td>{formatDateTime(status?.startDate)}</td>
                     <td>{status?.reasonForAdmission}</td>
                     <td>
                       {status?.dischargeDate ? (
@@ -216,7 +217,7 @@ const DoctorCare = () => {
                     </td>
                     <td>
                       {status?.dischargeDate
-                        ? status?.dischargeDate.split('T')[0]
+                        ? formatDateTime(status?.dischargeDate)
                         : null}
                     </td>
                     <td>
@@ -357,7 +358,7 @@ const DoctorCare = () => {
                 {currentDataDiseaseInfo.length > 0 ? (
                   currentDataDiseaseInfo.map((history, index) => (
                     <tr key={index}>
-                      <td>{history.date.split('T')[0]}</td>
+                      <td>{formatDateTime(history.date)}</td>
                       <td
                         className={`status-${
                           history.status === 1

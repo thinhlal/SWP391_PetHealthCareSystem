@@ -14,6 +14,7 @@ import { AuthContext } from '../../context/AuthContext.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Pagination, Stack } from '@mui/material';
+import { formatDateTime } from '../../utils/formatDate.js';
 
 function ProfilePet() {
   const { user } = useContext(AuthContext);
@@ -281,6 +282,7 @@ function ProfilePet() {
               <thead>
                 <tr>
                   <th>Medical ReportID</th>
+                  <th>BookingID</th>
                   <th>Date</th>
                   <th>Diagnosis</th>
                   <th>Notes</th>
@@ -296,7 +298,8 @@ function ProfilePet() {
                   currentMedicals.map((reportInfo, index) => (
                     <tr key={index}>
                       <td>{reportInfo.medicalReportID}</td>
-                      <td>{new Date(reportInfo.date).toLocaleString()}</td>
+                      <td>{reportInfo.bookingID}</td>
+                      <td>{formatDateTime(reportInfo.date)}</td>
                       <td>{reportInfo.diagnosis}</td>
                       <td>{reportInfo.notes}</td>
                       <td>
@@ -411,7 +414,7 @@ function ProfilePet() {
                 ) : (
                   currentVaccines.map((vaccine, index) => (
                     <tr key={index}>
-                      <td>{new Date(vaccine.dateGiven).toLocaleString()}</td>
+                      <td>{formatDateTime(vaccine.dateGiven)}</td>
                       <td>{vaccine.vaccinationDetails.name}</td>
                       <td>
                         {vaccine.vaccinationDetails.nextDate > 0
@@ -456,7 +459,7 @@ function ProfilePet() {
                               <div className='modal-body'>
                                 <p>
                                   <strong>Date Given:</strong>{' '}
-                                  {`${vaccine.dateGiven.split('T')[0]}`}
+                                  {`${formatDateTime(vaccine.dateGiven)}`}
                                 </p>
                                 <p>
                                   <strong>Vaccines:</strong>{' '}

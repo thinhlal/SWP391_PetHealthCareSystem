@@ -10,6 +10,7 @@ import { Pagination, Stack } from '@mui/material';
 import PetHealthSlider from '../../components/Employee/StatusSlider/StatusSlider';
 import BuildIcon from '@mui/icons-material/Build';
 import { grey } from '@mui/material/colors';
+import { formatDateTime } from '../../utils/formatDate';
 
 function ManageCages() {
   const [searchBookingIDValue, setSearchBookingValue] = useState('');
@@ -139,6 +140,7 @@ function ManageCages() {
     document.querySelector('#exampleModal .btn-close').click();
   };
 
+  console.log(selectedCage);
   const resetForm = () => {
     setBookingSearchResult([]);
     setSearchBookingValue('');
@@ -622,6 +624,49 @@ function ManageCages() {
                                   <form className='profile-form'>
                                     <div className='form-group'>
                                       <div className='sub-title-profile'>
+                                        BookingID:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-customer'
+                                        value={
+                                          selectedCage?.bookingDetails[0]
+                                            ?.bookingID || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile'>
+                                        Date Book:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-customer'
+                                        value={
+                                          selectedCage?.bookingDetails[0]?.dateBook.split(
+                                            'T',
+                                          )[0] || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile'>
+                                        CustomerID:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-customer'
+                                        value={
+                                          selectedCage?.customerDetails[0]
+                                            ?.customerID || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile'>
                                         Name:
                                       </div>
                                       <input
@@ -629,7 +674,7 @@ function ManageCages() {
                                         className='edit-customer'
                                         name='name'
                                         value={
-                                          selectedCage?.customerDetails[0]
+                                          selectedCage?.bookingDetails[0]
                                             ?.name || ''
                                         }
                                         readOnly
@@ -645,7 +690,7 @@ function ManageCages() {
                                         className='edit-customer'
                                         name='email'
                                         value={
-                                          selectedCage?.customerDetails[0]
+                                          selectedCage?.bookingDetails[0]
                                             ?.email || ''
                                         }
                                         readOnly
@@ -661,7 +706,7 @@ function ManageCages() {
                                         className='edit-customer'
                                         name='phone'
                                         value={
-                                          selectedCage?.customerDetails[0]
+                                          selectedCage?.bookingDetails[0]
                                             ?.phone || ''
                                         }
                                         readOnly
@@ -679,6 +724,21 @@ function ManageCages() {
                                   }}
                                 >
                                   <form className='pet-profile-form'>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        PetID:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='petID'
+                                        value={
+                                          selectedCage?.petDetails[0]?.petID ||
+                                          ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
                                     <div className='form-group'>
                                       <div className='sub-title-profile-pet'>
                                         Name:
@@ -786,16 +846,42 @@ function ManageCages() {
                                         readOnly
                                       />
                                     </div>
-
                                     <div className='form-group'>
                                       <div className='sub-title-profile-pet'>
-                                        Cage Number:
+                                        Cage Disease ID:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='cageDiseaseID'
+                                        value={
+                                          selectedCage?.cageDiseaseDetails
+                                            ?.cageDiseaseID || ''
+                                        }
+                                        readOnly
+                                      />
+                                    </div>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Cage ID:
                                       </div>
                                       <input
                                         type='text'
                                         className='edit-pet'
                                         name='cageNumber'
                                         value={selectedCage?.cageID || ''}
+                                        readOnly
+                                      />
+                                    </div>
+                                    <div className='form-group'>
+                                      <div className='sub-title-profile-pet'>
+                                        Cage Name:
+                                      </div>
+                                      <input
+                                        type='text'
+                                        className='edit-pet'
+                                        name='cageNumber'
+                                        value={selectedCage?.name || ''}
                                         readOnly
                                       />
                                     </div>
@@ -808,9 +894,10 @@ function ManageCages() {
                                         className='edit-pet'
                                         name='admissionTime'
                                         value={
-                                          selectedCage?.cageDiseaseDetails?.startDate.split(
-                                            'T',
-                                          )[0] || ''
+                                          formatDateTime(
+                                            selectedCage?.cageDiseaseDetails
+                                              ?.startDate,
+                                          ) || ''
                                         }
                                         readOnly
                                       />

@@ -66,6 +66,14 @@ class PetController {
         { $match: { petID } },
         {
           $lookup: {
+            from: 'cages',
+            localField: 'cageID',
+            foreignField: 'cageID',
+            as: 'cageDetails',
+          },
+        },
+        {
+          $lookup: {
             from: 'diseaseinfos',
             localField: 'cageDiseaseID',
             foreignField: 'cageDiseaseID',

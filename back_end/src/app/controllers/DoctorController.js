@@ -133,24 +133,24 @@ class DoctorController {
               {
                 $project: {
                   status: 1,
-                  _id: 0
-                }
-              }
-            ]
+                  _id: 0,
+                },
+              },
+            ],
           },
         },
         {
           $addFields: {
             status: {
-              $arrayElemAt:  ['$accountDetails.status', 0],
-            }
-          }
+              $arrayElemAt: ['$accountDetails.status', 0],
+            },
+          },
         },
         {
           $project: {
-            accountDetails: 0
-          }
-        }
+            accountDetails: 0,
+          },
+        },
       ]);
       res.status(200).json(allDoctors);
     } catch (error) {
