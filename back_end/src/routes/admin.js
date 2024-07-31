@@ -18,6 +18,11 @@ router.get(
   AdminController.getRevenueOfEachMonth,
 );
 router.get('/getAllRates', verifyToken, AdminController.getAllRates);
+router.get(
+  '/countStatisticBooking',
+  verifyToken,
+  AdminController.countStatisticBooking,
+);
 router.get('/getAllAccounts', verifyToken, AdminController.getAllAccounts);
 router.get('/getRating', verifyToken, AdminController.getRating);
 router.get('/getTotalIncome', verifyToken, AdminController.getTotalIncome);

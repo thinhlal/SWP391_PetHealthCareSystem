@@ -15,6 +15,9 @@ function Statistic() {
     useState(0);
   const [currentMonthlyTotalIncome, setCurrentMonthlyTotalIncome] = useState(0);
   const [totalIncome, setTotalIncome] = useState(0);
+  const [totalBooking, setTotalBooking] = useState(0);
+  const [totalCancelBooking, setTotalCancelBooking] = useState(0);
+  const [serviceMostUsed, setServiceMostUsed] = useState([]);
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   useEffect(() => {
@@ -77,11 +80,29 @@ function Statistic() {
     }
   }, [selectedDate]);
 
+  useEffect(() => {
+    const fetchTotalBooking = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `${process.env.REACT_APP_API_URL}/admin/countStatisticBooking`,
+        );
+        setTotalBooking(response.data.totalBookings);
+        setTotalCancelBooking(response.data.totalCancellations);
+        setServiceMostUsed(response.data.mostUsedServices);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (selectedDate) {
+      fetchTotalBooking();
+    }
+  }, [selectedDate]);
+
   const calculatePercentageChange = (current, previous) => {
     if (previous === 0) return current > 0 ? 100 : 0;
     return ((current - previous) / previous) * 100;
   };
-
   return (
     <div className='main-statistic'>
       <div className='Admin-DashBoard-Main_Title'>
@@ -180,22 +201,55 @@ function Statistic() {
         </div>
 
         <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-          <div className='Admin-DashBoard-Main-Header-Note'>Total Booking</div>
+          <div className='Admin-DashBoard-Main-Header-Note'>Total booking</div>
           <div className='Admin-DashBoard-Main-Header-Money'>
-            ${totalIncome.toFixed(2)}
+            {totalBooking}
           </div>
           <div className='Admin-DashBoard-Main-Header-Percent'>
-            Total income all time
+            Total booking of all time
           </div>
         </div>
 
         <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
-          <div className='Admin-DashBoard-Main-Header-Note'>Total</div>
+          <div className='Admin-DashBoard-Main-Header-Note'>
+            Total cancel booking
+          </div>
           <div className='Admin-DashBoard-Main-Header-Money'>
-            ${totalIncome.toFixed(2)}
+            {totalCancelBooking}
           </div>
           <div className='Admin-DashBoard-Main-Header-Percent'>
-            Total income all time
+            Total cancel booking
+          </div>
+        </div>
+
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'>
+            Booking cancellation rate
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            {totalBooking > 0
+              ? ((totalCancelBooking * 100) / totalBooking).toFixed(2)
+              : ''}
+            %
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            The cancellation rate
+          </div>
+        </div>
+        <div className='Admin-DashBoard-Main-Header-Income col-md-3'>
+          <div className='Admin-DashBoard-Main-Header-Note'>
+            Most used service
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Money'>
+            {serviceMostUsed &&
+              serviceMostUsed
+                .map(service => service.serviceDetails[0]?.name)
+                .join(', ')}
+          </div>
+          <div className='Admin-DashBoard-Main-Header-Percent'>
+            ID:{' '}
+            {serviceMostUsed &&
+              serviceMostUsed.map(service => service._id).join(', ')}
           </div>
         </div>
       </div>

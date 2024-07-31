@@ -6,6 +6,7 @@ const Doctor = require('../models/Doctor.js');
 const bcrypt = require('bcrypt');
 const Customer = require('../models/Customer.js');
 const Rate = require('../models/Rate.js');
+const ServiceBookingVet = require('../models/ServiceBookingVet.js');
 
 class AdminController {
   // GET /getRevenueOfEachMonth
@@ -370,6 +371,78 @@ class AdminController {
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Error when get rating', error });
+    }
+  }
+
+  // GET /countStatisticBooking
+  async countStatisticBooking(req, res, next) {
+    try {
+      const maxUsageCountResult = await ServiceBookingVet.aggregate([
+        {
+          $group: {
+            _id: '$serviceID',
+            usageCount: { $sum: 1 },
+          },
+        },
+        {
+          $sort: { usageCount: -1 },
+        },
+        {
+          $limit: 1,
+        },
+      ]);
+
+      const maxUsageCount =
+        maxUsageCountResult.length > 0 ? maxUsageCountResult[0].usageCount : 0;
+
+      const mostUsedServices = await ServiceBookingVet.aggregate([
+        {
+          $group: {
+            _id: '$serviceID',
+            usageCount: { $sum: 1 },
+          },
+        },
+        {
+          $match: { usageCount: maxUsageCount },
+        },
+        {
+          $lookup: {
+            from: 'services',
+            localField: '_id',
+            foreignField: 'serviceID',
+            as: 'serviceDetails',
+          },
+        },
+      ]);
+
+      const allBookings = await Booking.aggregate([
+        {
+          $lookup: {
+            from: 'payments',
+            localField: 'bookingID',
+            foreignField: 'bookingID',
+            as: 'paymentDetails',
+          },
+        },
+      ]);
+
+      const totalBookings = allBookings.length;
+      const totalCancellations = allBookings.filter(
+        booking =>
+          booking.isCancel ||
+          (booking.paymentDetails &&
+            booking.paymentDetails.some(payment => payment.isCancelPayment)),
+      ).length;
+      res.status(200).json({
+        totalBookings,
+        totalCancellations,
+        mostUsedServices,
+      });
+    } catch (error) {
+      console.log(error);
+      res
+        .status(500)
+        .json({ message: 'Error when fetching most used service', error });
     }
   }
 

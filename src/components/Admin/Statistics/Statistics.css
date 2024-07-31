@@ -50,6 +50,7 @@
 }
 
 .main-statistic .Admin-DashBoard-Main-Header {
+  gap: 10px;
   margin: 40px 0 0 0;
   font-family: Roboto, sans-serif;
   padding: 0;
