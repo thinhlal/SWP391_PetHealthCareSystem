@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance.js';
 import './ManageDoctorBooking.css';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
@@ -15,7 +15,7 @@ import {
 } from 'react-bootstrap';
 
 const DoctorSchedule = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedDate, setSelectedDate] = useState(
@@ -76,8 +76,9 @@ const DoctorSchedule = () => {
     if (!slot.isBooked && slot.isWithinWorkingHours && !slot.isPast) {
       const bookingDetails = bookings.find(
         booking =>
-          booking.doctorID === selectedDoctor.doctorID && 
-          new Date(`${selectedDate}T${booking.startTime}:00`) <= slot.startTime &&
+          booking.doctorID === selectedDoctor.doctorID &&
+          new Date(`${selectedDate}T${booking.startTime}:00`) <=
+            slot.startTime &&
           slot.endTime <= new Date(`${selectedDate}T${booking.endTime}:00`) &&
           booking.dateBook.split('T')[0] === selectedDate &&
           !booking.isCancel,
@@ -86,7 +87,6 @@ const DoctorSchedule = () => {
       setShowModal(true);
     }
   };
-  
 
   const updateAvailableSlots = (doctor, date) => {
     const workingDay = doctor.workingHoursDetails.find(
@@ -194,7 +194,12 @@ const DoctorSchedule = () => {
   return (
     <div className='manage-doctor-container'>
       <HeaderManager />
-      <Button className='back-button' onClick={() => navigate(-1)}>Back</Button>
+      <Button
+        className='back-button'
+        onClick={() => navigate(-1)}
+      >
+        Back
+      </Button>
       <h1>Doctor Booking</h1>
       <DropdownButton
         id='dropdown-doctor-name'
@@ -254,17 +259,17 @@ const DoctorSchedule = () => {
                   <div>
                     <div className='title-working-time-slot'>Working Time</div>
                     <div className='slot-time'>
-                    {slot.startTime.toLocaleTimeString('vi-VN', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: false,
-                    })}{' '}
-                    -{' '}
-                    {slot.endTime.toLocaleTimeString('vi-VN', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      hour12: false,
-                    })}
+                      {slot.startTime.toLocaleTimeString('vi-VN', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false,
+                      })}{' '}
+                      -{' '}
+                      {slot.endTime.toLocaleTimeString('vi-VN', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false,
+                      })}
                     </div>
                   </div>
                   {slot.isBooked && (
@@ -293,7 +298,9 @@ const DoctorSchedule = () => {
                             <div>Booking ID: {booking.bookingID}</div>
                             <div>Customer Name: {booking.name}</div>
                             <div>Pet Name: {booking.petDetails[0].name}</div>
-                            <div className={`status ${getStatusClass(getStatus(booking))}`}>
+                            <div
+                              className={`status ${getStatusClass(getStatus(booking))}`}
+                            >
                               Status: {getStatus(booking)}
                             </div>
                           </div>
@@ -332,9 +339,7 @@ const DoctorSchedule = () => {
                   <div className='grid-container'>
                     <div className='content-modal-manage-booking-customer'>
                       <div className='reason-manage-booking'>
-                        <span>
-                          Customer Information
-                        </span>
+                        <span>Customer Information</span>
                       </div>
                       <div className='reason-manage-booking-customer'>
                         <small className='title-reason-manage-booking'>
@@ -363,9 +368,7 @@ const DoctorSchedule = () => {
                     </div>
                     <div className='content-modal-manage-booking-pet'>
                       <div className='reason-manage-booking'>
-                        <span>
-                          Pet Information
-                        </span>
+                        <span>Pet Information</span>
                       </div>
                       <div className='reason-manage-booking-pet'>
                         <small className='title-reason-manage-booking'>
@@ -405,14 +408,11 @@ const DoctorSchedule = () => {
                   <div className='grid-container'>
                     <div className='content-modal-manage-booking'>
                       <div className='reason-manage-booking'>
-                        <span>
-                          Service Details
-                        </span>
+                        <span>Service Details</span>
                       </div>
-            
                     </div>
                     <div className='content-modal-manage-booking-service'>
-                    {modalBookingDetails.servicesInBooking.map(
+                      {modalBookingDetails.servicesInBooking.map(
                         (service, index) => (
                           <div
                             key={index}
