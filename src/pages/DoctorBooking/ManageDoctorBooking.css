@@ -159,45 +159,52 @@
   border: 1px solid #ddd;
 }
 
-.manage-doctor-container .content-modal-manage-booking-customer .reason-manage-booking {
+.modal-manage-doctor-booking-customer {
+  margin-bottom: 10px;
+}
+
+.modal-manage-doctor-booking-customer .reason-manage-booking {
   font-weight: bold;
   color: #001c44;
   font-size: 24px;
 }
 
-.manage-doctor-container .reason-manage-booking-customer {
+.modal-manage-doctor-booking-pet .reason-manage-booking-pet-information {
+  font-weight: bold;
+  color: #001c44;
+  font-size: 24px;
+}
+
+.modal-manage-doctor-booking-customer .reason-manage-booking-customer {
  font-size: 20px;
 }
 
-.manage-doctor-container .reason-manage-booking-pet {
+.modal-manage-doctor-booking-pet .reason-manage-booking-pet {
   font-size: 20px;
 }
 
-.manage-doctor-container .reason-manage-booking-service {
+.modal-manage-doctor-booking-service .reason-manage-booking-service-information {
+  font-weight: bold;
+  color: #001c44;
+  font-size: 24px;
+}
+
+.modal-manage-doctor-payment-service .reason-manage-booking-service {
   font-size: 20px;
 }
 
-.manage-doctor-container .reason-manage-booking-payment {
+.modal-manage-doctor-booking-service .reason-manage-booking-payment {
   font-size: 20px;
 }
 
-.manage-doctor-container .grid-container .content-modal-manage-booking-customer {
-  margin-bottom: 20px;
+.modal-manage-doctor-booking-service .reason-manage-booking-service-information {
+  font-weight: bold;
+  color: #001c44;
+  font-size: 24px;
 }
 
-.manage-doctor-container .grid-container .content-modal-manage-booking-pet {
-  margin-bottom: 20px;
-}
-
-.manage-doctor-container .content-modal-manage-booking-service {
-  margin-bottom: 20px;
-}
-
-.manage-doctor-container .content-modal-manage-booking-payment {
-  margin-bottom: 20px;
-}
-
-.manage-doctor-container .title-total-cost {
+.modal-manage-doctor-booking-service .reason-manage-booking-payment-information {
+  margin-top: 10px;
   font-weight: bold;
   color: #001c44;
   font-size: 24px;
