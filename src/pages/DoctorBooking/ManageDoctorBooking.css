@@ -47,7 +47,7 @@
   margin-left: 30px;
 }
 
-.control-filter-status {
+.manage-doctor-container .control-filter-status {
   margin-left: 30px;
   width: 300px;
 }
@@ -160,45 +160,45 @@
   border: 1px solid #ddd;
 }
 
-.reason-manage-booking {
+.manage-doctor-container .content-modal-manage-booking-customer .reason-manage-booking {
   font-weight: bold;
   color: #001c44;
   font-size: 24px;
 }
 
-.reason-manage-booking-customer {
+.manage-doctor-container .reason-manage-booking-customer {
+ font-size: 20px;
+}
+
+.manage-doctor-container .reason-manage-booking-pet {
   font-size: 20px;
 }
 
-.reason-manage-booking-pet {
+.manage-doctor-container .reason-manage-booking-service {
   font-size: 20px;
 }
 
-.reason-manage-booking-service {
+.manage-doctor-container .reason-manage-booking-payment {
   font-size: 20px;
 }
 
-.reason-manage-booking-payment {
-  font-size: 20px;
-}
-
-.content-modal-manage-booking-customer {
+.manage-doctor-container .grid-container .content-modal-manage-booking-customer {
   margin-bottom: 20px;
 }
 
-.content-modal-manage-booking-pet {
+.manage-doctor-container .grid-container .content-modal-manage-booking-pet {
   margin-bottom: 20px;
 }
 
-.content-modal-manage-booking-service {
+.manage-doctor-container .content-modal-manage-booking-service {
   margin-bottom: 20px;
 }
 
-.content-modal-manage-booking-payment {
+.manage-doctor-container .content-modal-manage-booking-payment {
   margin-bottom: 20px;
 }
 
-.title-total-cost {
+.manage-doctor-container .title-total-cost {
   font-weight: bold;
   color: #001c44;
   font-size: 24px;
@@ -232,7 +232,7 @@
   color: gray;
 }
 
-.back-button {
+.manage-doctor-container .back-button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -247,7 +247,7 @@
     transform 0.3s ease;
 }
 
-.back-button:hover {
+.manage-doctor-container .back-button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
