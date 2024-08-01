@@ -114,7 +114,7 @@ class SiteController {
       const token = jwt.sign(
         { id: account._id, username: account.username },
         JWT_SECRET,
-        { expiresIn: '7d' },
+        { expiresIn: '3d' },
       );
       const refreshToken = jwt.sign(
         { id: account._id, username: account.username },
@@ -129,7 +129,7 @@ class SiteController {
         httpOnly: true,
         secure: false,
         sameSite: 'strict',
-        maxAge: 7 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       });
 
       const userToOBj = account.toObject();
@@ -209,7 +209,7 @@ class SiteController {
         const newAccessToken = jwt.sign(
           { id: account._id, username: account.username },
           JWT_SECRET,
-          { expiresIn: '7d' },
+          { expiresIn: '3d' },
         );
         const newRefreshToken = jwt.sign(
           { id: account._id, username: account.username },
@@ -226,7 +226,7 @@ class SiteController {
           httpOnly: true,
           secure: false,
           sameSite: 'strict',
-          maxAge: 7 * 60 * 60 * 1000,
+          maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         res.status(200).json({ accessToken: newAccessToken });
       });

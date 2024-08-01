@@ -333,7 +333,7 @@ function Home() {
                         {service.name}
                       </div>
                       <div className='service_Info_Detail-text'>
-                        Description:&nbsp; {service.description}
+                        {service.description}
                       </div>
                       <div className='service_Info_Detail-text'>
                         Price:&nbsp;&nbsp;{service.price}
