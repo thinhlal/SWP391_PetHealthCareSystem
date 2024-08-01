@@ -320,7 +320,8 @@ function ManageListBooking() {
     }));
   };
 
-  const addServiceWhileCheckIn = () => {
+  const addServiceWhileCheckIn = petType => {
+    console.log(petType);
     if (servicesWhileCheckIn.length >= 3) {
       setErrors(prev => ({
         ...prev,
@@ -331,6 +332,8 @@ function ManageListBooking() {
 
     const newServices = allServices.filter(
       service =>
+        (service.type === 'Both' ||
+          service.type.toLowerCase() === petType.toLowerCase()) &&
         !bookingDetailsCheckIn.servicesInBooking.some(
           s => s.serviceID === service.serviceID,
         ),
@@ -2431,7 +2434,9 @@ function ManageListBooking() {
                                       <div
                                         className='add-service-paymentDetails'
                                         onClick={() => {
-                                          addServiceWhileCheckIn();
+                                          addServiceWhileCheckIn(
+                                            booking.petDetails[0].petType,
+                                          );
                                         }}
                                       >
                                         Add Service
@@ -2583,6 +2588,10 @@ function ManageListBooking() {
                                 className='btn-close'
                                 data-bs-dismiss='modal'
                                 aria-label='Close'
+                                onClick={() => {
+                                  setBookingDetailsCheckIn(null);
+                                  setServicesWhileCheckIn([]);
+                                }}
                               ></button>
                             </div>
                             <div className='modal-body'>
@@ -2689,7 +2698,9 @@ function ManageListBooking() {
                                       <div
                                         className='add-service-paymentDetails'
                                         onClick={() => {
-                                          addServiceWhileCheckIn();
+                                          addServiceWhileCheckIn(
+                                            booking.petDetails[0].petType,
+                                          );
                                         }}
                                       >
                                         Add Service
@@ -2813,6 +2824,10 @@ function ManageListBooking() {
                                 type='button'
                                 className='btn btn-secondary'
                                 data-bs-dismiss='modal'
+                                onClick={() => {
+                                  setBookingDetailsCheckIn(null);
+                                  setServicesWhileCheckIn([]);
+                                }}
                               >
                                 Close
                               </button>

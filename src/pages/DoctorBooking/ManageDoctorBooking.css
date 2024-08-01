@@ -60,10 +60,9 @@
 }
 
 .manage-doctor-container .slot-time {
-  font-size: 20px; 
-  font-weight: bold; 
+  font-size: 20px;
+  font-weight: bold;
 }
-
 
 .manage-doctor-container .slots-list {
   display: flex;
@@ -74,7 +73,7 @@
   margin-left: auto;
   margin-right: auto;
   padding: 20px;
-  max-width: 1100px; 
+  max-width: 1100px;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #f9f9f9;
@@ -97,12 +96,14 @@
   border-radius: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
-  background-color: #6495ED;
+  background-color: #6495ed;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  width: calc(25% - 25px); 
-  height: 260px; 
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  width: calc(25% - 25px);
+  height: 260px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -112,7 +113,7 @@
 }
 
 .manage-doctor-container .slot-item:hover {
-  background-color: #92B9E3;
+  background-color: #92b9e3;
   transform: scale(1.05);
 }
 
@@ -248,13 +249,12 @@
   margin-top: 10px;
   margin-left: 30px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .manage-doctor-container .back-button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
-
-
-
