@@ -1400,7 +1400,8 @@ function ManageListBooking() {
                                       {services.map((service, index) => (
                                         <tr key={index}>
                                           <td>
-                                            <select
+                                            <select 
+                                              className='add-more-service-action'
                                               value={service.service}
                                               onChange={e =>
                                                 handleServiceChange(
@@ -2361,7 +2362,7 @@ function ManageListBooking() {
                                               (service, index) => (
                                                 <tr key={index}>
                                                   <td>
-                                                    <select
+                                                    <select className='add-more-service-action'
                                                       value={
                                                         service.service ||
                                                         serviceWhileCheckInFilter[0]
@@ -2621,7 +2622,7 @@ function ManageListBooking() {
                                               (service, index) => (
                                                 <tr key={index}>
                                                   <td>
-                                                    <select
+                                                    <select className='add-more-service-action'
                                                       value={
                                                         service.service ||
                                                         serviceWhileCheckInFilter[0]
