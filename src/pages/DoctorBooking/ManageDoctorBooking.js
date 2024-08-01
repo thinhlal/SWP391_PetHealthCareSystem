@@ -76,8 +76,8 @@ const DoctorSchedule = () => {
     if (!slot.isBooked && slot.isWithinWorkingHours && !slot.isPast) {
       const bookingDetails = bookings.find(
         booking =>
-          new Date(`${selectedDate}T${booking.startTime}:00`) <=
-            slot.startTime &&
+          booking.doctorID === selectedDoctor.doctorID && 
+          new Date(`${selectedDate}T${booking.startTime}:00`) <= slot.startTime &&
           slot.endTime <= new Date(`${selectedDate}T${booking.endTime}:00`) &&
           booking.dateBook.split('T')[0] === selectedDate &&
           !booking.isCancel,
@@ -86,6 +86,7 @@ const DoctorSchedule = () => {
       setShowModal(true);
     }
   };
+  
 
   const updateAvailableSlots = (doctor, date) => {
     const workingDay = doctor.workingHoursDetails.find(
@@ -331,7 +332,7 @@ const DoctorSchedule = () => {
                   <div className='grid-container'>
                     <div className='content-modal-manage-booking-customer'>
                       <div className='reason-manage-booking'>
-                        <span className='font-weight-bold'>
+                        <span>
                           Customer Information
                         </span>
                       </div>
@@ -362,7 +363,7 @@ const DoctorSchedule = () => {
                     </div>
                     <div className='content-modal-manage-booking-pet'>
                       <div className='reason-manage-booking'>
-                        <span className='font-weight-bold'>
+                        <span>
                           Pet Information
                         </span>
                       </div>
@@ -404,7 +405,7 @@ const DoctorSchedule = () => {
                   <div className='grid-container'>
                     <div className='content-modal-manage-booking'>
                       <div className='reason-manage-booking'>
-                        <span className='font-weight-bold'>
+                        <span>
                           Service Details
                         </span>
                       </div>

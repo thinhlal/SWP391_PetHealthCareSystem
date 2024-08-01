@@ -159,45 +159,45 @@
   border: 1px solid #ddd;
 }
 
-.manage-doctor-container .reason-manage-booking {
+.reason-manage-booking {
   font-weight: bold;
   color: #001c44;
   font-size: 24px;
 }
 
-.manage-doctor-container .reason-manage-booking-customer {
+.reason-manage-booking-customer {
  font-size: 20px;
 }
 
-.manage-doctor-container .reason-manage-booking-pet {
+.reason-manage-booking-pet {
   font-size: 20px;
 }
 
-.manage-doctor-container .reason-manage-booking-service {
+.reason-manage-booking-service {
   font-size: 20px;
 }
 
-.manage-doctor-container .reason-manage-booking-payment {
+.reason-manage-booking-payment {
   font-size: 20px;
 }
 
-.manage-doctor-container .content-modal-manage-booking-customer {
+.content-modal-manage-booking-customer {
   margin-bottom: 20px;
 }
 
-.manage-doctor-container .content-modal-manage-booking-pet {
+.content-modal-manage-booking-pet {
   margin-bottom: 20px;
 }
 
-.manage-doctor-container .content-modal-manage-booking-service {
+.content-modal-manage-booking-service {
   margin-bottom: 20px;
 }
 
-.manage-doctor-container .content-modal-manage-booking-payment {
+.content-modal-manage-booking-payment {
   margin-bottom: 20px;
 }
 
-.manage-doctor-container  .title-total-cost {
+.title-total-cost {
   font-weight: bold;
   color: #001c44;
   font-size: 24px;
@@ -231,7 +231,7 @@
   color: gray;
 }
 
-.manage-doctor-container  .back-button {
+.back-button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -244,7 +244,7 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.manage-doctor-container  .back-button:hover {
+.back-button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
