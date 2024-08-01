@@ -59,18 +59,26 @@
   font-size: 25px;
 }
 
+.manage-doctor-container .slot-time {
+  font-size: 20px; 
+  font-weight: bold; 
+}
+
+
 .manage-doctor-container .slots-list {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
   margin-top: 50px;
-  margin-left: 100px;
-  margin-right: 100px;
-  border: 1px solid rgb(122, 122, 122);
-  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px;
-  height: 400px;
+  max-width: 1100px; 
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .manage-doctor-container .slots-list::before {
@@ -78,36 +86,38 @@
 }
 
 .manage-doctor-container .title-working-time-slot {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
 .manage-doctor-container .slot-item {
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 18px;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: #1272aa;
+  background-color: #6495ED;
   color: #fff;
   cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease;
-  width: 162px;
-  height: 170px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: calc(25% - 25px); 
+  height: 240px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .manage-doctor-container .slot-item:hover {
-  background-color: #cc7d07;
+  background-color: #92B9E3;
   transform: scale(1.05);
 }
 
 .manage-doctor-container .slot-item.booked {
-  background-color: #cc7d07;
+  background-color: #6c7ee1;
 }
 
 .manage-doctor-container .bookings-list {
@@ -117,14 +127,14 @@
 .manage-doctor-container .booking-item {
   padding: 5px;
   border-radius: 10px;
-  background-color: #055da5;
+  background-color: #92b9e3;
   margin-bottom: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .manage-doctor-container .booking-item:hover {
-  background-color: #e9e9e9;
+  background-color: #76b9f8;
 }
 
 .manage-doctor-container .booking-item div {
@@ -150,80 +160,94 @@
 }
 
 .manage-doctor-container .reason-manage-booking {
-  margin-bottom: 10px;
+  font-weight: bold;
+  color: #001c44;
+  font-size: 24px;
 }
 
-.manage-doctor-container .reason-manage-booking span {
+.manage-doctor-container .reason-manage-booking-customer {
+ font-size: 20px;
+}
+
+.manage-doctor-container .reason-manage-booking-pet {
+  font-size: 20px;
+}
+
+.manage-doctor-container .reason-manage-booking-service {
+  font-size: 20px;
+}
+
+.manage-doctor-container .reason-manage-booking-payment {
+  font-size: 20px;
+}
+
+.manage-doctor-container .content-modal-manage-booking-customer {
+  margin-bottom: 20px;
+}
+
+.manage-doctor-container .content-modal-manage-booking-pet {
+  margin-bottom: 20px;
+}
+
+.manage-doctor-container .content-modal-manage-booking-service {
+  margin-bottom: 20px;
+}
+
+.manage-doctor-container .content-modal-manage-booking-payment {
+  margin-bottom: 20px;
+}
+
+.manage-doctor-container  .title-total-cost {
+  font-weight: bold;
+  color: #001c44;
+  font-size: 24px;
+}
+
+.manage-doctor-container .booking-item .status {
   font-weight: bold;
 }
 
-.manage-doctor-container .font-weight-bold {
-  font-weight: bold;
+.manage-doctor-container .booking-item .status.Pending {
+  color: #ffcc6e;
 }
 
-.manage-doctor-container .mb-3 {
-  margin-bottom: 1rem !important;
+.manage-doctor-container .booking-item .status.BeingExamined {
+  color: blue;
 }
 
-.manage-doctor-container .dropdown-toggle {
+.manage-doctor-container .booking-item .status.Done {
+  color: green;
+}
+
+.manage-doctor-container .booking-item .status.NotPaid {
+  color: red;
+}
+
+.manage-doctor-container .booking-item .status.PaymentCancelled {
+  color: darkred;
+}
+
+.manage-doctor-container .booking-item .status.Cancelled {
+  color: gray;
+}
+
+.manage-doctor-container  .back-button {
   background-color: #007bff;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-left: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.manage-doctor-container .dropdown-toggle:hover,
-.manage-doctor-container .dropdown-toggle:focus {
+.manage-doctor-container  .back-button:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-.manage-doctor-container .modal-header {
-  border-bottom: none;
-}
 
-.manage-doctor-container .modal-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
 
-.manage-doctor-container .modal-footer {
-  border-top: none;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.manage-doctor-container button.btn-secondary {
-  background-color: #6c757d;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
-.manage-doctor-container button.btn-secondary:hover,
-.manage-doctor-container button.btn-secondary:focus {
-  background-color: #5a6268;
-}
-
-.manage-doctor-container button.btn-secondary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
-}
-
-.manage-doctor-container .nav-tabs .nav-link {
-  border: none;
-  color: #007bff;
-  background-color: #f9f9f9;
-  border-radius: 4px 4px 0 0;
-}
-
-.manage-doctor-container .nav-tabs .nav-link.active {
-  color: #fff;
-  background-color: #007bff;
-}
-
-.manage-doctor-container .tab-content > .tab-pane {
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}

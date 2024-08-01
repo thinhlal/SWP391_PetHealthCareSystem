@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import axiosInstance from '../../utils/axiosInstance.js';
 import './ManageDoctorBooking.css';
 import HeaderManager from '../../components/Employee/Header/HeaderManager';
@@ -14,6 +15,7 @@ import {
 } from 'react-bootstrap';
 
 const DoctorSchedule = () => {
+  const navigate = useNavigate(); 
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedDate, setSelectedDate] = useState(
@@ -159,6 +161,25 @@ const DoctorSchedule = () => {
     return 'Done';
   };
 
+  const getStatusClass = status => {
+    switch (status) {
+      case 'Pending':
+        return 'Pending';
+      case 'Being Examined':
+        return 'BeingExamined';
+      case 'Done':
+        return 'Done';
+      case 'Not Paid':
+        return 'NotPaid';
+      case 'Payment Cancelled':
+        return 'PaymentCancelled';
+      case 'Cancelled':
+        return 'Cancelled';
+      default:
+        return '';
+    }
+  };
+
   const handleStatusFilterChange = e => {
     setStatusFilter(e.target.value);
   };
@@ -172,6 +193,7 @@ const DoctorSchedule = () => {
   return (
     <div className='manage-doctor-container'>
       <HeaderManager />
+      <Button className='back-button' onClick={() => navigate(-1)}>Back</Button>
       <h1>Doctor Booking</h1>
       <DropdownButton
         id='dropdown-doctor-name'
@@ -230,6 +252,7 @@ const DoctorSchedule = () => {
                 >
                   <div>
                     <div className='title-working-time-slot'>Working Time</div>
+                    <div className='slot-time'>
                     {slot.startTime.toLocaleTimeString('vi-VN', {
                       hour: '2-digit',
                       minute: '2-digit',
@@ -241,6 +264,7 @@ const DoctorSchedule = () => {
                       minute: '2-digit',
                       hour12: false,
                     })}
+                    </div>
                   </div>
                   {slot.isBooked && (
                     <div className='bookings-list'>
@@ -268,7 +292,9 @@ const DoctorSchedule = () => {
                             <div>Booking ID: {booking.bookingID}</div>
                             <div>Customer Name: {booking.name}</div>
                             <div>Pet Name: {booking.petDetails[0].name}</div>
-                            <div>Status: {getStatus(booking)}</div>
+                            <div className={`status ${getStatusClass(getStatus(booking))}`}>
+                              Status: {getStatus(booking)}
+                            </div>
                           </div>
                         ))}
                     </div>
@@ -303,50 +329,50 @@ const DoctorSchedule = () => {
                   title='Info'
                 >
                   <div className='grid-container'>
-                    <div className='content-modal-manage-booking'>
+                    <div className='content-modal-manage-booking-customer'>
                       <div className='reason-manage-booking'>
                         <span className='font-weight-bold'>
                           Customer Information
                         </span>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-customer'>
                         <small className='title-reason-manage-booking'>
                           CustomerID:&nbsp;
                         </small>
                         <small>{modalBookingDetails.accountID}</small>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-customer'>
                         <small className='title-reason-manage-booking'>
                           Name:&nbsp;
                         </small>
                         <small>{modalBookingDetails.name}</small>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-customer'>
                         <small className='title-reason-manage-booking'>
                           Phone:&nbsp;
                         </small>
                         <small>{modalBookingDetails.phone}</small>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-customer'>
                         <small className='title-reason-manage-booking'>
                           Email:&nbsp;
                         </small>
                         <small>{modalBookingDetails.email}</small>
                       </div>
                     </div>
-                    <div className='content-modal-manage-booking'>
+                    <div className='content-modal-manage-booking-pet'>
                       <div className='reason-manage-booking'>
                         <span className='font-weight-bold'>
                           Pet Information
                         </span>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-pet'>
                         <small className='title-reason-manage-booking'>
                           Name:&nbsp;
                         </small>
                         <small>{modalBookingDetails.petDetails[0].name}</small>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-pet'>
                         <small className='title-reason-manage-booking'>
                           Type:&nbsp;
                         </small>
@@ -354,13 +380,13 @@ const DoctorSchedule = () => {
                           {modalBookingDetails.petDetails[0].petType}
                         </small>
                       </div>
-                      <div className='reason-manage-booking'>
-                        <small className='title-reason-manage-booking'>
+                      <div className='reason-manage-booking-pet'>
+                        <small className='title-reason-manage-booking-pet'>
                           Breed:&nbsp;
                         </small>
                         <small>{modalBookingDetails.petDetails[0].breed}</small>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-pet'>
                         <small className='title-reason-manage-booking'>
                           Gender:&nbsp;
                         </small>
@@ -382,11 +408,14 @@ const DoctorSchedule = () => {
                           Service Details
                         </span>
                       </div>
-                      {modalBookingDetails.servicesInBooking.map(
+            
+                    </div>
+                    <div className='content-modal-manage-booking-service'>
+                    {modalBookingDetails.servicesInBooking.map(
                         (service, index) => (
                           <div
                             key={index}
-                            className='reason-manage-booking'
+                            className='reason-manage-booking-service'
                           >
                             <small className='title-reason-manage-booking'>
                               {service.name}:&nbsp;
@@ -395,23 +424,21 @@ const DoctorSchedule = () => {
                           </div>
                         ),
                       )}
-                    </div>
-                    <div className='content-modal-manage-booking'>
-                      <div className='reason-manage-booking'>
-                        <span className='font-weight-bold'>Total Cost</span>
+                      <div className='reason-manage-booking-service'>
+                        <span className='title-total-cost'>Total Cost</span>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-service'>
                         <small className='title-reason-manage-booking'>
                           Total:&nbsp;
                         </small>
                         <small>{modalBookingDetails.totalPrice}$</small>
                       </div>
                     </div>
-                    <div className='content-modal-manage-booking'>
+                    <div className='content-modal-manage-booking-payment'>
                       <div className='reason-manage-booking'>
                         <span className='font-weight-bold'>Payment status</span>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-payment'>
                         <small className='title-reason-manage-booking'>
                           Date pay:&nbsp;
                         </small>
@@ -424,7 +451,7 @@ const DoctorSchedule = () => {
                         </small>
                       </div>
                       {modalBookingDetails?.dateCancelBook && (
-                        <div className='reason-manage-booking'>
+                        <div className='reason-manage-booking-payment'>
                           <small className='title-reason-manage-booking'>
                             Date Cancel:&nbsp;
                           </small>
@@ -433,7 +460,7 @@ const DoctorSchedule = () => {
                           </small>
                         </div>
                       )}
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-payment'>
                         <small className='title-reason-manage-booking'>
                           Date Booking:&nbsp;
                         </small>
@@ -446,14 +473,14 @@ const DoctorSchedule = () => {
                         modalBookingDetails.dateCancelBook,
                         modalBookingDetails.dateBook,
                       ) >= 3 ? (
-                        <div className='reason-manage-booking'>
+                        <div className='reason-manage-booking-payment'>
                           <small className='title-reason-manage-booking'>
                             Refund price:&nbsp;
                           </small>
                           <small>{modalBookingDetails.refundPrice}</small>
                         </div>
                       ) : null}
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-payment'>
                         <small className='title-reason-manage-booking'>
                           Status:&nbsp;
                         </small>
@@ -469,7 +496,7 @@ const DoctorSchedule = () => {
                           )}
                         </small>
                       </div>
-                      <div className='reason-manage-booking'>
+                      <div className='reason-manage-booking-payment'>
                         <small className='title-reason-manage-booking'>
                           Method:&nbsp;
                         </small>
