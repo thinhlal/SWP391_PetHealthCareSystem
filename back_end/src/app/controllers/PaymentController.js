@@ -4,7 +4,6 @@ class PaymentController {
   // POST /updatePaymentByID
   async updatePaymentByID(req, res, next) {
     const { paymentID } = req.body;
-    console.log(paymentID);
     try {
       const paymentUpdated = await Payment.findOneAndUpdate(
         { paymentID },
