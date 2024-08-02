@@ -531,7 +531,6 @@ a {
   text-wrap: balance;
   color: #000000;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .main .service_Info_Detail-text:nth-of-type(3) {
@@ -539,11 +538,9 @@ a {
   font-weight: bold;
   padding: 5px;
   text-wrap: balance;
-  font-family: 'Montserrat', sans-serif;
   color: #002169;
   letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .main .service_Info_Detail-button-wrapper-flex {
@@ -552,6 +549,14 @@ a {
   left: 125px;
   border-radius: 5px;
 }
+
+.main .service_Info_Detail-text_Price{
+  font-size: 18px;
+  position: absolute;
+  bottom: 100px;
+  left: 180px;
+}
+
 .main .service_Info_Detail-button {
   display: block;
   width: 190px;

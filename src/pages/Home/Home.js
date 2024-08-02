@@ -333,9 +333,12 @@ function Home() {
                         {service.name}
                       </div>
                       <div className='service_Info_Detail-text'>
-                        {service.description}
+                        For:&nbsp;{service.type === 'Both' ? 'Dog and Cat' : service.type}
                       </div>
                       <div className='service_Info_Detail-text'>
+                        {service.description}
+                      </div>
+                      <div className='service_Info_Detail-text_Price'>
                         Price:&nbsp;&nbsp;{service.price}
                       </div>
                       <div className='service_Info_Detail-button-wrapper-flex'>
